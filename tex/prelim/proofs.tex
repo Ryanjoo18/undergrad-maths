@@ -1,0 +1,758 @@
+\chapter{Mathematical Reasoning and Logic}\label{chap:logic-proofs}
+\section{Mathematical Terminology}
+It is useful to be familiar with the following terminology.
+\begin{itemize}
+\item A \vocab{definition} is a precise and unambiguous description of the meaning of a mathematical term. It characterises the meaning of a word by giving all the properties and only those properties that must be true.
+\item A \vocab{theorem} is a true mathematical statement that can be proven mathematically. In a mathematical paper, the term theorem is often reserved for the most important results.
+\item A \vocab{lemma} is a minor result whose sole purpose is to help in proving a theorem. It is a stepping stone on the path to proving a theorem. Very occasionally lemmas can take on a life of their own.
+\item A \vocab{corollary} is a result in which the (usually short) proof relies heavily on a given theorem.
+\item A \vocab{proposition} is a proven and often interesting result, but generally less important than a theorem.
+\item A \vocab{conjecture} is a statement that is unproved, but is believed to be true.
+\item An \vocab{axiom} is a statement that is assumed to be true without proof. These are the basic building blocks from which all theorems are proven.
+\item An \vocab{identity} is a mathematical expression giving the equality of two (often variable) quantities.
+\item A \vocab{paradox} is a statement that can be shown, using a given set of axioms and definitions, to be both true and false. Paradoxes are often used to show the inconsistencies in a flawed theory.
+\end{itemize}
+
+A \vocab{proof} is a sequence of true statements, without logical gaps, that is a logical argument establishing some conclusion.
+
+\section{Zeroth-order Logic}
+A \vocab{proposition} is a sentence which has exactly one truth value, i.e. it is either true or false, but not both and not neither. A proposition is denoted by uppercase letters such as $P$ and $Q$. If the proposition $P$ depends on a variable $x$, it is sometimes helpful to denote it by $P(x)$. 
+
+We can do some algebra on propositions, which include
+\begin{enumerate}[label=(\roman*)]
+\item \vocab{equivalence}, denoted by $P\iff Q$, which means $P$ and $Q$ are logically equivalent statements;
+
+\item \vocab{conjunction}, denoted by $P\land Q$, which means ``$P$ and $Q$'';
+
+\item \vocab{disjunction}, denoted by $P\lor Q$, which means ``$P$ or $Q$'';
+
+\item \vocab{negation}, denoted by $\lnot P$, which means ``not $P$''.
+\end{enumerate}
+
+Here are some useful properties when handling logical statements. You can easily prove all of them using truth tables.
+\begin{proposition}[Double negation law]
+\[P\iff\lnot(\lnot P)\]
+\end{proposition}
+
+\begin{proposition}[Commutative property]
+\[ P \land Q \iff Q \land P, \quad P \lor Q \iff Q \lor P \]
+\end{proposition}
+
+\begin{proposition}[Associative property for conjunction]
+\[ (P\land Q)\land R \iff P\land (Q\land R) \]
+\end{proposition}
+
+\begin{proposition}[Associative property for disjunction]
+\[ (P\lor Q)\lor R \iff P\lor (Q\lor R) \]
+\end{proposition}
+
+\begin{proposition}[Distributive property for conjunction across disjunction]
+\[ P\land(Q\lor R) \iff (P\land Q)\lor(P\land Q) \]
+\end{proposition}
+
+\begin{proposition}[Distributive property for disjunction across conjunction]
+\[ P\lor(Q\land R) \iff (P\lor Q)\land(P\lor R) \]
+\end{proposition}
+
+\begin{proposition}[De Morgan's laws]
+\[ \lnot(P \lor Q) \iff (\lnot P \land \lnot Q) \]
+\[ \lnot (P\land Q) \iff (\lnot P\lor \lnot Q) \]
+\end{proposition}
+
+\subsection{If, only if}
+\vocab{Implication} is denoted by $P \implies Q$, which means ``$P$ implies $Q$'', i.e. if $P$ holds then $Q$ also holds. It is equivalent to saying ``If $P$ then $Q$''. The only case when $P \implies Q$ is false is when the hypothesis $P$ is true and the conclusion $Q$ is false.
+
+$P \implies Q$ is known as a \vocab{conditional statement}. $P$ is known as the \vocab{hypothesis}, $Q$ is known as the \vocab{conclusion}.
+
+Statements of this form are probably the most common, although they may sometimes appear quite differently. The following all mean the same thing:
+\begin{enumerate}[label=(\roman*)]
+\item if $P$ then $Q$;
+\item $P$ implies $Q$;
+\item $P$ only if $Q$;
+\item $P$ is a sufficient condition for $Q$;
+\item $Q$ is a necessary condition for $P$.
+\end{enumerate}
+
+The \vocab{converse} of $P \implies Q$ is given by $Q \implies P$; both are not logically equivalent.
+
+The \vocab{inverse} of $P \implies Q$ is given by $\lnot P \implies \lnot Q$, i.e. the hypothesis and conclusion of the statement are both negated.
+
+The \vocab{contrapositive} of $P \implies Q$ is given by $\lnot Q \implies \lnot P$; both are logically equivalent.
+
+To prove $P \implies Q$, start by assuming that $P$ holds and try to deduce through some logical steps that $Q$ holds too. Alternatively, start by assuming that $Q$ does not hold and show that $P$ does not hold (that is, we prove the contrapositive).
+
+\subsection{If and only if, iff}
+\vocab{Bidirectional implication} is denoted by $P \iff Q$, which means both $P \implies Q$ and $Q \implies P$. We can read this as ``$P$ if and only if $Q$''. The letters ``iff'' are also commonly used to stand for ``if and only if''.
+
+$P \iff Q$ is true exactly when $P$ and $Q$ have the same truth value.
+
+$P \iff Q$ is known as a \vocab{biconditional statement}.
+
+These statements are usually best thought of separately as ``if'' and ``only if'' statements.
+
+To prove $P \iff Q$, prove the statement in both directions, i.e. prove both $P \implies Q$ and $Q \implies P$. Remember to make very clear, both to yourself and in your written proof, which direction you are doing.
+
+\section{First-order Logic}
+The \vocab{universal quantifier} is denoted by $\forall$, which means ``for all'' or ``for every''. An universal statement has the form $\forall x\in X, P(x)$.
+
+The \vocab{existential quantifier} is denoted by $\exists$, which means ``there exists''. An existential statement has the form $\exists x\in X, P(x)$, where $X$ is known as the \vocab{domain}.
+
+These are versions of De Morgan's laws for quantifiers:
+\[ \lnot \forall x\in X,P(x) \iff \exists x\in X,\lnot P(x) \]
+\[ \lnot \exists x\in X,P(x) \iff \forall x\in X,\lnot P(x) \]
+
+\begin{exercise}
+Negate the statement
+\[ \text{for all real numbers } x, \text{ if } x>2, \text{ then } x^2>4 \]
+\end{exercise}
+\begin{solution}
+In logical notation, this statement is $(\forall x \in \RR)[x>2 \implies x^2>4]$.
+\begin{align*}
+\lnot\{(\forall x \in \RR)[x>2 \implies x^2>4]\} 
+&\iff (\exists x \in \RR) \lnot[x>2 \implies x^2>4] \\
+&\iff (\exists x \in \RR) \lnot [(x\le2) \lor (x^2>4)] \\
+&\iff (\exists x \in \RR) [(x>2) \land (x^2\le4)]
+\end{align*}
+\end{solution}
+
+\begin{exercise}
+Negate surjectivity.
+\end{exercise}
+\begin{solution}
+If $f:X\to Y$ is not surjective, then it means that there exists $y \in Y$ not in the image of $X$, i.e. for all $x$ in $X$ we have $f(x)\neq y$.
+\begin{align*}
+\lnot \forall y \in Y, \exists x \in X, f(x)=y 
+&\iff \exists y \in Y, \lnot (\exists x \in X, f(x)=y) \\
+&\iff \exists y \in Y, \forall x \in X, \lnot (f(x)=y) \\
+&\iff \exists y \in Y, \forall x \in X, f(x) \neq y
+\end{align*}
+\end{solution}
+
+To prove a statement of the form $\forall x \in X \suchthat P(x)$, start the proof with ``Let $x \in X$.'' or ``Suppose $x \in X$ is given.'' to address the quantifier with an arbitrary $x$; provided no other assumptions about $x$ are made during the course of proving $P(x)$, this will prove the statement for all $x \in X$. 
+
+To prove a statement of the form $\exists x \in X \suchthat P(x)$, there is not such a clear steer about how to continue: you may need to show the existence of an $x$ with the right properties; you may need to demonstrate logically that such an $x$ must exist because of some earlier assumption, or it may be that you can show constructively how to find one; or you may be able to prove by contradiction, supposing that there is no such $x$ and consequently arriving at some inconsistency.
+
+\begin{remark}
+Read from left to right, and as new elements or statements are introduced they are allowed to depend on previously introduced elements but cannot depend on things that are yet to be mentioned.
+\end{remark}
+
+\begin{remark}
+To avoid confusion, it is a good idea to keep to the convention that the quantifiers come first, before any statement to which they relate.
+\end{remark}
+
+\section{Proofs}
+A \vocab{direct proof} of $P \implies Q$ is a series of valid arguments that start with the hypothesis $P$ and end with the conclusion $Q$. It may be that we can start from $P$ and work directly to $Q$, or it may be that we make use of $P$ along the way.
+
+A \vocab{proof by contrapositive} of $P \implies Q$ is to prove instead $\lnot Q \implies \lnot P$.
+
+A \vocab{disproof by counterexample} is to providing a counterexample in order to refute or disprove a conjecture. The counterexample must make the hypothesis a true statement, and the conclusion a false statement. In seeking counterexamples, it is a good idea to keep the cases you consider simple, rather than searching randomly. It is often helpful to consider ``extreme'' cases; for example, something is zero, a set is empty, or a function is constant.
+
+A \vocab{proof by cases} is to first dividing the situation into cases which exhaust all the possibilities, and then show that the statement follows in all cases.
+
+\subsection{Proof by contradiction}
+A \vocab{proof by contradiction} of $P$ involves first supposing $P$ is false, i.e. $\lnot P$; to prove $P \implies Q$ by contradiction, suppose that $Q$ is false, i.e. $P\land\lnot Q$. Then show through some logical reasoning that this leads to a contradiction or inconsistency. We may arrive at something that contradicts the hypothesis $P$, or something that contradicts the initial supposition that $Q$ is not true, or we may arrive at something that we know to be universally false.
+
+\begin{exercise}[Irrationality of $\sqrt{2}$]
+Prove that $\sqrt{2}$ is irrational.
+\end{exercise}
+\begin{proof}
+We prove by contradiction. Suppose otherwise, that $\sqrt{2}$ is rational. Then $\sqrt{2}=\dfrac{a}{b}$ for some $a,b\in\ZZ,b\neq 0$, $a,b$ coprime.
+
+Squaring both sides gives
+\[a^2=2b^2.\]
+Since RHS is even, LHS must also be even. Hence it follows that $a$ is even. Let $a=2k$ where $k\in\ZZ$. Substituting $a = 2k$ into the above equation and simplifying it gives us
+\[b^2=2k^2.\]
+This means that $b^2$ is even, from which follows again that $b$ is even. 
+
+This contradicts the assumption that $a,b$ coprime. Hence proven.
+\end{proof}
+
+\begin{exercise}[Euclid's theorem]
+There are infinitely many prime numbers.
+\end{exercise}
+
+\begin{proof}
+Suppose otherwise, that only finitely many prime numbers exist. List them as $p_1,\dots,p_n$. The number $N=p_1p_2\cdots p_n+1$ is divisible by a prime $p$, yet is coprime to $p_1,\dots,p_n$. Therefore, $p$ does not belong to our list of all prime numbers, a contradiction. Hence the initial assumption was false, proving that there are infinitely many primes.
+\end{proof}
+
+To \vocab{prove uniqueness}, we can either assume $\exists x,y \in S$ such that $P(x) \land P(y)$ is true and show $x=y$, or argue by assuming that $\exists x,y \in S$ are distinct such that $P(x) \land P(y)$, then derive a contradiction. $\exists!$ denotes ``there exists a unique''. To prove uniqueness and existence, we also need to show that $\exists x \in S \suchthat P(x)$ is true.
+
+\subsection{Proof of existence}
+To prove existential statements, we can adopt two approaches:
+\begin{enumerate}
+\item Constructive proof (direct proof): 
+
+To prove statements of the form $\exists x\in X \suchthat P(x)$, find or construct \vocab{a specific example} for $x$. To prove statements of the form $\forall y\in Y,\:\exists x\in X\suchthat P(x,y)$, construct example for $x$ in terms of $y$ (since $x$ is dependent on $y$).
+
+In both cases, you have to justify that your example $x$
+\begin{enumerate}
+\item belongs to the domain $X$, and
+\item satisfies the condition $P$.
+\end{enumerate}
+
+\item Non-constructive proof (indirect proof): 
+
+Use when specific examples are not easy or not possible to find or construct.
+Make arguments why such objects have to exist.
+May need to use proof by contradiction.
+Use definition, axioms or results that involve existential statements.
+\end{enumerate}
+
+\begin{exercise}
+Prove that we can find $100$ consecutive positive integers which are all composite numbers.
+\end{exercise}
+
+\begin{proof}
+We can prove this existential statement via constructive proof.
+
+Our goal is to find integers $n,n+1,n+2,\dots,n+99$, all of which are composite.
+
+Take $n=101!+2$. Then $n$ has a factor of $2$ and hence is composite. Similarly, $n+k=101!+(k+2)$ has a factor $k+2$ and hence is composite for $k=1,2,\dots,99$.
+
+Hence the existential statement is proven.
+\end{proof}
+
+\begin{exercise}
+Prove that for all rational numbers $p$ and $q$ with $p<q$, there is a rational number $x$ such that $p<x<q$.
+\end{exercise}
+\begin{proof}
+We prove this by construction. Our goal is to find such a rational $x$ in terms of $p$ and $q$.
+
+We take the average. Let $x=\dfrac{p+q}{2}$ which is a rational number.
+
+Since $p<q$, 
+\[ x=\frac{p+q}{2}<\frac{q+q}{2}=q \implies x<q \]
+Similarly,
+\[ x=\frac{p+q}{2}>\frac{p+p}{2}=p \implies p<x \]
+Hence we have shown the existence of rational number $x$ such that $p<x<q$.
+
+\begin{remark}
+For this type of question, there are two parts to prove: firstly, $x$ satisfies the given statement; secondly, $x$ is within the domain (for this question we do not have to prove $x$ is rational since $\QQ$ is closed under addition).
+\end{remark}
+\end{proof}
+
+\begin{exercise}
+Prove that for all rational numbers $p$ and $q$ with $p<q$, there is an irrational number $r$ such that $p<r<q$.
+\end{exercise}
+\begin{proof}
+We prove this by construction. Similarly, our goal is to find an irrational $r$ in terms of $p$ and $q$.
+
+Note that we cannot simply take $r=\dfrac{p+q}{2}$; a simple counterexample is the case $p=-1,q=1$ where $r=0$ is clearly not irrational.
+
+Since $p$ lies in between $p$ and $q$, let $r=p+c$ where $0<c<q-p$. Since $c<q-p$, we have $c=\dfrac{q-p}{k}$ for some $k>1$; to make $c$ irrational, we take $k$ to be irrational.
+
+Take $r=p+\dfrac{q-p}{\sqrt{2}}$. We need to show $r$ is irrational and $p<r<q$.
+
+\textbf{Part 1:} $p<r<q$
+
+Since $q<p$, $r=p+\text{(positive number)}>p$. On the other hand, $\dfrac{q-p}{\sqrt{2}}<q-p$ so $r<p+(q-p)=q$.
+
+\textbf{Part 2:} $r$ is irrational
+
+We prove by contradiction. Suppose $r$ is rational. We have $\sqrt{2}=\dfrac{q-p}{r-p}$. Since $p,q,r$ are all rational (and $r-p\neq0$), RHS is rational. This implies that LHS is rational, i.e. $\sqrt{2}$ is rational, a contradiction.
+\end{proof}
+
+Non-constructive proof:
+\begin{exercise}
+Prove that every integer greater than $1$ is divisible by a prime.
+\end{exercise}
+
+\begin{proof}
+If $n$ is prime, then we are done as $n\mid n$.
+
+If $n$ is not prime, then $n$ is composite. So $n$ has a divisor $d_1$ such that $1<d_1<n$. If $d_1$ is prime then we are done as $d_1\mid n$. If $d_1$ is not prime then $d_1$ is composite, has divisor $d_2$ such that $1<d_2<n$.
+
+If $d_2$ is prime, then we are done as $d_2\mid d_1$ and $d_1\mid n$ imply $d_2\mid n$. If $d_2$ is not prime then $d_2$ is composite, has divisor $d_3$ such that $1<d_3<d_2$.
+
+Continuing in this manner after $k$ times, we will get
+\[ 1<d_k<d_{k-1}<\cdots<d_2<d_1<n \]
+where $d_i\mid n$ for all $i$.
+
+This process must stop after finite steps, as there can only be a finite number of $d_i$'s between $1$ and $n$. On the other hand, the process will stop only if there is a $d_i$ which is a prime. 
+
+Hence we conclude that there must be a divisor $d_i$ of $n$ that is prime.
+\end{proof}
+
+\begin{remark}
+This proof is also known as \vocab{proof by infinite descent}, a method which relies on the well-ordering principle of the positive integers.
+\end{remark}
+
+\begin{exercise}
+Prove that the equation $x^2+y^2=3z^2$ has no solutions $(x,y,z)$ in integers where $z\neq0$.
+\end{exercise}
+
+\begin{proof}
+Suppose we have a solution $(x,y,z)$. Without loss of generality, we may assume that $z>0$. By the least integer principle, we may also assume that our solution has $z$ minimal. Taking remainders modulo $3$, we see that
+\[ x^2+y^2\equiv0\pmod3 \]
+Recalling that squares may only be congruent to $0$ or $1$ modulo $3$, we conclude that
+\[ x^2\equiv y^2\equiv 0 \implies x \equiv y \equiv 0 \pmod 3 \]
+Writing $x=3a$ and $y=3b$ we obtain
+\[ 9a^2+9b^2=3z^2 \implies 3(a^2+b^2)=z^2 \implies 3\mid z^2 \implies 3\mid z \]
+Now let $z=3c$ and cancel $3$'s to obtain
+\[ a^2+b^2=3c^2. \]
+We have therefore constructed another solution $(a,b,c)=\brac{\frac{x}{3},\frac{y}{3},\frac{z}{3}}$ to the original equation. However $0<c<z$ contradicts the minimality of $z$.
+\end{proof}
+
+\subsection{Proof by mathematical induction}
+Induction is an extremely powerful method of proof used throughout mathematics. It deals with infinite families of statements which come in the form of lists. The idea behind induction is in showing how each statement follows from the previous one on the list -- all that remains is to kick off this logical chain reaction from some starting point.
+
+We shall assume that $\NN$ satisfies the well-ordering principle: every nonempty $S\subset\NN$ has a least element; that is, there exists $m\in S$ such that $m\le k$ for all $k\in S$.
+
+\begin{remark}
+The well-ordering principle does not hold for $\ZZ$, $\QQ$, and $\RR$.
+\end{remark}
+
+\begin{lemma}
+Let $S\subset\NN$. If
+\begin{enumerate}[label=(\roman*)]
+\item $1\in S$
+\item $k\in S\implies k+1\in S$
+\end{enumerate}
+then $S=\NN$.
+\end{lemma}
+
+\begin{proof}
+If $S=\NN$ then we are done. Now suppose $S\neq\NN$. Then $\NN\setminus S$ is not empty. By the well-ordering principle, $\NN\setminus S$ has a least element $p$. Since $1\in S$, we must have $p>1$. By (ii), $p=(p-1)+1\in S$. But this contradicts $p\in\NN\setminus S$.
+\end{proof}
+
+\begin{theorem}[Principle of mathematical induction]
+Let $P(n)$ be a family of statements indexed by $\NN$. Suppose that 
+\begin{enumerate}[label=(\roman*)]
+\item $P(1)$ is true;
+\item for all $k\in\NN$, $P(k)\implies P(k+1)$.
+\end{enumerate}
+Then $P(n)$ is true for all $n\in\NN$.
+\end{theorem}
+
+(i) is known as the \textbf{base case}, (ii) is known as the \textbf{inductive step}. Using logic notation, the above can be written as
+\[ \{P(1) \land (\forall n \in \NN) [P(k) \implies P(k+1)]\} \implies (\forall n \in \NN)P(n) \]
+
+\begin{proof}
+Apply the above lemma to the set $S=\{n\in\NN\mid P(n)\text{ is true}\}$.
+\end{proof}
+
+\begin{exercise}
+Prove that for any $n\in\NN$,
+\[\sum_{i=1}^n i=\frac{n(n+1)}{2}.\]
+\end{exercise}
+
+\begin{proof}
+Let $\displaystyle P(n):\sum_{i=1}^n i=\frac{n(n+1)}{2}$.
+
+Clearly $P(1)$ holds. Now suppose $P(k)$ holds for some $k\in\NN$, $k\ge1$; that is,
+\[\sum_{i=1}^k i=\frac{k(k+1)}{2}.\]
+Adding $k+1$ to both sides,
+\begin{align*}
+\sum_{i=1}^{k+1} i&=\frac{k(k+1)}{2}+(k+1)\\
+&=\frac{(k+1)(k+2)}{2}\\
+&=\frac{(k+1)[(k+1)+1]}{2}
+\end{align*}
+thus $P(k+1)$ is true.
+
+Since $P(1)$ true and $P(k)\implies P(k+1)$ for all $k\in\NN$, $k\ge1$,\\
+$P(n)$ is true for all $n\in\NN$.
+\end{proof}
+
+\begin{exercise}[Bernoulli's inequality]
+Let $x\in\RR$, $x>-1$. Let $n\in\ZZ^+$. Then
+\[(1+x)^n\ge1+nx.\]
+\end{exercise}
+
+\begin{proof}
+We prove by induction on $n$. Fix $x>-1$. Let $P(n):(1+x)^n\ge1+nx$.
+
+The base case $P(1)$ is clear.
+
+Suppose that $P(k)$ is true for some $k\in\ZZ^+$, $k\ge1$. That is, $(1+x)^k\ge1+kx$. Note that $1+x>0$, and $kx^2\ge0$ (since $k>0$ and $x^2\ge0$). Then
+\begin{align*}
+(1+x)^{k+1}&=(1+x)(1+x)^k\\
+&\ge(1+x)(1+kx)\quad\text{[induction hypothesis]}\\
+&=1+(k+1)x+kx^2\\
+&\ge1+(k+1)x\quad[\because kx^2\ge0]
+\end{align*}
+so $P(k+1)$ is true. Hence by induction, the result holds.
+\end{proof}
+
+A corollary of induction is if the family of statements holds for $n \ge N$, rather than necessarily $n \ge 0$:
+
+\begin{corollary}
+Let $P(n)$ be a family of statements indexed by integers $n \ge N$ for $N\in\ZZ$. Suppose that 
+\begin{enumerate}[label=(\roman*)]
+\item $P(N)$ is true;
+\item for all $k \ge N$, $P(k) \implies P(k+1)$. 
+\end{enumerate}
+Then $P(n)$ is true for all $n \ge N$.
+\end{corollary}
+
+\begin{proof}
+Applying the above theorem to the statement $Q(n)=P(n+N)$ for $n\in\NN$.
+\end{proof}
+
+Another variant on induction is when the inductive step relies on some earlier case(s) but not necessarily the immediately previous case.
+
+\begin{theorem}[Strong induction]
+Let $P(n)$ be a family of statements indexed by $\NN$. Suppose that
+\begin{enumerate}[label=(\roman*)]
+\item $P(1)$ is true;
+\item for all $m \in \NN$, if for integers $k$ with $1 \le k \le m$, $P(k)$ is true then $P(m+1)$ is true.
+\end{enumerate}
+Then $P(n)$ is true for all $n \in \NN$.
+\end{theorem}
+
+Using logic notation, this is written as
+\[ \{P(1) \land (\forall m \in \NN) [P(1) \land P(2) \land \cdots \land P(m) \implies P(m+1)]\} \implies (\forall n \in \NN)P(n) \]
+
+The following example illustrates how the strong form of induction can be useful:
+
+\begin{exercise}
+Prove the Fundamental Theorem of Arithmetic: every natural number greater than 1 may be expressed as a product of one or more prime numbers.
+\end{exercise}
+
+\begin{proof}
+Let $P(n)$ be the statement that $n$ may be expressed as a product of prime numbers. 
+
+Clearly $P(2)$ holds, since $2$ is itself prime. 
+
+Let $n \ge 2$ be a natural number and suppose that $P(m)$ holds for all $m<n$.
+
+\begin{itemize}
+\item If $n$ is prime then it is trivially the product of the single prime number $n$. 
+
+\item If $n$ is not prime, then there must exist some $r, s > 1$ such that $n = rs$. By the inductive hypothesis, each of $r$ and $s$ can be written as a product of primes, and therefore $n = rs$ is also a product of primes.
+\end{itemize}
+
+Thus, whether $n$ is prime or not, we have have that $P(n)$ holds. By strong induction, $P(n)$ is true for all natural numbers. That is, every natural number greater than 1 may be expressed as a product of one or more primes.
+\end{proof}
+
+The following is also another variant on induction.
+
+\begin{theorem}[Cauchy induction]
+Let $P(n)$ be a family of statements indexed by $\NN_{\ge2}$. Suppose that
+\begin{enumerate}[label=(\roman*)]
+\item $P(2)$ is true;
+\item for all $k\in\NN$, $P(k)\implies P(2k)$ and $P(k)\implies (k-1)$.
+\end{enumerate}
+Then $P(n)$ is true for all $n\in\NN_{\ge2}$.
+\end{theorem}
+
+\begin{exercise}
+Prove the AM--GM Inequality: given $n\in\NN$, for positive reals $a_1,a_2,dots,a_n$,
+\[\frac{a_1+a_2+\cdots+a_n}{n}\ge\sqrt[n]{a_1a_2\cdots a_n}.\]
+\end{exercise}
+
+\begin{proof}
+Let $\displaystyle P(n):\frac{a_1+a_2+\cdots+a_n}{n}\ge\sqrt[n]{a_1a_2\cdots a_n}$.
+
+Base case $P(2)$ is true because\[\frac{a_1+a_2}{2}\ge\sqrt{a_1a_2} \iff (a_1+a_2)^2\ge 4a_1a_2 \iff (a_1-a_2)^2\ge0\]
+
+Next we show that $P(n)\implies P(2n)$, i.e. if AM--GM holds for $n$ variables, it also holds for $2n$ variables:
+
+\[\frac{a_1+a_2+\cdots+a_{2n}}{2n}=\frac{\frac{a_1+a_2+\cdots+a_n}{n}+\frac{a_{n+1}+a_{n+2}+\cdots+a_{2n}}{n}}{2}\]\[\frac{\frac{a_1+a_2+\cdots+a_n}{n}+\frac{a_{n+1}+a_{n+2}+\cdots+a_{2n}}{n}}{2}\ge\frac{\sqrt[n]{a_1a_2\cdots a_n}+\sqrt[n]{a_{n+1}a_{n+2}\cdots a_{2n}}}{2}\]\[\frac{\sqrt[n]{a_1a_2\cdots a_n}+\sqrt[n]{a_{n+1}a_{n+2}\cdots a_{2n}}}{2}\ge\sqrt{\sqrt[n]{a_1a_2\cdots a_n}\sqrt[n]{a_{n+1}a_{n+2}\cdots a_{2n}}}\]\[\sqrt{\sqrt[n]{a_1a_2\cdots a_n}\sqrt[n]{a_{n+1}a_{n+2}\cdots a_{2n}}}=\sqrt[2n]{a_1a_2\cdots a_{2n}}\]
+The first inequality follows from $n$-variable AM--GM, which is true by assumption, and the second inequality follows from 2-variable AM--GM, which is proven above.
+
+Finally we show that $P(n)\implies P(n-1)$, i.e. if AM--GM holds for $n$ variables, it also holds for $n-1$ variables. By $n$-variable AM--GM, $\frac{a_1+a_2+\cdots+a_n}{n}\ge\sqrt[n]{a_1a_2\cdots a_n}$ Let $a_n=\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}$ Then we have\[\frac{a_1+a_2+\cdots+a_{n-1}+\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}}{n}=\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\]So,\[\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\ge\sqrt[n]{a_1a_2\cdots a_{n-1}\cdot \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}}\]\[\Rightarrow\left(\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\right)^n\ge a_1a_2\cdots a_{n-1}\cdot \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\]\[\Rightarrow\left(\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\right)^{n-1}\ge a_1a_2\cdots a_{n-1}\]\[\Rightarrow \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\ge\sqrt[n-1]{a_1a_2\cdots a_{n-1}}\]
+By Cauchy Induction, this proves the AM--GM inequality for $n$ variables.
+\end{proof}
+
+\subsection{Pigeonhole principle}
+\begin{theorem}[Pigeonhole principle]
+If $kn+1$ objects ($k\ge1$ not necessarily finite) are distributed among $n$ boxes, one of the boxes will contain at least $k+1$ objects.
+\end{theorem}
+
+\begin{exercise}[IMO 1972]
+Prove that every set of 10 two-digit integer numbers has two disjoint subsets with the same sum of elements.
+\end{exercise}
+
+\begin{solution}
+Let $S$ be the set of $10$ numbers. It has $2^{10}-2=1022$ subsets that differ from both $S$ and the empty set. They are the ``pigeons''.
+
+If $A\subset S$, the sum of elements of $A$ cannot exceed $91+92+\cdots+99=855$. The numbers between 1 and 855, which are all possible sums, are the ``holes''.
+
+Because the number of ``pigeons'' exceeds the number of ``holes'', there will be two ``pigeons'' in the same ``hole''. Specifically, there will be two subsets with the same sum of elements. Deleting the common elements, we obtain two disjoint sets with the same sum of elements.
+\end{solution}
+
+\begin{exercise}[Putnam 2006]
+Prove that for every set $X=\{x_1,x_2,\dots,x_n\}$ of $n$ real numbers, there exists a nonempty subset $S$ of $X$ and an integer $m$ such that
+\[\absolute{m+\sum_{x\in S}s}\le\frac{1}{n+1}.\]
+\end{exercise}
+
+\begin{solution}
+Recall that the fractional part of a real number $x$ is $x-\floor{x}$. Let us look at the fractional parts of the numbers $x_1,x_1+x_2,\dots,x_1+x_2+\cdots+x_n$. If any of them is either in the interval $\sqbrac{0,\frac{1}{n+1}}$ or $\sqbrac{\frac{n}{n+1},1}$, then we are done. If not, we consider these $n$ numbers as the ``pigeons'' and the $n-1$ intervals $\sqbrac{\frac{1}{n+1},\frac{2}{n+1}},\sqbrac{\frac{2}{n+1},\frac{3}{n+1}},\dots,\sqbrac{\frac{n-1}{n+1},\frac{n}{n+1}}$ as the ``holes''. By the pigeonhole principle, two of these sums, say $x_1+x_2+\cdots+x_k$ and $x_1+x_2+\cdots+x_{k+m}$, belong to the same interval. But then their difference $x_{k+1}+\cdots+x_{k+m}$ lies within a distance of $\frac{1}{n+1}$ of an integer, and we are done.
+\end{solution}
+\pagebreak
+
+\section*{Exercises}
+\begin{prbm}
+Use the Unique Factorisation Theorem to prove that, if a positive integer $n$ is not a perfect square, then $\sqrt{n}$ is irrational.
+
+[The Unique Factorisation Theorem states that every integer $n>1$ has a unique standard factored form, i.e. there is exactly one way to express $n=p_1^{k_1}p_2^{k_2}\cdots p_t^{k_t}$ where $p_1<p_2<\cdots<p_t$ are distinct primes and $k_1,k_2,\dots,k_t$ are some positive integers.]
+\end{prbm}
+
+\begin{proof}
+Prove by contradiction.
+
+Suppose $n$ is not a perfect square and $\sqrt{n}$ is rational.
+
+Then $\sqrt{n}=\frac{a}{b}$ for some integers $a$ and $b$. Squaring both sides and clearing denominator gives 
+\begin{equation*}\tag{$\ast$}
+nb^2=a^2.
+\end{equation*}
+
+Consider the standard factored forms of $n$, $a$ and $b$:
+\[ n=p_1^{k_1}p_2^{k_2}\cdots p_t^{k_t} \]
+\[ a=q_1^{e_1}q_2^{e_2}\cdots q_u^{e_u} \implies a^2=q_1^{2e_1}q_2^{2e_2}\cdots q_u^{2e_u} \]
+\[ b=r_1^{f_1}r_2^{f_2}\cdots r_v^{f_v} \implies b^2=r_1^{2f_1}r_2^{2f_2}\cdots r_v^{2f_v} \]
+i.e. the powers of primes in the standard factored form of $a^2$ and $b^2$ are all even integers. 
+
+This means the powers $k_i$ of primes $p_i$ in the standard factored form of $n$ are also even by Unique Factorisation Theorem (UFT):
+
+Note that all $p_i$ appear in the standard factored form of $a^2$ with even power $2c_i$, because of $(\ast)$. By UFT, $p_i$ must also appear in the standard factored form of $nb^2$ with the same even power $2c_i$.
+
+If $p_i\nmid b$, then $k_i=2c_i$ which is even. If $p_i\mid b$, then $p_i$ will appear in $b^2$ with even power $2d_i$. So $k_i+2d_i=2c_i$, and hence $k_i=2(c_i-d_i)$, which is again even.
+
+Hence $n=p_1^{k_1}p_2^{k_2}\cdots p_t^{k_t}=\brac{p_1^{\frac{k_1}{2}}p_2^{\frac{k_2}{2}}\cdots p_t^{\frac{k_t}{2}}}^2$.
+
+Since $\frac{k_i}{2}$ are all integers, $p_1^{\frac{k_1}{2}}p_2^{\frac{k_2}{2}}\cdots p_t^{\frac{k_t}{2}}$ is an integer and $n$ is a perfect square. This contradicts the given hypothesis that $n$ is not a perfect square.
+
+So we conclude that when a positive integer $n$ is not a perfect square, then $\sqrt{n}$ is irrational.
+\end{proof}
+
+\begin{prbm}
+Prove that for every pair of irrational numbers $p$ and $q$ such that $p<q$, there is an irrational $x$ such that $p<x<q$.
+\end{prbm}
+
+\begin{proof}
+Consider the average of $p$ and $q$: $p<\dfrac{p+q}{2}<q$.
+
+If $\dfrac{p+q}{2}$ is irrational, take $x=\dfrac{p+q}{2}$ and we are done.
+
+If $\dfrac{p+q}{2}$ is rational, call it $r$, take the average of $p$ and $r$: $p<\dfrac{p+r}{2}<r<q$. Since $p$ is irrational and $r$ is rational, $\dfrac{p+r}{2}$ is irrational. In this case, we take $x=\dfrac{3p+q}{4}$.
+\end{proof}
+
+\begin{prbm}
+Given $n$ real numbers $a_1,a_2,\dots,a_n$. Show that there exists an $a_i$ ($1\le i\le n$) such that $a_i$ is greater than or equal to the mean (average) value of the $n$ numbers.
+\end{prbm}
+
+\begin{proof}
+Prove by contradiction.
+
+Let $\bar{a}$ denote the mean value of the $n$ given numbers. Suppose $a_i<\bar{a}$ for all $a_i$. Then
+\[ \bar{a}=\frac{a_1+a_2+\cdots+a_n}{n}<\frac{\bar{a}+\bar{a}+\cdots+\bar{a}}{n}=\frac{n\bar{a}}{n}=\bar{a}. \]
+We derive $\bar{a}<\bar{a}$, which is a contradiction.
+
+Hence there must be some $a_i$ such that $a_i>\bar{a}$.
+\end{proof}
+
+\begin{prbm}
+Prove that the following statement is false: there is an irrational number $a$ such that for all irrational number $b$, $ab$ is rational.
+\end{prbm}
+
+\textbf{Thought process:} prove the negation of the statement: for every irrational number $a$, there is an irrational number $b$ such that $ab$ is irrational.
+
+\textbf{Proving technique:} constructive proof (note that we can consider multiple cases and construct more than one $b$)
+
+\begin{proof}
+Given an irrational number $a$, let us consider $\dfrac{\sqrt{2}}{a}$.
+
+\textbf{Case 1:} $\dfrac{\sqrt{2}}{a}$ is irrational.
+
+Take $b=\dfrac{\sqrt{2}}{a}$. Then $ab=\sqrt{2}$ which is irrational.
+
+\textbf{Case 2:} $\dfrac{\sqrt{2}}{a}$ is rational.
+
+Then the reciprocal $\dfrac{a}{\sqrt{2}}$. Since $\sqrt{6}$ is irrational, the product $\brac{\dfrac{a}{\sqrt{2}}}\sqrt{6}=a\sqrt{3}$ is irrational. Take $b=\sqrt{3}$, which is irrational. Then $ab=a\sqrt{3}$ which is irrational.
+\end{proof}
+
+\begin{prbm}
+Prove that there are infinitely many prime numbers that are congruent to $3$ modulo $4$.
+\end{prbm}
+
+\begin{proof}
+Prove by contradiction.
+
+Suppose there are only finitely many primes that are congruent to $3$ modulo $4$. Let $p_1,p_2,\dots,p_m$ be the list of all the primes that are congruent to $3$ modulo $4$.
+
+We construct an integer $M$ by $M=(p_1p_2\cdots p_m)^2+2$.
+
+We have the following observation:
+\begin{enumerate}[label=(\roman*)]
+\item  $M\equiv 3 \mod 4$.
+\item Every $p_i$ divides $M-2$.
+\item None of the $p_i$ divides $M$. [Otherwise, together with (ii), this will imply $p_i$ divides $2$, which is impossible.]
+\item $M$ is not a prime number. [Otherwise, by (i), $M$ is a prime number congruent to $3$ modulo $4$. But $M\neq p_i$ for all $1\le i\le m$. This contradicts the assumption that $p_1,p_2,\dots,p_m$ are all the prime numbers congruent to $3$ modulo $4$.]
+\end{enumerate}
+
+From the above discussion, we know that $M$ is a composite number by (iv). So it has a prime factorization $M=q_1q_2\cdots q_k$.
+
+Since $M$ is odd, all these prime factors $q_j$ must be odd, and hence $q_j$ must be congruent to either $1$ or $3$ modulo $4$.
+
+By (iii), $q_j$ cannot be any of the $p_i$. So all $q_j$ must be congruent to $1$ modulo $4$. Then $M$, which is the product of $q_j$, must also be congruent to $1$ modulo $4$.
+
+This contradicts (i) that $M$ is congruent to $3$ modulo $4$.
+
+Hence we conclude that there must be infinitely many primes that are congruent to $3$ modulo $4$.
+\end{proof}
+
+\begin{prbm}
+Prove that, for any positive integer $n$, there is a perfect square $m^2$ ($m$ is an integer) such that $n\le m^2\le 2n$.
+\end{prbm}
+
+\begin{proof}
+Prove by contradiction.
+
+Suppose otherwise, that $n>m^2$ and $(m+1)^2>2n$ so that there is no square between $n$ and $2n$, then
+\[ (m+1)^2>2n>2m^2. \]
+Since we are dealing with integers and the inequalities are strict, we get
+\[ (m+1)^2\ge2m^2+2 \]
+which simplifies to
+\[ 0\ge m^2-2m+1=(m-1)^2 \]
+The only value for which this is possible is $m=1$, but you can eliminate that easily enough.
+\end{proof}
+
+\begin{prbm}
+Prove that for every positive integer $n\ge4$,
+\[ n!>2^n. \]
+\end{prbm}
+
+\begin{proof}
+Let $P(n):n!>2^n$
+
+\textbf{Base case:} $P(4)$
+
+LHS: $4!=4\times3\times2\times1=24$, RHS: $2^4=16<24$
+
+So $P(4)$ is true.
+
+\textbf{Inductive step:} $P(k) \implies P(k+1)$ for all $k\in\NN_{\ge4}$
+\begin{align*}
+k! &> 2^k \\
+(k+1)k! &> 2^k(k+1) \\
+&> 2^k2 \quad \text{since from $k\ge4$, $k+1\ge5>2$} \\
+&= 2^{k+1}
+\end{align*}
+hence proven $P(k) \implies P(k+1)$ for integers $k\ge4$.
+
+By PMI, we have proven $P(n)$ for all integers $n\ge4$.
+\end{proof}
+
+\begin{prbm}
+Prove by mathematical induction, for $n\ge2$,
+\[ \sqrt[n]{n}<2-\frac{1}{n}. \]
+\end{prbm}
+
+\begin{proof}
+Let $P(n):\sqrt[n]{n}<2 - \dfrac{1}{n}$ for $n \ge 2$.
+
+\textbf{Base case:} $P(2)$
+
+When $n=2$, $\sqrt{2}=1.41\dots<2-\dfrac{1}{2}=1.5$ which is true. Hence $P(2)$ is true.
+
+\textbf{Inductive step:} $P(k)\implies P(k+1)$ for all $k\in\NN_{\ge2}$
+
+Assume $P(k)$ is true for $k \ge 2, k \in \NN$, i.e.
+\[ \sqrt[k]{k}<2 - \dfrac{1}{k} \implies k<\brac{2-\frac{1}{k}}^k \]
+
+We want to prove that $P(k+1)$ is true, i.e.
+\[ k+1<\brac{2-\frac{1}{k+1}}^{k+1} \]
+
+Since $k>2$, we have 
+\begin{align*}
+\brac{2-\frac{1}{k+1}}^{k+1}
+&> \brac{2-\frac{1}{k}}^{k+1} \quad \because k>2 \\
+&= \brac{2-\frac{1}{k}}^k\brac{2-\frac{1}{k}} \\
+&> k\brac{2-\frac{1}{k}} \quad \text{[by inductive hypothesis]} \\
+&= 2k-1=k+k-1 > k-1 \because k>2
+\end{align*}
+Hence $P(k+1)$ is true.
+
+Since $P(2)$ is true and $P(k)\implies P(k+1)$, by mathematical induction $P(n)$ is true.
+\end{proof}
+
+\begin{prbm}
+Prove that for all integers $n \ge 3$, 
+\[ \brac{1+\frac{1}{n}}^n<n \]
+\end{prbm}
+
+\begin{proof}
+\textbf{Base case:} $P(3)$
+
+On the LHS, $\brac{1+\dfrac{1}{3}}^3=\dfrac{64}{27}=2\dfrac{10}{27}<3$. Hence $P(3)$ is true.
+
+\textbf{Inductive step:} $P(k)\implies P(k+1)$ for all $k\in\NN_{\ge3}$
+
+Our inductive hypothesis is
+\[ \brac{1+\frac{1}{k}}^k<k \]
+Multiplying both sides by $\brac{1+\dfrac{1}{k}}$ (to get a $k+1$ in the power),
+\[ \brac{1+\frac{1}{k}}^k\brac{1+\frac{1}{k}}=\brac{1+\frac{1}{k}}^{k+1}<k\brac{1+\frac{1}{k}}=k+1  \]
+Since $k<k+1 \iff \dfrac{1}{k}>\dfrac{1}{k+1}$, 
+\[ \brac{1+\frac{1}{k}}^{k+1} > \brac{1+\frac{1}{k+1}}^{k+1} \]
+The rest of the proof follows easily.
+\end{proof}
+
+A sequence of integers $F_i$, where integer $1\le i\le n$, is called the \emph{Fibonacci sequence} if and only if it is defined recursively by $F_1=1$, $F_2=1$, $F_n=F_{n-1}+F_{n-2}$ for $n>2$.
+
+\begin{prbm}
+Let $a_i$ where integer $1\le i\le n$ be a sequence of integers defined recursively by initial conditions $a_1=1$, $a_2=1$, $a_3=3$ and the recurrence relation $a_n=a_{n-1}+a_{n-2}+a_{n-3}$ for $n>3$.
+
+For all $n\in\NN$, prove that
+\[ a_n\le2^{n-1}. \]
+\end{prbm}
+
+\begin{proof}
+Let $P(n):a_n\le2^{n-1}$.
+
+Given the recurrence relation, it could be possible to use $P(k),P(k+1),P(k+2)$ to prove $P(k+3)$ for all $k\in\NN$.
+
+\textbf{Base case:} $P(1),P(2),P(3)$
+
+$P(1):a_1=1\le2^{1-1}=1$ is true.
+
+$P(2):a_2=1\le2^{2-1}=2$ is true.
+
+$P(3):a_3=3\le2^{3-1}=4$ is true.
+
+\textbf{Inductive step:} $P(k)\land P(k+1)\land P(k+2)\implies P(k+3)$ for all $k\in\NN$
+
+By inductive hypothesis, for $k\in\NN$ we have $a_k\le2^k, a_{k+1}\le2^{k+1}, a_{k+2}\le2^{k+2}$.
+\begin{align*}
+a_{k+3} &= a_k+a_{k+1}+a_{k+2} \quad \text{[start from recurrence relation]} \\
+&\le 2^k+2^{k+1}+2^{k+2} \quad \text{[use inductive hypothesis]} \\
+&= 2^k(1+2+2^2) \\
+&< 2^k(2^3) \quad \text{[approximation, since $1+2+2^2<2^3$]} \\
+&= 2^{k+3}
+\end{align*}
+which is precisely $P(k+3):a_{k+3}\le2^{k+3}$.
+\end{proof}
+
+\begin{prbm}
+For $m,n\in\NN$, prove that
+\[ F_{n+m+1}=F_nF_m+F_{n+1}F_{m+1}. \]
+\end{prbm}
+
+\begin{proof}
+For $n\in\NN$, take $P(n):F_{n+m+1}=F_nF_m+F_{n+1}F_{m+1}$ for all $m\in\NN$ in the cases $k=n$ and $k=n+1$.
+
+So we are using induction to progress through $n$ and dealing with $m$ simultaneously at each stage. 
+
+To verify $P(0)$, we note that
+\[ F_{m+1}=F_0F_m+F_1F_{m+1} \]
+and
+\[ F_{m+2}=F_1F_m+F_2F_{m+1} \]
+for all $m$, as $F_0=0$ and $F_1=F_2=1$.
+
+For the inductive step we assume $P(n)$, i.e. that for all $m\in\NN$,
+\begin{align*}
+F_{n+m+1}&=F_nF_m+F_{n+1}F_{m+1},\\
+F_{n+m+2}&=F_{n+1}F_m+F_{n+2}F_{m+1}.
+\end{align*}
+
+Then
+\begin{align*}
+F_{n+m+3}
+&=F_{n+m+2}+F_{n+m+1}\\
+&=F_n F_m+F_{n+1}F_{m+1}+F_{n+1}F_m+F_{n+2}F_{m+1}\\
+&=(F_n+F_{n+1})Fm+(F_{n+1}+F_{n+2})F_{m+1}\\
+&=F_{n+2}F_m+F_{n+3}F_{m+1}
+\end{align*}
+thus $P(n+1)$ is true, for all $m\in\NN$.
+\end{proof}

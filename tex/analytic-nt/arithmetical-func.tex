@@ -1,0 +1,60 @@
+\section*{Introduction}
+An integer $n>1$ is called \textbf{prime} if the only positive divisors of $n$ are $1$ and $n$. If $n>1$ and if $n$ is not prime, then n is called composite.
+
+\begin{lemma*}
+Every integer $n>1$ is either a prime number or a product of prime numbers.
+\end{lemma*}
+
+\begin{proof}
+We use induction on $n$. The theorem is clearly true for $n=2$. Assume it is true for every integer $<n$. Then if $n$ is not prime it has a positive divisor $d$, where $d\neq1$, $d\neq n$. Hence $n=cd$,where $c\neq n$.But both $c$ and $d$ are $<n$ and $>l$ so each of $c$ and $d$ is a product of prime numbers, hence so is $n$.
+\end{proof}
+
+\begin{theorem}[Euclid]
+There are infinitely many prime numbers.
+\end{theorem}
+
+\begin{proof}
+Suppose there are only a finite number of primes, say $p_1,p_2,\dots,p_n$. Let $N=1+p_1p_2\cdots p_n$. Now $N>1$ so either $N$ is prime or $N$ is a product of primes. Of course $N$ is not prime since it exceeds each $p_i$. Moreover, no $p_i$ divides $N$ (if $p_i\mid N$ then $p_i$ divides the difference $N-p_1p_2\cdots p_n=1$). This contradicts the above lemma.
+\end{proof}
+
+\begin{theorem}[Fundamental theorem of arithmetic]
+Every integer $n>1$ can be represented as a product of prime factors in only one way, apart from the order of the factors.
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+
+
+\chapter{Arithmetical Functions}
+An \textbf{arithmetical function} is a real- or complex-valued function defined on the positive integers. This chapter introduces several arithmetical functions which play an important role in the study of divisibility properties of integers and the distribution of primes.
+
+The chapter also discusses Dirichlet multiplication, a concept which helps clarify interrelationships between various arithmetical functions.
+
+\section{M\"{o}bius Function}
+\begin{definition}[M\"{o}bius function]
+$\mu(1)=1$. If $n>1$, write $n=p_1^{a_1}\cdots p_k^{n_k}$. Then
+\[\mu(n)=\begin{cases}
+(-1)^k&a_1=\cdots=a_k=1\\
+0&\text{otherwise}
+\end{cases}\]
+\end{definition}
+
+\begin{remark}
+Note that $\mu(n)=0$ if and only if $n$ has a square factor $>1$.
+\end{remark}
+
+\begin{theorem}
+If $n\ge1$, we have
+\[\sum_{d\mid n}\mu(d)=\begin{cases}
+1&n=1\\
+0&n>1
+\end{cases}\]
+\end{theorem}
+
+\begin{proof}
+The result is clearly true if $n=1$. Assume, then, that $n>1$ and write $n=p_1^{a_1}\cdots p_k^{a_k}$.
+\end{proof}
+
+\section{Euler's Totient Function}

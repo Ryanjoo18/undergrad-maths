@@ -1,0 +1,53 @@
+\part{Statistics}
+\chapter{Introductory Measure Theory}
+\section{Introduction to Probability Theory}
+\begin{definition}[Probability space]
+A \vocab{probability space} is a triple $(\Omega,\mathcal{F},\PP)$ where
+\begin{itemize}
+\item $\Omega$ is a set, called the \vocab{sample space};
+\item $\mathcal{F}$ is a collection of subsets of $\Omega$, called \vocab{events}, satisfying the following axioms:
+\begin{enumerate}[label=F\arabic*:]
+    \item $\Omega\in\mathcal{F}$.
+    \item If $A\in\mathcal{F}$, then also $A^c\in\mathcal{F}$.
+    \item If $\{A_i,i\in I\}$ is a finite or countably infinite collection of members of $\mathcal{F}$, then $\bigcup_{i\in I}A_i\in\mathcal{F}$.
+\end{enumerate}
+\item $\PP$ is a \vocab{probability measure}, which is a function $\PP:\mathcal{F}\to\RR$ satisfying the following axioms:
+\begin{enumerate}[label=P\arabic*:]
+    \item For all $A\in\mathcal{F}$, $\PP(A)\ge0$.
+    \item $\PP(\Omega)=1$.
+    \item If $\{A_i,i\in I\}$ is a finite or countably infinite collection of members of $\mathcal{F}$, and $A_i\cap A_j=\emptyset$ for $i\neq j$, then $\PP\brac{\bigcup_{i\in I}A_i}=\sum_{i\in I}\PP(A_i)$.
+\end{enumerate}
+\end{itemize}
+\end{definition}
+
+\section{Basics from Measure Theory}
+\begin{definition}[Limits of sets]
+Let $(A_n)$ be a sequence of subsets of $\Omega$. We define
+\begin{align*}
+A_*&=\liminf_{n\to\infty}A_n=\bigcup_{n=1}^{\infty}\bigcap_{m=n}^{\infty}A_m,\\
+A^*&=\limsup_{n\to\infty}A_n=\bigcap_{n=1}^{\infty}\bigcup_{m=n}^{\infty}A_m.
+\end{align*}
+If the sets $A_*$ and $A^*$ agree, then
+\[A=A_*=A^*=\lim_{n\to\infty}A_n.\]
+\end{definition}
+
+One instance when a limit exists is when the sequence of sets is monotone.
+
+\begin{proposition}
+Let $(A_n)$ be a sequencw of subsets of $\Omega$.
+\begin{enumerate}[label=(\arabic*)]
+\item If $A_1\subset A_2\subset\cdots$, then
+\[\lim_{n\to\infty}A_n=\bigcup_{n=1}^{\infty}A_n.\]
+\item If $A_1\supset A_2\supset\cdots$, then
+\[\lim_{n\to\infty}A_n=\bigcap_{n=1}^{\infty}A_n.\]
+\end{enumerate}
+\end{proposition}
+
+%\chapter{Discrete Random Variables}
+%A \vocab{discrete random variable} $X$ on a probability space $(\Omega,F,\PP)$ is a function $X : \Omega \to \RR$ such that
+%\begin{enumerate}[label=(\alph*)]
+%\item $\{\omega \in \Omega: X(\omega) = x\} \in F$ for each $x \in \RR$
+%\item $\Im{X} \coloneqq X(\Omega) = \{X(\omega): \omega \in \Omega\}$ is a finite or countable subset of $\RR$.
+
+% https://courses.maths.ox.ac.uk/pluginfile.php/93417/mod_resource/content/8/PrelimsProb_MT23_26Sep2023.pdf
+%\end{enumerate}

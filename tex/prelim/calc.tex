@@ -1,0 +1,238 @@
+\chapter{Calculus}
+\section{Single Variable Calculus}
+\subsection{Integration Techniques}
+We review the following basic techniques for evaluating integrals:
+\begin{itemize}
+\item Integration by substitution
+\item Integration by parts, reduction formula
+\end{itemize}
+
+\begin{exercise}
+Evaluate
+\[I=\int_{0}^{1}\frac{1}{\sqrt{4-2x-x^2}}\dd{x}.\]
+\end{exercise}
+
+\begin{solution}
+The integral is close to the known integral $\int\frac{1}{\sqrt{1-x^2}}\dd{x}$. By completing the square we may write
+\begin{align*}
+4-2x-x^2&=5-(x+1)^2\\
+&=5\brac{1-\brac{\frac{x+1}{\sqrt{5}}}^2}.
+\end{align*}
+Making the substitution $u=\frac{x+1}{\sqrt{5}}$ we have $\dd{u}=\frac{1}{\sqrt{5}}\dd{x}$, so that
+\begin{align*}
+I&=\int_{0}^{1}\frac{1}{\sqrt{4-2x-x^2}}\dd{x}\\
+&=\frac{1}{\sqrt{5}}\int_{0}^{1}\frac{1}{\sqrt{1-\brac{\frac{x+1}{\sqrt{5}}}^2}}\dd{x}\\
+&=\frac{1}{\sqrt{5}}\int_{\frac{1}{\sqrt{5}}}^{\frac{2}{\sqrt{5}}}\frac{\sqrt{5}}{\sqrt{1-u^2}}\dd{u}\\
+&=\int_{\frac{1}{\sqrt{5}}}^{\frac{2}{\sqrt{5}}}\frac{1}{\sqrt{1-u^2}}\dd{u}\\
+&=\sin^{-1}\frac{2}{\sqrt{5}}-\sin^{-1}\frac{1}{\sqrt{5}}.
+\end{align*}
+\end{solution}
+
+Now let us recall the technique of integration by parts. This is the integral form of the product rule for derivatives, that is $(fg)^\prime=f^\prime g+fg^\prime$, where $f$ and $g$ are functions of $x$, and the prime denotes the derivative with respect to $x$. Thus we have
+\[f(x)g(x)=\int g(x)f^\prime(x)\dd{x}+\int f(x)g^\prime(x)\dd{x}\]
+and we arrange the terms to obtain
+\[\int f(x)g^\prime(x)\dd{x}=f(x)g(x)-\int g(x)f^\prime(x)\dd{x}.\]
+Similarly, for definite integrals we have
+\[\int_{a}^{b}f(x)g^\prime(x)\dd{x}=\sqbrac{f(x)g(x)}_a^b-\int_{a}^{b}g(x)f^\prime(x)\dd{x}.\]
+
+\begin{exercise}
+Evaluate
+\[I=\int xe^x\dd{x}.\]
+\end{exercise}
+
+\begin{solution}
+We have $f(x)=x$ and $g^\prime(x)=e^x$, so that $f^\prime(x)=1$ and $g(x)=e^x$. Thus
+\begin{align*}
+I&=\int xe^x\dd{x}\\
+&=xe^x-\int e^x\dd{x}\\
+&=xe^x-e^x+c.
+\end{align*}
+\end{solution}
+
+Sometimes, after two applications of the ``by parts'' formula, we almost get back to where we started:
+
+\begin{exercise}
+Evaluate
+\[I=\int e^x\sin x\dd{x}.\]
+\end{exercise}
+
+\begin{solution}
+\begin{align*}
+\int e^x\sin x\dd{x}
+&=e^x\sin x-\int e^x\cos x\dd{x}\\
+&=e^x\sin x-e^x\cos x-\int e^x\sin x\dd{x}.
+\end{align*}
+Now we see that we have returned to our original integral, so that we can rearrange this equation to obtain
+\[\int e^x\sin x\dd{x}=\frac{1}{2}e^x\brac{\sin x-\cos x}+c.\]
+\end{solution}
+
+Finally in this section we look at an example of a \emph{reduction formula}.
+
+\begin{exercise}
+Consider $I_n=\int\cos^n x\dd{x}$ where $n$ is a non-negative integer. Find a reduction formula for $I_n$, and use this formula to evaluate $\int\cos^7x\dd{x}$.
+\end{exercise}
+
+\begin{solution}
+The aim here is to write $I_n$ in terms of other $I_k$ where $k<n$, so that eventually we are reduced to calculating $I_0$ or $I_1$, say, both of which are easily found (analagous to a recurrence relation). Using integration by parts we have:
+\begin{align*}
+I_n&=\int\cos^n x\dd{x}\\
+&=\int\cos^{n-1}\times\cos x\dd{x}\\
+&=\cos^{n-1}x\sin x+(n-1)\int\cos^{n-2}x\sin^2 x\dd{x}\\
+&=\cos^{n-1}x\sin x+(n-1)\int\cos^{n-2}x(1-\cos^2 x)\dd{x}\\
+&=\cos^{n-1}x\sin x+(n-1)\brac{I_{n-2}-I_n}.
+\end{align*}
+
+Rearranging this to make $I_n$ the subject we obtain
+\[I_n=\frac{1}{n}\cos^{n-1}x\sin x+\frac{n-1}{n}I_{n-2}.\]
+
+With this reduction formula, $I_n$ can be rewritten in terms of simpler and simpler integrals until we are left only needing to calculate $I_0$ if $n$ is even, or $I_1$ if $n$ is odd. Therefore, $I_7$ can be found as follows:
+\begin{align*}
+I_7&=\frac{1}{7}\cos^6x\sin x+\frac{6}{7}I_5\\
+&=\frac{1}{7}\cos^6x\sin x+\frac{6}{7}\brac{\frac{1}{5}\cos^4x\sin x+\frac{4}{5}I_3}\\
+&=\frac{1}{7}\cos^6x\sin x+\frac{6}{7}\brac{\frac{1}{5}\cos^4x\sin x+\frac{4}{5}\brac{\frac{1}{3}\cos^2x\sin x+\frac{2}{3}I_1}}\\
+&=\frac{1}{7}\cos^6x\sin x+\frac{6}{35}\cos^4x\sin x+\frac{24}{105}\cos^2x\sin x+\frac{48}{105}\sin x+c.
+\end{align*}
+\end{solution}
+
+\subsection{First Order Differential Equations}
+An \vocab{ordinary differential equation} (ODE) is an equation relating a variable, say $x$, a function, say $y$, of the variable $x$, and finitely many of the derivatives of $y$ with respect to $x$. That is, an ODE can be written in the form
+\[f\brac{x,y,\dv{y}{x},\dv[2]{y}{x},\dots,\dv[k]{y}{x}}=0\]
+for some function $f$, $k\in\NN$. Here $x$ is the independent variable and the ODE governs how the dependent variable $y$ varies with $x$. The equation may have no, one or many functions $y(x)$ which satisfy it; the problem is usually to find the most general solution $y(x)$, a function which satisfies the differential equation.
+
+We say that an ODE has \emph{order} $k$ if it involves derivatives of order $k$ and less. Thus first order differential equations take the form
+\[\dv{y}{x}=f(x,y).\]
+In general, a $k$-th order ODE takes the form
+\[a_k(x)\dv[k]{y}{x}+a_{k-1}(x)\dv[k-1]{y}{x}+\cdots+a_1(x)\dv{y}{x}+a_0(x)y=f(x),\]
+where $a_k(x)\neq0$. The ODE is \emph{homogeneous} if $f(x)=0$ for all $x$, and \emph{inhomogeneous} otherwise. 
+
+The following are some standard methods for solving first order ODEs:
+\begin{itemize}
+\item Direct integration
+\item Separation of variables
+\item Reduction to separable form by substitution
+\item Exact differential equations
+\item Integrating factors
+\end{itemize}
+
+If the ODE takes the form
+\[\dv{y}{x}=f(x),\]
+then we can solve this by direct integration:
+
+\begin{exercise}
+Find the general solution to
+\[\dv{y}{x}=x^2\sin x.\]
+\end{exercise}
+
+\begin{solution}
+Integrating both sides with respect to $x$ and then integrating the RHS by parts, we have
+\[y=-x^2\cos x+2x\sin x+2\cos x+c.\]
+\end{solution}
+
+When the ODE is \emph{separable}, that is, it takes the form
+\[\dv{y}{x}=a(x)b(y),\]
+where $a(x)$ and $b(y)$ are functions of $x$ and $y$ respectively, we can solve this by separating the variables:
+\[\frac{1}{b(y)}\dv{y}{x}=a(x),\]
+then integrating both sides with respect to $x$ we find
+\[\int\frac{1}{b(y)}\dd{y}=\int a(x)\dd{x}.\]
+Here we have assumed that $b(y)\neq0$; if $b(y)=0$ then the solution is $y=c$ for some constant $c$.
+
+Some first order differential equations can be transformed by a suitable substitution into separable form.
+
+\begin{exercise}
+Find the general solution to
+\[\dv{y}{x}=\sin(x+y+1).\]
+\end{exercise}
+
+\begin{solution}
+Let $u=x+y+1$, so that $\dv{u}{x}=1+\dv{y}{x}$. Then the original equation can be written as
+\[\dv{u}{x}=1+\sin u,\]
+which is separable. We have 
+\[\frac{1}{1+\sin u}\dv{u}{x}=1,\]
+which integrates to
+\[\int\frac{1}{1+\sin u}\dd{u}=x+c.\]
+Let us evaluate the integral on the LHS:
+\begin{align*}
+\int\frac{1}{1+\sin u}\dd{u}&=\int\frac{1-\sin u}{(1+\sin u)(1-\sin u)}\dd{u}\\
+&=\int\frac{1-\sin u}{1-\sin^2 u}\dd{u}\\
+&=\int\frac{1-\sin u}{\cos^2 u}\dd{u}\\
+&=\int\sec^2 u\dd{u}-\int\sec u\tan u\dd{u}\\
+&=\tan u-\sec u+c.
+\end{align*}
+Therefore the general solution is
+\[\tan(x+y+1)-\sec(x+y+1)=x+c.\]
+This solution, where we have not found $y$ in terms of $x$, is called an \emph{implicit solution}.
+\end{solution}
+
+A special group of first order differential equations are homogeneous ones, of the form
+\[\dv{y}{x}=f\brac{\frac{y}{x}}.\]
+These can be solved by the substitution of the form $y(x)=xv(x)$, so that the ODE becomes
+\[x\dv{v}{x}=f(v)-v,\]
+which is separable.
+
+Now we look specifically at first order linear ODEs, which take the general form
+\[\dv{y}{x}+p(x)y=q(x).\]
+We see that the homogeneous form, that is when $q(x)=0$, is separable. The inhomogeneous form can be solved by multiplying an \emph{integrating factor} $I(x)$ given by
+\[I(x)=e^{\int p(x)\dd{x}}\]
+on both sides of the equation, so that
+\[e^{\int p(x)\dd{x}}\dv{y}{x}+p(x)e^{\int p(x)\dd{x}}y=e^{\int p(x)\dd{x}}q(x).\]
+Using the product rule for derivatives, this gives
+\[\dv{}{x}\brac{e^{\int p(x)\dd{x}}y}=e^{\int p(x)\dd{x}}q(x),\]
+which we can integrate directly to find $y(x)$:
+\[y(x)=e^{-\int p(x)\dd{x}}\brac{\int e^{\int p(x)\dd{x}}q(x)\dd{x}+c}.\]
+
+\begin{exercise}
+Solve the linear differential equation
+\[\dv{y}{x}+2xy=2xe^{-x^2}.\]
+\end{exercise}
+
+\begin{solution}
+The integrating factor is $I(x)=e^{\int 2x\dd{x}}=e^{x^2}$. Multiplying through by this factor gives
+\[e^{x^2}\dv{y}{x}+2xe^{x^2}y=2x,\]
+that is
+\[\dv{}{x}\brac{e^{x^2}y}=2x.\]
+Integrating both sides with respect to $x$ we find
+\[e^{x^2}y=x^2+c,\]
+so that the general solution is
+\[y=\brac{x^2+c}e^{-x^2}.\]
+\end{solution}
+
+\subsection{Second Order Linear Differential Equations}
+
+
+\section{Multivariable Calculus}
+\subsection{Partial Differentiation}
+\begin{definition}[Partial derivative]
+Let $f:\RR^n\to\RR$ be a function of $n$ variables. The \vocab{partial derivative} of $f$ with respect to the $i$-th variable is the function
+\[\pdv{f}{x_i}=\lim_{h\to0}\frac{f(x_1,\dots,x_{i-1},x_i+h,x_{i+1},\dots,x_n)-f(x_1,\dots,x_n)}{h}.\]
+\end{definition}
+
+\begin{notation}
+We define second and higher order partial derivatives in a similar manner to how we define them for full derivatives. So in the case of second order partial derivatives of a function $f(x,y)$, we have
+\begin{align*}
+\pdv[2]{f}{x}&=\pdv{}{x}\brac{\pdv{f}{x}}=f_{xx},\\
+\pdv[2]{f}{y}&=\pdv{}{y}\brac{\pdv{f}{y}}=f_{yy},\\
+\pdv{f}{y,x}&=\pdv{}{y}\brac{\pdv{f}{x}}=f_{xy},\\
+\pdv{f}{x,y}&=\pdv{}{x}\brac{\pdv{f}{y}}=f_{yx}.
+\end{align*}
+\end{notation}
+
+If $f_{xy}$ and $f_{yx}$ are both defined and continuous in a region containing the point $(a,b)$, then 
+\[f_{xy}(a,b)=f_{yx}(a,b);\]
+this is known as \emph{Clairaut's theorem}. A consequence of this theorem is that we don't need to keep track of the order in which we take derivatives.
+
+\begin{theorem}[Chain rule]
+Let $F(t)=f\brac{u(t),v(t)}$ with $u$ and $v$ differentiable and $f$ being continuously differentiable in each variable. Then
+\begin{equation}
+\dv{F}{t}=\pdv{f}{u}\dv{u}{t}+\pdv{f}{v}\dv{v}{t}.
+\end{equation}
+\end{theorem}
+
+
+
+\subsection{Coordinate systems and Jacobians}
+\subsection{Double Integrals}
+\subsection{Parametric representation of curves and surfaces}
+\subsection{The gradient vector}
+\subsection{Taylor's theorem}
+\subsection{Critical points}
+\subsection{Lagrange multipliers}

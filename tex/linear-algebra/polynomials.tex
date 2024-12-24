@@ -1,0 +1,101 @@
+\chapter{Polynomials}
+\section{Definitions}
+\begin{definition}[Polynomial]
+A function $p:\FF\to\FF$ is a \textbf{polynomial} with coefficients in $\FF$ if there exist $a_i\in\FF$ such that
+\[p(z)=a_0+a_1z+\cdots+a_nz^n\quad(z\in\FF)\]
+\end{definition}
+
+\begin{notation}
+The set of all polynomials with coefficients in $\FF$ is denoted by $\FF[z]$.
+\end{notation}
+
+\begin{proposition}
+With the usual operations of addition and scalar multiplication, $\FF[z]$ is a vector space over $\FF$, as you should verify. Hence $\FF[z]$ is a subspace of $\FF^\FF$ (vector space of functions from $\FF$ to $\FF$).
+\end{proposition}
+
+\begin{definition}[Degree]
+A polynomial $p\in\FF[z]$ is has \textbf{degree} $n$, denoted by $\deg p=n$, if there exist scalars $a_0,a_1,\dots,a_n\in\FF$ with $a_n\neq0$ such that $p(z)=a_0+a_1z+\cdots+a_nz^n$ for all $z\in\FF$.
+\end{definition}
+
+\begin{notation}
+For non-negative integer $n$, $\FF_n[z]$ denotes the set of all polynomials with coefficients in $\FF$ and degree at most $n$.
+\end{notation}
+
+\begin{proposition}
+For non-negative integer, $\FF_n[z]$ is finite-dimensional.
+\end{proposition}
+
+\begin{proof}
+$\FF_n[z]=\spn(1,z,z^2,\dots,z^n)$ [here we slightly abuse notation by letting $z^k$ denote a function]. 
+\end{proof}
+
+\begin{proposition}
+$\FF[z]$ is infinite-dimensional.
+\end{proposition}
+
+\begin{proof}
+Consider any list of elements of $\FF[z]$. Let $n$ denote the highest degree of the polynomials in this list. Then every polynomial in the span of this list has degree at most $n$. Thus $z^{n+1}$ is not in the span of our list. Hence no list spans $\FF[z]$. Thus $\FF[z]$ is infnite-dimensional.
+\end{proof}
+
+\section{Zeros of Polynomials}
+The solutions to the equation $p(z)=0$ play a crucial role in the study of a polynomial $p\in\FF[z]$. Thus these solutions have a special name.
+
+\begin{definition}[Zero]
+$\lambda\in\FF$ is called a \vocab{zero}\index{zero of polynomial} (or \emph{root}) of a polynomial $p\in\FF[z]$ if
+\[p(\lambda)=0.\]
+\end{definition}
+
+The next result is the key tool that we will use to show that the degree of a polynomial is unique.
+
+\begin{lemma}[Factor Theorem]
+Suppose $n\in\ZZ^+$, $p\in\FF_n[z]$. Suppose $\lambda\in\FF$, then $p(\lambda)=0$ if and only if there exists $q\in\FF_{n-1}[z]$ such that
+\[p(z)=(z-\lambda)q(z)\]
+for every $z\in\FF$.
+\end{lemma}
+
+Now we can prove that the degree of a polynomials determines how many zeros it has.
+
+\begin{proposition}
+Suppose $n\in\ZZ^+$, $p\in\FF_n[z]$. Then $p$ has at most $n$ zeros in $\FF$.
+\end{proposition}
+
+\section{Division Algorithm for Polynomials}
+\begin{proposition}[Division Algorithm]
+Suppose $p,s\in\FF[z]$, $s\neq0$. Then there exists unique polynomials $q,r\in\FF[z]$, where $\deg r<\deg s$, such that
+\[p=sq+r.\]
+\end{proposition}
+
+\section{Factorisation of Polynomials over $\CC$}
+\begin{theorem}[Fundamental Theorem of Algebra, first version]
+Every non-constant polynomial with complex coefficients has a zero in $\CC$.
+\end{theorem}
+
+\begin{theorem}[Fundamental Theorem of Algebra, second version]
+If $p\in\CC[z]$ is a non-constant polynomial, then $p$ has a unique factorisation (except for the order of the factors) of the form
+\[p(z)=c(z-\lambda_1)\cdots(z-\lambda_n),\]
+where $c,\lambda_1,\dots,\lambda_n\in\CC$.
+\end{theorem}
+
+\section{Factorisation of Polynomials over $\RR$}
+A polynomial with real coefficients may have no real zeros. For example, the polynomial $x^2+1$ has no real zeros.
+
+To obtain a factorisation theorem over $\RR$, we will use our factorisation theorem over $\CC$. We begin with the next result.
+
+\begin{proposition}
+Suppose $p\in\CC[z]$ is a polynomial with real coefficients. If $\lambda\in\CC$ is a zero of $p$, then so is the conjugate $\overline{\lambda}$.
+\end{proposition}
+
+We want a factorisation theorem for polynomials with real coefficients. We begin with the following result.
+
+\begin{lemma}[Factorisation of quadratic polynomial]
+Suppose $b,c\in\RR$. Then there is a polynomial factorisation of the form
+\[x^2+bx+c=(x-\lambda_1)(x-\lambda_2)\]
+with $\lambda_1,\lambda_2\in\RR$ if and only if $b^2\ge 4c$.
+\end{lemma}
+
+\begin{theorem}[Factorisation of polynomial over $\RR$]
+Suppose $p\in\RR[x]$ is a non-constant polynomial. Then $p$ has a unique factorisation (except for the order of the factors) of the form
+\[p(x)=c(x-\lambda_1)\cdots(x-\lambda_n)(x^2+b_1x+c_1)\cdots(x^2+b_Nx+c_N),\]
+where $c,\lambda_1,\dots,\lambda_n,b_1,\dots,b_N,c_1,\dots,c_N\in\RR$, with ${b_k}^2<4c_k$ for each $k$.
+\end{theorem}
+

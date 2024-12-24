@@ -1,0 +1,414 @@
+% Font
+\usepackage{tgpagella} % text only
+\usepackage{mathpazo}  % math & text
+
+%Colour
+\usepackage[dvipsnames]{xcolor}
+\usepackage{soul,xcolor}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.65}
+
+\usepackage{amsmath,amssymb}
+\usepackage[integrals]{wasysym}
+%Define some macros
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\mailto}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand{\brac}[1]{\left(#1\right)}
+\newcommand{\sqbrac}[1]{\left[#1\right]}
+\newcommand{\absolute}[1]{\left|#1\right|}
+\newcommand{\crbrac}[1]{\left\{#1\right\}}
+\providecommand{\arc}[1]{\wideparen{#1}}
+\newcommand{\vocab}[1]{{\sffamily\color{darkblue}\bfseries #1}}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\unit}[1]{\,\mathrm{#1}}
+\newcommand{\degC}{^\circ{\mathrm C}}
+\newcommand{\tab}{\hspace{0.5cm}}
+\newcommand{\per}[2]{^{#1}\mathrm{P}_{#2}}
+\newcommand{\com}[2]{^{#1}\mathrm{C}_{#2}}
+\newcommand{\leg}[2]{\brac{\dfrac{#1}{#2}}}
+
+%More commands and math operators
+\DeclareMathOperator{\cis}{cis}
+\DeclareMathOperator*{\lcm}{lcm}
+\DeclareMathOperator*{\argmin}{arg min}
+\DeclareMathOperator*{\argmax}{arg max}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\cosec}{cosec}
+\DeclareMathOperator{\Exp}{E}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Po}{Po}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\cs}{cis}
+\newcommand{\suchthat}{\text{ s.t. }}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\artanh}{artanh}
+\DeclareMathOperator{\cosech}{cosech}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Ann}{Ann}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+
+%Inequalities
+\newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
+\newcommand{\symsum}{\sum_{\mathrm{sym}}}
+\newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
+\newcommand{\symprod}{\prod_{\mathrm{sym}}}
+
+%Convenient Environments
+\usepackage{amsthm}
+%\renewenvironment{proof}{{\bfseries Proof. }}{\qed}
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+%\newenvironment{solution}{{\bfseries Solution. } }{\qed}
+%\newenvironment{notation}{{\bfseries Notation. }}{}
+%\newenvironment{derivation}{{\bfseries Derivation. }}{\qed}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+
+%Letters
+\newcommand{\BB}{\mathbf B}
+\newcommand{\CC}{\mathbf C}
+\newcommand{\DD}{\mathbf D}
+\newcommand{\EE}{\mathbf E}
+\newcommand{\FF}{\mathbf F}
+\newcommand{\KK}{\mathbf K}
+\newcommand{\NN}{\mathbf N}
+\newcommand{\PP}{\mathbf P}
+\newcommand{\QQ}{\mathbf Q}
+\newcommand{\RR}{\mathbf R}
+\newcommand{\SSS}{\mathbf S}
+\newcommand{\ZZ}{\mathbf Z}
+
+%Asymptote setup
+\usepackage{asymptote}
+
+%Generic symbols for both text and math mode
+%Provides generic commands \degree, \celsius, \perthousand, \micro and \ohm which work both in text and maths mode.
+\usepackage{gensymb}
+
+% Fonts and math symbols
+\usepackage{lmodern,amsfonts,mathrsfs,mathtools,changepage,centernot}
+
+% Advanced positioning
+\usepackage{xcoffins,calc}
+
+%Ragged boxes
+\usepackage[raggedrightboxes]{ragged2e}
+
+%Strikeout text
+\usepackage{cancel}
+
+% Pictures and images
+\usepackage{graphicx,float}
+\graphicspath{ {./images/} }
+\usepackage{tikz,pstricks} 
+\usetikzlibrary{calc,intersections,through,backgrounds,positioning}
+\usepackage{titlepic}
+
+\usetikzlibrary{shapes.geometric, arrows}
+%\usepackage[siunitx]{circuitikz}
+
+% Code environment
+\usepackage{listings}
+\lstset{
+basicstyle=\small\ttfamily,
+columns=flexible,
+breaklines=true
+}
+
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\usepackage{comment}
+
+% Side captions
+\usepackage[rightcaption]{sidecap}
+
+% Wrap figures
+\usepackage{wrapfig}
+
+% Additional symbols
+%\usepackage{MnSymbol}
+
+% Customise lists (such as itemize, enumerate, description)
+\usepackage{enumerate}
+\usepackage{enumitem}
+
+% Create colored boxes for theorems, examples, etc.
+\usepackage[most,listings]{tcolorbox}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=darkblue,
+    filecolor=black,
+    linkcolor=darkblue,
+    urlcolor=darkblue,
+}
+
+% Cross referencing
+\usepackage{varioref}
+\usepackage[capitalise]{cleveref}
+\usepackage{nameref}
+
+% Tables
+\usepackage{array}
+\usepackage{tabularray}
+\usepackage{multirow,multicol}
+\usepackage{longtable}
+
+% Physics symbols and notation
+\usepackage{physics}
+
+% Derivative notation
+\usepackage{derivative}
+
+% Conditional statements
+\usepackage{ifthen}
+
+% Plotting graphs
+\usepackage{pgfplots}
+
+% Formatting derivatives
+\usepackage{commath}
+
+% Formatting code
+\usepackage{fancyvrb} %\Verbatim[numbers=left,frame=single,formatcom=\color{red}] - this is used to print code
+
+% Headers and footers
+\usepackage{fancyhdr} 
+
+% Page numbering
+\usepackage{lastpage}
+
+% Tools for writing packages
+\usepackage{etoolbox}
+
+%\usepackage[Lenny]{fncychap} %options: Sonny,Lenny,Glenn,Conny,Rejne,Rjarne,Bjornstrup
+
+% Bottom footnotes
+\usepackage[bottom]{footmisc}
+
+% Acronyms
+\usepackage[acronym]{glossaries}
+
+% Include PDF pages
+\usepackage{pdfpages}
+
+% Create todo notes
+\usepackage[colorinlistoftodos]{todonotes}
+
+% Tables
+\usepackage{booktabs}
+
+% Chemistry packages
+\usepackage{chemfig}
+\usepackage[version=4]{mhchem}
+\usepackage{plimsoll}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{shadows}
+
+\mdfdefinestyle{mdbluebox}{%
+    skipabove=12pt,
+    linewidth=3pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=blue,
+    backgroundcolor=TealBlue!5,
+    innerbottommargin=9pt,
+    skipbelow=2pt,
+    nobreak=true,
+}
+\declaretheoremstyle[
+    headfont=\sffamily\bfseries\color{MidnightBlue},
+    mdframed={style=mdbluebox},
+    headpunct={\\[3pt]},
+    postheadspace={0pt}
+]{thmbluebox}
+
+\mdfdefinestyle{mdredbox}{%
+    skipabove=12pt,
+    linewidth=3pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=RawSienna,
+    backgroundcolor=Salmon!5,
+    innerbottommargin=9pt,
+    skipbelow=2pt,
+    nobreak=true,
+}
+\declaretheoremstyle[
+    headfont=\sffamily\bfseries\color{RawSienna},
+    mdframed={style=mdredbox},
+    headpunct={\\[3pt]},
+    postheadspace={0pt},
+]{thmredbox}
+
+\mdfdefinestyle{mdgreenbox}{%
+    skipabove=12pt,
+    linewidth=3pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=ForestGreen,
+    backgroundcolor=ForestGreen!5,
+    innerbottommargin=9pt,
+    skipbelow=2pt,
+    nobreak=true,
+}
+\declaretheoremstyle[
+    headfont=%\sffamily
+    \bfseries\color{ForestGreen!70!black},
+    mdframed={style=mdgreenbox},
+    headpunct={\\[3pt]},
+    postheadspace={0pt},
+]{thmgreenbox}
+
+\mdfdefinestyle{mdblackbox}{%
+    skipabove=8pt,
+    linewidth=3pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=black,
+    backgroundcolor=RedViolet!5!gray!5,
+}
+\declaretheoremstyle[
+    headfont=\bfseries,
+    headpunct={\\[3pt]},
+    postheadspace={0pt},
+    mdframed={style=mdblackbox}
+]{thmblackbox}
+
+\mdfdefinestyle{mdpurplebox}{%
+    skipabove=8pt,
+    linewidth=3pt,
+    rightline=false,
+    leftline=true,
+    topline=false,
+    bottomline=false,
+    linecolor=black,
+    backgroundcolor=Orchid!10,
+}
+\declaretheoremstyle[
+    headfont=\sffamily\bfseries\color{Orchid},
+    mdframed={style=mdpurplebox},
+    headpunct={\\[3pt]},
+    postheadspace={0pt},
+]{thmpurplebox}
+
+%Theorem setup
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem*{definition*}{Definition}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem*{corollary*}{Corollary}
+
+\newtheorem{prbm}{Problem}[chapter]
+\newtheorem*{claim}{Claim}
+
+%\declaretheorem[style=thmbluebox,name=Theorem,numberwithin=chapter]{theorem}
+%\declaretheorem[style=thmredbox,name=Definition,sibling=theorem]{definition}
+%\declaretheorem[style=thmpurplebox,name=Lemma,sibling=theorem]{lemma}
+%\declaretheorem[style=thmpurplebox,name=Proposition,sibling=theorem]{proposition}
+%\declaretheorem[style=thmpurplebox,name=Corollary,sibling=theorem]{corollary}
+%\declaretheorem[style=thmpurplebox,name=Assumption,sibling=theorem]{assume}
+%\declaretheorem[style=thmbluebox,name=Theorem,numbered=no]{theorem*}
+%\declaretheorem[style=thmredbox,name=Definition,numbered=no]{definition*}
+%\declaretheorem[style=thmpurplebox,name=Lemma,numbered=no]{lemma*}
+%\declaretheorem[style=thmpurplebox,name=Proposition,numbered=no]{proposition*}
+%\declaretheorem[style=thmpurplebox,name=Corollary,numbered=no]{corollary*}
+%\declaretheorem[style=thmpurplebox,name=Assumption,numbered=no]{assume*}
+\declaretheorem[style=thmblackbox,name=Example,numbered=no]{example}
+%\declaretheorem[style=thmblackbox,name=Example,numbered=no]{example*}
+\declaretheorem[style=thmgreenbox,name=Exercise,numbered=no]{exercise}
+
+%Custom theorem environments using tcolorbox
+%\tcbuselibrary{theorems}
+  
+% Customise section headings
+\usepackage{titlesec}
+\definecolor{darkred}{rgb}{0.9, 0.0, 0.0}
+\usepackage[T1]{fontenc}
+\titleclass{\part}{top}
+\titleformat{\part}[display]
+  {\Huge\bfseries\centering}{{\color{darkred}\thepart}}{0pt}{}
+\titlespacing*{\part}{0pt}{20pt}{50pt}
+\titleformat{\chapter}[hang]{\fontsize{60}{70}\bfseries}{{\color{darkred}\thechapter}\hspace{20pt}}{0pt}{\Huge\bfseries}
+\titleformat{\section}{\LARGE\bfseries}{{\color{darkred}\S\thesection}}{1em}{}
+\titleformat{\subsection}{\Large\bfseries}{{\color{darkred}\S\thesubsection}}{1em}{\itshape}
+\setcounter{secnumdepth}{1}
+
+\makeatletter
+\NewDocumentCommand{\lowerint}{}{\mathop{}\mathpalette\lowerint@\relax\!\int}
+\NewDocumentCommand{\upperint}{}{\mathop{}\mathpalette\upperint@\relax\!\int}
+\newcommand{\lowerint@}[2]{%
+  \begingroup
+  \sbox\z@{$\m@th#1\int$}%
+  \lowup@{l}{\underline}{#1}%
+  \endgroup
+}
+\newcommand{\upperint@}[2]{%
+  \begingroup
+  \sbox\z@{$\m@th#1\int$}%
+  \lowup@{r}{\overline}{#1}%
+  \endgroup
+}
+\newcommand{\lowup@}[3]{%
+  % #1 = l (lower) or r (upper)
+  % #2 = \underline (lower) or \overline (upper)
+  % #3 = math style
+  \rlap{%
+    \hspace{0.05\wd\z@}%
+    \makebox[0.9\wd\z@][#1]{%
+      $\m@th#2{%
+        \hspace{0.4\wd\z@}%
+        \ifx#3\displaystyle\else\hspace{0.1\wd\z@}\fi
+        \vphantom{\copy\z@}%
+      }$%
+    }%
+    \hspace{0.05\wd\z@}%
+  }%
+}
+\makeatother

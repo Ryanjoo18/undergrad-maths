@@ -1,0 +1,306 @@
+\chapter{Vector Spaces}\label{chap:vector-spaces}
+This chapter introduces vector spaces and subspaces.
+
+\section{Definition of Vector Space}
+\begin{notation}
+A field is denoted by $\FF$, which can mean either $\RR$ or $\CC$. $\FF^n$ is the set of $n$-tuples whose elements belong to $\FF$:
+\[\FF^n\coloneqq\{(x_1,\dots,x_n)\mid x_i\in\FF\}\]
+For $(x_1,\dots,x_n)\in\FF^n$ and $i=1,\dots,n$, we say that $x_i$ is the $i$-th coordinate of $(x_1,\dots,x_n)$.
+\end{notation}
+
+\begin{definition}[Vector space]
+$V$ is a \vocab{vector space}\index{vector space} over $\FF$ if the following properties hold:
+\begin{enumerate}[label=(\roman*)]
+\item Addition is commutative: $u+v=v+u$ for all $u,v\in V$
+\item Addition is associative: $(u+v)+w=u+(v+w)$ for all $u,v,w\in V$
+
+Multiplication is associative: $(ab)v=a(bv)$ for all $v\in V$, $a,b\in\FF$
+\item Additive identity: there exists $\vb{0}\in V$ such that $v+\vb{0}=v$ for all $v\in V$
+\item Additive inverse: for every $v\in V$, there exists $w\in V$ such that $v+w=\vb{0}$
+\item Multiplicative identity: $1v=v$ for all $v\in V$
+\item Distributive properties: $a(u+v)=au+av$ and $(a+b)v=av+bv$ for all $a,b,\in\FF$ and $u,v\in V$
+\end{enumerate}
+\end{definition}
+
+\begin{notation}
+For the rest of this text, $V$ denotes a vector space over $\FF$.
+\end{notation}
+
+\begin{example}
+$\RR^n$ is a vector space over $\RR$, $\CC^n$ is a vector space over $\CC$.
+\end{example}
+
+Elements of a vector space are called \textbf{vectors} or \textbf{points}.
+
+The scalar multiplication in a vector space depends on $\FF$. Thus when we
+need to be precise, we will say that $V$ is a vector space over $\FF$ instead of saying simply that $V$ is a vector space. For example, $\RR^n$ is a vector space over $\RR$, and $\CC^n$ is a vector space over $\CC$. A vector space over $\RR$ is called a \textbf{real vector space}\index{vector space!real vector space}; a vector space over $\CC$ is called a \textbf{complex vector space}\index{vector space!complex vector space}.
+
+\begin{proposition}[Uniqueness of additive identity]
+A vector space has a unique additive identity.
+\end{proposition}
+
+\begin{proof}
+Suppose otherwise, then $\vb{0}$ and $\vb{0}^\prime$ are additive identities of $V$. Then
+\[\vb{0}^\prime=\vb{0}^\prime+\vb{0}=\vb{0}+\vb{0}^\prime=\vb{0}\]
+where the first equality holds because $\vb{0}$ is an additive identity, the second equality comes from commutativity, and the third equality holds because $\vb{0}^\prime$ is an additive identity. Thus $\vb{0}^\prime=\vb{0}$.
+\end{proof}
+
+\begin{proposition}[Uniqueness of additive inverse]
+Every element in a vector space has a unique additive inverse.
+\end{proposition}
+
+\begin{proof}
+Suppose otherwise, then for $v\in V$, $w$ and $w^\prime$ are additive inverses of $v$. Then
+\[w=w+\vb{0}=w+(v+w^\prime)=(w+v)+w^\prime=\vb{0}+w^\prime=w^\prime.\]
+Thus $w=w^\prime$.
+\end{proof}
+
+Because additive inverses are unique, the following notation now makes sense.
+
+\begin{notation}
+Let $v,w\in V$. Then $-v$ denotes the additive inverse of $v$; $w-v$ is defined to be $w+(-v)$.
+\end{notation}
+
+We now prove some seemingly trivial facts.
+
+\begin{proposition}[The number 0 times a vector]
+For every $v\in V$, $0v=\vb{0}$.
+\end{proposition}
+
+\begin{proof}
+For $v\in V$, we have
+\[0v=(0+0)v=0v+0v.\]
+Adding the additive inverse of $0v$ to both sides of the equation gives $\vb{0}=0v$.
+\end{proof}
+
+\begin{proposition}[A number times the vector 0]
+For every $a\in\FF$, $a\vb{0}=\vb{0}$.
+\end{proposition}
+
+\begin{proof}
+For $a\in\FF$, we have
+\[a\vb{0}=a(\vb{0}+\vb{0})=a\vb{0}+a\vb{0}.\]
+Adding the additive inverse of $a\vb{0}$ to both sides of the equation gives $\vb{0}=a\vb{0}$.
+\end{proof}
+
+Now we show that if an element of $V$ is multiplied by the scalar $1$, then the result is the additive inverse of the element of $V$.
+
+\begin{proposition}[The number $-1$ times a vector]
+For every $v\in V$, $(-1)v=-v$.
+\end{proposition}
+
+\begin{proof}
+For $v\in V$, we have
+\[v+(-1)v=1v+(-1)v=(1+(-1))v=0v=\vb{0}.\]
+Since $v+(-1)v=\vb{0}$, $(-1)v$ is the additive inverse of $v$.
+\end{proof}
+
+\begin{example}
+$\FF^\infty$ is defined to be the set of all sequences of elements of $\FF$:
+\[\FF^\infty\coloneqq\{(x_1,x_2,\dots)\mid x_i\in\FF\}\]
+\begin{itemize}
+\item Addition on $\FF^\infty$ is defined by
+\[(x_1,x_2,\dots)+(y_1,y_2,\dots)=(x_1+y_1,x_2+y_2,\dots)\]
+\item Scalar multiplication on $\FF^\infty$ is defined by
+\[\lambda(x_1,x_2,\dots)=(\lambda x_1,\lambda x_2,\dots)\]
+\end{itemize}
+
+Verify that $\FF^\infty$ becomes a vector space over $\FF$. Also verify that the additive identity in $\FF^\infty$ is $\vb{0}=(0,0,\dots)$.
+\end{example}
+
+Our next example of a vector space involves a set of functions.
+
+\begin{example}
+If $S$ is a set, $\FF^S\coloneqq\{f\mid f:S\to\FF\}$.
+\begin{itemize}
+\item Addition on $\FF^S$ is defined by 
+\[(f+g)(x)=f(x)+g(x)\quad(\forall x\in S)\]
+for all $f,g\in\FF^S$.
+\item Multiplication on $\FF^S$ is defined by
+\[(\lambda f)(x)=\lambda f(x)\quad(\forall x\in S)\]
+for all $\lambda\in\FF$, $f\in\FF^S$.
+\end{itemize}
+
+Verify that if $S$ is a non-empty set, then $\FF^S$ is a vector space over $\FF$.
+
+Also verify that the additive identity of $\FF^S$ is the function $0:S\to\FF$ defined by
+\[0(x)=0\quad(\forall x\in S)\]
+and for $f\in\FF^S$, additive inverse of $f$ is the function $-f:S\to\FF$ defined by
+\[(-f)(x)=-f(x)\quad(\forall x\in S)\]
+\end{example}
+
+\begin{remark}
+$\FF^n$ and $\FF^\infty$ are special cases of the vector space $\FF^S$; think of $\FF^n$ as $\FF^{\{1,2,\dots,n\}}$, and $\FF^\infty$ as $\FF^{\{1,2,\dots\}}$.
+\end{remark}
+
+\begin{example}[Complexification]
+Suppose $V$ is a real vector space. The \emph{complexifcation} of $V$, denoted by $V_\CC$, equals $V\times V$. An element of $V_\CC$ is an ordered pair $(u,v)$, where $u,v\in V$, which we write as $u+iv$.
+\begin{itemize}
+\item Addition on $V_\CC$ is defined by
+\[(u_1+iv_1)+(u_2+iv_2)=(u_1+u_2)+i(v_1+v_2)\]
+for all $u_1,v_2,u_2,v_2\in V$.
+\item Complex scalar multiplication on $V_\CC$ is defined by
+\[(a+bi)(u+iv)=(au-bv)+i(av+bu)\]
+for all $a,b\in\RR$ and all $u,v\in V$.
+\end{itemize}
+You should verify that with the defnitions of addition and scalar multiplication as above, $V_\CC$ is a (complex) vector space.
+\end{example}
+
+\section{Subspaces}
+\begin{definition}[Subspace]
+$U\subseteq V$ is a \vocab{subspace}\index{vector space!subspace} of $V$ if $U$ is also a vector space (with the same addition and scalar multiplication as on $V$). We denote this as $U\le V$.
+\end{definition}
+
+The following result is useful in determining whether a given subset of $V$ is a subspace of $V$.
+
+\begin{lemma}[Subspace test]\label{lemma:subspace-conditions}
+Suppose $U\subseteq V$. $U\le V$ if and only if $U$ satisfies the following conditions:
+\begin{enumerate}[label=(\roman*)]
+\item Additive identity: $\vb{0}\in U$
+\item Closed under addition: $u+w\in U$ for all $u,w\in U$
+\item Closed under scalar multiplication: $\lambda u\in U$ for all $\lambda\in\FF$, $u\in U$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+
+\fbox{$\implies$} If $U\le V$, then $U$ satisfies the three conditions above by the definition of vector space.
+
+\fbox{$\impliedby$} Conversely, suppose $U$ satisfies the three conditions above. (i) ensures that the additive identity of $V$ is in $U$. (ii) ensures that addition makes sense on $U$. (iii) ensures that scalar multiplication makes sense on $U$.
+
+If $u\in U$, then $-u=(-1)u\in U$ by (iii). Hence every element of $U$ has an additive inverse in $U$.
+
+The other parts of the definition of a vector space, such as associativity and commutativity, are automatically satisfied for $U$ because they hold on the larger space $V$. Thus $U$ is a vector space and hence is a subspace of $V$.
+\end{proof}
+
+\begin{definition}[Sum of subsets]
+Suppose $U_1,\dots,U_n\subset V$. The \vocab{sum}\index{sum of subsets} of $U_1,\dots,U_n$ is the set of all possible sums of elements of $U_1,\dots,U_n$:
+\[U_1+\cdots+U_n\coloneqq\{u_1+\cdots+u_n\mid u_i\in U_i\}.\]
+\end{definition}
+
+\begin{example}
+Suppose that $U=\{(x,0,0)\in\FF^3\mid x\in F\}$ and $W=\{(0,y,0)\in\FF^3\mid y\in\FF\}$. Then
+\[U+W=\{(x,y,0)\mid x,y\in\FF\}.\]
+\end{example}
+
+\begin{example}
+Suppose that $U=\{(x,x,y,y)\in\FF^4\mid x,y\in\FF\}$ and $W=\{(x,x,x,y)\in\FF^4\mid x,y\in\FF\}$. Then
+\[U+W=\{(x,x,y,z)\in\FF^4\mid x,y,z\in\FF\}.\]
+\end{example}
+
+The next result states that the sum of subspaces is a subspace, and is in fact the smallest subspace containing all the summands.
+
+\begin{proposition}
+Suppose $U_1,\dots,U_n\le V$. Then $U_1+\cdots+U_n$ is the smallest subspace of $V$ containing $U_1,\dots,U_n$.
+\end{proposition}
+
+\begin{proof}
+It is easy to see that $\vb{0}\in U_1+\cdots+U_n$ and that $U_1+\cdots+U_n$ is closed under addition and scalar multiplication, hence $U_1+\cdots+U_n\le V$.
+
+Clearly $U_1,\dots,U_n$ are all contained in $U_1+\cdots+U_n$ (to see this, consider sums $u_1+\cdots+u_n$ where all except one of the $u$'s are $\vb{0}$). Conversely, every subspace of $V$ containing $U_1,\dots,U_n$ contains $U_1+\cdots+U_n$ (because subspaces must contain all finite sums of their elements). Thus $U_1+\cdots+U_n$ is the smallest subspace of $V$ containing $U_1,\dots,U_n$.
+\end{proof}
+
+\begin{definition}[Direct sum]
+Suppose $U_1,\dots,U_n\le V$. The sum $U_1+\cdots+U_n$ is called a \vocab{direct sum}\index{direct sum} if each element of $U_1+\cdots+U_n$ can be written in only one way a sum of $u_1+\cdots+u_n$, $u_i\in U_i$. In this case, we denote the sum as
+\[U_1\oplus\cdots\oplus U_n.\]
+\end{definition}
+
+\begin{example}
+Suppose that $U=\{(x,y,0)\in\FF^3\mid x,y\in\FF\}$ and $W=\{(0,0,z)\in\FF^3\mid z\in\FF\}$. Then $\FF^3=U\oplus W$.
+\end{example}
+
+\begin{example}
+Suppose $U_i$ is the subspace of $\FF^n$ of those vectors whose coordinates are all 0 except for the $i$-th coordinate; that is, $U_i=\{(0,\dots,0,x,0,\dots,0)\in\FF^n\mid x\in\FF\}$. Then $\FF^n=U_1\oplus\cdots\oplus U_n$.
+\end{example}
+
+\begin{lemma}[Condition for direct sum]\label{lemma:condition-direct-sum}
+Suppose $V_1,\dots,V_n\le V$, let $W=V_1+\cdots+V_n$. Then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item Any element in $W$ can be uniquely expressed as the sum of vectors in $V_1,\dots,V_n$.
+\item If $v_i\in V_i$ satisfies $v_1+\cdots+v_n=\vb{0}$, then $v_1=\cdots=v_n=\vb{0}$.
+\item For $k=2,\dots,n$, $(V_1+\cdots+V_{k-1})\cap V_k=\{\vb{0}\}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+
+(i)$\iff$(ii) First suppose $W$ is a direct sum. Then by the definition of direct sum, the only way to write $\vb{0}$ as a sum $u_1+\cdots+u_n$ is by taking $u_i=\vb{0}$.
+
+Now suppose that the only way to write $\vb{0}$ as a sum $v_1+\cdots+v_n$ by taking $v_1=\cdots=v_n=\vb{0}$. For $v\in V_1+\cdots+V_n$, suppose that there is more than one way to represent $v$:
+\begin{align*}
+v&=v_1+\cdots+v_n\\
+v&=v_1^\prime+\cdots+v_n^\prime
+\end{align*}
+for some $v_i,v_i^\prime\in V_i$. Substracting the above two equations gives
+\[\vb{0}=(v_1-v_1^\prime)+\cdots+(v_n-v_n^\prime).\]
+Since $v_i-v_i^\prime\in V_i$, we have $v_i-v_i^\prime=\vb{0}$ so $v_i=v_i^\prime$. Hence there is only one unique way to represent $v_1+\cdots+v_n$, thus $W$ is a direct sum.
+
+(ii)$\iff$(iii) First suppose if $v_i\in V_i$ satisfies $v_1+\cdots+v_n=\vb{0}$, then $v_1=\cdots=v_n=\vb{0}$. Let $v_k\in(V_1+\cdots+V_{k-1})\cap V_k$. Then $v_k=v_1+\cdots+v_{k-1}$ where $v_i\in V_i$ ($1\le i\le k-1$). Thus
+\begin{align*}
+v_1+\cdots+v_{k-1}-v_k&=\vb{0}\\
+v_1+\cdots+v_{k-1}+(-v_k)+\vb{0}+\cdots+\vb{0}&=\vb{0}
+\end{align*}
+by taking $v_{k+1}=\cdots=v_n=\vb{0}$. Then $v_1=\cdots=v_k=\vb{0}$.
+
+Now suppose that for $k=2,\dots,n$, $(V_1+\cdots+V_{k-1})\cap V_k=\{\vb{0}\}$.
+\begin{align*}
+v_1+\cdots+v_n&=\vb{0}\\
+v_1+\cdots+v_{n-1}&=-v_n
+\end{align*}
+where $v_1+\cdots+v_{n-1}\in V_1+\cdots+V_{n-1}$, $-v_n\in V_n$. Thus
+\[v_1+\cdots+v_{n-1}=-v_n\in(V_1+\cdots+V_{n-1})\cap V_n=\{\vb{0}\}\]
+so $v_1+\cdots+v_{n-1}=\vb{0}$, $v_n=\vb{0}$. Induction on $n$ gives $v_1=\cdots=v_{n-1}=v_n=\vb{0}$.
+\end{proof}
+
+\begin{proposition}
+Suppose $U,W\le V$. Then $U+W$ is a direct sum if and only if $U\cap W=\{\vb{0}\}$.
+\end{proposition}
+
+\begin{proof} \
+
+\fbox{$\implies$} Suppose that $U+W$ is a direct sum. If $v\in U\cap W$, then $\vb{0}=v+(-v)$, where $v\in U$, $-v\in W$. By the unique representation of $\vb{0}$ as the sum of a vector in $U$ and a vector in $W$, we have $v=\vb{0}$. Thus $U\cap W=\{\vb{0}\}$.
+
+\fbox{$\impliedby$} Suppose $U\cap W=\{\vb{0}\}$. Suppose $u\in U$, $w\in W$, and $0=u+w$. $u=-w\in W$, thus $u\in U\cap W$, so $u=w=\vb{0}$. By \cref{lemma:condition-direct-sum}, $U+W$ is a direct sum.
+\end{proof}
+\pagebreak
+
+\subsection*{Exercises}
+\begin{prbm}
+Suppose $W$ is a vector space over $\FF$, $V_1$ and $V_2$ are subspaces of $W$. Show that $V_1\cap V_2$ is a vector space over $\FF$ if and only if $V_1\subset V_2$ or $V_2\subset V_1$.
+\end{prbm}
+
+\begin{solution}
+The backward direction is trivial. We focus on proving the forward direction.
+
+Supppse otherwise, then $V_1\setminus V_2\neq\emptyset$ and $V_2\setminus V_1\neq\emptyset$. Pick $v_1\in V_1\setminus V_2$ and $v_2\in V_2\setminus V_1$. Then
+\begin{align*}
+v_1,v_2\in V_1\cup V_2&\implies v_1+v_2\in V_1\cup V_2\\
+&\implies v_2,v_1+v_2\in V_2\\
+&\implies v_1=(v_1+v_2)-v_2\in V_2
+\end{align*}
+which is a contradiction.
+\end{solution}
+
+\begin{prbm}
+Suppose $W$ is a vector space over $\FF$, $V_1,V_2,V_3$ are subspaces of $W$. Then $V_1\cup V_2\cup V_3$ is a vector space over $\FF$ if and only if one of the $V_i$ contains the other two.
+\end{prbm}
+
+\begin{solution}
+We prove the forward direction. Suppose otherwise, then $v_1\in V_1\setminus(V_2+V_3)$, $v_2\in V_2\setminus(V_1+V_3)$, $v_3\in V_3\setminus(V_1+V_2)$. Consider
+\[\{v_1+v_2+v_3,v_1+v_2+2v_3,v_1+2v_2+v_3,v_1+2v_2+2v_3\}\subset V_1\cup V_2\cup V_3\]
+Then
+\begin{align*}
+&(v_1+v_2+2v_3)-(v_1+v_2+v_3)=v_3\notin V_1+V_2\\
+&\implies v_1+v_2+v_3\notin V_1+V_2\quad\text{or}\quad v_1+v_2+2v_3\notin V_1+V_2\\
+&\implies v_1+v_2+v_3\in V_3\quad\text{or}\quad v_1+v_2+2v_3\in V_3\\
+&\implies v_1+v_2\in V_3
+\end{align*}
+Similarly,
+\begin{align*}
+&(v_1+2v_2+2v_3)-(v_1+2v_2+v_3)=v_3\notin V_1+V_2\\
+&\implies v_1+2v_2+v_3\notin V_1+V_2\quad\text{or}\quad v_1+2v_2+2v_3\notin V_1+V_2\\
+&\implies v_1+2v_2+v_3\in V_3\quad\text{or}\quad v_1+2v_2+2v_3\in V_3\\
+&\implies v_1+2v_2\in V_3
+\end{align*}
+This implies $(v_1+2v_2)-(v_1+v_2)=v_2\in V_3$, a contradiction.
+\end{solution}

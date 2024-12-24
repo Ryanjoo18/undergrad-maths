@@ -1,0 +1,51 @@
+\chapter{Logic}
+Mathematical logic is about providing a uniform, unambiguous language for mathematics, making precise what a proof is, explaining and guaranteeing exactness, rigour and certainty in mathematics, as well as establishing the foundations of mathematics.
+
+\section{Propositional Calculus}
+This section is basically a recap of \cref{chap:logic-proofs}.
+
+The alphabet of propositional calculus consists of the following (abstract) symbols:
+\begin{itemize}
+\item the \vocab{propositional variables} $p_0,p_1,\dots,p_n,\dots$
+\item \vocab{negation} $\lnot$ - the unary connective not
+\item four binary connectives $\rightarrow,\land,\lor,\leftrightarrow$ which mean implies, and, or, if and only if respectively
+\item two punctuation marks $($ and $)$ which are left parenthesis and right parenthesis respectively.
+\end{itemize}
+
+This alphabet is denoted by $\mathcal{L}$.
+
+\begin{notation}
+Note also that we use $\rightarrow$, and not $\implies$.
+\end{notation}
+
+\begin{definition}[String]
+A \vocab{string} (from $\mathcal{L}$) is any finite sequence of symbols from $\mathcal{L}$.
+\end{definition}
+
+\begin{example} \
+\begin{itemize}
+\item $\rightarrow p_{17}()$
+\item $((p_0\land p_1)\rightarrow\lnot p_2)$
+\item $))\lnot)p_{32}$
+\end{itemize}
+\end{example}
+
+The \vocab{length} of a string is the number of symbols in it. So the strings in the examples have length 4, 10, 5 respectively. (A propositional variable has length 1.)
+
+We now single out from all strings those which make grammatical sense (formulas).
+
+\begin{definition}[Formula]
+The notion of a \vocab{formula} of $\mathcal{L}$ is defined (recursively) by the following rules:
+\begin{enumerate}[label=(\roman*)]
+\item every propositional variable is a formula
+\item if the string $A$ is a formula then so is $\lnot A$
+\item if the strings $A$ and $B$ are both formulas then so are the strings
+\begin{align*}
+(A\rightarrow B)&\text{ read $A$ implies $B$}\\
+(A\land B)&\text{ read $A$ and $B$}\\
+(A\lor B)&\text{ read $A$ or $B$}\\
+(A\leftrightarrow B)&\text{ read $A$ if and only if $B$}
+\end{align*}
+\item Nothing else is a formula, i.e. a string $\phi$ is a formula if and only if $\phi$ can be obtained from propositional variables by finitely many applications of the formation rules (ii) and (iii)
+\end{enumerate}
+\end{definition}

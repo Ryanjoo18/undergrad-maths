@@ -1,0 +1,246 @@
+\chapter{Continuity}\label{chap:real-analysis_continuity}
+\section{Limit of Functions}
+Let $(X,d_X)$ be a metric space, let $E\subseteq X$. Then the metric $d_X$ induces a metric on $E$. Now consider a mapping $f$ (or function) from $E$ into another metric space $(Y,d_Y)$.
+
+In particular, if $Y=\RR$, $f$ is called a \textbf{real-valued function}; and if $Y=\CC$, $f$ is called a \textbf{complex-valued function}.
+
+\begin{definition}[Limit of function]\label{defn:limit-function}
+Consider a limit point $p\in E$. We say $\displaystyle\lim_{x\to p}f(x)=q$\index{limit of function} if there exists a point $q\in Y$ such that
+\[\forall\epsilon>0,\quad\exists\delta>0,\quad\forall x\in E,\quad0<d_X(x,p)<\delta\implies d_Y\brac{f(x),q}<\epsilon.\]
+\end{definition}
+
+In words, this means no matter what $B_\epsilon(q)$ we are given, we can always find a $B_\delta(p)$ succh that $f\brac{\overline{B}_\delta(p)\cap E}\subset B_\epsilon(q)$.
+
+We can recast this definition in terms of limits of sequences:
+\begin{theorem}\label{limit-func-seq}
+$\displaystyle\lim_{x\to p}f(x)=q$ if and only if $\displaystyle\lim_{n\to\infty}f(p_n)=q$ for every sequence $(p_n)$ in $E$ such that $p_n \neq p$, $\displaystyle\lim_{n\to\infty}p_n=p$.
+\end{theorem}
+
+\begin{proof} \
+
+\fbox{$\implies$} Suppose $\displaystyle\lim_{x\to p}f(x)=q$. Choose $(p_n)$ in $E$ satisfying $p_n \neq p$ and $\displaystyle\lim_{n\to\infty}p_n=p$. We now want to show that $\displaystyle\lim_{n\to\infty}f(p_n)=q$.
+
+Let $\epsilon>0$ be given. Since $\displaystyle\lim_{x\to p}f(x)=q$, there exists $\delta>0$ such that 
+\[\forall x\in E,\quad0<d_X(x,p)<\delta\implies d_Y\brac{f(x),q}<\epsilon.\]
+Also, since $\displaystyle\lim_{n\to\infty}p_n=p$, there exists $N\in\NN$ such that
+\[\forall n\ge N,\quad 0<d_X(p_n,p)<\delta.\]
+Thus for $n\ge N$, we have $d_Y\brac{f(p_n),q}<\epsilon$, which shows that $\displaystyle\lim_{n\to\infty}f(p_n)=q$.
+
+\fbox{$\impliedby$} We now prove the reverse direction by contrapositive. Suppose $\displaystyle\lim_{x\to p}f(x)\neq q$. Then
+\[\exists\epsilon>0,\quad\forall\delta>0,\quad\exists x\in E,\quad d_Y\brac{f(x),q}\ge\epsilon\quad\text{and}\quad0<d_X(x,p)<\delta.\]
+Taking $\delta_n=\frac{1}{n}$ ($n=1,2,\dots$), we thus find a sequence in $E$ satisfying $p_n \neq p$ and $\displaystyle\lim_{n\to\infty}p_n=p$ for which $\displaystyle\lim_{n\to\infty}f(p_n)\neq q$.
+\end{proof}
+
+\begin{corollary}
+If $f$ has a limit at $p$, this limit is unique.
+\end{corollary}
+
+\begin{proof}
+This follows from  and \cref{limit-func-seq}.
+\end{proof}
+
+\begin{proposition}
+Suppose $E\subseteq X$, limit point $p\in E$, $f,g:E\to\RR$. Let $\displaystyle\lim_{x\to p}f(x)=A$ and $\displaystyle\lim_{x\to p}g(x)=B$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $\displaystyle\lim_{x\to p}(f+g)(x)=A+B$
+\item $\displaystyle\lim_{x\to p}(fg)(x)=AB$
+\item $\displaystyle\lim_{x\to p}\brac{\frac{p}{q}}(x)=\frac{A}{B}$ ($B\neq0$)
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+By the same proofs as for sequences, limits are unique, and in $\RR$ they add/multiply/divide as expected.
+\end{proof}
+
+\section{Continuous Functions}
+Consider metric spaces $(X,d_X)$ and $(Y,d_Y)$, let $E\subseteq X$.
+
+\begin{definition}[Continuity]
+We say that $f:E\to Y$ is \vocab{continuous}\index{continuity} at $p\in E$ if 
+\[\forall\epsilon>0,\quad\exists\delta>0,\quad\forall x\in X,\quad d_X(x,p)<\delta\implies d_Y\brac{f(x),f(p)}.\]
+We say $f$ is continuous in $E$ if it is continuous at every point of $E$.
+\end{definition}
+
+\begin{lemma}
+Assume $p$ is a limit point of $E$. Then $f$ is continuous at $p$ if and only if $\displaystyle\lim_{x\to p}f(x)=f(p)$.
+\end{lemma}
+
+\begin{proof}
+Compare Definitions 4.1 and 4.5.
+\end{proof}
+
+\begin{theorem}[Sequential criterion for continuity]
+$f:E\subseteq X\to Y$ is continuous at $p\in E$ if and only if for every sequence $(x_n)$ in $E$ that converges to $p$, the sequence $\brac{f(x_n)}$ converges to $f(p)$.
+\end{theorem}
+
+\begin{proof}
+The sequential definition of continuity follows almost directly from the sequential definition of limits.
+\end{proof}
+
+As for real-valued functions, the definition of continuity can be phrased in terms of limits.
+
+\begin{corollary}
+$f:X\to\RR$ is continuous at $p\in X$ if and only if for any sequence $(x_n)$ with $\displaystyle\lim_{n\to\infty}x_n=p$, we have $\displaystyle\lim_{n\to\infty}f(x_n)=f(p)$.
+\end{corollary}
+
+We now consider the composition of functions. The following result shows that a continuous function of a continuous function is continous.
+
+\begin{proposition}
+Suppose $X,Y,Z$ are metric spaces, $E\subseteq X$, $f:E\to Y$, $g$ maps the range of $f(E)$ into $Z$, $h:E\to Z$ defined by
+\[h(x)=g\circ f(x)\quad(x\in E)\]
+If $f$ is continuous at $p\in E$, and $g$ is continuous at $f(p)$, then $h$ is continuous at $p$.
+\end{proposition}
+
+\begin{proof}
+Let $\epsilon>0$ be given. Since $g$ is continous at $f(p)$, there exists $\eta>0$ such that for all $y\in f(E)$,
+\[d_Y\brac{y,f(p)}<\eta\implies d_Z\brac{g(y),g\brac{f(p)}}<\epsilon\]
+Since $f$ is continuous at $p$, there exists $\delta>0$ such that for all $x\in E$,
+\[d_X\brac{x,p}<\delta\implies d_Y\brac{f(x),f(p)}<\eta\]
+It follows that for all $x\in E$,
+\[d_X(x,p)<\delta\implies d_Z\brac{h(x),h(p)}=d_Z\brac{g\brac{f(x)},g\brac{f(p)}}<\epsilon\]
+Thus $h$ is continuous at $p$. 
+\end{proof}
+
+\begin{proposition}
+$f:X\to Y$ is continuous on $X$ if and only if $f^{-1}(V)$ is open in $X$ for every open set $V\subseteq Y$.
+\end{proposition}
+
+\begin{proof} \
+
+\fbox{$\implies$} Suppose $f$ is continuous on $X$, $V\subseteq Y$ is open. We have to show that every point of $f^{-1}(V)$ is an interior point of $f^{-1}(V)$.
+
+So, suppose $p\in X$ and $f(p)\in V$. Since $V$ is open, there exists $\epsilon>0$ such that $y\in V$ if $d_Y\brac{f(p),y}<\epsilon$; and since $f$ is continuous at $p$, there exists $\delta>0$ such that $d_Y\brac{f(x),f(p)}<\epsilon$ if $d_X(x,p)<\delta$. Thus $x\in f^{-1}(V)$ as soon as $d_X(x,p)<\delta$.
+
+\fbox{$\impliedby$} Conversely, suppose $f^{-1}(V)$ is open in $X$ for every open set $V\subseteq Y$. Fix $p\in X$ and $\epsilon>0$, let $V=\{y\in Y\mid d_Y\brac{y,f(p)}\}<\epsilon$. Then $V$ is open; hence $f^{-1}(V)$ as soon as $d_X(p,x)<\delta$. But if $x\in f^{-1}(V)$, then $f(x)\in V$, so that $d_Y\brac{f(x),f(p)}<\epsilon$.
+\end{proof}
+
+\begin{corollary}
+$f:X\to Y$ is continuous if and only if $f^{-1}(C)$ is closed in $X$ for every closed set $C\subseteq Y$.
+\end{corollary}
+
+\begin{proof}
+This follows from the above result, since a set is closed if and only if its complement is open, and since $f^{-1}(E^c)=[f^{-1}(E)]^c$ for every $E\subseteq Y$.
+\end{proof}
+
+\begin{proposition}
+Let $f,g:X\to\RR$. Then $f+g$, $fg$, and $\frac{f}{g}$ ($g(x)\neq0$ for all $x\in X$) are continuous on $X$.
+\end{proposition}
+
+\begin{proof}
+At isolated points of X there is nothing to prove. At limit points, the statement follows from Theorems 4.4 and 4.6
+\end{proof}
+
+
+
+
+\subsection{Continuity of linear functions in normed spaces}
+A great deal of power comes from considering the set of all functions on a space satisfying some property, such as continuity, as a metric space in its own right. In this section we consider some important examples of such spaces.
+
+We begin with the space of bounded real-valued functions on a set $X$. At this stage we assume nothing about $X$.
+
+\begin{definition}[Space of bounded real-valued functions]
+If $X$ is any set, we define $B(X)$ to be the space of functions $f:X\to\RR$ for which $f(X)=\{f(x)\mid x\in X\}$ is bounded. If $f\in B(X)$, define $\norm{f}_\infty=\sup_{x\in X}|f(x)|$.
+\end{definition}
+
+\begin{lemma}
+For any set $X$, $B(X)$ is a vector space, and $\norm{\cdot}_\infty$ is a norm.
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+Now we turn to the space of continuous real-valued functions, $C(X)$. To make sense of what this means we now need $X$ to be a metric space.
+
+\begin{definition}
+Let $X$ be a metric space. We write $C(X)$ for the space of all continuous functions $f:X\to\RR$.
+\end{definition}
+
+
+
+\section{Continuity and Compactness}
+Assume $(X,d_X)$ and $(Y,d_Y)$ are metric spaces.
+
+\begin{definition}[Bounded]
+$f:E\to\RR^n$ is said to be \vocab{bounded} if there exists $M\in\RR$ such that $|f(x)|\le M$ for all $x\in E$.
+\end{definition}
+
+\begin{theorem}
+Suppose $f:X\to Y$ is continuous. Then for any compact subset $K\subseteq X$, the image set $f(K)$ is a compact subset of $Y$.
+\end{theorem}
+
+\begin{proof}
+We prove it by definition. Assume $\{V_i\mid i\in I\}$ is an open cover of $f(K)$. By the continuity of $f$ and 
+\end{proof}
+
+\begin{theorem}[Extreme Value Theorem]
+A continuous function on a compact set attains its maximum and minimum values.
+\end{theorem}
+
+\begin{definition}[Uniform continuity]
+Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, let $E\subseteq X$. We say that $f:E\to Y$ is \vocab{uniformly continuous} if
+\[\forall\epsilon>0,\quad\exists\delta>0,\quad\forall x,y\in E,\quad d_X(x,y)<\delta\implies d_Y\brac{f(x),f(y)}<\epsilon.\]
+\end{definition}
+
+Let us consider the differences between the concepts of continuity and of uniform continuity. First, uniform continuity is a property of a function on a set, whereas continuity can be defined at a single point. To ask whether a given function is uniformly continuous at a certain point is meaningless. Second, if $f$ is continuous on $X$, then it is possible to find, for each $\epsilon>0$ and for each point $p\in X$, a number $\delta>0$ having the property specified in Definition 4.5. This $\delta$ depends $\epsilon$ \emph{and} on $p$. If $f$ is, however, uniformly continuous on $X$, then it is possible, for each $\epsilon>0$, to find \emph{one} number $\delta>0$ which will do for \emph{all} points $p\in X$.
+
+Evidently, every uniformly continuous function is continuous. That the two concepts are equivalent on compact sets follows from the next theorem. 
+
+\begin{proposition}
+Let $f:E\subseteq X\to Y$ be continuous. Then $f$ is uniformly continous.
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\section{Continuity and Connectedness}
+\begin{proposition}
+If $f:X\to Y$ is continous, and if $E\subseteq X$ is connected, then $f(E)$ is connected.
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}[Intermediate Value Theorem]
+Let $f:[a,b]\to\RR$ be continuous. If $f(a)<f(b)$ and $f(a)<c<f(b)$, then there exists $x\in(a,b)$ such that $f(x)=c$.
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\section{Discontinuities}
+Let $f:X\to Y$. If $f$ is not continuous at $x\in X$, we say that $f$ is discontinuous at $x$, or that $f$ has a discontinuity at $x$.
+
+If $f$ is defined on an interval or a segment, it is customary to divide discontinuities into two types. Before giving this classification, we have to define the \vocab{right-hand} and the \vocab{left-hand limits} of $f$ at $x$, denoted by $f(x+)$ and $f(x-)$ respectively.
+
+\begin{definition}[Right-hand and left-hand limits]
+Let $f:(a,b)\to\RR$. Consider any point $x$ such that $a\le x<b$. 
+\end{definition}
+
+\begin{definition}[Discontinuities]
+Let $f:[a,b]\to\RR$. If $f$ is discontinuous at $x$, and if $f(x+)$ and $f(x-)$ exist, then $f$ is said to have a \vocab{discontinuity of the first kind}, or a \vocab{simple discontinuity}, at $x$. Otherwise the discontinuity is said to be of the \vocab{second kind}.
+\end{definition}
+
+There are two ways in which a function can have a simple discontinuity: either  
+
+\section{Monotonic Functions}
+\begin{proposition}
+Let $f:[a,b]\to\RR$ be monotonically increasing. Then $f(x+)$ and $f(x-)$ exist for all $x\in(a,b)$; more precisely,
+\[\sup_{t\in(a,x)}f(t)=f(x-)\le f(x)\le f(x+)=\inf_{t\in(x,b)}f(t).\]
+Furthermore, if $a<x<y<b$, then
+\[f(x+)\le f(y-).\]
+\end{proposition}
+
+Analogous results evidently hold for monotically decreasing functions.
+
+\section{Infinite Limits and Limits at Infinity}
+\begin{definition}
+For $c\in\RR$, the set $\{x\in\RR\mid x>c\}$ is called a neighbourhood of $+\infty$ and is written $(c,+\infty)$. Similarly, the set $(-\infty,c)$ is a neighbourhood of $-\infty$.
+\end{definition}
+
+\begin{definition}
+Let $f:E\subset\RR\to\RR$. We say that $\displaystyle\lim_{t\to x}f(t)=A$ where $A$ and $x$ are in the extended real number system, if for every neighbourhood of $U$ of $A$ there is a neighbourhood $V$ of $x$ such that $V\cap E$ is not empty, and such that $f(t)\in U$ for all $t\in V\cap E$, $t\neq x$.
+\end{definition}

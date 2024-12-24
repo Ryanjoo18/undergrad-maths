@@ -1,0 +1,446 @@
+\chapter{Graph Theory}
+% ASO: https://courses.maths.ox.ac.uk/pluginfile.php/93815/mod_resource/content/3/GraphTheoryPartA-notes-2023.pdf
+% Part B: https://courses.maths.ox.ac.uk/pluginfile.php/25887/mod_resource/content/3/Graph%20Theory%20Lecture%20Notes.pdf
+
+A very early theorem of Graph Theory, perhaps even the first, was proved in 1766 by Euler, concerning a popular problem of the time called ``the bridges of K\"{o}nigsberg''. K\"{o}nigsberg is divided into 4 districts by the river Pregel and has 7 bridges. The problem was to decide whether it is possible to take a walk that crosses every bridge exactly once. To formulate this problem mathematically, we construct a graph in which there is a vertex for each district and an edge representing each bridge.
+
+\section{Introduction to Graphs}
+\begin{notation}
+$[n]$ denotes the set $\{1,2,\dots,n\}$.
+\end{notation}
+
+\begin{notation}
+For any set $S$, $\binom{n}{k}$ denotes the set of subsets of $S$ of size $k$; that is,
+\[\binom{n}{k}=\{A\subseteq S\mid|A|=k\}.\]
+\end{notation}
+
+\begin{definition}[Graph]
+A \vocab{graph} is a pair $G=(V(G),E(G))$. The elements of $V(G)$ are called the \vocab{vertices} of $G$; the elements of $E(G)$ are called the \vocab{edges} of $G$.
+\end{definition}
+
+$G$ can be represented visually by drawing a point for each vertex and a line between any pair of points that form an edge.
+
+\begin{notation}
+$|G|=|V(G)|$ denotes the number of vertices; $e(G)=|E(G)|$ denotes the number of edges.
+\end{notation}
+
+\begin{definition}
+The \vocab{order} of a graph $G$ is $|V(G)|$. The \vocab{size} of $G$ is $|E(G)|$.
+\end{definition}
+
+\begin{definition}
+The \vocab{complement} of $G$, denoted by $\overline{G}$, is a graph with the same vertex set as $G$ and $E(\overline{G}) = \{e \notin E(G)\}$; that is, $\overline{G}$ has edges exactly where there are no edges in $G$.
+\end{definition}
+
+\begin{notation}
+We write $uv=\{u,v\}=vu$ for the (unordered) pair representing an edge between $u$ and $v$.
+\end{notation}
+
+\begin{definition}[Simple graph]
+A \vocab{loop} is an edge $vv$ for some $v \in V$. An edge $uv$ is a \vocab{multiple edge} if it appears more than once in $E$. 
+
+A graph is \vocab{simple} if it has no loops or multiple edges.
+\end{definition}
+
+\begin{remark}
+Unless explicitly stated otherwise, we will only consider simple graphs. General (potentially non-simple) graphs are also called multigraphs.
+\end{remark}
+
+\begin{definition}
+Vertices $u$ and $v$ are \vocab{neighbours} if $uv\in E(G)$; we also say that $u$ and $v$ are \emph{adjacent}. An edge $e\in E(G)$ is \vocab{incident} to a vertex $v \in V(G)$ if $v\in e$. Edges $e$ and $e^\prime$ are \vocab{incident} if $e\cap e^\prime=\emptyset$.
+\end{definition}
+
+\begin{definition}
+Given a vertex $v$, the \vocab{degree} of $v$, denoted by $d(v)$, is the number of neighbours of $v$ in $G$. If the degree of each vertex is the same, we can call that the degree of the graph.
+
+A \vocab{leaf} is a vertex of degree one, i.e.\ with a unique neighbour.
+\end{definition}
+
+\begin{remark}
+A trivial graph is a graph with order $1$. An empty graph is a graph of size $0$. Note that a graph must have at least one vertex by definition. But a graph can certainly have no edges!
+\end{remark}
+
+\begin{definition}[Subgraph]
+$H$ is a \vocab{subgraph} of $G$ if $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$.
+\begin{itemize}
+\item $H$ is a \vocab{spanning subgraph} if $V(H)=V(G)$.
+\item $H$ is an \vocab{induced subgraph} if $uv\in E(H)\iff uv\in E(G)$ for all $u,v\in V(H)$.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Walk]
+A \vocab{$u-v$ walk} in $G$, denoted by $W$, is a finite sequence of vertices 
+\[u=v_0,v_1,\dots,v_k=v\]
+such that $v_i v_{i+1} \in E(G)$ for all $0 \le i < k-1$.
+\begin{itemize}
+\item If the vertices in $W$ are distinct, we call it a \vocab{path}.
+\item If $u=v$, we call $W$ a \vocab{closed walk}; otherwise, it is an \vocab{open walk}.
+\item A \vocab{trail} is an open walk without repeating vertices.
+\item A \vocab{path} is an open walk without repeating edges. Note that paths are trails, but not vice-versa.
+\item A \vocab{circuit} is a closed walk without repeating edges, i.e. $u=v$, it begins and ends with the same vertex.
+\item A \vocab{cycle} is a closed walk without repeating vertices, other than the initial and terminal vertices, i.e. $u=v$ but the vertices are otherwise distinct and $W$ has at least 3 vertices. If a graph $G$ has no cycle we call it \vocab{acyclic}.
+\item A \vocab{trail} is a walk in which no two vertices appear consecutively (in either order) more than once; that is, no edge is used more than once. A \vocab{tour} is a closed trail.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Connectedness]
+A graph $G$ is \vocab{connected} if there exists a $u-v$ path for all $u,v\in V(G)$.
+
+Vertices $u,v\in V(G)$ \vocab{lie in the same component} if they are joined by a $u-v$ walk. Clearly this forms an equivalence relation and the partition of $V(G)$ into equivalence classes expresses $G$ as a union of disjoint connected graphs called its \vocab{components}.
+\end{definition}
+
+\begin{definition}[Diameter]
+The \vocab{diameter} of a connected graph $G$, denoted by $\diam G$, is defined as
+\[\diam G=\max_{u\neq v}d(u,v).\]
+By construction, $d(u,v) \le \diam G$ for all $u,v \in V(G)$.
+\end{definition}
+
+\begin{definition}[Complete graph]
+$G$ is \vocab{complete} if every pair of vertices in $G$ is joined by an edge. A complete graph on $n$ vertices is denoted by $K_n$.
+\end{definition}
+
+\begin{definition}
+A graph $G$ is \vocab{planar} if it can be drawn such that a pair of edges can only cross at a vertex.
+\end{definition}
+
+\begin{theorem}[Euler's Characteristic Formula]
+For any connected planar graph, with $V$ vertices, $E$ edges and $F$ faces (regions bounded by edges, including the outer, infinitely large region), then
+\begin{equation}
+V-E+F=2.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We prove by induction.
+
+If $G$ has zero edges, that is $E=0$, then $V=1$ and $F=1$. Then $V-E+F=1-0+1=2$.
+
+Suppose Euler's formula holds for a graph with $n$ edges.
+
+For a graph $G$ with $n+1$ edges, we now consider two cases:
+
+\textbf{Case 1}: If $G$ is a tree and does not contain any cycle. It can be easily proven by induction for trees with any number of edges.
+
+\textbf{Case 2}: If $G$ is not a tree and contains at least one cycle. Choose an edge $e_1$ in $G$ which divides the given region into two different parts and remove that edge $e_1$ to get another graph $G^\prime$. Note that $F>F^\prime$.
+
+Now, $G$ has $n+1$ edges, then $G^\prime$ has $n$ edges so by the hypothesis $G^\prime$ satisfies the Euler's formula. For $G^\prime$, $V^\prime-E^\prime+F^\prime=2$ where $V^\prime=V$, $E^\prime=E-1$ and $F^\prime=F-1$.
+
+Substituting these values gives
+\begin{align*}
+V^\prime-E^\prime+F^\prime&=2\\
+V-E+1+F-1&=2\\
+V-E+F&=2
+\end{align*}
+
+Hence, Euler's formula is applicable for $n+1$ edges.
+
+This proves the Euler's formula.
+\end{proof}
+
+\subsection{Trees}
+\begin{definition}[Tree]
+A \vocab{tree} is a connected graph that does not contain any cycles; that is, it is a minimally connected graph.
+\end{definition}
+
+\begin{proposition}\label{prop:tree-acyclic}
+Any tree is acyclic.
+\end{proposition}
+
+\begin{proof}
+Let $G$ be a tree, i.e. $G$ is minimally connected.
+
+Suppose, for a contradiction, that $G$ contains a cycle $C$. Let $e \in E(C)$. We will obtain our contradiction by showing that $G-e \coloneqq (V(G),E(G)\setminus\{e\})$ is connected. 
+
+Let $P$ be the path obtained by deleting $e$ from $C$. Consider any $u,v$ in $V(G)$. As $G$ is connected, there is an $u-v$ walk $W$ in $G$. Replacing any use of $e$ in $W$ by $P$ gives an $u-v$ walk in $G-e$. Thus $G-e$ is connected, a contradiction.
+\end{proof}
+
+The following are equivalent characterisations of trees.
+\begin{lemma}[Characterisation of trees]\label{lemma:tree-char} \
+\begin{enumerate}[label=(\roman*)]
+\item $G$ is a tree if and only if $G$ is connected and acyclic.
+\item Any two vertices in a tree are joined by a unique path.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item If $G$ is a tree then $G$ is connected and acyclic.
+
+Conversely, let $G$ be connected and acyclic. Suppose for a contradiction that $G-e$ is connected for some $e = (u,v) \in E(G)$.
+
+Let $W$ be a shortest $u-v$ walk in $G-e$. Then $W$ must be a path, i.e. have no repeated vertices, otherwise we would find a shorter walk by deleting a segment of $W$ between two visits to the same vertex. Combining $W$ with $(u,v)$ gives a cycle, which is a contradiction.
+
+\item Suppose for a contradiction that this fails for some tree $G$. 
+
+Choose $u,v$ in $V(G)$ so that there are distinct $u-v$ paths P1, P2, and P1 is as short as possible over all such choices of $u$ and $v$.
+
+Then P1 and P2 only intersect in $u$ and $v$, so their union is a cycle, contradicting \cref{prop:tree-acyclic}.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+The fact that a shortest walk between two points is a path is often useful. More generally, considering an extremal (shortest, longest, minimal, maximal, \dots) object is often a useful proof technique.
+\end{remark}
+
+\begin{lemma}\label{tree_leaves}
+Any tree with at least two vertices has at least two leaves.
+\end{lemma}
+\begin{proof}
+Consider any tree $G$. Let $P$ be a longest path in $G$. The two ends of $P$ must be leaves. Indeed, an end cannot have a neighbour in $V(G) \setminus V(P)$, or we could make $P$ longer, and cannot have any neighbour in $V(P)$ other than the next in the sequence of $P$, or we would have a cycle.
+
+The existence of leaves in trees is useful for inductive arguments, via the following lemma. Given $v \in V(G)$, let $G-v$ be the graph with $V(G-v) = V(G)\setminus\{v\}$ and $E(G-v) = \{(u,v) \in E(G) \mid v \notin \{u,v\}\}$.
+\end{proof}
+
+\begin{lemma}\label{tree_leaf}
+If $G$ is a tree and $v$ is a leaf of $G$ then $G-v$ is a tree.
+\end{lemma}
+\begin{proof}
+By \cref{lemma:tree-char} (i), it suffices to show that $G-v$ is connected and acyclic. Acyclicity is immediate from \cref{prop:tree-acyclic}. Connectedness follows by noting for any $u,v \in V(G)\setminus\{v\}$ that the unique $u-v$ path in $G$ is contained in $G-v$.
+\end{proof}
+
+\begin{lemma}\label{tree_edges}
+Any tree on $n$ vertices has $n-1$ edges.
+\end{lemma}
+\begin{proof}
+By induction. A tree with 1 vertex has 0 edges. Let $G$ be a tree on $n>1$ vertices. By \cref{tree_leaves}, $G$ has a leaf $v$. By \cref{tree_leaf}, $G-v$ is a tree. By induction hypothesis, $G-v$ has $n-2$ edges. Replacing $v$ gives $n-1$ edges in $G$.
+\end{proof}
+
+We conclude this section with another characterisation of trees. First we note that any connected graph $G$ contains a minimally connected subgraph (i.e. a tree) with the same vertex set, which we call a \vocab{spanning tree} of $G$.
+
+\begin{lemma}
+A graph $G$ is a tree on $n$ vertices if and only if $G$ is connected and has $n-1$ edges.
+\end{lemma}
+
+\begin{proof}
+If $G$ is a tree then $G$ is connected by definition and has $n-1$ edges by \cref{tree_edges}. 
+
+Conversely, suppose that $G$ is connected and has $n-1$ edges. Let $H$ be a spanning tree of $G$. Then $H$ has $n-1$ edges by \cref{tree_edges}, so $H = G$, so $G$ is a tree.
+\end{proof}
+
+\subsection{Bipartite Graphs, Matching}
+\begin{definition}[Bipartite graph]
+A graph $G$ is \vocab{bipartite} if $V(G)$ can be partitioned into two non-empty disjoint sets $A$ and $B$ such that no edge has both endpoints in the same set.
+
+$G$ is said to be \vocab{complete bipartite} if $G$ is bipartite and all possible edges between the two sets $A$ and $B$ are drawn. In the case where $|A|=m, |B|=n$, such a graph is denoted by $K_{m,n}$.
+
+Let $k \ge 2$. A graph $G$ is said to be \vocab{$k$-partite} if $V(G)$ can be partitioned into $k$ pairwise disjoint sets $A_1, \dots, A_k$ such that no edge has both endpoints in the same set.
+
+A \vocab{complete $k$-partite} graph is defined similarly as a complete bipartite. In the case where $|A_i| = n_i$, such a graph is denoted by $K_{n_1,n_2,\dots,n_k}$.
+\end{definition}
+
+The Marriage Problem is as follows:
+
+\begin{quote}
+Given $n$ men and $n$ women, under what conditions is it possible to pair each man with a woman such that every pair know each other?
+\end{quote}
+
+We now mathematically formulate this problem. Let $G$ be a graph. We say $M\subseteq E(G)$ is a \emph{matching} if the edges in $M$ are pairwise disjoint. We say $M$ is \emph{perfect} if every vertex belongs to some edge of $M$. 
+In this terminology, the marriage problem asks when a bipartite graph has a perfect matching.
+
+We will return to this question later. First we consider the algorithmic question of how to find a matching of maximum size.
+
+\begin{theorem}[K\"{o}nig's Theorem]
+In any bipartite graph, the size of a maximum matching equals the size of a minimum cover.
+\end{theorem}
+
+\begin{theorem}[Hall's Theorem]
+Let $G$ be a bipartite graph with parts $A$ and $B$. Then $G$ has a matching covering $A$ if and only if $|N(S)|\ge|S|$ for every $S\subseteq A$.
+\end{theorem}
+
+\subsection{Isomorphism}
+\begin{definition}[Isomorphism]
+Let $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ be graphs. An isomorphism $\phi : G_1 \to G_2$ is a bijection (a one-to-one correspondence) from $V_1$ to $V_2$ such that $(u,v) \in E_1$ if and only if $(\phi(u),\phi(v)) \in E_2$. We say $G_1$ is isomorphic to $G_2$ if there is an isomorphism between them.
+\end{definition}
+
+\subsection{Minimum Cost Spanning Trees}
+$G$ is a connected graph and we have some cost $c(e)>0$ for every edge $e\in E(G)$. For any $S\subseteq E(G)$ we call $c(S)=\sum_{e\in S}c(e)$ the cost of $S$. The problem we wish to solve is:
+
+\begin{quote}
+Find $S\subseteq E(G)$ with minimum possible $c(S)$ such that $(V(G),S)$ is a connected graph.
+\end{quote}
+
+A solution is necessarily a spanning tree for $G$. Recall that this is a tree $T=(V(G),S)$ where $S\subseteq E(G)$. We say that $T$ is a minimum cost spanning tree of $G$ if any other spanning tree $T^\prime$ satisfies $c(T^\prime)\ge c(T)$. How can we find one efficiently?
+
+One natural method to try is the ``greedy algorithm'': choose edges one at a time, each time choosing the cheapest edge that does not create a cycle. There are various versions of this algorithm; we will describe the one due to Kruskal.
+
+\begin{theorem}[Kruskal's Algorithm]
+At step $i\ge0$, keep track of a subset $A_i\subseteq E(G)$. This will have the property that $(V(G),A_i)$ is acyclic. Start with $A_0=\emptyset$. At step $i\ge0$, is there an edge $e\in E(G)\setminus A_i$ such that $(V(G),A_i\cup\{e\})$ is acyclic? If no, then output $A=A_i$ and stop. If yes, then set $A_{i+1}=A_i\cup\{e\}$ for one such $e$ such that $c(e)$ is minimal, and proceed to step $i+1$.
+\end{theorem}
+
+You should try a few examples on small graphs to understand the algorithm and check that it does find minimum cost spanning trees in your examples. However, it is not obvious that it will always work, and indeed there are different problems in graph theory for which greedy algorithms don't always work. Fortunately, the greedy algorithm always works for the minimum cost spanning tree problem, as shown by the following theorem.
+
+\begin{theorem}
+$(V(G),A)$ is a minimum cost spanning tree of $G$.
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\subsection{Euler Tours and Trails}
+\begin{definition}
+Let $W$ be a walk in a graph $G$. We call $W$ an \vocab{Euler trail} if every edge of $G$ appears exactly once in $W$. 
+
+We call $W$ an \vocab{Euler tour} if it is closed, i.e. it starts and ends at the same vertex.
+\end{definition}
+
+For a graph $G$ with an Euler tour $W$, clearly $G$ must be connected after we delete all isolated vertices (i.e. vertices of degree zero). We also note that each visit of $W$ to a vertex v uses two edges at v (one to arrive and one to leave). This is also true of the start and end vertex of W if we consider them to be a single visit. (Or we can think of the vertex sequence of W as being written around a circle rather than along a line, so that there is no start or end, and each visit uses two edges.) As every edge is used exactly once, we deduce that every vertex has even degree; we call a graph with this property \vocab{Eulerian}.
+
+\begin{lemma}
+In any graph, there are an even number of vertices with odd degree.
+\end{lemma}
+
+\begin{proof}
+Since every edge has two endpoints,
+\[\sum_{v\in V(G)}d(v)=2|E(G)|.\]
+Therefore, in the sum, there must be an even number of occurrences of $d(v)$ for which $d(v)$ is odd.
+\end{proof}
+
+An Euler tour can be found efficiently using \vocab{Fleury's Algorithm}:
+\begin{quote}
+Start at any vertex. We will follow a walk, erasing each edge after it is used (erased edges cannot be used again). At each stage, ensure that the following holds:
+\begin{enumerate}[label=(\roman*)]
+\item when the edge is removed, the resulting graph is connected once isolated vertices are removed, and
+\item we do not run along an edge to a leaf, unless this is the only edge of the graph.
+\end{enumerate}
+\end{quote}
+
+\begin{theorem}[Euler]
+Let $G$ be a connected Eulerian graph. Then $G$ has an Euler tour.
+\end{theorem}
+
+\subsection{Hamiltonian Cycles}
+In the previous section, we investigated graphs that admit an Euler tour, which is a closed walk that traverses every edge exactly once. There is a seemingly related question that one can ask about a graph: does there exists a closed walk that visits every vertex exactly once?
+
+\begin{definition}[Hamiltonian cycle]
+A \vocab{Hamiltonian cycle} is a closed walk that visits every vertex of a graph $G$ once.
+
+When a graph $G$ contains such a cycle, it is said to be \vocab{Hamiltonian}.
+\end{definition}
+
+\begin{theorem}[Ore's Theorem]
+Let $G$ be a connected graph with $n\ge3$ vertices. Suppose that for every pair of non-adjacent vertices $x$ and $y$, $d(x)+d(y)\ge n$. Then $G$ is Hamiltonian.
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{corollary}[Dirac's Theorem]
+If $G$ is connected with $n\ge3$ vertices and for every vertex $v$, $d(v)\ge\frac{n}{2}$, then $G$ is Hamiltonian.
+\end{corollary}
+
+\subsection{Shortest Paths}
+How do you find the quickest route from A to B? Maybe you ask your satnav, but how does your satnav find the route? It doesn't check all options, as there are too many: it uses an efficient algorithm. We formulate the problem mathematically as follows:
+
+\begin{quote}
+Let $G$ be a connected graph. Let $\ell(e)>0$ be the ``length'' of the edge $e$ for $e\in E(G)$. The $\ell$-length of a path $P$ is $\ell(P)=\sum_{e\in E(P)}\ell(e)$.
+
+Given $x,y\in V(G)$, an $\ell$-shortest $xy$-path is an $xy$-path $P$ that minimises $\ell(P)$.
+\end{quote}
+
+The \vocab{Dijkstra's Algorithm} is a method of finding a $\ell$-shortest $xy$-path. The idea of the algorithm is to maintain a ``tentative distance from $x$'' called $D(v)$ for each $v\in V(G)$. At each step of the algorithm we finalise $D(u)$ for some vertex $u$. At the end of the algorithm all $D(u)$ will be equal to the correct value, i.e. $D(u)=\ell(P_u^*)$ for some $\ell$-shortest $xu$-path $P_u^*$.
+
+\subsection{Chinese Postman Problem}
+
+\subsection{Colouring}
+vertex/edge colouring and Ramsey Theory
+graph colouring and the four-colour theorem; Ramsey theory; 
+
+\subsection{Tur\'{a}n graph}
+
+
+Menger's theorem, network flows; complete subgraphs and Turán's theorem, and the Erdös-Stone theorem; probabilistic methods in graph theory
+\pagebreak
+
+\section*{Exercises}
+Problems can include tournament, matching, and scheduling problems.
+\begin{prbm}[K\"{o}nigsberg Bridge Problem]
+K\"{o}nigsberg was a small town in Prussia. There is a river running through the town and there were seven bridges across the river. The inhabitants of K\"{o}nigsberg liked to walk around the town and cross all of the bridges:
+
+Is it possible to walk around the town and cross every bridge, once and once only?
+\end{prbm}
+
+\begin{solution}
+We replace every landmass by a vertex and every bridge by an edge to give the following graph.
+\end{solution}
+
+\begin{prbm}(Moser's circle problem) 
+Determine the number of regions into which a circle is divided if $n$ points on its circumference are joined by chords with no three internally concurrent.
+\end{prbm}
+
+\begin{proof}[Solution]
+Consider the graph which has points on the circumference and intersection points between chords as its vertices.
+
+Let $V, E, F$ denote the number of vertices, edges, regions respectively.
+
+To count the number of intersection points, note that $4$ points on the circumference give one unique intersection point between the two non-parallel chords formed by connecting two pairs of points which intersect inside the circle. Hence, number of intersection points is $\dbinom{n}{4}$. 
+\[ V = n + \binom{n}{4} \]
+Total number of edges includes $n$ circular arcs, number of original chords formed from connecting pairs of points on the circumference
+E = no. of original lines + 2 x no. of intersection points
+E = n choose 2 + 2 x n choose 4 + n
+since there are n circular arcs
+
+Using Euler's Characteristic Formula, we have 
+\begin{align*}
+F &= E - V - 1 \\
+\Aboxed{F &= 1 + \binom{n}{2} + \binom{n}{4}}
+\end{align*}
+\end{proof}
+
+\begin{comment}
+\chapter{Game Theory}
+\textbf{Recommended readings:} \href{https://mathematicalolympiads.files.wordpress.com/2012/08/martin_j-_osborne-an_introduction_to_game_theory-oxford_university_press_usa2003.pdf}{``An Introduction to Game Theory" by Osborne}
+%http://www.matt-versaggi.com/mit_open_courseware/GameAI/MathematicalGameTheoryandApplications.pdf
+
+% games of normal form and extensive form, and their applications in economics, relations between game theory and decision making; games of complete information: static games with finite or infinite strategy spaces, Nash equilibrium of pure and mixed strategy, dynamic games, backward induction solutions, information sets, subgame-perfect equilibrium, finitely and infinitely-repeated games; games of incomplete information: Bayesian equilibrium, first price sealed auction, second price sealed auction, and other auctions, dynamic Bayesian games, perfect Bayesian equilibrium, signaling games; cooperative games: bargaining theory, cores of n-person cooperative games, the Shapley value and its applications in voting, cost sharing, etc.
+
+\section{Strict Dominance}
+\subsection{Prisoner's Dilemma}
+To start off, we will take a look at the \vocab{Prisoner's Dilemma}, which goes as follows:
+
+\begin{quote}
+Two thieves plan to rob a store, but the police arrest them for trespassing. The police suspect that they planned to break in but lack the evidence to support such an accusation. They require a confession to charge the suspects. The police offer them the following deal:
+\begin{itemize}
+\item If no one confesses, both are charged a one month jail sentence each for trespassing.
+\item If a rat confesses and the other does not, the rat is not charged but the other is charged a twelve month jail sentence for robbery.
+\item If both confess, both are charged an eight month jail sentence each.
+\end{itemize}
+If both criminals are self-interested and only care about minimising their jail time, should they take the interrogator's deal?
+\end{quote}
+
+We condense the above information into a \vocab{payoff matrix} as shown below, where we have two players, A and B. The horizontal rows represent A's choices, while the vertical columns represent B's choices, and each cell contains a combination of their payoffs.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rcc}
+\multicolumn{1}{l}{}         & quiet                       & confess                     \\ \cline{2-3} 
+\multicolumn{1}{r|}{quiet}   & \multicolumn{1}{c|}{$-1$, $-1$} & \multicolumn{1}{c|}{$-12$, $0$} \\ \cline{2-3} 
+\multicolumn{1}{r|}{confess} & \multicolumn{1}{c|}{$0$, $-12$} & \multicolumn{1}{c|}{$-8$, $-8$} \\ \cline{2-3} 
+\end{tabular}
+\end{table}
+
+\subsection{Split or Steal}
+The game goes as follows:
+\begin{quote}
+Each of two players, Sarah and Steve, has to pick one of two balls: inside one ball appears the word ``\textbf{split}'' and inside the other the word ``\textbf{steal}'' (each player is first asked to secretly check which of the two balls in front of him/her is the split ball and which is the steal ball). They make their decisions simultaneously. 
+\end{quote}
+
+The possible outcomes are shown in the figure below, where each row is labelled with a possible choice for Sarah and each column with a possible choice for Steven. Each cell in the table thus corresponds to a possible pair of choices and the resulting outcome is written inside the cell.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{images/Split_or_steal.png}
+\end{figure}
+
+\section{Nash Equilibrium}
+\vocab{Nash Equilibrium} is a set of optimal strategies that work against \textit{all} counter-steategies. This means that if any given player were told the strategies of all their opponents, they still would choose to retain their original strategy. 
+
+\subsection{Matrix games}
+
+\section{Fair Division}
+\subsection{Rental harmony problem}
+Sperner's lemma
+
+%https://www.cs.cmu.edu/~arielpro/15896/docs/paper19b.pdf
+\end{comment}

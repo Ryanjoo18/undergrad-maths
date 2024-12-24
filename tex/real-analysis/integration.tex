@@ -1,0 +1,275 @@
+\chapter{Riemann--Stieltjes Integral}\label{chap:rs-integration}
+\section{Definition of Riemann--Stieltjes Integral}
+A \vocab{partition} $P$ of a closed interval $[a,b]\subset\RR$ is a finite set of points $x_0,x_1,\dots,x_n$ where
+\[a=x_0\le x_1\le\cdots\le x_{n-1}\le x_n=b.\]
+Let $f:[a,b]\to\RR$ be bounded, and $\alpha$ be an increasing function over $[a,b]$. Denote by
+\begin{align*}
+M_i&=\sup_{[x_{i-1},x_i]}f(x),\\
+m_i&=\inf_{[x_{i-1},x_i]}f(x),
+\end{align*}
+and by
+\[\Delta\alpha_i=\alpha(x_i)-\alpha(x_{i-1}).\]
+The \vocab{upper sum} of $f$ with respect to the partition $P$ and $\alpha$ is
+\[U(f,\alpha;P)=\sum_{i=1}^n M_i \Delta \alpha_i\]
+and the \vocab{lower sum} of $f$ with respect to the partition $P$ and $\alpha$ is
+\[ L(f,\alpha;P)=\sum_{i=1}^n m_i \Delta \alpha_i. \]
+Define the upper Riemann--Stieltjes integral as
+\[\upperint_a^bf(x)\dd{\alpha(x)}\coloneqq\inf_P U(f,\alpha;P)\]
+and the lower Riemann--Stieltjes integral as
+\[\lowerint_a^bf(x)\dd{\alpha(x)}\coloneqq\sup_P L(f,\alpha;P).\]
+It is easy to see from definition that
+\[ \lowerint_a^bf(x)\dd{\alpha(x)}\le\upperint_a^bf(x)\dd{\alpha(x)}. \]
+
+\begin{definition}[Riemann--Stieltjes integrability]
+A function $f$ is \vocab{Riemann--Stieltjes integrable}\index{Riemann--Stieltjes integrability} with respect to $\alpha$ over $[a,b]$, if
+\[\lowerint_a^bf(x)\dd{\alpha(x)}=\upperint_a^bf(x)\dd{\alpha(x)}.\]
+\end{definition}
+
+\begin{notation}
+$\displaystyle\int_a^bf(x)\dd{\alpha(x)}$ denotes the common value, which is called the Riemann--Stieltjes of $f$ with respect to $\alpha$ over $[a,b]$.
+\end{notation}
+
+\begin{notation}
+$R_\alpha[a,b]$ denotes the set of Riemann--Stieljes integrable functions with respect to $\alpha$ over $[a,b]$.
+\end{notation}
+
+In particular, when $\alpha(x)=x$, we call the corresponding Riemann--Stieljes integration the \textbf{Riemann integration}, and use $R[a,b]$ to denote the set of Riemann integrable functions.
+
+\begin{definition}[Refinement]
+The partition $P^\prime$ is a \vocab{refinement} of $P$ if $P^\prime\supset P$. Given two partitions $P_1$ and $P_2$, we say that $P^\prime$ is their \vocab{common refinement} if $P^\prime=P_1\cup P_2$.
+\end{definition}
+
+Intuitively, a refinement will give a better estimation than the original partition, so the upper and lower sums of a refinement should be more restrictive. We will now show this.
+
+\begin{proposition}
+If $P^\prime$ is a refinement of $P$, then
+\begin{enumerate}[label=(\roman*)]
+\item $L(f,\alpha;P)\le L(f,\alpha;P^\prime)$
+\item $U(f,\alpha;P^\prime)\le U(f,\alpha;P)$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Suppose first that $P^\prime$ contains just one point more than $P$ Let this extra point be $x^\prime$, and suppose $x_{i-1}<x^\prime<x_i$ for some $i$, where $x_{i-1},x_i\in P$. Put
+\[w_1=\inf_{x\in[x_{i-1},x^\prime]}f(x)\]
+and
+\[w_2=\inf_{x\in[x^\prime,x_i]}f(x).\]
+Let, as before,
+\[m_i=\inf_{x\in[x_{i-1},x_i]}f(x).\]
+Clearly $w_1\ge m_i$ and $w_2\ge m_i$. Hence
+\begin{align*}
+&L(f,\alpha;P^\prime)-L(f,\alpha;P)\\
+&=w_1[\alpha(x^\prime)-\alpha(x_{i-1})]+w_2[\alpha(x_i)-\alpha(x^\prime)]-m_i[\alpha(x_i)-\alpha(x_{i-1})]\\
+&=(w_1-m_i)[\alpha(x^\prime)-\alpha(x_{i-1})]+(w_2-m_i)[\alpha(x_i)-\alpha(x^\prime)]\ge0.
+\end{align*}
+If $P^\prime$ contains $k$ more points than $P$, we repeat this reasoning $k$ times.
+
+\item Analogous to the proof of (1).
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+\[\lowerint_a^bf\dd{\alpha}\le\upperint_a^bf\dd{\alpha}.\]
+\end{proposition}
+
+\begin{proof}
+Let $P^\prime$ be the common refinement of partitions $P_1$ and $P_2$. By the previous result,
+\[L(f,\alpha;P_1)\le L(f,\alpha;P^\prime)\le U(f,\alpha;P^\prime)\le U(f,\alpha;P_2)\]
+and so
+\[L(f,\alpha;P_1)\le U(f,\alpha;P_2).\]
+Fix $P_2$ and take sup over all $P_1$ gives
+\[\lowerint f\dd{\alpha}\le U(f,\alpha;P_2).\]
+Then take inf over all $P_2$, which gives the desired result.
+\end{proof}
+
+Now we move on to integrability conditions for $f$.
+
+\begin{theorem}%6.6
+$f\in R_\alpha[a,b]$ if and only if for each $\forall\epsilon>0\exists P$ such that
+\[U(f,\alpha;P)-L(f,\alpha;P)<\epsilon.\]
+\end{theorem}
+
+\begin{proof}
+Suppose $f\in R_\alpha[a,b]$. Let $\epsilon>0$ be given. Then there exists partitions $P_1$ and $P_2$ such that
+
+\end{proof}
+
+\begin{example}[Dirichlet function]
+The Dirichlet function is defined over $\RR$ by
+\[f(x)=\begin{cases}
+1&x\in\QQ \\
+0&x\in\RR\setminus\QQ
+\end{cases}\]
+We try to calculate the two on the interval $[0,1]$.
+
+The Dirichlet function is pathological because for each subinterval $[x_{i-1},x_i]$, the supremum is always $1$ and the infimum is always $0$.
+
+So no matter what partition we use, $U(f,P)$ is always $1$ whereas $L(f,P)$ is always $0$. This means that $U(f)=1$ and $L(f)=0$, so there are two different values for ``the integral of $f$''.
+
+This is like the case where we try to find the limit of the Dirichlet function where $x$ is approaching any given real number $r$, there exists two sequences approaching $r$ whose image approaches two different values.
+\end{example}
+
+Now, a very important and fun case about the more general RS-integral, which we'll discuss next week (do try the exercise yourself first)
+
+\begin{example}[Heaviside step function]
+The Heaviside step function $H$ is a real-valued function defined by
+\[H(x)=\begin{cases}
+0&x\le0\\
+1&x>0
+\end{cases}\]
+
+\begin{proposition*}
+$f$ bounded on $[a,b]$, $f$ continuous at $s\in(a,b)$. Let $\alpha(x)=H(x-s)$, then
+\[\int_a^b f\dd{\alpha}=f(s).\]
+\end{proposition*}
+
+\begin{proposition*}
+Suppose $c_n\ge0$ for $n=1,2,\dots$, $\sum c_n$ converges, $(s_n)$ is a sequence of distinct points in $(a,b)$, and
+\[\alpha(x)=\sum_{n=1}^{\infty}c_n I(x-s_n).\]
+Let $f$ be continuous on $[a,b]$. Then
+\[\int_a^b f\dd{\alpha}=\sum_{n=1}^{\infty}c_n f(s_n).\]
+\end{proposition*}
+\end{example}
+
+\begin{proposition} \
+\begin{enumerate}[label=(\roman*)]
+\item 
+\end{enumerate}
+\end{proposition}
+
+6.7
+
+\begin{proposition}
+If $f$ is continuous on $[a,b]$, then $f\in R_\alpha[a,b]$.
+\end{proposition}
+
+\begin{proof}
+Let $\epsilon>0$ be given. Choose $\eta>0$ such that
+\[[\alpha(b)-\alpha(a)]\eta<\epsilon.\]
+Since $f$ is uniformly continuous on $[a,b]$ (Theorem 4.19), there exists $\delta>0$ such that
+\[\absolute{f(x)-f(t)}<\eta\]
+if $x\in[a,b]$, $t\in[a,b]$, $|x-t|<\delta$.
+
+If $P$ is any partition of $[a,b]$ such that $\Delta x_i<\delta$ for all $i$, then
+\end{proof}
+
+\begin{proposition}
+If $f$ is monotonic on $[a,b]$, and if $\alpha$ is continuous on $[a,b]$, then $f\in R_\alpha[a,b]$.
+\end{proposition}
+
+\begin{proposition}
+Suppose $f$ is bounded on $[a,b]$, $f$ has only finitely many points of discontinuity on $[a,b]$, and $\alpha$ is continuous at every point at which $f$ is discontinuous. Then $f\in R_\alpha[a,b]$.
+\end{proposition}
+
+\begin{proposition}
+$f\in R_\alpha[a,b]$, $m\le f\le M$, and $\phi$ is uniformly continuous on $[m,M]$. Then
+\[\phi\circ f\in R_\alpha[a,b].\]
+\end{proposition}
+
+\begin{proof}
+Choose $\epsilon>0$. Since $\phi$ is uniformly continuous on $[m,M]$, there exists $\delta>0$ such that $\delta<\epsilon$ and $|\phi(s)-\phi(t)|<\epsilon$ if $|s-t|<\le\delta$ and $s,t\in[m,M]$.
+
+Since $f\in R_\alpha[a,b]$, there exists a partition $P=\{x_0,x_1,\dots,x_n\}$ of $[a,b]$ such that
+\[U(f,\alpha;P)-L(f,\alpha;P)<\delta^2.\]
+
+\end{proof}
+
+\section{Properties of the Integral}
+\begin{theorem} \
+\begin{enumerate}[label=(\roman*)]
+\item If $f_1,f_2\in R_\alpha[a,b]$, then 
+\[ f_1+f_2\in R_\alpha[a,b]; \]
+$cf\in R_\alpha[a,b]$ for every $c\in\RR$, and
+\[ \int_a^b(f_1+f_2)\dd{\alpha}=\int_a^bf_1\dd{\alpha}+\int_a^bf_2\dd{\alpha}, \]
+\[ \int_a^b(cf)\dd{\alpha}=c\int_a^bf\dd{\alpha}. \]
+
+\item If $f_1,f_2\in R_\alpha[a,b]$ and $f_1\le f_2$, then
+\[ \int_a^bf_1\dd{\alpha}\le\int_a^bf_2\dd{\alpha}. \]
+
+\item If $f\in R_\alpha[a,b]$ and $c\in[a,b]$, then $f\in R_\alpha[a,c]$ and $f\in R_\alpha[c,b]$, and
+\[ \int_a^bf\dd{\alpha}=\int_a^c\dd{\alpha}+\int_c^b\dd{\alpha}. \]
+
+\item If $f\in R_\alpha[a,b]$ and $|f|\le M$, then
+\[ \absolute{\int_a^bf\dd{\alpha}}\le M\sqbrac{\alpha(b)-\alpha(a)}. \]
+
+\item If $f\in R_{\alpha_1}[a,b]$ and $f\in R_{\alpha_2}[a,b]$, then $f\in R_{\alpha_1+\alpha_2}[a,b]$ and
+\[ \int_a^bf\dd{(\alpha_1+\alpha_2)}=\int_a^bf\dd{\alpha_1}+\int_a^bf\dd{\alpha_2}; \]
+if $f\in R_\alpha[a,b]$ and $c$ is a positive constant, then $f\in R_{c\alpha}[a,b]$ and
+\[ \int_a^bf\dd{(c\alpha)}=c\int_a^bf\dd{\alpha}. \]
+
+\item If $f\in R_\alpha[a,b]$ and $g\in R_\alpha[a,b]$, then $fg\in R_\alpha[a,b]$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item If $f=f_1+f_2$ and $P$ is any partition of $[a,b]$, we have
+\begin{align*}
+L(f_1,\alpha;P)+L(f_2,\alpha;P)&\le L(f,\alpha;P)\\
+&\le U(f,\alpha;P)\\
+&\le U(f_1,\alpha;P)+U(f_2,\alpha;P).
+\end{align*}
+
+If $f_1\in R_\alpha[a,b]$ and $f_2\in R_\alpha[a,b]$, let $\epsilon>0$ be given. There are partitions $P_1$ and $P_2$ such that
+
+
+\item 
+\item 
+\item 
+\item 
+\item 
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Triangle inequality]
+$f\in R_\alpha[a,b]$, then $|f|\in R_\alpha[a,b]$,
+\[ \absolute{\int_a^bf\dd{\alpha}}\le\int_a^b|f|\dd{\alpha}. \]
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+6.14 6.15
+Heaviside step function
+
+6.16 corollary
+for intinite sum, need $\sum c_n$ to converge
+(23) comparison test
+
+\begin{proposition}[Integration by substitution]
+Assume $\alpha$ increases monotonically, $\alpha^\prime\in R[a,b]$. Let $f$ be a bounded real function on $[a,b]$, then
+\[f\in R_\alpha[a,b]\iff f\alpha^\prime\in R[a,b].\]
+\end{proposition}
+
+\begin{proposition}[Change of variables]
+Suppose $\phi:[A,B]\to[a,b]$ is a strictly increasing continuous function. Suppose $\alpha$ is monotonically increasing on $[a,b]$, $f\in R_\alpha[a,b]$. Define $\beta$ and $g$ on $[A,B]$ by
+\[\beta(y)=\alpha(\phi(y)),\quad g(y)=f(\phi(y)).\]
+Then $g\in R(\beta)$ and
+\[\int_A^B g\dd{\beta}=\int_a^b f\dd{\alpha}.\]
+\end{proposition}
+
+\section{Integration and Differentiation}
+We shall show that integration and differentiation are, in a certain sense, inverse operations.
+
+\begin{lemma}
+$f\in R_\alpha[a,b]$. For $x\in [a,b]$, put
+\[F(x)=\int_a^x f(t)\dd{t}.\]
+Then $F$ is continuous on $[a,b]$; furthermore, if $f$ is continuous at $x_0\in[a,b]$, then $F$ is differentiable at $x_0$, and
+\[F^\prime(x_0)=f(x_0).\]
+\end{lemma}
+
+\begin{theorem}[Fundamental Theorem of Calculus]
+$f\in R_\alpha[a,b]$, there is a differentiable function $F$ on $[a,b]$ such that $F^\prime=f$, then
+\begin{equation}
+\int_a^b f(x)\dd{x}=F(b)-F(a).
+\end{equation}
+\end{theorem}
+
+\begin{theorem}[Integration by parts]
+Suppose $F$ and $G$ are differentiable functions on $[a,b]$, $F^\prime=f\in R$, $G^\prime=g\in R$. Then
+\begin{equation}
+\int_a^b F(x)g(x)\dd{x}=F(b)G(b)-F(a)G(a)-\int_a^b f(x)G(x)\dd{x}.
+\end{equation}
+\end{theorem}

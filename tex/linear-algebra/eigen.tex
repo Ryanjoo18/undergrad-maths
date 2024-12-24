@@ -1,0 +1,48 @@
+\chapter{Eigenvalues and Eigenvectors}
+\section{Invariant Subspaces}
+\subsection{Eigenvalues}
+\begin{definition}[Operator]
+A linear map from a vector space to itself is called an \vocab{operator}\index{operator}.
+\end{definition}
+
+\begin{definition}[Invariant subspace]
+Suppose $T\in\mathcal{L}(v)$. $U\le V$ is called \vocab{invariant}\index{invariant subspace} under $T$ if $Tu\in U$ for all $u\in U$.
+\end{definition}
+
+\begin{definition}[Eigenvalue]
+Suppose $T\in\mathcal{L}(V)$. $\lambda\in\FF$ is called an \vocab{eigenvalue}\index{eigenvalue} of $T$ if there exists $v\in V$, $v\neq\vb{0}$ such that $Tv=\lambda v$.
+\end{definition}
+
+\begin{lemma}[Equivalent conditions to be an eigenvalue]
+Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $\lambda\in\FF$. Then the following are equivalent:
+\begin{enumerate}[label=(\arabic*)]
+\item $\lambda$ is an eigenvalue of $T$.
+\item $T-\lambda I$ is not injective.
+\item $T-\lambda I$ is not surjective.
+\item $T-\lambda I$ is not invertible.
+\end{enumerate}
+\end{lemma}
+
+\begin{definition}[Eigenvector]
+Suppose $T\in\mathcal{L}(V)$, $\lambda\in\FF$ is an eigenvalue of $T$. A vector $v\in V$, $v\neq\vb{0}$ is called an \vocab{eigenvector}\index{eigenvector} of $T$ corresponding to $\lambda$ if $Tv=\lambda v$.
+\end{definition}
+
+\begin{proposition}[Linearly independent eigenvectors]
+Suppose $T\in\mathcal{L}(V)$. Then every list of eigenvectors of $T$ corresponding to distinct eigenvalues of $T$ is linearly independent.
+\end{proposition}
+
+\begin{proposition}
+Suppose $V$ is finite-dimensional. Then each operator on $V$ has at most $\dim V$ distinct eigenvalues.
+\end{proposition}
+
+\subsection{Polynomials Applied to Operators}
+\begin{notation}
+Suppose $T\in\mathcal{L}(V)$, $n\in\ZZ^+$. $T^n\in\mathcal{L}(V)$ is defined by $T^n=\underbrace{T\cdots T}_\text{$m$ times}$. $T^0$ is defined to be the identity operator $I$ on $V$. If $T$ is invertible with inverse $T^{-1}$, then $T^{-n}\in\mathcal{L}(V)$ is defined by $T^{-n}=\brac{T^{-1}}^n$.
+\end{notation}
+
+
+
+\section{The Minimal Polynomial}
+\section{Upper-Triangular Matrices}
+\section{Diagonalisable Operators}
+\section{Commuting Operators}

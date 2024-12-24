@@ -1,0 +1,135 @@
+\chapter{Topological Spaces}\label{chap:topological-spaces}
+\section{Definitions and Examples}
+\begin{definition}[Topological space]
+A \vocab{topological space} $(X,\mathcal{T})$ consists of a non-mepty set $X$ together with a family $\mathcal{T}$ of subsets of $X$ satisfying:
+\begin{enumerate}[label=(\roman*)]
+\item $X,\emptyset\in\mathcal{T}$;
+\item if $U_i\in\mathcal{T}$ for all $i\in I$, then $\bigcup_{i\in I}U_i\in\mathcal{T}$ (preserved under arbitrary unions);
+\item if $U_1,\dots,U_n\in\mathcal{T}$, then $\bigcap_{i=1}^{n}U_i\in\mathcal{T}$ (preserved under finite intersections).
+\end{enumerate}
+The family $\mathcal{T}$ is called a \vocab{topology} for $X$. The sets in $\mathcal{T}$ are called the \vocab{open sets} of $X$.
+\end{definition}
+
+\begin{notation}
+When $\mathcal{T}$ is understood we talk about the topological space $X$.
+\end{notation}
+
+\begin{remark}
+A consequence of (ii) is that if $U_1,\dots,U_n$ is a collection of open sets, then $U_1\cap\cdots\cap U_n$ is open. But the intersection of infinitely many open sets need not be open!
+
+On the other hand, in (iii), the indexing set $I$ is allowed to be infinite. It may even be uncountable.
+\end{remark}
+
+\begin{example}
+The following are some examples of topological spaces. Let $X$ be any non-empty set.
+\begin{itemize}
+\item The \textbf{discrete topology} on $X$ is the set of all subsets of $X$; that is,
+\[\mathcal{T}=\mathcal{P}(X).\]
+\item The \textbf{indiscrete topology} (or trivial topology) on $X$ is
+\[\mathcal{T}=\{X,\emptyset\}.\]
+\item The \textbf{co-finite topology} on $X$ consists of the empty set together with every subset $U$ of $X$ such that $X\setminus U$ is finite.
+\end{itemize}
+\end{example}
+
+\begin{definition}[Basis]
+A set $\mathcal{B}$ of subsets of $X$ is a basis if
+\begin{enumerate}[label=(\roman*)]
+\item $\bigcup_{B\in\mathcal{B}}B=X$;
+\item for all $B_1,B_2\in\mathcal{B}$ and $x\in B_1\cap B_2$, there exists $B_3\in\mathcal{B}$ such that $x\in B_3\subset B_1\cap B_2$.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}
+A basis $\mathcal{B}$ generates a topology $\mathcal{T}$ via
+\[U\in\mathcal{T}\iff\forall x\in U\exists B\in\mathcal{B}\text{ such that }x\in B\subset U.\]
+\end{theorem}
+
+\begin{proposition}\label{prop:topo-metrisable}
+Let $(X,d)$ be a metric space. Then the open subsets of $X$ form a topology, denoted by $\mathcal{T}_d$.
+\end{proposition}
+
+\begin{proof}
+Check through the conditions in the definition for a topological space:
+\begin{enumerate}[label=(\roman*)]
+\item Trivial.
+\item Let $U$ and $V$ be open subsets of $X$. Consider an arbitrary point $x\in U\cap V$.
+
+As $U$ is open, there exists $r_1>0$ such that $B_{r_1}(x)\subset U$. Likewise, as $x\in V$ and $V$ is open, there exists $r_2>0$ such that $B_{r_2}(x)\subset V$.
+
+Take $r\coloneqq\min\{r_1,r_2\}$. Then $B_r(x)\subset B_{r_1}(x)\subset U$ and $B_r(x)\subset B_{r_2}(x)\subset V$. Hence $B_r(x)\subset U\cap V$.
+
+\item For every $x\in\bigcup_{i\in I}U_i$ there exists $k\in I$ such that $x\in U_k$. Since $U_k$ is open, there exists $r>0$ such that $B_r(x)\subset U_k\subset\bigcup_{i\in I}U_i$.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+A topological space $(X,\mathcal{T})$ is \vocab{metrisable} if it arises from (at least oe) metric space $(X,d)$, i.e. there is at least one metric $d$ on $X$ such that $\mathcal{T}=\mathcal{T}_d$.
+\end{definition}
+
+\begin{definition}
+Two metrics on a set are \vocab{topologically equivalent} if they give rise to the same topology.
+\end{definition}
+
+\begin{example} \
+\begin{itemize}
+\item The metrics $d_1$, $d_2$, $d_\infty$ on $\RR^n$ are all topologically equivalent. (Recall that $d_1$, $d_2$, $d_\infty$ are the metrics arising from the norms $\norm{\cdot}_1$, $\norm{\cdot}_2$, $\norm{\cdot}_\infty$, respectively.)
+We shall call the topology defined by the above metrics the \textbf{standard} (or canonical) topology on $\RR^n$.
+\item The discrete topology on a non-empty set $X$ is metrisable, using the metric
+\[d(x,y)=\begin{cases}
+0&\text{if }x=y,\\
+1&\text{if }x\neq y.
+\end{cases}\]
+It is easy to check that this is a metric. To see that is gives the discrete topology, consider any subset $U\subset X$. Then for every $x\in U$, $B_\frac{1}{2}(x)\subset U$.
+\end{itemize}
+\end{example}
+
+\begin{definition}
+Given two topologies $\mathcal{T}_1$ and $\mathcal{T}_2$ on the same set, we say $\mathcal{T}_1$ is \vocab{coarser} than $\mathcal{T}_2$ if $\mathcal{T}_1\subset\mathcal{T}2$.
+\end{definition}
+
+\begin{remark}
+For any space $(X,\mathcal{T})$, the indiscrete topology on $X$ is coarser than $\mathcal{T}$ which in turn is coarser than the discrete topology on $X$.
+\end{remark}
+
+\begin{definition}
+Let $(X,\mathcal{T})$ be a topological space. A subset $V$ of $X$ is \vocab{closed} in $X$ if $X\setminus V$ is open in X (i.e. $X\setminus V\in\mathcal{T}$).
+\end{definition}
+
+\begin{example} \
+\begin{itemize}
+\item In the space $[0,1)$ with the usual topology coming from the Euclidean metric, $[1/2,1)$ is closed.
+\item In a discrete space, all subsets are closed since their complements are open.
+\item In the co-finite topology on a set $X$, a subset is closed if and only if it is finite or all of $X$.
+\end{itemize}
+\end{example}
+
+\begin{proposition}
+Let $X$ be a topological space. Then
+\begin{enumerate}[label=(\roman*)]
+\item $X$, $\emptyset$ are closed in $X$;
+\item if $V_1$, $V_2$ are closed in $X$ then $V_1\cup V_2$ is closed in $X$;
+\item if $V_i$ is closed in $X$ for all $i\in I$ then $\bigcap_{i\in I}Vi$ is closed in $X$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+These properties follow from (i), (ii), (iii) of definition of topological space, and from the De Morgan laws.
+\end{proof}
+
+\begin{definition}[Convergent sequence]
+A sequence $\{x_n\}_{n\in\NN}$ in a topological space $X$ converges to a point $x\in X$ if given any open set $U$ containing $x$ there exists $N\in\NN$ such that $x_n\in U$ for all $n>N$.
+\end{definition}
+
+\begin{example} \
+\begin{itemize}
+\item In a metric space this is equivalent to the metric definition of convergence.
+\item In an indiscrete topological space $X$ any sequence converges to any point $x\in X$.
+\item In an infinite space $X$ with the co-finite topology any sequence $\{x_n\}$ of pairwise distinct elements (i.e. such that $x_n\neq x_m$ when $n\neq m$) converges to any point $x\in X$.
+\end{itemize}
+\end{example}
+
+
+
+% clear this first https://courses.maths.ox.ac.uk/pluginfile.php/93920/mod_resource/content/1/toplectnotes17%20%281%29.pdf
+
+%https://www.uio.no/studier/emner/matnat/math/MAT4500/h19/rognes-notes-2018.pdf

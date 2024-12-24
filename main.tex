@@ -1,0 +1,123 @@
+\documentclass[11pt,a4paper,oneside]{book}
+\usepackage[top=1.0in, bottom=1.0in, left=0.8in, right=0.8in, heightrounded]{geometry}
+\raggedbottom
+
+\usepackage{ryan}
+\usepackage[bottom]{footmisc}
+\usepackage{pdfpages}
+
+\usepackage{imakeidx} % Index
+\titlespacing*{\chapter}{0pt}{0pt}{0pt} % Spacing below chapter
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\uppercase{\footnotesize\bfseries\sffamily\leftmark}}
+\fancyhead[R]{{\footnotesize\bfseries\sffamily\thepage}}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headsep}{0.4in}
+\renewcommand{\arraystretch}{1.5}
+
+% command to provide stretchy vertical space in proportion
+\newcommand\nbvspace[1][3]{\vspace*{\stretch{#1}}}
+
+\newif\iflinalg
+\newif\ifabsalg
+\newif\ifranalysis
+\newif\ifcanalysis
+\newif\iftop
+\newif\ifanalyticnt
+\newif\ifmisc
+
+% Bibliography
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=nyt
+]{biblatex}
+\addbibresource{biblio.bib}
+
+\makeindex % Print index
+
+\begin{document}
+%%%%%%%%%%%%%%% [TOPICS] %%%%%%%%%%%%%%%
+\absalgtrue %Abstract Algebra
+\linalgtrue %Linear Algebra
+\ranalysistrue %Real Analysis
+%\canalysistrue %Complex Analysis
+\toptrue %Topology
+%\analyticnttrue
+%\misctrue %Misc
+
+\input{tex/frontmatter.tex}
+
+\mainmatter
+%%%%%%%%%%%%%%% ABSTRACT ALGEBRA
+\ifabsalg
+    \input{tex/abstract-algebra/intro.tex}
+    \input{tex/abstract-algebra/groups.tex}
+    \input{tex/abstract-algebra/rings.tex}
+%    \input{tex/abstract-algebra/modules-vec-spaces.tex}
+%    \input{tex/abstract-algebra/fields.tex}
+\fi
+
+%%%%%%%%%%%%%%% LINEAR ALGEBRA
+\iflinalg
+    \part{Linear Algebra}\label{part:linear-algebra}
+    \input{tex/linear-algebra/vector-spaces.tex}
+    \input{tex/linear-algebra/finite-dim-vector-spaces.tex}
+    \input{tex/linear-algebra/linear-maps.tex}
+%    \input{tex/linear-algebra/polynomials.tex}
+    \input{tex/linear-algebra/eigen.tex}
+\fi
+
+%%%%%%%%%%%%%%% REAL ANALYSIS
+\ifranalysis
+    \part{Real Analysis}\label{part:real-analysis}
+    \input{tex/real-analysis/number-systems.tex}
+    \input{tex/real-analysis/basic-topology.tex}
+    \input{tex/real-analysis/sequences-series.tex}
+    \input{tex/real-analysis/continuity.tex}
+    \input{tex/real-analysis/differentiation.tex}
+    \input{tex/real-analysis/integration.tex}
+    \input{tex/real-analysis/sequences-series-functions.tex}
+    \input{tex/real-analysis/special-functions.tex}
+\fi
+
+%%%%%%%%%%%%%%% COMPLEX ANALYSIS
+\ifcanalysis
+    \part{Complex Analysis}\label{part:complex-analysis}
+    \input{tex/complex-analysis/complex-num-func.tex}
+\fi
+
+%%%%%%%%%%%%%%% TOPOLOGY
+\iftop
+    \input{tex/topology/intro.tex}
+    \input{tex/topology/topological-spaces.tex}
+\fi
+
+%%%%%%%%%%%%%%% ANALYTIC NT
+\ifanalyticnt
+    \part{Analytic Number Theory}\label{part:analytic-nt}
+    \input{tex/analytic-nt/arithmetical-func.tex}
+\fi
+
+%%%%%%%%%%%%%%% MISC
+\ifmisc
+    \part{Miscellaneous Topics}
+    \input{tex/misc/graph-theory.tex}
+    \input{tex/misc/logic.tex}
+\fi
+\pagebreak
+
+\appendix
+%%%%%%%%%%%%%%% PRELIMINARY
+\input{tex/prelim/proofs.tex}
+\input{tex/prelim/set-theory.tex}
+\input{tex/prelim/calc.tex}
+
+\backmatter
+\printbibliography[title={Bibliography}]
+
+\printindex
+\end{document}
