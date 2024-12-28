@@ -222,6 +222,8 @@ breaklines=true
 % Create todo notes
 \usepackage[colorinlistoftodos]{todonotes}
 
+\usepackage{imakeidx} % Index
+
 % Tables
 \usepackage{booktabs}
 
@@ -376,6 +378,7 @@ breaklines=true
   {\Huge\bfseries\centering}{{\color{darkred}\thepart}}{0pt}{}
 \titlespacing*{\part}{0pt}{20pt}{50pt}
 \titleformat{\chapter}[hang]{\fontsize{60}{70}\bfseries}{{\color{darkred}\thechapter}\hspace{20pt}}{0pt}{\Huge\bfseries}
+\titlespacing*{\chapter}{0pt}{0pt}{0pt} % Spacing below chapter
 \titleformat{\section}{\LARGE\bfseries}{{\color{darkred}\S\thesection}}{1em}{}
 \titleformat{\subsection}{\Large\bfseries}{{\color{darkred}\S\thesubsection}}{1em}{\itshape}
 \setcounter{secnumdepth}{1}

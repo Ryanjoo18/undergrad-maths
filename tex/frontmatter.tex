@@ -53,7 +53,7 @@ French mathematician and theoretical physicist\end{flushright}
 
 Copyright \copyright \ 2024 by Ryan Joo Rui An.
 
-Licensed under \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{CC BY-NC-SA 4.0}. You are free to copy and redistribute the material in any medium or format, as well as remix, transform, and build upon the material. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. You may not use the material for commercial purposes. If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original. You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+This book is licensed under the terms of the Creative Commons Attribution-NonCommercial 4.0 International License (\url{https://creativecommons.org/licenses/by-nc/4.0}), which permits any noncommercial use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to original author and source, provide a link to the Creative Commons license, and indicate if changes were made. The images or other third party material in this book are included in the book's Creative Commons license, unless indicated otherwise in a credit line to the material. If material is not included in the book's Creative Commons license and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder.
 
 This is (still!) an incomplete draft. Please send corrections and comments to \url{ryanjooruian18@gmail.com}, or pull-request at \url{https://github.com/Ryanjoo18/undergrad-math}.
 
@@ -63,6 +63,7 @@ Last updated \today.
 \pagebreak
 
 \frontmatter
+\begin{comment}
 \section*{About the Author}
 \textbf{Ryan Joo Rui An} is a high school student who has just completed his A-Level studies in Singapore. He has spent over 11 years honing his skills in various mathematics competitions. His journey began at an early age, where he developed a fascination with numbers while doing mental arithmetic. This early interest quickly blossomed into a deep commitment to mathematics, leading him to participate in numerous mathematics olympiads competitions.
 
@@ -81,6 +82,7 @@ Outside of mathematics, the author has a keen interest in playing chess and prog
 
 This book is a culmination of the author's years of experience, dedication, and love for mathematics while he studies mathematics at the undergraduate level.
 \pagebreak
+\end{comment}
 
 \section*{Preface}
 \ifabsalg
@@ -88,7 +90,7 @@ This book is a culmination of the author's years of experience, dedication, and 
 \fi
 
 \iflinalg
-\cref{part:linear-algebra} covers \textbf{linear algebra}, which follows \cite{axler}. \cref{chap:vector-spaces} gives an introduction to vector spaces and subspaces. \cref{chap:finite-dim-vector-spaces} gives an overview of span, linear independence, bases and dimension. \cref{chap:linear-maps} goes through linear maps, kernel and image, matrices, invertibility and isomorphism, as well as products and quotients of vector spaces.
+\cref{part:linear-algebra} covers \textbf{linear algebra}, which follows \cite{axler}. \cref{chap:vector-spaces} introduces vector spaces, subspaces, span, linear independence, bases and dimension. \cref{chap:linear-maps} concerns linear maps and related concepts.
 \fi
 
 \ifranalysis
@@ -103,10 +105,28 @@ This book is a culmination of the author's years of experience, dedication, and 
 \cref{part:topology} covers \textbf{topology}, which follows \cite{munkres}.
 \fi
 
+\ifappend
 The reader is not assumed to have any mathematical prerequisites, although some experience with proofs may be helpful. \textbf{Preliminary topics} such as logic and methods of proofs (\cref{chap:logic-proofs}), and basic set theory (\cref{chap:set-theory}) are covered in the appendix.
-\pagebreak
+\fi
 
-\section*{Note on Problem Solving}
+\subsection*{Note on Presentation}
+The following are some common mathematical terms used in this book. They are neither exhaustive nor rigorous, but they should give you a good idea of what is meant when these terms are used. The following terms are \textbf{bolded} when they are used, for readability.
+\begin{itemize}
+\item \textbf{Definition}: a precise and unambiguous description of the meaning of a mathematical term. It characterizes the meaning of a word by giving all the properties and only those properties that must be true.
+\item \textbf{Theorem}: a mathematical statement that is proved using rigorous mathematical reasoning. In a mathematical paper, the term theorem is often reserved for the most important results.
+\item \textbf{Lemma}: a minor result whose sole purpose is to help in proving a theorem. It is a stepping stone on the path to proving a theorem. Very occasionally lemmas can take on a life of their own (Zorn's lemma, Urysohn's lemma, Burnside's lemma, Sperner's lemma).
+\item \textbf{Corollary}: a result in which the (usually short) proof relies heavily on a given theorem (we often say that ``this is a corollary of Theorem A'').
+\item \textbf{Proposition}: a proved and often interesting result, but generally less important than a theorem.
+\item \textbf{Conjecture}: a statement that is unproved, but is believed to be true (Collatz conjecture, Goldbach conjecture, twin prime conjecture).
+\item \textbf{Claim}: an assertion that is then proved. It is often used like an informal lemma.
+\item \textbf{Axiom/Postulate}: a statement that is assumed to be true without proof. These are the basic building blocks from which all theorems are proved (Euclid's five postulates, Zermelo--Fraenkel axioms, Peano axioms).
+\item \textbf{Identity}: a mathematical expression giving the equality of two (often variable) quantities (trigonometric identities, Euler's identity).
+\item \textbf{Paradox}: a statement that can be shown, using a given set of axioms and definitions, to be both true and false. Paradoxes are often used to show the inconsistencies in a flawed theory (Russell's paradox). The term paradox is often used informally to describe a surprising or counterintuitive result that follows from a given set of rules (Banach--Tarski paradox, Alabama paradox, Gabriel's horn).
+\end{itemize}
+
+Important terms are \vocab{coloured} when they are first defined, and are included in the glossary at the end of the book. Less important terms are instead \emph{italicised} when they are first defined, and are not included in the glossary.
+
+\subsection*{Note on Problem Solving}
 Mathematics is about problem solving. In \cite{polya}, George P\'{o}lya outlined the following problem solving cycle.
 \begin{enumerate}
 \item \textbf{Understand the problem}
