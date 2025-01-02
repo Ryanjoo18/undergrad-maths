@@ -1,6 +1,10 @@
 \chapter{Real and Complex Number Systems}\label{chap:number-systems}
 
-This chapter discusses the construction and properties of the real field $\RR$, the complex field $\CC$, and Euclidean space $\RR^n$.
+\begin{learn}
+\item Discuss the construction and properties of the real field $\RR$.
+\item Discuss the construction and properties of the complex field $\CC$.
+\item Discuss the construction and properties of the Euclidean space $\RR^n$.
+\end{learn}
 
 \begin{comment}
 \section{Natural Numbers}
@@ -218,9 +222,9 @@ q&\text{if otherwise.}
 \section{Real Numbers}
 $\QQ$ has some problems, the first of which being \emph{algebraic incompleteness}: there exists equations with coefficients in $\QQ$ but do not have solutions in $\QQ$ (in fact $\RR$ has this problem too, but $\CC$ is algebraically complete, by the Fundamental Theorem of Algebra).
 
-\begin{lemma*}
+\begin{lemma}
 $x^2-2=0$ has no solution in $\QQ$.
-\end{lemma*}
+\end{lemma}
 
 \begin{proof}
 Suppose, for a contradiction, that $x^2-2=0$ has a solution $x=\frac{p}{q}$, $q\neq0$. We also assume $\frac{p}{q}$ is in lowest terms; that is, $p,q$ are coprime. Squaring both sides gives $\frac{p^2}{q^2}=2$, or $p^2=2q^2$. Observe that $p^2$ is even, so $p$ is even; let $p=2m$ for some integer $m$. Then this implies $4m^2=2q^2$, or $2m^2=q^2$. Similarly, $q^2$ is even so $q$ is even.
@@ -233,14 +237,14 @@ The second problem is \emph{analytic incompleteness}: there exists a sequence of
 tends to the the irrational number $\sqrt{2}$.
 
 Continuing from the above lemma,
-\begin{lemma*}
+\begin{lemma}
 Let
 \begin{align*}
 A&=\{p\in\QQ\mid p>0,p^2<2\},\\
 B&=\{p\in\QQ\mid p>0,p^2>2\}.
 \end{align*}
 Then $A$ contains no largest number, and $B$ contains no smallest number.
-\end{lemma*}
+\end{lemma}
 
 \begin{proof}
 Prove by construction. We associate with each rational $p>0$ the number
@@ -290,7 +294,7 @@ We prove by contruction, as follows.
 One method to construct $\RR$ from $\QQ$ is Dedekind cuts.
 
 \begin{definition*}[Dedekind cut]
-A \vocab{Dedekind cut} $\alpha\subset\QQ$ satisfies the following properties:
+A \vocab{Dedekind cut}\index{Dedekind cut} $\alpha\subset\QQ$ satisfies the following properties:
 \begin{enumerate}[label=(\roman*)]
 \item $\alpha\neq\emptyset$, $\alpha\neq\QQ$;
 \item if $p\in\alpha$, $q\in\QQ$ and $q<p$, then $q\in\alpha$;
@@ -416,23 +420,23 @@ $\forall\alpha,\beta,\gamma\in\RR$, $\alpha+(\beta+\gamma)=(\alpha+\beta)+\gamma
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item We need to show that $\alpha+\beta\subseteq\beta+\alpha$ and $\beta+\alpha\subseteq\alpha+\beta$.
+\item We need to show that $\alpha+\beta\subset\beta+\alpha$ and $\beta+\alpha\subset\alpha+\beta$.
 
-Let $r\in\alpha+\beta$. Then $r=a+b$ for $a\in\alpha$ and $b\in\beta$. Thus $r=b+a$ since $+$ is commutative on $\QQ$. Hence $r\in\beta+\alpha$. Therefore $\alpha+\beta\subseteq\beta+\alpha$.
+Let $r\in\alpha+\beta$. Then $r=a+b$ for $a\in\alpha$ and $b\in\beta$. Thus $r=b+a$ since $+$ is commutative on $\QQ$. Hence $r\in\beta+\alpha$. Therefore $\alpha+\beta\subset\beta+\alpha$.
 
-Similarly, $\beta+\alpha\subseteq\alpha+\beta$.
+Similarly, $\beta+\alpha\subset\alpha+\beta$.
 
 Therefore $\alpha+\beta=\beta+\alpha$.
 
-\item Let $r\in\alpha+(\beta+\gamma)$. Then $r=a+(b+c)$ where $a\in\alpha,b\in\beta,c\in\gamma$. Thus $r=(a+b)+c$ by associativity of $+$ on $\QQ$. Therefore $r\in(\alpha+\beta)+\gamma$, hence $\alpha+(\beta+\gamma)\subseteq(\alpha+\beta)+\gamma$.
+\item Let $r\in\alpha+(\beta+\gamma)$. Then $r=a+(b+c)$ where $a\in\alpha,b\in\beta,c\in\gamma$. Thus $r=(a+b)+c$ by associativity of $+$ on $\QQ$. Therefore $r\in(\alpha+\beta)+\gamma$, hence $\alpha+(\beta+\gamma)\subset(\alpha+\beta)+\gamma$.
 
-Similarly, $(\alpha+\beta)+\gamma\subseteq\alpha+(\beta+\gamma)$.
+Similarly, $(\alpha+\beta)+\gamma\subset\alpha+(\beta+\gamma)$.
 
-\item Let $r\in\alpha+0^*$. Then $r=a+p$ for some $a\in\alpha,p\in0^*$. Thus $r=a+p<a+0=a$ by ordering on $\QQ$ and identity on $\QQ$. Hence $\alpha+0^*\subseteq\alpha$.
+\item Let $r\in\alpha+0^*$. Then $r=a+p$ for some $a\in\alpha,p\in0^*$. Thus $r=a+p<a+0=a$ by ordering on $\QQ$ and identity on $\QQ$. Hence $\alpha+0^*\subset\alpha$.
 
 Let $r\in\alpha$. Then there exists $r^\prime>p$ where $r^\prime\in\alpha$. Thus $r-r^\prime<0$, so $r-r^\prime\in0^*$. We see that
 \[ r=\underbrace{r^\prime}_{\in\alpha}+\underbrace{(r-r^\prime)}_{\in0^*}. \]
-Hence $\alpha\subseteq\alpha+0^*$.
+Hence $\alpha\subset\alpha+0^*$.
 
 \item We first need to show that $\beta$ is a Dedekind cut.
 \begin{enumerate}[label=(\roman*)]
@@ -489,8 +493,8 @@ We complete the definition of multiplication by setting $\alpha0^*=0^*=0^*\alpha
 -[(-\alpha)\beta]&a<0^*,\beta>0^*,\\
 -[\alpha\cdot(-\beta)]&\alpha>0^*,\beta<0^*.
 \end{cases}\]
-\pagebreak
 
+\subsection{Properties of $\RR$}
 We now discuss properties of $\RR$.
 
 \begin{theorem}[$\RR$ is archimedian]\label{thrm:r-archimedian}
@@ -620,75 +624,117 @@ The extended real number system does not form a field, but it is customary to ma
 \item If $x>0$ then $x\cdot(+\infty)=+\infty$, $x\cdot(-\infty)=-\infty$.
 \item If $x<0$ then $x\cdot(+\infty)=-\infty$, $x\cdot(-\infty)=+\infty$.
 \end{enumerate}
-When it is desired to make the distinction between real numbers on the one hand and the symbols $+\infty$ and $-\infty$ on the other quite explicit, the former are called \textbf{finite}.
+When it is desired to make the distinction between real numbers on the one hand and the symbols $+\infty$ and $-\infty$ on the other quite explicit, the former are called \emph{finite}.
 
 \section{Complex Field}
 Consider the Cartesian product
-\[\RR^2\coloneqq\RR\times\RR=\{(x_1,x_2)\mid x_1,x_2\in\RR\}.\]
-We can define addition and scalar multiplication on $\RR^2$:
+\[\RR^2\coloneqq\RR\times\RR=\{(a,b)\mid a,b\in\RR\}.\]
+A \emph{complex number} is an ordered pair $(a,b)\in\RR^2$. Let $x=(a,b)$, $y=(c,d)$ be two complex numbers. We write $x=y$ if and only if $a=c$ and $b=d$. Define addition and multiplication on $\RR^2$ as
 \begin{align*}
-(x_1,x_2)+(y_1,y_2)&=(x_1+y_1,x_2+y_2),\\
-c(x_1,x_2)&=(cx_1,cx_2).
+x+y&=(a+c,b+d),\\
+xy&=(ac-bd,ad+bc).
 \end{align*}
-for all $(x_1,x_2),(y_1,y_2)\in\RR^2$, $c\in\RR$.
 
 \begin{proposition}
-$\RR^2$, with addition and scalar multiplication defined as above, is a vector space over $\RR$.
-\end{proposition}
-
-For $(x_1,x_2),(y_1,y_2)\in\RR^2$, the \textbf{inner product} is defined as 
-\[\langle(x_1,x_2),(y_1,y_2)\rangle\coloneqq x_1y_1+x_2y_2.\]
-The inner product induces a \textbf{norm}, defined as follows:
-\[|(x_1,x_2)|\coloneqq\langle(x_1,x_2),(x_1,x_2)\rangle^\frac{1}{2}=\brac{{x_1}^2+{x_2}^2}^\frac{1}{2}. \]
-\begin{notation}
-From now on, we use $\vb{x}$ to denote $(x_1,x_2)$.
-\end{notation}
-
-\begin{proposition} \
-\begin{enumerate}[label=(\roman*)]
-\item $|\vb{x}|\ge0$, where equality holds if and only if $\vb{x}=\vb{0}$.
-\item $|c\vb{x}|=|c||\vb{x}|$
-\item $|\vb{x}+\vb{y}|\le|\vb{x}|+|\vb{y}|$
-\item $|\langle\vb{x},\vb{y}\rangle|\le|\vb{x}||\vb{y}|$
-\end{enumerate}
-\end{proposition}
-
-Let $x=(a,b)$, $y=(c,d)$. Over $\RR^2$, we can define multiplication $\cdot$ as
-\[(a,b)\cdot(c,d)=(ac-bd,ad+bc)\]
-for all $(a,b),(c,d)\in\RR^2$. If we identity $\RR^2$ with
-\[\CC\coloneqq\{x+yi\mid x,y\in\RR\}\]
-via $(x,y)\mapsto x+yi$, where $i^2=-1$, then all structures defined above are induced to $\CC$.
-
-\begin{proposition}
-$(\CC,+,\cdot)$ is a field, with $(0,0)$ and $(1,0)$ in the role of $0$ and $1$.
+$\RR^2$, with addition and multiplication defined as above, is a field, with additive identity $(0,0)$ and multiplicative identity $(1,0)$. We call this structure $\CC$, the \vocab{complex field}.
 \end{proposition}
 
 \begin{proof}
-Simply check the field axioms.
+Check the field axioms.
 \end{proof}
 
-We call $\CC$ the \vocab{complex field}. A element in $\CC$ is called a \textbf{complex number}. Usually, a complex number is denoted by $z=x+yi$ where $x,y\in\RR$. Here $x$ is called the \textbf{real part} of $z$, denoted by $x=\Re(z)$; $y$ is called the \textbf{imaginary part} of $z$, denoted by $y=\Im(z)$. The norm of $z$ is denoted by $|z|$. For $z=x+yi$, the \textbf{conjugate} of $z$ is $\bar{z}=x-yi$.
+\begin{proposition}
+For any $a,b\in\RR$, we have
+\begin{align*}
+(a,0)+(b,0)&=(a+b,0),\\
+(a,0)(b,0)&=(ab,0).
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+The above result shows that the complex numbers of the form $(a,0)$ have the same arithmetic properties as the corresponding real numbers $a$. We can therefore identify $(a,0)\in\CC$ with $a\in\RR$. This identification gives us $\RR$ as a subfield of $\CC$.
+
+The reader may have noticed that we have defined the complex numbers without any reference to the mysterious square root of $-1$. We now show that the notation $(a,b)$ is equivalent to the more customary $a+bi$.
+
+\begin{definition}[Imaginary number]
+$i=(0,1)$.
+\end{definition}
+
+\begin{proposition}
+$i^2=-1$.
+\end{proposition}
+
+\begin{proof}
+\[i^2=(0,1)(0,1)=(-1,0)=-1.\]
+\end{proof}
+
+\begin{proposition}
+For $a,b\in\RR$, $(a,b)=a+bi$.
+\end{proposition}
+
+\begin{proof}
+\begin{align*}
+a+bi&=(a,0)+(b,0)(0,1)\\
+&=(a,0)+(0,b)\\
+&=(a,b).
+\end{align*}
+\end{proof}
+
+\begin{definition}
+For $a,b\in\RR$, $z=a+bi$, we call $a$ and $b$ the \emph{real part} and \emph{imaginary part} of $z$ respectively, denoted by $a=\Re(z)$, $b=\Im(z)$; $\overline{z}=a-bi$ is called the \emph{conjugate} of $z$.
+\end{definition}
 
 \begin{proposition}
 For $z,w\in\CC$,
 \begin{enumerate}[label=(\roman*)]
-\item $\overline{z+w}=\bar{z}+\bar{w}$
-\item $\overline{zw}=\bar{z}\bar{w}$
-\item $z+\bar{z}=2\Re(z)$, $z-\bar{z}=2i\Im(z)$
-\item $z\bar{z}\in\RR$ and $z\bar{z}>0$ (except when $z=0$)
+\item $\overline{z+w}=\overline{z}+\overline{w}$
+\item $\overline{zw}=\overline{z}\overline{w}$
+\item $z+\overline{z}=2\Re(z)$, $z-\overline{z}=2i\Im(z)$
+\item $z\overline{z}\in\RR$ and $z\overline{z}>0$ (except when $z=0$)
 \end{enumerate}
 \end{proposition}
 
+\begin{definition}
+For $z\in\CC$, its \emph{absolute value} is
+\[|z|\coloneqq\brac{z\overline{z}}^\frac{1}{2}.\]
+\end{definition}
+
 \begin{proposition}
 For $z,w\in\CC$,
 \begin{enumerate}[label=(\roman*)]
-\item $z>0$ unless $z=0$, $|0|=0$
-\item $|\bar{z}|=|z|$
+\item $|z|>0$ unless $z=0$, $|0|=0$
+\item $|\overline{z}|=|z|$
 \item $|zw|=|z||w|$
 \item $|\Re(z)|\le|z|$
 \item $|z+w|\le|z|+|w|$
 \end{enumerate}
 \end{proposition}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item The square root is non-negative, by definition.
+\item The conjugate of $\overline{z}$ is $z$, and the rest follows by the definition of absolute value.
+\item Let $z=a+bi$, $w=c+di$ with $a,b,c,d\in\RR$. Then
+\[|zw|^2=(ac-bd)^2+(ad-bc)^2=(a^2+b^2)(c^2+d^2)=|z|^2|w|^2,\]
+or $|zw|^2=\brac{|z||w|}^2$ so the desired result follows.
+\item Let $z=a+bi$. Note that $a^2\le a^2+b^2$, hence
+\[|\Re(z)|=|a|=\sqrt{a^2}\le\sqrt{a^2+b^2}=|z|.\]
+\item Let $z,w\in\CC$. Note that the conjugate of $z\overline{w}$ is $\overline{z}w$, so $z\overline{w}+\overline{z}w=2\Re(z\overline{w})$. Hence
+\begin{align*}
+|z+w|^2&=(z+w)(\overline{z+w})\\
+&=(z+w)(\overline{z}+\overline{w})\\
+&=z\overline{z}+z\overline{w}+\overline{z}w+w\overline{w}\\
+&=|z|^2+2\Re(z\overline{w})+|w|^2\\
+&\le|z|^2+2|z\overline{w}|+|w|^2\\
+&=|z|^2+2|z||w|+|w|^2\\
+&=\brac{|z|+|w|}^2
+\end{align*}
+and taking square roots yields the desired result.
+\end{enumerate}
+\end{proof}
 
 \begin{theorem}[Schwarz inequality]
 If $a_1,\dots,a_n,b_1,\dots,b_n\in\CC$, then
@@ -698,34 +744,45 @@ If $a_1,\dots,a_n,b_1,\dots,b_n\in\CC$, then
 \end{theorem}
 
 \begin{proof}
-Let $A=\sum|a_i|^2$, $B=\sum|b_i|^2$, $C=\sum a_i\bar{b_i}$. If $B=0$, then $b_1=\cdots=b_n=0$, and the conclusion is trivial. Assume therefore that $B>0$. Then we have
+Let $A=\sum|a_i|^2$, $B=\sum|b_i|^2$, $C=\sum a_i\overline{b_i}$. If $B=0$, then $b_1=\cdots=b_n=0$, and the conclusion is trivial. Assume therefore that $B>0$. Then we have
 \begin{align*}
 \sum|Ba_i-Cb_i|^2
-&=\sum(Ba_i-Cb_i)(B\bar{a_i}-\overline{Cb_i})\\
-&=B^2\sum|a_i|^2-B\bar{C}\sum a_i\bar{b_j}-BC\sum\bar{a_i}b_i+|C|^2\sum|b_i|^2\\
+&=\sum(Ba_i-Cb_i)(\overline{Ba_i-Cb_i})\\
+&=\sum(Ba_i-Cb_i)(B\overline{a_i}-\overline{Cb_i})\\
+&=B^2\sum|a_i|^2-B\overline{C}\sum a_i\overline{b_j}-BC\sum\overline{a_i}b_i+|C|^2\sum|b_i|^2\\
 &=B^2A-B|C|^2\\
 &=B(AB-|C|^2).
 \end{align*}
 Since each term in the first sum is non-negative, we see that
 \[B(AB-|C|^2)\ge0.\]
 Since $B>0$, it follows that $AB-|C|^2\ge0$. This is the desired inequality.
-\end{proof}
 
 (when does equality hold?)
+\end{proof}
+\pagebreak
 
 \section{Euclidean Spaces}
 For $n\in\ZZ^+$, 
 \[\RR^n=\{(x_1,\dots,x_n)\mid x_i\in\RR\}\]
-where $\vb{x}=(x_1,\dots,x_n)$, $x_i$'s are called the coordinates of $\vb{x}$. The elements of $\RR^n$ are called points, or vectors. Addition and scalar multiplication on $\RR^n$ defined as follows: for $\vb{x},\vb{y}\in\RR^n$, $\alpha\in\RR$,
-\begin{align*}
-\vb{x}+\vb{y}&=(x_1+y_1,\dots,x_n+y_n)\\
-\alpha\vb{x}&=(\alpha x_1,\dots,\alpha x_n)
-\end{align*}
-These two operations satisfy the commutative, associatives, and distributive laws (the proof is trivial, in view of the analagous laws for the real numbers) and make $\RR^n$ into a vector space over the real field. The zero element of $\RR^n$ (sometimes called the origin or the null vector) is the point $\vb{0}$, all of whose coordinates are $0$.
+where $\vb{x}=(x_1,\dots,x_n)$, $x_i$'s are called the coordinates of $\vb{x}$. The elements of $\RR^n$ are called \emph{points}, or \emph{vectors}.
 
-We define the \textbf{inner product} (or scalar product) of $\vb{x}$ and $\vb{y}$ by
-\[\vb{x}\cdot\vb{y}\coloneqq\sum_{i=1}^nx_iy_i.\]
-The \textbf{norm} is a real-valued function $\norm{\cdot}:\RR^n\to\RR$; given $\vb{x}=(x_1,\dots,x_n)$, the norm of $\vb{x}$ is defined as
+Define addition and scalar multiplication on $\RR^n$ as follows: for $\vb{x},\vb{y}\in\RR^n$, $\alpha\in\RR$,
+\begin{align*}
+\vb{x}+\vb{y}&=(x_1+y_1,\dots,x_n+y_n),\\
+\alpha\vb{x}&=(\alpha x_1,\dots,\alpha x_n).
+\end{align*}
+
+\begin{proposition}
+$\RR^n$, with addition and scalar multiplication defined above, is a vector space over $\RR$, where the zero element of $\RR^n$ (sometimes called the origin or the null vector) is the point $\vb{0}$, all of whose coordinates are $0$.
+\end{proposition}
+
+\begin{proof}
+These two operations satisfy the commutative, associatives, and distributive laws (the proof is trivial, in view of the analagous laws for the real numbers).
+\end{proof}
+
+We define the \emph{inner product} of $\vb{x}$ and $\vb{y}$ by
+\[\vb{x}\cdot\vb{y}\coloneqq\sum_{i=1}^nx_iy_i,\]
+and the \emph{norm} of $\vb{x}$ by
 \[\norm{\vb{x}}\coloneqq\brac{\vb{x}\cdot\vb{x}}^\frac{1}{2}=\brac{\sum_{i=1}^n{x_i}^2}^\frac{1}{2}.\]
 The structure now defined (the vector space $\RR^n$ with the above inner product and norm) is called the \vocab{Euclidean $n$-space}.
 
@@ -743,18 +800,25 @@ Suppose $\vb{x},\vb{y},\vb{z}\in\RR^n$, $\alpha\in\RR$. Then
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item 
-\item 
-\item 
+\item Obvious from definition.
+\item \begin{align*}
+\norm{\vb{x}}=0&\iff\brac{\sum_{i=1}^n{x_i}^2}^\frac{1}{2}=0\\
+&\iff\sum_{i=1}^n{x_i}^2=0\\
+&\iff x_1=\cdots=x_n=0\\
+&\iff\vb{x}=(0,\dots,0)=\vb{0}
+\end{align*}
+since ${x_i}^2\ge0$.
+
+\item Obvious from definition.
 \item This is an immediate consequence of the Cauchy--Schwarz inequality.
-\item By (4) we have
+\item By (iv) we have
 \begin{align*}
 \norm{\vb{x}+\vb{y}}&=(\vb{x}+\vb{y})\cdot(\vb{x}+\vb{y})\\
 &=\vb{x}\cdot\vb{x}+2\vb{x}\cdot\vb{y}+\vb{y}\cdot\vb{y}\\
 &\le\norm{\vb{x}}^2+2\norm{\vb{x}}\norm{\vb{y}}+\norm{\vb{y}}^2\\
 &=\brac{\norm{\vb{x}}+\norm{\vb{y}}}^2.
 \end{align*}
-\item This follows directly from (5) by replacing $\vb{x}$ by $\vb{x}-\vb{y}$ and $\vb{y}$ by $\vb{y}-\vb{z}$.
+\item This follows directly from (v) by replacing $\vb{x}$ by $\vb{x}-\vb{y}$ and $\vb{y}$ by $\vb{y}-\vb{z}$.
 \end{enumerate}
 \end{proof}
 
@@ -773,8 +837,8 @@ Suppose that $E$ and $F$ are sets in $\RR^n$ where $E$ and $F$ is finite. Prove 
 \pagebreak
 
 \section*{Exercises}
-\begin{prbm}
-If $r\neq0$ is rational and $x$ is irrational, prove that $r+x$ and $rx$ are irrational.
+\begin{prbm}[\cite{rudin} Ch.1 Q1]
+If $r\in\QQ\setminus\{0\}$ and $x\in\RR\setminus\QQ$, prove that $r+x\in\RR\setminus\QQ$ and $rx\in\RR\setminus\QQ$.
 \end{prbm}
 
 \begin{solution}
@@ -785,15 +849,7 @@ which says that $x$ can be written as the quotient of two integers, so $x$ is ra
 The proof for the case $rx$ is similar.
 \end{solution}
 
-\begin{prbm}
-Prove that there is no rational number whose square is $12$.
-\end{prbm}
-
-\begin{solution}
-If $r\in\QQ$, $r^2=12$, then $\brac{\frac{r}{2}}^2=3$, so this is equivalent to showing there is no rational number whose square is $3$. The proof is analagous to that of proving $\sqrt{2}$ is irrational.
-\end{solution}
-
-\begin{prbm}
+\begin{prbm}[\cite{rudin} Ch.1 Q4]
 Let $E$ be a nonempty subset of an ordered set; suppose $\alpha$ is a lower bound of $E$ and $\beta$ is an upper bound of $E$. Prove that $\alpha\le\beta$.
 \end{prbm}
 
@@ -801,8 +857,8 @@ Let $E$ be a nonempty subset of an ordered set; suppose $\alpha$ is a lower boun
 Let $x\in E$. By definition of lower and upper bounds, $\alpha\le x\le\beta$.
 \end{solution}
 
-\begin{prbm}
-Let $A$ be a nonempty set of real numbers which is bounded below. Let $-A$ be the set of all numbers $-x$, where $x\in A$. Prove that
+\begin{prbm}[\cite{rudin} Ch.1 Q5]
+Let $A\subset\RR$, $A\neq\emptyset$ be bounded below. Let $-A$ be the set of all numbers $-x$, where $x\in A$. Prove that
 \[\inf A=-\sup(-A).\]
 \end{prbm}
 
@@ -812,35 +868,68 @@ Let $\alpha=\inf A$. If $x\in(-A)$ then $-x\in A$, so $\alpha\le-x$, and so $-\a
 If $\beta<-\alpha$ then $-\beta>\alpha$, and there exists $x\in A$ such that $x<-\beta$. Then $-x\in(-A)$, and $-x>\beta$. This shows that $-\alpha=\sup(-A)$, and we are done.
 \end{solution}
 
-\begin{prbm}
-Proe that no order can be defined in the complex field that turns it into an ordered field.
+\begin{prbm}[\cite{rudin} Ch.1 Q8]
+Proe that no order can be defined in $\CC$ that turns it into an ordered field.
 \end{prbm}
 
-\begin{prbm}[Lexicographic order]
+\begin{solution}
+By Proposition 1.18d, an ordering $<$ that makes $\CC$ an ordered field would have to satisfy $-1=i^2>0$, contradicting $1>0$.
+\end{solution}
+
+\begin{prbm}[\cite{rudin} Ch.1 Q9, lexicographic order]
 Suppose $z=a+bi$, $w=c+di$. Define an order on $\CC$ as follows:
 \[z<w\iff\begin{cases}
 a<c,\text{ or}\\
 a=c,b<d.
 \end{cases}\]
-Prove that this turns the set of all complex numbers into an ordered set. Does this ordered set have the least uupper bound property?
+Prove that this turns $\CC$ into an ordered set. Does this ordered set have the least upper bound property?
 \end{prbm}
 
-\begin{prbm}
-Suppose $z=a+bi$, $w+u+iv$, and
+\begin{prbm}[\cite{rudin} Ch.1 Q10]
+Suppose $z=a+bi$, $w=u+iv$, and
 \[a=\brac{\frac{|w|+u}{2}}^\frac{1}{2},\quad b=\brac{\frac{|w|-u}{2}}^\frac{1}{2}.\]
-Prove that $z^2=w$ if $v\ge0$ and that $\bar{z}^2=w$ if $v\le0$. Conclude that every complex number (with one exception!) has two complex square roots.
+Prove that $z^2=w$ if $v\ge0$ and that $\overline{z}^2=w$ if $v\le0$. Conclude that every complex number (with one exception!) has two complex square roots.
 \end{prbm}
 
-\begin{prbm}
-If $z$ is a complex number, prove that there exists $r\ge0$ and a complex number $w$ with $|w|=1$ such that $z=rw$. Are $w$ and $r$ always uniquely determined by $z$?
+\begin{solution}
+We have
+\[a^2-b^2=\frac{|w|+u}{2}-\frac{|w|-u}{2}=u,\]
+and
+\[2ab=\brac{|w|+u}^\frac{1}{2}\brac{|w|-u}^\frac{1}{2}=\brac{|w|^2-u^2}^\frac{1}{2}=\brac{v^2}^\frac{1}{2}=|v|.\]
+Hence
+\[z^2=\brac{a^2-b^2}+2abi=u+|v|i=w\]
+if $v\ge0$, and
+\[\overline{z}^2=\brac{a^2-b^2}-2abi=u-|v|i=w\]
+if $v\le0$. Hence every non-zero $w$ has two square roots $\pm z$ or $\pm\overline{z}$. Of course, $0$ has only one square root, itself.
+\end{solution}
+
+\begin{prbm}[\cite{rudin} Ch.1 Q11]
+If $z\in\CC$, prove that there exists $r\ge0$ and $w\in\CC$ with $|w|=1$ such that $z=rw$. Are $w$ and $r$ always uniquely determined by $z$?
 \end{prbm}
 
-\begin{prbm}[Triangle inequality]
+\begin{prbm}[\cite{rudin} Ch.1 Q12, triangle inequality]
 If $z_1,\dots,z_n\in\CC$, prove that
 \[|z_1+\cdots+z_n|\le|z_1|+\cdots+|z_n|.\]
 \end{prbm}
 
-\begin{prbm}
+\begin{solution}
+By the triangle inequality, $|z_1+z_2|\le|z_1|+|z_2|$. Assume the statement holds for $n-1$. Then
+\[|z_1+\cdots+z_{n-1}+z_n|\le|z_1+\cdots+z_{n-1}|+|z_n|\le|z_1|+\cdots+|z_n|,\]
+which establishes the claim by induction.
+\end{solution}
+
+\begin{prbm}[\cite{rudin} Ch.1 Q13]
 If $x,y\in\CC$, prove that
 \[\absolute{|x|-|y|}\le|x-y|.\]
 \end{prbm}
+
+\begin{solution}
+By the triangle inequality,
+\[|x|=|(x-y)+y|\le|x-y|+|y|\]
+so that
+\[|x|-|y|\le|x-y|.\]
+Interchanging the roles of $x$ and $y$ in the above, we also have
+\[|y|-|x|\le|x-y|\]
+so that
+\[\absolute{|x|-|y|}\le|x-y|.\]
+\end{solution}

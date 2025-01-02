@@ -1,0 +1,38 @@
+\chapter{Calculus}
+\section{Multivariable Calculus}
+\subsection{Partial Differentiation}
+\begin{definition}[Partial derivative]
+Let $f:\RR^n\to\RR$ be a function of $n$ variables. The \vocab{partial derivative} of $f$ with respect to the $i$-th variable is the function
+\[\pdv{f}{x_i}=\lim_{h\to0}\frac{f(x_1,\dots,x_{i-1},x_i+h,x_{i+1},\dots,x_n)-f(x_1,\dots,x_n)}{h}.\]
+\end{definition}
+
+\begin{notation}
+We define second and higher order partial derivatives in a similar manner to how we define them for full derivatives. So in the case of second order partial derivatives of a function $f(x,y)$, we have
+\begin{align*}
+\pdv[2]{f}{x}&=\pdv{}{x}\brac{\pdv{f}{x}}=f_{xx},\\
+\pdv[2]{f}{y}&=\pdv{}{y}\brac{\pdv{f}{y}}=f_{yy},\\
+\pdv{f}{y,x}&=\pdv{}{y}\brac{\pdv{f}{x}}=f_{xy},\\
+\pdv{f}{x,y}&=\pdv{}{x}\brac{\pdv{f}{y}}=f_{yx}.
+\end{align*}
+\end{notation}
+
+If $f_{xy}$ and $f_{yx}$ are both defined and continuous in a region containing the point $(a,b)$, then 
+\[f_{xy}(a,b)=f_{yx}(a,b);\]
+this is known as \emph{Clairaut's theorem}. A consequence of this theorem is that we don't need to keep track of the order in which we take derivatives.
+
+\begin{theorem}[Chain rule]
+Let $F(t)=f\brac{u(t),v(t)}$ with $u$ and $v$ differentiable and $f$ being continuously differentiable in each variable. Then
+\begin{equation}
+\dv{F}{t}=\pdv{f}{u}\dv{u}{t}+\pdv{f}{v}\dv{v}{t}.
+\end{equation}
+\end{theorem}
+
+
+
+\subsection{Coordinate systems and Jacobians}
+\subsection{Double Integrals}
+\subsection{Parametric representation of curves and surfaces}
+\subsection{The gradient vector}
+\subsection{Taylor's theorem}
+\subsection{Critical points}
+\subsection{Lagrange multipliers}

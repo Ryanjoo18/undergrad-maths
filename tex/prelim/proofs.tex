@@ -1,19 +1,9 @@
 \chapter{Mathematical Reasoning and Logic}\label{chap:logic-proofs}
-\section{Mathematical Terminology}
-It is useful to be familiar with the following terminology.
-\begin{itemize}
-\item A \vocab{definition} is a precise and unambiguous description of the meaning of a mathematical term. It characterises the meaning of a word by giving all the properties and only those properties that must be true.
-\item A \vocab{theorem} is a true mathematical statement that can be proven mathematically. In a mathematical paper, the term theorem is often reserved for the most important results.
-\item A \vocab{lemma} is a minor result whose sole purpose is to help in proving a theorem. It is a stepping stone on the path to proving a theorem. Very occasionally lemmas can take on a life of their own.
-\item A \vocab{corollary} is a result in which the (usually short) proof relies heavily on a given theorem.
-\item A \vocab{proposition} is a proven and often interesting result, but generally less important than a theorem.
-\item A \vocab{conjecture} is a statement that is unproved, but is believed to be true.
-\item An \vocab{axiom} is a statement that is assumed to be true without proof. These are the basic building blocks from which all theorems are proven.
-\item An \vocab{identity} is a mathematical expression giving the equality of two (often variable) quantities.
-\item A \vocab{paradox} is a statement that can be shown, using a given set of axioms and definitions, to be both true and false. Paradoxes are often used to show the inconsistencies in a flawed theory.
-\end{itemize}
 
-A \vocab{proof} is a sequence of true statements, without logical gaps, that is a logical argument establishing some conclusion.
+\begin{learn}
+\item introduce basic logic;
+\item introduce common methods of proof.
+\end{learn}
 
 \section{Zeroth-order Logic}
 A \vocab{proposition} is a sentence which has exactly one truth value, i.e. it is either true or false, but not both and not neither. A proposition is denoted by uppercase letters such as $P$ and $Q$. If the proposition $P$ depends on a variable $x$, it is sometimes helpful to denote it by $P(x)$. 
@@ -30,39 +20,24 @@ We can do some algebra on propositions, which include
 \end{enumerate}
 
 Here are some useful properties when handling logical statements. You can easily prove all of them using truth tables.
-\begin{proposition}[Double negation law]
-\[P\iff\lnot(\lnot P)\]
+\begin{proposition} \
+\begin{enumerate}[label=(\roman*)]
+\item Double negation law: $P\iff\lnot(\lnot P)$.
+\item Commutative: $P \land Q \iff Q \land P$, $P \lor Q \iff Q \lor P$.
+\item Conjunction is associative: $(P\land Q)\land R \iff P\land (Q\land R)$.
+\item Disjunction is associative: $(P\lor Q)\lor R \iff P\lor (Q\lor R)$.
+\item Conjunction distributes over disjunction: $P\land(Q\lor R) \iff (P\land Q)\lor(P\land Q)$.
+\item Disjunction distributes over conjunction: $P\lor(Q\land R) \iff (P\lor Q)\land(P\lor R)$.
+\end{enumerate}
 \end{proposition}
 
-\begin{proposition}[Commutative property]
-\[ P \land Q \iff Q \land P, \quad P \lor Q \iff Q \lor P \]
-\end{proposition}
-
-\begin{proposition}[Associative property for conjunction]
-\[ (P\land Q)\land R \iff P\land (Q\land R) \]
-\end{proposition}
-
-\begin{proposition}[Associative property for disjunction]
-\[ (P\lor Q)\lor R \iff P\lor (Q\lor R) \]
-\end{proposition}
-
-\begin{proposition}[Distributive property for conjunction across disjunction]
-\[ P\land(Q\lor R) \iff (P\land Q)\lor(P\land Q) \]
-\end{proposition}
-
-\begin{proposition}[Distributive property for disjunction across conjunction]
-\[ P\lor(Q\land R) \iff (P\lor Q)\land(P\lor R) \]
-\end{proposition}
-
-\begin{proposition}[De Morgan's laws]
+\begin{proposition}[de Morgan's laws]
 \[ \lnot(P \lor Q) \iff (\lnot P \land \lnot Q) \]
 \[ \lnot (P\land Q) \iff (\lnot P\lor \lnot Q) \]
 \end{proposition}
 
 \subsection{If, only if}
-\vocab{Implication} is denoted by $P \implies Q$, which means ``$P$ implies $Q$'', i.e. if $P$ holds then $Q$ also holds. It is equivalent to saying ``If $P$ then $Q$''. The only case when $P \implies Q$ is false is when the hypothesis $P$ is true and the conclusion $Q$ is false.
-
-$P \implies Q$ is known as a \vocab{conditional statement}. $P$ is known as the \vocab{hypothesis}, $Q$ is known as the \vocab{conclusion}.
+\vocab{Implication} is denoted by $P \implies Q$, which means ``$P$ implies $Q$'', i.e. if $P$ holds then $Q$ also holds. It is equivalent to saying ``If $P$ then $Q$''. $P \implies Q$ is known as a \emph{conditional statement}, where $P$ is known as the \emph{hypothesis} and $Q$ is known as the \emph{conclusion}. The only case when $P \implies Q$ is false is when the hypothesis $P$ is true and the conclusion $Q$ is false.
 
 Statements of this form are probably the most common, although they may sometimes appear quite differently. The following all mean the same thing:
 \begin{enumerate}[label=(\roman*)]
@@ -73,33 +48,31 @@ Statements of this form are probably the most common, although they may sometime
 \item $Q$ is a necessary condition for $P$.
 \end{enumerate}
 
-The \vocab{converse} of $P \implies Q$ is given by $Q \implies P$; both are not logically equivalent.
-
-The \vocab{inverse} of $P \implies Q$ is given by $\lnot P \implies \lnot Q$, i.e. the hypothesis and conclusion of the statement are both negated.
-
-The \vocab{contrapositive} of $P \implies Q$ is given by $\lnot Q \implies \lnot P$; both are logically equivalent.
+Given $P\implies Q$,
+\begin{itemize}
+\item its \vocab{converse} is $Q \implies P$; both are not logically equivalent;
+\item its \vocab{inverse} is $\lnot P \implies \lnot Q$, i.e. the hypothesis and conclusion of the statement are both negated; both are not logically equivalent;
+\item the \vocab{contrapositive} is $\lnot Q\implies\lnot P$; both are logically equivalent.
+\end{itemize}
 
 To prove $P \implies Q$, start by assuming that $P$ holds and try to deduce through some logical steps that $Q$ holds too. Alternatively, start by assuming that $Q$ does not hold and show that $P$ does not hold (that is, we prove the contrapositive).
 
 \subsection{If and only if, iff}
-\vocab{Bidirectional implication} is denoted by $P \iff Q$, which means both $P \implies Q$ and $Q \implies P$. We can read this as ``$P$ if and only if $Q$''. The letters ``iff'' are also commonly used to stand for ``if and only if''.
+\vocab{Bidirectional implication} is denoted by $P \iff Q$, which means both $P \implies Q$ and $Q \implies P$; $P \iff Q$ is known as a \emph{biconditional statement}. We can read this as ``$P$ if and only if $Q$''. The letters ``iff'' are also commonly used to stand for ``if and only if''.
 
 $P \iff Q$ is true exactly when $P$ and $Q$ have the same truth value.
 
-$P \iff Q$ is known as a \vocab{biconditional statement}.
-
-These statements are usually best thought of separately as ``if'' and ``only if'' statements.
-
-To prove $P \iff Q$, prove the statement in both directions, i.e. prove both $P \implies Q$ and $Q \implies P$. Remember to make very clear, both to yourself and in your written proof, which direction you are doing.
+These statements are usually best thought of separately as ``if'' and ``only if'' statements. To prove $P \iff Q$, prove the statement in both directions, i.e. prove both $P \implies Q$ and $Q \implies P$. Remember to make very clear, both to yourself and in your written proof, which direction you are doing.
 
 \section{First-order Logic}
-The \vocab{universal quantifier} is denoted by $\forall$, which means ``for all'' or ``for every''. An universal statement has the form $\forall x\in X, P(x)$.
+The \vocab{universal quantifier} is denoted by $\forall$, which means ``for all'' or ``for every''. A \emph{universal statement} takes the form $\forall x\in X, P(x)$.
 
-The \vocab{existential quantifier} is denoted by $\exists$, which means ``there exists''. An existential statement has the form $\exists x\in X, P(x)$, where $X$ is known as the \vocab{domain}.
+The \vocab{existential quantifier} is denoted by $\exists$, which means ``there exists''. An \emph{existential statement} takes the form $\exists x\in X, P(x)$, where $X$ is known as the \emph{domain}.
 
-These are versions of De Morgan's laws for quantifiers:
+\begin{proposition}[de Morgan's laws]
 \[ \lnot \forall x\in X,P(x) \iff \exists x\in X,\lnot P(x) \]
 \[ \lnot \exists x\in X,P(x) \iff \forall x\in X,\lnot P(x) \]
+\end{proposition}
 
 \begin{exercise}
 Negate the statement
@@ -139,8 +112,9 @@ Read from left to right, and as new elements or statements are introduced they a
 \begin{remark}
 To avoid confusion, it is a good idea to keep to the convention that the quantifiers come first, before any statement to which they relate.
 \end{remark}
+\pagebreak
 
-\section{Proofs}
+\section{Methods of Proof}
 A \vocab{direct proof} of $P \implies Q$ is a series of valid arguments that start with the hypothesis $P$ and end with the conclusion $Q$. It may be that we can start from $P$ and work directly to $Q$, or it may be that we make use of $P$ along the way.
 
 A \vocab{proof by contrapositive} of $P \implies Q$ is to prove instead $\lnot Q \implies \lnot P$.
@@ -149,38 +123,36 @@ A \vocab{disproof by counterexample} is to providing a counterexample in order t
 
 A \vocab{proof by cases} is to first dividing the situation into cases which exhaust all the possibilities, and then show that the statement follows in all cases.
 
-\subsection{Proof by contradiction}
-A \vocab{proof by contradiction} of $P$ involves first supposing $P$ is false, i.e. $\lnot P$; to prove $P \implies Q$ by contradiction, suppose that $Q$ is false, i.e. $P\land\lnot Q$. Then show through some logical reasoning that this leads to a contradiction or inconsistency. We may arrive at something that contradicts the hypothesis $P$, or something that contradicts the initial supposition that $Q$ is not true, or we may arrive at something that we know to be universally false.
+\subsection{Proof by Contradiction}
+A \vocab{proof by contradiction} of $P$ involves first supposing $P$ is false, i.e. $\lnot P$; to prove $P \implies Q$ by contradiction, suppose $P\land\lnot Q$. Then show through some logical reasoning that this leads to a contradiction or inconsistency. We may arrive at something that contradicts the hypothesis $P$, or something that contradicts the initial supposition that $Q$ is not true, or we may arrive at something that we know to be universally false.
 
 \begin{exercise}[Irrationality of $\sqrt{2}$]
 Prove that $\sqrt{2}$ is irrational.
 \end{exercise}
-\begin{proof}
+\begin{solution}
 We prove by contradiction. Suppose otherwise, that $\sqrt{2}$ is rational. Then $\sqrt{2}=\dfrac{a}{b}$ for some $a,b\in\ZZ,b\neq 0$, $a,b$ coprime.
 
 Squaring both sides gives
 \[a^2=2b^2.\]
 Since RHS is even, LHS must also be even. Hence it follows that $a$ is even. Let $a=2k$ where $k\in\ZZ$. Substituting $a = 2k$ into the above equation and simplifying it gives us
 \[b^2=2k^2.\]
-This means that $b^2$ is even, from which follows again that $b$ is even. 
+This means that $b^2$ is even, from which follows again that $b$ is even. This contradicts the assumption that $a$ and $b$ coprime, so we are done.
+\end{solution}
 
-This contradicts the assumption that $a,b$ coprime. Hence proven.
-\end{proof}
-
-\begin{exercise}[Euclid's theorem]
-There are infinitely many prime numbers.
+\begin{exercise}[Euclid]
+Prove that there are infinitely many prime numbers.
 \end{exercise}
 
-\begin{proof}
-Suppose otherwise, that only finitely many prime numbers exist. List them as $p_1,\dots,p_n$. The number $N=p_1p_2\cdots p_n+1$ is divisible by a prime $p$, yet is coprime to $p_1,\dots,p_n$. Therefore, $p$ does not belong to our list of all prime numbers, a contradiction. Hence the initial assumption was false, proving that there are infinitely many primes.
-\end{proof}
+\begin{solution}
+Suppose otherwise, that only finitely many prime numbers exist. List them as $p_1,\dots,p_n$. The number $N=p_1p_2\cdots p_n+1$ is divisible by a prime $p$, yet is coprime to $p_1,\dots,p_n$. Therefore, $p$ does not belong to our list of all prime numbers, a contradiction.
+\end{solution}
 
 To \vocab{prove uniqueness}, we can either assume $\exists x,y \in S$ such that $P(x) \land P(y)$ is true and show $x=y$, or argue by assuming that $\exists x,y \in S$ are distinct such that $P(x) \land P(y)$, then derive a contradiction. $\exists!$ denotes ``there exists a unique''. To prove uniqueness and existence, we also need to show that $\exists x \in S \suchthat P(x)$ is true.
 
-\subsection{Proof of existence}
+\subsection{Proof of Existence}
 To prove existential statements, we can adopt two approaches:
 \begin{enumerate}
-\item Constructive proof (direct proof): 
+\item Constructive proof (direct proof)
 
 To prove statements of the form $\exists x\in X \suchthat P(x)$, find or construct \vocab{a specific example} for $x$. To prove statements of the form $\forall y\in Y,\:\exists x\in X\suchthat P(x,y)$, construct example for $x$ in terms of $y$ (since $x$ is dependent on $y$).
 
@@ -190,7 +162,7 @@ In both cases, you have to justify that your example $x$
 \item satisfies the condition $P$.
 \end{enumerate}
 
-\item Non-constructive proof (indirect proof): 
+\item Non-constructive proof (indirect proof)
 
 Use when specific examples are not easy or not possible to find or construct.
 Make arguments why such objects have to exist.
@@ -268,13 +240,11 @@ Continuing in this manner after $k$ times, we will get
 \[ 1<d_k<d_{k-1}<\cdots<d_2<d_1<n \]
 where $d_i\mid n$ for all $i$.
 
-This process must stop after finite steps, as there can only be a finite number of $d_i$'s between $1$ and $n$. On the other hand, the process will stop only if there is a $d_i$ which is a prime. 
-
-Hence we conclude that there must be a divisor $d_i$ of $n$ that is prime.
+Since there can only be a finite number of $d_i$'s between $1$ and $n$, this process must stop after finite steps. On the other hand, the process will stop only if there is a $d_i$ which is a prime. Hence we conclude that there must be a divisor $d_i$ of $n$ that is prime.
 \end{proof}
 
 \begin{remark}
-This proof is also known as \vocab{proof by infinite descent}, a method which relies on the well-ordering principle of the positive integers.
+This proof is also known as \emph{proof by infinite descent}, a method which relies on the well-ordering principle on $\NN$.
 \end{remark}
 
 \begin{exercise}
@@ -293,10 +263,10 @@ Now let $z=3c$ and cancel $3$'s to obtain
 We have therefore constructed another solution $(a,b,c)=\brac{\frac{x}{3},\frac{y}{3},\frac{z}{3}}$ to the original equation. However $0<c<z$ contradicts the minimality of $z$.
 \end{proof}
 
-\subsection{Proof by mathematical induction}
+\subsection{Proof by Mathematical Induction}
 Induction is an extremely powerful method of proof used throughout mathematics. It deals with infinite families of statements which come in the form of lists. The idea behind induction is in showing how each statement follows from the previous one on the list -- all that remains is to kick off this logical chain reaction from some starting point.
 
-We shall assume that $\NN$ satisfies the well-ordering principle: every nonempty $S\subset\NN$ has a least element; that is, there exists $m\in S$ such that $m\le k$ for all $k\in S$.
+We shall assume that $\NN$ satisfies the \emph{well-ordering principle}: every nonempty $S\subset\NN$ has a least element; that is, there exists $m\in S$ such that $m\le k$ for all $k\in S$.
 
 \begin{remark}
 The well-ordering principle does not hold for $\ZZ$, $\QQ$, and $\RR$.
@@ -315,7 +285,7 @@ then $S=\NN$.
 If $S=\NN$ then we are done. Now suppose $S\neq\NN$. Then $\NN\setminus S$ is not empty. By the well-ordering principle, $\NN\setminus S$ has a least element $p$. Since $1\in S$, we must have $p>1$. By (ii), $p=(p-1)+1\in S$. But this contradicts $p\in\NN\setminus S$.
 \end{proof}
 
-\begin{theorem}[Principle of mathematical induction]
+\begin{theorem}[Principle of mathematical induction]\label{thrm:pmi}
 Let $P(n)$ be a family of statements indexed by $\NN$. Suppose that 
 \begin{enumerate}[label=(\roman*)]
 \item $P(1)$ is true;
@@ -373,7 +343,7 @@ Suppose that $P(k)$ is true for some $k\in\ZZ^+$, $k\ge1$. That is, $(1+x)^k\ge1
 so $P(k+1)$ is true. Hence by induction, the result holds.
 \end{proof}
 
-A corollary of induction is if the family of statements holds for $n \ge N$, rather than necessarily $n \ge 0$:
+A corollary of induction is if the family of statements holds for $n\ge N$, rather than necessarily $n\ge0$:
 
 \begin{corollary}
 Let $P(n)$ be a family of statements indexed by integers $n \ge N$ for $N\in\ZZ$. Suppose that 
@@ -385,7 +355,7 @@ Then $P(n)$ is true for all $n \ge N$.
 \end{corollary}
 
 \begin{proof}
-Applying the above theorem to the statement $Q(n)=P(n+N)$ for $n\in\NN$.
+Apply \cref{thrm:pmi} to the statement $Q(n)=P(n+N)$ for $n\in\NN$.
 \end{proof}
 
 Another variant on induction is when the inductive step relies on some earlier case(s) but not necessarily the immediately previous case.
@@ -394,26 +364,25 @@ Another variant on induction is when the inductive step relies on some earlier c
 Let $P(n)$ be a family of statements indexed by $\NN$. Suppose that
 \begin{enumerate}[label=(\roman*)]
 \item $P(1)$ is true;
-\item for all $m \in \NN$, if for integers $k$ with $1 \le k \le m$, $P(k)$ is true then $P(m+1)$ is true.
+\item for all $k\in\NN$, $P(1)\land\cdots\land P(k)\implies P(k+1)$.
 \end{enumerate}
-Then $P(n)$ is true for all $n \in \NN$.
+Then $P(n)$ is true for all $n\in\NN$.
 \end{theorem}
 
-Using logic notation, this is written as
-\[ \{P(1) \land (\forall m \in \NN) [P(1) \land P(2) \land \cdots \land P(m) \implies P(m+1)]\} \implies (\forall n \in \NN)P(n) \]
+\begin{proof}
+Let $Q(n)$ be the statement ``$P(k)$ holds for $k=0,1,\dots,n$''. Then the conditions for the strong form are equivalent to (i) $Q(0)$ holds and (ii) for $n\in\NN$, $Q(n)\implies Q(n+1)$. It follows by induction that $Q(n)$ holds for all $n\in\NN$, and hence $P(n)$ holds for all $n$.
+\end{proof}
 
-The following example illustrates how the strong form of induction can be useful:
-
-\begin{exercise}
-Prove the Fundamental Theorem of Arithmetic: every natural number greater than 1 may be expressed as a product of one or more prime numbers.
+\begin{exercise}[Fundamental theorem of arithmetic]
+Prove that every natural number greater than $1$ may be expressed as a product of one or more prime numbers.
 \end{exercise}
 
 \begin{proof}
-Let $P(n)$ be the statement that $n$ may be expressed as a product of prime numbers. 
+Let $P(n)$: $n$ may be expressed as a product of prime numbers. 
 
 Clearly $P(2)$ holds, since $2$ is itself prime. 
 
-Let $n \ge 2$ be a natural number and suppose that $P(m)$ holds for all $m<n$.
+Let $n\ge 2$ be a natural number and suppose that $P(m)$ holds for all $m<n$.
 
 \begin{itemize}
 \item If $n$ is prime then it is trivially the product of the single prime number $n$. 
@@ -421,7 +390,7 @@ Let $n \ge 2$ be a natural number and suppose that $P(m)$ holds for all $m<n$.
 \item If $n$ is not prime, then there must exist some $r, s > 1$ such that $n = rs$. By the inductive hypothesis, each of $r$ and $s$ can be written as a product of primes, and therefore $n = rs$ is also a product of primes.
 \end{itemize}
 
-Thus, whether $n$ is prime or not, we have have that $P(n)$ holds. By strong induction, $P(n)$ is true for all natural numbers. That is, every natural number greater than 1 may be expressed as a product of one or more primes.
+In both cases, $P(n)$ holds. Hence by strong induction, $P(n)$ is true for all $n\in\NN$.
 \end{proof}
 
 The following is also another variant on induction.
@@ -435,8 +404,8 @@ Let $P(n)$ be a family of statements indexed by $\NN_{\ge2}$. Suppose that
 Then $P(n)$ is true for all $n\in\NN_{\ge2}$.
 \end{theorem}
 
-\begin{exercise}
-Prove the AM--GM Inequality: given $n\in\NN$, for positive reals $a_1,a_2,dots,a_n$,
+\begin{exercise}[AM--GM inequality]
+Given $n\in\NN$, prove that for positive reals $a_1,a_2,dots,a_n$,
 \[\frac{a_1+a_2+\cdots+a_n}{n}\ge\sqrt[n]{a_1a_2\cdots a_n}.\]
 \end{exercise}
 
@@ -445,18 +414,17 @@ Let $\displaystyle P(n):\frac{a_1+a_2+\cdots+a_n}{n}\ge\sqrt[n]{a_1a_2\cdots a_n
 
 Base case $P(2)$ is true because\[\frac{a_1+a_2}{2}\ge\sqrt{a_1a_2} \iff (a_1+a_2)^2\ge 4a_1a_2 \iff (a_1-a_2)^2\ge0\]
 
-Next we show that $P(n)\implies P(2n)$, i.e. if AM--GM holds for $n$ variables, it also holds for $2n$ variables:
-
+Next we show that $P(n)\implies P(2n)$
 \[\frac{a_1+a_2+\cdots+a_{2n}}{2n}=\frac{\frac{a_1+a_2+\cdots+a_n}{n}+\frac{a_{n+1}+a_{n+2}+\cdots+a_{2n}}{n}}{2}\]\[\frac{\frac{a_1+a_2+\cdots+a_n}{n}+\frac{a_{n+1}+a_{n+2}+\cdots+a_{2n}}{n}}{2}\ge\frac{\sqrt[n]{a_1a_2\cdots a_n}+\sqrt[n]{a_{n+1}a_{n+2}\cdots a_{2n}}}{2}\]\[\frac{\sqrt[n]{a_1a_2\cdots a_n}+\sqrt[n]{a_{n+1}a_{n+2}\cdots a_{2n}}}{2}\ge\sqrt{\sqrt[n]{a_1a_2\cdots a_n}\sqrt[n]{a_{n+1}a_{n+2}\cdots a_{2n}}}\]\[\sqrt{\sqrt[n]{a_1a_2\cdots a_n}\sqrt[n]{a_{n+1}a_{n+2}\cdots a_{2n}}}=\sqrt[2n]{a_1a_2\cdots a_{2n}}\]
 The first inequality follows from $n$-variable AM--GM, which is true by assumption, and the second inequality follows from 2-variable AM--GM, which is proven above.
 
-Finally we show that $P(n)\implies P(n-1)$, i.e. if AM--GM holds for $n$ variables, it also holds for $n-1$ variables. By $n$-variable AM--GM, $\frac{a_1+a_2+\cdots+a_n}{n}\ge\sqrt[n]{a_1a_2\cdots a_n}$ Let $a_n=\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}$ Then we have\[\frac{a_1+a_2+\cdots+a_{n-1}+\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}}{n}=\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\]So,\[\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\ge\sqrt[n]{a_1a_2\cdots a_{n-1}\cdot \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}}\]\[\Rightarrow\left(\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\right)^n\ge a_1a_2\cdots a_{n-1}\cdot \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\]\[\Rightarrow\left(\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\right)^{n-1}\ge a_1a_2\cdots a_{n-1}\]\[\Rightarrow \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\ge\sqrt[n-1]{a_1a_2\cdots a_{n-1}}\]
-By Cauchy Induction, this proves the AM--GM inequality for $n$ variables.
+Finally we show that $P(n)\implies P(n-1)$. By $n$-variable AM--GM, $\frac{a_1+a_2+\cdots+a_n}{n}\ge\sqrt[n]{a_1a_2\cdots a_n}$ Let $a_n=\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}$ Then we have\[\frac{a_1+a_2+\cdots+a_{n-1}+\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}}{n}=\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\]So,\[\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\ge\sqrt[n]{a_1a_2\cdots a_{n-1}\cdot \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}}\]\[\Rightarrow\left(\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\right)^n\ge a_1a_2\cdots a_{n-1}\cdot \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\]\[\Rightarrow\left(\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\right)^{n-1}\ge a_1a_2\cdots a_{n-1}\]\[\Rightarrow \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\ge\sqrt[n-1]{a_1a_2\cdots a_{n-1}}\]
+By Cauchy induction, this proves the AM--GM inequality for $n$ variables.
 \end{proof}
 
-\subsection{Pigeonhole principle}
+\subsection{Pigeonhole Principle}
 \begin{theorem}[Pigeonhole principle]
-If $kn+1$ objects ($k\ge1$ not necessarily finite) are distributed among $n$ boxes, one of the boxes will contain at least $k+1$ objects.
+If $kn+1$ objects are distributed among $n$ boxes, one of the boxes will contain at least $k+1$ objects.
 \end{theorem}
 
 \begin{exercise}[IMO 1972]
@@ -489,11 +457,7 @@ Use the Unique Factorisation Theorem to prove that, if a positive integer $n$ is
 \end{prbm}
 
 \begin{proof}
-Prove by contradiction.
-
-Suppose $n$ is not a perfect square and $\sqrt{n}$ is rational.
-
-Then $\sqrt{n}=\frac{a}{b}$ for some integers $a$ and $b$. Squaring both sides and clearing denominator gives 
+Prove by contradiction. Suppose $n$ is not a perfect square and $\sqrt{n}$ is rational. Then $\sqrt{n}=\frac{a}{b}$ for some $a,b\in\ZZ$. Squaring both sides and clearing denominator gives 
 \begin{equation*}\tag{$\ast$}
 nb^2=a^2.
 \end{equation*}
@@ -504,17 +468,13 @@ Consider the standard factored forms of $n$, $a$ and $b$:
 \[ b=r_1^{f_1}r_2^{f_2}\cdots r_v^{f_v} \implies b^2=r_1^{2f_1}r_2^{2f_2}\cdots r_v^{2f_v} \]
 i.e. the powers of primes in the standard factored form of $a^2$ and $b^2$ are all even integers. 
 
-This means the powers $k_i$ of primes $p_i$ in the standard factored form of $n$ are also even by Unique Factorisation Theorem (UFT):
-
-Note that all $p_i$ appear in the standard factored form of $a^2$ with even power $2c_i$, because of $(\ast)$. By UFT, $p_i$ must also appear in the standard factored form of $nb^2$ with the same even power $2c_i$.
+This means the powers $k_i$ of primes $p_i$ in the standard factored form of $n$ are also even by Unique Factorisation Theorem. Note that all $p_i$ appear in the standard factored form of $a^2$ with even power $2c_i$, because of $(\ast)$. By UFT, $p_i$ must also appear in the standard factored form of $nb^2$ with the same even power $2c_i$.
 
 If $p_i\nmid b$, then $k_i=2c_i$ which is even. If $p_i\mid b$, then $p_i$ will appear in $b^2$ with even power $2d_i$. So $k_i+2d_i=2c_i$, and hence $k_i=2(c_i-d_i)$, which is again even.
 
 Hence $n=p_1^{k_1}p_2^{k_2}\cdots p_t^{k_t}=\brac{p_1^{\frac{k_1}{2}}p_2^{\frac{k_2}{2}}\cdots p_t^{\frac{k_t}{2}}}^2$.
 
 Since $\frac{k_i}{2}$ are all integers, $p_1^{\frac{k_1}{2}}p_2^{\frac{k_2}{2}}\cdots p_t^{\frac{k_t}{2}}$ is an integer and $n$ is a perfect square. This contradicts the given hypothesis that $n$ is not a perfect square.
-
-So we conclude that when a positive integer $n$ is not a perfect square, then $\sqrt{n}$ is irrational.
 \end{proof}
 
 \begin{prbm}

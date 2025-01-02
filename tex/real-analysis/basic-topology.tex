@@ -1,11 +1,12 @@
 \chapter{Basic Topology}\label{chap:basic-topology}
-This chapter discusses basic notions of point set topology. Refer to \cref{part:topology} for further discussion of topology.
+This chapter discusses basic notions of point set topology, which focuses on the metric space and its related structures. Then we introduce compactness and prove three major results (\cref{thrm:cantor-intersection}, \cref{thrm:heine-borel}, \cref{thrm:bolzano-weierstrass}). We also briefly talk about perfect sets, and connectedness of sets.
 
 \section{Metric Space}
+\subsection{Definitions and Examples}
 \begin{definition}[Metric space]
-A set $X$ with an associated \textbf{metric}\index{metric} $d:X\times X\to\RR$ is called a \vocab{metric space}\index{metric space}, if the following properties are satisfied for all $p,q\in X$:
+A \vocab{metric space}\index{metric space} is a set $X$ with an associated \emph{metric} $d:X\times X\to\RR$, which satisfies the following properties for all $p,q\in X$:
 \begin{enumerate}[label=(\roman*)]
-\item Positive definitiveness: $d(p,q)\ge0$, where equality holds if and only if $x=y$;
+\item Positive definitiveness: $d(p,q)\ge0$, where equality holds if and only if $p=q$;
 \item Symmetry: $d(p,q)=d(q,p)$;
 \item Triangle inequality: $d(p,q)\le d(p,r)+d(r,q)$ for any $r\in X$.
 \end{enumerate}
@@ -13,7 +14,7 @@ A set $X$ with an associated \textbf{metric}\index{metric} $d:X\times X\to\RR$ i
 
 For the rest of the chapter, $X$ is taken to be a metric space, unless specified otherwise.
 
-\begin{example}\label{exmp:r-metrics}
+\begin{example}[Metrics on $\RR^n$]
 Each of the following functions define metrics on $\RR^n$.
 \begin{align*}
 d_1(x,y)&=\sum_{i=1}^{n}|x_i-y_i|;\\
@@ -21,7 +22,6 @@ d_2(x,y)&=\sqrt{\sum_{i=1}^{n}(x_i-y_i)}\\
 d_\infty(x,y)&=\max_{i\in\{1,2,\dots,n\}}|x_i-y_i|.
 \end{align*}
 These are called the $\ell^1$-, $\ell^2$- (or Euclidean) and $\ell^\infty$-distances respectively.
-\end{example}
 
 The proof that each of $d_1$, $d_2$, $d_\infty$ is a metric is mostly very routine, with the exception of proving that $d_2$, the Euclidean distance, satisfies the triangle inequality. To establish this, recall that the Euclidean norm $\norm{x}_2$ of a vector $x=(x_1,\dots,x_n)\in\RR^n$ is
 \[\norm{x}_2\coloneqq\brac{\sum_{i=1}^n{x_i}^2}^\frac{1}{2}=\langle x,x\rangle^\frac{1}{2},\]
@@ -43,8 +43,9 @@ But since
 this inequality is immediate from the Cauchy--Schwarz inequality, that is to say the inequality
 \[|\langle u,v\rangle|\le\norm{u}_2\norm{v}_2.\]
 \end{proof}
+\end{example}
 
-The following are some interesting examples of metrics.
+The following are a few interesting examples of metrics.
 
 \begin{example}[Discrete metric]
 The \textbf{discrete metric} on an arbitrary set $X$ is defined as follows:
@@ -86,6 +87,7 @@ where $v$ and $w$ are any non-zero vectors in $L_1$ and $L_2$ respectively.
 When $n=2$, the distance between two lines is $\sin\theta$ where $\theta$ is the angle between those lines.
 \end{example}
 
+\begin{comment}
 \subsection{Norms}
 \begin{definition}[Norms]
 Let $V$ be any vector space (over the reals). A function $\norm{\cdot}:V\to[0,\infty)$ is called a \vocab{norm}\index{norm} if it satisfies the following properties:
@@ -142,27 +144,22 @@ Note that $\ell_2$ is in fact an inner product space where
 \[\langle(x_n),(y_n)\rangle=\sum_{n\ge1}x_ny_n,\]
 (the fact that the right-hand side converges if $(x_n)$ and $(y_n)$ are in $\ell_2$ follows from the Cauchy--Schwarz inequality). The space $\ell^2$ is known as \vocab{Hilbert space}.
 \end{example}
+\end{comment}
 
-\subsection{New metric spaces from old one}
 A metric space $(X,d)$ naturally induces a metric on any of its subsets.
 
 \begin{definition}[Subspace]
-Suppose $(X,d)$ is a metric space, $Y\subseteq X$. Then the restriction of $d$ to $Y\times Y$ gives $Y$ a metric so that $(Y,d_{Y\times Y})$ is a metric space. We call $Y$ equipped with this metric a \vocab{subspace}.
+Suppose $(X,d)$ is a metric space, $Y\subset X$. Then the restriction of $d$ to $Y\times Y$ gives $Y$ a metric so that $(Y,d_{Y\times Y})$ is a metric space. We call $Y$ equipped with this metric a \vocab{subspace}.
 \end{definition}
 
 \begin{example}
 Subspaces of $\RR$ include $[0,1]$, $\QQ$, $\ZZ$.
 \end{example}
 
-\begin{definition}[Product space]
-If $(X,d_X)$ and $(Y,d_Y)$ are metric spaces, then it is natural to try to make $X\times Y$ into a metric space. One method is as follows: if $x_1,x_2\in X$ and $y_1,y_2\in Y$ then we set
+\begin{proposition}[Product space]
+If $(X,d_X)$ and $(Y,d_Y)$ are metric spaces, set
 \[d_{X\times Y}\brac{(x_1,y_1),(x_2,y_2)}=\sqrt{d_X(x_1,x_2)^2+d_Y(y_1,y_2)^2.}\]
-\end{definition}
-
-The use of the square mean on the right, rather than the max or the sum, is appealing since then the product $\RR\times\RR$ becomes the space $\RR^2$ with the Euclidean metric. However, either of those alternative definitions results in a metric which is equivalent.
-
-\begin{proposition}
-With notation as above, $d_{X\times Y}$ gives a metric on $X\times Y$.
+for $x_1,x_2\in X$, $y_1,y_2\in Y$. Then $d_{X\times Y}$ gives a metric on $X\times Y$; we call $X\times Y$ the \emph{product space}.
 \end{proposition}
 
 \begin{proof}
@@ -184,7 +181,7 @@ By Cauchy--Schwarz,
 Substituting this into the previous line gives precisely the square of (2), and (1) follows.
 \end{proof}
 
-\subsection{Balls and boundedness}
+\subsection{Balls and Boundedness}
 \begin{definition}[Balls]\index{balls}
 The \vocab{open ball}\index{balls!open ball} centred at $x\in X$ with radius $r>0$ is defined to be the set
 \[B_r(x)\coloneqq\{y\in X\mid d(x,y)<r\}.\]
@@ -203,11 +200,11 @@ We caution that this intuitive picture of the closed ball being the open ball ``
 \end{remark}
 
 \begin{definition}[Bounded]
-$E\subseteq X$ is said to be \vocab{bounded}\index{boundedness} if $E$ is contained in some open ball; that is, there exists $M\in\RR$ and $q\in X$ such that $d(p,q)<M$ for all $p\in E$.
+$E\subset X$ is said to be \vocab{bounded}\index{boundedness} if $E$ is contained in some open ball; that is, there exists $M\in\RR$ and $q\in X$ such that $d(p,q)<M$ for all $p\in E$.
 \end{definition}
 
 \begin{proposition}
-Let $E\subseteq X$. Then the following are equivalent:
+Let $E\subset X$. Then the following are equivalent:
 \begin{enumerate}[label=(\roman*)]
 \item $E$ is bounded;
 \item $E$ is contained in some closed ball;
@@ -221,16 +218,16 @@ Let $E\subseteq X$. Then the following are equivalent:
 
 (2)$\implies$(3) This follows immediately from the triangle inequality.
 
-(3)$\implies$(1) Suppose $E$ satisfies (iii), then there exists $r\in\RR$ such that $d(x,y)\le r$ for all $x,y\in E$. If $E=\emptyset$, then $E$ is certainly bounded. Otherwise, let $p\in E$ be an arbitrary point. Then $E\subseteq B_{r+1}(p)$.
+(3)$\implies$(1) Suppose $E$ satisfies (iii), then there exists $r\in\RR$ such that $d(x,y)\le r$ for all $x,y\in E$. If $E=\emptyset$, then $E$ is certainly bounded. Otherwise, let $p\in E$ be an arbitrary point. Then $E\subset B_{r+1}(p)$.
 \end{proof}
 
-\subsection{Open and closed sets}
+\subsection{Open and Closed Sets}
 \begin{definition}[Neighbourhood]
-$N\subseteq X$ is called a \vocab{neighbourhood}\index{neighbourhood} of $p\in X$ if $B_\delta(p)\subseteq N$ for some $\delta>0$.
+$N\subset X$ is called a \vocab{neighbourhood}\index{neighbourhood} of $p\in X$ if $B_\delta(p)\subset N$ for some $\delta>0$.
 \end{definition}
 
 \begin{definition}[Open set]
-$E\subseteq X$ is \vocab{open}\index{open set} (in $X$) if it is a neighbourhood of each of its elements; that is, for all $x\in E$, $B_\delta(x)\subseteq E$ for some $\delta>0$.
+$E\subset X$ is \vocab{open}\index{open set} (in $X$) if it is a neighbourhood of each of its elements; that is, for all $x\in E$, $B_\delta(x)\subset E$ for some $\delta>0$.
 \end{definition}
 
 \begin{proposition}
@@ -246,7 +243,7 @@ d(z,x)&\le d(z,y)+d(y,x)\\
 &<\delta+d(y,x)\\
 &=r.
 \end{align*}
-and so $z\in B_r(x)$. Since for all $y\in B_r(x)$ there exists $\delta>0$ such that $B_\delta(y)\subseteq B_r(x)$, we have that $B_r(x)$ is open.
+and so $z\in B_r(x)$. Since for all $y\in B_r(x)$ there exists $\delta>0$ such that $B_\delta(y)\subset B_r(x)$, we have that $B_r(x)$ is open.
 \end{proof}
 
 \begin{proposition}\label{prop:open-set-properties}
@@ -260,8 +257,8 @@ and so $z\in B_r(x)$. Since for all $y\in B_r(x)$ there exists $\delta>0$ such t
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
 \item Obvious by definition.
-\item If $ x\in\bigcup_{i\in I}E_i$ then there is some $i\in I$ with $x\in E_i$. Since $E_i$ is open, there exists $\delta>0$ such that $B_\delta(x)\subseteq E_i$ and hence $ B_\delta(x)\in\bigcup_{i\in I}E_i$.
-\item Suppose that $I$ is finite and that $ x\in\bigcap_{i\in I}E_i$. For each $i\in I$, we have $x\in E_i$ and so there exists $\delta_i$ such that $B_{\delta_i}(x)\subseteq E_i$. Set $\delta=\min_{i\in I}\delta_i$, then $\delta>0$ (here it is, of course, crucial that $I$ be finite), and $B_\delta(x)\subseteq B_{\delta_i}(x)\subseteq E_i$ for all $i$. Therefore $ B_\delta(x)\subseteq\bigcap_{i\in I}E_i$.
+\item If $ x\in\bigcup_{i\in I}E_i$ then there is some $i\in I$ with $x\in E_i$. Since $E_i$ is open, there exists $\delta>0$ such that $B_\delta(x)\subset E_i$ and hence $ B_\delta(x)\in\bigcup_{i\in I}E_i$.
+\item Suppose that $I$ is finite and that $ x\in\bigcap_{i\in I}E_i$. For each $i\in I$, we have $x\in E_i$ and so there exists $\delta_i$ such that $B_{\delta_i}(x)\subset E_i$. Set $\delta=\min_{i\in I}\delta_i$, then $\delta>0$ (here it is, of course, crucial that $I$ be finite), and $B_\delta(x)\subset B_{\delta_i}(x)\subset E_i$ for all $i$. Therefore $ B_\delta(x)\subset\bigcap_{i\in I}E_i$.
 \end{enumerate}
 \end{proof}
 
@@ -274,7 +271,7 @@ It is extremely important to note that, whilst the indexing set $I$ in (2) can b
 \end{remark}
 
 \begin{proposition}\label{prop:open-subspace-cap}
-Suppose $Y$ is a subspace of $X$. $E\subseteq Y$ is open relative to $Y$ if and only if $E=Y\cap G$ for some open subset $G$ of $X$.
+Suppose $Y$ is a subspace of $X$. $E\subset Y$ is open relative to $Y$ if and only if $E=Y\cap G$ for some open subset $G$ of $X$.
 \end{proposition}
 
 \begin{proof} \
@@ -285,17 +282,17 @@ For each $p\in E$, let the open ball
 \[V_p=\{q\in X\mid d(p,q)<r_p\},\]
 and define
 \[G=\bigcup_{p\in E}V_p.\]
-Since $G$ is an intersection of open balls and open balls are open sets, by \cref{prop:open-set-properties}, $G$ is an open subset of $X$. Since $p\in V_p$ for all $p\in E$, it is clear that $E\subseteq G\cap Y$.
+Since $G$ is an intersection of open balls and open balls are open sets, by \cref{prop:open-set-properties}, $G$ is an open subset of $X$. Since $p\in V_p$ for all $p\in E$, it is clear that $E\subset G\cap Y$.
 
-To show the opposite containment, by our choice of $V_p$, we have $V_p\cap Y\subseteq E$ for every $p\in E$, so that $G\cap Y\subseteq E$. Hence $E=G\cap Y$.
+To show the opposite containment, by our choice of $V_p$, we have $V_p\cap Y\subset E$ for every $p\in E$, so that $G\cap Y\subset E$. Hence $E=G\cap Y$.
 
-\fbox{$\impliedby$} Conversely, if $G$ is open in $X$ and $E=G\cap Y$, every $p\in E$ has a neighbourhood $V_p\cap Y\subseteq E$. Hence $E$ is open relative to $Y$.
+\fbox{$\impliedby$} Conversely, if $G$ is open in $X$ and $E=G\cap Y$, every $p\in E$ has a neighbourhood $V_p\cap Y\subset E$. Hence $E$ is open relative to $Y$.
 \end{proof}
 
 The complement of an open set is a closed set.
 
 \begin{definition}[Closed set]
-$E\subseteq X$ is \vocab{closed}\index{closed set} if its complement $E^c=X\setminus E$ is open.
+$E\subset X$ is \vocab{closed}\index{closed set} if its complement $E^c=X\setminus E$ is open.
 \end{definition}
 
 %\begin{example}
@@ -330,15 +327,15 @@ From \cref{prop:open-set-properties}, simply take complements and apply de Morga
 As above, the indexing set in (3) must be finite; for instane, the closed intervals $F_i=\sqbrac{-1+\frac{1}{n},1-\frac{1}{n}}$ are all closed in $\RR$, but their union $\bigcup_{i=1}^\infty F_i=(-1,1)$ is open, not closed.
 \end{remark}
 
-\subsection{Interiors, closures, limit points}
+\subsection{Interiors, Closures, Limit Points}
 \begin{definition}
-The \vocab{interior}\index{interior} of $E\subseteq X$, denoted by $E^\circ$, is defined to be the union of all open subsets of $X$ contained in $E$.
+The \vocab{interior}\index{interior} of $E\subset X$, denoted by $E^\circ$, is defined to be the union of all open subsets of $X$ contained in $E$.
 
 The \vocab{closure}\index{closure} of $E$, denoted by $\overline{E}$, is defined to be the intersection of all closed subsets of $X$ containing $E$.
 
 The set $\overline{E}\setminus E^\circ$ is known as the \vocab{boundary}\index{boundary} of $E$, denoted by $\partial E$. $p$ is a \vocab{boundary point}\index{boundary point} of $E$ if $p\in\partial E$.
 
-A set $E\subseteq X$ is said to be \vocab{dense}\index{dense} if $\overline{E}=X$.
+A set $E\subset X$ is said to be \vocab{dense}\index{dense} if $\overline{E}=X$.
 \end{definition}
 
 Since an arbitrary union of open sets is open, $E^\circ$ is itself an open set, and it is clearly the unique largest open subset of $X$ contained in $E$. If $E$ is itself open then evidently $E=E^\circ$.
@@ -356,7 +353,7 @@ The rationals $\QQ$ are a dense subset of $\RR$.
 Let us give a couple of simple characterisations of the closure of a set.
 
 \begin{proposition}
-Suppose $E\subseteq X$. $p\in\overline{E}$ if and only if every open ball $B_\delta(p)$ contains a point of $E$.
+Suppose $E\subset X$. $p\in\overline{E}$ if and only if every open ball $B_\delta(p)$ contains a point of $E$.
 \end{proposition}
 
 \begin{proof} \
@@ -367,7 +364,7 @@ Suppose $E\subseteq X$. $p\in\overline{E}$ if and only if every open ball $B_\de
 \end{proof}
 
 \begin{remark}
-A particular consequence of this is that $E\subseteq X$ is dense if and only if it meets every open set in $X$.
+A particular consequence of this is that $E\subset X$ is dense if and only if it meets every open set in $X$.
 \end{remark}
 
 We now introduce the notion of limit points.
@@ -386,7 +383,7 @@ Consider the metric space $\RR^2$. The limit point set of any open ball $B_r(x)$
 Consider $\QQ\subset\RR$. $\QQ^\prime=\bar{\QQ}=\RR$.
 \end{example}
 
-Note that we do not necessarily have $E\subseteq E^\prime$, that is to say it is quite possible for a point $p\in E$ not to be a limit point of $E$. This occurs if there exists some ball $B_\delta(p)$ such that $B_\delta(p)\cap E=\{p\}$; in this case we say that $p$ is an \vocab{isolated point} of $E$.
+Note that we do not necessarily have $E\subset E^\prime$, that is to say it is quite possible for a point $p\in E$ not to be a limit point of $E$. This occurs if there exists some ball $B_\delta(p)$ such that $B_\delta(p)\cap E=\{p\}$; in this case we say that $p$ is an \vocab{isolated point} of $E$.
 
 \begin{proposition}
 If $p$ is a limit point of $E$, then every ball of $p$ contains infinitely many points of $E$.
@@ -405,23 +402,23 @@ A finite point set has no limit points.
 \end{corollary}
 
 \begin{proposition}
-Suppose $E\subseteq X$. $E^\prime$ is a closed subset of $X$.
+Suppose $E\subset X$. $E^\prime$ is a closed subset of $X$.
 \end{proposition}
 
 \begin{proof}
 To prove that $E^\prime$ is closed, we need to show that the complement $(E^\prime)^c$ is open.
 
-Suppose $p\in (E^\prime)^c$. Then exists a ball $B_\epsilon(p)$ whose intersection with $E$ is either empty or $\{p\}$. We claim that $B_\frac{\epsilon}{2}(p)\subseteq (E^\prime)^c$. Let $q\in B_\frac{\epsilon}{2}(p)$. If $q=p$, then clearly $q\in (E^\prime)^c$. If $q\neq p$, there is some ball about $q$ which is contained in $B_\epsilon(p)$, but does not contain $p$: the ball $B_\delta(q)$ where $\delta=\min\brac{\frac{\epsilon}{2},d(p,q)}$ has this property. This ball meets $E$ in the empty set, and so $q\in (E^\prime)^c$ in this case too.
+Suppose $p\in (E^\prime)^c$. Then exists a ball $B_\epsilon(p)$ whose intersection with $E$ is either empty or $\{p\}$. We claim that $B_\frac{\epsilon}{2}(p)\subset (E^\prime)^c$. Let $q\in B_\frac{\epsilon}{2}(p)$. If $q=p$, then clearly $q\in (E^\prime)^c$. If $q\neq p$, there is some ball about $q$ which is contained in $B_\epsilon(p)$, but does not contain $p$: the ball $B_\delta(q)$ where $\delta=\min\brac{\frac{\epsilon}{2},d(p,q)}$ has this property. This ball meets $E$ in the empty set, and so $q\in (E^\prime)^c$ in this case too.
 \end{proof}
 
 \begin{proposition}
-Suppose $E\subseteq X$. Then $\overline{E}=E\cup E^\prime$.
+Suppose $E\subset X$. Then $\overline{E}=E\cup E^\prime$.
 \end{proposition}
 
 \begin{proof}
-We first show the containment $E\cup E^\prime\subseteq\overline{E}$. Obviously $E\subseteq\overline{E}$, so we need only show that $E^\prime\subseteq\overline{E}$. Suppose $p\in\overline{E}^c$. Since $\overline{E}^c$ is open, there is some ball $B_\epsilon(p)$ which lies in $\overline{E}^c$, and hence also in $E^c$, and therefore a cannot be a limit point of $E$. This concludes the proof of this direction.
+We first show the containment $E\cup E^\prime\subset\overline{E}$. Obviously $E\subset\overline{E}$, so we need only show that $E^\prime\subset\overline{E}$. Suppose $p\in\overline{E}^c$. Since $\overline{E}^c$ is open, there is some ball $B_\epsilon(p)$ which lies in $\overline{E}^c$, and hence also in $E^c$, and therefore a cannot be a limit point of $E$. This concludes the proof of this direction.
 
-Now we look at the opposite containment $\overline{E}\subseteq E\cup E^\prime$. If $p\in\overline{E}$, we saw in Lemma 5.1.5 that there is a sequence  $(x_n)$ of elements of $E$ with $x_n\to p$. If $x_n=p$ for some $n$ then we are done, since this implies that $p\in E$. Suppose, then, that $x_n\neq p$ for all $n$. Let $\epsilon>0$ be given, for sufficiently large $n$, all the $x_n$ are elements of $B_\epsilon(p)\setminus\{p\}$, and they all lie in $E$. It follows that $p$ is a limit point of $E$, and so we are done in this case also.
+Now we look at the opposite containment $\overline{E}\subset E\cup E^\prime$. If $p\in\overline{E}$, we saw in Lemma 5.1.5 that there is a sequence  $(x_n)$ of elements of $E$ with $x_n\to p$. If $x_n=p$ for some $n$ then we are done, since this implies that $p\in E$. Suppose, then, that $x_n\neq p$ for all $n$. Let $\epsilon>0$ be given, for sufficiently large $n$, all the $x_n$ are elements of $B_\epsilon(p)\setminus\{p\}$, and they all lie in $E$. It follows that $p$ is a limit point of $E$, and so we are done in this case also.
 \end{proof}
 
 \begin{proposition}
@@ -698,45 +695,45 @@ The key feature of compact sets is that from any open cover, you can always sele
 
 \begin{definition}
 Let $\mathcal{U}=\{U_i\mid i\in I\}$ be a collection of open subsets of $X$. We say that $\mathcal{U}$ is an \vocab{open cover}\index{open cover} of a set $K$ if
-\[K\subseteq\bigcup_{i\in I}U_i.\]
-If $I^\prime\subseteq I$ and $K\subseteq\bigcup_{i\in I^\prime}U_i$, we say that $\{U_i\mid i\in I^\prime\}$ is a \textbf{subcover} of $\mathcal{U}$. If moreover, $I^\prime$ is finite, then it is called a \textbf{finite subcover}.
+\[K\subset\bigcup_{i\in I}U_i.\]
+If $I^\prime\subset I$ and $K\subset\bigcup_{i\in I^\prime}U_i$, we say that $\{U_i\mid i\in I^\prime\}$ is a \textbf{subcover} of $\mathcal{U}$. If moreover, $I^\prime$ is finite, then it is called a \textbf{finite subcover}.
 \end{definition}
 
 \begin{definition}[Compactness]
-$K\subseteq X$ is said to be \vocab{compact}\index{compactness} if every open cover of $K$ contains a finite subcover.
+$K\subset X$ is said to be \vocab{compact}\index{compactness} if every open cover of $K$ contains a finite subcover.
 \end{definition}
 
 That is, if $\mathcal{U}=\{U_i\mid i\in I\}$ is an open cover of $K$, then there are finitely many indices $i_1,\dots,i_n$ such that
-\[K\subseteq \bigcup_{k=1}^{n}U_{i_k}.\]
+\[K\subset \bigcup_{k=1}^{n}U_{i_k}.\]
 
 \begin{exercise}
 Every finite set is compact.
 \end{exercise}
 
 \begin{solution}
-Let $E$ be finite. Let $\mathcal{U}=\{U_i\mid i\in I\}$ be an open cover of $E$, then we have that $E\subseteq\bigcup_{i\in I}$.
+Let $E$ be finite. Let $\mathcal{U}=\{U_i\mid i\in I\}$ be an open cover of $E$, then we have that $E\subset\bigcup_{i\in I}$.
 
-For each point $x\in E$, take $i_x$ such that $x\in U_{i_x}$. Let $\mathcal{V}=\{U_{i_x}\mid x\in E\}$. By construction, since $x\in\mathcal{V}$ for all $x\in E$, $E\subseteq\mathcal{V}$ so $\mathcal{V}$ is an open cover of $E$. Since there are finitely many $x$, $\mathcal{V}$ is thus a finite subcover of $E$, and hence $E$ is compact.
+For each point $x\in E$, take $i_x$ such that $x\in U_{i_x}$. Let $\mathcal{V}=\{U_{i_x}\mid x\in E\}$. By construction, since $x\in\mathcal{V}$ for all $x\in E$, $E\subset\mathcal{V}$ so $\mathcal{V}$ is an open cover of $E$. Since there are finitely many $x$, $\mathcal{V}$ is thus a finite subcover of $E$, and hence $E$ is compact.
 \end{solution}
 
 \begin{proposition}
-Suppose $Y$ is a subspace of $X$, and $K\subseteq Y$. Then $K$ is compact relative to $X$ if and only if $K$ is compact relative to $Y$.
+Suppose $Y$ is a subspace of $X$, and $K\subset Y$. Then $K$ is compact relative to $X$ if and only if $K$ is compact relative to $Y$.
 \end{proposition}
 
 \begin{proof} \
 
-\fbox{$\implies$} Suppose $K$ is compact relative to $X$. Let $\mathcal{U}$ be an open cover of $K$; that is, $\mathcal{U}=\{U_i\mid i\in I\}$ is a collection of sets open relative to $Y$, such that $K\subseteq\bigcup_{i\in I}U_i$. 
+\fbox{$\implies$} Suppose $K$ is compact relative to $X$. Let $\mathcal{U}$ be an open cover of $K$; that is, $\mathcal{U}=\{U_i\mid i\in I\}$ is a collection of sets open relative to $Y$, such that $K\subset\bigcup_{i\in I}U_i$. 
 By \cref{prop:open-subspace-cap}, for all $i\in I$, there exist $V_i$ open relative to $X$ such that $U_i=Y\cap V_i$. Since $K$ is compact relative to $X$, we have
 \begin{equation*}\tag{1}
-K\subseteq\bigcup_{k=1}^{n}V_{i_k}
+K\subset\bigcup_{k=1}^{n}V_{i_k}
 \end{equation*}
-for some choice of finitely many indices $i_1,\dots,i_n$. Since $K\subseteq Y$, (1) implies that
+for some choice of finitely many indices $i_1,\dots,i_n$. Since $K\subset Y$, (1) implies that
 \begin{equation*}\tag{2}
-K\subseteq\bigcup_{k=1}^{n}U_{i_k}.
+K\subset\bigcup_{k=1}^{n}U_{i_k}.
 \end{equation*}
 This proves that $K$ is compact relative to $Y$.
 
-\fbox{$\impliedby$} Suppose $K$ is compact relative to $Y$, let $\mathcal{V}=\{V_i\mid i\in I\}$ be a collection of open subsets of $X$ which covers $K$, and put $U_i=Y\cap V_i$. Then (2) will hold for some choice of $i_1,\dots,i_n$; and since $U_i\subseteq V_i$, (2) implies (1).
+\fbox{$\impliedby$} Suppose $K$ is compact relative to $Y$, let $\mathcal{V}=\{V_i\mid i\in I\}$ be a collection of open subsets of $X$ which covers $K$, and put $U_i=Y\cap V_i$. Then (2) will hold for some choice of $i_1,\dots,i_n$; and since $U_i\subset V_i$, (2) implies (1).
 \end{proof}
 
 \begin{proposition}
@@ -744,11 +741,11 @@ Compact subsets of metric spaces are closed.
 \end{proposition}
 
 \begin{proof}
-Let $K\subseteq X$ be compact. To prove that $K$ is closed, we need to show that $K^c$ is open.
+Let $K\subset X$ be compact. To prove that $K$ is closed, we need to show that $K^c$ is open.
 
 Suppose $p\in X$, $p\neq K$. If $q\in K$, let $V_q$ and $W_q$ be neighbourhoods of $p$ and $q$ respectively, of radius less than $\frac{1}{2}d(p,q)$. Since $K$ is compact, there exists finite many points $q_1,\dots,q_n\in K$ such that
-\[K\subseteq\bigcup_{k=1}^{n}W_{q_k}=W.\]
-If $V=\bigcap_{k=1}^{n}V_{q_k}$, then $V$ is a neighbourhood of $p$ which does not intersect $W$. Hence $V\subseteq K^c$, so $p$ is an interior point of $K^c$. The theorem follows.
+\[K\subset\bigcup_{k=1}^{n}W_{q_k}=W.\]
+If $V=\bigcap_{k=1}^{n}V_{q_k}$, then $V$ is a neighbourhood of $p$ which does not intersect $W$. Hence $V\subset K^c$, so $p$ is an interior point of $K^c$. The theorem follows.
 \end{proof}
 
 \begin{proposition}
@@ -756,7 +753,7 @@ Closed subsets of compact sets are compact.
 \end{proposition}
 
 \begin{proof}
-Suppose $F\subseteq K\subseteq X$, $F$ is closed (relative to $X$), and $K$ is compact.
+Suppose $F\subset K\subset X$, $F$ is closed (relative to $X$), and $K$ is compact.
 
 Let $\mathcal{V}=\{V_i\mid i\in I\}$ be an open cover of $F$. If $F^c$ is adjoined to $\mathcal{V}$, we obtain an open cover $\Omega$ of $K$. Since $K$ is compact, there is a finite subcollection $\Phi$ of $\Omega$ which covers $K$, and hence $F$. If $F^c$ is a member of $\Phi$, we may remove it from $\Phi$ and still retain an open cover of $F$. We have thus shown that a finite subcollection of $\mathcal{V}$ covers $F$.
 \end{proof}
@@ -785,12 +782,12 @@ Let $I_n$ consist of all points $\vb{x}=(x_1,\dots,x_k)$ such that
 Every $k$-cell is compact.
 \end{proposition}
 
-\begin{theorem}[Cantor's Intersection Theorem]
+\begin{theorem}[Cantor's Intersection Theorem]\label{thrm:cantor-intersection}
 Given a decreasing sequence of compact sets $A_1\supset A_2 \supset \cdots$, there exists a point $x\in\RR^n$ such that $x$ belongs to all $A_i$. In other words, $\bigcap_{i=1}^\infty A_i\neq\emptyset$. Moreover, if for all $i\in\NN$ we have $\diam A_{i+1}\le c\cdot\diam A_k$ for some constant $c<1$, then such a point must be unique, i.e. $\bigcap_{i=1}^\infty A_k=\{x\}$ for some $x\in\RR^n$.
 \end{theorem}
 
 \begin{proposition}
-If $E\subseteq\RR^n$ has one of the following three properties, then it has the other two:
+If $E\subset\RR^n$ has one of the following three properties, then it has the other two:
 \begin{enumerate}[label=(\roman*)]
 \item $E$ is closed and bounded.
 \item $E$ is compact.
@@ -798,15 +795,15 @@ If $E\subseteq\RR^n$ has one of the following three properties, then it has the 
 \end{enumerate}
 \end{proposition}
 
-\begin{theorem}[Heine--Borel Theorem]
-$E\subseteq\RR^n$ is compact if and only if $E$ is closed and bounded.
+\begin{theorem}[Heine--Borel Theorem]\label{thrm:heine-borel}
+$E\subset\RR^n$ is compact if and only if $E$ is closed and bounded.
 \end{theorem}
 
 \begin{proof}
 
 \end{proof}
 
-\begin{theorem}[Bolzano--Weierstrass Theorem]
+\begin{theorem}[Bolzano--Weierstrass Theorem]\label{thrm:bolzano-weierstrass}
 Every bounded infinite subset of $\RR^n$ has a limit point in $\RR^n$.
 \end{theorem}
 
@@ -879,7 +876,7 @@ $P$ is perfect.
 \end{proposition}
 
 \begin{proof}
-To show that $P$ is perfect, it is enough to show that $P$ contains no isolated point. Let $x\in P$, and let $S$ be any segment containing $x$. Let $I_n$ be that interval of $E_n$ which contains $x$. Choose $n$ large enough, so that $I_n\subseteq S$. Let $x_n$ be an endpoint of $I_n$, such that $x_n\neq x$.
+To show that $P$ is perfect, it is enough to show that $P$ contains no isolated point. Let $x\in P$, and let $S$ be any segment containing $x$. Let $I_n$ be that interval of $E_n$ which contains $x$. Choose $n$ large enough, so that $I_n\subset S$. Let $x_n$ be an endpoint of $I_n$, such that $x_n\neq x$.
 
 It follows from the construction of $P$ that $x_n\in P$. Hence $x$ is a limit point of $P$, and $P$ is perfect.
 \end{proof}
@@ -889,7 +886,7 @@ It follows from the construction of $P$ that $x_n\in P$. Hence $x$ is a limit po
 \begin{definition}[Connectedness]
 $A$ and $B$ are said to be \vocab{separated} if $A\cap\overline{B}=\emptyset$ and $\bar{A}\cap B=\emptyset$; that is, no point of $A$ lies in the closure of $B$ and no point of $B$ lies in the closure of $A$.
 
-$E\subseteq X$ is said to be \vocab{connected}\index{connectedness} if $E$ is not a union of two non-empty separated sets. 
+$E\subset X$ is said to be \vocab{connected}\index{connectedness} if $E$ is not a union of two non-empty separated sets. 
 \end{definition}
 
 \begin{remark}
@@ -942,7 +939,7 @@ The following are equivalent:
 Frequently one has a metric space $X$ and a subset $E$ of it whose connectedness or otherwise one wishes to ascertain. To this end, it is useful to record the following lemma.
 
 \begin{lemma}
-Let $E\subseteq X$, considered as a metric space with the metric induced from $X$. Then $E$ is connected if and only if the following is true: if $U,V$ are open subsets of $X$, and $U\cap V\cap E=\emptyset$, then $E\subseteq U\cup V$ implies either $E\subseteq U$ or $E\subseteq V$.
+Let $E\subset X$, considered as a metric space with the metric induced from $X$. Then $E$ is connected if and only if the following is true: if $U,V$ are open subsets of $X$, and $U\cap V\cap E=\emptyset$, then $E\subset U\cup V$ implies either $E\subset U$ or $E\subset V$.
 \end{lemma}
 
 \begin{proof}

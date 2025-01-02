@@ -1,5 +1,5 @@
 \chapter{Numerical Sequences and Series}\label{chap:num-seq-series}
-As the title indicates, this chapter will deal primarily with sequences and series of complex numbers. The basic facts about convergence, however, are just as easily explained in a more general setting. The first three sections will therefore be concerned with sequences in euclidean spaces, or even in metric spaces.
+Tthis chapter will deal primarily with sequences and series in $\RR$ (and also $\CC$). The basic facts about convergence, however, are just as easily explained in a more general setting. The first three sections will therefore be concerned with sequences in euclidean spaces, or even in metric spaces.
 
 As usual, let $(X,d)$ be a metric space.
 
@@ -8,20 +8,10 @@ As usual, let $(X,d)$ be a metric space.
 \begin{definition}[Convergence]
 A sequence $(x_n)$ \vocab{converges}\index{convergence of sequence} to $x\in X$, denoted by $x_n\to x$ or $\displaystyle\lim_{n\to\infty}x_n=x$, if
 \[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall n\ge N,\quad d(x_n,x)<\epsilon.\]
-We call $x$ the \textbf{limit} of $(x_n)$.
+We call $x$ the \emph{limit} of $(x_n)$.
 
-If $(x_n)$ does not converge, it is said to \textbf{diverge}.
+If $(x_n)$ does not converge, it is said to \emph{diverge}.
 \end{definition}
-
-\begin{exercise}
-Show that $\dfrac{1}{n}\to 0$ as $n\to\infty$.
-\end{exercise}
-
-\begin{solution}
-Fix $\epsilon>0$. Then by the Archimedian property, there exists $N\in\NN$ such that $\frac{1}{N}<\epsilon$. Then for all $n\ge N$,
-\[0<\frac{1}{n}\le\frac{1}{N}<\epsilon\]
-so $\absolute{\frac{1}{n}-0}<\epsilon$. Hence $\frac{1}{n}\to0$ as $n\to\infty$.
-\end{solution}
 
 \begin{exercise}
 Define what it means for $x_n\not\to x$.
@@ -32,10 +22,52 @@ Basically negate the definition for convergence:
 \[\exists\epsilon>0,\quad\forall N\in\NN,\quad\exists n\ge N,\quad d(x_n,x)\ge\epsilon.\]
 \end{solution}
 
-\begin{definition}[Bounded sequence]
-The set of all points $x_n$ is the \vocab{range} of $(x_n)$; the range of a sequence may be a finite set or it may be infinite.
+\begin{exercise}
+Show that $\dfrac{1}{n}\to 0$ as $n\to\infty$.
+\end{exercise}
 
-The sequence $(x_n)$ is said to be \vocab{bounded}\index{bounded sequence} if its range is bounded.
+\begin{solution}
+Fix $\epsilon>0$. Then by the Archimedian property, there exists $N\in\NN$ such that $\frac{1}{N}<\epsilon$. Then for all $n\ge N$,
+\[0<\frac{1}{n}\le\frac{1}{N}<\epsilon\]
+which implies $\absolute{\frac{1}{n}-0}<\epsilon$. Hence $\frac{1}{n}\to0$ as $n\to\infty$.
+\end{solution}
+
+\begin{exercise}
+Let $a_n=1+(-1)^n\frac{1}{\sqrt{n}}$. Show that $a_n\to 1$ as $n\to\infty$.
+\end{exercise}
+
+We want to find $N$ such that if $n\ge N$ then
+\begin{align*}
+|a_n-1|&<\epsilon\\
+\absolute{\brac{1+(-1)^n\frac{1}{\sqrt{n}}}-1}&<\epsilon\\
+\frac{1}{\sqrt{n}}&<\epsilon\\
+\frac{1}{\epsilon}&<\sqrt{n}
+\end{align*}
+so we take $N=\ceiling{\frac{1}{\epsilon^2}}+1$.
+
+\begin{solution}
+Let $\epsilon>0$ be given. Take $N=\ceiling{\frac{1}{\epsilon}}+1$. If $n\ge N$, then
+\begin{align*}
+n&>\frac{1}{\epsilon^2}\\
+\sqrt{n}&>\frac{1}{\epsilon}\\
+\frac{1}{\sqrt{n}}&<\epsilon\\
+|a_n-1|&<\epsilon.
+\end{align*}
+Hence $a_n\to1$ as $n\to\infty$.
+\end{solution}
+
+\begin{exercise}
+Let $a_n=\dfrac{n\cos(n^3+1)}{5n^2+1}$ for $n\ge1$. Then $a_n\to0$ as $n\to\infty$.
+\end{exercise}
+
+
+
+\begin{definition}[Bounded sequence]
+The set of all points $x_n$ is the \vocab{range} of $(x_n)$:
+\[\{x_n\mid n\in\NN\};\]
+the range of a sequence may be a finite set or it may be infinite.
+
+$(x_n)$ is said to be \vocab{bounded}\index{bounded sequence} if its range is bounded.
 \end{definition}
 
 We now outline some important properties of convergent sequences in metric spaces.
@@ -218,7 +250,7 @@ Show that if $(y_n)$ is convergent, then $(x_n)$ is also convergent.
 
 \subsection{Subsequences}
 \begin{definition}[Subsequence]
-Given a sequence $(x_n)$, consider a sequence $(n_k)$ of positive integers such that $n_1<n_2<\cdots$. Then $(x_{n_i})$ is called a \vocab{subsequence}\index{subsequence} of $(x_n)$. If $(x_{n_i})$ converges, its limit is called a \textbf{subsequential limit} of $(x_n)$.
+Given a sequence $(x_n)$, consider a sequence $(n_k)$ of positive integers such that $n_1<n_2<\cdots$. Then $(x_{n_i})$ is called a \vocab{subsequence}\index{subsequence} of $(x_n)$. If $(x_{n_i})$ converges, its limit is called a \emph{subsequential limit} of $(x_n)$.
 \end{definition}
 
 \begin{proposition}
@@ -271,7 +303,7 @@ for $i=1,2,3,\dots$. This says that $(x_{n_i})$ converges to $q$. Hence $q\in E$
 \end{proof}
 
 \subsection{Cauchy Sequences}
-This is a very helpful way to determine whether a sequence is convergent or divergent, as it does not require the limit to be known. In the future you will see many instances where the convergence of all sorts of limits are compared with similar counterparts; generally we describe such properties as \textbf{Cauchy criteria}.
+This is a very helpful way to determine whether a sequence is convergent or divergent, as it does not require the limit to be known. In the future you will see many instances where the convergence of all sorts of limits are compared with similar counterparts; generally we describe such properties as \emph{Cauchy criteria}.
 
 \begin{definition}[Cauchy sequence]
 A sequence $(x_n)$ in a metric space $X$ is said to be a \vocab{Cauchy sequence}\index{Cauchy sequence} if 
@@ -446,13 +478,13 @@ Now you should try to prove (i) for liminf as well; as for (ii), try to explain 
 \begin{definition}[Series]
 Given a sequence $(a_n)$ in $X$, we associate a sequence $(s_n)$, where
 \[s_n=\sum_{k=1}^n a_k,\]
-which we call a \vocab{series}. The term $s_n$ is called the \textbf{$n$-th partial sum} of the series.
+which we call a \vocab{series}. The term $s_n$ is called the \emph{$n$-th partial sum} of the series.
 
-If the sequence of partial sums $(s_n)$ converges to $s$, we say that the (infinite) series \textbf{converges}, and write $\displaystyle\sum_{n=1}^\infty a_n=s$; that is,
+If the sequence of partial sums $(s_n)$ converges to $s$, we say that the (infinite) series \emph{converges}, and write $\displaystyle\sum_{n=1}^\infty a_n=s$; that is,
 \[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall n\ge N,\quad\absolute{\sum_{k=1}^n a_k-s}<\epsilon.\]
-The number $s$ is called the \textbf{sum} of the series.
+The number $s$ is called the \emph{sum} of the series.
 
-If $(s_n)$ diverges, the series is said to \textbf{diverge}.
+If $(s_n)$ diverges, the series is said to \emph{diverge}.
 \end{definition}
 
 \begin{notation}
@@ -615,7 +647,7 @@ Since $\sum\beta^n$ converges, by the comparison test, $\sum a_n$ converges.
 \end{enumerate}
 \end{proof}
 
-The series $\sum a_n$ is said to \textbf{converge absolutely} if the series $\sum|a_n|$ converges.
+The series $\sum a_n$ is said to \emph{converge absolutely} if the series $\sum|a_n|$ converges.
 
 \begin{lemma}[Absolute convergence]\label{lemma:absolute-convergence}
 If $\sum a_n$ converges absolutely, then $\sum a_n$ converges.
@@ -681,7 +713,7 @@ is an integer, we have that $q!(e-s_n)$ is an integer. Since $q\ge1$, this impli
 \begin{example}[Power series] \
 Given a sequence $(c_n)$ of complex numbers, the series
 \[\sum_{n=0}^{\infty}c_nz^n\]
-is called a \vocab{power series}. The numbers $c_n$ are called the \textbf{coefficients} of the series.
+is called a \vocab{power series}. The numbers $c_n$ are called the \emph{coefficients} of the series.
 
 In general, the series will converge or diverge, depending on the choice of $z$. More specifically, with every power series there is associated a circle, the circle of convergence, such that $\sum c_nz^n$ converges if $z$ is in the interior of the circle and diverges if $z$ is in the exterior.
 
@@ -695,7 +727,7 @@ Given the power series $\sum c_nz^n$, let
 \end{enumerate}
 \end{proposition*}
 
-$R$ is called the \textbf{radius of convergence} of $\sum c_nz^n$.
+$R$ is called the \emph{radius of convergence} of $\sum c_nz^n$.
 
 \begin{proof}
 Put $a_n=c_nz^n$, then apply the root test:
@@ -771,7 +803,7 @@ Thus two convergent series may be added term by term, and the resulting series c
 \begin{definition}[Cauchy product]
 Given $\sum a_n$ and $\sum b_n$, let
 \[c_n=\sum_{k=0}^{n}a_k b_{n-k}\quad(n=0,1,2,\dots)\]
-We call $\sum c_n$ the \textbf{product} of the two given series.
+We call $\sum c_n$ the \emph{product} of the two given series.
 \end{definition}
 
 This definition may be motivated as follows. If we take two power series $\sum a_nz^n$ and $\sum b_nz^n$, multiply them term by term, and collect terms containing the same power of $z$, we get
@@ -821,7 +853,7 @@ Let the series $\sum a_n$, $\sum b_n$, $\sum c_n$ converge to $A$, $B$, $C$ resp
 \begin{definition}[Rearrangement]
 Let $(k_n)$ be a sequence in which every positive integer appears once and only once. Putting
 \[a_n^\prime=a_{k_n}\quad(\forall n\in\NN)\]
-we say that $\sum a_n^\prime$ is a \textbf{rearrangement} of $\sum a_n$.
+we say that $\sum a_n^\prime$ is a \emph{rearrangement} of $\sum a_n$.
 \end{definition}
 
 \begin{proposition}

@@ -1,6 +1,5 @@
-\chapter{Calculus}
-\section{Single Variable Calculus}
-\subsection{Integration Techniques}
+\chapter{Single Variable Calculus}
+\section{Integration Techniques}
 We review the following basic techniques for evaluating integrals:
 \begin{itemize}
 \item Integration by substitution
@@ -94,7 +93,7 @@ I_7&=\frac{1}{7}\cos^6x\sin x+\frac{6}{7}I_5\\
 \end{align*}
 \end{solution}
 
-\subsection{First Order Differential Equations}
+\section{First Order Differential Equations}
 An \vocab{ordinary differential equation} (ODE) is an equation relating a variable, say $x$, a function, say $y$, of the variable $x$, and finitely many of the derivatives of $y$ with respect to $x$. That is, an ODE can be written in the form
 \[f\brac{x,y,\dv{y}{x},\dv[2]{y}{x},\dots,\dv[k]{y}{x}}=0\]
 for some function $f$, $k\in\NN$. Here $x$ is the independent variable and the ODE governs how the dependent variable $y$ varies with $x$. The equation may have no, one or many functions $y(x)$ which satisfy it; the problem is usually to find the most general solution $y(x)$, a function which satisfies the differential equation.
@@ -197,42 +196,51 @@ so that the general solution is
 \end{solution}
 
 \subsection{Second Order Linear Differential Equations}
+The main subject of this section is linear ODEs with constant coefficients, but before we look at these we give two theorems that are valid in the more general case.
 
+Recall that a homogeneous linear ODE of order $k$ takes the form
+\[a_k(x)\dv[k]{y}{x}+a_{k-1}(x)\dv[k-1]{y}{x}+\cdots+a_1(x)\dv{y}{x}+a_0y=0.\]
+It turns out that the space of solutions to this ODE has some nice algebraic properties.
 
-\section{Multivariable Calculus}
-\subsection{Partial Differentiation}
-\begin{definition}[Partial derivative]
-Let $f:\RR^n\to\RR$ be a function of $n$ variables. The \vocab{partial derivative} of $f$ with respect to the $i$-th variable is the function
-\[\pdv{f}{x_i}=\lim_{h\to0}\frac{f(x_1,\dots,x_{i-1},x_i+h,x_{i+1},\dots,x_n)-f(x_1,\dots,x_n)}{h}.\]
-\end{definition}
-
-\begin{notation}
-We define second and higher order partial derivatives in a similar manner to how we define them for full derivatives. So in the case of second order partial derivatives of a function $f(x,y)$, we have
-\begin{align*}
-\pdv[2]{f}{x}&=\pdv{}{x}\brac{\pdv{f}{x}}=f_{xx},\\
-\pdv[2]{f}{y}&=\pdv{}{y}\brac{\pdv{f}{y}}=f_{yy},\\
-\pdv{f}{y,x}&=\pdv{}{y}\brac{\pdv{f}{x}}=f_{xy},\\
-\pdv{f}{x,y}&=\pdv{}{x}\brac{\pdv{f}{y}}=f_{yx}.
-\end{align*}
-\end{notation}
-
-If $f_{xy}$ and $f_{yx}$ are both defined and continuous in a region containing the point $(a,b)$, then 
-\[f_{xy}(a,b)=f_{yx}(a,b);\]
-this is known as \emph{Clairaut's theorem}. A consequence of this theorem is that we don't need to keep track of the order in which we take derivatives.
-
-\begin{theorem}[Chain rule]
-Let $F(t)=f\brac{u(t),v(t)}$ with $u$ and $v$ differentiable and $f$ being continuously differentiable in each variable. Then
-\begin{equation}
-\dv{F}{t}=\pdv{f}{u}\dv{u}{t}+\pdv{f}{v}\dv{v}{t}.
-\end{equation}
+\begin{theorem}
+The space of solutions of a homogeneous linear ODE is a real vector space; that is, if $y_1$ and $y_2$ are solutions, then $\alpha_1y_1+\alpha_2y_2$ is also a solution, for $\alpha_1,\alpha_2\in\RR$.
 \end{theorem}
 
+\begin{proof}
+Suppose
+\begin{equation*}\tag{1}
+a_k(x)\dv[k]{y_1}{x}+a_{k-1}(x)\dv[k-1]{y_1}{x}+\cdots+a_1(x)\dv{y_1}{x}+a_0(x)y_1=0,
+\end{equation*}
+\begin{equation*}\tag{2}
+a_k(x)\dv[k]{y_2}{x}+a_{k-1}(x)\dv[k-1]{y_2}{x}+\cdots+a_1(x)\dv{y_2}{x}+a_0(x)y_2=0.
+\end{equation*}
+$\alpha_1\times(1)+\alpha_2\times(2)$ gives
+\[a_k(x)\dv[k]{(\alpha_1y_1+\alpha_2y_2)}{x}+a_{k-1}(x)\dv[k-1]{(\alpha_1y_1+\alpha_2y_2)}{x}+\cdots+a_1(x)\dv{(\alpha_1y_1+\alpha_2y_2)}{x}+a_0(x)(\alpha_1y_1+\alpha_2y_2)=0,\]
+which shows that $\alpha_1y_1+\alpha_2y_2$ is also a solution to the ODE.
+\end{proof}
 
+\begin{remark}
+The above holds simply due to differentiation being a linear map.
+\end{remark}
 
-\subsection{Coordinate systems and Jacobians}
-\subsection{Double Integrals}
-\subsection{Parametric representation of curves and surfaces}
-\subsection{The gradient vector}
-\subsection{Taylor's theorem}
-\subsection{Critical points}
-\subsection{Lagrange multipliers}
+In the case where the ODE is linear but inhomogeneous, solving the inhomogeneous equation still strongly relates to the solution of the associated homogeneous equation.
+
+\begin{theorem}
+Let $y_p(x)$ be a solution (known as a \emph{particular integral}) of the homogeneous ODE
+\[a_k(x)\dv[k]{y}{x}+a_{k-1}(x)\dv[k-1]{y}{x}+\cdots+a_1(x)\dv{y}{x}+a_0(x)y=f(x).\]
+Then $y(x)$ is a solution if and only if $y(x)$ can be written as
+\[y(x)=y_c(x)+y_p(x),\]
+where $y_c(x)$ is a solution of the corresponding homogeneous linear ODE (known as the \emph{complementary function}).
+\end{theorem}
+
+\begin{proof}
+If $y(x)=y_c(x)+y_p(x)$ is a solution, then
+\[a_k(x)\dv[k]{(y_c+y_p)}{x}+a_{k-1}(x)\dv[k-1]{(y_c+y_p)}{x}+\cdots+a_1(x)\dv{(y_c+y_p)}{x}+a_0(x)(y_c+y_p)=f(x).\]
+Rearranging brackets,
+\[\brac{a_k(x)\dv[k]{y_c}{x}+\cdots+a_0(x)y_c}+\brac{a_k(x)\dv[k]{y_p}{x}+\cdots+a_0(x)y_p}=f(x),\]
+where the second bracket equals $f(x)$, since $y_p(x)$ is a solution. Hence the first bracket must equal zero, that is $y_c(x)$ is a solution of the corresponding homogeneous ODE.
+\end{proof}
+
+We now introduce a method for finding a second solution to a second order homogeneous linear ODE, when one solution has already been found.
+
+Suppose $z(x)\neq0$ is a non-trivial solution to

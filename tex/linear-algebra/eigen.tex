@@ -6,16 +6,16 @@ A linear map from a vector space to itself is called an \vocab{operator}\index{o
 \end{definition}
 
 \begin{definition}[Invariant subspace]
-Suppose $T\in\mathcal{L}(v)$. $U\le V$ is called \vocab{invariant}\index{invariant subspace} under $T$ if $Tu\in U$ for all $u\in U$.
+Suppose $T\in\mathcal{L}(V)$. $U\le V$ is called \vocab{invariant}\index{invariant subspace} under $T$ if $Tu\in U$ for all $u\in U$.
 \end{definition}
 
-\begin{definition}[Eigenvalue]
-Suppose $T\in\mathcal{L}(V)$. $\lambda\in\FF$ is called an \vocab{eigenvalue}\index{eigenvalue} of $T$ if there exists $v\in V$, $v\neq\vb{0}$ such that $Tv=\lambda v$.
+\begin{definition}[Eigenvalue and eigenvector]
+Suppose $T\in\mathcal{L}(V)$. $\lambda\in\FF$ is called an \vocab{eigenvalue}\index{eigenvalue} of $T$ if there exists $v\in V\setminus\{\vb{0}\}$ such that $Tv=\lambda v$; $v$ is called an \vocab{eigenvector}\index{eigenvector} of $T$ corresponding to $\lambda$.
 \end{definition}
 
 \begin{lemma}[Equivalent conditions to be an eigenvalue]
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $\lambda\in\FF$. Then the following are equivalent:
-\begin{enumerate}[label=(\arabic*)]
+\begin{enumerate}[label=(\roman*)]
 \item $\lambda$ is an eigenvalue of $T$.
 \item $T-\lambda I$ is not injective.
 \item $T-\lambda I$ is not surjective.
@@ -23,9 +23,12 @@ Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $\lambda\in\FF$. Then t
 \end{enumerate}
 \end{lemma}
 
-\begin{definition}[Eigenvector]
-Suppose $T\in\mathcal{L}(V)$, $\lambda\in\FF$ is an eigenvalue of $T$. A vector $v\in V$, $v\neq\vb{0}$ is called an \vocab{eigenvector}\index{eigenvector} of $T$ corresponding to $\lambda$ if $Tv=\lambda v$.
-\end{definition}
+\begin{proof} \
+
+\fbox{(i)$\iff$(ii)} $Tv=\lambda v$ is equivalent to the equation $(T-\lambda I)v=\vb{0}$, so $T-\lambda I$ is not injective.
+
+\fbox{(ii)$\iff$(iii)$\iff$(iv)} This directly follows from 
+\end{proof}
 
 \begin{proposition}[Linearly independent eigenvectors]
 Suppose $T\in\mathcal{L}(V)$. Then every list of eigenvectors of $T$ corresponding to distinct eigenvalues of $T$ is linearly independent.

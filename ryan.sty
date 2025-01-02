@@ -142,7 +142,6 @@ breaklines=true
 
 \lstset{style=mystyle}
 
-\usepackage{comment}
 
 % Side captions
 \usepackage[rightcaption]{sidecap}
@@ -150,8 +149,7 @@ breaklines=true
 % Wrap figures
 \usepackage{wrapfig}
 
-% Additional symbols
-%\usepackage{MnSymbol}
+%\usepackage{MnSymbol} % Additional symbols
 
 % Customise lists (such as itemize, enumerate, description)
 \usepackage{enumerate}
@@ -160,8 +158,8 @@ breaklines=true
 % Create colored boxes for theorems, examples, etc.
 \usepackage[most,listings]{tcolorbox}
 
-% Hyperlinks
-\usepackage{hyperref}
+
+\usepackage{hyperref} % Hyperlink setup
 \hypersetup{
     colorlinks,
     citecolor=darkblue,
@@ -175,20 +173,13 @@ breaklines=true
 \usepackage[capitalise]{cleveref}
 \usepackage{nameref}
 
-% Tables
-\usepackage{array}
-\usepackage{tabularray}
-\usepackage{multirow,multicol}
-\usepackage{longtable}
+\usepackage{setspace}
+\usepackage{array,tabularray,multirow,multicol,longtable,booktabs} % Tables
 
-% Physics symbols and notation
-\usepackage{physics}
 
-% Derivative notation
-\usepackage{derivative}
-
-% Conditional statements
-\usepackage{ifthen}
+\usepackage{physics} % Physics symbols and notation
+\usepackage{derivative} % Derivative notation
+\usepackage{ifthen} % Conditional statements
 
 % Plotting graphs
 \usepackage{pgfplots}
@@ -199,41 +190,31 @@ breaklines=true
 % Formatting code
 \usepackage{fancyvrb} %\Verbatim[numbers=left,frame=single,formatcom=\color{red}] - this is used to print code
 
-% Headers and footers
-\usepackage{fancyhdr} 
-
 % Page numbering
 \usepackage{lastpage}
 
 % Tools for writing packages
 \usepackage{etoolbox}
 
-%\usepackage[Lenny]{fncychap} %options: Sonny,Lenny,Glenn,Conny,Rejne,Rjarne,Bjornstrup
 
-% Bottom footnotes
-\usepackage[bottom]{footmisc}
+\usepackage[bottom]{footmisc} % Bottom footnotes
 
-% Acronyms
-\usepackage[acronym]{glossaries}
 
-% Include PDF pages
-\usepackage{pdfpages}
+\usepackage[acronym]{glossaries} % Acronyms
 
-% Create todo notes
-\usepackage[colorinlistoftodos]{todonotes}
 
+\usepackage{pdfpages} % Include PDF pages
+
+\usepackage[colorinlistoftodos]{todonotes} % Create todo notes
+\usepackage{comment}
+\usepackage{version}
 \usepackage{imakeidx} % Index
 
-% Tables
-\usepackage{booktabs}
+\usepackage{chemfig} % Chemistry
+\usepackage[version=4]{mhchem} % Chemistry
+\usepackage{plimsoll} % Chemistry
 
-% Chemistry packages
-\usepackage{chemfig}
-\usepackage[version=4]{mhchem}
-\usepackage{plimsoll}
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0.5em}
 
 \usepackage{thmtools}
 \usepackage[framemethod=TikZ]{mdframed}
@@ -346,9 +327,8 @@ breaklines=true
 \newtheorem*{proposition*}{Proposition}
 \newtheorem{corollary}[definition]{Corollary}
 \newtheorem*{corollary*}{Corollary}
-
-\newtheorem{prbm}{Problem}[chapter]
 \newtheorem*{claim}{Claim}
+\newtheorem{prbm}{Problem}[chapter]
 
 %\declaretheorem[style=thmbluebox,name=Theorem,numberwithin=chapter]{theorem}
 %\declaretheorem[style=thmredbox,name=Definition,sibling=theorem]{definition}
@@ -365,9 +345,6 @@ breaklines=true
 \declaretheorem[style=thmblackbox,name=Example,numbered=no]{example}
 %\declaretheorem[style=thmblackbox,name=Example,numbered=no]{example*}
 \declaretheorem[style=thmgreenbox,name=Exercise,numbered=no]{exercise}
-
-%Custom theorem environments using tcolorbox
-%\tcbuselibrary{theorems}
   
 % Customise section headings
 \usepackage{titlesec}
@@ -382,36 +359,3 @@ breaklines=true
 \titleformat{\section}{\LARGE\bfseries}{{\color{darkred}\S\thesection}}{1em}{}
 \titleformat{\subsection}{\Large\bfseries}{{\color{darkred}\S\thesubsection}}{1em}{\itshape}
 \setcounter{secnumdepth}{1}
-
-\makeatletter
-\NewDocumentCommand{\lowerint}{}{\mathop{}\mathpalette\lowerint@\relax\!\int}
-\NewDocumentCommand{\upperint}{}{\mathop{}\mathpalette\upperint@\relax\!\int}
-\newcommand{\lowerint@}[2]{%
-  \begingroup
-  \sbox\z@{$\m@th#1\int$}%
-  \lowup@{l}{\underline}{#1}%
-  \endgroup
-}
-\newcommand{\upperint@}[2]{%
-  \begingroup
-  \sbox\z@{$\m@th#1\int$}%
-  \lowup@{r}{\overline}{#1}%
-  \endgroup
-}
-\newcommand{\lowup@}[3]{%
-  % #1 = l (lower) or r (upper)
-  % #2 = \underline (lower) or \overline (upper)
-  % #3 = math style
-  \rlap{%
-    \hspace{0.05\wd\z@}%
-    \makebox[0.9\wd\z@][#1]{%
-      $\m@th#2{%
-        \hspace{0.4\wd\z@}%
-        \ifx#3\displaystyle\else\hspace{0.1\wd\z@}\fi
-        \vphantom{\copy\z@}%
-      }$%
-    }%
-    \hspace{0.05\wd\z@}%
-  }%
-}
-\makeatother
