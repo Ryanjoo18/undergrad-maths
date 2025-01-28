@@ -8,12 +8,12 @@
 
 \section{Basics}
 \subsection{Definitions and Notations}
-A \vocab{set} $S$ can be loosely defined as a collection of objects\footnote{\emph{Russell's paradox}, after the mathematician and philosopher Bertrand Russell (1872--1970), provides a warning as to the looseness of our definition of a set. Suppose $H$ is the collection of sets that are not elements of themselves; that is,
+A \vocab{set}\index{set} $S$ can be loosely defined as a collection of objects\footnote{\emph{Russell's paradox}, after the mathematician and philosopher Bertrand Russell (1872--1970), provides a warning as to the looseness of our definition of a set. Suppose $H$ is the collection of sets that are not elements of themselves; that is,
 \[H=\{S\mid S\notin S\}.\]
 
 The problem arises when we ask the question of whether or not $H$ is itself in $H$? On one hand, if $H\notin H$ then $H$ meets the precise criterion for being in $H$ and so $H\in H$, a contradiction. On the other hand, if $H\in H$ then by the property required for this to be the case, $H\notin H$, another contradiction. Thus we have a paradox: $H$ is neither in $H$, nor not in $H$.
 
-The modern resolution of Russell's paradox is that we have taken too naive an understanding of ``collection'', and that Russell's ``set'' $H$ is in fact not a set. It does not fit within axiomatic set theory (which relies on the so-called ZF axioms), and so the question of whether or not $H$ is in $H$ simply doesn't make sense.}. For a set $S$, we write $x \in S$ to mean that $x$ is an \vocab{element} of $S$, and $x \notin S$ if otherwise. 
+The modern resolution of Russell's paradox is that we have taken too naive an understanding of ``collection'', and that Russell's ``set'' $H$ is in fact not a set. It does not fit within axiomatic set theory (which relies on the so-called ZF axioms), and so the question of whether or not $H$ is in $H$ simply doesn't make sense.}. For a set $S$, we write $x \in S$ to mean that $x$ is an \vocab{element}\index{set!element} of $S$, and $x \notin S$ if otherwise. 
 
 To describe a set, one can list its elements explicitly. A set can also be defined in terms of some property $P(x)$ that the elements $x \in S$ satisfy, denoted by the following set builder notation:
 \[\{x\in S \mid P(x)\}\]
@@ -22,26 +22,24 @@ Some basic sets (of numbers) you should be familiar with:
 \begin{itemize}
 \item $\NN=\{1,2,3,\dots\}$ denotes the natural numbers (non-negative integers).
 \item $\ZZ=\{\dots,-2,-1,0,1,2,\dots\}$ denotes the integers.
-\item $\QQ=\{\frac{p}{q} \mid p,q\in\ZZ, q\neq0\}$ denotes the rational numbers.
+\item $\QQ=\crbrac{\frac{p}{q}\:\big|\:p,q\in\ZZ, q\neq0}$ denotes the rational numbers.
 \item $\RR$ denotes the real numbers (the construction of which using Dedekind cuts will be discussed in \cref{chap:number-systems}).
 \item $\CC=\{x+yi \mid x,y\in\RR\}$ denotes the complex numbers.
 \end{itemize}
 
-We have that
-\[\NN\subset\ZZ\subset\QQ\subset\RR\subset\CC.\]
+We have that $\NN\subset\ZZ\subset\QQ\subset\RR\subset\CC$.
 
-The \vocab{empty set} is the set with no elements, denoted by $\emptyset$.
+The \vocab{empty set}\index{set!empty set} is the set with no elements, denoted by $\emptyset$.
 
-$A$ is a \vocab{subset} of $B$ if every element of $A$ is in $B$, denoted by $A\subset B$:
+$A$ is a \vocab{subset}\index{set!subset} of $B$ if every element of $A$ is in $B$, denoted by $A\subset B$:
 \[A\subset B\iff(\forall x)(x\in A \implies x\in B)\]
-We denote $A\subsetneq B$ to explicitly mean that $A\subset B$ and $A\neq B$; we call $A$ a \vocab{proper subset} of $B$.
+We denote $A\subsetneq B$ to explicitly mean that $A\subset B$ and $A\neq B$; we call $A$ a \emph{proper subset} of $B$.
 
 \begin{proposition}[$\subset$ is transitive]
 If $A \subset B$ and $B \subset C$, then $A \subset C$.
 \end{proposition}
 
 \begin{proof}
-For all $x\in A$, $x\in B$
 Let $x\in A$. 
 Since $A \subset B$ and $x\in A$, $x\in B$. 
 Since $B \subset C$ and $x\in B$, $x\in C$. 
@@ -69,7 +67,7 @@ A = B &\iff (\forall x)[x \in A \iff x \in B] \\
 Double inclusion is a useful tool to prove that two sets are equal.
 \end{remark}
 
-Some frequently occurring subsets of $\RR$ are known as \vocab{intervals}, which can be visualised as sections of the real line. We define \emph{bounded intervals}
+Some frequently occurring subsets of $\RR$ are known as \vocab{intervals}\index{set!interval}, which can be visualised as sections of the real line. We define \emph{bounded intervals}
 \begin{align*}
 (a,b)&=\{x\in\RR\mid a<x<b\},\\
 [a,b]&=\{x\in\RR\mid a\le x\le b\},\\
@@ -85,12 +83,12 @@ and \emph{unbounded intervals}
 \end{align*}
 An interval of the first type $(a,b)$ is called an \emph{open interval}; an interval of the second type $[a,b]$ is called a \emph{closed interval}. Note that if $a=b$, then $[a,b]=\{a\}$, while $(a,b)=[a,b)=(a,b]=\emptyset$.
 
-The \vocab{power set} $\mathcal{P}(A)$ of $A$ is the set of all subsets of $A$ (including the set itself and the empty set):
+The \vocab{power set}\index{set!power set} $\mathcal{P}(A)$ of $A$ is the set of all subsets of $A$ (including the set itself and the empty set):
 \[\mathcal{P}(A)=\{S\mid S\subset A\}.\]
 
-An \vocab{ordered pair} is denoted by $(a,b)$, where the order of the elements matters. Two pairs $(a_1,b_1)$ and $(a_2,b_2)$ are equal if and only if $a_1=a_2$ and $b_1=b_2$.  Similarly, we have ordered triples $(a,b,c)$, quadruples $(a,b,c,d)$ and so on. If there are $n$ elements it is called an \vocab{$n$-tuple}.
+An \vocab{ordered pair}\index{set!ordered pair} is denoted by $(a,b)$, where the order of the elements matters. Two pairs $(a_1,b_1)$ and $(a_2,b_2)$ are equal if and only if $a_1=a_2$ and $b_1=b_2$.  Similarly, we have ordered triples $(a,b,c)$, quadruples $(a,b,c,d)$ and so on. If there are $n$ elements it is called an \emph{$n$-tuple}.
 
-The \vocab{Cartesian product} of sets $A$ and $B$, denoted by $A \times B$, is the set of all ordered pairs with the first element of the pair coming from $A$ and the second from $B$:
+The \vocab{Cartesian product}\index{set!Cartesian product} of sets $A$ and $B$, denoted by $A \times B$, is the set of all ordered pairs with the first element of the pair coming from $A$ and the second from $B$:
 \[A\times B\coloneqq\{(a,b)\mid a\in A,b\in B\}.\]
 More generally, we define $A_1 \times A_2 \times \cdots \times A_n$ to be the set of all ordered $n$-tuples $(a_1, a_2, \dots, a_n)$, where $a_i \in A_i$ for $1 \le i \le n$. If all the $A_i$ are the same, we write the product as $A^n$.
 
@@ -103,33 +101,28 @@ $\RR^2$ is the Euclidean plane, $\RR^3$ is the Euclidean space, and $\RR^n$ is t
 \end{align*}
 \end{example}
 
-To generalise the notion of intervals, we define a \emph{$k$-cell} as
-\[\{(x_1,\dots,x_n)\in\RR^k\mid a_i\le x_i\le b_i (1\le i\le k)\}.\]
-For example, a $1$-cell is an interval, a $2$-cell is a rectangle, and a $3$-cell is a rectangular solid. In this regard, we can think of a $k$-cell as a higher-dimensional version of a rectangle or rectangular solid; it is the Cartesian product of $k$ closed intervals in $\RR$.
-
 \subsection{Algebra of Sets}
 We now disuss the algebra of sets. Given $A \subset S$ and $B \subset S$,
 \begin{enumerate}[label=(\roman*)]
-\item The \vocab{union} $A \cup B$ is the set consisting of elements that are in $A$ or $B$ (or both):
+\item The \vocab{union}\index{set!union} $A \cup B$ is the set consisting of elements that are in $A$ or $B$ (or both):
 \[ A\cup B=\{x \in S \mid x\in A \lor x\in B\} \]
 
-\item The \vocab{intersection} $A \cap B$ is the set consisting of elements that are in both $A$ and $B$:
+\item The \vocab{intersection}\index{set!intersection} $A \cap B$ is the set consisting of elements that are in both $A$ and $B$:
 \[ A\cap B=\{x \in S \mid x\in A \land x\in B\} \]
 
-$A$ and $B$ are \vocab{disjoint} if both sets have no element in common:
-\[ A\cap B = \emptyset \]
+$A$ and $B$ are \vocab{disjoint}\index{set!disjoint} if both sets have no element in common: $A\cap B=\emptyset$.
 \end{enumerate}
 
-More generally, we can take unions and intersections of arbitrary numbers of sets (could be finitely or infinitely many). Given a family of subsets $\{A_i\mid i\in I\}$ where $I$ is an \emph{indexing set}, we write
+More generally, we can take unions and intersections of arbitrary numbers of sets (could be finitely or infinitely many). Given a family of sets $\{A_i\mid i\in I\}$ where $I$ is an \emph{indexing set}, we write
 \[\bigcup_{i\in I}A_i=\{x \mid \exists i\in I, x\in A_i\},\]
 and
 \[\bigcap_{i\in I}A_i=\{x \mid \forall i\in I, x\in A_i\}.\]
 
 \begin{enumerate}[resume*]
-\item The \vocab{complement} of $A$, denoted by $A^c$, is the set containing elements that are not in A:
+\item The \vocab{complement}\index{set!complement} of $A$, denoted by $A^c$, is the set containing elements that are not in A:
 \[ A^c = \{x \in S \mid x \notin A\} \]
 
-\item The \vocab{set difference}, or complement of $B$ in $A$, denoted by $A\setminus B$, is the subset consisting of those elements that are in $A$ and not in $B$:
+\item The \vocab{set difference}\index{set!set difference}, or complement of $B$ in $A$, denoted by $A\setminus B$, is the subset consisting of those elements that are in $A$ and not in $B$:
 \[ A\setminus B = \{x \in A \mid x \notin B\} \]
 Note that $A\setminus B = A \cap B^c$.
 \end{enumerate}
@@ -184,10 +177,10 @@ x\in(A\cup B)^c&\iff x\notin A\cup B\\
 \end{enumerate}
 \end{proof}
 
-De Morgan's laws extend naturally to any number of sets, so if $\{A_i \mid i \in I\}$ is a family of subsets of $S$, then
+De Morgan's laws extend naturally to any number of sets. Suppose $\{A_i\mid i\in I\}$ is a family of subsets of $S$, then
 \begin{align*}
 \brac{\bigcap_{i\in I}A_i}^c&=\bigcup_{i\in I}{A_i}^c,\\
-\brac{\bigcup_{i\in I}A_i}^c&=\bigcap_{i\in I}{A_i}^c
+\brac{\bigcup_{i\in I}A_i}^c&=\bigcap_{i\in I}{A_i}^c.
 \end{align*}
 
 \begin{exercise}
@@ -266,89 +259,67 @@ A \vocab{well order}\index{relation!well order} on $A$ is a total order on $A$ s
 \end{definition}
 
 \begin{example}
-You should verify the following:
 \begin{itemize}
 \item Less than: the relation $<$ on $R$ is not reflexive, symmetric, or anti-symmetric, but it is transitive.
 \item Not equal to: the relation $\neq$ on $R$ is not reflexive, anti-symmetric or transitive, but it is symmetric.
 \end{itemize}
 \end{example}
 
-\begin{definition}
-Let the non-empty set $A$ be partially ordered by $\le$.
-\begin{itemize}
-\item A subset $B\subset A$ is called a \vocab{chain} if for all $x,y\in B$, either $x\le y$ or $y\le x$.
-\item An \vocab{upper bound} for a subset $B\subset A$ is an element $u\in A$ such that $b\le u$ for all $b\in B$.
-\item A \vocab{maximal element} of $A$ is an element $m\in A$ such that $m\le x$ for any $x\in A$, then $m=x$.
-\end{itemize}
-\end{definition}
-
-\begin{lemma}[Zorn's lemma]
-If $A$ is a non-empty partially ordered set in which every chain has an upper bound, then $A$ has a maximal element.
-\end{lemma}
-
-It is a non-trivial result that Zorn's lemma is independent of the usual (Zermelo--Fraenkel) axioms of set theory in the sense that if the axioms of set theory are consistent, then so are these axioms together with Zorn's lemma; and if the axioms of set theory are consistent, then so are these axioms together with the negation of Zorn's lemma.
-
-\begin{lemma}[Axiom of choice]
-The Cartesian product of any non-empty collection of non-empty sets is non-empty. In other words, if $I$ is any non-empty (indexing) set and $A_i$ is a non-empty set for all $i\in I$, then there exists a choice function from $I$ to $\bigcup_{i\in I}A_i$.
-\end{lemma}
-
-\begin{lemma}[Well-ordering principle]
-Every non-empty set $A$ has a well-ordering.
-\end{lemma}
-
-\begin{theorem}
-Assuming the usual (Zermelo--Fraenkel) axioms of set theory, the following are equivalent:
-\begin{enumerate}[label=(\roman*)]
-\item Zorn's lemma
-\item Axiom of choice
-\item Well-ordering principle
-\end{enumerate}
-\end{theorem}
-
-\begin{proof}
-This follows from elementary set theory. We refer the reader to \textit{Real and Abstract Analysis} by Hewitt and Stromberg, Section 3.
-\end{proof}
-
 \subsection{Equivalence Relations}
 One important type of relation is an equivalence relation. An equivalence relation is a way of saying two objects are, in some particular sense, ``the same''.
 
 \begin{definition}[Equivalence relation]
-A relation $R$ on a set $A$ is an \vocab{equivalence relation}\index{relation!equivalence relation} if it is reflexive, symmetric and transitive.
+A relation $\sim$ on a set $A$ is an \vocab{equivalence relation}\index{equivalence relation} if it is reflexive, symmetric and transitive.
 \end{definition}
 
 \begin{notation}
-We use $\sim$ to denote the equivalence relation $R$ in $A\times A$: we denote $a\sim b$ for $(a,b)\in R$.
+We denote $a\sim b$ for $(a,b)\in R$.
 \end{notation}
 
 An equivalence relation provides a way of grouping together elements that can be viewed as being the same:
 
 \begin{definition}[Equivalence class]
-Given an equivalence relation $\sim$ on a set $A$, and given $x \in A$, the \vocab{equivalence class}\index{equivalence class} of $x$ is
+Given an equivalence relation $\sim$ on a set $A$, and given $x \in A$, the \vocab{equivalence class}\index{equivalence relation!equivalence class} of $x$ is
 \[[x]\coloneqq\{y\in A\mid y\sim x\}.\]
-\end{definition}
-
-\begin{proposition}
-Every two equivalence classes are disjoint; thus the union of equivalence classes form the entire set.
-\end{proposition}
-
-\begin{remark}
-From the point of view of the elements, every element belongs to one and only one equivalence class.
-\end{remark}
-
-\begin{definition}[Quotient set]
-The \vocab{quotient set}\index{quotient set} is the set of all equivalence classes, denoted by $A/\sim$.
 \end{definition}
 
 Grouping the elements of a set into equivalence classes provides a partition of the set, which we define as follows:
 
 \begin{definition}[Partition]
-A \vocab{partition}\index{partition} of a set $A$ is a collection of subsets $\{A_i\subset A\mid i\in I\}$, where $I$ is an indexing set, with the property that
+A \vocab{partition}\index{equivalence relation!partition} of a set $A$ is a collection of subsets $\{A_i\subset A\mid i\in I\}$, where $I$ is an indexing set, with the property that
 \begin{enumerate}[label=(\roman*)]
 \item $A_i\neq\emptyset$ for all $i\in I$ (all the subsets are non-empty)
 \item $\bigcup_{i\in I}A_i=A$ (every member of $A$ lies in one of the subsets)
 \item $A_i\cap A_j=\emptyset$ for every $i\neq j$ (the subsets are disjoint)
 \end{enumerate}
 The subsets are called the \emph{parts} of the partition.
+\end{definition}
+
+\begin{proposition}
+Let $\sim$ be an equivalence relation on a non-empty set $X$. Then the equivalence classes under $\sim$ are a partition of $X$.
+\end{proposition}
+
+To prove this, we need to show that
+\begin{enumerate}[label=(\roman*)]
+\item every equivalence class is non-empty;
+\item every element of $X$ is an element of an equivalence class;
+\item every element of $X$ lies in exactly one equivalence class.
+\end{enumerate}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item An equivalence class $[x]$ contains $x$ as $x\sim x$, by reflexivity of the relation. Thus $[x]\neq\emptyset$.
+\item From (i), note that every $x\in X$ is in the equivalence class $[x]$, so every element of $X$ is an element of at least one equivalence class.
+\item Suppose otherwise, for a contradiction, that some element of $X$ lies in more than one equivalence class. Let $x\in X$ such that $x\in[y]$ and $x\in[z]$; we want to show that $[y]=[z]$ (using double inclusion).
+
+Let $a\in[y]$, so $a\sim y$. ALso $x\in[y]$ so $x\sim y$. By symmetry, $y\sim x$. By transitivity, $a\sim x$. Now $x\in[z]$ so $x\sim z$ and similarly $a\sim z$ thus $a\in[z]$. Hence $[y]\subset[z]$.
+
+By the same argument, $[z]\subset[y]$. Hence $[y]=[z]$.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}[Quotient set]
+The \vocab{quotient set}\index{equivalence relation!quotient set} is the set of all equivalence classes, denoted by $A/\sim$.
 \end{definition}
 
 \begin{example}[Modular arithmetic]
@@ -409,6 +380,52 @@ $(\ZZ/n\ZZ)^\times$ is also the collection of congruence classes whose represent
 \[(\ZZ/n\ZZ)^\times=\{[a]\in\ZZ/n\ZZ\mid(a,n)=1\}.\]
 \end{proposition}
 \end{example}
+
+\subsection{Axiom of Choice and Its Equivalences}
+\begin{definition}
+Let $(P,\le)$ be a partially ordered set. Suppose $A\subset P$.
+\begin{enumerate}[label=(\roman*)]
+\item $u\in P$ is an \vocab{upper bound} for $A$ if $x\le u$ for all $x\in A$.
+\item $m\in P$ is a \vocab{maximal element} of $P$ if $x\in P$ and $m\le x$ implies $m=x$.
+\item Similarly we define \vocab{lower bound} and \vocab{minimal element}.
+\item $C\subset P$ is called a \vocab{chain} if either $x\le y$ or $y\le x$ for all $x,y\in C$.
+\end{enumerate}
+\end{definition}
+
+This terminology of partially ordered sets will often be applied to an arbitrary family of sets. When this is done, it should be understood that the family is being regarded as a partially ordered set under the relation $\subsetneq$. Thus a maximal member of $\mathscr{A}$ is a set $M\in\mathscr{A}$ such that $M$ is a proper subset of no other member of $\mathscr{A}$; a chain of sets is a family $\mathscr{C}$ of sets such that $A\subsetneq B$ or $B\subsetneq A$ for all $A,B\in\mathscr{C}$.
+
+\begin{definition}
+Let $\mathscr{F}$ be a family of sets. Then $\mathscr{F}$ is said to be a \emph{family of finite character} if for each set $A$, we have $A\in\mathscr{F}$ if and only if each finite subset of $A$ is in $\mathscr{F}$.
+\end{definition}
+
+We shall need the following technical fact.
+
+\begin{lemma}
+Let $\mathscr{F}$ be a family of finite character, and let $\mathscr{C}$ be a chain in $\mathscr{F}$. Then $\bigcup\mathscr{C}\in\mathscr{F}$.
+\end{lemma}
+
+\begin{proof}
+It suffices to show that each finite subset of $\bigcup\mathscr{C}$ is in $\mathscr{F}$. Let $F=\{x_1,\dots,x_n\}\subset\bigcup\mathscr{C}$. Then there exist sets $C_1,\dots,C_n\in\mathscr{C}$ such that $x_i\in C_i$ ($i=1,\dots,n$). Since $\mathscr{C}$ is a chain, there exists $i_0\in\{1,\dots,n\}$ such that $C_i\subsetneq C_{i_0}$ for $i=1,\dots,n$. Then $F\subset C_{i_0}\in\mathscr{F}$. But $\mathscr{F}$ is of finite character, and so $F\in\mathscr{F}$.
+\end{proof}
+
+\begin{theorem}
+The following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Axiom of choice}: The Cartesian product of any non-empty collection of non-empty sets is non-empty.
+\item \emph{Tukey's lemma}: Every non-empty family of finite character has a maximal member.
+\item \emph{Hausdorff maximality principle}: Every non-empty partially ordered set contains a maximal chain.
+\item \emph{Zorn's lemma}: Every non-empty partially ordered set in which every chain has an upper bound has a maximal element.
+\item \emph{Well-ordering principle}: Every non-empty set has a well-ordering.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+We direct the reader to Section 3 of \cite{hewitt-stromberg} for the complete proof.
+\end{proof}
+
+\begin{remark}
+It is a non-trivial result that Zorn's lemma is independent of the usual (Zermelo--Fraenkel) axioms of set theory in the sense that if the axioms of set theory are consistent, then so are these axioms together with Zorn's lemma; and if the axioms of set theory are consistent, then so are these axioms together with the negation of Zorn's lemma.
+\end{remark}
 \pagebreak
 
 \section{Functions}
@@ -431,24 +448,8 @@ Given $B \subset Y$, the \vocab{pre-image}\index{function!pre-image} of $B$ unde
 \end{definition}
 
 \begin{remark}
-Beware the potentially confusing notation: for $x \in X$, $f(x)$ is a single element of $Y$, but for $A \subset X$, $f(A)$ is a set (a subset of $Y$). Note also that $f^{-1}(B)$ should be read as ``the pre-image of $B$'' and not as ``$f$-inverse of $B$''; the pre-image is defined even if no inverse function exists (in which case $f^{-1}$ on its own has no meaning; we discuss invertibility of a function below).
+Note the distinction between ``codomain'' and ``range''.
 \end{remark}
-
-\begin{exercise}
-Prove the following statements:
-\begin{enumerate}[label=(\roman*)]
-\item $f(A\cup B)=f(A)\cup f(B)$
-\item $f(A_1\cup\cdots\cup A_n)=f(A_1)\cup\cdots\cup f(A_n)$
-\item $f(\bigcup_{\lambda\in A}A_\lambda)=\bigcup_{\lambda\in A}f(A_\lambda)$
-\item $f(A\cap B)\subset f(A)\cap f(B)$
-\item $f^{-1}(f(A))\supset A$
-\item $f(f^{-1}(A))\subset A$
-\item $f^{-1}(A\cup B)=f^{-1}(A)\cup f^{-1}(B)$
-\item $f^{-1}(A\cap B)=f^{-1}(A)\cap f^{-1}(B)$
-\item $f^{-1}(A_1\cup\cdots\cup A_n)=f^{-1}(A_1)\cup\cdots\cup f^{-1}(A_n)$
-\item $f^{-1}(\bigcup_{\lambda\in A}A_\lambda)=\bigcup_{\lambda\in A}f^{-1}(A_\lambda)$
-\end{enumerate}
-\end{exercise}
 
 If a function is defined on some larger domain than we care about, it may be helpful to restrict the domain:
 
@@ -457,7 +458,7 @@ Given a function $f:X \to Y$ and a subset $A \subset X$, the \vocab{restriction}
 \end{definition}
 
 \begin{remark}
-The restriction is almost the same function as the original $f$ -- just the domain has changed.
+The restriction is almost the same function as the original function---just the domain has changed.
 \end{remark}
 
 Another rather trivial but nevertheless important function is the identity map:
@@ -475,31 +476,20 @@ If the domain is unambiguous, the subscript may be omitted.
 \begin{definition}
 Let $f:X\to Y$ be a function.
 \begin{enumerate}[label=(\roman*)]
-\item $f$ is \vocab{injective}\index{function!injectivity} if each element of $Y$ has at most one element of $X$ that maps to it:
+\item $f$ is \vocab{injective}\index{function!injectivity} (or \emph{one-to-one}) if each element of $Y$ has at most one element of $X$ that maps to it:
 \[\forall x_1,x_2\in X,\quad f(x_1)=f(x_2) \implies x_1=x_2\]
 
-\item $f$ is \vocab{surjective}\index{function!surjectivity} if every element of $Y$ is mapped to at least one element of $X$:
+\item $f$ is \vocab{surjective}\index{function!surjectivity} (or \emph{onto}) if every element of $Y$ is mapped to at least one element of $X$:
 \[ \forall y\in Y,\quad\exists x\in X,\quad f(x)=y \]
+Equivalently, $f$ is surjective if $f(X)=Y$.
 
 \item $f$ is \vocab{bijective}\index{function!bijectivity} if it is both injective and surjective; a bijective function is termed a \emph{bijection}.
 \end{enumerate}
 \end{definition}
 
 \begin{notation}
-Given two sets $X$ and $Y$, write $X\sim Y$ to denote the existence of a bijection from $X$ to $Y$.
+We write $X\sim Y$ if there exists a bijection $f:X\to Y$.
 \end{notation}
-
-\begin{proposition}[$\sim$ is transitive]
-If $X\sim Y$ and $Y\sim Z$, then $X\sim Z$.
-\end{proposition}
-
-\begin{theorem}[Cantor--Schroder--Bernstein]
-If $f:A\to B$ and $g:B\to A$ are both injections, then $A\sim B$.
-\end{theorem}
-
-\begin{proof}
-%https://web.williams.edu/Mathematics/lg5/CanBer.pdf
-\end{proof}
 
 \subsection{Composition}
 \begin{definition}[Composition]
@@ -590,7 +580,7 @@ We construct $Z=Y\cup\{1,2\}$ for some random $1,2 \notin Y$.
 
 Then we define
 \begin{align*}
-&g_1:Y\to Z,g_1(y)=1,g_1(y^\prime)=y^\prime
+&g_1:Y\to Z,g_1(y)=1,g_1(y^\prime)=y^\prime\\
 &g_2:Y\to Z,g_2(y)=2,g_2(y^\prime)=y^\prime
 \end{align*}
 
@@ -600,14 +590,34 @@ So conversely, if for any set $Z$ and any functions $g_i:Y \to Z$ we have $g_1 \
 \end{proof}
 
 \subsection{Invertibility}
-Recalling that $\id_X$ is the identity map on $X$, we can define invertibility:
+Recalling that $\id_X$ is the identity map on $X$, we can define invertibility.
 
 \begin{definition}[Invertibility]
-A function $f:X\to Y$ is \vocab{invertible}\index{invertibility (function)} if there exists $g:Y\to X$ such that $g\circ f=\id_X$ and $f\circ g=\id_Y$; $g$ is known as the \emph{inverse} of $f$.
+Let $f:X\to Y$. We say that
+\begin{enumerate}[label=(\roman*)]
+\item $f$ is \vocab{left-invertible} if there exists $g:Y\to X$ such that $g\circ f=\id_X$; $g$ is a \emph{left-inverse} of $f$;
+\item $f$ is \vocab{right-invertible} if there exists $h:Y\to X$ such that $f\circ h=\id_Y$; $h$ is a \emph{right-inverse} of $h$;
+\item $f$ is \vocab{invertible}\index{function!invertibility} if there exists $k:Y\to X$ which is a left and right inverse of $f$; $k$ is an \emph{inverse} of $f$.
+\end{enumerate}
 \end{definition}
 
+\begin{remark}
+Notice that if $g$ is left-inverse to $f$ then $f$ is right-inverse to $g$. A function can have more than one left-inverse, or more than one right-inverse.
+\end{remark}
+
+\begin{example}
+Let
+\begin{align*}
+f:\RR\to[0,\infty),&\quad f(x)=x^2\\
+g:[0,\infty)\to\RR,&\quad g(x)=\sqrt{x}
+\end{align*}
+\begin{itemize}
+\item $f$ is not left-invertible. Suppose otherwise, for a contradiction, that $h$ is a left inverse of $f$, so that $hf=\id_\RR$. Then 
+\end{itemize}
+\end{example}
+
 \begin{proposition}[Uniqueness of inverse]
-If $f:X \to Y$ is invertible then its inverse is unique.
+If $f:X\to Y$ is invertible then its inverse is unique.
 \end{proposition}
 
 \begin{proof}
@@ -625,7 +635,45 @@ The inverse of $f$ is denoted by $f^{-1}$
 Note that directly from the definition, if $f$ is invertible then $f^{-1}$ is also invertible, and $(f^{-1})^{-1}=f$.
 \end{remark}
 
-The following result shows how to invert the composition of invertible functions:
+The following result provides an important and useful criterion for invertibility.
+
+\begin{lemma}[Invertibility criterion]
+Let $f:X\to Y$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $f$ is left-invertible if and only if $f$ is injective;
+\item $f$ is right-invertible if and only if $f$ is surjective;
+\item $f$ is invertible if and only if $f$ is bijective.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item \fbox{$\implies$} Suppose $f$ is left-invertible; let $g$ be a left-inverse of $f$, so $g\circ f=\id_X$.
+
+Now suppose $f(a)=f(b)$. Then applying $g$ to both sides gives $g\brac{f(a)}=g\brac{f(b)}$, so $a=b$.
+
+\fbox{$\impliedby$} Let $f$ be injective. Choose any $x_0$ in the domain of $f$. Define $g:Y\to X$ as follows; note that each $y\in Y$ is either in the image of $f$ or not.
+\begin{itemize}
+\item If $y$ is in the image of $f$, it equals $f(x)$ for a \emph{unique} $x\in X$ (uniqueness is because of the injectivity of $f$), so define $g(y)=x$.
+\item If $y$ is not in the image of $f$, define $g(y)=x_0$. 
+\end{itemize}
+Clearly $g\circ f=\id_X$.
+
+\item \fbox{$\implies$} Suppose $f$ is right-invertible; let $g$ be a right-inverse of $f$, so $f\circ g=\id_Y$.
+
+Let $y\in Y$. Then $f\brac{g(y)}=\id_Y(y)=y$ so $y\in f(X)$. Thus $f(X)=Y$ so $f$ is surjective.
+
+\fbox{$\impliedby$} Suppose $f$ is surjective. Let $y\in Y$, then $y$ is in the image of $f$, so we can choose an element $g(y)\in X$ such that $f\brac{g(y)}=y$. This defines a function $g:Y\to X$ which is evidently a right-inverse of $f$.
+
+\item \fbox{$\implies$} Suppose $f$ is invertible. Then $f$ is left-invertible and right-invertible. By (i) and (ii), $f$ is injective and surjective, so $f$ is bijective.
+
+\fbox{$\impliedby$} Suppose $f$ is bijective. Then by (i) and (ii), $f$ has a left-inverse $g:Y\to X$ and a right-inverse $h:Y\to X$. But ``invertible'' requires a single function to be \emph{both} a left and right inverse, so we need to show that $g=h$:
+\[g=g\circ\id_Y=g\circ(f\circ h)=(g\circ f)\circ h=\id_X\circ h=h\]
+so $g=h$ is an inverse of $f$.
+\end{enumerate}
+\end{proof}
+
+The following result shows how to invert the composition of invertible functions.
 
 \begin{proposition}[Inverse of composition]
 Let $f:X \to Y$, $g:Y \to Z$. If $f$ and $g$ are invertible, then $g \circ f$ is invertible, and
@@ -654,32 +702,27 @@ and similarly,
 which shows that $f^{-1} \circ g^{-1}$ satisfies the properties required to be the inverse of $g \circ f$.
 \end{proof}
 
-The following result provides an important and useful criterion for invertibility:
+\begin{corollary}
+If $f_1,\dots,f_n$ are invertible and the composition $f_1\circ\cdots\circ f_n$ makes sense, then it is also invertible and its inverse is
+\[f_n^{-1}\circ\cdots\circ f_1^{-1}.\]
+\end{corollary}
 
-\begin{lemma}[Invertibility criterion]
-$f:X \to Y$ is invertible if and only if it is bijective.
-\end{lemma}
+\begin{proposition}
+$\sim$ is an equivalence relation between sets.
+\end{proposition}
 
-\begin{proof} \
-
-\fbox{$\implies$} Suppose $f$ is invertible, so it has an inverse $f^{-1}: Y \to X$. We first show $f$ is injective. Suppose that $f(x_1) = f(x_2)$ for some $x_1, x_2 \in X$. Then applying $f^{-1}$ to both sides and noting that $f^{-1}\circ f=\id_X$ by definition,
-\[x_1=f^{-1}\brac{f(x_1)}=f^{-1}\brac{f(x_2)}=x_2.\]
-Thus $f$ is injective.
-
-We now show that $f$ is surjective. Let $y \in Y$, and note that $f^{-1}(y) \in X$ has the property that $f(f^{-1}(y)) = y$. So $f$ is surjective. Therefore $f$ is bijective.
-
-\fbox{$\impliedby$} Suppose $f$ is bijective. We want to show that there exists $g:Y \to X$ such that $g \circ f = \id_X$ and $f \circ g = \id_Y$.
-
-Since $f$ is surjective, we know that for any $y \in Y$, there is an $x \in X$ such that $f(x) = y$. Furthermore, since $f$ is injective, we know that this $x$ is unique. So for each $y \in Y$ there is a unique $x \in X$ such that $f(x) = y$. This recipe provides a well-defined function $g(y) = x$, for which we have $g(f(x)) = x$ for any $x \in X$ and $f(g(y)) = y$ for any $y \in Y$. So $g$ satisfies the property required to be an inverse of $f$ and therefore $f$ is invertible.
+\begin{proof}
+We need to prove (i) reflexivity, (ii) symmetry, and (iii) transitivity.
+\begin{enumerate}[label=(\roman*)]
+\item The identity map gives a bijection from a set to itself.
+\item Suppose $f:X\to Y$ is a bijection. Then $f$ is invertible, with inverse $f^{-1}:Y\to X$. Since $f^{-1}$ is invertible (with inverse $f$), it is bijective.
+\item Suppose $f:X\to Y$ and $g:Y\to Z$ are bijections, and thus they are invertible. Then by the previous result, $g\circ f$ is invertible and thus bijective.
+\end{enumerate}
 \end{proof}
 
-It is also possible to define left-inverse and right-inverse functions as functions that partially satisfy the definition of the inverse:
-
-\begin{definition}
-A function $f:X \to Y$ is \vocab{left invertible} if there exists a function $g:Y \to X$ such that $g \circ f = \id_X$, and is \vocab{right invertible} if there exists a function $h: Y \to X$ such that $f \circ h = \id_Y$.
-\end{definition}
-
-As may be somewhat apparent from the previous proof, being left- and right-invertible is equivalent to being injective and surjective, respectively. We leave this as an exercise to show.
+\begin{theorem}[Cantor--Schr\"{o}der--Bernstein]
+If $f:X\to Y$ and $g:Y\to X$ are injective, then $A\sim B$.
+\end{theorem}
 
 \subsection{Monotonicity}
 \begin{definition}[Monotonicity]
@@ -711,238 +754,52 @@ $f$ is \emph{strictly concave} if the $\ge$ sign above is replaced with a strict
 \end{definition}
 \pagebreak
 
-\section{Ordered Sets and Boundedness}
-Let $S$ be a set.
-\begin{definition}[Order]
-An \vocab{order}\index{order} on $S$ is a binary relation, denoted by $<$, with the following properties:
-\begin{enumerate}[label=(\roman*)]
-\item Trichotomy: $\forall x,y \in S$, one and only one of the following statements is true:
-\[x<y,\quad x=y,\quad y<x.\]
-\item Transitivity: $\forall x,y,z \in S$, if $x<y$ and $y<z$, then $x<z$.
-\end{enumerate}
-We call $(S,<)$ an \vocab{ordered set}.
-\end{definition}
-
-\begin{notation}
-$x \le y$ indicates that $x<y$ or $x=y$, without specifying which of these two is to hold. In other words, $x\le y$ is the negation of $x>y$.
-\end{notation}
-
-\begin{definition}[Boundedness]
-Suppose $S$ is an ordered set, and $E\subset S$.
-\begin{itemize}
-\item If there exists $\beta\in S$ such that $x\le\beta$ for all $x\in E$, we say that $E$ is \vocab{bounded above}, and call $\beta$ an \vocab{upper bound} of $E$.
-\item If there exists $\beta\in S$ such that $x\ge\beta$ for all $x\in E$, we say that $E$ is \vocab{bounded below}, and call $\beta$ a \vocab{lower bound} of $E$.
-\end{itemize}
-$E$ is \vocab{bounded} in $S$ if it is bounded above and below.
-\end{definition}
-
-\begin{definition}[Supremum]
-Suppose $S$ is an ordered set, $E\subset S$, and $E$ is bounded above. We call $\alpha\in S$ the \vocab{supremum}\index{supremum} of $E$, denoted by $\alpha=\sup E$, if it satisfies the following properties:
-\begin{enumerate}[label=(\roman*)]
-\item $\alpha$ is an upper bound for $E$;
-\item if $\beta<\alpha$ then $\beta$ is not an upper bound of $E$, i.e. $\exists x\in S\suchthat x>\beta$ (least upper bound).
-\end{enumerate}
-\end{definition}
-
-\begin{definition}[Infimum]
-We cal $\alpha\in S$ the \vocab{infimum}\index{infimum} of $E$, denoted by $\alpha=\inf E$, if it satisfies the following properties:
-\begin{enumerate}[label=(\roman*)]
-\item $\alpha$ is a lower bound for $E$;
-\item if $\beta>\alpha$ then $\beta$ is not a lower bound of $E$, i.e. $\exists x\in S\suchthat x<\beta$ (greatest lower bound).
-\end{enumerate}
-\end{definition}
-
-\begin{proposition}[Uniqueness of suprenum]
-If $E$ has a supremum, then it is unique.
-\end{proposition}
-
-\begin{proof}
-Assume that $M$ and $N$ are suprema of $E$.
-
-Since $N$ is a supremum, it is an upper bound for $E$. Since $M$ is a supremum, then it is the least upper bound and thus $M \le N$. 
-
-Similarly, since $M$ is a supremum, it is an upper bound for $E$; since $N$ is a supremum, it is a least upper bound and thus $N \le M$.
-
-Since $N \le M$ and $M \le N$, thus $M=N$. Therefore, a supremum for a set is unique if it exists.
-\end{proof}
-
-\begin{definition}
-An ordered set $S$ is said to have the \vocab{least-upper-bound property} (l.u.b.) if the following is true: if non-empty $E\subset S$ is bounded above, then $\sup E\in S$.
-
-Similarly, $S$ has the greatest-lower-bound property if the following is true: if non-empty $E\subset S$ is bounded below, then $\inf E\in S$.
-\end{definition}
-
-We shall now show that there is a close relation between greatest lower bounds and least upper bounds, and that every ordered set with the least-upper-bound property also has the greatest-lower-bound property.
-
-\begin{theorem}
-Suppose $S$ is an ordered set. If $S$ has the least-upper-bound property, then $S$ has the greatest-lower-bound property.
-\end{theorem}
-
-\begin{proof}
-Suppose $B\subset S$, $B\neq\emptyset$ is bounded below. We want to show that $\inf B\in S$. To do so, let $L\subset S$ be the set of all lower bounds of $B$; that is, $L=\{y\in S\mid y\le x\forall x\in B\}$. If we can show that $\inf B=\sup L$, then we are done.
-
-Since $B$ is bounded below, $L\neq\emptyset$. Since every $x\in B$ is an upper bound of $L$, $L$ is bounded above. Then since $S$ has the least-upper-bound property, we have that $\sup L\in S$.
-
-To show that $\sup L=\inf B$, we need to show that $\sup L$ is a lower bound of $B$, and $\sup L$ is the greatest of the lower bounds.
-
-Suppose $\gamma<\sup L$, then $\gamma$ is not an upper bound of $L$. Since $B$ is the set of upper bounds of $L$, $\gamma\notin B$. Considering the contrapositive, if $\gamma\in B$, then $\gamma\ge\sup L$. Hence $\sup L$ is a lower bound of $B$, and thus $\sup L\in L$.
-
-If $\sup L<\beta$ then $\beta\notin L$, since $\sup L$ is an upper bound of $L$. In other words, $\sup L$ is a lower bound of $B$, but $\beta$ is not if $\beta>\sup L$. This means that $\sup L=\inf B$.
-\end{proof}
-
-\begin{corollary}
-If $S$ has the greatest-lower-bound property, then it has the least-upper-bound property.
-
-Hence $S$ has the least-upper-bound property if and only if $S$ has the greatest-lower-bound property.
-\end{corollary}
-
-Let's explore some useful properties of sup and inf.
-
-\begin{proposition}[Comparison theorem]
-Let $S, T \subset \RR$ be non-empty sets such that $s \le t$ for every $s \in S$ and $t \in T$. If $T$ has a supremum, then so does $S$, and $\sup S \le \sup T$.
-\end{proposition}
-
-\begin{proof}
-Let $\tau = \sup T$. Since $\tau$ is a supremum for $T$, then $t \le \tau$ for all $t \in T$. Let $s \in S$ and choose any $t \in T$. Then, since $s \le t$ and $t \le \tau$ , then $s \le t$. Thus, $\tau$ is an upper bound for $S$. 
-
-By the Completeness Axiom, $S$ has a supremum, say $\sigma = \sup S$. We will show that $\sigma \le \tau$. Notice that, by the above, $\tau$ is an upper bound for $S$. Since $\sigma$ is the least upper bound for $S$, then $\sigma \le \tau$. Therefore,
-\[\sup S \le \sup T.\]
-\end{proof}
-
-Let's explore some useful properties of sup and inf.
-
-\begin{proposition}
-Let $S, T$ be non-empty subsets of $\RR$, with $S \subset T$ and with $T$ bounded above. Then $S$ is bounded above, and $\sup S \le \sup T$.
-\end{proposition}
-\begin{proof}
-Since $T$ is bounded above, it has an upper bound, say $b$. Then $t \le b$ for all $t \in T$, so certainly $t \le b$ for all $t \in S$, so $b$ is an upper bound for $S$.
-
-Now $S, T$ are non-empty and bounded above, so by completeness each has a supremum. Note that $\sup T$ is an upper bound for $T$ and hence also for $S$, so $\sup T \ge \sup S$ (since $\sup S$ is the least upper bound for $S$).
-\end{proof}
-
-\begin{proposition}
-Let $T \subset \RR$ be non-empty and bounded below. Let $S = \{-t \mid t \in T\}$. Then $S$ is non-empty and bounded above. Furthermore, $\inf T$ exists, and $\inf T = -\sup S$.
-\end{proposition}
-\begin{proof}
-Since $T$ is non-empty, so is $S$. Let $b$ be a lower bound for $T$, so $t \ge b$ for all $t \in T$. Then $-t \le -b$ for all $t \in T$, so $s \le -b$ for all $s \in S$, so $-b$ is an upper
-bound for $S$.
-
-Now $S$ is non-empty and bounded above, so by completeness it has a
-supremum. Then $s \le \sup S$ for all $s \in S$, so $t \ge -\sup S$ for all $t \in T$, so $-\sup S$ is a lower bound for $T$.
-
-Also, we saw before that if $b$ is a lower bound for $T$ then $-b$ is an upper bound for $S$. Then $-b \ge \sup S$ (since $\sup S$ is the least upper bound), so $b \le -\sup S$. So $-\sup S$ is the greatest lower bound.
-
-So $\inf T$ exists and $\inf T = -\sup S$.
-\end{proof}
-
-\begin{proposition}[Approximation property]
-Let $S\subset\RR$ be non-empty and bounded above. For any $\epsilon > 0$, there is $s_\epsilon \in S$ such that $\sup S-\epsilon < s_\epsilon \le \sup S$.
-\end{proposition}
-
-\begin{proof}
-Take $\epsilon > 0$.
-
-Note that by definition of the supremum we have $s \le \sup S$ for all $s \in S$. Suppose, for a contradiction, that $\sup S-\epsilon \ge s$ for all $s \in S$.
-
-Then $\sup S-\epsilon$ is an upper bound for $S$, but $\sup S-\epsilon < \sup S$, which is a contradiction.
-
-Hence there is $s_\epsilon \in S$ with $\sup S-\epsilon<s_\epsilon$.
-\end{proof}
-
-If we are dealing with rational numbers, the sup/inf of a set may not exist. For example, a set of numbers in $\QQ$, defined by $\{[\pi\cdot10^n]/10^n\}$.
-3,3.1,3.14,3.141,3.1415,3.14159,...
-But this set does not have an infimum in $\QQ$.
-
-By ZFC, we have the Completeness Axiom, which states that any non-empty set $A \subset \RR$ that is bounded above has a supremum; in other words, if $A$ is a non-empty set of real numbers that is bounded above, there exists a $M \in \RR$ such that $M = \sup A$.
-
-\begin{exercise}
-Consider the set
-\[\crbrac{\frac{1}{n}\mid n\in\ZZ^{+}}.\]
-\begin{enumerate}[label=(\alph*)]
-\item Show that $\max S=1$.
-\item Show that if $d$ is a lower bound for $S$, then $d \le 0$.
-\item Use (b) to show that $0 = \inf S$.
-\end{enumerate}
-\end{exercise}
-
-\begin{exercise}
-Find, with proof, the supremum and/or infimum of $\{\frac{1}{n}\}$.
-\end{exercise}
-
-\begin{solution}
-For the suprenum,
-\[ \sup\crbrac{\frac{1}{n}} = \max\crbrac{\frac{1}{n}} = 1. \]
-For the infinum, for all positive $a$ we can pick $n=[\frac{1}{a}]+1$, then $a>\frac{1}{n}$. Hence 
-\[ \inf\crbrac{\frac{1}{n}}=0. \]
-\end{solution}
-
-\begin{exercise}
-Find, with proof, the supremum and/or infimum of $\{\sin n\}$.
-\end{exercise}
-
-\begin{proof}
-The answer is easy to guess: $\pm1$
-
-For the supremum, we need to show that $1$ is the smallest we can pick, so for any $a=1-\epsilon<1$ we want to find an integer $n$ close enough to $2k\pi+\dfrac{\pi}{2}$ so that $\sin n > a$.
-
-Whenever we want to show the approximations between rational and irrational numbers we should think of the \textbf{pigeonhole principle}.
-\[ 2k\pi+\frac{\pi}{2}=6k+(2\pi-6)k+\frac{\pi}{2} \]
-Consider the set of fractional parts $\{(2\pi-6)k\}$. Since this an infinite set, for any small number $\delta$ there is always two elements $\{(2\pi-6)a\}<\{(2\pi-6)b\}$ such that
-\[ |\{(2\pi-6)b\}-\{(2\pi-6)a\}|<\epsilon \]
-
-Then $\{(2\pi-6)(b-a)\}<\delta$
-
-We then multiply by some number $m$ (basically adding one by one) so that
-\[ 0 \le \{(2\pi-6)\cdot m(b-a)\}-\brac{2-\frac{\pi}{2}}<\delta \]
-
-Picking $k=m(b-a)$ thus gives
-\begin{align*}
-2k\pi+\frac{\pi}{2} &= 6k+(2\pi-6)k+\frac{\pi}{2} \\
-&= 6k+[(2\pi-6)k]+2+{(2\pi-6)k}-\brac{2-\frac{\pi}{2}}
-\end{align*}
-
-Thus $n=6k+[(2\pi-6)k]+2$ satisfies $\absolute{2k\pi+\dfrac{\pi}{2}-n}<\delta$
-
-Now we're not exactly done here because we still need to talk about how well $\sin n$ approximates to 1.
-
-We need one trigonometric fact: $\sin x<x$ for $x>0$. (This simply states that the area of a sector in the unit circle is larger than the triangle determined by its endpoints.)
-
-\begin{align*}
-\sin n&=\sin\brac{n-\brac{2k\pi+\frac{\pi}{2}}+\brac{2k\pi+\frac{\pi}{2}}} \\
-&=\cos\brac{n-\brac{2k\pi+\frac{\pi}{2}}} \\
-&=\cos\theta
-\end{align*}
-
-\[ 1 - \sin n = 2 \sin^2 \frac{\theta}{2} = 2 \sin^2 \absolute{\frac{\theta}{2}} \le \frac{\theta^2}{2}<\delta \]
-
-Hence we simply pick $\delta=\epsilon$ to ensure that $1 - \sin n<\epsilon$, and we're done.
-\end{proof}
-\pagebreak
-
 \section{Cardinality}
 This section is about formalising the notion of the ``size'' of a set.
 
 \begin{definition}
-Two sets $A$ and $B$ said to be \vocab{equivalent} (or have the same \emph{cardinal number}), denoted by $A\sim B$, if there exists a bijection $f:A\to B$. 
+$A$ and $B$ said to be \vocab{equivalent} (or have the same \emph{cardinality}), denoted by $A\sim B$, if there exists a bijection $f:A\to B$. 
 \end{definition}
 
 \begin{notation}
-For $n\in\ZZ^+$, let
+For $n\in\NN$, denote
 \begin{align*}
-\ZZ^+&=\{i\in\ZZ\mid i\ge1\},\\
-\ZZ_n^+&=\{i\in\ZZ^+\mid 1\le i\le n\},\\
-n\ZZ^+&=\{ni\mid i\in\ZZ^+\}.
+\NN_n&=\{k\in\NN\mid 1\le k\le n\},\\
+n\NN&=\{nk\mid k\in\NN\}.
 \end{align*}
 \end{notation}
 
 \begin{definition}
 For any set $A$, we say
-\begin{itemize}
-\item $A$ is \vocab{finite} if $A\sim\ZZ_n^+$ for some integer $n$, the \textbf{cardinality} of $A$ is $|A|=n$; $A$ is \textbf{infinite} if $A$ is not finite;
-\item $A$ is \vocab{countable} if $A\sim \ZZ^+$; $A$ is \textbf{uncountable} if $A$ is neither finite nor countable; $A$ is \textbf{at most countable} if $A$ is finite or countable.
-\end{itemize}
+\begin{enumerate}[label=(\roman*)]
+\item $A$ is \vocab{finite} if $A\sim\NN_n$ for some integer $n\in\NN$, then the \emph{cardinality} of $A$ is $|A|=n$; $A$ is \emph{infinite} if $A$ is not finite;
+\item $A$ is \vocab{countable} if $A\sim \NN$; $A$ is \emph{uncountable} if $A$ is neither finite nor countable; $A$ is \emph{at most countable} if $A$ is finite or countable.
+\end{enumerate}
 \end{definition}
 
+\begin{remark}
+Any countable set can be ``listed'' in a sequence $a_1,a_2,\dots$ of distinct terms. This technique is particularly useful when there is not possible to deduce an explicit formula for a bijection.
+\end{remark}
+
+\begin{proposition}
+$\NN$ is infinite.
+\end{proposition}
+
+\begin{proof}
+We want to show that there does not exist a bijection from $\NN_n$ to $\NN$, for all $n\in\NN$. We prove by induction on $n$.
+
+For the base case $n=1$, if there exists a function $f_1:\{1\}\to\NN$, consider the set $\NN\setminus f_1(\{1\})$. It is not empty, so $f_1$ is not surjective, thus it is not bijective.
+
+For the inductive step, we want to show if there does not exist a bijection from $\NN_k$ to $\NN$, then there does not exist a bijection from $\NN_{k+1}$ to $\NN$. We prove the contrapositive: if there exists a bijection from $\NN_{k+1}\to\NN$, then there exists a bijection from $\NN_k$ to $\NN$.
+
+Suppose $h:\NN_{k+1}\to\NN$ is a bijection. If remove the element $k+1$, then there exists a bijection from $\NN_k$ to $\NN\setminus\{h(k+1)\}$. But $\NN\setminus\{h(k+1)\}\sim\NN$ so $\NN_k\sim\NN$.
+\end{proof}
+
+\begin{corollary}
+Any countable set is infinite.
+\end{corollary}
+
+\begin{comment}
 \subsection{Finite Sets}
 For finite sets, we can do some arithmetic with their cardinalities.
 
@@ -1039,93 +896,144 @@ To prove the PIE, we calculate
 
 \subsection{Countability}
 For two finite sets $A$ and $B$, we evidently have $A\sim B$ if and only if $A$ and $B$ contain the same number of elements. For infinite sets, however, the idea of ``having the same number of elements'' becomes quite vague, whereas the notion of bijectivity retains its clarity.
+\end{comment}
 
-\begin{proposition}
-$n\ZZ^+$ is countable.
-\end{proposition}
+\begin{example}
+$\NN$ is countable since the identity map from $\NN$ to $\NN$ is a bijection.
+\end{example}
 
+\begin{example}
+$n\NN$ is countable.
 \begin{proof}
-Let $f:\ZZ^+\to n\ZZ^+$ be given by 
-\[f(k)=nk.\]
-For any $k_1,k_2\in\ZZ^+$, $nk_1=nk_2$ implies $k_1=k_2$ so $f$ is injective. For any $x\in n\ZZ^+$, $x=ni$ for some $i\in\ZZ^+$, thus $\frac{x}{n}=i\in\ZZ^+$ so $f$ is surjective. Hence $f$ is bijective, $n\ZZ^+\sim\ZZ^+$ and we are done.
+Let $f:\NN\to n\NN$ which sends $k\mapsto nk$. We now need to show that $f$ is (i) injective, and (ii) surjective.
+\begin{enumerate}[label=(\roman*)]
+\item For any $k_1,k_2\in\NN$, $nk_1=nk_2$ implies $k_1=k_2$ so $f$ is injective.
+\item For any $x\in n\NN$, $x=nk$ for some $k\in\NN$, thus $\frac{x}{n}=k\in\NN$ so $f$ is surjective.
+\end{enumerate}
+Hence $f$ is bijective, so $n\NN\sim\NN$ and we are done.
 \end{proof}
+\end{example}
 
-\begin{proposition}
+\begin{example}
 $\ZZ$ is countable.
-\end{proposition}
-
 \begin{proof}
-Consider the following arrangement of the elements of $\ZZ$ and $\ZZ^+$:
+Consider the following arrangement of the elements of $\ZZ$ and $\NN$:
 \begin{align*}
 \ZZ&:\quad0,1,-1,2,-2,3,-3,\dots\\
-\ZZ^+&:\quad1,2,3,4,5,6,7,\dots
+\NN&:\quad1,2,3,4,5,6,7,\dots
 \end{align*}
-The function $f:\ZZ^+\to\ZZ$ defined as
+In fact we can write an explicit formula for a bijection $f:\NN\to\ZZ$ where
 \[f(n)=\begin{cases}
 \dfrac{n}{2}&\text{($n$ even)}\\[1ex]
 -\dfrac{n-1}{2}&\text{($n$ odd)}
 \end{cases}\]
-is bijective.
 \end{proof}
+\end{example}
 
-\begin{proposition}
-Every infinite subset of a countable set $A$ is countable.
+\begin{proposition}\label{prop:infinite-subset-countable}
+Every infinite subset of a countable set is countable.
 \end{proposition}
 
 \begin{proof}
-Suppose $E\subset A$, and $E$ is infinite. Arrange the elements $x\in A$ in a sequence $\{x_n\}$ of distinct elements. Construct a sequence $\{n_k\}$ as follows: Let $n_1$ be the smallest positive integer such that $x_{n_1}\in E$. Having chosen $n_1,\dots,n_{k-1}$ ($k=2,3,4,\dots$), let $n_k$ be the smallest integer greater than $n_{k-1}$ such that $x_{n_k}\in E$.
-
-Let $f:\ZZ^+\to E$ be defined as
-\[f(k)=x_{n_k},\]
-which is bijective. Hence $E\sim\ZZ^+$, $E$ is countable.
-\end{proof}
-
-This shows that countable sets represent the ``smallest'' infinity: No uncountable set can be a subset of a countable set.
-
-\begin{proposition}
-Let $(E_n)$ be a sequence of countable sets, put
-\[S=\bigcup_{n=1}^\infty E_n.\]
-Then $S$ is countable.
-\end{proposition}
-
-\begin{proof}
-Let every set $E_n$ be arranged in a sequence $\{x_{n_k}\}$ ($k=1,2,3,\dots$), and consider the infinite array
+Let $S$ be the countable set. Then we can arrange the elements of $S$ in a sequence $(s_n)$ of distinct elements:
+\[s_1,s_2,\dots\]
+Suppose $E\subset S$ is infinite. The main idea is to show that we can list out the elements of $E$ in a sequence. We now construct a sequence $(n_k)$ as follows: Let
 \begin{align*}
-&x_{11}\quad x_{12}\quad x_{13}\quad x_{14}\quad\cdots\\
-&x_{21}\quad x_{22}\quad x_{23}\quad x_{24}\quad\cdots\\
-&x_{31}\quad x_{32}\quad x_{33}\quad x_{34}\quad\cdots\\
-&x_{41}\quad x_{42}\quad x_{43}\quad x_{44}\quad\cdots\\
-&\vdots
+n_1&=\min\{i\mid s_i\in E\}\\
+n_2&=\min\{i\mid s_i\in E,i>n_1\}\\
+&\vdots\\
+n_k&=\min\{i\mid s_i\in E,i>n_{k-1}\}.
 \end{align*}
-in which the elements of $E_n$ form the $n$-th row. The array contains all elements of $S$. These elements can be arranged in a sequence
-\[x_{11},x_{21},x_{12},x_{31},x_{22},x_{13},x_{41},x_{32},x_{23},x_{14},\dots\]
-If any two of the sets En have elements in common, these will appear more than once in (17). Hence there is a subset $T$ of the set of all positive integers such that S ~ T, which shows that $S$ is at most countable (Theorem 2.8). Since $E_1\subset S$, and $E_1$ is infinite, $S$ is infinite, and thus countable. 
+Then
+\[E=\{s_{n_1},s_{n_2},\dots\},\]
+where we note that the function $f(k)=s_{n_k}$ ($k=1,2,\dots$) is bijective. Hence $E\sim\NN$, as desired.
 \end{proof}
+
+\begin{remark}
+This shows that countable sets represent the ``smallest'' infinity: No uncountable set can be a subset of a countable set.
+\end{remark}
+
+\begin{proposition}\label{prop:union-countable}
+The countable union of countable sets is countable.
+\end{proposition}
+
+\begin{proof}
+Let $\{A_n\mid n\in\NN\}$ be a fanily of countable sets; clearly this is a countable collection of sets (indexed by $\NN$). Then we want to show that the union
+\[S=\bigcup_{n=1}^\infty A_n\]
+is countable.
+
+Since every set $A_n$ is countable, we can list its elements in a sequence $(a_{nk})$ ($k=1,2,3,\dots$). Arrange the elements of all the sets in $\{A_n\}$ in the form of an infinite array, containing all elements of $S$, where the elements of $A_n$ form the $n$-th row.
+\begin{table}[H]
+\centering
+\begin{tabular}{cccccc}
+$A_1$:&$\cancelto{}{a_{11}}$ & $\cancelto{}{a_{12}}$ & $\cancelto{}{a_{13}}$ & $\cancelto{}{a_{14}}$ & $\cdots$\\
+$A_2$:&$\cancelto{}{a_{21}}$ & $\cancelto{}{a_{22}}$ & $\cancelto{}{a_{23}}$ & $\cancelto{}{a_{24}}$ & $\cdots$\\
+$A_3$:&$\cancelto{}{a_{31}}$ & $\cancelto{}{a_{32}}$ & $\cancelto{}{a_{33}}$ & $\cancelto{}{a_{34}}$ & $\cdots$\\
+$A_4$:&$\cancelto{}{a_{41}}$ & $\cancelto{}{a_{42}}$ & $\cancelto{}{a_{43}}$ & $\cancelto{}{a_{44}}$ & $\cdots$\\
+$\vdots$ & & & & &
+\end{tabular}
+\end{table}
+We then zigzag our way through the array, and arrange these elements in a sequence
+\[a_{11},a_{21},a_{12},a_{31},a_{22},a_{13},a_{41},a_{32},a_{23},a_{14},\dots\]
+thus $S$ is countable, and we are almost done!
+
+A small problem is that if any two of the sets $A_n$ have elements in common, these will appear more than once in the above sequence. Then we take a subset $T\subset S$, where every element only appears once. Note that $T$ is an infinite subset, since $A_1\subset T$ is infinite. Then since $T$ is an infinite subset of a countable set $S$, by \cref{prop:infinite-subset-countable}, $T$ is countable.
+\end{proof}
+
+\begin{remark}
+If we were to instead start by going down by the first row of the above array, then we would not get to the second row (and beyond); all that would show is the first row is countable. Instead, we wind our way through diagonally, ensuring that we hit every number of the array.
+\end{remark}
 
 \begin{corollary}
-Suppose $A$ is at most countable, and, for every $\alpha\in A$, $B_\alpha$ is at most countable. Put
-\[T=\bigcup_{\alpha\in A}B_\alpha.\]
-Then $T$ is at most coutable.
+Suppose $A$ is an indexing set that is at most countable. Let $\{B_\alpha\mid\alpha\in A\}$ be a family of sets that are at most countable. Then the union
+\[\bigcup_{\alpha\in A}B_\alpha\]
+is at most coutable.
 \end{corollary}
 
 \begin{proposition}
-Let $A$ be a countable set, and let $B_n$ be the set of all $n$-tuples $(a_1,\dots,a_n)$, where $a_i\in A$. Then $B_n$ is countable.
+Let $A$ be a countable set. For $n\in\NN$, let
+\[B_n=\{(a_1,\dots,a_n)\mid a_i\in A\}.\]
+Then $B_n$ is countable.
 \end{proposition}
+
+\begin{proof}
+We prove by induction on $n$. That $B_1$ is countable is evident, since $B_1=A$.
+
+Now suppose $B_{n-1}$ is countable. The elements of $B_n$ are of the form 
+\[(b,a)\quad(b\in B_{n-1},a\in A)\]
+For every fixed $b$, the set of ordered pairs $(b,a)$ is equivalent to $A$, and hence countable. Thus $B_n$ is a union of countable sets. By \cref{prop:union-countable}, $B_n$ is countable.
+\end{proof}
 
 \begin{corollary}
 $\QQ$ is countable.
 \end{corollary}
 
-\begin{proposition}
-The set of all algebraic numbers is countable. (Exercise 2)
-\end{proposition}
+\begin{proof}
+Note that every $x\in\QQ$ is of the form $\frac{b}{a}$, where $a,b\in\ZZ$. By the previous result, taking $n=2$, the set of pairs $(a,b)$ and therefore the set of fractions $\frac{b}{a}$ is countable.
+\end{proof}
+
+That not all infinite sets are, however, countable, is shown by the next result.
 
 \begin{proposition}
-Let A be the set of all sequences whose elements are the digits 0
-and 1. This set A is uncountable. 
+Let $A$ be the set of all sequences whose elements are the digits $0$ and $1$. Then $A$ is uncountable. 
 \end{proposition}
 
-The idea of the above proof was first used by Cantor, and is called Cantor's diagonal process; for, if the sequences $s_1,s_2,s_3,\dots$ are placed in an array like (16), it is the elements on the diagonal which are involved in the construction of the new sequence.
+\begin{proof}
+Let $E\subset A$ be countable, consisting of the sequences $s_1,s_2,s_3,\dots$.
+
+We construct a new sequence $s$ as follows:
+\[\text{$n$-th digit of $s$}=\begin{cases}
+0&\text{if $n$-th digit in $s_n$ is $1$,}\\
+1&\text{if $n$-th digit in $s_n$ is $0$.}
+\end{cases}\]
+Then the sequence $s$ differs from every member of $E$ in at least one place, so $s\notin E$. But clearly $s\in A$; hence $E\subsetneq A$.
+
+We have shown that every countable subset of $A$ is a proper subset of $A$. It follows that $A$ is uncountable (for otherwise $A$ would be a proper subset of $A$, which is absurd).
+\end{proof}
+
+\begin{remark}
+The idea of the above proof is called \emph{Cantor's diagonal process}, first used by Cantor. This is because if elements of the sequences $s_1,s_2,s_3,\dots$ are listed out in an array, it is the elements on the diagonal which are involved in the construction of the new sequence.
+\end{remark}
 
 \begin{corollary}
 $\RR$ is uncountable.
@@ -1135,35 +1043,39 @@ $\RR$ is uncountable.
 This follows from the binary representation of the real numbers.
 \end{proof}
 
-\subsection{Infinite Sets}
-A consequence of Cantor's Theorem (\cref{thrm:cantor}) is that there is no largest infinity. Since there are an infinite number of different sizes of infinity, it makes sense for us to order them from smallest onwards.
+\begin{theorem}[Cantor's theorem]
+For any set $A$, we have $A\not\sim\mathcal{P}(A)$.
+\end{theorem}
 
-The \vocab{aleph numbers} are a sequence of numbers used to represent the cardinality of infinite sets, given by
-\[\aleph_0,\aleph_1,\aleph_2,\aleph_3,\dots,\]
-where $\aleph_0=|\NN|$.
-
-Another set of infinite cardinals is the set of \vocab{beth numbers},
-\[\beth_0,\beth_1,\beth_2,\beth_3,\dots,\]
-where
-\begin{align*}
-\beth_0&=\aleph_0,\\
-\beth_1&=2^{\aleph_0}=|\mathcal{P}(\NN)|=|\RR|,
-\end{align*}
-and in general, for all $n$, we can recursively define
-\[\beth_{n+1}=2^{\beth_n}.\]
-
-A natural question to ask is if the aleph numbers and beth numbers line up. We have defined $\beth_0=\aleph_0$, but is $\beth_1=\aleph_1$? Another way to ask this question is whether
-\[|\mathcal{P}(\NN)|=|\RR|.\]
-This is called the \textbf{continuum hypothesis}. In fact it has been show that the continuum hypothesis can neither be proved nor disproved using the standard ZFC set theory axioms. The generalised continuum hypothesis is as follows:
-\begin{align*}
-2^{\aleph_n}&=\aleph_{n+1}\quad(\forall n)\\
-\aleph_n&=\beth_n\quad(\forall n)
-\end{align*}
-A restatement of the above is that there is no set $S$ such that
-\[\aleph_n<|S|<2^{\aleph_n}.\]
+\begin{proof}
+Suppose otherwise, for a contradiction, that $A\sim\mathcal{P}(A)$. Then there exists a bijection $f:A\to\mathcal{P}(A)$. Then for each $x\in A$, $f(x)$ is a subset of $A$. Now consider the ``anti-diagonal'' set
+\[B=\{x\in A\mid x\notin f(x)\}.\]
+That is, $B$ is the subset of $A$ containing all $x\in A$ such that $x$ is not in the set $f(x)$. Since $B\subset A$, we have $B\in\mathcal{P}(A)$. Since $f$ is bijective (in particular surjective), there exists $x\in A$ such that $f(x)=B$. Now there are two cases: (i) $x\in B$, or (ii) $x\notin B$.
+\begin{enumerate}[label=(\roman*)]
+\item If $x\in B$, then by definition of the set $B$ it must be the case that $x\notin f(x)$. But since $f(x)=B$, we then have $x\notin D$. This is absurd since we cannot have $x\in B$ and $x\notin B$ simultaneously.
+\item If $x\notin B$, by definition of the set $B$, this implies that $x\in f(x)$. But $f(x)=B$. So we have $x\in B$ and $x\notin B$, which is again absurd.
+\end{enumerate}
+In either case, we have reached a contradiction. Hence there cannot exist a surjective (and thus bijective) function $A\to\mathcal{P}(A)$.
+\end{proof}
 \pagebreak
 
 \section*{Exercises}
+\begin{prbm}
+Prove the following statements:
+\begin{enumerate}[label=(\roman*)]
+\item $f(A\cup B)=f(A)\cup f(B)$
+\item $f(A_1\cup\cdots\cup A_n)=f(A_1)\cup\cdots\cup f(A_n)$
+\item $f(\bigcup_{\lambda\in A}A_\lambda)=\bigcup_{\lambda\in A}f(A_\lambda)$
+\item $f(A\cap B)\subset f(A)\cap f(B)$
+\item $f^{-1}(f(A))\supset A$
+\item $f(f^{-1}(A))\subset A$
+\item $f^{-1}(A\cup B)=f^{-1}(A)\cup f^{-1}(B)$
+\item $f^{-1}(A\cap B)=f^{-1}(A)\cap f^{-1}(B)$
+\item $f^{-1}(A_1\cup\cdots\cup A_n)=f^{-1}(A_1)\cup\cdots\cup f^{-1}(A_n)$
+\item $f^{-1}(\bigcup_{\lambda\in A}A_\lambda)=\bigcup_{\lambda\in A}f^{-1}(A_\lambda)$
+\end{enumerate}
+\end{prbm}
+
 \begin{prbm}
 Let $A$ be the set of all complex polynomials in $n$ variables. Given a subset $T \subset A$, define the \textit{zeros} of $T$ as the set
 \[ Z(T) = \{P=(a_1,\dots,a_n) \mid f(P)=0 \text{ for all } f \in T\} \]
@@ -1239,5 +1151,9 @@ The complex number $a+bi$ is defined to be the equivalence class of $a+bx$.
 \item Define the sum and product of two complex numbers and show that such definitions are well-defined.
 \item Define the reciprocal of a complex number.
 \end{enumerate}
+\end{prbm}
+
+\begin{prbm}
+The set of all algebraic numbers is countable. (Exercise 2)
 \end{prbm}
 \pagebreak

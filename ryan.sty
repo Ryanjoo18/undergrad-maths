@@ -1,7 +1,3 @@
-% Font
-\usepackage{tgpagella} % text only
-\usepackage{mathpazo}  % math & text
-
 %Colour
 \usepackage[dvipsnames]{xcolor}
 \usepackage{soul,xcolor}
@@ -19,7 +15,8 @@
 \newcommand{\absolute}[1]{\left|#1\right|}
 \newcommand{\crbrac}[1]{\left\{#1\right\}}
 \providecommand{\arc}[1]{\wideparen{#1}}
-\newcommand{\vocab}[1]{{\sffamily\color{darkblue}\bfseries #1}}
+\newcommand{\vocab}[1]{{%\sffamily
+\color{darkblue}\bfseries\textit{#1}}}
 \renewcommand{\epsilon}{\varepsilon}
 \newcommand{\unit}[1]{\,\mathrm{#1}}
 \newcommand{\degC}{^\circ{\mathrm C}}
@@ -53,6 +50,8 @@
 \DeclareMathOperator{\Sym}{Sym}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Col}{Col}
 \renewcommand{\le}{\leqslant}
 \renewcommand{\ge}{\geqslant}
 
@@ -240,26 +239,6 @@ breaklines=true
     postheadspace={0pt}
 ]{thmbluebox}
 
-\mdfdefinestyle{mdredbox}{%
-    skipabove=12pt,
-    linewidth=3pt,
-    rightline=false,
-    leftline=true,
-    topline=false,
-    bottomline=false,
-    linecolor=RawSienna,
-    backgroundcolor=Salmon!5,
-    innerbottommargin=9pt,
-    skipbelow=2pt,
-    nobreak=true,
-}
-\declaretheoremstyle[
-    headfont=\sffamily\bfseries\color{RawSienna},
-    mdframed={style=mdredbox},
-    headpunct={\\[3pt]},
-    postheadspace={0pt},
-]{thmredbox}
-
 \mdfdefinestyle{mdgreenbox}{%
     skipabove=12pt,
     linewidth=3pt,
@@ -297,23 +276,6 @@ breaklines=true
     postheadspace={0pt},
     mdframed={style=mdblackbox}
 ]{thmblackbox}
-
-\mdfdefinestyle{mdpurplebox}{%
-    skipabove=8pt,
-    linewidth=3pt,
-    rightline=false,
-    leftline=true,
-    topline=false,
-    bottomline=false,
-    linecolor=black,
-    backgroundcolor=Orchid!10,
-}
-\declaretheoremstyle[
-    headfont=\sffamily\bfseries\color{Orchid},
-    mdframed={style=mdpurplebox},
-    headpunct={\\[3pt]},
-    postheadspace={0pt},
-]{thmpurplebox}
 
 %Theorem setup
 \theoremstyle{definition}
@@ -359,3 +321,7 @@ breaklines=true
 \titleformat{\section}{\LARGE\bfseries}{{\color{darkred}\S\thesection}}{1em}{}
 \titleformat{\subsection}{\Large\bfseries}{{\color{darkred}\S\thesubsection}}{1em}{\itshape}
 \setcounter{secnumdepth}{1}
+
+% Font
+\usepackage{tgpagella} % text only
+%\usepackage{mathpazo}  % math & text

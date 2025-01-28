@@ -1,12 +1,12 @@
 \chapter{Groups}\label{chap:groups}
 \section{Introduction to Groups}
-\subsection{Definitions and Examples}
+\subsection{Definitions and Properties}
 \begin{definition}[Binary operation]
 A \vocab{binary operation} $\ast$ on a set $G$ is a function $\ast:G\times G\to G$. For any $a,b\in G$, we write $a \ast b$ for the image of $(a,b)$ under $\ast$.
 
-$\ast$ is \vocab{associative} on $G$ if $(a\ast b)\ast c=a\ast(b\ast c)$ for all $a,b,c\in G$.
+$\ast$ is \emph{associative} on $G$ if $(a\ast b)\ast c=a\ast(b\ast c)$ for all $a,b,c\in G$.
 
-$\ast$ is \vocab{commutative} on $G$ if $a\ast b=b\ast a$ for all $a,b\in G$.
+$\ast$ is \emph{commutative} on $G$ if $a\ast b=b\ast a$ for all $a,b\in G$.
 \end{definition}
 
 \begin{definition}[Group]
@@ -17,12 +17,12 @@ A \vocab{group}\index{group} $(G,\ast)$ consists of a set $G$ and a binary opera
 \item Invertibility: for all $a\in G$, there exists inverse $c\in G$ such that $a\ast c=c\ast a=e$.
 \end{enumerate}
 
-$G$ is \vocab{abelian}\footnote{after the Norwegian mathematician Niels
-Abel (1802-1829)} if the operation is commutative; it is \vocab{non-abelian} if otherwise.
+$G$ is \vocab{abelian}\footnote{after the Norwegian mathematician Niels 
+Abel (1802--1829)} if the operation is commutative; it is \emph{non-abelian} if otherwise.
 \end{definition}
 
 \begin{remark}
-When verifying that $(G,\ast)$ is a group we have to check (i), (ii), (iii) above and also that $\ast$ is a binary operation -- that is, $a\ast b\in G$ for all $a,b\in G$; this is sometimes referred to as closure.
+When verifying that $(G,\ast)$ is a group we have to check (i), (ii), (iii) above and also that $\ast$ is a binary operation closed in $G$---that is, $a\ast b\in G$ for all $a,b\in G$.
 \end{remark}
 
 \begin{notation}
@@ -34,11 +34,11 @@ We abbreviate $a\ast b$ to just $ab$ if the operation is clear.
 \end{notation}
 
 \begin{notation}
-Since the operation $\ast$ is associative, we can omit unnecessary parentheses and write $(ab)c=a(bc)=abc$.
+Since $\ast$ is associative, we omit unnecessary parentheses and write $(ab)c=a(bc)=abc$.
 \end{notation}
 
 \begin{notation}
-For any $a\in G$, $n\in\ZZ^+$ we abbreviate $a^n=\underbrace{a\cdots a}_\text{$n$ times}$.
+For any $a\in G$, $n\in\ZZ^+$ we denote $a^n=\underbrace{a\cdot a\cdots a}_\text{$n$ times}$.
 \end{notation}
 
 \begin{notation}
@@ -46,36 +46,13 @@ We write $(\ZZ,+)$, $(\QQ,+)$, $(\RR,+)$, $(\CC,+)$ as simply $\ZZ$, $\QQ$, $\RR
 \end{notation}
 
 \begin{example}
-The following are some examples of groups.
 \begin{itemize}
 \item $\ZZ$, $\QQ$, $\RR$, $\CC$ are groups, with identity $0$ and (additive) inverse $-a$ for all $a$.
 \item $\QQ\setminus\{0\}$, $\RR\setminus\{0\}$, $\CC\setminus\{0\}$, $\QQ^+$, $\RR^+$ are groups under $\times$, with identity $1$ and (multiplicative) inverse $\frac{1}{a}$ for all $a$; $\ZZ\setminus\{0\}$ is not a group under $\times$, because all elements except for $\pm1$ do not have an inverse in $\ZZ\setminus\{0\}$.
-\item For $n\in\ZZ^+$, $\ZZ/n\ZZ$ is an abelian group under $+$.
-\item For $n\in\ZZ^+$, $(\ZZ/n\ZZ)^\times$ is an abelian group under multiplication.
+\item For $n\in\ZZ^+$, $\ZZ_n$ is an abelian group under $+$.
+\item For $n\in\ZZ^+$, $(\ZZ_n)^\times$ is an abelian group under multiplication.
 \end{itemize}
 \end{example}
-
-\begin{definition}[Product group]
-Let $(G,\ast_G)$ and $(H,\ast_H)$ be groups. Then the operation $\ast$ is defined on $G\times H$ by
-\[(g_1,h_1)\ast(g_2,h_2)=(g_1\ast_G g_2,h_1\ast_H h_2)\]
-for all $g_1,g_2\in G$, $h_1,h_2\in H$. $(G\times H, \ast)$ is called the \vocab{product group} of $G$ and $H$.
-\end{definition}
-
-\begin{proposition}
-The product group is a group.
-\end{proposition}
-    
-\begin{proof} \
-\begin{enumerate}[label=(\roman*)]
-\item Since $\ast_G$ and $\ast_H$ are both associative binary operations, it follows that $\ast$ is also an associative binary operation on $G \times H$.
-\item We also note
-\[e_{G\times H}=(e_G,e_H),\quad(g,h)^{-1}=(g^{-1},h^{-1})\]
-as for any $g \in G$, $h \in H$,
-\[(e_G,e_H)\ast(g,h)=(g,h)=(g,h)\ast(e_G,e_H).\]
-\item As for identity,
-\[(g^{-1},h^{-1})\ast(g,h)=(e_G,e_H)=(g,h)\ast(g^{-1},h^{-1}).\]
-\end{enumerate}
-\end{proof}
 
 \begin{proposition}
 Let $G$ be a group. Then
@@ -113,11 +90,11 @@ Let $a,b\in G$. Then the equations $ax=b$ and $ya=b$ have unique solutions for $
 \end{proposition}
 
 \begin{proof}
-That $x=a^{-1}b$ is unique follows from the uniqueness of $a^{-1}$ and the same for $y=ba^{-1}$.
+We can solve $ax=b$ by applying $a^{-1}$ to both sides of the equation to get $x=a^{-1}b$. The uniqueness of $x$ follows because $a^{-1}$ is unique. A similar case holds for $ya=b$.
 \end{proof}
 
 \begin{definition}[Order of a group]
-The cardinality $|G|$ of a group $G$ is called the \vocab{order} of $G$. We say that a group $G$ is finite if $|G|$ is finite.
+Let $G$ be a group. Its cardinality $|G|$ is called the \vocab{order} of $G$. We say that a group $G$ is a \emph{finite group} if $|G|<\infty$.
 \end{definition}
 
 One way to represent a finite group is by means of the group table or Cayley table\footnote{after
@@ -127,8 +104,26 @@ the English mathematician Arthur Cayley (1821 -- 1895)}. Let $G=\{e,g_2,g_3,\dot
 Note that a group is abelian if and only if its Cayley table is symmetric about the main (top-left to bottom-right) diagonal.
 \end{remark}
 
+\subsection{Examples}
+\begin{example}[Product group]
+Let $(G,\ast_G)$ and $(H,\ast_H)$ be groups. Then the operation $\ast$ is defined on $G\times H$ by
+\[(g_1,h_1)\ast(g_2,h_2)=(g_1\ast_G g_2,h_1\ast_H h_2)\]
+for all $g_1,g_2\in G$, $h_1,h_2\in H$. $(G\times H, \ast)$ is called the \emph{product group} of $G$ and $H$.
+
+We check that the product group is a group:
+\begin{enumerate}[label=(\roman*)]
+\item Since $\ast_G$ and $\ast_H$ are both associative binary operations, it follows that $\ast$ is also an associative binary operation on $G \times H$.
+\item We also note
+\[e_{G\times H}=(e_G,e_H),\quad(g,h)^{-1}=(g^{-1},h^{-1})\]
+as for any $g \in G$, $h \in H$,
+\[(e_G,e_H)\ast(g,h)=(g,h)=(g,h)\ast(e_G,e_H).\]
+\item As for identity,
+\[(g^{-1},h^{-1})\ast(g,h)=(e_G,e_H)=(g,h)\ast(g^{-1},h^{-1}).\]
+\end{enumerate}
+\end{example}
+
 \begin{example}[Dihedral groups]
-An important family of groups is the \vocab{dihedral groups}\index{dihedral group $D_{2n}$}. For $n\in\ZZ^+$, $n\ge3$, let $D_{2n}$ be the set of symmetries\footnote{a symmetry is any rigid motion of the $n$-gon which can be effected by taking a copy of the $n$-gon, moving this copy in any fashion in $3$-space and then placing the copy back on the original $n$-gon so it exactly covers it. A symmetry can be a reflection or a rotation.} of a regular $n$-gon.
+An important family of groups is the \vocab{dihedral groups}. For $n\in\ZZ^+$, $n\ge3$, let $D_{2n}$ be the set of symmetries\footnote{a symmetry is any rigid motion of the $n$-gon which can be effected by taking a copy of the $n$-gon, moving this copy in any fashion in $3$-space and then placing the copy back on the original $n$-gon so it exactly covers it. A symmetry can be a reflection or a rotation.} of a regular $n$-gon.
 
 \begin{remark}
 Here ``D'' stands for ``dihedral'', meaning two-sided.
@@ -146,7 +141,7 @@ We now make $D_{2n}$ into a group. For $S,T\in D_{2n}$, define the binary operat
 
 Let $r$ be the rotation clockwise about the origin by $\frac{2\pi}{n}$ radians, let $s$ be the reflection about the line of symmetry through the first labelled vertex and the origin.
 
-\begin{proposition} \
+\begin{proposition*} \
 \begin{enumerate}[label=(\roman*)]
 \item $|r|=n$
 \item $|s|=2$
@@ -157,7 +152,7 @@ and thus $|D_{2n}|=2n$.
 \item $rs=sr^{-1}$
 \item $r^is=sr^{-i}$
 \end{enumerate}
-\end{proposition}
+\end{proposition*}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
@@ -175,29 +170,28 @@ A presentation for the dihedral group $D_{2n}$ using generators and relations is
 \end{example}
 
 \begin{example}[Permutation groups]
-Let $S$ be a non-empty set. A bijection $S\to S$ is called a \textbf{permutation} of $S$; the set of permutations of $S$ is denoted by $\Sym(S)$.
+Let $S$ be a non-empty set. A bijection $S\to S$ is called a \emph{permutation} of $S$; the set of permutations of $S$ is denoted by $\Sym(S)$.
 
-$\Sym(S)$ is a group under function composition $\circ$. We show that the group axioms hold for $(\Sym(S),\circ)$:
+We now show that $\Sym(S)$ is a group under function composition $\circ$; $(\Sym(S),\circ)$ is the \vocab{symmetric group} on $S$. Note that $\circ$ is a binary operation on $\Sym(S)$ since if $\sigma:S\to S$ and $\tau:S\to S$ are both bijections, then $\sigma\circ\tau$ is also a bijection from $S$ to $S$.
 \begin{enumerate}[label=(\roman*)]
-\item $\circ$ is a binary operation on $\Sym(S)$ since if $\sigma:S\to S$ and $\tau:S\to S$ are both bijections, then $\sigma\circ\tau$ is also a bijection from $S$ to $S$.
-\item Since function composition is associative in general, $\circ$ is associative.
-\item The identity of $\Sym(S)$ is $1$, defined by $1(a)=a$ for all $a\in S$.
-\item For every permutation $\sigma$, there is a (2-sided) inverse function $\sigma^{-1}:S\to S$ satisfying $\sigma\circ\sigma^{-1}=\sigma^{-1}\circ\sigma=1$.
+\item Function composition is associative so $\circ$ is associative.
+\item The identity of $\Sym(S)$ is the identity map $1$, defined by $1(a)=a$ for all $a\in S$.
+\item For every permutation $\sigma$, $\sigma$ is bijective and thus invertible, so there exists a (2-sided) inverse $\sigma^{-1}:S\to S$ satisfying $\sigma\circ\sigma^{-1}=\sigma^{-1}\circ\sigma=1$.
 \end{enumerate}
 
-$(\Sym(S),\circ)$ is called the \vocab{symmetric group}\index{symmetric group $S_n$} on $S$. In the special case where $S=\{1,2,\dots,n\}$, the symmetric group on $S$ is denoted $S_n$, the symmetric group of degree $n$.
+In the special case where $S=\{1,2,\dots,n\}$, the symmetric group on $S$ is called the \emph{symmetric group of degree $n$}, denoted by $S_n$.
 
-\begin{proposition}
+\begin{proposition*}
 If $|S|\ge3$ then $\Sym(S)$ is non-abelian.
-\end{proposition}
+\end{proposition*}
 
 \begin{proof}
 Let $S=\{x_1,x_2,x_3\}$ where three elements are distinct.
 \end{proof}
 
-\begin{proposition}
-The order of $S_n$ is $n!$.
-\end{proposition}
+\begin{proposition*}
+$|S_n|=n!$
+\end{proposition*}
 
 \begin{proof}
 Obvious, since there are $n!$ permutations of $\{1,2,\dots,n\}$.
@@ -205,13 +199,10 @@ Obvious, since there are $n!$ permutations of $\{1,2,\dots,n\}$.
 \end{example}
 
 \begin{example}[Matrix groups]
-
-A field is denoted by $\FF$; $\FF^\times=\FF\setminus\{0\}$.
-
 For $n\in\ZZ^+$, let $GL_n(\FF)$ be the set of all $n\times n$ invertible matrices whose entries are in $\FF$:
-\[GL_n(\FF)=\{A\mid A\in M_{n\times n}(\FF),\det(A)\neq0\}.\]
+\[GL_n(\FF)=\{A\in M_{n\times n}(\FF)\mid\det(A)\neq0\}.\]
 
-We show that $GL_n(\FF)$ is a group under matrix multiplication:
+We show that $GL_n(\FF)$ is a group under matrix multiplication; $GL_n(\FF)$ is the \vocab{general linear group} of degree $n$.
 \begin{enumerate}[label=(\roman*)]
 \item Since $\det(AB)=\det(A)\cdot\det(B)$, it follows that if $\det(A)\neq0$ and $\det(B)\neq0$, then $\det(AB)\neq0$, so $GL_n(\FF)$ is closed under matrix multiplication.
 \item Matrix multiplication is associative.
@@ -219,12 +210,10 @@ We show that $GL_n(\FF)$ is a group under matrix multiplication:
 \[AA^{-1}=A^{-1}A=I\]
 where $I$ is the $n\times n$ identity matrix.
 \end{enumerate}
-
-We call $GL_n(\FF)$ the \vocab{general linear group}\index{general linear group $GL_n(\FF)$} of degree $n$.
 \end{example}
 
 \begin{example}[Quaternion group]
-The \vocab{Quaternion group}\index{Quaternion group $Q_8$} $Q_8$ is defined by
+The \vocab{Quaternion group} $Q_8$ is defined by
 \[Q_8=\{1,-1,i,-i,j,-j,k,-k\}\]
 with product $\cdot$ computed as follows:
 \begin{itemize}
@@ -237,55 +226,21 @@ with product $\cdot$ computed as follows:
 Note that $Q_8$ is a non-abelian group of order $8$.
 \end{example}
 
-An important (if rather elementary) family of groups is the \emph{cyclic groups}.
-
+\subsection{Cyclic Groups and Order}
 \begin{definition}[Cyclic group]
-A group $G$ is called \vocab{cyclic}\index{cyclic group $C_n$} if there exists $g\in G$ such that
-\[G=\{g^k\mid k\in\ZZ\}.\]
-Then $g$ is called a \vocab{generator}\index{generator} of $G$.
+Let $G$ be a group, $g\in G$. If for every $x\in G$, there exists $n\in\ZZ$ such that $g^n=x$ then $g$ is the \vocab{generator} of $G$; denote $G=\langle g\rangle$.
+
+$G$ is \vocab{cyclic} if there is a generator for $G$ in $G$.
 \end{definition}
 
-\begin{notation}
-If $G$ is generated by $x$, we write $G=\langle x\rangle$.
-\end{notation}
-
 \begin{remark}
-A cyclic group may have more than one generator. For example, if $G=\langle x\rangle$, then also $G=\langle x^{-1}\rangle$ because $(x^{-1})^n=x^{-n}\in G$ for $n\in\ZZ$ so does $-n$, so that
-\[\{x^n\mid n\in\ZZ\}=\{(x^{-1})^n\mid n\in\ZZ\}.\] 
+A cyclic group may have more than one generator. For example, if $G=\langle g\rangle$, then also $G=\langle g^{-1}\rangle$ because $(g^{-1})^n=g^{-n}\in G$ for $n\in\ZZ$ so does $-n$, thus
+\[\{g^n\mid n\in\ZZ\}=\{(g^{-1})^n\mid n\in\ZZ\}.\] 
 \end{remark}
 
 \begin{example}
 $\ZZ$ is a cyclic group with generators $1$ and $-1$.
 \end{example}
-
-\begin{proposition}
-Cyclic groups are abelian.
-\end{proposition}
-
-\begin{proof}
-Let $G$ be a cyclic group. For $g^i,g^j\in G$, by the laws of exponents,
-\[g^i g^j=g^{i+j}=g^j g^i.\]
-\end{proof}
-
-\begin{proposition}
-If $G=\langle x\rangle$, then $|G|=|x|$ (where if one side of this equality is infinite, so is the other):
-\begin{enumerate}[label=(\roman*)]
-\item if $|G|=n<\infty$, then $x^n=1$ and $1,x,x^2,\dots,x^{n-1}$ are all the distinct elements of $G$;
-\item if $|G|=\infty$, then $x^n\neq1$ for all $n\neq0$, and $x^a\neq x^b$ for all $a,b\in\ZZ$, $a\neq b$.
-\end{enumerate}
-\end{proposition}
-
-\begin{proposition}
-Let $G$ be an arbitrary group, $x\in G$ and let $m,n\in\ZZ$. If $x^n=1$ and $x^m=1$, then $x^d=1$ where $d=\gcd(m,n)$. In particular, if $x^m=1$ for some $m\in\ZZ$, then $|x|$ divides $m$.
-\end{proposition}
-
-\begin{theorem}
-Any two cyclic groups of the same order are isomorphic:
-\begin{enumerate}[label=(\roman*)]
-\item if $n\in\ZZ^+$ and $\langle x\rangle$ and $\langle y\rangle$ are both cyclic groups of order $n$, then the map $\phi:\langle x\rangle\to\langle y\rangle$ which maps $x^k\mapsto y^k$ is well-defined and is an isomorphism.
-\item if $\langle x\rangle$ is an infinite cyclic group, the map $\phi:\ZZ\to\langle x\rangle$ which maps $k\mapsto x^k$ is well-defined and is an isomorphism.
-\end{enumerate}
-\end{theorem}
 
 \begin{notation}
 For each $n\in\ZZ^+$, $C_n$ denotes the cyclic group of order $n$:
@@ -297,110 +252,20 @@ g^{i+j-n}&(n\le i+j\le 2n-2)
 \end{cases}\]
 \end{notation}
 
-\subsection{Subgroups}
-\begin{definition}[Subgroup]
-Let $G$ be a group. $H\subset G$, $H\neq\emptyset$ is a \vocab{subgroup}\index{subgroup} of $G$, denoted $H\le G$, if the group operation $\ast$ restricts to make a group of $H$; that is,
-\begin{enumerate}[label=(\roman*)]
-\item $e\in H$;
-\item $xy\in H$ for all $x,y\in H$;
-\item $x^{-1}\in H$ for all $x\in H$.
-\end{enumerate}
-\end{definition}
-
-\begin{remark}
-Observe that if $\ast$ is an associative (respectively, commutative) binary operation on $G$ and $\ast$ is restricted to some $H\subset G$ is a binary operation on $H$, then $\ast$ is automatically associative (respectively, commutative) on $H$ as well.
-\end{remark}
-
-\begin{lemma}[Subgroup criterion]
-Let $G$ be a group. $H\subset G$, $H\neq\emptyset$ is a subgroup of $G$ if and only if $xy^{-1}\in H$ for all $x,y\in H$. 
-
-Furthermore, if $H$ is finite, then it suffices to check that $H$ is non-empty and closed under multiplication.
-\end{lemma}
-
-\begin{proof}
-If $H$ is a subgroup of $G$, then we are done, by definition of subgroup.
-
-Conversely, we want to prove that for $H\neq\emptyset$, if $xy^{-1}\in H$ for all $x,y\in H$, then $H\le G$:
-\begin{enumerate}[label=(\roman*)]
-\item Since $H\neq\emptyset$, take $x\in H$, let $y=x$, then $1=xx^{-1}\in H$, so $H$ contains the identity of $G$.
-\item Since $1\in H$, $x\in H$, then $x^{-1}\in H$ so $H$ is closed under taking inverses.
-\item For any $x,y\in H$, $x,y^{-1}\in H$, so by (ii), $x(y^{-1})^{-1}=xy\in H$, so $H$ is closed under multiplication.
-\end{enumerate}
-Hence $H$ is a subgroup of $G$.
-
-For the last part, suppose that $H$ is finite and closed under multiplication. Take $x\in H$. Then there are only finitely many distinct elements among $x,x^2,x^3,\dots$ and so $x^a=x^b$ for $a,b\in\ZZ$ with $a<b$. If $n=b-a$, then $x^n=1$ so in particular every element $x\in H$ is of finite order. Then $x^{n-1}\in x^{-1}\in H$, so $H$ is closed under inverses.
-\end{proof}
-
-We now introduce some important families of subgroups of an arbitrary group $G$. Let $A\subset G$, $A\neq\emptyset$.
-
-\begin{example}[Centraliser]
-The \vocab{centraliser}\index{subgroup!centraliser} of $A$ in $G$ is defined by
-\[C_G(A)\coloneqq\{g\in G\mid\forall a\in A,gag^{-1}=a\}.\]
-Since $gag^{-1}=a$ if and only if $ga=ag$, $C_G(A)$ is the set of elements of $G$ which commute with every element of $A$.
-
 \begin{proposition}
-$C_G(A)$ is a subgroup of $G$.
-\end{proposition}
-
-\begin{notation}
-In the special case when $A=\{a\}$ we simply write $C_G(a)$ instead of $C_G(\{a\})$. In this case $a^n\in C_G(a)$ for all $n\in\ZZ$.
-\end{notation}
-\end{example}
-
-\begin{example}[Center]
-The \vocab{center}\index{subgroup!center} of $G$ is the set of elements commuting with all the elements of $G$:
-\[Z(G)\coloneqq\{g\in G\mid\forall x\in G,gx=xg\}.\]
-
-\begin{proposition}
-$Z(G)$ is a subgroup of $G$.
+Cyclic groups are abelian.
 \end{proposition}
 
 \begin{proof}
-Note that $Z(G)=C_G(G)$, so the argument above proves $Z(G)\le G$ as a special case.
+Let $G$ be a cyclic group. For $g^i,g^j\in G$, by the laws of exponents,
+\[g^i g^j=g^{i+j}=g^j g^i.\]
 \end{proof}
-\end{example}
 
-\begin{example}[Normaliser]
-Define $gAg^{-1}=\{gag^{-1}\mid a\in A\}$. The \vocab{normaliser}\index{subgroup!normaliser} of $A$ in $G$ is
-\[N_G(A)\coloneqq\{g\in G\mid gAg^{-1}=A\}.\]
-
-\begin{proposition}
-$N_G(A)$ is a subgroup of $G$.
-\end{proposition}
-
-\begin{proof}
-Notice that if $g\in C_G(A)$, then $gag^{-1}=a\in A$ for all $a\in A$ so $C_G(A)\le N_G(A)$.
-\end{proof}
-\end{example}
-
-The fact that the normaliser of $A$ in $G$, the centraliser of $A$ in $G$, and the center of $G$ are all subgroups are special cases of results on group actions.
-
-\begin{example}[Stabiliser]
-If $G$ is a group acting on a set $S$, $s\in S$, then the \vocab{stabiliser}\index{subgroup!stabiliser} of $s$ in $G$ is
-\[G_s\coloneqq\{g\in G\mid g\cdot s=s\}.\]
-
-\begin{proposition}
-$G_s$ is a subgroup of $G$.
-\end{proposition}
-\end{example}
-
-\subsection{Cosets}
 \begin{definition}[Order]
 Let $G$ be a group, $g\in G$. If there is a positive integer $k$ such that $g^k=e$, then the \vocab{order} of $g$ is defined as
 \[o(g)\coloneqq\min\{m>0\mid g^m=e\}.\]
 Otherwise we say that the order of $g$ is infinite.
 \end{definition}
-
-\begin{example}
-Some examples to illustrate the above concept.
-\begin{itemize}
-\item An element of a group has order 1 if and only if it is the identity.
-\item In the additive groups $\ZZ$, $\QQ$, $\RR$, $\CC$, every non-zero (i.e. non-identity) element has infinite order.
-\item In the multiplicative groups $\RR\setminus\{0\}$ or $\QQ\setminus\{0\}$, the element $-1$ has order 2 and all other non-identity elements have infinite order.
-\item In $\ZZ/9\ZZ$, the element $\overline{6}$ has order 3. (Recall that in an additive group, the powers of an element are integer multiples of the element.)
-\item In $(\ZZ/7\ZZ)^\times$, the powers of the element $\overline{2}$ are $\overline{2},\overline{4},\overline{8}=\overline{1}$, the identity in this group, so 2 has order 3. Similarly, the element $\overline{3}$ has order 6, since $3^6$ is the smallest positive power of 3 that is congruent to 1 mod 7.
-\end{itemize}
-\end{example}
 
 \begin{proposition}
 If $G$ is finite, then $o(g)$ is finite for each $g\in G$.
@@ -416,91 +281,209 @@ As $G$ is finite, then this list must have repeats. Hence there are integers $i>
 If $g\in G$ and $o(g)$ is finite, then $g^n=e$ if and only if $o(g)\mid n$.
 \end{proposition}
 
-\begin{proof}
-If $n=ko(g)$ then 
+\begin{proof} \
+
+\fbox{$\impliedby$} Suppose $o(g)\mid n$. Then $n=ko(g)$ for some $k\in\ZZ$, so
 \[g^n=\brac{g^{o(g)}}^k=e^k=e.\]
-Conversely, if $g^n=e$ then, by the division algorithm, there are integers $q, r$ such that $n=qo(g)+r$ where $0\le r<o(g)$. Then
+\fbox{$\implies$} Suppose $g^n=e$. By the division algorithm, there exists integers $q,r$ such that $n=qo(g)+r$, where $0\le r<o(g)$. Then
 \[g^r=g^{n-qo(g)}=g^n\brac{g^{o(g)}}^{-q}=e.\]
-By the minimality of $o(g)$ then $r=0$ and so $n=qo(g)$.
+By the minimality of $o(g)$, we must have $r=0$, and so $n=qo(g)$ implies $o(g)\mid n$.
+\end{proof}
+
+\begin{corollary}
+Let $G$ be a cyclic group, $g\in G$. Then $g^k=g^m$ if and only if $m\equiv k\pmod{o(g)}$.
+\end{corollary}
+
+\begin{proposition}
+If $G=\langle g\rangle$, then $|G|=o(g)$ (where if one side of this equality is infinite, so is the other). More specifically,
+\begin{enumerate}[label=(\roman*)]
+\item if $|G|=n<\infty$, then $g^n=e$ and $e,g,g^2,\dots,g^{n-1}$ are all the distinct elements of $G$;
+\item if $|G|=\infty$, then $g^n\neq e$ for all $n\neq0$, and $g^a\neq g^b$ for all $a,b\in\ZZ$, $a\neq b$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item We first show that all the elements are distinct. If $g^a=g^b$ for $0\le a<b<n$, then $g^{b-a}=e$, which contradicts the minimality of $o(g)$. Thus $G$ has at least $n$ elements and it remains to show that these are all of them.
+
+For the element $g^t$, by the division algorithm, we can write $t=qn+r$ where $0\le r<n$. Then
+\[g^t=g^{qn+r}=\brac{g^n}^q g^r=g^r\in\{e,g,g^2,\dots,g^{n-1}\}\]
+since $0\le r<n$.
+
+\item Suppose $o(g)=\infty$, so no positive power of $g$ is the identity. If $g^a=g^b$ for some $a,b\in\ZZ$, $a<b$, then $g^{b-a}=e$, contradicting the previous statement. Thus distinct powers of $g$ are distinct elements of $G$, so $|G|=\infty$.
+\end{enumerate}
+\end{proof}
+
+Note that a given cyclic group may have more than one generator. The next results determine precisely which powers of $g$ generate the group $\langle g\rangle$.
+
+\begin{proposition}
+Let $G$ be a group, $g\in G$. Let $a\in\ZZ\setminus\{0\}$.
+\begin{enumerate}[label=(\roman*)]
+\item If $o(g)=\infty$, then $o(g^a)=\infty$.
+\item If $o(g)=n<\infty$, then $o(g)=\dfrac{n}{\gcd(n,a)}$. In particular, if $a\mid n$, then $o(g^a)=\dfrac{n}{a}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Suppose, for a contradiction, that $o(g)=\infty$ but $o(g^a)=m<\infty$. Then by definition of order,
+\[e=(g^a)^m=g^{am}.\]
+Also,
+\[g^{-am}=\brac{g^{am}}^{-1}=e^{-1}=e.\]
+Now one of $am$ or $-am$ is positive (since $a\neq0$ and $m\neq0$), so some positive power of $g$ is the identity. This contradicts the hypothesis $o(g)=\infty$.
+
+\item 
+\end{enumerate}
 \end{proof}
 
 \begin{proposition}
-If $\phi:G\to H$ is an isomorphism and $g\in G$ then $o(\phi(g))=o(g)$.
+Let $G=\langle g\rangle$.
+\begin{enumerate}[label=(\roman*)]
+\item If $o(g)=\infty$, then $G=\langle g^a\rangle$ if and only if $a=\pm1$.
+\item If $o(g)=n<\infty$, then $G=\langle x^a\rangle$ if and only if $\gcd(a,n)=1$. In particular, the number of generators of $G$ is $\phi(n)$ (where $\phi$ is Euler's totient function).
+\end{enumerate}
+\end{proposition}
+
+\subsection{Subgroups}
+\begin{definition}[Subgroup]
+Let $G$ be a group. A non-empty $H\subset G$ is a \vocab{subgroup}\index{subgroup} of $G$, denoted $H\le G$, if $H$ is closed under products and inverses; that is,
+\begin{enumerate}[label=(\roman*)]
+\item $e\in H$;
+\item $xy\in H$ for all $x,y\in H$;
+\item $x^{-1}\in H$ for all $x\in H$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+If $\ast$ is an associative (respectively, commutative) binary operation on $G$ and $\ast$ is restricted to some $H\subset G$ is a binary operation on $H$, then $\ast$ is automatically associative (respectively, commutative) on $H$ as well.
+\end{remark}
+
+The following result provides a convenient method to determine if a given subset of a group is a subgroup.
+
+\begin{lemma}[Subgroup criterion]
+Let $G$ be a group, $H\subset G$ is non-empty. Then $H\le G$ if and only if $xy^{-1}\in H$ for all $x,y\in H$. 
+\end{lemma}
+
+\begin{proof} \
+
+\fbox{$\implies$} If $H\le G$, then we are done, by definition of subgroup.
+
+\fbox{$\impliedby$} We want to prove that for non-empty $H\subset G$, if $xy^{-1}\in H$ for all $x,y\in H$, then $H\le G$, by checking the group axioms:
+\begin{enumerate}[label=(\roman*)]
+\item Since $H\neq\emptyset$, take $x\in H$, let $y=x$, then $e=xx^{-1}\in H$, so $H$ contains the identity of $G$.
+\item Since $e\in H$, $x\in H$, then $x^{-1}\in H$ so $H$ is closed under taking inverses.
+\item For any $x,y\in H$, $x,y^{-1}\in H$, so by (ii), $x(y^{-1})^{-1}=xy\in H$, so $H$ is closed under multiplication.
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+Let $G=\langle g\rangle$ be a cyclic group. Then every subgroup of $G$ is cyclic.
+\end{proposition}
+
+\begin{proposition}
+Let $G$ be a group, $H,K\le G$. Then $H\cap K\le G$.
 \end{proposition}
 
 \begin{proof}
-We have
-\[(\phi(g))^k=e_H\iff\phi(g^k)=e_H\iff g^k=e_G\]
-as $\phi$ is injective.
+Apply the subgroup criterion:
+\begin{enumerate}[label=(\roman*)]
+\item Since $e_G\in H$ and $e_G\in K$, we have $e_G\in H\cap K$, so $H\cap K\neq\emptyset$.
+\item Let $a,b\in H\cap K$. Then $a,b\in H$ and $a,b\in K$. Since $H,K\le G$, by the subgroup criterion, $ab^{-1}\in H$ and $ab^{-1}\in K$, so $ab^{-1}\in H\cap K$.
+\end{enumerate}
 \end{proof}
 
-We introduce left cosets and right cosets of a subgroup.
+\begin{corollary}
+Let $G$ be a group, $\{H_i\mid i\in I\}$ is a collection of subgroups of $G$. Then
+\[\bigcap_{i\in I}H_i\le G.\]
+\end{corollary}
 
+Thus we may make the following definition.
+\begin{definition}[Subgroup generated by subset of group]
+Let $G$ be a group, $S\subset G$. The \vocab{subgroup generated by $S$}, denoted by $\langle S\rangle$, is the smallest subgroup of $G$ which contains $S$.
+
+If $g\in G$, then we write $\langle g\rangle$ (rather than the more accurate but cumbersome $\langle\{g\}\rangle$).
+
+If $\langle S\rangle=G$, then the elements of $S$ are said to be \emph{generators} of $G$.
+\end{definition}
+
+\begin{example}
+If $G$ is abelian and $g,h\in G$ then
+\[\langle g,h\rangle=\{g^rh^s\mid r,s\in\ZZ\}.\]
+\begin{proof}
+Certainly $\{g^rh^s\mid r,s\in\ZZ\}\subset\langle g,h\rangle$. However, when $G$ is abelian (or indeed if just $gh=hg$), then $\{g^rh^s\mid r,s\in\ZZ\}$ is a subgroup as follows:
+\begin{enumerate}[label=(\roman*)]
+\item $e=g^0h^0\in\{g^rh^s\mid r,s\in\ZZ\}$
+\item $(g^kh^l)(g^Kh^L)=g^{k+K}h^{l+L}\in\{g^rh^s\mid r,s\in\ZZ\}$
+\item $(g^kh^l)^{-1}=h^{-l}g^{-k}=g^{-k}h^{-l}\in\{g^rh^s\mid r,s\in\ZZ\}$
+\end{enumerate}
+\end{proof}
+\end{example}
+\pagebreak
+
+\section{Cosets and Lagrange's Theorem}
 \begin{definition}[Coset]\index{coset}
-Let $H\le G$. For $g\in G$, a \vocab{left coset}\index{coset!left coset} of $H$ in $G$ is 
-\[gH\coloneqq\{gh\mid h\in H\}.\]
-Similarly, for $g\in G$, a \vocab{right coset}\index{coset!right coset} of $H$ in $G$ is
-\[Hg\coloneqq\{hg\mid h\in H\}.\]
-Any element of a coset is called a \textbf{representative} for the coset.
+Let $H\le G$. For $a\in G$, a \vocab{left coset}\index{coset!left coset} and \vocab{right coset}\index{coset!right coset} of $H$ in $G$ are
+\begin{align*}
+aH&\coloneqq\{ah\mid h\in H\}\\
+Ha&\coloneqq\{ha\mid h\in H\}
+\end{align*}
+Any element of a coset is called a \emph{representative} for the coset.
 \end{definition}
 
 The set of left cosets is given by
-\[(G/H)_{l}\coloneqq\{gH\mid g\in G\}.\]
+\[(G/H)_{l}\coloneqq\{aH\mid a\in G\}.\]
 Similarly, the set of right cosets is given by
-\[(G/H)_{r}\coloneqq\{Hg\mid g\in G\}.\]
+\[(G/H)_{r}\coloneqq\{Ha\mid a\in G\}.\]
 
-\begin{comment}
-\begin{mdframed}
-The following is an alternative formation using quotient sets.
+\begin{lemma}
+Let $H\le G$. Then $aH=H$ if and only if $a\in H$. (Similarly, $Ha=H$ if and only if $a\in H$.)
+\end{lemma}
 
-Let $H\le G$. Define $\sim$ on $G$ as follows: for all $x,y\in G$,
-\[x\sim y\iff x^{-1}y\in H.\]
-We verify that this is an equivalence relation:
-\begin{enumerate}[label=(\roman*)]
-\item $\forall x\in G$,
-\[x^{-1}x=e\in H\implies x\sim x\]
-\item $\forall x,y\in G$,
-\begin{align*}
-x\sim y
-&\implies x^{-1}y\in H\\
-&\implies (x^{-1}y)^{-1}\in H\\
-&\implies y^{-1}x\in H\\
-&\implies y\sim x
-\end{align*}
-\item $\forall a,b,c\in G$,
-\begin{align*}
-a\sim b,b\sim c
-&\implies a^{-1}b\in H, b^{-1}c\in H\\
-&\implies (a^{-1}b)(b^{-1}c)=a^{-1}c\in H\\
-&\implies a\sim c
-\end{align*}
-\end{enumerate}
-Denote the set of equivalence classes as
-\[G/\sim\coloneqq\{[x]\mid x\in G\}.\]
-Given $x,y\in G$, we formulate a left coset of $H$ in $G$ as follows:
-\begin{align*}
-x\sim y
-&\iff x^{-1}y\in H\\
-&\iff \exists h\in H,x^{-1}y=h\\
-&\iff \exists h\in H,y=xh\iff y\in xH
-\end{align*}
-and hence $[x]=xH$. Thus we can write
-\[G/\sim=(G/H)_{l}.\]
-As for the right coset, define
-\[x\sim y\iff xy^{-1}\in H\]
-and the rest is similar.
-\end{mdframed}
-\end{comment}
+\begin{proof} \
 
-\begin{proposition}
-Let $H\le G$. Given $g,g^\prime\in G$, two (left) cosets $gH$ and $g^\prime H$ are either disjoint or equal; that is, $(G/H)_l$ form a partition of $G$.
-\end{proposition}
+\fbox{$\implies$} Suppose $aH=H$. Then $ah\in H$ for some $h\in H$. Let $k=ah$, then $a=kh^{-1}\in H$.
+
+\fbox{$\impliedby$} Let $a\in H$. Then $aH\subset H$.
+
+Since $a^{-1}\in H$, $a^{-1}H\subset H$. Then $H=eH=(aa^{-1})H=a(a^{-1})H\subset aH$. Hence $aH=H$.
+\end{proof}
+
+The next result shows when two cosets are equal.
+\begin{lemma}
+Let $H\le G$, $a,b\in G$. Then $aH=bH$ if and only if $a^{-1}b\in H$.
+\end{lemma}
 
 \begin{proof}
-We want to prove: if the cosets $gH$ and $g^\prime H$ have an element in common, then they are equal.
-
-Suppose $gh=g^\prime h^\prime$ for some $h,h^\prime\in H$. Then $g=g^\prime h^\prime h^{-1}$. But $h^\prime h^{-1}\in H$, so $gH=g^\prime(h^\prime h^{-1})H=g^\prime H$, since $h^\prime h^{-1}H=H$.
+\begin{align*}
+aH=bH&\iff a^{-1}(aH)=a^{-1}bH\\
+&\iff (a^{-1}a)H=(a^{-1}b)H\\
+&\iff H=(a^{-1}b)H
+\end{align*}
+Note that from the previous result, $H=(a^{-1}b)H$ if and only if $a^{-1}b\in H$.
 \end{proof}
+
+\begin{proposition}
+Let $H\le G$. Then $(G/H)_l$ forms a partition of $G$. (Similar remarks hold for right cosets.)
+\end{proposition}
+
+We need to prove the following.
+\begin{enumerate}[label=(\roman*)]
+\item For all $a\in G$, $aH\neq\emptyset$.
+\item $\bigcup_{a\in G}aH=G$.
+\item For every $a,b\in G$, $aH\cap bH=\emptyset$ or $aH=bH$.
+\end{enumerate}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Since $H\le G$, $e\in H$. Thus for all $a\in G$, $a=ae\in aH$ so $aH\neq\emptyset$.
+\item For all $a\in G$, $aH\subset G$, then $\bigcup_{a\in G}aH\subset G$. Note that $a\in G$ implies $a=ae\in aH$, and so $G=\bigcup_{a\in G}g\subset\bigcup_{a\in G}aH$. By double inclusion we are done.
+\item If $aH\cap bH=\emptyset$, then we are done. If $aH\cap bH\neq\emptyset$ we need to show $aH=bH$. Let $x\in G$ such that $x\in aH\cap bH$. Then $x=ah_1=bh_2$ for $h_1,h_2\in H$ so $h_1=a^{-1}bh_2$. Notice that $a^{-1}b=h_1h_2^{-1}\in H$ and thus $aH=bH$.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}[Index]
+The number of left cosets of $H$ in $G$ is called the \vocab{index} of $H$ in $G$, denoted by $|G:H|$.
+\end{definition}
 
 The following result shows that $H$ partitions $G$ into equal-sized parts.
 
@@ -519,27 +502,15 @@ f(h_1)=f(h_2)
 thus $f$ is an injective mapping. Note that $f$ is surjective by the definition of $aH$. Since $f$ is bijective, $|H|=|aH|$.
 \end{proof}
 
-An important result relating the order of a group with the orders of its subgroups is Lagrange's theorem.
-
 \begin{theorem}[Lagrange's theorem]
-If $G$ is a finite group, $H\le G$, then $|H|$ divides $|G|$, and the number of left cosets of $H$ in $G$ equals $\frac{|G|}{|H|}$.
+Let $G$ be a finite group, $H\le G$. Then $|G|=|H|\:|G:H|$.
 \end{theorem}
 
 \begin{proof}
-Since $|G|<\infty$, let
-\[(G/H)_{l}=\{a_1H,a_2H,\dots,a_nH\}.\]
-Since $G$ is the disjoint union of $a_1H,\dots,a_nH$, we have that
-\begin{align*}
-|G|&=\sum_{i=1}^{n}|a_iH|\\
-&=\sum_{i=1}^{n}|H|\\
-&=nH.
-\end{align*}
-Thus
-\[n=\frac{|G|}{|H|}\in\NN\]
+Let $|H|=n$, and let $|G:H|=k$. Since $G$ is partitioned into $k$ disjoint subsets, each of which has cardinality $n$, we have $|G|=kn$, or
+\[|G|=|H|\:|G:H|\]
 as desired.
 \end{proof}
-
-We call $|G:H|\coloneqq\frac{|G|}{|H|}$ the \vocab{index} of $H$ in $G$.
 
 \begin{theorem}[Fermat's little theorem]
 For every finite group $G$, for all $a \in G$, $a^{|G|}=e$.
@@ -558,18 +529,108 @@ and thus $|H|=k$. By Lagrange's theorem, $k$ divides $|G|$, so
 If $a$ and $N$ are coprime, then $a^{\phi(N)}\equiv1\pmod N$, where $\phi$ is Euler's totient function.
 \end{theorem}
 
+\begin{proposition}
+A group of prime order is cyclic.
+\end{proposition}
+
+\begin{definition}
+Let $H,K\le G$, define
+\[HK=\{hk\mid h\in H,k\in K\}.\]
+\end{definition}
+
+\begin{proposition}
+If $H,K\le G$ are finite groups, then
+\[|HK|=\frac{|H||K|}{|H\cap K|}.\]
+\end{proposition}
+
+\begin{proof}
+Notice that $HK$ is a union of left cosets of $K$, namely
+\[HK=\bigcup_{h\in H}hK.\]
+
+\end{proof}
+\pagebreak
+
+\section{Normal Subgroups, Quotient Groups}
+\begin{definition}[Normal subgroup]
+Let $G$ be a group. $H\le G$ is a \vocab{normal subgroup} of $G$, denoted by $H\triangleleft G$, if
+\[aH=Ha\quad(\forall a\in G)\]
+\end{definition}
+
+If $G$ has no non-trivial normal subgroup, then $G$ is a \emph{simple group}.
+
+\begin{remark}
+This does \emph{not} mean that $ah=ha$ for all $a\in G$, $h\in H$ or that $G$ is abelian. Although we can easily see that all subgroups of abelian groups are normal. In general, a left coset does not equal the right coset.
+\end{remark}
+
+\begin{lemma}
+The following are equivalent.
+\begin{enumerate}[label=(\roman*)]
+\item $H\triangleleft G$.
+\item $ghg^{-1}\in H$ for all $g\in G$, $h\in H$.
+\item $gHg^{-1}=H$ for all $g\in G$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+
+\fbox{(i)$\iff$(ii)} In the forward direction, $aH=Ha$ for all $a\in G$. Let $g\in G$, $x\in H$. Then $gH=Hg$ so $gx=h^\prime g$ for some $h^\prime\in H$. Then $gxg^{-1}=h^\prime gg^{-1}=h^\prime\in H$.
+
+In the reverse direction, $ghg^{-1}\in H$ for all $g\in G$, $h\in H$. Fix $g$. Then $ghg^{-1}\in H$ implies $gh\in Hg$ for all $h\in H$. So $gH\subset Hg$. Similarly $gH\supset Hg$, so $gH=Hg$.
+
+\fbox{(i)$\iff$(iii)} $H\triangleleft G$ if and only if for all $g\in G$,
+\begin{align*}
+gH=Hg&\iff(gH)g^{-1}=(Hg)g^{-1}\\
+&\iff gHg^{-1}=H
+\end{align*}
+\end{proof}
+
+\begin{definition}[Quotient group]
+Let $G$ be a group, $H\triangleleft G$. Then the \vocab{quotient group} of $G$ by $H$ is
+\[G/H\coloneqq\{aH\mid a\in G\}.\]
+\end{definition}
+
+\begin{proposition}
+$G/H$ is a group under the following operation. Let $aH,bH\in G/H$. Then the product of $aH$ and $bH$ is $(aH)(bH)$.
+\[(aH)(bH)=a(Hb)H=a(bH)H=abH\]
+\end{proposition}
+
+\begin{proof}
+Check group axioms.
+\begin{enumerate}[label=(\roman*)]
+\item For $a,b,c\in G$,
+\begin{align*}
+(aH)(bHcH)&=(aH)(bcH)\\
+&=a(bc)H\\
+&=(ab)cH\\
+&=(aHbH)cH
+\end{align*}
+so the operation is associative.
+\item The identity of $G/H$ is the coset $eH$.
+\item For $aH\in G/H$, the inverse of $aH$ is $a^{-1}H$ as is immediate from the definition of the product.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+Let $G$ be a finite group, $H\triangleleft G$. Then
+\[|G/H|=|G:H|=\frac{|G|}{|H|}.\]
+\end{lemma}
+
+\begin{definition}[Quotient map]
+Let $H\triangleleft G$. The map $\pi:G\to G/H$ which sends $g\mapsto gH$ is called the \vocab{quotient map}.
+\end{definition}
+\pagebreak
+
 \section{Homomorphisms and Isomorphisms}
 In this section, we make precise the notion of when two groups ``look the same''; that is, they have the same group-theoretic structure. This is the notion of an \emph{isomorpism} between two groups.
 
-\subsection{Definitions}
+\subsection{Definitions and Examples}
 \begin{definition}[Homomorphism]
 Let $(G,\ast)$ and $(H,\diamond)$ be groups. A map $\phi:G\to H$ is called a \vocab{homomorphism}\index{homomorphism} if, for all $x,y\in G$,
 \[\phi(x\ast y)=\phi(x)\diamond\phi(y).\]
 \end{definition}
 
-When the group operations for $G$ and $H$ are not explicitly written, the homomorphism condition becomes simply
-\[\phi(xy)=\phi(x)\phi(y)\]
-but it is important to keep in mind that the product on the LHS is computed in $G$, and the product on the RHS is computed in $H$.
+When the group operations for $G$ and $H$ are not explicitly written, we have
+\[\phi(xy)=\phi(x)\phi(y).\]
 
 \begin{definition}[Isomorphism]
 $\phi:G\to H$ is called an \vocab{isomorphism}\index{isomorphism} if
@@ -580,9 +641,9 @@ $\phi:G\to H$ is called an \vocab{isomorphism}\index{isomorphism} if
 Then $G$ and $H$ are said to be \vocab{isomorphic}, denoted by $G\cong H$.
 \end{definition}
 
-In other words, the groups $G$ and $H$ are isomorphic if there is a bijection between them which preserves the group operations. Intuitively, $G$ and $H$ are the same group except that the elements and the operations may be written differently in $G$ and $H$.
+Intuitively, $G$ and $H$ are the same group except that the elements and the operations may be written differently in $G$ and $H$.
 
-We also have the following terminology: An \textbf{automorphism} of a group $G$ is an isomorphism from $G$ to $G$. The automorphisms of $G$ form a group $\Aut(G)$ under composition. An endomorphism of $G$ is a homomorphism from $G$ to $G$. (Rarely used) A \textbf{monomorphism} is an injective homomorphism and an \textbf{epimorphism} is a surjective homomorphism.
+We also have the following terminology: An \emph{automorphism} of a group $G$ is an isomorphism from $G$ to $G$. The automorphisms of $G$ form a group $\Aut(G)$ under composition. An endomorphism of $G$ is a homomorphism from $G$ to $G$. (Rarely used) A \emph{monomorphism} is an injective homomorphism and an \emph{epimorphism} is a surjective homomorphism.
 
 \begin{example}
 For any group $G$, $G\cong G$ as the identity map provides an isomorphism from $G$ to itself. (Exercise: prove that the identity map is the \emph{only} isomorphism from $G$ to itself.)
@@ -590,12 +651,11 @@ For any group $G$, $G\cong G$ as the identity map provides an isomorphism from $
 $\ZZ\cong10\ZZ$ as the map $\phi:\ZZ\to10\ZZ$ by $x\mapsto 10x$ is a homomorphism and a bijection.
 \end{example}
 
-\begin{exercise}
-Prove that $(\RR,+)\cong(\RR^+,\times)$.
-\end{exercise}
+\begin{example}
+$(\RR,+)\cong(\RR^+,\times)$.
 
 \begin{proof}
-The exponential map $\exp:\RR\to\RR^+$ defined by $\exp(x)=e^x$, where $e$ is the base of the natural logarithm, is an isomorphism from $(\RR,+)$ to $(\RR^+,\times)$.
+The exponential map $\exp:\RR\to\RR^+$ defined by $\exp(x)=e^x$ is an isomorphism from $(\RR,+)$ to $(\RR^+,\times)$.
 \begin{enumerate}[label=(\roman*)]
 \item $\exp$ is a bijection since it has an inverse function (namely $\ln$).
 \item $\exp$ preserves the group operations since $e^{x+y}=e^xe^y$.
@@ -603,9 +663,10 @@ The exponential map $\exp:\RR\to\RR^+$ defined by $\exp(x)=e^x$, where $e$ is th
 
 We see that both the elements and the operations are different yet the two groups are isomorphic, that is, as groups they have identical structures.
 \end{proof}
+\end{example}
 
 \begin{proposition}
-Let $\phi:G\to H$ be a homomorphism between groups and let $g\in G$, $n\in\ZZ$. Then
+Let $\phi:G\to H$ be a homomorphism. Let $g\in G$, $n\in\ZZ$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $\phi(e_G)=e_H$;
 \item $\phi(g^{-1})=\brac{\phi(g)}^{-1}$;
@@ -615,32 +676,44 @@ Let $\phi:G\to H$ be a homomorphism between groups and let $g\in G$, $n\in\ZZ$. 
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item We have
-\[\phi(e_G)=\phi(e_G e_G)=\phi(e_G)\phi(e_G).\]
-Now apply $\phi(e_G)^{-1}$ to both sides. Since $\phi(e_G)\phi(e_G)^{-1}=e_H$, we have
-\[e_H=\phi(e_G)e_H,\]
-so $\phi(e_G)=e_H$.
+\item $\phi(e_G)=\phi(e_G e_G)=\phi(e_G)\phi(e_G)$, then apply $\phi(e_G)^{-1}$ to both sides to get $\phi(e_G)=e_H$.
 
-\item 
-\[\phi(g)\phi(g^{-1})=\phi(gg^{-1})=\phi(e_G)=e_H.\]
+\item $\phi(g)\phi(g^{-1})=\phi(gg^{-1})=\phi(e_G)=e_H$.
 
-\item Note more generally that we can show $\phi(g^n)=(\phi(g))^n$ for $n>0$ by induction and then for $n=-k<0$ we have
+\item Note more generally that we can show $\phi(g^n)=(\phi(g))^n$ for $n>0$ by induction. For $n=-k<0$ we have
 \[\phi(g^n)=\phi((g^{-1})^k)=(\phi(g^{-1}))^k=(\phi(g)^{-1})^k=\phi(g)^n.\]
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}
-If $\phi:G\to H$ is an isomorphism, then
-\begin{enumerate}[label=(\roman*)]
-\item $|G|=|H|$;
-\item $G$ is abelian if and only if $H$ is abelian;
-\item $|x|=|\phi(x)|$ for all $x\in G$.
-\end{enumerate}
-\end{proposition}
+\begin{theorem}
+Any two cyclic groups of the same order are isomorphic.
+\end{theorem}
+
+\begin{proof}
+Suppose $\langle x\rangle$ and $\langle y\rangle$ are both cyclic groups of order $n$. We first prove the case where $n<\infty$. We claim that the map $\phi:\langle x\rangle\to\langle y\rangle$ which sends $x^k\mapsto y^k$ is an isomorphism.
+\begin{lemma*}
+Let $G$ be a group, $g\in G$, let $m,n\in\ZZ$. Denote $d=\gcd(m,n)$. If $g^n=e$ and $g^m=e$, then $g^d=e$.
+\end{lemma*}
+\begin{proof}
+By Bezout's lemma, since $d=\gcd(m,n)$, then there exists $q,r\in\ZZ$ such that $qm+rn=d$. Thus
+\[g^d=g^{qm+rn}=\brac{g^m}^q\brac{g^n}^r=e.\]
+\end{proof}
+We first show that $\phi$ is well-defined; that is, $x^r=x^s\implies \phi(x^r)=\phi(x^s)$. Note that $x^{r-s}=e$, so by the above lemma, $n\mid r-s$. Write $r=tn+s$ for some $t\in\ZZ$, so
+\[\phi(x^r)=\phi(x^{tn+s})=y^{tn+s}=(y^n)^ty^s=y^s=\phi(x^s).\]
+
+We then show that $\phi$ is a homomorphism:
+\[\phi(x^ax^b)=\phi(x^{a+b})=y^{a+b}=y^ay^b=\phi(x^a)\phi(x^b).\]
+
+Finally we show that $\phi$ is bijective. Since the element $y^k$ of $\langle y\rangle$ is in the image of $x^k$ under $\phi$, $\phi$ is surjective. Since both groups have the same finite order, any surjection from one to the other is a bijection. Therefore $\phi$ is an isomorphism.
+
+We now prove the case where $n=\infty$. If $\langle x\rangle$ is an infinite cyclic group, let $\phi:\ZZ\to\langle x\rangle$ be defined by $\phi(k)=x^k$. (This map is well-defined since there is no ambiguity in the representation of elements in the domain.)
+
+Since $x^a\neq x^b$ for all distinct $a,b\in\ZZ$, $\phi$ is injective. By definition of a cyclic group, $\phi$ is surjective. As above, the laws of exponents ensure $\phi$ is a homomorphism. Hence $\phi$ is an isomorphism.
+\end{proof}
 
 \subsection{Kernel and Image}
-\begin{definition}[Kernel, image]
-If $\phi$ is a homomorphism $\phi:G\to H$, the \vocab{kernel}\index{kernel} of $\phi$ is
+\begin{definition}[Kernel and image]
+Let $\phi:G\to H$ be a homomorphism. Then the \vocab{kernel}\index{kernel} of $\phi$ is
 \[\ker\phi\coloneqq\{g\in G\mid \phi(g)=e_H\}\subset G.\]
 The \vocab{image}\index{image} of $G$ under $\phi$ is
 \[\im\phi\coloneqq\phi(G)=\{\phi(g)\mid g\in G\}\subset H.\]
@@ -650,82 +723,212 @@ The \vocab{image}\index{image} of $G$ under $\phi$ is
 $\im\phi$ is the usual set theoretic image of $\phi$.
 \end{remark}
 
-\begin{definition}[Normal subgroup]
-Let $G$ be a group, $H\le G$. $H$ is said to be a \vocab{normal subgroup} of $G$, denoted by $H\triangleleft G$, if
-\[gH=Hg\quad(\forall g\in G)\]
-or equivalently if
-\[g^{-1}hg\in H\quad(\forall g\in G,h\in H)\]
-\end{definition}
-
-\begin{remark}
-This does \emph{not} mean that $gh=hg$ for all $g\in G$, $h\in H$ or that $G$ is abelian. Although we can easily see that all subgroups of abelian groups are normal.
-\end{remark}
-
 \begin{proposition}
-Let $\phi:G\to H$ be a homomorphism between groups. Then $\ker\phi\le G$. In fact, $\ker\phi\triangleleft G$.
+Let $\phi:G\to H$ be a homomorphism. Then
+\begin{enumerate}[label=(\roman*)]
+\item $\ker\phi\triangleleft G$;
+\item $\im\phi\le H$.
+\end{enumerate}
 \end{proposition}
 
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Apply the subgroup criterion. Since $e_G\in\ker\phi$, $\ker\phi\neq\emptyset$. Let $x,y\in\ker\phi$; that is, $\phi(x)=\phi(y)=e_H$. Then
+\[\phi(xy^{-1})=\phi(x)\phi(y)^{-1}=e_H\]
+so $xy^{-1}\in\ker\phi$. By the subgroup criterion, $\ker\phi\le G$.
+
+
+
+\item Since $\phi(e_G)=e_H$, $e_H\in\im\phi$ so $\im\phi\neq\emptyset$. Let $x,y\in\im\phi$. Then there exists $a,b\in G$ such that $\phi(a)=x$, $\phi(b)=y$. Then
+\[xy^{-1}=\phi(a)\phi(b)^{-1}=\phi(ab^{-1})\]
+so $xy^{-1}\in\im\phi$. By the subgroup criterion, $\im\phi\le G$.
+\end{enumerate}
+\end{proof}
+
 \begin{proposition}
-Let $\phi:G\to H$ be a homomorphism between groups. Then $\im\phi\le H$.
+Let $\phi:G\to H$ be a homomorphism. Then $\phi$ is injective if and only if $\ker\phi=\{e_G\}$.
 \end{proposition}
 
-\subsection{Quotient Groups}
-\begin{definition}[Quotient group]
+\begin{proof} \
 
-\end{definition}
+\fbox{$\implies$} Suppose $\phi$ is injective. Since $\phi(e_G)=e_H$, $e_G\in\ker\phi$ so $\{e_G\}\subset\ker\phi$. 
+
+Conversely, let $g\in\ker\phi$, so $\phi(g)=e_H$. Then $\phi(g)=e_H=\phi(e_H)$, so by injectivity, $g=e_G$ and thus $g=e_G$. Hence $\ker\phi\subset\{e_G\}$, so $\ker\phi=\{e_G\}$.
+
+\fbox{$\impliedby$} Suppose $\ker\phi=\{e_G\}$. Suppose $\phi(a)=\phi(b)$, then
+\begin{align*}
+\phi(a)&=\phi(b)\\
+\phi(a)\phi(b)^{-1}&=\phi(b)\phi(b)^{-1}\\
+\phi(a)\phi(b)^{-1}&=e_H\\
+\phi(ab^{-1})&=e_H
+\end{align*}
+Hence $ab^{-1}\in\ker\phi=\{e_G\}$, so $ab^{-1}=e_G$ and thus $a=b$. Therefore $\phi$ is injective.
+\end{proof}
 
 \subsection{Isomorphism Theorems}
 \begin{theorem}[First isomorphism theorem]
-Let $\phi:G\to H$ be a homomorphism of groups. Then $G/\ker\phi\cong\im\phi(G)$.
+Let $\phi:G\to H$ be a homomorphism. Then
+\[G/\ker\phi\cong\im\phi(G).\]
 \end{theorem}
 
-\begin{corollary}
-Let $\phi:G\to H$ be a homomorphism of groups.
-\begin{enumerate}[label=(\roman*)]
-\item $\phi$ is injective if and only if $\ker\phi=1$.
-\item $|G:\ker\phi|=|\phi(G)|$.
-\end{enumerate}
-\end{corollary}
-
 \begin{theorem}[Second isomorphism theorem]
-
+Let $A,B\le G$, $A\le N_G(B)$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $AB\le G$;
+\item $B\triangleleft AB$;
+\item $A\cap B\triangleleft A$;
+\item $AB/B\cong A/A\cap B$.
+\end{enumerate}
 \end{theorem}
 
 \begin{theorem}[Third isomorphism theorem]
-
+Let $H,K\triangleleft G$, $H\le K$. Then $K/H\triangleleft G/H$, and
+\[(G/H)/(K/H)\cong G/K.\]
+If we denote the quotient by $H$ with a bar, this can be written
+\[\overline{G}/\overline{K}\cong G/K.\]
 \end{theorem}
 
 \begin{theorem}[Fourth isomorphism theorem]
 
 \end{theorem}
 
-\section{Group Actions}
-We move now, from thinking of groups in their own right, to thinking of how groups can move sets around -- for example, how $S_n$ permutes $\{1,2,\dots,n\}$ and matrix groups move vectors.
+\begin{theorem}[Cayley's theorem]
 
-\begin{definition}[Left action]
-A \vocab{left action} of a group $G$ on a set $S$ is a map $\rho:G\times S\to S$ such that
+\end{theorem}
+\pagebreak
+
+\section{Group Actions}
+We move now, from thinking of groups in their own right, to thinking of how groups can move sets around---for example, how $S_n$ permutes $\{1,2,\dots,n\}$ and matrix groups move vectors.
+
+\begin{definition}[Group action]
+A \vocab{group action} of a group $G$ on a set $A$ is a map from $G\times A\to A$ (written as $g\cdot a$, for all $g\in G$, $a\in A$) satisfying the following properties:
 \begin{enumerate}[label=(\roman*)]
-\item $\rho(e,s)=s$ for all $s\in S$;
-\item $\rho\brac{g,\rho(h,s)}=\rho(gh,s)$ for all $s\in S$, $g,h\in G$.
+\item $g_1\cdot(g_2\cdot a)=(g_1g_2)\cdot a$, for all $g_1,g_2\in G$, $a\in A$;
+\item $e_G\cdot a=a$ for all $a\in A$.
+\end{enumerate}
+We say that $G$ is a group acting on a set $A$.
+\end{definition}
+
+Intuitively, a group action of $G$ on a set $A$ means that every element $g$ in $G$ acts as a permutation on $A$ in a manner consistent with the group operations in $G$. There is also a notion of left \emph{action} and \emph{right action}.
+
+For the following defintions, let $G$ be a group, and $A\subset G$ be non-empty.
+
+\begin{definition}[Centraliser]
+The \vocab{centraliser} of $A$ in $G$ is defined by
+\[C_G(A)\coloneqq\{g\in G\mid\forall a\in A,gag^{-1}=a\}.\]
+\end{definition}
+
+Since $gag^{-1}=a$ if and only if $ga=ag$, $C_G(A)$ is the set of elements of $G$ which commute with every element of $A$.
+
+We check that $C_G(A)\le G$:
+\begin{enumerate}[label=(\roman*)]
+\item $e\in C_G(A)$, so $C_G(A)\neq\emptyset$.
+\item Let $x,y\in C_G(A)$; that is, for all $a\in A$, $xax^{-1}=a$ and $yay^{-1}=a$. Then
+\begin{align*}
+(xy)a(xy)^{-1}&=(xy)a(y^{-1}x^{-1})\\
+&=x(yay^{-1})x^{-1}\\
+&=xax^{-1}=a
+\end{align*}
+so $xy\in C_G(A)$. Hence $C_G(A)$ is closed under products.
+\item Let $x\in C_G(A)$; that is, for all $a\in A$, $xax^{-1}=a$. Applying $x^{-1}$ to both sides gives $ax^{-1}=x^{-1}a$. Applying $x$ to both sides gives $a=x^{-1}ax$, so $x^{-1}\in C_G(A)$. Hence $C_G(A)$ is closed under taking inverses.
+\end{enumerate}
+
+\begin{notation}
+In the special case when $A=\{a\}$ we simply write $C_G(a)$ instead of $C_G(\{a\})$. In this case $a^n\in C_G(a)$ for all $n\in\ZZ$.
+\end{notation}
+
+\begin{definition}[Centre]
+The \vocab{centre} of $G$ is the set of elements which commute with all the elements of $G$:
+\[Z(G)\coloneqq\{g\in G\mid\forall x\in G,gx=xg\}.\]
+\end{definition}
+
+Note that $Z(G)=C_G(G)$, so the argument above proves $Z(G)\le G$ as a special case.
+
+\begin{definition}[Normaliser]
+Define $gAg^{-1}=\{gag^{-1}\mid a\in A\}$. The \vocab{normaliser} of $A$ in $G$ is
+\[N_G(A)\coloneqq\{g\in G\mid gAg^{-1}=A\}.\]
+\end{definition}
+
+Notice that if $g\in C_G(A)$, then $gag^{-1}=a\in A$ for all $a\in A$ so $C_G(A)\le N_G(A)$. The proof that $N_G(A)\le G$ is similar to the one that $C_G(A)\le G$.
+
+\begin{definition}[Stabiliser]
+If $G$ is a group acting on a set $S$, $s\in S$, then the \vocab{stabiliser} of $s$ in $G$ is
+\[G_s\coloneqq\{g\in G\mid g\cdot s=s\}.\]
+\end{definition}
+
+\begin{notation}
+Denote the set of all fixed points to be $S^G=\{s\in S\mid\forall g\in G, gs=g\}$.
+\end{notation}
+
+We check that $G_s\le G$:
+\begin{enumerate}[label=(\roman*)]
+\item By definition of group action, $e_G\cdot a=a$, so $e_G\in G_s$.
+\item Let $x,y\in G_s$, then
+\begin{align*}
+(xy)\cdot s&=x\cdot(y\cdot s)\\
+&=x\cdot s=s
+\end{align*}
+so $xy\in G_s$. Hence $G_s$ is closed under products.
+\item Let $x\in G_s$; that is, $x\cdot s=s$. Then
+\begin{align*}
+x^{-1}\cdot s&=x^{-1}\cdot(x\cdot s)\\
+&=(x^{-1}x)\cdot s\\
+&=e\cdot s=s
+\end{align*}
+so $x^{-1}\in G_s$. Hence $G_s$ is closed under taking inverses.
+\end{enumerate}
+
+\begin{definition}
+The \emph{kernel} of the action of $G$ on $S$ is
+\[\{g\in G\mid\forall s\in S, g\cdot s=s\}.\]
+\end{definition}
+
+\begin{definition}[Orbit]
+Let $G$ be a group that acts on a set $S$. Define the \vocab{orbit} of a group element $s\in S$ as
+\[G(s)\coloneqq\{g\cdot s\in S\mid g\in G\}.\]
+\end{definition}
+
+\subsection{Conjugation}
+
+\subsection{Sylow's Theorem}
+\begin{definition}[Sylow $p$-subgroup]
+Let $G$ be a group, and let $p$ be a prime.
+\begin{enumerate}[label=(\roman*)]
+\item A group of order $p^\alpha$ ($\alpha\ge1$) is called a \emph{$p$-group}. Subgroups of $G$ which are $p$-groups are called \emph{$p$-subgroups}.
+\item If $|G|=p^\alpha m$ ($p\nmid m$), then a subgroup of order $p^\alpha$ is called a \vocab{Sylow $p$-subgroup} of $G$.
 \end{enumerate}
 \end{definition}
 
 \begin{notation}
-We will normally write $g\cdot s$ for $\rho(g,s)$ and so (i) and (ii) above would now read as:
-\begin{enumerate}[label=(\roman*)]
-\item $e\cdot s=s$ for all $s\in S$;
-\item $g\cdot(h\cdot s)=(gh)\cdot s$ for all $s\in S$, $g,h\in G$.
-\end{enumerate}
+The set of Sylow $p$-subgroups of $G$ is denoted by $Syl_p(G)$, and the number of Sylow $p$-subgroups of $G$ is denoted by $n_p(G)$ (or just $n_p$ when $G$ is clear from the context).
 \end{notation}
 
-\begin{remark}
-We will think of $g\cdot s\in S$ as the point that $s$ is moved to by $g$.
-\end{remark}
-
-\begin{definition}[Right action]
-A \vocab{right action} of a group $G$ on a set $S$ is a map $\rho:S\times G\to S$ such that
+\begin{theorem}[Sylow's theorem]
+Let $|G|=p^\alpha m$, where $p$ is a prime and $p\nmid m$.
 \begin{enumerate}[label=(\roman*)]
-\item $\rho(s,e)=s$ for all $s\in S$;
-\item $\rho\brac{\rho(s,h), g}=\rho(s,hg)$ for all $s\in S$, $g,h\in G$.
+\item Sylow $p$-subgroups of $G$ exist, i.e. $Syl_p(G)\neq\emptyset$.
+\item If $P$ is a Sylow $p$-subgroup of $G$, and $Q$ is any $p$-subgroup of $G$, then there exists $g\in G$ such that $Q\le gPg^{-1}$, i.e. $Q$ is contained in some conjugate of $P$. In particular, any two Sylow $p$-subgroups of $G$ are conjugate in $G$.
+\item $n_p\equiv1\pmod p$. Furthermore, $n_p$ is the index in $G$ of the normaliser $N_G(P)$ for any Sylow $p$-subgroup $P$, hence $n_p\mid m$.
 \end{enumerate}
+\end{theorem}
+\pagebreak
+
+\section{Group Product, Finite Abelian Groups}
+\begin{definition}[Direct product]
+The \vocab{direct product} $G_1\times\cdots\times G_n$ of the groups $(G_1,\ast_1),\dots,(G_n,\ast_n)$ is the Cartesian product
+\[G_1\times\cdots\times G_n\coloneqq\{(g_1,\dots,g_n)\mid g_i\in G_i\}\]
+with operation defined componentwise:
+\[(g_1,\dots,g_n)\ast(h_1,\dots,h_n)=(g_1\ast_1 h_1,\dots,g_n\ast_n h_n).\]
 \end{definition}
+
+\begin{proposition}
+If $G_1,\dots,G_n$ are groups, then
+\[|G_1\times\cdots\times G_n|=|G_1|\:|G_2|\cdots|G_n|.\]
+\end{proposition}
+
+\begin{proof}
+Let $G=G_1\times\cdots\times G_n$. The proof that the group axioms hold for $G$ is straightforward since each axiom is a consequence of the fact that the same axiom holds for each $G_i$, and the operation on $G$ defined componentwise.
+
+The number of $n$-tuples in $G$ follows from simple combinatorics.
+\end{proof}
+

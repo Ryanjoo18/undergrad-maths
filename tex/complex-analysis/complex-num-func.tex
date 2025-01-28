@@ -131,24 +131,21 @@ and $\displaystyle f^\prime(a)=\pdv{u(a)}{x}+i\pdv{v(a)}{x}$.
 We have
 \[f(z)=f(a)+f^\prime(a)(z-a)+\epsilon(z)(z-a),\]
 where $\epsilon(z)\to0$ as $z\to a$. Identifying $\CC\cong\RR^2$ and writing $a=(a_1,a_2)$, $z=(a_1+h,a_2+k)$, $f=(u,v)$ and $f^\prime(a)=(b_1,b_2)$, this gives
-(u(a1 + h, a2 + k), v(a1 + h, a2 + k))
-= (u(a1, a2), v(a1, a2)) + (b1, b2) · (h, k) + (ε1(h, k), ε2(h, k)) · (h, k).
-The · here means complex multiplication, under the identification of C and
-R
-2
-: thus
-(b1, b2) · (h, k) = (b1h − b2k, b1k + b2h)
-(because (b1 + ib2)(h + ik) = (b1h − b2k) + i(b2h + b1k)). The functions
-ε1(h, k), ε2(h, k) both tend to 0 as k(h, k)k → 0.
+%(u(a1 + h, a2 + k), v(a1 + h, a2 + k))
+%= (u(a1, a2), v(a1, a2)) + (b1, b2) · (h, k) + (ε1(h, k), ε2(h, k)) · (h, k).
+The $\cdot$ here means complex multiplication, under the identification of $\CC$ and $\RR^2$: thus
+%(b1, b2) · (h, k) = (b1h − b2k, b1k + b2h)
+%(because (b1 + ib2)(h + ik) = (b1h − b2k) + i(b2h + b1k)). The functions
+%ε1(h, k), ε2(h, k) both tend to 0 as k(h, k)k → 0.
 Looking at the first component, we have
-u(a1 + h, a2 + k) = u(a1, a2) + b1h − b2k + ε1(h, k)h − ε2(h, k)k.
+%u(a1 + h, a2 + k) = u(a1, a2) + b1h − b2k + ε1(h, k)h − ε2(h, k)k.
 In particular,
-u(a1 + h, a2) = u(a1, a2) + b1h + ε1(h, 0)h.
+%u(a1 + h, a2) = u(a1, a2) + b1h + ε1(h, 0)h.
 
 Since $\epsilon_1(h,0)\to0$ as $|h|\to0$, it follows that $\pdv{u(a)}{x}$ exists and equals $b_1$.
 
 Very similar arguments may be used for the other partial derivatives and we see that they all exist, and that
-\[∂yu(a) = −b2, ∂xv(a) = b2, ∂yv(a) = b1.\]
+%\[∂yu(a) = −b2, ∂xv(a) = b2, ∂yv(a) = b1.\]
 Everything stated in the theorem now follows. 
 \end{proof}
 

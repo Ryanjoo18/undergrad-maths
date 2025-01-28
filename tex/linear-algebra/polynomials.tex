@@ -1,12 +1,12 @@
 \chapter{Polynomials}
 \section{Definitions}
 \begin{definition}[Polynomial]
-A function $p:\FF\to\FF$ is a \textbf{polynomial} with coefficients in $\FF$ if there exist $a_i\in\FF$ such that
+$p:\FF\to\FF$ is a \vocab{polynomial}\index{polynomial} with coefficients in $\FF$ if there exist $a_i\in\FF$ such that
 \[p(z)=a_0+a_1z+\cdots+a_nz^n\quad(z\in\FF)\]
 \end{definition}
 
 \begin{notation}
-The set of all polynomials with coefficients in $\FF$ is denoted by $\FF[z]$.
+The set of polynomials with coefficients in $\FF$ is denoted by $\FF[z]$.
 \end{notation}
 
 \begin{proposition}
@@ -14,15 +14,15 @@ With the usual operations of addition and scalar multiplication, $\FF[z]$ is a v
 \end{proposition}
 
 \begin{definition}[Degree]
-A polynomial $p\in\FF[z]$ is has \textbf{degree} $n$, denoted by $\deg p=n$, if there exist scalars $a_0,a_1,\dots,a_n\in\FF$ with $a_n\neq0$ such that $p(z)=a_0+a_1z+\cdots+a_nz^n$ for all $z\in\FF$.
+A polynomial $p\in\FF[z]$ is has \vocab{degree}\index{polynomial!degree} $n$, denoted by $\deg p=n$, if there exist scalars $a_0,a_1,\dots,a_n\in\FF$ with $a_n\neq0$ such that $p(z)=a_0+a_1z+\cdots+a_nz^n$ for all $z\in\FF$.
 \end{definition}
 
 \begin{notation}
-For non-negative integer $n$, $\FF_n[z]$ denotes the set of all polynomials with coefficients in $\FF$ and degree at most $n$.
+For non-negative integer $n$, $\FF_n[z]$ denotes the set of polynomials with coefficients in $\FF$ and degree at most $n$.
 \end{notation}
 
 \begin{proposition}
-For non-negative integer, $\FF_n[z]$ is finite-dimensional.
+For non-negative integer $n$, $\FF_n[z]$ is finite-dimensional.
 \end{proposition}
 
 \begin{proof}
@@ -36,22 +36,41 @@ $\FF[z]$ is infinite-dimensional.
 \begin{proof}
 Consider any list of elements of $\FF[z]$. Let $n$ denote the highest degree of the polynomials in this list. Then every polynomial in the span of this list has degree at most $n$. Thus $z^{n+1}$ is not in the span of our list. Hence no list spans $\FF[z]$. Thus $\FF[z]$ is infnite-dimensional.
 \end{proof}
+\pagebreak
 
 \section{Zeros of Polynomials}
-The solutions to the equation $p(z)=0$ play a crucial role in the study of a polynomial $p\in\FF[z]$. Thus these solutions have a special name.
-
-\begin{definition}[Zero]
-$\lambda\in\FF$ is called a \vocab{zero}\index{zero of polynomial} (or \emph{root}) of a polynomial $p\in\FF[z]$ if
+\begin{definition}[Zero of polynomial]
+$\lambda\in\FF$ is called a \vocab{zero}\index{polynomial!zero} (or \emph{root}) of a polynomial $p\in\FF[z]$ if
 \[p(\lambda)=0.\]
 \end{definition}
 
 The next result is the key tool that we will use to show that the degree of a polynomial is unique.
 
-\begin{lemma}[Factor Theorem]
+\begin{lemma}[Factor theorem]\label{lemma:factor-thm}
 Suppose $n\in\ZZ^+$, $p\in\FF_n[z]$. Suppose $\lambda\in\FF$, then $p(\lambda)=0$ if and only if there exists $q\in\FF_{n-1}[z]$ such that
-\[p(z)=(z-\lambda)q(z)\]
-for every $z\in\FF$.
+\[p(z)=(z-\lambda)q(z)\quad(\forall z\in\FF)\]
 \end{lemma}
+
+\begin{proof} \
+
+\fbox{$\implies$} Suppose $p(\lambda)=0$. Let $a_0,a_1,\dots,a_n\in\FF$ be such that
+\[p(z)=a_nz^n+\cdots+a_1z+a_0\quad(\forall z\in\FF)\]
+Then for all $z\in\FF$,
+\begin{align*}
+p(z)&=p(z)-p(\lambda)\\
+&=\brac{a_nz^n+\cdots+a_1z+a_0}-\brac{a_n\lambda^n+\cdots+a_1\lambda+a_0}\\
+&=a_n\brac{z^n-\lambda^n}+\cdots+a_1(z-\lambda).
+\end{align*}
+Note that for each $k=1,\dots,n$, we can factorise
+\[z^k-\lambda^k=(z-\lambda)\brac{z^{k-1}+z^{k-2}\lambda+\cdots+\lambda^{k-1}}.\]
+Thus $p$ equals $z-\lambda$ times some polynomial of degree $n-1$, as desired.
+
+\fbox{$\impliedby$} Now suppose that there exists a polynomial $q\in\FF[z]$ such that
+\[p(z)=(z-\lambda)q(z)\quad(\forall z\in\FF)\]
+Then
+\[p(\lambda)=(\lambda-\lambda)q(\lambda)=0,\]
+as desired.
+\end{proof}
 
 Now we can prove that the degree of a polynomials determines how many zeros it has.
 
@@ -59,22 +78,43 @@ Now we can prove that the degree of a polynomials determines how many zeros it h
 Suppose $n\in\ZZ^+$, $p\in\FF_n[z]$. Then $p$ has at most $n$ zeros in $\FF$.
 \end{proposition}
 
+\begin{proof}
+Prove by induction on $n$.
+
+The desired result holds for $n=1$ because if $a_1\neq0$ then the polynomial $a_0+a_1z$ has only one zero (which equals $-\frac{a_0}{a_1}$).
+
+Now assume the desired result holds for $n-1$. If $p$ has no zeros in $\FF$, then the desired result holds and we are done. Thus suppose $p$ has a zero $\lambda\in\FF$. By \cref{lemma:factor-thm}, there exists $q\in\FF[z]$ of degree $n-1$ such that
+\[p(z)=(z-\lambda)q(z)\quad(\forall z\in\FF)\]
+By the induction hypothesis, $q$ has at most $n-1$ zeros in $\FF$. The equation above shows that the zeros of $p$ in $\FF$ are exactly the zeros of $q$ in $\FF$ along with $\lambda$. Thus $p$ has at most $n$ zeros in $\FF$.
+\end{proof}
+
+The result above implies that the coefficients of a polynomial are uniquely determined (because if a polynomial had two different sets of coefficients, then subtracting the two representations of the polynomial would give a polynomial with some nonzero coefficients but infinitely many zeros). In particular, the degree of a polynomial is uniquely defined.
+\pagebreak
+
 \section{Division Algorithm for Polynomials}
-\begin{proposition}[Division Algorithm]
+\begin{proposition}[Division algorithm]
 Suppose $p,s\in\FF[z]$, $s\neq0$. Then there exists unique polynomials $q,r\in\FF[z]$, where $\deg r<\deg s$, such that
 \[p=sq+r.\]
 \end{proposition}
 
+\begin{proof}
+Let $n=\deg p$, $m=\deg s$. If $n<m$, take $q=0$ and $r=p$ to get the desired equation.
+
+Now assume that $n\ge m$.
+\end{proof}
+\pagebreak
+
 \section{Factorisation of Polynomials over $\CC$}
-\begin{theorem}[Fundamental Theorem of Algebra, first version]
+\begin{theorem}[Fundamental theorem of algebra, first version]
 Every non-constant polynomial with complex coefficients has a zero in $\CC$.
 \end{theorem}
 
-\begin{theorem}[Fundamental Theorem of Algebra, second version]
+\begin{theorem}[Fundamental theorem of algebra]
 If $p\in\CC[z]$ is a non-constant polynomial, then $p$ has a unique factorisation (except for the order of the factors) of the form
 \[p(z)=c(z-\lambda_1)\cdots(z-\lambda_n),\]
 where $c,\lambda_1,\dots,\lambda_n\in\CC$.
 \end{theorem}
+\pagebreak
 
 \section{Factorisation of Polynomials over $\RR$}
 A polynomial with real coefficients may have no real zeros. For example, the polynomial $x^2+1$ has no real zeros.
@@ -98,4 +138,3 @@ Suppose $p\in\RR[x]$ is a non-constant polynomial. Then $p$ has a unique factori
 \[p(x)=c(x-\lambda_1)\cdots(x-\lambda_n)(x^2+b_1x+c_1)\cdots(x^2+b_Nx+c_N),\]
 where $c,\lambda_1,\dots,\lambda_n,b_1,\dots,b_N,c_1,\dots,c_N\in\RR$, with ${b_k}^2<4c_k$ for each $k$.
 \end{theorem}
-

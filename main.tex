@@ -3,13 +3,14 @@
 \raggedbottom
 
 \usepackage{ryan}
+\usetikzlibrary{hobby}    
 
 % Header and footer
 \usepackage{fancyhdr} 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\uppercase{\footnotesize\bfseries\sffamily\leftmark}}
-\fancyhead[R]{{\footnotesize\bfseries\sffamily\thepage}}
+\fancyhead[L]{\uppercase{\footnotesize\sffamily\leftmark}}
+\fancyhead[R]{{\footnotesize\sffamily\thepage}}
 
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\headsep}{0.4in}
@@ -22,13 +23,13 @@
 
 % Conditionals
 \newif\ifprelim
+\newif\ifcalc
 \newif\iflinalg
 \newif\ifabsalg
 \newif\ifranalysis
 \newif\ifcanalysis
 \newif\iftop
-\newif\ifanalyticnt
-\newif\ifmisc
+\newif\ifgraph
 
 % Bibliography
 \usepackage[
@@ -87,28 +88,36 @@ In this chapter, we will
 \begin{document}
 %%%%%%%%%%%%%%% [TOPICS] %%%%%%%%%%%%%%%
 \prelimtrue %Prelim
+%\calctrue %Calc
 \absalgtrue %Abstract Algebra
 \linalgtrue %Linear Algebra
 \ranalysistrue %Real Analysis
 %\canalysistrue %Complex Analysis
-\toptrue %Topology
-%\analyticnttrue
-%\misctrue %Misc
+%\toptrue %Topology
+%\graphtrue %Graph Theory
 
 \input{tex/frontmatter.tex}
 
 \mainmatter
 %%%%%%%%%%%%%%% PRELIMINARY TOPICS
 \ifprelim
+    \part{Preliminary Topics}\label{part:prelim}
     \input{tex/prelim/proofs.tex}
     \input{tex/prelim/set-theory.tex}
 \fi
 
+%%%%%%%%%%%%%%% CALC
+\ifcalc
+    \part{Calculus}
+    \input{tex/calc/single-var-calc.tex}
+    \input{tex/calc/multi-var-calc.tex}
+\fi
+
 %%%%%%%%%%%%%%% ABSTRACT ALGEBRA
 \ifabsalg
-    \input{tex/abstract-algebra/intro.tex}
+    \part{Abstract Algebra}\label{part:abstract-algebra}
     \input{tex/abstract-algebra/groups.tex}
-    \input{tex/abstract-algebra/rings.tex}
+%    \input{tex/abstract-algebra/rings.tex}
 %    \input{tex/abstract-algebra/modules-vec-spaces.tex}
 %    \input{tex/abstract-algebra/fields.tex}
 \fi
@@ -118,7 +127,7 @@ In this chapter, we will
     \part{Linear Algebra}\label{part:linear-algebra}
     \input{tex/linear-algebra/vector-spaces.tex}
     \input{tex/linear-algebra/linear-maps.tex}
-%    \input{tex/linear-algebra/polynomials.tex}
+    \input{tex/linear-algebra/polynomials.tex}
     \input{tex/linear-algebra/eigen.tex}
 \fi
 
@@ -128,11 +137,11 @@ In this chapter, we will
     \input{tex/real-analysis/number-systems.tex}
     \input{tex/real-analysis/basic-topology.tex}
     \input{tex/real-analysis/sequences-series.tex}
-    \input{tex/real-analysis/continuity.tex}
-    \input{tex/real-analysis/differentiation.tex}
-    \input{tex/real-analysis/integration.tex}
-    \input{tex/real-analysis/sequences-series-functions.tex}
-    \input{tex/real-analysis/special-functions.tex}
+%    \input{tex/real-analysis/continuity.tex}
+%    \input{tex/real-analysis/differentiation.tex}
+%    \input{tex/real-analysis/integration.tex}
+%    \input{tex/real-analysis/sequences-series-functions.tex}
+%    \input{tex/real-analysis/special-functions.tex}
 \fi
 
 %%%%%%%%%%%%%%% COMPLEX ANALYSIS
@@ -147,17 +156,12 @@ In this chapter, we will
     \input{tex/topology/topological-spaces.tex}
 \fi
 
-%%%%%%%%%%%%%%% ANALYTIC NT
-\ifanalyticnt
-    \part{Analytic Number Theory}\label{part:analytic-nt}
-    \input{tex/analytic-nt/arithmetical-func.tex}
-\fi
-
 %%%%%%%%%%%%%%% MISC
-\ifmisc
-    \part{Miscellaneous Topics}
+\ifgraph
+    \part{Graph Theory}
+    A very early theorem of Graph Theory, perhaps even the first, was proved in $1766$ by Euler, concerning a popular problem of the time called ``the bridges of K\"{o}nigsberg''. K\"{o}nigsberg is divided into 4 districts by the river Pregel and has $7$ bridges. The problem was to decide whether it is possible to take a walk that crosses every bridge exactly once. To formulate this problem mathematically, we construct a graph in which there is a vertex for each district and an edge representing each bridge.
+
     \input{tex/misc/graph-theory.tex}
-    \input{tex/misc/logic.tex}
 \fi
 \pagebreak
 

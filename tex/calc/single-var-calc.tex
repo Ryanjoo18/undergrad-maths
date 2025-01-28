@@ -6,6 +6,7 @@ We review the following basic techniques for evaluating integrals:
 \item Integration by parts, reduction formula
 \end{itemize}
 
+\subsection{Integration by Substitution}
 \begin{exercise}
 Evaluate
 \[I=\int_{0}^{1}\frac{1}{\sqrt{4-2x-x^2}}\dd{x}.\]
@@ -27,6 +28,7 @@ I&=\int_{0}^{1}\frac{1}{\sqrt{4-2x-x^2}}\dd{x}\\
 \end{align*}
 \end{solution}
 
+\subsection{Integration by Parts}
 Now let us recall the technique of integration by parts. This is the integral form of the product rule for derivatives, that is $(fg)^\prime=f^\prime g+fg^\prime$, where $f$ and $g$ are functions of $x$, and the prime denotes the derivative with respect to $x$. Thus we have
 \[f(x)g(x)=\int g(x)f^\prime(x)\dd{x}+\int f(x)g^\prime(x)\dd{x}\]
 and we arrange the terms to obtain
@@ -113,6 +115,7 @@ The following are some standard methods for solving first order ODEs:
 \item Integrating factors
 \end{itemize}
 
+\subsection{Direct Integration}
 If the ODE takes the form
 \[\dv{y}{x}=f(x),\]
 then we can solve this by direct integration:
@@ -127,6 +130,7 @@ Integrating both sides with respect to $x$ and then integrating the RHS by parts
 \[y=-x^2\cos x+2x\sin x+2\cos x+c.\]
 \end{solution}
 
+\subsection{Separation of Variables}
 When the ODE is \emph{separable}, that is, it takes the form
 \[\dv{y}{x}=a(x)b(y),\]
 where $a(x)$ and $b(y)$ are functions of $x$ and $y$ respectively, we can solve this by separating the variables:
@@ -168,6 +172,7 @@ These can be solved by the substitution of the form $y(x)=xv(x)$, so that the OD
 \[x\dv{v}{x}=f(v)-v,\]
 which is separable.
 
+\subsection{Integrating Factor}
 Now we look specifically at first order linear ODEs, which take the general form
 \[\dv{y}{x}+p(x)y=q(x).\]
 We see that the homogeneous form, that is when $q(x)=0$, is separable. The inhomogeneous form can be solved by multiplying an \emph{integrating factor} $I(x)$ given by
@@ -195,7 +200,8 @@ so that the general solution is
 \[y=\brac{x^2+c}e^{-x^2}.\]
 \end{solution}
 
-\subsection{Second Order Linear Differential Equations}
+\section{Second Order Linear Differential Equations}
+\subsection{Two Theorems}
 The main subject of this section is linear ODEs with constant coefficients, but before we look at these we give two theorems that are valid in the more general case.
 
 Recall that a homogeneous linear ODE of order $k$ takes the form
@@ -225,7 +231,7 @@ The above holds simply due to differentiation being a linear map.
 
 In the case where the ODE is linear but inhomogeneous, solving the inhomogeneous equation still strongly relates to the solution of the associated homogeneous equation.
 
-\begin{theorem}
+\begin{theorem}\label{thrm:linear-inhomogeneous-ode}
 Let $y_p(x)$ be a solution (known as a \emph{particular integral}) of the homogeneous ODE
 \[a_k(x)\dv[k]{y}{x}+a_{k-1}(x)\dv[k-1]{y}{x}+\cdots+a_1(x)\dv{y}{x}+a_0(x)y=f(x).\]
 Then $y(x)$ is a solution if and only if $y(x)$ can be written as
@@ -241,6 +247,89 @@ Rearranging brackets,
 where the second bracket equals $f(x)$, since $y_p(x)$ is a solution. Hence the first bracket must equal zero, that is $y_c(x)$ is a solution of the corresponding homogeneous ODE.
 \end{proof}
 
-We now introduce a method for finding a second solution to a second order homogeneous linear ODE, when one solution has already been found.
+\subsection{Second order homogeneous linear ODEs}
+We introduce a method for finding a second solution to a second order homogeneous linear ODE, when one solution has already been found.
 
 Suppose $z(x)\neq0$ is a non-trivial solution to
+\begin{equation*}\tag{$\ast$}
+p(x)\dv[2]{y}{x}+q(x)\dv{y}{x}+r(x)y=0.
+\end{equation*}
+Make the substitution $y(x)=u(x)z(x)$ so that $(\ast)$ becomes
+\[p(x)\brac{\dv[2]{u}{x}z+2\dv{u}{x}\dv{z}{x}+u\dv[2]{z}{x}}+q(x)\brac{\dv{u}{x}z+u\dv{z}{x}}+r(x)uz=0.\]
+Rearranging and using the fact that $z$ is a solution,
+\[p(x)z\dv[2]{u}{x}+\brac{2p(x)\dv{z}{x}+q(x)z}\dv{u}{x}=0,\]
+which is a homogenous differential equation of first order for $\dv{u}{x}$. In theory this can be solved, to obtain the general solution to ($\ast$). The following example illustrates this technique.
+
+\begin{exercise}
+Verify that $z(x)=\frac{1}{x}$ is a solution to
+\[x\dv[2]{y}{x}+2(1-x)\dv{y}{x}-2y=0,\]
+and hence find its general solution.
+\end{exercise}
+
+\begin{solution}
+You can easily verify that $z(x)=\frac{1}{x}$ is a solution by direct substitution.
+
+Substituting $y(x)=\frac{1}{x}u(x)$ gives
+\[x\frac{1}{x}\dv[2]{u}{x}+\brac{-2x^{-2}x+2(1-x)\frac{1}{x}}\dv{u}{x}=0.\]
+Let $w=\dv{u}{x}$, then
+\[\dv{w}{x}-2w=0,\]
+which is separable and has general solution $w(x)=C_1e^{2x}$. Thus
+\[u(x)=\int w(x)\dd{x}=C_1e^{2x}+C_2,\]
+so
+\[y(x)=\frac{1}{x}\brac{C_1e^{2x}+C_2}.\]
+\end{solution}
+
+\subsection{Linear ODEs with constant coefficients}
+We first consider the homogeneous case.
+\begin{theorem}
+Consider the homogeneous linear equation
+\begin{equation*}\tag{$\ast$}
+\dv[2]{y}{x}+q\dv{y}{x}+ry=0,
+\end{equation*}
+where $q,r\in\RR$. The auxilliary equation
+\[m^2+qm+r=0\]
+has two roots $m_1$ and $m_2$.
+\begin{enumerate}[label=(\roman*)]
+\item If $m_1\neq m_2$ are real, then the general solution is
+\[y(x)=C_1e^{m_1x}+C_2e^{m_2x}.\]
+\item If $m=m_1=m_2$ is a repeated real root, then the general solution is
+\[y(x)=(C_1x+C_2)e^{mx}.\]
+\item If $m_1=\alpha+i\beta$ is a complex root, so that $m_2=\alpha-i\beta$, then the general solution is
+\[y(x)=e^{\alpha x}\brac{C_1\cos\beta x+C_2\sin\beta x}.\]
+\end{enumerate}
+In each case, $C_1$ and $C_2$ are constants.
+\end{theorem}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item By Vieta's formula, $m_1+m_2=-q$ and $m_1m_2=r$. Hence ($\ast$) can be written as
+\[\dv[2]{y}{x}-(m_1+m_2)\dv{y}{x}+m_1m_2y=0.\]
+Note also that $e^{m_1x}$ is a solution of the above equation, so $e^{m_1x}$ is a solution of ($\ast$).
+
+Make the substitution $y(x)=u(x)e^{m_1x}$, then
+\[\brac{\dv[2]{u}{x}+2m_1\dv{u}{x}+m_1^2u}-(m_1+m_2)\brac{\dv{u}{x}+m_1u}+m_1m_2u=0,\]
+so that
+\begin{equation*}\tag{1}
+\dv[2]{u}{x}-(m_2-m_1)\dv{u}{x}=0.
+\end{equation*}
+If $m_2-m_1\neq0$, (1) is in separable form, so the general solution is
+\[\dv{u}{x}=ke^{(m_2-m_1)x},\]
+so
+\[u(x)=C_2e^{(m_2-m_1)x}+C_1.\]
+Since $y(x)=u(x)e^{m_1x}$, the desired result follows.
+
+\item If $m_2-m_1=0$ then (1) becomes
+\[\dv[2]{y}{x}=0.\]
+Integrating directly twice gives
+\[u(x)=C_1x+C_2.\]
+Since $y(x)=u(x)e^{mx}$, the desired result follows.
+
+\item Suppose now that the roots of the auxiliary equation are conjugate complex numbers $\alpha\pm i\beta$. A simple proof which relies on complex number theory uses Euler's identity
+\[e^{i\theta}=\cos\theta+i\sin\theta\]
+as follows. Allow $C_1$ and $C_2$ in (i) to be complex numbers; then the required general solution takes the form
+\[y(x)=C_1e^{(\alpha+i\beta)x}+C_2e^{(\alpha-i\beta)x}=e^{\alpha x}\brac{\tilde{C_1}\cos\beta x+\tilde{C_2}\sin\beta x},\]
+where $\tilde{C_1}$ and $\tilde{C_2}$ are constants, forced to be real if we let $C_2$ be the complex conjugate of $C_1$. These can be renamed as $C_1$ and $C_2$, respectively, to complete the proof.
+\end{enumerate}
+\end{proof}
+
+We now turn to the inhomogeneous case. We solve these ODEs by applying \cref{thrm:linear-inhomogeneous-ode}; the particular solution $y_p(x)$ is usually found by a mixture of educated guesswork combined with trial and error; the first step is to mimic the form of $f(x)$.

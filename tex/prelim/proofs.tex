@@ -213,15 +213,18 @@ Note that we cannot simply take $r=\dfrac{p+q}{2}$; a simple counterexample is t
 
 Since $p$ lies in between $p$ and $q$, let $r=p+c$ where $0<c<q-p$. Since $c<q-p$, we have $c=\dfrac{q-p}{k}$ for some $k>1$; to make $c$ irrational, we take $k$ to be irrational.
 
-Take $r=p+\dfrac{q-p}{\sqrt{2}}$. We need to show $r$ is irrational and $p<r<q$.
+\begin{claim}
+$r=p+\dfrac{q-p}{\sqrt{2}}$.
+\end{claim}
 
-\textbf{Part 1:} $p<r<q$
+We shall show that (i) $p<r<q$, and (ii) $r$ is irrational.
+\begin{enumerate}[label=(\roman*)]
+\item Since $q-p>0$, $\dfrac{q-p}{\sqrt{2}}>0$ so $r=p+\dfrac{q-p}{\sqrt{2}}>p+0=p$.
 
-Since $q<p$, $r=p+\text{(positive number)}>p$. On the other hand, $\dfrac{q-p}{\sqrt{2}}<q-p$ so $r<p+(q-p)=q$.
+$\dfrac{q-p}{\sqrt{2}}<q-p$ so $r<p+(q-p)=q$.
 
-\textbf{Part 2:} $r$ is irrational
-
-We prove by contradiction. Suppose $r$ is rational. We have $\sqrt{2}=\dfrac{q-p}{r-p}$. Since $p,q,r$ are all rational (and $r-p\neq0$), RHS is rational. This implies that LHS is rational, i.e. $\sqrt{2}$ is rational, a contradiction.
+\item We prove by contradiction. Suppose $r$ is rational. We have $\sqrt{2}=\dfrac{q-p}{r-p}$. Since $p,q,r$ are all rational (and $r-p\neq0$), RHS is rational. This implies that LHS is rational, i.e.\ $\sqrt{2}$ is rational, which is a contradiction.
+\end{enumerate}
 \end{proof}
 
 Non-constructive proof:
@@ -264,25 +267,31 @@ We have therefore constructed another solution $(a,b,c)=\brac{\frac{x}{3},\frac{
 \end{proof}
 
 \subsection{Proof by Mathematical Induction}
-Induction is an extremely powerful method of proof used throughout mathematics. It deals with infinite families of statements which come in the form of lists. The idea behind induction is in showing how each statement follows from the previous one on the list -- all that remains is to kick off this logical chain reaction from some starting point.
+Induction is an extremely powerful method of proof used throughout mathematics. It deals with infinite families of statements which come in the form of lists. The idea behind induction is in showing how each statement follows from the previous one on the list---all that remains is to kick off this logical chain reaction from some starting point.
 
-We shall assume that $\NN$ satisfies the \emph{well-ordering principle}: every nonempty $S\subset\NN$ has a least element; that is, there exists $m\in S$ such that $m\le k$ for all $k\in S$.
+The \emph{well-ordering principle} on $\NN$ states the following: every non-empty subset $S\subset\NN$ has a smallest element; that is, there exists $m\in S$ such that $m\le k$ for all $k\in S$.
 
-\begin{remark}
-The well-ordering principle does not hold for $\ZZ$, $\QQ$, and $\RR$.
-\end{remark}
+The \emph{principle of induction} states the following: Let $S\subset\NN$. If (i) $1\in S$, and (ii) $k\in S\implies k+1\in S$, then $S=\NN$.
 
-\begin{lemma}
-Let $S\subset\NN$. If
-\begin{enumerate}[label=(\roman*)]
-\item $1\in S$
-\item $k\in S\implies k+1\in S$
-\end{enumerate}
-then $S=\NN$.
+\begin{lemma}\label{lemma:wop-poi}
+The well-ordering principle is equivalent to the principle of induction.
 \end{lemma}
 
-\begin{proof}
-If $S=\NN$ then we are done. Now suppose $S\neq\NN$. Then $\NN\setminus S$ is not empty. By the well-ordering principle, $\NN\setminus S$ has a least element $p$. Since $1\in S$, we must have $p>1$. By (ii), $p=(p-1)+1\in S$. But this contradicts $p\in\NN\setminus S$.
+\begin{proof} \
+
+\fbox{$\implies$} Suppose otherwise, for a contradiction, that $S$ exists with the given properties in the principle of induction, but $S\neq\NN$. 
+
+Consider the set $\NN\setminus S$. Then $\NN\setminus S$ is not empty. By the well-ordering principle, $\NN\setminus S$ has a least element $p$. Since $1\in S$, $1\notin \NN\setminus S$ so $p\neq 1$, thus we must have $p>1$. 
+
+Now consider $p-1$. Since $p$ is the least element of $\NN\setminus S$, $p-1\notin \NN\setminus S$ so $p-1\in S$. But by (ii) of the principle of induction, $p-1\in S$ implies $p\in S$, which contradicts the fact that $p\in\NN\setminus S$.
+
+\fbox{$\impliedby$} Suppose the principle of induction is true. Then this implies that \cref{thrm:pmi} is true, which in turn implies that \cref{thrm:strong-induction} is true. In order to prove the well-ordering of $\NN$, we prove the following statement $P(n)$ by strong induction on $n$: If $S\subset\NN$ and $n\in S$, then $S$ has a least element.
+
+The basis step is true, because if $1\in S$ then $1$ is the smallest element of $S$, since there are no smaller elements of $\NN$.
+
+Now suppose that $P(k)$ is true for $k=1,\dots,n$. To show that $P(n+1)$ is true, let $S\subset\NN$ contain $n+1$. If $n+1$ is the smallest element of $S$, then we are done. Otherwise, $S$ has a smaller element $k$, and $P(k)$ is true by the inductive hypothesis, so again $S$ has a smallest element.
+
+Hence by strong induction, $P(n)$ is true for all $n\in\NN$. This implies the well-ordering of $\NN$, because if $S$ is a non-empty subset of $\NN$, then pick $n\in S$. Since $n\in\NN$, $P(n)$ is true, and therefore $S$ has a smallest element.
 \end{proof}
 
 \begin{theorem}[Principle of mathematical induction]\label{thrm:pmi}
@@ -294,11 +303,10 @@ Let $P(n)$ be a family of statements indexed by $\NN$. Suppose that
 Then $P(n)$ is true for all $n\in\NN$.
 \end{theorem}
 
-(i) is known as the \textbf{base case}, (ii) is known as the \textbf{inductive step}. Using logic notation, the above can be written as
-\[ \{P(1) \land (\forall n \in \NN) [P(k) \implies P(k+1)]\} \implies (\forall n \in \NN)P(n) \]
+(i) is known as the \emph{base case}; (ii) is known as the \emph{inductive step}, where we assume $P(k)$ to be true---this is called the \emph{inductive hypothesis}---and show that $P(k+1)$ is true.
 
 \begin{proof}
-Apply the above lemma to the set $S=\{n\in\NN\mid P(n)\text{ is true}\}$.
+Apply the principle of induction to the set $S=\{n\in\NN\mid P(n)\text{ is true}\}$.
 \end{proof}
 
 \begin{exercise}
@@ -307,7 +315,7 @@ Prove that for any $n\in\NN$,
 \end{exercise}
 
 \begin{proof}
-Let $\displaystyle P(n):\sum_{i=1}^n i=\frac{n(n+1)}{2}$.
+We induct on $n$. Let $\displaystyle P(n):\sum_{i=1}^n i=\frac{n(n+1)}{2}$.
 
 Clearly $P(1)$ holds. Now suppose $P(k)$ holds for some $k\in\NN$, $k\ge1$; that is,
 \[\sum_{i=1}^k i=\frac{k(k+1)}{2}.\]
@@ -317,23 +325,18 @@ Adding $k+1$ to both sides,
 &=\frac{(k+1)(k+2)}{2}\\
 &=\frac{(k+1)[(k+1)+1]}{2}
 \end{align*}
-thus $P(k+1)$ is true.
-
-Since $P(1)$ true and $P(k)\implies P(k+1)$ for all $k\in\NN$, $k\ge1$,\\
-$P(n)$ is true for all $n\in\NN$.
+thus $P(k+1)$ is true. Hence by induction, the result holds.
 \end{proof}
 
 \begin{exercise}[Bernoulli's inequality]
-Let $x\in\RR$, $x>-1$. Let $n\in\ZZ^+$. Then
+Let $x\in\RR$, $x>-1$. Then for all $n\in\NN$,
 \[(1+x)^n\ge1+nx.\]
 \end{exercise}
 
 \begin{proof}
 We prove by induction on $n$. Fix $x>-1$. Let $P(n):(1+x)^n\ge1+nx$.
 
-The base case $P(1)$ is clear.
-
-Suppose that $P(k)$ is true for some $k\in\ZZ^+$, $k\ge1$. That is, $(1+x)^k\ge1+kx$. Note that $1+x>0$, and $kx^2\ge0$ (since $k>0$ and $x^2\ge0$). Then
+The base case $P(1)$ is clear. Suppose that $P(k)$ is true for some $k\in\ZZ^+$, $k\ge1$. That is, $(1+x)^k\ge1+kx$. Note that $1+x>0$, and $kx^2\ge0$ (since $k>0$ and $x^2\ge0$). Then
 \begin{align*}
 (1+x)^{k+1}&=(1+x)(1+x)^k\\
 &\ge(1+x)(1+kx)\quad\text{[induction hypothesis]}\\
@@ -360,7 +363,7 @@ Apply \cref{thrm:pmi} to the statement $Q(n)=P(n+N)$ for $n\in\NN$.
 
 Another variant on induction is when the inductive step relies on some earlier case(s) but not necessarily the immediately previous case.
 
-\begin{theorem}[Strong induction]
+\begin{theorem}[Strong induction]\label{thrm:strong-induction}
 Let $P(n)$ be a family of statements indexed by $\NN$. Suppose that
 \begin{enumerate}[label=(\roman*)]
 \item $P(1)$ is true;
@@ -370,7 +373,7 @@ Then $P(n)$ is true for all $n\in\NN$.
 \end{theorem}
 
 \begin{proof}
-Let $Q(n)$ be the statement ``$P(k)$ holds for $k=0,1,\dots,n$''. Then the conditions for the strong form are equivalent to (i) $Q(0)$ holds and (ii) for $n\in\NN$, $Q(n)\implies Q(n+1)$. It follows by induction that $Q(n)$ holds for all $n\in\NN$, and hence $P(n)$ holds for all $n$.
+Let $Q(n)$ be the statement ``$P(k)$ holds for $k=1,\dots,n$''. Then the conditions for the strong form are equivalent to (i) $Q(1)$ holds and (ii) for $n\in\NN$, $Q(n)\implies Q(n+1)$. By \cref{thrm:pmi}, $Q(n)$ holds for all $n\in\NN$, and hence $P(n)$ holds for all $n$.
 \end{proof}
 
 \begin{exercise}[Fundamental theorem of arithmetic]
@@ -378,11 +381,9 @@ Prove that every natural number greater than $1$ may be expressed as a product o
 \end{exercise}
 
 \begin{proof}
-Let $P(n)$: $n$ may be expressed as a product of prime numbers. 
+Let $P(n)$ be the statement that $n$ may be expressed as a product of prime numbers. 
 
-Clearly $P(2)$ holds, since $2$ is itself prime. 
-
-Let $n\ge 2$ be a natural number and suppose that $P(m)$ holds for all $m<n$.
+Clearly $P(2)$ holds, since $2$ is itself prime. Let $n\ge 2$ be a natural number and suppose that $P(k)$ holds for all $k<n$.
 
 \begin{itemize}
 \item If $n$ is prime then it is trivially the product of the single prime number $n$. 
@@ -405,7 +406,7 @@ Then $P(n)$ is true for all $n\in\NN_{\ge2}$.
 \end{theorem}
 
 \begin{exercise}[AM--GM inequality]
-Given $n\in\NN$, prove that for positive reals $a_1,a_2,dots,a_n$,
+Given $n\in\NN$, prove that for positive reals $a_1,a_2,\dots,a_n$,
 \[\frac{a_1+a_2+\cdots+a_n}{n}\ge\sqrt[n]{a_1a_2\cdots a_n}.\]
 \end{exercise}
 
@@ -577,20 +578,16 @@ Prove that for every positive integer $n\ge4$,
 \begin{proof}
 Let $P(n):n!>2^n$
 
-\textbf{Base case:} $P(4)$
+For the base case $P(4)$, the LHS equals to $4!=4\times3\times2\times1=24$, and the RHS equals $2^4=16<24$. Since LHS equals RHS, $P(4)$ is true.
 
-LHS: $4!=4\times3\times2\times1=24$, RHS: $2^4=16<24$
-
-So $P(4)$ is true.
-
-\textbf{Inductive step:} $P(k) \implies P(k+1)$ for all $k\in\NN_{\ge4}$
+Now suppose that $P(k)$ is true for some $k\in\NN_{\ge4}$. Then
 \begin{align*}
-k! &> 2^k \\
-(k+1)k! &> 2^k(k+1) \\
-&> 2^k2 \quad \text{since from $k\ge4$, $k+1\ge5>2$} \\
-&= 2^{k+1}
+k!&>2^k \\
+(k+1)k!&>2^k(k+1)\\
+&>2^k2\quad\text{since from $k\ge4$, $k+1\ge5>2$} \\
+&=2^{k+1}
 \end{align*}
-hence proven $P(k) \implies P(k+1)$ for integers $k\ge4$.
+thus $P(k+1)$ is true, so we have shown $P(k)\implies P(k+1)$ for all $k\in\NN_{\ge4}$.
 
 By PMI, we have proven $P(n)$ for all integers $n\ge4$.
 \end{proof}
@@ -603,16 +600,12 @@ Prove by mathematical induction, for $n\ge2$,
 \begin{proof}
 Let $P(n):\sqrt[n]{n}<2 - \dfrac{1}{n}$ for $n \ge 2$.
 
-\textbf{Base case:} $P(2)$
+For the base case, when $n=2$, $\sqrt{2}=1.41\dots<2-\dfrac{1}{2}=1.5$ which is true. Hence $P(2)$ is true.
 
-When $n=2$, $\sqrt{2}=1.41\dots<2-\dfrac{1}{2}=1.5$ which is true. Hence $P(2)$ is true.
-
-\textbf{Inductive step:} $P(k)\implies P(k+1)$ for all $k\in\NN_{\ge2}$
-
-Assume $P(k)$ is true for $k \ge 2, k \in \NN$, i.e.
+Now assume $P(k)$ is true for $k \ge 2, k \in \NN$; that is,
 \[ \sqrt[k]{k}<2 - \dfrac{1}{k} \implies k<\brac{2-\frac{1}{k}}^k \]
 
-We want to prove that $P(k+1)$ is true, i.e.
+We want to prove that $P(k+1)$ is true; that is,
 \[ k+1<\brac{2-\frac{1}{k+1}}^{k+1} \]
 
 Since $k>2$, we have 
@@ -634,14 +627,10 @@ Prove that for all integers $n \ge 3$,
 \end{prbm}
 
 \begin{proof}
-\textbf{Base case:} $P(3)$
+For the base case $P(3)$, $\brac{1+\dfrac{1}{3}}^3=\dfrac{64}{27}=2\dfrac{10}{27}<3$. Hence $P(3)$ is true.
 
-On the LHS, $\brac{1+\dfrac{1}{3}}^3=\dfrac{64}{27}=2\dfrac{10}{27}<3$. Hence $P(3)$ is true.
-
-\textbf{Inductive step:} $P(k)\implies P(k+1)$ for all $k\in\NN_{\ge3}$
-
-Our inductive hypothesis is
-\[ \brac{1+\frac{1}{k}}^k<k \]
+Assume that $P(k)$ is true for some $k\in\NN_{\ge3}$; that is,
+\[\brac{1+\frac{1}{k}}^k<k.\]
 Multiplying both sides by $\brac{1+\dfrac{1}{k}}$ (to get a $k+1$ in the power),
 \[ \brac{1+\frac{1}{k}}^k\brac{1+\frac{1}{k}}=\brac{1+\frac{1}{k}}^{k+1}<k\brac{1+\frac{1}{k}}=k+1  \]
 Since $k<k+1 \iff \dfrac{1}{k}>\dfrac{1}{k+1}$, 
@@ -652,7 +641,7 @@ The rest of the proof follows easily.
 A sequence of integers $F_i$, where integer $1\le i\le n$, is called the \emph{Fibonacci sequence} if and only if it is defined recursively by $F_1=1$, $F_2=1$, $F_n=F_{n-1}+F_{n-2}$ for $n>2$.
 
 \begin{prbm}
-Let $a_i$ where integer $1\le i\le n$ be a sequence of integers defined recursively by initial conditions $a_1=1$, $a_2=1$, $a_3=3$ and the recurrence relation $a_n=a_{n-1}+a_{n-2}+a_{n-3}$ for $n>3$.
+Let $(a_n)$ be a sequence of integers defined recursively by the initial conditions $a_1=1$, $a_2=1$, $a_3=3$ and the recurrence relation $a_n=a_{n-1}+a_{n-2}+a_{n-3}$ for $n>3$.
 
 For all $n\in\NN$, prove that
 \[ a_n\le2^{n-1}. \]
@@ -690,17 +679,15 @@ For $m,n\in\NN$, prove that
 \end{prbm}
 
 \begin{proof}
-For $n\in\NN$, take $P(n):F_{n+m+1}=F_nF_m+F_{n+1}F_{m+1}$ for all $m\in\NN$ in the cases $k=n$ and $k=n+1$.
+We induct on $n$. Let $P(n):F_{n+m+1}=F_nF_m+F_{n+1}F_{m+1}$ for all $m\in\NN$ in the cases $k=n$ and $k=n+1$.
 
-So we are using induction to progress through $n$ and dealing with $m$ simultaneously at each stage. 
-
-To verify $P(0)$, we note that
+To show that $P(0)$ is true, note that
 \[ F_{m+1}=F_0F_m+F_1F_{m+1} \]
 and
 \[ F_{m+2}=F_1F_m+F_2F_{m+1} \]
 for all $m$, as $F_0=0$ and $F_1=F_2=1$.
 
-For the inductive step we assume $P(n)$, i.e. that for all $m\in\NN$,
+Now assume $P(n)$ is true; that is, for all $m\in\NN$,
 \begin{align*}
 F_{n+m+1}&=F_nF_m+F_{n+1}F_{m+1},\\
 F_{n+m+2}&=F_{n+1}F_m+F_{n+2}F_{m+1}.
@@ -711,7 +698,7 @@ Then
 F_{n+m+3}
 &=F_{n+m+2}+F_{n+m+1}\\
 &=F_n F_m+F_{n+1}F_{m+1}+F_{n+1}F_m+F_{n+2}F_{m+1}\\
-&=(F_n+F_{n+1})Fm+(F_{n+1}+F_{n+2})F_{m+1}\\
+&=(F_n+F_{n+1})F_m+(F_{n+1}+F_{n+2})F_{m+1}\\
 &=F_{n+2}F_m+F_{n+3}F_{m+1}
 \end{align*}
 thus $P(n+1)$ is true, for all $m\in\NN$.
