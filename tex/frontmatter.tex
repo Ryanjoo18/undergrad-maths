@@ -1,17 +1,21 @@
 \begin{center}
 \
 
-\vspace{6cm}
+\vspace{3cm}
 
-{\huge\bfseries Undergraduate Mathematics}
+{\color{schoolbusyellow}\Huge
+\uppercase{Topics in}\\[1em]
+\uppercase{Pure Mathematics}}
 
-\vspace{2cm}
+\vspace{9cm}
 
-{\huge Ryan Joo Rui An}
+{\color{schoolbusyellow}\huge Ryan Joo}
 \end{center}
 \thispagestyle{empty}
+\pagecolor{smalt(darkpowderblue)}
 \pagebreak
 
+\pagecolor{white}
 \thispagestyle{empty}
 \
 
@@ -26,7 +30,7 @@ French mathematician and theoretical physicist\end{flushright}
 
 \vfill
 
-Copyright \copyright \ 2025 by Ryan Joo Rui An.
+Copyright \copyright \ 2025 by Ryan Joo.
 
 This book is licensed under the terms of the Creative Commons Attribution-NonCommercial 4.0 International License (\url{https://creativecommons.org/licenses/by-nc/4.0}), which permits any noncommercial use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to original author and source, provide a link to the Creative Commons license, and indicate if changes were made. The images or other third party material in this book are included in the book's Creative Commons license, unless indicated otherwise in a credit line to the material. If material is not included in the book's Creative Commons license and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder.
 
@@ -38,70 +42,48 @@ Last updated \today.
 \pagebreak
 
 \frontmatter
-\begin{comment}
-\section*{About the Author}
-\textbf{Ryan Joo Rui An} is a high school student who has just completed his A-Level studies in Singapore. He has spent over 11 years honing his skills in various mathematics competitions. His journey began at an early age, where he developed a fascination with numbers while doing mental arithmetic. This early interest quickly blossomed into a deep commitment to mathematics, leading him to participate in numerous mathematics olympiads competitions.
-
-The author's (not many) mathematics credentials include:
-\begin{itemize}
-\item 3 Silver awards in the \emph{Singapore Mathematics Olympiad} 2022 to 2024;
-\item 6 Gold awards in the \emph{Singapore and Asian Schools Math Olympiad} 2019 to 2023, top in Singapore in 2022 and 2023, top in Malaysia in 2024;
-\item Merit award in the \emph{Singapore International Mathematical and Computational Challenge} 2024;
-\item 2 Prize awards, 2 High Distinction awards in the \emph{Australian Mathematics Competition} 2019 to 2023, best in school in 2023;
-\item Honourable mention in the \emph{High School Mathematical Contest in Modeling} 2023;
-\item 2nd place in the \emph{Hua Lo Geng Secondary School Mathematics Competition} 2019;
-\item 1st place in the \emph{Chen Jingrun's Cup Secondary School Mathematics Competition} 2019.
-\end{itemize}
-
-Outside of mathematics, the author has a keen interest in playing chess and programming.
-
-This book is a culmination of the author's years of experience, dedication, and love for mathematics while he studies mathematics at the undergraduate level.
-\pagebreak
-\end{comment}
-
 \section*{Preface}
+\ifprelim
+The reader is not assumed to have any mathematical prerequisites, although some experience with proofs may be helpful. \textbf{Preliminary topics} such as logic and methods of proofs (\cref{chap:logic-proofs}), and basic set theory (\cref{chap:set-theory}) are covered in \cref{part:prelim}.
+\fi
+
 \ifabsalg
-\cref{part:abstract-algebra} covers \textbf{abstract algebra}, which follows \cite{dummit-foote,artin}. \cref{chap:groups} introduces groups; \cref{chap:rings} introduces rings.
+\cref{part:abstract-algebra} covers \textbf{abstract algebra}, which follows \cite{dummit-foote,artin}.
+\begin{itemize}
+\item \cref{chap:groups} introduces groups.
+\end{itemize}
 \fi
 
 \iflinalg
-\cref{part:linear-algebra} covers \textbf{linear algebra}, which follows \cite{axler}. \cref{chap:vector-spaces} introduces vector spaces, subspaces, span, linear independence, bases and dimension. \cref{chap:linear-maps} concerns linear maps and related concepts.
+\cref{part:linear-algebra} covers \textbf{linear algebra}, which follows \cite{axler}.
+\begin{itemize}
+\item \cref{chap:vector-spaces} introduces vector spaces, subspaces, span, linear independence, bases and dimension.
+\item \cref{chap:linear-maps} concerns linear maps and related concepts.
+\end{itemize}
 \fi
 
-\ifranalysis
-\cref{part:real-analysis} covers \textbf{real analysis}, which follows \cite{rudin,apostol,bartle-sherbert}. The lecture series by Professor Francis Su is very helpful; \cite{alcock} is also a good read to get some intuition into some abstract notions. \cref{chap:number-systems} introduces the real and complex number systems; \cref{chap:basic-topology} covers basic topology required for subsequent chapters; \cref{chap:num-seq-series} and \cref{chap:func-seq-series} cover numerical sequences and series, and sequences and series of functions respectively; \cref{chap:real-analysis_continuity} covers continuity of functions; \cref{chap:differentiation} and \cref{chap:rs-integration} cover differentiation and Riemann--Stieljes integration respectively; \cref{chap:special-functions} covers some special functions such as power series, exponential and logarithmic functions, trigonometric functions, fourier series and the gamma function.
-\fi
-
-\ifcanalysis
-\cref{part:complex-analysis} covers \textbf{complex analysis}, which follows \cite{ahlfors,lang}.
+\ifanalysis
+\cref{part:real-analysis} covers \textbf{real analysis}, which follows \cite{rudin,apostol}.
+\begin{itemize}
+\item \cref{chap:number-systems} introduces the real and complex number systems.
+\item \cref{chap:basic-topology} covers basic point-set topology, in the context of metric spaces.
+\item \cref{chap:num-seq-series} concerns numerical sequences and series, in particular their convergence.
+\item \cref{chap:real-analysis_continuity} covers continuity of functions.
+\item \cref{chap:differentiation} covers differentiation.
+\item \cref{chap:rs-integration} covers Riemann--Stieljes integration.
+\item \cref{chap:func-seq-series} covers sequences and series of functions.
+\item \cref{chap:special-functions} covers some special functions, most notably power series and the fourier series.
+\end{itemize}
 \fi
 
 \iftop
-\cref{part:topology} covers \textbf{topology}, which follows \cite{munkres}.
+\cref{part:topology} covers \textbf{general topology}, which follows \cite{munkres}.
 \fi
 
-\ifprelim
-The reader is not assumed to have any mathematical prerequisites, although some experience with proofs may be helpful. \textbf{Preliminary topics} such as logic and methods of proofs (\cref{chap:logic-proofs}), and basic set theory (\cref{chap:set-theory}) are covered in the appendix.
-\fi
+For ease of reference, important terms are \vocab{coloured} when first defined, and are included in the glossary; less important terms are \emph{italicised} when first defined, and are not included in the glossary.
+\pagebreak
 
-\subsection*{Note on Presentation}
-The following are some common mathematical terms used in this book. They are neither exhaustive nor rigorous, but they should give you a good idea of what is meant when these terms are used. The following terms are \textbf{bolded} when they are used, for readability.
-\begin{itemize}
-\item \textbf{Definition}: a precise and unambiguous description of the meaning of a mathematical term. It characterises the meaning of a word by giving all the properties and only those properties that must be true.
-\item \textbf{Theorem}: a mathematical statement that is proved using rigorous mathematical reasoning. It is often reserved for the most important results.
-\item \textbf{Lemma}: a minor result whose sole purpose is to help in proving a theorem. It is a stepping stone on the path to proving a theorem. Very occasionally lemmas can take on a life of their own (Zorn's lemma, Urysohn's lemma, Burnside's lemma, Sperner's lemma).
-\item \textbf{Corollary}: a result in which the (usually short) proof relies heavily on a given theorem (we often say that ``this is a corollary of Theorem A'').
-\item \textbf{Proposition}: a proved and often interesting result, but generally less important than a theorem.
-\item \textbf{Conjecture}: a statement that is unproved, but is believed to be true (Collatz conjecture, Goldbach conjecture, twin prime conjecture).
-\item \textbf{Claim}: an assertion that is then proved. It is often used like an informal lemma.
-\item \textbf{Axiom/Postulate}: a statement that is assumed to be true without proof. These are the basic building blocks from which all theorems are proved (Euclid's five postulates, Zermelo--Fraenkel axioms, Peano axioms).
-\item \textbf{Identity}: a mathematical expression giving the equality of two (often variable) quantities (trigonometric identities, Euler's identity).
-\item \textbf{Paradox}: a statement that can be shown, using a given set of axioms and definitions, to be both true and false. Paradoxes are often used to show the inconsistencies in a flawed theory (Russell's paradox). The term paradox is often used informally to describe a surprising or counterintuitive result that follows from a given set of rules (Banach--Tarski paradox, Alabama paradox, Gabriel's horn).
-\end{itemize}
-
-Important terms are \vocab{coloured} when they are first defined, and are included in the glossary at the end of the book. Less important terms are instead \emph{italicised} when they are first defined, and are not included in the glossary.
-
-\subsection*{Note on Problem Solving}
+\section*{Note on Problem Solving}
 Mathematics is about problem solving. In \cite{polya}, George P\'{o}lya outlined the following problem solving cycle.
 \begin{enumerate}
 \item \textbf{Understand the problem}

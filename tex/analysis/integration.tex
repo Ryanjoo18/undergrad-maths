@@ -1,0 +1,678 @@
+\chapter{Riemann--Stieltjes Integral}\label{chap:rs-integration}
+\section{Definition of Riemann--Stieltjes Integral}
+To approximate the area under the curve of a function, we partition the interval into finitely many sub-intervals, then multiply the width of each sub-interval by its height.
+\begin{itemize}
+\item For the height, we can choose to either use the supremum of the function over the interval or the infimum. Obviously, using the supremum will provide an upper bound, and using the infimum will provide a lower bound.
+\item For the width, we use the difference between the two endpoints in their output values when input into a monotonically increasing function $\alpha$.
+\end{itemize}
+
+The upper Riemann integral is the infimum of upper bounds over all possible partitions. The lower Riemann integral is similarly defined. If they are equal, then the function is said to be Riemann--Stieltjes integrable.
+
+\subsection{Notation and Preliminaries}
+A \vocab{partition} $P$ of a closed interval $[a,b]$ is a finite set of points, say
+\[P=\{x_0,x_1,\dots,x_n\},\]
+where $a=x_0\le x_1\le\cdots\le x_{n-1}\le x_n=b$.
+
+\begin{notation}
+$\mathcal{P}[a,b]$ denotes the set of all partitions of $[a,b]$.
+\end{notation}
+
+Let $f:[a,b]\to\RR$ be bounded. Denote
+\[M_i=\sup_{x\in[x_{i-1},x_i]}f(x),\quad m_i=\inf_{x\in[x_{i-1},x_i]}f(x)\quad(i=1,\dots,n).\]
+Let $\alpha$ be a monotonically increasing function on $[a,b]$. Denote
+\[\Delta\alpha_i=\alpha(x_i)-\alpha(x_{i-1})\quad(i=1,\dots,n).\]
+
+The \emph{upper sum} and \emph{lower sum} of $f$ with respect to the partition $P$ and $\alpha$ are respectively
+\begin{align*}
+U(f,\alpha;P)&=\sum_{i=1}^n M_i \Delta \alpha_i,\\
+L(f,\alpha;P)&=\sum_{i=1}^n m_i \Delta \alpha_i.
+\end{align*}
+
+The partition $P^\prime$ is a \vocab{refinement} of $P$ if $P^\prime\supset P$. Given two partitions $P_1$ and $P_2$, we say that $P^\prime$ is their \emph{common refinement} if $P^\prime=P_1\cup P_2$.
+
+Intuitively, a refinement will give a better estimation than the original partition, so the upper and lower sums of a refinement should be more restrictive. We will now show this.
+
+\begin{lemma}\label{lemma:int-refinement}
+If $P^\prime$ is a refinement of $P$, then
+\begin{enumerate}[label=(\roman*)]
+\item $L(f,\alpha;P)\le L(f,\alpha;P^\prime)$
+\item $U(f,\alpha;P^\prime)\le U(f,\alpha;P)$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Suppose first that $P^\prime$ contains just one point more than $P$. Let this extra point be $x^\prime$, and suppose $x_{i-1}<x^\prime<x_i$ for some $i$ ($1\le i\le n$), where $x_{i-1},x_i\in P$. Let
+\[w_1=\inf_{x\in[x_{i-1},x^\prime]}f(x),\quad w_2=\inf_{x\in[x^\prime,x_i]}f(x).\]
+Let, as before,
+\[m_i=\inf_{x\in[x_{i-1},x_i]}f(x).\]
+Clearly $w_1\ge m_i$ and $w_2\ge m_i$. Then
+\begin{align*}
+&L(f,\alpha;P^\prime)-L(f,\alpha;P)\\
+&=w_1\brac{\alpha(x^\prime)-\alpha(x_{i-1})}+w_2\brac{\alpha(x_i)-\alpha(x^\prime)}-m_i\brac{\alpha(x_i)-\alpha(x_{i-1})}\\
+&=\underbrace{(w_1-m_i)}_{\ge0}\underbrace{\brac{\alpha(x^\prime)-\alpha(x_{i-1})}}_{>0}+\underbrace{(w_2-m_i)}_{\ge0}\underbrace{\brac{\alpha(x_i)-\alpha(x^\prime)}}_{>0}\\
+&\ge0
+\end{align*}
+and hence $L(f,\alpha;P)\le L(f,\alpha;P^\prime)$.
+
+If $P^\prime$ contains $k$ more points than $P$, we repeat this reasoning $k$ times.
+
+\item Analogous to the proof of (i).
+\end{enumerate}
+\end{proof}
+
+Since $f$ is bounded, there exist $m$ and $M$ such that $m\le f(x)\le M$ for all $x\in[a,b]$. Hence for every partition $P$,
+\[m\brac{\alpha(b)-\alpha(a)}\le L(f,\alpha;P)\le U(f,\alpha;P)\le M\brac{\alpha(b)-\alpha(a)}\]
+so that the numbers $L(f,\alpha;P)$ and $U(f,\alpha;P)$ form a bounded set. This shows that the upper and lower integrals are defined for every bounded function $f$. We now define the \emph{upper and lower Riemann--Stieltjes integrals} respectively as
+\begin{align*}
+\upperint_a^b f\dd{\alpha}&\coloneqq\inf_{P\in\mathcal{P}[a,b]} U(f,\alpha;P)\\
+\lowerint_a^b f\dd{\alpha}&\coloneqq\sup_{P\in\mathcal{P}[a,b]} L(f,\alpha;P)
+\end{align*}
+where we take inf and sup over all partitions.
+
+One would expect the lower RS integral to be less than or equal to the upper RS integral. We now show this.
+
+\begin{lemma}\label{lemma:int-upper-lower}
+\[\lowerint_a^bf\dd{\alpha}\le\upperint_a^bf\dd{\alpha}.\]
+\end{lemma}
+
+\begin{proof}
+Let $P^\prime$ be the common refinement of partitions $P_1$ and $P_2$; that is, $P^\prime=P_1\cup P_2$. Clearly $P^\prime\supset P_1$; by \cref{lemma:int-refinement},
+\[L(f,\alpha;P_1)\le L(f,\alpha;P^\prime).\]
+Similarly, $P^\prime\supset P_2$, so
+\[U(f,\alpha;P^\prime)\le U(f,\alpha;P_2).\]
+Clearly $L(f,\alpha;P^\prime)\le U(f,\alpha;P^\prime)$. Thus combining the above two equations gives
+\[L(f,\alpha;P_1)\le U(f,\alpha;P_2).\]
+Fix $P_2$ and take sup over all $P_1$ gives
+\[\lowerint_{a}^{b}f\dd{\alpha}\le U(f,\alpha;P_2).\]
+Then taking inf over all $P_2$ gives
+\[\lowerint_a^bf\dd{\alpha}\le\upperint_a^bf\dd{\alpha}.\]
+\end{proof}
+
+\subsection{Definition}
+\begin{definition}[Riemann--Stieltjes integral]
+$f$ is \vocab{Riemann--Stieltjes integrable}\index{Riemann--Stieltjes integrability} with respect to $\alpha$ over $[a,b]$, if
+\[\lowerint_a^b f\dd{\alpha}=\upperint_a^b f\dd{\alpha}.\]
+We call the common value the \vocab{Riemann--Stieltjes integral} of $f$ with respect to $\alpha$ over $[a,b]$, and denote it as
+\[\int_{a}^{b}f\dd{\alpha}.\]
+\end{definition}
+
+The functions $f$ and $\alpha$ are referred to as the \emph{integrand} and the \emph{integrator}, respectively.
+
+\begin{notation}
+$\mathcal{R}_\alpha[a,b]$ denotes the set of Riemann--Stieltjes integrable functions with respect to $\alpha$ over $[a,b]$.
+\end{notation}
+
+In particular, when $\alpha(x)=x$, we call the corresponding Riemann--Stieltjes integration the \emph{Riemann integration}, and use $\mathcal{R}[a,b]$ to denote the set of Riemann integrable functions.
+
+\begin{notation}
+$x$ is a ``dummy variable'' and may be replaced by any other convenient symbol; hence we omit it.
+\end{notation}
+
+\begin{example}[Dirichlet function]
+The \emph{Dirichlet function} is defined over $[0,1]$ by
+\[f(x)=\begin{cases}
+1&(x\in\QQ) \\
+0&(x\in\RR\setminus\QQ)
+\end{cases}\]
+For each subinterval $[x_{i-1},x_i]$, due to the density of rationals and irrationals, $[x_{i-1},x_i]$ contains both rationals and irrationals, so $M_i=1$ and $m_i=0$. Hence for any partition $P$,
+\[U(f;P)=1,\quad L(f;P)=0.\]
+Thus
+\[1=\upperint f\dd{\alpha}\neq\lowerint f\dd{\alpha}=0\]
+so the Dirichlet function is not Riemann--Stieltjes integrable.
+\end{example}
+
+The next result is particularly useful in determining the Riemann--Stieltjes integrability of a function. We will use it many times later.
+
+\begin{lemma}[Integrability criterion]\label{lemma:integrability-criterion}
+$f\in \mathcal{R}_\alpha[a,b]$ if and only if
+\[\forall\epsilon>0,\quad\exists P,\quad U(f,\alpha;P)-L(f,\alpha;P)<\epsilon.\]
+\end{lemma}
+
+\begin{proof} \
+
+\fbox{$\implies$} Suppose $f\in \mathcal{R}_\alpha[a,b]$. Let $\epsilon>0$ be given. Then there exists partitions $P_1$ and $P_2$ such that
+\[U(f,\alpha;P_2)-\int_{a}^{b}f\dd{\alpha}<\frac{\epsilon}{2}\]
+and
+\[\int_{a}^{b}f\dd{\alpha}-L(f,\alpha;P_1)<\frac{\epsilon}{2}.\]
+Choose $P$ to be the common refinement of $P_1$ and $P_2$. Then
+\begin{align*}
+U(f,\alpha;P)
+&\le U(f,\alpha;P_2)\\
+&<\int_{a}^{b}f\dd{\alpha}+\frac{\epsilon}{2}\\
+&<L(f,\alpha;P_1)+\epsilon\\
+&\le L(f,\alpha;P)+\epsilon.
+\end{align*}
+Hence for this partition $P$, we have
+\[U(f,\alpha;P)-L(f,\alpha;P)<\epsilon.\]
+
+\fbox{$\impliedby$} From \cref{lemma:int-upper-lower}, for every partition $P$, we have
+\[L(f,\alpha;P)\le\lowerint_{a}^{b}f\dd{\alpha}\le\upperint_{a}^{b}f\dd{\alpha}\le U(f,\alpha;P).\]
+Since $U(f,\alpha;P)-L(f,\alpha;P)<\epsilon$, we have that
+\[0\le\upperint_{a}^{b}\dd{\alpha}-\lowerint_{a}^{b}f\dd{\alpha}<\epsilon.\]
+Since this holds for all $\epsilon>0$, we have
+\[\upperint_{a}^{b}f\dd{\alpha}=\lowerint_{a}^{b}f\dd{\alpha}.\]
+Hence $f\in\mathcal{R}_\alpha[a,b]$.
+\end{proof}
+
+\subsection{Useful Identities}
+\begin{proposition}[Cauchy criterion]\label{prop:integral-cauchy-criterion} \
+\begin{enumerate}[label=(\roman*)]
+\item If $U(f,\alpha;P)-L(f,\alpha;P)<\epsilon$ holds for some $P$ and some $\epsilon>0$, then $U(f,\alpha;P^\prime)-L(f,\alpha;P^\prime)<\epsilon$ holds (with the same $\epsilon$) for every refinement of $P$, $P^\prime$.
+\item If $U(f,\alpha;P)-L(f,\alpha;P)<\epsilon$ holds for $P=\{x_0,\dots,x_n\}$, and
+\[s_i,t_i\in[x_{i-1},x_i]\quad(i=1,\dots,n)\]
+then
+\[\sum_{i=1}^{n}\absolute{f(s_i)-f(t_i)}\Delta\alpha_i<\epsilon.\]
+\item If $f\in\mathcal{R}_\alpha[a,b]$ and the hypotheses of (ii) hold, then
+\[\absolute{\sum_{i=1}^{n}f(t_i)\Delta\alpha_i-\int_{a}^{b}f\dd{\alpha}}<\epsilon.\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Suppose $U(f,\alpha;P)-L(f,\alpha;P)<\epsilon$ holds for some partition $P$ and some $\epsilon>0$. By \cref{lemma:int-refinement}, for any refinement $P^\prime$,
+\[U(f,\alpha;P^\prime)\le U(f,\alpha;P),\quad L(f,\alpha;P)\le L(f,\alpha;P^\prime).\]
+Hence
+\[U(f,\alpha;P^\prime)-L(f,\alpha;P^\prime)\le U(f,\alpha;P)-L(f,\alpha;P)<\epsilon.\]
+
+\item See that
+\[f(s_i),f(t_i)\in[m_i,M_i]\quad(i=1,\dots,n)\]
+so that
+\[\absolute{f(s_i)-f(t_i)}\le M_i-m_i.\]
+Thus
+\[\sum_{i=1}^{n}\absolute{f(s_i)-f(t_i)}\Delta\alpha_i\le U(f,\alpha;P)-L(f,\alpha;P)<\epsilon.\]
+
+\item The desired result follows from the two inequalities
+\[L(f,\alpha;P)\le\sum_{i=1}^{n}f(t_i)\Delta\alpha_i\le U(f,\alpha;P)\]
+\[L(f,\alpha;P)\le\int_{a}^{b}f\dd{\alpha}\le U(f,\alpha;P)\]
+\end{enumerate}
+\end{proof}
+
+The next result states that all continuous functions are integrable.
+
+\begin{proposition}[Continuity implies integrability]
+If $f$ is continuous on $[a,b]$, then $f\in \mathcal{R}_\alpha[a,b]$.
+\end{proposition}
+
+\begin{proof}
+Let $\epsilon>0$ be given. Choose $\eta>0$ such that
+\[\brac{\alpha(b)-\alpha(a)}\eta<\epsilon.\]
+Since $f$ is continuous on $[a,b]$ which is compact, by \cref{lemma:continuity-uniform-continuity}, $f$ is uniformly continuous on $[a,b]$. Thus there exists $\delta>0$ such that for all $x,y\in[a,b]$,
+\[|x-y|<\delta\implies\absolute{f(x)-f(y)}<\eta.\]
+
+If $P$ is any partition of $[a,b]$ such that $\Delta x_i<\delta$ for $i=1,\dots,n$, then
+\[M_i-m_i\le\eta\quad(i=1,\dots,n).\]
+Hence
+\begin{align*}
+U(f,\alpha;P)-L(f,\alpha;P)
+&=\sum_{i-1}^{n}(M_i-m_i)\Delta\alpha_i\\
+&\le\eta\sum_{i=1}^{n}\Delta\alpha_i=\eta\brac{\alpha(b)-\alpha(a)}<\epsilon.
+\end{align*}
+Therefore $f\in\mathcal{R}_\alpha[a,b]$, by the integrability criterion (\cref{lemma:integrability-criterion}).
+\end{proof}
+
+\begin{proposition}
+If $f$ is monotonic on $[a,b]$, and if $\alpha$ is continuous on $[a,b]$, then $f\in\mathcal{R}_\alpha[a,b]$.
+\end{proposition}
+
+\begin{proof}
+Let $\epsilon>0$ be given. For any positive integer $n$, choose a partition $P$ such that
+\[\Delta\alpha_i=\frac{\alpha(b)-\alpha(a)}{n}\quad(i=1,\dots,n).\]
+This is possible by the intermediate value theorem, due to the continuity of $\alpha$.
+
+Suppose that $f$ is monotonically increasing (the proof is analogous in the other case). Then
+\[M_i=f(x_i),\quad m_i=f(x_{i-1})\quad(i=1,\dots,n).\]
+Hence
+\begin{align*}
+U(f,\alpha;P)-L(f,\alpha;P)
+&=\sum_{i=1}^{n}(M_i-m_i)\Delta\alpha_i\\
+&=\frac{\alpha(b)-\alpha(a)}{n}\sum_{i=1}^{n}\brac{f(x_i)-f(x_{i-1})}\\
+&=\frac{\alpha(b)-\alpha(a)}{n}\brac{f(b)-f(a)}<\epsilon
+\end{align*}
+if $n$ is taken large enough. Hence $f\in\mathcal{R}_\alpha[a,b]$, by the integrability criterion.
+\end{proof}
+
+\begin{proposition}
+Suppose $f$ is bounded on $[a,b]$, $f$ has only finitely many points of discontinuity on $[a,b]$, and $\alpha$ is continuous at every point at which $f$ is discontinuous. Then $f\in \mathcal{R}_\alpha[a,b]$.
+\end{proposition}
+
+\begin{proof}
+Let $\epsilon>0$ be given. Since $f$ is bounded, let $M=\sup|f(x)|$. Let $E$ be the set of points at which $f$ is discontinuous.
+
+Since $E$ is finite, and $\alpha$ is continuous at every point of $E$, we can cover $E$ by finitely many disjoint intervals $[u_j,v_j]\subset[a,b]$ such that the sum of the corresponding differences $\sum_{j}\brac{\alpha(v_j)-\alpha(u_j)}<\epsilon$. Furthermore, we can place these intervals in such a way that every point of $E\cap(a,b)$ lies in the interior of some $[u_j,v_j]$.
+
+Remove the segments $(u_j,v_j)$ from $[a,b]$. The remaining set $K$ is compact. Hence $f$ is uniformly continuous on $K$, so there exists $\delta>0$ such that for all $s,t\in K$,
+\[|s-t|<\delta\implies|f(x)-f(t)|<\epsilon.\]
+
+Now form a partition $P=\{x_0,x_1,\dots,x_n\}$ of $[a,b]$ as follows: Each $u_j$ occurs in $P$. Each $v_j$ occurs in $P$. No point of any segment $(u_j,v_j)$ occurs in $P$. If $x_{i-i}$ is not one of the $u_j$, then $\Delta x_i<\delta$.
+
+Note that $M_i-m_i\le 2M$ for every $i$, and that $M_i-m_i<\epsilon$ unless $x_{i-i}$ is one of the $u_j$. Hence
+\begin{align*}
+U(f,\alpha;P)-L(f,\alpha;P)
+&=\sum_{i=1}^{n}(M_i-m_i)\Delta\alpha_i\\
+&\le\brac{\alpha(b)-\alpha(a)}\epsilon+2M\epsilon.
+\end{align*}
+Since $\epsilon$ is arbitrary, we have $f\in\mathcal{R}_\alpha[a,b]$, by the integrability criterion.
+\end{proof}
+
+The next result states that a uniformly continuous function of an integrable function is also integrable.
+
+\begin{proposition}\label{prop:integral-composition}
+Suppose $f\in \mathcal{R}_\alpha[a,b]$, $m\le f\le M$, and $\phi$ is continuous on $[m,M]$. Then $\phi\circ f\in \mathcal{R}_\alpha[a,b]$.
+\end{proposition}
+
+\begin{proof}
+Let $h=\phi\circ f$. Let $\epsilon>0$ be given. Since $\phi$ is uniformly continuous on $[m,M]$, there exists $\delta>0$ such that $\delta<\epsilon$, and for all $s,t\in[m,M]$,
+\[|s-t|\le\delta\implies|\phi(s)-\phi(t)|<\epsilon.\]
+
+Since $f\in \mathcal{R}_\alpha[a,b]$, by \cref{lemma:integrability-criterion}, there exists a partition $P=\{x_0,\dots,x_n\}$ of $[a,b]$ such that
+\begin{equation*}\tag{1}
+U(f,\alpha;P)-L(f,\alpha;P)<\delta^2.
+\end{equation*}
+Let 
+\[M_i=\sup_{x\in[x_{i-1},x_i]}f(x),\quad M_i^*=\sup_{x\in[x_{i-1},x_i]}h(x),\]
+\[m_i=\inf_{x\in[x_{i-1},x_i]}f(x),\quad m_i^*=\inf_{x\in[x_{i-1},x_i]}h(x).\]
+Divide the numbers $1,\dots,n$ into two classes:
+\begin{align*}
+A&=\{i\mid M_i-m_i<\delta\},\\
+B&=\{i\mid M_i-m_i\ge\delta\}.
+\end{align*}
+\begin{itemize}
+\item For $i\in A$, our choice of $\delta$ shows that $M_i^*-m_i^*\le\epsilon$.
+\item For $i\in B$, $M_i^*-m_i^*\le 2K$, where $\displaystyle K=\sup_{m\le t\le M}|\phi(t)|$.
+\end{itemize}
+By (1), we have
+\[\delta\sum_{i\in B}\Delta\alpha_i\le\sum_{i\in B}(M_i-m_i)\Delta\alpha_i<\delta^2\]
+so that $\sum_{i\in B}\Delta\alpha_i<\delta$. It follows that
+\begin{align*}
+U(h,\alpha;P)-L(h,\alpha;P)
+&=\sum_{i\in A}(M_i^*-m_i^*)\Delta\alpha_i+\sum_{i\in B}(M_i^*-m_i^*)\Delta\alpha_i\\
+&\le\epsilon\brac{\alpha(b)-\alpha(a)}+2K\delta\\
+&<\epsilon\brac{\alpha(b)-\alpha(a)+2K}.
+\end{align*}
+Since $\epsilon$ was arbitrary, by the integrability criterion, $h\in\mathcal{R}_\alpha[a,b]$.
+\end{proof}
+\pagebreak
+
+\section{Properties of the Integral}
+\begin{lemma} \
+\begin{enumerate}[label=(\roman*)]
+\item If $f_1,f_2\in \mathcal{R}_\alpha[a,b]$, then $f_1+f_2\in \mathcal{R}_\alpha[a,b]$, and
+\[\int_a^b(f_1+f_2)\dd{\alpha}=\int_a^bf_1\dd{\alpha}+\int_a^bf_2\dd{\alpha}.\]
+\item If $f\in\mathcal{R}_\alpha[a,b]$, then $cf\in\mathcal{R}_\alpha[a,b]$ for every $c\in\RR$, and
+\[\int_a^b(cf)\dd{\alpha}=c\int_a^bf\dd{\alpha}.\]
+
+\item If $f_1,f_2\in \mathcal{R}_\alpha[a,b]$ and $f_1\le f_2$, then
+\[\int_a^bf_1\dd{\alpha}\le\int_a^bf_2\dd{\alpha}.\]
+
+\item If $f\in \mathcal{R}_\alpha[a,b]$ and $c\in[a,b]$, then $f\in \mathcal{R}_\alpha[a,c]$ and $f\in \mathcal{R}_\alpha[c,b]$, and
+\[ \int_a^b f\dd{\alpha}=\int_a^c f\dd{\alpha}+\int_c^b f\dd{\alpha}. \]
+
+\item If $f\in \mathcal{R}_\alpha[a,b]$ and $|f|\le M$, then
+\[\absolute{\int_a^bf\dd{\alpha}}\le M\brac{\alpha(b)-\alpha(a)}.\]
+
+\item If $f\in R_{\alpha_1}[a,b]$ and $f\in R_{\alpha_2}[a,b]$, then $f\in R_{\alpha_1+\alpha_2}[a,b]$, and
+\[\int_a^bf\dd{(\alpha_1+\alpha_2)}=\int_a^bf\dd{\alpha_1}+\int_a^bf\dd{\alpha_2};\]
+if $f\in \mathcal{R}_\alpha[a,b]$ and $c$ is a positive constant, then $f\in R_{c\alpha}[a,b]$, and
+\[\int_a^bf\dd{(c\alpha)}=c\int_a^bf\dd{\alpha}.\]
+
+\item If $f\in \mathcal{R}_\alpha[a,b]$ and $g\in \mathcal{R}_\alpha[a,b]$, then $fg\in \mathcal{R}_\alpha[a,b]$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item If $f=f_1+f_2$ and $P$ is any partition of $[a,b]$, we have
+\begin{equation*}\tag{1}
+L(f_1,\alpha;P)+L(f_2,\alpha;P)\le L(f,\alpha;P)\le U(f,\alpha;P)\le U(f_1,\alpha;P)+U(f_2,\alpha;P).
+\end{equation*}
+If $f_1\in \mathcal{R}_\alpha[a,b]$ and $f_2\in \mathcal{R}_\alpha[a,b]$, let $\epsilon>0$ be given. There are partitions $P_1$ and $P_2$ such that
+\begin{align*}
+U(f_1,\alpha;P_1)-L(f_1,\alpha;P_1)&<\frac{\epsilon}{2}\\
+U(f_2,\alpha;P_2)-L(f_2,\alpha;P_2)&<\frac{\epsilon}{2}
+\end{align*}
+Let $P$ be the common refinement of $P_1$ and $P_2$. Then (1) implies
+\[U(f,\alpha;P)-L(f,\alpha;P)<\epsilon\]
+which proves that $f\in\mathcal{R}_\alpha[a,b]$.
+
+With this same $P$ we have
+\begin{align*}
+U(f_1,\alpha;P)<\int_{a}^{b}f_1\dd{\alpha}+\frac{\epsilon}{2}\\
+U(f_2,\alpha;P)<\int_{a}^{b}f_2\dd{\alpha}+\frac{\epsilon}{2}
+\end{align*}
+Hence (1) implies
+\[\int_{a}^{b}f\dd{\alpha}\le U(f,\alpha;P)<\int_{a}^{b}f_1\dd{\alpha}+\int_{a}^{b}f_2\dd{\alpha}+\epsilon.\]
+Since $\epsilon$ was arbitrary, we conclude that
+\[\int_{a}^{b}f\dd{\alpha}\le\int_{a}^{b}f_1\dd{\alpha}+\int_{a}^{b}f_2\dd{\alpha}.\]
+If we replace $f_1$ and $f_2$ in the above equation by $-f_1$ and $-f_2$, the inequality is reversed, and the equality is proved.
+
+\item The case where $c=0$ is trivial. Given $\epsilon>0$, there exists $P$ such that $U(f,\alpha;P)-L(f,\alpha;P)<\epsilon$. If $c>0$ write
+\[U(cf,\alpha;P)=\sum_{i=1}^{n}cM_i\alpha_i=c\sum_{i=1}^{n}M_i\alpha_i=c U(f,\alpha;P).\]
+Similarly,
+\[L(cf,\alpha;P)=c L(f,\alpha;P).\]
+Then
+\[U(cf,\alpha;P)-L(cf,\alpha;P)=c\brac{U(f,\alpha;P)-L(f,\alpha;P)}<c\epsilon\]
+and since $\epsilon$ is arbitrary, we are done. The case where $c<0$ is similar. Therefore $cf\in\mathcal{R}_\alpha[a,b]$.
+
+With this same $P$ we have
+\[U(f,\alpha;P)-\int_{a}^{b}f\dd{\alpha}<\epsilon.\]
+Then if $c>0$,
+\[\int_{a}^{b}cf\dd{\alpha}\le U(cf,\alpha;P)=cU(f,\alpha;P)<c\int_{a}^{b}f\dd{\alpha}+c\epsilon\]
+so
+\[\int_{a}^{b}cf\dd{\alpha}\le c\int_{a}^{b}f\dd{\alpha}.\]
+If we replace $f$ in the above equation by $-f$, the inequality is reversed, and the equality is proved.
+
+\item For every partition $P$, we have
+\[U(f_1,\alpha;P)=\sum_{i=1}^{n}M_i(f_1)\Delta\alpha_i\le\sum_{i=1}^{n}M_i(f_2)\Delta\alpha_i=U(f_2,\alpha;P)\]
+since $\alpha$ is monotonically increasing on $[a,b]$.
+
+\item 
+\item 
+\item 
+\item Take $\phi(t)=t^2$. By \cref{prop:integral-composition}, $f^2\in R_\alpha[a,b]$ if $f\in R_\alpha[a,b]$. Write
+\[fg=\frac{1}{4}\brac{(f+g)^2-(f-g)^2}.\]
+Then the desired result follows.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}[Triangle inequality]
+Suppose $f\in\mathcal{R}_\alpha[a,b]$. Then $|f|\in \mathcal{R}_\alpha[a,b]$, and
+\[\absolute{\int_a^bf\dd{\alpha}}\le\int_a^b|f|\dd{\alpha}.\]
+\end{lemma}
+
+\begin{proof}
+Take $\phi(t)=|t|$, which is a continuous function. By \cref{prop:integral-composition}, we have that $|f|=\phi\circ f\in\mathcal{R}_\alpha[a,b]$. Choose $c=\pm1$, so that
+\[c\int_{a}^{b}f\dd{\alpha}\ge0.\]
+Then
+\[\absolute{\int_{a}^{b}f\dd{\alpha}}=c\int_{a}^{b}f\dd{\alpha}=\int_{a}^{b}cf\dd{\alpha}\le\int_{a}^{b}|f|\dd{\alpha},\]
+since $cf\le|f|$.
+\end{proof}
+
+\begin{example}[Heaviside step function]
+The \emph{Heaviside step function} $H$ is defined by
+\[H(x)\coloneqq\begin{cases}
+0&(x\le0)\\
+1&(x>0)
+\end{cases}\]
+
+\begin{proposition*}
+Suppose $f$ is bounded on $[a,b]$, continuous at $s\in(a,b)$. Let $\alpha(x)=H(x-s)$, then
+\[\int_a^b f\dd{\alpha}=f(s).\]
+\end{proposition*}
+
+\begin{proof}
+Consider partitions $P=\{x_0,x_1,x_2,x_3\}$, where $x_0=a$, and $x_1=s<x_2<x_3=b$. Then
+\[U(f,\alpha;P)=M_2,\quad L(f,\alpha;P)=m_2.\]
+Since $f$ is continuous at $s$, we see that $M_2$ and $m_2$ converge to $f(s)$ as $x_2\to s$.
+\end{proof}
+
+\begin{proposition*}
+Suppose $c_n\ge0$ for $n=1,2,\dots$, $\sum c_n$ converges, $(s_n)$ is a sequence of distinct points in $(a,b)$, and
+\[\alpha(x)=\sum_{n=1}^{\infty}c_n H(x-s_n).\]
+Let $f$ be continuous on $[a,b]$. Then
+\[\int_a^b f\dd{\alpha}=\sum_{n=1}^{\infty}c_n f(s_n).\]
+\end{proposition*}
+
+\begin{proof}
+Since $0\le c_n H(x-s_n)\le c_n$ for $n=1,2,\dots$ and $\sum c_n$ converges, by the comparison test, $\alpha(x)=c_n H(x-s_n)$ converges for every $x$. Its sum $\alpha(x)$ is evidently monotonic (since each term in the sum is non-negative), and $\alpha(a)=0$, $\alpha(b)=\sum c_n$.
+
+Let $\epsilon>0$ be given. Since $\sum c_n$ converges, choose $N\in\NN$ so that 
+\[\sum_{n=N+1}^{\infty}c_n<\epsilon.\]
+Let
+\[\alpha_1(x)=\sum_{n=1}^{N}c_n H(x-s_n),\quad\alpha_2(x)=\sum_{n=N+1}^{\infty}c_n H(x-s_n).\]
+By Theorems 6.12 and 6.15,
+\[\int_{a}^{b}f\dd{\alpha_1}=\sum_{n=1}^{N}c_n f(s_n).\]
+Since $\alpha_2(b)-\alpha_2(a)<\epsilon$,
+\[\absolute{\int_{a}^{b}f\dd{\alpha_2}}\le M\epsilon,\]
+where $M=\sup|f(x)|$. Since $\alpha=\alpha_1+\alpha_2$, it follows from (24) and (25) that
+\[\absolute{\int_{a}^{b}f\dd{\alpha}-\sum_{n=1}^{N}c_n f(s_n)}\le M\epsilon.\]
+Since $\epsilon$ was arbitrary, and taking $N\to\infty$, we obtain
+\[\int_a^b f\dd{\alpha}=\sum_{n=1}^{\infty}c_n f(s_n).\]
+\end{proof}
+In this case, we call $\alpha(x)$ a \emph{step function}; then the integral reduces to a finite or infinite series.
+\end{example}
+
+The next result states that if $\alpha$ has an integrable derivative, then the integral reduces to an ordinary Riemann integral.
+
+\begin{proposition}[Integration by substitution]
+Assume $\alpha$ increases monotonically, $\alpha^\prime\in\mathcal{R}[a,b]$. Let $f:[a,b]\to\RR$ be bounded, then $f\in \mathcal{R}_\alpha[a,b]$ if and only if $f\alpha^\prime\in\mathcal{R}[a,b]$. In that case
+\begin{equation}
+\int_{a}^{b}f\dd{\alpha}=\int_{a}^{b}f(x)\alpha^\prime(x)\dd{x}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Let $\epsilon>0$ be given and apply Theorem 6.6 to $\alpha^\prime$: There exists a partition $P=\{x_0,\dots,x_n\}$ of $[a,b]$ such that
+\begin{equation*}\tag{1}
+U(\alpha^\prime;P)-L(\alpha^\prime;P)<\epsilon.
+\end{equation*}
+By the mean value theorem, there exist points $t_i\in[x_{i-1},x_i]$ such that
+\[\Delta\alpha_i=\alpha^\prime(t_i)\Delta x_i\quad(i=1,\dots,n).\]
+If $s_i\in[x_{i-1},x_i]$, then by \cref{prop:integral-cauchy-criterion},
+\begin{equation*}\tag{2}
+\sum_{i=1}^{n}\absolute{\alpha^\prime(s_i)-\alpha^\prime(t_i)}\Delta x_i<\epsilon.
+\end{equation*}
+Let $M=\sup|f(x)|$. Since
+\[\sum_{i=1}^{n}f(s_i)\Delta\alpha_i=\sum_{i=1}^{n}f(s_i)\alpha^\prime(t_i)\Delta x_i\]
+it follows from (2) that
+\begin{align*}
+\absolute{\sum_{i=1}^{n}f(s_i)\Delta\alpha_i-\sum_{i=1}^{n}f(s_i)\alpha^\prime(s_i)\Delta x_i}
+&=\absolute{\sum_{i=1}^{n}f(s_i)\brac{\alpha^\prime(t_i)-\alpha^\prime(s_i)}\Delta x_i}\\
+&\le\sum_{i=1}^{n}\absolute{f(s_i)\brac{\alpha^\prime(t_i)-\alpha^\prime(s_i)}\Delta x_i}\\
+&=\sum_{i=1}^{n}|f(s_i)|\absolute{\alpha^\prime(t_i)-\alpha^\prime(s_i)}\Delta x_i\\
+&\le M\sum_{i=1}^{n}\absolute{\alpha^\prime(t_i)-\alpha^\prime(s_i)}\Delta x_i\\
+&\le M\epsilon.\tag{3}
+\end{align*}
+In particular, for all choices of $s_i\in[x_{i-1},x_i]$,
+\[\sum_{i=1}^{n}f(s_i)\Delta\alpha_i\le U(f\alpha^\prime;P)+M\epsilon\]
+so taking sup for $f(s_i)$ gives
+\[U(f,\alpha;P)\le U(f\alpha^\prime;P)+M\epsilon.\]
+The same argument leads from (3) to
+\[U(f\alpha^\prime;P)\le U(f,\alpha;P)+M\epsilon.\]
+Hence
+\begin{equation*}\tag{4}
+\absolute{U(f,\alpha;P)-U(f\alpha^\prime;P)}\le M\epsilon.
+\end{equation*}
+Since (1) holds true for any refinement of $P$, hence (4) also remains true. We conclude that
+\[\absolute{\upperint_{a}^{b}f\dd{\alpha}-\upperint_{a}^{b}f(x)\alpha^\prime(x)\dd{x}}\le M\epsilon.\]
+But $\epsilon$ is arbitrary. Hence
+\[\upperint_{a}^{b}f\dd{\alpha}=\upperint_{a}^{b}f(x)\alpha^\prime(x)\dd{x}\]
+for any bounded $f$. The equality of the lower integrals follows from
+\begin{align*}
+\upperint_{a}^{b}-f\dd{\alpha}&=\upperint_{a}^{b}-f\alpha^\prime\dd{x}\\
+-\lowerint_{a}^{b}f\dd{\alpha}&=-\lowerint_{a}^{b}f\alpha^\prime\dd{x}\\
+\lowerint_{a}^{b}f\dd{\alpha}&=\lowerint_{a}^{b}f(x)\alpha^\prime(x)\dd{x}
+\end{align*}
+Therefore the theorem follows.
+\end{proof}
+
+\begin{proposition}[Change of variables]
+Suppose $\phi:[A,B]\to[a,b]$ is strictly increasing and continuous. Suppose $\alpha$ is monotonically increasing on $[a,b]$, $f\in \mathcal{R}_\alpha[a,b]$. Define $\beta$ and $g$ on $[A,B]$ by
+\[\beta(y)=\alpha(\phi(y)),\quad g(y)=f(\phi(y)).\]
+Then $g\in \mathcal{R}_\beta[A,B]$, and
+\begin{equation}
+\int_A^B g\dd{\beta}=\int_a^b f\dd{\alpha}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+To each partition $P=\{x_0,\dots,x_n\}$ of $[a,b]$ corresponds a partition $Q=\{y_0,\dots,y_n\}$ of $[A,B]$, where
+\[x_i=\phi(y_i)\quad(i=1,\dots,n).\]
+All partitions of $[A,B]$ are obtained in this way. Since the values taken by $f$ on $[x_{i-i},x_i]$ are exactly the same as those taken by $g$ on $[y_{i-i},y_i]$, we see that
+\begin{align*}
+U(g,\beta;Q)&=U(f,\alpha;P),\\
+L(g,\beta;Q)&=L(f,\alpha;P).
+\end{align*}
+Since $f\in\mathcal{R}_\alpha[a,b]$, $P$ can be chosen so that both $U(f,\alpha;P)$ and $L(f,\alpha;P)$ are close to $\int f\dd{\alpha}$. Hence (38), combined with Theorem 6.6, shows that $g\in\mathcal{R}_\beta[A,B]$ and that (37) holds. This completes the proof. 
+\end{proof}
+
+Note the following special case: Take $\alpha(x)=x$. Then $\beta=\phi$. Assume $\phi^\prime\in\mathcal{R}[A,B]$. If Theorem 6.17 is applied to the left side of (37), we obtain
+\[\int_{a}^{b}f(x)\dd{x}=\int_{A}^{B}f\brac{\phi(y)}\phi^\prime(y)\dd{y}.\]
+\pagebreak
+
+\section{Integration and Differentiation}
+We shall show that integration and differentiation are, in a certain sense, inverse operations.
+
+\begin{theorem}
+Suppose $f\in \mathcal{R}_\alpha[a,b]$. For $a\le x\le b$, let the \emph{cumulative function} be
+\[F(x)=\int_a^x f(t)\dd{t}.\]
+Then $F$ is continuous on $[a,b]$; furthermore, if $f$ is continuous at $x_0\in[a,b]$, then $F$ is differentiable at $x_0$, and
+\[F^\prime(x_0)=f(x_0).\]
+\end{theorem}
+
+\begin{proof}
+Suppose $f\in\mathcal{R}_\alpha[a,b]$. Since $f$ is bounded, let $|f(t)|\le M$ for $t\in[a,b]$. If $a\le x<y\le b$, then
+\begin{align*}
+|F(y)-F(x)|
+&=\absolute{\int_{a}^{y}f(t)\dd{t}-\int_{a}^{x}f(t)\dd{t}}\\
+&=\absolute{\int_{x}^{y}f(t)\dd{t}}\\
+&\le\int_{x}^{y}|f(t)|\dd{t}\\
+&\le M(y-x).
+\end{align*}
+Hence $F$ is Lipschitz continuous, so $F$ is uniformly continuous on $[a,b]$.
+
+Now suppose $f$ is continuous at $x_0$. Fix $\epsilon>0$, choose $\delta>0$ such that for $a\le t\le b$,
+\[|t-x_0|<\delta\implies|f(t)-f(x_0)|<\epsilon.\]
+Hence, if $s,t$ are such that
+\[x_0-\delta<s\le x_0\le t<x_0+\delta\quad\text{and}\quad a\le x<t\le b,\]
+we have, by Theorem 6.12(d),
+\begin{align*}
+\absolute{\frac{F(t)-F(s)}{t-s}-f(x_0)}
+&=\absolute{\frac{\int_{a}^{s}f(u)\dd{u}-\int_{a}^{s}f(u)\dd{u}}{t-s}-f(x_0)}\\
+&=\absolute{\frac{1}{t-s}\int_{s}^{t}\brac{f(u)-f(x_0)}\dd{u}}\\
+&=\frac{1}{t-s}\absolute{\int_{s}^{t}\brac{f(u)-f(x_0)}\dd{u}}\\
+&\le\frac{1}{t-s}\int_{s}^{t}|f(u)-f(x_0)|\dd{u}\\
+&<\frac{1}{t-s}\epsilon(t-s)=\epsilon
+\end{align*}
+so it follows that $F^\prime(x_0)=f(x_0)$.
+\end{proof}
+
+\begin{theorem}[Fundamental theorem of calculus]
+Suppose $f\in \mathcal{R}_\alpha[a,b]$, and there exists a differentiable function $F$ on $[a,b]$ such that $F^\prime=f$. Then
+\begin{equation}
+\int_a^b f(x)\dd{x}=F(b)-F(a).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $\epsilon>0$ be given. Choose a partition $P=\{x_0,\dots,x_n\}$ of $[a,b]$ such that $U(f;P)-L(f;P)<\epsilon$. By the mean value theorem, there exist $t_i\in[x_{i-1},x_i]$ such that
+\begin{align*}
+F(x_i)-F(x_{i-1})
+&=F^\prime(t_i)\Delta x_i\\
+&=f(t_i)\Delta x_i.
+\end{align*}
+Thus
+\[\sum_{i=1}^{n}f(t_i)\Delta x_i=F(b)-F(a).\]
+Then by \cref{prop:integral-cauchy-criterion},
+\[\absolute{F(b)-F(a)-\int_{a}^{b}f(x)\dd{x}}
+=\absolute{\sum_{i=1}^{n}f(t_i)\Delta x_i-\int_{a}^{b}f(x)\dd{x}}
+<\epsilon.\]
+Since this holds for all $\epsilon>0$, the proof is complete.
+\end{proof}
+
+\begin{lemma}[Integration by parts]
+Suppose $F$ and $G$ are differentiable on $[a,b]$, $F^\prime=f\in\mathcal{R}[a,b]$ and $G^\prime=g\in\mathcal{R}[a,b]$. Then
+\begin{equation}
+\int_a^b F(x)g(x)\dd{x}=F(b)G(b)-F(a)G(a)-\int_a^b f(x)G(x)\dd{x}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $H(x)=F(x)G(x)$. Then
+\begin{align*}
+H^\prime(x)
+&=F^\prime(x)G(x)+F(x)G^\prime(x)\\
+&=f(x)G(x)+F(x)g(x)
+\end{align*}
+\end{proof}
+\pagebreak
+
+\section{Integration of Vector-valued Functions}
+\begin{definition}
+Let $f_1,\dots,f_k:[a,b]\to\RR$, and let $\vb{f}=(f_1,\dots,f_k):[a,b]\to\RR^k$. We say that $\vb{f}\in\mathcal{R}_\alpha[a,b]$ if $f_1,\dots,f_k\in\mathcal{R}_\alpha[a,b]$. If this is the case, we define
+\[\int_{a}^{b}\vb{f}\dd{\alpha}=\brac{\int_{a}^{b}f_1\dd{\alpha},\dots,\int_{a}^{b}f_k\dd{\alpha}}.\]
+In other words, $\int\vb{f}\dd{\alpha}$ is the point in $\RR^k$ whose $i$-th coordinate is $\int f_i\dd{\alpha}$.
+\end{definition}
+
+It is clear that parts (a), (c), and (e) of Theorem 6.12 are valid for these
+vector-valued integrals; we simply apply the earlier results to each coordinate.
+The same is true of Theorems 6.17, 6.20, and 6.21. To illustrate, we state the analogue of the fundamental theorem of calculus.
+
+\begin{proposition}
+If $\vb{f},\vb{F}:[a,b]\to\RR^k$, $\vb{f}\in\mathcal{R}_\alpha[a,b]$, and $\vb{F}^\prime=\vb{f}$. Then
+\begin{equation}
+\int_{a}^{b}\vb{f}(t)\dd{t}=\vb{F}(b)-\vb{F}(a).
+\end{equation}
+\end{proposition}
+\todo{to do}
+\pagebreak
+
+\section{Rectifiable Curves}
+\begin{definition}[Curve]
+A \vocab{curve} in $\RR^k$ is a continuous mapping $\gamma:[a,b]\to\RR^k$.
+
+If $\gamma$ is bijective, $\gamma$ is called an \emph{arc}. If $\gamma(a)=\gamma(b)$, $\gamma$ is said to be a \emph{closed curve}.
+\end{definition}
+
+The case $k=2$ (i.e., the case of plane curves) is of considerable importance in the study of analytic functions of a complex variable.
+
+\begin{remark}
+Note that we define a curve to be a mapping, not a point set. Of course, with each curve $\gamma$ in $\RR^k$ there is associated a subset of $\RR^k$, namely the range of $\gamma$, but different curves may have the same range. 
+\end{remark}
+
+For each partition $P=\{x_0,\dots,x_n\}$ of $[a,b]$ and each curve $\gamma$ on $[a,b]$, let
+\[\Lambda(\gamma;P)=\sum_{i=1}^{n}|\gamma(x_i)-\gamma(x_{i-1})|.\]
+
+The $i$-th term in this sum is the distance (in $\RR^k$) between the points $\gamma(x_{i-1})$ and $\gamma(x_i)$, Hence $\Lambda(\gamma;P)$ is the length of a polygonal path with vertices at $\gamma(x_0),\gamma(x_1),\dots,\gamma(x_n)$, in this order. As our partition becomes finer and finer, this polygon approaches the range of $\gamma$ more and more closely.
+
+\begin{definition}
+The \vocab{total variation} (or \emph{length}) of $\gamma$ is
+\[\Lambda(\gamma)\coloneqq\sup_{P\in\mathcal{P}[a,b]}\Lambda(\gamma;P).\]
+\end{definition}
+
+\begin{definition}[Rectifiable curve]
+$\gamma$ is \vocab{rectifiable} if $\Lambda(\gamma)<\infty$.
+\end{definition}
+
+
+
+\begin{proposition}
+If $\gamma$ is a continuously differentiable curve on $[a,b]$, then $\gamma$ is rectifiable, and
+\begin{equation}
+\Lambda(\gamma)=\int_{a}^{b}|\gamma^\prime(t)|\dd{t}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+If $a\le x_{i-1}<x_i\le b$, then
+\[|\gamma(x_i)-\gamma(x_{i-1})|=\absolute{\int_{x_{i-1}}^{x_i}\gamma^\prime(t)\dd{t}}\le\int_{x_{i-1}}^{x_i}|\gamma^\prime(t)|\dd{t}.\]
+Hence, for every partition $P$ of $[a,b]$, taking the sum on both sides gives
+\[\Lambda(\gamma;P)\le\int_{a}^{b}|\gamma^\prime(t)|\dd{t}\]
+and taking sup gives
+\[\Lambda(\gamma)\le\int_{a}^{b}|\gamma^\prime(t)|\dd{t}.\]
+To prove the opposite inequality, let $\epsilon>0$ be given. Since $\gamma^\prime$ is uniformly continuous on $[a,b]$, there exists $\delta>0$ such that
+\[|s-t|<\delta\implies|\gamma^\prime(s)-\gamma^\prime(t)|<\epsilon.\]
+Let $P=\{x_0,\dots,x_n\}$ be a partition of $[a,b]$, with $\Delta x_i<\delta$ for all $i$. If $t\in[x_{i-1},x_i]$, it follows that
+\[|\gamma^\prime(t)|\le|\gamma^\prime(x_i)|+\epsilon.\]
+Hence
+\begin{align*}
+\int_{x_{i-1}}^{x_i}|\gamma^\prime(t)|\dd{t}
+&\le|\gamma^\prime(x_i)|\Delta x_i+\epsilon\Delta x_i\\
+&=\absolute{\int_{x_{i-1}}^{x_i}\brac{\gamma^\prime(t)+\gamma^\prime(x_i)-\gamma^\prime(t)}\dd{t}}+\epsilon\Delta x_i\\
+&\le\absolute{\int_{x_{i-1}}^{x_i}\gamma^\prime(t)\dd{t}}+\absolute{\int_{x_{i-1}}^{x_i}\brac{\gamma^\prime(x_i)-\gamma^\prime(t)}\dd{t}}+\epsilon\Delta x_i\\
+&\le|\gamma(x_i)-\gamma(x_{i-1})|+2\epsilon\Delta x_i.
+\end{align*}
+If we add these inequalities, we obtain
+\begin{align*}
+\int_{a}^{b}|\gamma^\prime(t)|\dd{t}
+&\le\Lambda(\gamma;P)+2\epsilon(b-a)\\
+&\le\Lambda(\gamma)+2\epsilon(b-a).
+\end{align*}
+Since $\epsilon$ was arbitrary,
+\[\int_{a}^{b}|\gamma^\prime(t)|\le\Lambda(\gamma).\]
+This completes the proof. 
+\end{proof}
+\pagebreak
+
+\section*{Exercises}
+\addcontentsline{toc}{section}{Exercises}

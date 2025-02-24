@@ -1,0 +1,194 @@
+\chapter{Complex Functions}\label{chap:complex-functions}
+\begin{summary}
+\item 
+\end{summary}
+
+$\CC$ is a metric space, with metric $d(z,w)=|z-w|$ as defined in \cref{chap:number-systems}. Therefore all notions defined for general metric spaces, as outlined in \cref{chap:basic-topology,chap:num-seq-series,chap:real-analysis_continuity,chap:special-functions}, are applicable to $\CC$.
+
+\section{Analytic Functions}
+\begin{definition}
+Let $U\subset\CC$ be open. Then $f:U\to\CC$ is \vocab{differentiable} at $a\in U$ if
+\[\lim_{z\to a}\frac{f(z)-f(a)}{z-a}\]
+exists; the value of this limit is denoted by $f^\prime(a)$, known as the \emph{derivative} of $f$ at $a$.
+
+If $f$ is differentiable at every point of $U$, we say that $f$ is \emph{differentiable} on $U$; we call $f$ \vocab{analytic}.
+\end{definition}
+
+Notice that if $f$ is differentiable on $U$, then $f^\prime$ defines a function from $U$ to $\CC$.
+
+\begin{lemma}[Differentiability implies continuity]
+If $f$ is differentiable at $a$, then $f$ is continuous at $a$.
+\end{lemma}
+
+\begin{proof}
+\begin{align*}
+\lim_{z\to a}f(z)-f(a)
+&=\lim_{z\to a}\frac{f(z)-f(a)}{z-a}(z-a)\\
+&=\lim_{z\to a}\frac{f(z)-f(a)}{z-a}\cdot\lim_{z\to a}(z-a)\\
+&=f^\prime(a)\cdot0=0
+\end{align*}
+and hence $\displaystyle\lim_{z\to a}f(z)=f(a)$.
+\end{proof}
+
+The following lemma collects the basic facts about derivatives. We omit the proof, which is essentially identical to the real case.
+
+\begin{lemma}[Properties of derivatives]
+Let $a\in\CC$, $U\subset\CC$ be open, and $f,g:U\to\CC$.
+\begin{enumerate}[label=(\roman*)]
+\item If $f,g$ are differentiable at $a$, then $f+g$ is differentiable at $a$, and\hfill(sums)
+\[(f+g)^\prime(a)=f^\prime(a)+g^\prime(a).\]
+\item If $f,g$ are differentiable at $a$, then $fg$ is differentiable at $a$, and\hfill(products)
+\[(fg)^\prime(a)=f^\prime(a)g(a)+f(a)g^\prime(a).\]
+\item If $f,g$ are differentiable at $a$ and $g(a)\neq0$ then $f/g$ is differentiable at $a$, and\hfill(quotients)
+\[\brac{\frac{f}{g}}^\prime(a)=\frac{f^\prime(a)g(a)-f(a)g^\prime(a)}{g(a)^2}.\]
+\item If $U$ and $V$ are open subsets of $\CC$ and $f:V\to U$, $g:U\to\CC$, where $f$ is differentiable at $a\in V$ and $g$ is differentiable at $f(a)\in U$, then $g\circ f$ is differentiable at $a$, and\hfill(chain rule)
+\[(g\circ f)^\prime(a)=g^\prime(f(a))f^\prime(a).\]
+\end{enumerate}
+\end{lemma}
+
+\begin{example}[Polynomials]
+Just as in the real case, the basic rules of differentiation stated above allow one to check that polynomial functions are differentiable:
+\begin{itemize}
+\item using the product rule and induction one sees that $z^n$ has derivative $nz^{n-1}$ for all $n\ge0$ (as a constant obviously has derivative $0$,
+\item and $f(z)=z$ has derivative $1$).
+\end{itemize}
+Then by linearity it follows every polynomial is differentiable.
+\end{example}
+
+Just as in the real-variable case, one can formulate complex differentiability in the following form, which is in fact the better form to use in most instances.
+
+\begin{lemma}
+Let $a\in\CC$, let $U$ be a neighbourhood of $a$ and let $f:U\to\CC$. Then $f$ is differentiable at $a$, with derivative $f^\prime(a)$, if and only if
+\[f(z)=f(a)+f^\prime(a)(z-a)+\epsilon(z)(z-a),\]
+where $\epsilon(z)\to0$ as $z\to a$.
+\end{lemma}
+
+\begin{proof}
+check that this definition is indeed equivalent to (really just a reformulation of) the previous one.
+\end{proof}
+
+\subsection{Cauchy--Riemann Equations}
+Let $f:U\subset\CC\to\CC$ be analytic. For $x+iy\in U$, let
+\[u(x,y)=\Re f(x+iy),\quad v(x,y)=\Im f(x+iy);\]
+that is,
+\[f(x+iy)=u(x,y)+iv(x,y).\]
+Let us evaluate the limit
+\[f^\prime(z)=\lim_{h\to0}\frac{f(z+h)-f(z)}{h}\]
+in two different ways. First let $h\to0$ through real values of $h$; we get
+\begin{align*}
+f^\prime(z)&=\lim_{h\to0}\frac{f(z+h)-f(z)}{h}\\
+&=\lim_{h\to0}\frac{f(x+h+iy)-f(x+iy)}{h}\\
+&=\lim_{h\to0}\brac{\frac{u(x+h,y)-u(x,y)}{h}+i\frac{v(x+h,y)-v(x,y)}{h}}\\
+&=\lim_{h\to0}\frac{u(x+h,y)-u(x,y)}{h}+i\lim_{h\to0}\frac{v(x+h,y)-v(x,y)}{h}\\
+&=\pdv{u}{x}+i\pdv{v}{y}
+\end{align*}
+Now let $h\to0$ through purely imaginary values; that is, for real $h$,
+\begin{align*}
+f^\prime(z)
+&=\lim_{h\to0}\frac{f(z+ih)-f(z)}{ih}\\
+&=\lim_{h\to0}\brac{-i\frac{u(x,y+h)-u(x,y)}{h}+\frac{v(x,y+h)-v(x,y)}{h}}\\
+&=-i\pdv{u}{y}+\pdv{v}{y}
+\end{align*}
+
+Equating the real and imaginary parts of the two expressions for $f^\prime(z)$, we obtain the \vocab{Cauchy--Riemann equations}:
+\begin{equation}\label{eqn:cauchy-riemann}
+\pdv{u}{x}=\pdv{v}{y},\quad\pdv{u}{y}=-\pdv{v}{x}.
+\end{equation}
+
+\begin{remark}
+This suggests that complex differentiability is a much more rigid property than one might think at first sight; if $f$ is differentiable then these partial derivatives do exist, and moreover they are subject to a constraint.
+\end{remark}
+
+We shall prove later that the derivative of an analytic function is itself analytic. By this fact, $u$ and $v$ have continuous second partial derivatives. Differentiating \cref{eqn:cauchy-riemann} again gives
+\[\pdv[2]{u}{x}=\pdv{v}{x,y},\quad\pdv[2]{u}{y}=-\pdv{v}{y,x}.\]
+Hence
+\begin{equation}\label{eqn:harmonic-function-diff}
+\pdv[2]{u}{x}+\pdv[2]{u}{y}=0.
+\end{equation}
+\cref{eqn:harmonic-function-diff} is called \emph{Laplace's equation}. Solutions to \cref{eqn:harmonic-function-diff} are said to be \vocab{harmonic}. If two harmonic functions $u$ and $v$ satisfy the Cauchy--Riemann equations \cref{eqn:cauchy-riemann}, then $v$ is called the \emph{conjugate harmonic function} of $u$.
+
+\begin{theorem}
+Suppose $u,v:U\subset\RR^2\to\RR$ have continuous partial derivatives. Then $f:U\subset\RR^2\to\CC$ defined by $f(z)=u(z)+iv(z)$ is analytic if and only if $u$ and $v$ satisfy the Cauchy--Riemann equations.
+\end{theorem}
+
+\begin{proof} \
+
+\fbox{$\impliedby$} We can write
+\begin{align*}
+u(x+h,y+k)-u(x,y)&=\pdv{u}{x}h+\pdv{u}{y}k+\epsilon_1\\
+v(x+h,y+k)-v(x,y)&=\pdv{v}{x}h+\pdv{v}{y}k+\epsilon_2
+\end{align*}
+where the remainders $\epsilon_1,\epsilon_2$ tend to zero more rapidly than $h+ik$ (in the sense that $\epsilon_1/(h+ik)\to0$ and $\epsilon_2/(h+ik)\to0$ for $h+ik\to0$). With the notation $f(z)=u(x,y)+iv(x,y)$, by the Cauchy--Riemann equations we obtain
+\[f(z+h+ik)-f(z)=\brac{\pdv{u}{x}+i\pdv{v}{x}}(h+ik)+\epsilon_1+i\epsilon_2\]
+and hence
+\[\lim_{h+ik\to0}\frac{f(z+h+ik)-f(z)}{h+ik}=\pdv{u}{x}+i\pdv{v}{x}.\]
+Therefore $f(z)$ is analytic.
+
+
+\end{proof}
+
+\begin{example}
+The function $f(z)=\bar{z}$ is not analytic.
+\begin{proof}
+Let $u,v:\RR^2\to\RR$ be the components of $f$. Then $u(x,y) = x$, $v(x,y)=-y$, and so
+\[\pdv{u}{x}=1,\quad\pdv{u}{y}=0,\quad\pdv{v}{x}=0,\quad\pdv{v}{y}=-1.\]
+Since $u$ and $v$ do not satisfy the Cauchy--Riemann equations, $f$ is not analytic.
+\end{proof}
+\end{example}
+
+\begin{proposition}
+Let $U$ be either $\CC$ or some open disk. If $u:U\to\RR$ is a harmonic function, then $u$ has a harmonic conjugate.
+\end{proposition}
+
+\begin{proof}
+Let $U=D_R(0)$ where $0<R\le\infty$, and let $u:U\to\RR$ be a harmonic function. We will find a harmonic function $v$ such that $u$ and $v$ satisfy the Cauchy--Riemann equations.
+
+Let
+\[v(x,y)=\int_{0}^{y}u_x(x,t)\dd{t}+\phi(x)\]
+and determine $\phi$ so that $u_x=-u_y$. Differentiating both sides of this equation with respect to $x$ gives
+\begin{align*}
+v_x(x,y)&=\int_{0}^{y}u_{xx}(x,t)\dd{t}+\phi^\prime(x)\\
+&=-\int_{0}^{y}u_{yy}(x,t)\dd{t}+\phi^\prime(x)\\
+&=-u_y(x,y)+u_y(x,0)+\phi^\prime(x)
+\end{align*}
+So it must be that $\phi^\prime(x)=-u_y(x,0)$. It is easily checked that $u$ and
+\[v(x,y)=\int_{0}^{y}u_x(x,t)\dd{t}-\int_{0}^{x}u_y(s,0)\dd{s}\]
+so satisfy the Cauchy--Riemann equations.
+\end{proof}
+\pagebreak
+
+\subsection{Power Series}
+\begin{proposition}
+Let $\displaystyle f(x)=\sum_{n=0}^{\infty}c_n(z-a)^n$ have radius of convergence $R>0$.
+\begin{enumerate}[label=(\roman*)]
+\item For each $k\ge1$, the series
+\[\sum_{n=k}^{\infty}n(n-1)\cdots(n-k+1)c_n(z-a)^{n-k}\]
+has radius of convergence $R$.
+\item $f$ is infinitely differentiable on $D_R(a)$, and
+\[f^{(k)}(z)=\sum_{n=k}^{\infty}n(n-1)\cdots(n-k+1)c_n(z-a)^{n-k}\]
+for all $k\ge1$ and $|z-a|<R$.
+\item For $n\ge0$,
+\[c_n=\frac{1}{n!}f^{(n)}(a).\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+WLOG asssume that $a=0$.
+\begin{enumerate}[label=(\roman*)]
+\item 
+\end{enumerate}
+\end{proof}
+\pagebreak
+
+\section{Analytic Functions as Mappings}
+\begin{definition}
+A \vocab{path} in a region $U\subset\CC$ is a continuous function $\gamma:[a,b]\to U$ for some interval $[a,b]\subset\RR$. If $\gamma$ is differentiable on $[a,b]$ and $\gamma^\prime$ is continuous, then $\gamma$ is a \emph{smooth path}.
+\end{definition}
+
+
+
+\begin{proposition}
+If $f:U\subset\CC\to\CC$ is analytic, then $f$ preserves angles at each $z_0\in U$ where $f^\prime(z_0)\neq0$.
+\end{proposition}
+
+\subsection{M\"{o}bius Transformations}

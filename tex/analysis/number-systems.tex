@@ -1,59 +1,85 @@
 \chapter{Real and Complex Number Systems}\label{chap:number-systems}
 
-\begin{learn}
-\item define the supremum and infimum of a set;
-\item discuss the construction and properties of the real field $\RR$;
-\item discuss the construction and properties of the complex field $\CC$;
-\item discuss the construction and properties of the Euclidean space $\RR^n$.
-\end{learn}
+\begin{summary}
+\item Supremum, infimum.
+\item Construction and properties of the real field $\RR$.
+\item Construction and properties of the complex field $\CC$.
+\item Construction and properties of the Euclidean space $\RR^n$.
+\end{summary}
 
 \section{Ordered Sets and Boundedness}
 \subsection{Definitions}
 Let $S$ be a set.
-\begin{definition}[Order]
-An \vocab{order}\index{order} on $S$ is a binary relation, denoted by $<$, with the following properties:
+\begin{definition}
+An \vocab{order}\index{order} on $S$ is a binary relation $<$ such that
 \begin{enumerate}[label=(\roman*)]
-\item Trichotomy: $\forall x,y \in S$, one and only one of the following statements is true:
-\[x<y,\quad x=y,\quad y<x.\]
-\item Transitivity: $\forall x,y,z \in S$, if $x<y$ and $y<z$, then $x<z$.
+\item for all $x,y\in S$, exactly one of $x<y$, $x=y$, or $y<x$ holds;\hfill(trichotomy)
+\item if $x,y,z\in S$ are such that $x<y$ and $y<z$, then $x<z$.\hfill(transitivity)
 \end{enumerate}
-We call $(S,<)$ an \vocab{ordered set}.
+$S$ is an \vocab{ordered set} if it has an order; denote it by $(S,<)$.
 \end{definition}
 
 \begin{notation}
-$x \le y$ indicates that $x<y$ or $x=y$, without specifying which of these two is to hold. In other words, $x\le y$ is the negation of $x>y$.
+We write $x\le y$ if $x<y$ or $x=y$. We define $>$ and $\ge$ in the obvious way.
 \end{notation}
 
 \begin{definition}[Boundedness]
-Suppose $S$ is an ordered set, and $E\subset S$.
+Let $E\subset S$, where $S$ is an ordered set.
 \begin{enumerate}[label=(\roman*)]
-\item $E$ is \vocab{bounded above} if there exists $\beta\in S$ such that $x\le\beta$ for all $x\in E$; $\beta$ is called an \vocab{upper bound} of $E$.
-\item $E$ is \vocab{bounded below} if there exists $\beta\in S$ such that $x\ge\beta$ for all $x\in E$; $\beta$ is called a \vocab{lower bound} of $E$.
+\item $E$ is \vocab{bounded above} if there exists $\beta\in S$ such that $x\le\beta$ for all $x\in E$; $\beta$ is called an \emph{upper bound} of $E$.
+\item $E$ is \vocab{bounded below} if there exists $\beta\in S$ such that $x\ge\beta$ for all $x\in E$; $\beta$ is called a \emph{lower bound} of $E$.
 \end{enumerate}
 $E$ is \vocab{bounded} in $S$ if it is bounded above and below.
 \end{definition}
 
-\begin{definition}[Supremum]
-Suppose $S$ is an ordered set, $E\subset S$, and $E$ is bounded above. We call $\alpha\in S$ the \vocab{supremum}\index{supremum} of $E$, denoted by $\alpha=\sup E$, if it satisfies the following properties:
+\begin{definition}[Supremum, infimum]
+We say $\alpha\in S$ is the \vocab{supremum}\index{supremum} of $E$ if
 \begin{enumerate}[label=(\roman*)]
 \item $\alpha$ is an upper bound for $E$;
 \item if $\beta<\alpha$ then $\beta$ is not an upper bound of $E$, i.e. $\exists x\in S\suchthat x>\beta$ (least upper bound).
 \end{enumerate}
-\end{definition}
 
-\begin{definition}[Infimum]
-We cal $\alpha\in S$ the \vocab{infimum}\index{infimum} of $E$, denoted by $\alpha=\inf E$, if it satisfies the following properties:
+Likewise, we say $\alpha\in S$ is the \vocab{infimum}\index{infimum} of $E$ if 
 \begin{enumerate}[label=(\roman*)]
 \item $\alpha$ is a lower bound for $E$;
 \item if $\beta>\alpha$ then $\beta$ is not a lower bound of $E$, i.e. $\exists x\in S\suchthat x<\beta$ (greatest lower bound).
 \end{enumerate}
 \end{definition}
 
+\begin{remark}
+It is not necessary for the supremum and infimum of $E$ to be in $E$.
+\end{remark}
+
+\begin{lemma}[Uniqueness of suprenum]
+If $E$ has a supremum, then it is unique.
+\end{lemma}
+
+\begin{proof}
+Suppose $\alpha$ are $\beta$ be suprema of $E$.
+
+Since $\beta$ is a supremum, it is an upper bound for $E$. Since $\alpha$ is a supremum, then it is the \emph{least} upper bound, so $\alpha\le\beta$. Interchanging the roles of $\alpha$ and $\beta$ gives $\beta\le\alpha$. Hence $\alpha=\beta$.
+\end{proof}
+
+Since the supremum and infimum are unique, we can give them a notation.
+
+\begin{notation}
+Denote the supremum of $E$ by $\sup E$, the infimum by $\inf E$.
+\end{notation}
+
+\begin{example}
+Let $E=\crbrac{\frac{1}{n}\:\big|\:n\in\NN}$. Then $\sup E=1$, $\inf E=0$.
+\begin{proof}
+It is clear that $1$ is an upper bound for $E$. Suppose $\beta<1$. Since $1\in E$, evidently $\beta$ is not an upper bound for $E$. Hence $\sup E=1$.
+
+It is clear that $0$ is a lower bound for $E$. Suppose $\beta>0$. Pick $n=\floor{\frac{1}{\beta}}+1$, then $\beta>\frac{1}{n}$, so $\beta$ is not a lower bound for $E$. Hence $\inf E=0$.
+\end{proof}
+\end{example}
+
 \subsection{Least-upper-bound Property}
 \begin{definition}
-An ordered set $S$ is said to have the \vocab{least-upper-bound property} (l.u.b.) if the following is true: if non-empty $E\subset S$ is bounded above, then $\sup E\in S$.
+An ordered set $S$ has the \vocab{least-upper-bound property} (l.u.b.) if every non-empty subset of $S$ that is bounded above has a supremum in $S$.
 
-Similarly, $S$ has the greatest-lower-bound property if the following is true: if non-empty $E\subset S$ is bounded below, then $\inf E\in S$.
+We define the \emph{greatest-lower-bound property} similarly.
 \end{definition}
 
 \begin{proposition}
@@ -88,20 +114,6 @@ Hence $S$ has the least-upper-bound property if and only if $S$ has the greatest
 
 \subsection{Properties of Suprema and Infima}
 This section discusses some fundamental properties of the supremum that will be useful in this text. There is a corresponding set of properties of the infimum that the reader should formulate for himself.
-
-\begin{proposition}[Uniqueness of suprenum]
-If $E$ has a supremum, then it is unique.
-\end{proposition}
-
-\begin{proof}
-We prove by contradiction. Suppose otherwise, for a contradiction, that $E$ does not have a unique supremum; let $\alpha$ and $\beta$ be suprema of $E$.
-
-Since $\beta$ is a supremum, it is an upper bound for $E$. Since $\alpha$ is a supremum, then it is the least upper bound and thus $\alpha\le\beta$. 
-
-Similarly, since $\alpha$ is a supremum, it is an upper bound for $E$; since $\beta$ is a supremum, it is a least upper bound and thus $\beta\le\alpha$.
-
-Since $\alpha\le\beta$ and $\beta\le\alpha$, we have that $\alpha=\beta$.
-\end{proof}
 
 The next result shows that a set with a supremum contains numbers arbitrarily close to its supremum.
 
@@ -165,11 +177,56 @@ Since $A$ is non-empty and bounded above, by the lub property of $S$, $A$ has a 
 
 Also, we saw before that if $\beta$ is a lower bound for $B$ then $-\beta$ is an upper bound for $A$. Then $-\beta \ge \sup A$ (since $\sup A$ is the least upper bound), so $\beta \le -\sup A$. Therefore $-\sup A$ is the greatest lower bound of $B$.
 \end{proof}
+
+\subsection{Ordered Fields}
+\begin{definition}[Ordered field]
+A field $F$ is an \vocab{ordered field} if there exists an order $<$ on $F$ such that for all $x,y,z\in F$,
+\begin{enumerate}[label=(\roman*)]
+\item if $y<z$ then $x+y<x+z$;
+\item if $x>0$ and $y>0$ then $xy>0$.
+\end{enumerate}
+\end{definition}
+
+If $x>0$, we call $x$ \emph{positive}; if $x<0$, $x$ is \emph{negative}.
+
+All the familiar rules for working with inequalities apply in every ordered field: Multiplication by positive [negative] quantities preserves [reverses] inequalities, no square is negative, etc. The following result lists some of these. 
+
+\begin{proposition}[Basic properties]\label{prop:ordered-field-properties}
+Let $F$ be an ordered field, $x,y,z\in F$.
+\begin{enumerate}[label=(\roman*)]
+\item If $x>0$ then $-x<0$, and vice versa.
+\item If $x>0$ and $y<z$ then $xy<xz$.
+\item If $x<0$ and $y<z$ then $xy>xz$.
+\item If $x\neq0$ then $x^2>0$. In particular, $1>0$.
+\item If $0<x<y$ then $0<\frac{1}{y}<\frac{1}{x}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item If $x>0$ then $0=-x+x>-x+0$, so that $-x<0$.
+
+If $x<0$ then $0=-x+x<-x+0$, so that $-x>0$.
+\item Since $z>y$, we have $z-y>y-y=0$, so $x(z-y)>0$. Hence
+\[xz=x(z-y)+xy>0+xy=xy.\]
+\item By (i) and (ii),
+\[-[x(z-y)]=(-x)(z-y)>0,\]
+so that $x(z-y)<0$. Hence $xz<xy$.
+\item If $x>0$, part (ii) of the above definition gives $x^2>0$.
+
+If $x<0$, then $-x>0$ so $(-x)^2>0$. But $x^2=(-x)^2$.
+
+Since $1=1^2$, $1>0$.
+\item If $y>0$ and $v\le0$, then $yv\le 0$. But $y\brac{\frac{1}{y}}=1>0$, so $\frac{1}{y}>0$. Likewise, $\frac{1}{x}>0$.
+
+Multiplying both sides of the inequality $x<y$ by the positive quantity $\brac{\frac{1}{x}}\brac{\frac{1}{y}}$, we obtain $\frac{1}{y}<\frac{1}{x}$.
+\end{enumerate}
+\end{proof}
 \pagebreak
 
 \section{Real Numbers}
 \subsection{Problems with $\QQ$}
-$\QQ$ has some problems, the first of which being \emph{algebraic incompleteness}: there exists equations with coefficients in $\QQ$ but do not have solutions in $\QQ$ (in fact $\RR$ has this problem too, but $\CC$ is algebraically complete, by the Fundamental Theorem of Algebra).
+$\QQ$ has some problems, the first of which being \emph{algebraic incompleteness}: there exists equations with coefficients in $\QQ$ but do not have solutions in $\QQ$ (in fact $\RR$ has this problem too, but $\CC$ is algebraically complete, by the fundamental theorem of algebra).
 
 \begin{lemma}
 $x^2-2=0$ has no solution in $\QQ$.
@@ -215,27 +272,6 @@ In the previous result, note that $B$ is the set of all upper bounds of $A$, and
 \end{proof}
 
 \subsection{Real Field}
-\begin{comment}
-\begin{definition}[Ordered field]
-A field $F$ is an \vocab{ordered field} if there eists an order $<$ on $F$ such that for all $x,y,z\in F$,
-\begin{enumerate}[label=(\roman*)]
-\item if $y<z$ then $x+y<x+z$;
-\item if $x>0$ and $y>0$ then $xy>0$.
-\end{enumerate}
-\end{definition}
-
-\begin{proposition}[Basic properties]
-The following statements are true in every ordered field.
-\begin{enumerate}[label=(\roman*)]
-\item If $x>0$ then $-x<0$, and vice versa.
-\item If $x>0$ and $y<z$ then $xy<xz$.
-\item If $x<0$ and $y<z$ then $xy>xz$.
-\item If $x\neq0$ then $x^2>0$. In particular, $1>0$.
-\item If $0<x<y$ then $0<\frac{1}{y}<\frac{1}{x}$.
-\end{enumerate}
-\end{proposition}
-\end{comment}
-
 The sole objective of this subsection is to prove the following result.
 
 \begin{theorem}[Existence of real field]
@@ -625,10 +661,10 @@ More generally, having chosen $a_1,\dots,a_{n-1}$ with $0\le a_i\le 9$, let $a_n
 Then $0\le a_n\le 9$ and we have
 \[r_n\le x<r_n+\frac{1}{10^n},\]
 where $r_n=a_0.a_1a_2\cdots a_n$.
-
-It is easy to verify that
-\[x=\sup\{r_1,r_2,\dots\}.\]
 \end{proof}
+
+Furthermore, it is easy to verify that $\displaystyle x=\sup_{n\in\NN}r_n$.
+\pagebreak
 
 \subsection{Extended Real Number System}
 \begin{definition}[Extended real number system]
@@ -692,9 +728,7 @@ Exercise.
 
 You may have noticed that we have defined the complex numbers without referring to the mysterious square root of $-1$. We now show that the notation $(a,b)$ is equivalent to the more customary $a+bi$.
 
-\begin{definition}[Imaginary number]
-$i=(0,1)$.
-\end{definition}
+Define the imaginary number $i=(0,1)$.
 
 \begin{proposition}
 $i^2=-1$.
@@ -716,9 +750,7 @@ a+bi&=(a,0)+(b,0)(0,1)\\
 \end{align*}
 \end{proof}
 
-\begin{definition}
 For $a,b\in\RR$, $z=a+bi$, we call $a$ and $b$ the \emph{real part} and \emph{imaginary part} of $z$ respectively, denoted by $a=\Re(z)$, $b=\Im(z)$; $\overline{z}=a-bi$ is called the \emph{conjugate} of $z$.
-\end{definition}
 
 \begin{proposition}
 For $z,w\in\CC$,
@@ -730,12 +762,10 @@ For $z,w\in\CC$,
 \end{enumerate}
 \end{proposition}
 
-\begin{definition}
 For $z\in\CC$, tbe \emph{absolute value} of $z$ is defined as
 \[|z|\coloneqq\brac{z\overline{z}}^\frac{1}{2}.\]
-\end{definition}
 
-\begin{proposition}
+\begin{lemma}
 For $z,w\in\CC$,
 \begin{enumerate}[label=(\roman*)]
 \item $|z|\ge0$
@@ -743,7 +773,7 @@ For $z,w\in\CC$,
 \item $|zw|=|z||w|$
 \item $|\Re(z)|\le|z|$
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
@@ -771,8 +801,7 @@ For $z,w\in\CC$,
 \begin{proof}
 Let $z,w\in\CC$. Note that the conjugate of $z\overline{w}$ is $\overline{z}w$, so $z\overline{w}+\overline{z}w=2\Re(z\overline{w})$. Hence
 \begin{align*}
-|z+w|^2&=(z+w)(\overline{z+w})\\
-&=(z+w)(\overline{z}+\overline{w})\\
+|z+w|^2&=(z+w)(\overline{z+w})=(z+w)(\overline{z}+\overline{w})\\
 &=z\overline{z}+z\overline{w}+\overline{z}w+w\overline{w}\\
 &=|z|^2+2\Re(z\overline{w})+|w|^2\\
 &\le|z|^2+2|z\overline{w}|+|w|^2\\
@@ -788,9 +817,31 @@ For $z_1,\dots,z_n\in\CC$,
 \end{corollary}
 
 \begin{proof}
-By the triangle inequality, $|z_1+z_2|\le|z_1|+|z_2|$. Assume the statement holds for $n-1$. Then
+We have proven the case $n=2$. Assume the statement holds for $n-1$. Then
 \[|z_1+\cdots+z_{n-1}+z_n|\le|z_1+\cdots+z_{n-1}|+|z_n|\le|z_1|+\cdots+|z_n|,\]
 which establishes the claim by induction.
+\end{proof}
+
+\begin{corollary}
+For $x,y,z\in\CC$,
+\begin{enumerate}[label=(\roman*)]
+\item $\absolute{|x|-|y|}\le|x-y|$;
+\item $|x-y|\le|x-z|+|z-y|$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item By the triangle inequality,
+\[|x|=|(x-y)+y|\le|x-y|+|y|\]
+so that
+\[|x|-|y|\le|x-y|.\]
+Interchanging the roles of $x$ and $y$ in the above gives
+\[|y|-|x|\le|x-y|.\]
+Hence
+\[\absolute{|x|-|y|}\le|x-y|.\]
+\item In the triangle inequality, replace $x$ by $x-y$ and $y$ by $y-z$.
+\end{enumerate}
 \end{proof}
 
 \begin{theorem}[Cauchy--Schwarz inequality]
@@ -834,14 +885,14 @@ For $n\in\NN$, define
 \[\RR^n\coloneqq\{(x_1,\dots,x_n)\mid x_i\in\RR\}\]
 where $\vb{x}=(x_1,\dots,x_n)$, $x_i$'s are called the coordinates of $\vb{x}$. The elements of $\RR^n$ are called \emph{points}, or \emph{vectors}.
 
-\begin{proposition}
+\begin{lemma}
 Let $\vb{x}=(x_1,\dots,x_n)$, $\vb{y}=(y_1,\dots,y_n)$. $\RR^n$, with addition and scalar multiplication defined as
 \begin{align*}
 \vb{x}+\vb{y}&=(x_1+y_1,\dots,x_n+y_n),\\
 \alpha\vb{x}&=(\alpha x_1,\dots,\alpha x_n).
 \end{align*}
 for $\vb{x},\vb{y}\in\RR^n$, $\alpha\in\RR$, is a vector space over $\RR$. Note that the zero element of $\RR^n$ is $\vb{0}=(0,\dots,0)$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 These two operations satisfy the commutative, associatives, and distributive laws (the proof is trivial, in view of the analagous laws for the real numbers).
@@ -850,42 +901,33 @@ These two operations satisfy the commutative, associatives, and distributive law
 We define the \emph{inner product} of $\vb{x}$ and $\vb{y}$ by
 \[\vb{x}\cdot\vb{y}\coloneqq\sum_{i=1}^nx_iy_i,\]
 and the \emph{norm} of $\vb{x}$ by
-\[\norm{\vb{x}}\coloneqq\brac{\vb{x}\cdot\vb{x}}^\frac{1}{2}=\brac{\sum_{i=1}^n{x_i}^2}^\frac{1}{2}.\]
+\[\norm{\vb{x}}\coloneqq\sqrt{\vb{x}\cdot\vb{x}}.\]
 The structure now defined (the vector space $\RR^n$ with the above inner product and norm) is called the \vocab{Euclidean $n$-space}.
 
-\begin{proposition}
-Suppose $\vb{x},\vb{y},\vb{z}\in\RR^n$, $\alpha\in\RR$. Then
+\begin{lemma}[Basic properties of norm]
+Suppose $\vb{x},\vb{y},\vb{z}\in\RR^n$, $\alpha\in\RR$.
 \begin{enumerate}[label=(\roman*)]
-\item $\norm{\vb{x}}\ge0$
-\item $\norm{\vb{x}}=0$ if and only if $\vb{x}=\vb{0}$
-\item $\norm{\alpha\vb{x}}=|\alpha|\norm{\vb{x}}$
+\item $\norm{\vb{x}}\ge0$, where equality holds if and only if $\vb{x}=\vb{0}$.\hfill(positive definiteness)
+\item $\norm{\alpha\vb{x}}=|\alpha|\norm{\vb{x}}$\hfill(homogeneity)
 \item $\norm{\vb{x}\cdot\vb{y}}\le\norm{\vb{x}}\norm{\vb{y}}$
-\item $\norm{\vb{x}+\vb{y}}\le\norm{\vb{x}}+\norm{\vb{y}}$
-\item $\norm{\vb{x}-\vb{z}}\le\norm{\vb{x}-\vb{y}}+\norm{\vb{y}-\vb{z}}$
+\item $\norm{\vb{x}+\vb{y}}\le\norm{\vb{x}}+\norm{\vb{y}}$\hfill(triangle inequality)
+\item $\norm{\vb{x}-\vb{z}}\le\norm{\vb{x}-\vb{y}}+\norm{\vb{y}-\vb{z}}$\hfill(triangle inequality)
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
 \item Obvious from definition.
-\item \begin{align*}
-\norm{\vb{x}}=0&\iff\brac{\sum_{i=1}^n{x_i}^2}^\frac{1}{2}=0\\
-&\iff\sum_{i=1}^n{x_i}^2=0\\
-&\iff x_1=\cdots=x_n=0\\
-&\iff\vb{x}=(0,\dots,0)=\vb{0}
-\end{align*}
-since ${x_i}^2\ge0$.
-
 \item Obvious from definition.
 \item This is an immediate consequence of the Cauchy--Schwarz inequality.
-\item By (iv) we have
+\item By (iii) we have
 \begin{align*}
 \norm{\vb{x}+\vb{y}}&=(\vb{x}+\vb{y})\cdot(\vb{x}+\vb{y})\\
 &=\vb{x}\cdot\vb{x}+2\vb{x}\cdot\vb{y}+\vb{y}\cdot\vb{y}\\
 &\le\norm{\vb{x}}^2+2\norm{\vb{x}}\norm{\vb{y}}+\norm{\vb{y}}^2\\
 &=\brac{\norm{\vb{x}}+\norm{\vb{y}}}^2.
 \end{align*}
-\item This follows directly from (v) by replacing $\vb{x}$ by $\vb{x}-\vb{y}$ and $\vb{y}$ by $\vb{y}-\vb{z}$.
+\item This follows directly from (iv) by replacing $\vb{x}$ by $\vb{x}-\vb{y}$ and $\vb{y}$ by $\vb{y}-\vb{z}$.
 \end{enumerate}
 \end{proof}
 
@@ -904,139 +946,93 @@ Suppose that $E$ and $F$ are sets in $\RR^n$ where $E$ and $F$ is finite. Prove 
 \pagebreak
 
 \section*{Exercises}
-\begin{prbm}
-Consider the set $\crbrac{\frac{1}{n}\:\big|\:n\in\NN}$.
-\begin{enumerate}[label=(\roman*)]
-\item Show that $\max S=1$.
-\item Show that if $d$ is a lower bound for $S$, then $d \le 0$.
-\item Use (ii) to show that $0 = \inf S$.
-\end{enumerate}
-\end{prbm}
-
-\begin{prbm}
-Find, with proof, the supremum and/or infimum of $\{\frac{1}{n}\}$.
-\end{prbm}
-
-\begin{solution}
-For the suprenum,
-\[ \sup\crbrac{\frac{1}{n}} = \max\crbrac{\frac{1}{n}} = 1. \]
-For the infinum, for all positive $a$ we can pick $n=[\frac{1}{a}]+1$, then $a>\frac{1}{n}$. Hence 
-\[ \inf\crbrac{\frac{1}{n}}=0. \]
-\end{solution}
-
-\begin{prbm}
-Find, with proof, the supremum and/or infimum of $\{\sin n\}$.
-\end{prbm}
-
-\begin{proof}
-The answer is easy to guess: $\pm1$
-
-For the supremum, we need to show that $1$ is the smallest we can pick, so for any $a=1-\epsilon<1$ we want to find an integer $n$ close enough to $2k\pi+\dfrac{\pi}{2}$ so that $\sin n > a$.
-
-Whenever we want to show the approximations between rational and irrational numbers we should think of the \emph{pigeonhole principle}.
-\[ 2k\pi+\frac{\pi}{2}=6k+(2\pi-6)k+\frac{\pi}{2} \]
-Consider the set of fractional parts $\{(2\pi-6)k\}$. Since this an infinite set, for any small number $\delta$ there is always two elements $\{(2\pi-6)a\}<\{(2\pi-6)b\}$ such that
-\[ |\{(2\pi-6)b\}-\{(2\pi-6)a\}|<\epsilon \]
-
-Then $\{(2\pi-6)(b-a)\}<\delta$
-
-We then multiply by some number $m$ (basically adding one by one) so that
-\[ 0 \le \{(2\pi-6)\cdot m(b-a)\}-\brac{2-\frac{\pi}{2}}<\delta \]
-
-Picking $k=m(b-a)$ thus gives
-\begin{align*}
-2k\pi+\frac{\pi}{2} &= 6k+(2\pi-6)k+\frac{\pi}{2} \\
-&= 6k+[(2\pi-6)k]+2+{(2\pi-6)k}-\brac{2-\frac{\pi}{2}}
-\end{align*}
-
-Thus $n=6k+[(2\pi-6)k]+2$ satisfies $\absolute{2k\pi+\dfrac{\pi}{2}-n}<\delta$
-
-Now we're not exactly done here because we still need to talk about how well $\sin n$ approximates to 1.
-
-We need one trigonometric fact: $\sin x<x$ for $x>0$. (This simply states that the area of a sector in the unit circle is larger than the triangle determined by its endpoints.)
-
-\begin{align*}
-\sin n&=\sin\brac{n-\brac{2k\pi+\frac{\pi}{2}}+\brac{2k\pi+\frac{\pi}{2}}} \\
-&=\cos\brac{n-\brac{2k\pi+\frac{\pi}{2}}} \\
-&=\cos\theta
-\end{align*}
-
-\[1-\sin n = 2 \sin^2 \frac{\theta}{2} = 2 \sin^2 \absolute{\frac{\theta}{2}} \le \frac{\theta^2}{2}<\delta \]
-
-Hence we simply pick $\delta=\epsilon$ to ensure that $1 - \sin n<\epsilon$, and we're done.
-\end{proof}
-
-\begin{prbm}[\cite{rudin} Ch.1 Q1]
+\addcontentsline{toc}{section}{Exercises}
+\begin{exercise}[\cite{rudin} 1.1]
 If $r\in\QQ\setminus\{0\}$ and $x\in\RR\setminus\QQ$, prove that $r+x\in\RR\setminus\QQ$ and $rx\in\RR\setminus\QQ$.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
-We prove by contradiction. Suppose $r+x$ is rational, then $r+x=\dfrac{m}{n}$ for $m,n\in\ZZ$, and $m,n$ have no common factors. Then $m=n(r+x)$. Let $r=\frac{p}{q}$ for $p,q\in\ZZ$, the former equation implies that $m=n\brac{\frac{p}{q}+x}$, i.e., $qm=n(p+qx)$, giving
-\[x=\frac{mq-np}{nq},\]
-which says that $x$ can be written as the quotient of two integers, so $x$ is rational, a contradiction.
-
-The proof for the case $rx$ is similar.
+Prove by contradiction. If $r$ and $r+x$ were both rational, then $x=(r+x)-r$ would also be rational. Similarly if $rx$ were rational, then $x=\frac{rx}{r}$ would also be rational.
 \end{solution}
 
-\begin{prbm}[\cite{rudin} Ch.1 Q4]
-Let $E$ be a nonempty subset of an ordered set; suppose $\alpha$ is a lower bound of $E$ and $\beta$ is an upper bound of $E$. Prove that $\alpha\le\beta$.
-\end{prbm}
+\begin{exercise}[\cite{rudin} 1.2]
+Prove that there is no rational number whose square is $12$.
+\end{exercise}
 
 \begin{solution}
-Let $x\in E$. By definition of lower and upper bounds, $\alpha\le x\le\beta$.
+Prove by contradiction.
 \end{solution}
 
-\begin{prbm}[\cite{rudin} Ch.1 Q8]
-Prove that no order can be defined in $\CC$ that turns it into an ordered field.
-\end{prbm}
+\begin{exercise}[\cite{rudin} 1.4]
+Let $E$ be a nonempty subset of an ordered set; suppose $\alpha$ is a lower bound of $E$, and $\beta$ is an upper bound of $E$. Prove that $\alpha\le\beta$.
+\end{exercise}
 
 \begin{solution}
-By Proposition 1.18d, an ordering $<$ that makes $\CC$ an ordered field would have to satisfy $-1=i^2>0$, contradicting $1>0$.
+Since $E$ is non-empty, there exists $x\in E$. By definition of lower and upper bounds, we have $\alpha\le x\le\beta$.
 \end{solution}
 
-\begin{prbm}[\cite{rudin} Ch.1 Q9, lexicographic order]
+\begin{exercise}[\cite{rudin} 1.8]
+Prove that no order can be defined in $\CC$ that turns it into an ordered field. \emph{Hint}: $-1$ is a square.
+\end{exercise}
+
+\begin{solution}
+By \cref{prop:ordered-field-properties}, an order $<$ that makes $\CC$ an ordered field would have to satisfy $-1=i^2>0$, contradicting $1>0$.
+\end{solution}
+
+\begin{exercise}[\cite{rudin} 1.9, lexicographic order]
 Suppose $z=a+bi$, $w=c+di$. Define an order on $\CC$ as follows:
 \[z<w\iff\begin{cases}
 a<c,\text{ or}\\
 a=c,b<d.
 \end{cases}\]
 Prove that this turns $\CC$ into an ordered set. Does this ordered set have the least upper bound property?
-\end{prbm}
+\end{exercise}
 
-\begin{prbm}[\cite{rudin} Ch.1 Q10]
+\begin{solution}
+We show that this order turns $\CC$ into an ordered set.
+\begin{enumerate}[label=(\roman*)]
+\item Since the \emph{real} numbers are ordered, we have $a<c$ or $a=c$ or $c<a$. In the first case $z<w$; in the third case $w<z$.
+
+Now consider the second case where $a=c$. We must have $b<d$ or $b=d$ or $d<b$, which correspond to $z<w$, $z=w$, $w<z$ respectively.
+
+Hence we have shown that either $z<w$ or $z=w$ or $w<z$.
+
+\item We now show that if $z<w$ and $w<u$, then $z<u$. Let $u=e+fi$.
+
+Since $z<w$, we have either $a<c$, or $a=c$ and $b<d$. Since $w<u$, we have either $c<f$, or $c=f$ and $d<g$. Hence there are four possible cases:
+\begin{itemize}
+\item $a<c$ and $c<f$. Then $a<f$ and so $z<u$, as required.
+\item $a<c$ and $c=f$, and $d<g$. Again $a<f$, so $z<u$.
+\item $a=c$, and $b<d$ and $c<f$. Once again $a<f$ so $z<u$.
+\item $a=c$ and $b<d$, and $c=f$ and $d<g$. Then $a=f$ and $b<g$, so $z<u$.
+\end{itemize}
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}[\cite{rudin} 1.10]
 Suppose $z=a+bi$, $w=u+iv$, and
 \[a=\brac{\frac{|w|+u}{2}}^\frac{1}{2},\quad b=\brac{\frac{|w|-u}{2}}^\frac{1}{2}.\]
 Prove that $z^2=w$ if $v\ge0$ and that $\overline{z}^2=w$ if $v\le0$. Conclude that every complex number (with one exception!) has two complex square roots.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 We have
 \[a^2-b^2=\frac{|w|+u}{2}-\frac{|w|-u}{2}=u,\]
 and
 \[2ab=\brac{|w|+u}^\frac{1}{2}\brac{|w|-u}^\frac{1}{2}=\brac{|w|^2-u^2}^\frac{1}{2}=\brac{v^2}^\frac{1}{2}=|v|.\]
-Hence
-\[z^2=\brac{a^2-b^2}+2abi=u+|v|i=w\]
-if $v\ge0$, and
-\[\overline{z}^2=\brac{a^2-b^2}-2abi=u-|v|i=w\]
-if $v\le0$. Hence every non-zero $w$ has two square roots $\pm z$ or $\pm\overline{z}$. Of course, $0$ has only one square root, itself.
+Hence if $v\ge0$,
+\[z^2=\brac{a^2-b^2}+2abi=u+|v|i=w;\]
+if $v\le0$,
+\[\overline{z}^2=\brac{a^2-b^2}-2abi=u-|v|i=w.\]
+Hence every non-zero $w$ has two square roots $\pm z$ or $\pm\overline{z}$. Of course, $0$ has only one square root, itself.
 \end{solution}
 
-\begin{prbm}[\cite{rudin} Ch.1 Q11]
+\begin{exercise}[\cite{rudin} 1.11]
 If $z\in\CC$, prove that there exists $r\ge0$ and $w\in\CC$ with $|w|=1$ such that $z=rw$. Are $w$ and $r$ always uniquely determined by $z$?
-\end{prbm}
-
-\begin{prbm}[\cite{rudin} Ch.1 Q13]
-If $x,y\in\CC$, prove that
-\[\absolute{|x|-|y|}\le|x-y|.\]
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
-By the triangle inequality,
-\[|x|=|(x-y)+y|\le|x-y|+|y|\]
-so that
-\[|x|-|y|\le|x-y|.\]
-Interchanging the roles of $x$ and $y$ in the above, we also have
-\[|y|-|x|\le|x-y|\]
-so that
-\[\absolute{|x|-|y|}\le|x-y|.\]
+If $z=0$, take $r=0$ and $w=1$; in this case $w$ is not unique.
+
+Otherwise take $r=|z|$ and $w=\frac{z}{|z|}$; these choices are unique, since if $z=rw$, we must have $r=r|w|=|rw|=|z|$ so $w=\frac{z}{r}=\frac{z}{|z|}$ are unique.
 \end{solution}

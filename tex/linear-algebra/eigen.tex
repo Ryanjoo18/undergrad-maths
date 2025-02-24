@@ -161,14 +161,14 @@ which we can write as
 where $p(z)=a_0+a_1z+\cdots+a_nz^n$, where we pick $p$ such that $\deg p$ is minimal.
 
 By the fundamental theorem of algebra, there exists a root of $p$ in $\CC$; let $\lambda\in\CC$ be a root of $p$. Then by the factor theorem,
-\[p(z)=(z-\lambda)q(z)\quad(\forall z\in\CC)\]
-so
-\[p(T)=(T-\lambda I)q(T).\]
-Then 
-\[\vb{0}=p(T)v=(T-\lambda I)q(T)v,\]
-or
-\[Tq(T)v=\lambda qT(v).\]
-We have that $q(T)v\neq\vb{0}$ since we chose $p(T)v=\vb{0}$, $\deg p$ is minimal. Therefore $\lambda$ is an eigenvalue of $T$, with corresponding eigenvector $q(T)v$.
+\[p(z)=(z-\lambda)q(z)\quad(z\in\CC).\]
+Thus
+\begin{align*}
+p(T)&=(T-\lambda I)q(T)\\
+\vb{0}=p(T)v&=(T-\lambda I)q(T)v\\
+Tq(T)v&=\lambda q(T)v
+\end{align*}
+Since $p$ is the minimal polynomial and $\deg q<\deg p$, we must have that $q(T)v\neq\vb{0}$. Therefore $\lambda$ is an eigenvalue of $T$, with corresponding eigenvector $q(T)v$.
 \end{proof}
 
 \begin{example}
@@ -220,7 +220,7 @@ A \emph{monic polynomial} is a polynomial whose highest-degree coefficient equal
 The following result shows the existence, uniqueness and degree of the \emph{minimal polynomial}.
 
 \begin{lemma}
-Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. Then there exists a unique monic polynomial $p\in\FF[z]$ of smallest degree such that $p(T)=\vb{0}$. Furthermore, $\deg p\le\dim V$.
+Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. Then there exists a unique monic polynomial $p\in\FF[z]$ of smallest degree such that $p(T)=0$. Furthermore, $\deg p\le\dim V$.
 \end{lemma}
 
 \begin{proof} \
@@ -229,7 +229,7 @@ Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. Then there exists a uni
 
 If $n=0$, then $I$ is the zero operator on $V$; thus take $p$ to be the constant polynomial $1$.
 
-Now assume that $n>0$ and that the desired result holds for all operators on all vector spaces of smaller dimension. We want to construct a monic polynomial of smallest degree such that when applied to $T$ gives the $\vb{0}$ operator.
+Now assume that $n>0$ and that the desired result holds for all operators on all vector spaces of smaller dimension. We want to construct a monic polynomial of smallest degree such that when applied to $T$ gives the $0$ operator.
 
 Let $u\in V\setminus\{\vb{0}\}$, consider the set
 \[\{u,Tu,T^2u,\dots,T^nu\}.\]
@@ -243,18 +243,18 @@ By the linear dependence lemma, $\{u,Tu,\dots,T^{m-1}u\}$ is linearly independen
 &\le\dim V-m.
 \end{align*}
 Since $\im q(T)$ is invariant under $T$, we can apply the induction hypothesis to the restriction $T|_{\im q(T)}$. Thus there exists a monic polynomial $s\in\FF[z]$ with $\deg s\le \dim V-m$ such that
-\[s\brac{T|_{\im q(T)}}=\vb{0}.\]
+\[s\brac{T|_{\im q(T)}}=0.\]
 Hence for all $v\in V$ we have
 \[((sq)(T))v=s(T)(q(T)v)=\vb{0}\]
-because $q(T)v\in\im q(T)$ and $s(T)|_{\im q(T)}=s(T|_{\im q(T)})=\vb{0}$. Thus $sq$ is a monic polynomial such that $\deg sq\le\dim V$ and $(sq)(T)=\vb{0}$, as desired.
+because $q(T)v\in\im q(T)$ and $s(T)|_{\im q(T)}=s(T|_{\im q(T)})=0$. Thus $sq$ is a monic polynomial such that $\deg sq\le\dim V$ and $(sq)(T)=0$, as desired.
 
-\fbox{Uniqueness} Let $p\in\FF[z]$ be a monic polynomial of smallest degree such that $p(T)=\vb{0}$; let $r\in\FF[z]$ be a monic polynomial of same degree and $r(T)=\vb{0}$. Then $(p-r)(T)=\vb{0}$ and also $\deg(p-r)<\deg p$.
+\fbox{Uniqueness} Let $p\in\FF[z]$ be a monic polynomial of smallest degree such that $p(T)=0$; let $r\in\FF[z]$ be a monic polynomial of same degree and $r(T)=0$. Then $(p-r)(T)=0$ and also $\deg(p-r)<\deg p$.
 
-We claim that $p-r=\vb{0}$. Suppose otherwise, for a contradiction, that $p-r\neq\vb{0}$. Then divide $p-r$ by the coefficient of the highest-order term in $p-r$ to get a monic polynomial $s\in\FF[z]$, which satisfies $s(T)=\vb{0}$ and also $\deg s=\deg(p-r)<\deg p$, a contradiction.
+We claim that $p-r=0$. Suppose otherwise, for a contradiction, that $p-r\neq0$. Then divide $p-r$ by the coefficient of the highest-order term in $p-r$ to get a monic polynomial $s\in\FF[z]$, which satisfies $s(T)=0$ and also $\deg s=\deg(p-r)<\deg p$, a contradiction.
 \end{proof}
 
 \begin{definition}[Minimal polynomial]
-Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. The \vocab{minimal polynomial}\index{minimal polynomial} of $T$ is the unique monic polynomial $p\in\FF[z]$ of smallest degree such that $p(T)=\vb{0}$.
+Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. The \vocab{minimal polynomial}\index{minimal polynomial} of $T$ is the unique monic polynomial $p\in\FF[z]$ of smallest degree such that $p(T)=0$.
 \end{definition}
 
 \begin{theorem}
@@ -266,6 +266,23 @@ Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$.
 where $\lambda_i$ are eigenvalues of $T$.
 \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+Let $p$ be the minimal polynomial of $T$.
+\begin{enumerate}[label=(\roman*)]
+\item First suppose $\lambda\in\FF$ is a zero of $p$. Then $p$ can be written in the form
+\[p(z)=(z-\lambda)q(z)\]
+where $q$ is a monic polynomial with coefficients in $\FF$. Since $p(T)=0$, we have
+\[\vb{0}=(T-\lambda I)(q(T)v)\quad(v\in V).\]
+Since $\deg p<\deg p$ and $p$ is the minimal polynomial of $T$, there exists at least one $v\in V$ such that $q(T)v\neq\vb{0}$. The equation above thus implies that $\lambda$ is an eigenvalue of $T$, as desired.
+
+To prove that every eigenvalue of $T$ is a zero of $p$, now suppose $\lambda\in\FF$ is an eigenvalue of $T$. Thus there exists $v\in V\setminus\{\vb{0}\}$ such that $Tv=\lambda v$. Repeated applications of $T$ to both sides of this equation show that $T^k v=\lambda^k v$ for every nonnegative integer $k$. Thus
+\[p(T)v=p(\lambda)v.\]
+Since $p$ is the minimal polynomial of $T$, we have $p(T)v=\vb{0}$. Hence the equation above implies that $p(\lambda)=0$. Thus $\lambda$ is a zero of $p$, as desired.
+
+\item To get the desired result, use (a) and the second version of the fundamental theorem of algebra (see 4.13).
+\end{enumerate}
+\end{proof}
 
 \begin{proposition}
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $q\in\FF[z]$. Then $q(T)=0$ if and only if $q$ is a polynomial multiple of the minimal polynomial of $T$.
@@ -361,18 +378,18 @@ Diagonalisation may require a different basis.
 
 \begin{definition}[Eigenspace]
 Suppose $T\in\mathcal{L}(V)$, $\lambda\in\FF$. The \vocab{eigenspace}\index{eigenspace} of $T$ corresponding to $\lambda$ is the subspace of $V$ defined by
-\[V_\lambda\coloneqq\ker(T-\lambda I)=\{v\in V\mid Tv=\lambda v\}.\]
+\[E(\lambda,T)\coloneqq\ker(T-\lambda I)=\{v\in V\mid Tv=\lambda v\}.\]
 \end{definition}
 
 \begin{remark}
-Hence $V_\lambda$ is the set of all eigenvectors of $T$ corresponding to $\lambda$, along with the $\vb{0}$ vector.
+Hence $E(\lambda,T)$ is the set of all eigenvectors of $T$ corresponding to $\lambda$, along with the $\vb{0}$ vector.
 \end{remark}
 
 \begin{proposition}
 Suppose $T\in\mathcal{L}(V)$, $\lambda_1,\dots,\lambda_m$ are distinct eigenvalues of $T$. Then
-\[V_{\lambda_1}+\cdots+V_{\lambda_m}\]
+\[E(\lambda_1,T)+\cdots+E(\lambda_m,T)\]
 is a direct sum. Furthermore, if $V$ is finite-dimensional, then
-\[\dim V_{\lambda_1}+\cdots+\dim V_{\lambda_m}\le\dim V.\]
+\[\dim E(\lambda_1,T)+\cdots+\dim E(\lambda_m,T)\le\dim V.\]
 \end{proposition}
 
 \begin{lemma}[Conditions equivalent to diagonalisability]
@@ -380,8 +397,8 @@ Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $\lambda_1,\dots,\lambd
 \begin{enumerate}[label=(\roman*)]
 \item $T$ is diagonalisable.
 \item $V$ has a basis consisting of eigenvectors of $T$.
-\item $V=V_{\lambda_1}\oplus\cdots\oplus V_{\lambda_m}$.
-\item $\dim V=\dim V_{\lambda_1}+\cdots+\dim V_{\lambda_m}$.
+\item $V=E(\lambda_1,T)\oplus\cdots\oplus E(\lambda_m,T)$.
+\item $\dim V=\dim E(\lambda_1,T)+\cdots+\dim E(\lambda_m,T)$.
 \end{enumerate}
 \end{lemma}
 
@@ -409,17 +426,49 @@ Suppose $T\in\mathcal{L}(V)$, $\{v_1,\dots,v_n\}$ is a basis of $V$. Then each e
 \pagebreak
 
 \section{Commuting Operators}
+\begin{definition}[Commute]
+Two operators $S$ and $T$ on the same vector space \vocab{commute} if $ST=TS$.
 
+Two square matrices $A$ and $B$ of the same size commute if $AB=BA$.
+\end{definition}
+
+\begin{lemma}[commuting operators correspond to commuting matrices]
+Suppose $S,T\in\mathcal{L}(V)$ and $\{v_1,\dots,v_n\}$ is a basis of $V$. Then $S$ and $T$ commute if and only if $\mathcal{M}(S;\{v_1,\dots,v_n\})$ and $\mathcal{M}(T;\{v_1,\dots,v_n\})$ commute.
+\end{lemma}
+
+\begin{lemma}[Eigenspace is invariant under commuting operator]
+Suppose $S,T\in\mathcal{L}(V)$ commute, $\lambda\in\FF$. Then $E(\lambda,S)$ is invariant under $T$.
+\end{lemma}
+
+\begin{proposition}
+Two diagonalizable operators on the same vector space have diagonal matrices with respect to the same basis if and only if the two operators commute.
+\end{proposition}
+
+\begin{lemma}[Common eigenvector for commuting operators]
+Every pairs of commuting operators on a finite-dimensional nonzero complex vector space has a common eigenvector.
+\end{lemma}
+
+\begin{lemma}[Commuting operators are simultaneously upper triangular]
+Suppose $V$ is a finite-dimensional complex vector space, $S$ and $T$ are commuting operators on $V$. Then there is a basis of $V$ with respect to which both $S$ and $T$ have upper-triangular matrices.
+\end{lemma}
+
+\begin{proposition}[Eigenvalues of sum and product of commuting operators]
+Suppose $V$ is a finite-dimensional complex vector space, $S$ and $T$ are commuting operators on $V$. Then
+\begin{enumerate}[label=(\roman*)]
+\item every eigenvalue of $S+T$ is an eigenvalue of $S$ plus an eigenvalue of $T$;
+\item every eigenvalue of $ST$ is an eigenvalue of $S$ times an eigenvalue of $T$.
+\end{enumerate}
+\end{proposition}
 \pagebreak
 
 \section*{Exercises}
-\begin{prbm}[\cite{axler} 5A Q1]
+\begin{exercise}[\cite{axler} 5A Q1]
 Suppose $T\in\mathcal{L}(V)$, $U\le V$. Prove that
 \begin{enumerate}[label=(\roman*)]
 \item if $U\subset \ker T$, then $U$ is invariant under $T$;
 \item if $\im T\subset U$, then $U$ is invariant under $T$.
 \end{enumerate}
-\end{prbm}
+\end{exercise}
 
 \begin{solution} \
 \begin{enumerate}[label=(\roman*)]

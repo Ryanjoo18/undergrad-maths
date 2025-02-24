@@ -1,10 +1,10 @@
 \chapter{Set Theory}\label{chap:set-theory}
 
-\begin{learn}
-\item recap basic definitions relating to sets (excluding detailed axiomatic discussions);
-\item define relations and related concepts including binary relation, partial order, total order, well order, equivalence relations, equivalence relations, equivalence class, quotient set, partition of a set;
-\item define functions, injectivity, surjectivity, bijectivity, composition, invertibility, monotonicity;
-\end{learn}
+\begin{summary}
+\item Basic definitions relating to sets (excluding detailed axiomatic discussions).
+\item Relations and related concepts including binary relation, partial order, total order, well order, equivalence relations, equivalence relations, equivalence class, quotient set, partition.
+\item Functions, injectivity, surjectivity, bijectivity, composition, invertibility.
+\end{summary}
 
 \section{Basics}
 \subsection{Definitions and Notations}
@@ -35,9 +35,9 @@ $A$ is a \vocab{subset}\index{set!subset} of $B$ if every element of $A$ is in $
 \[A\subset B\iff(\forall x)(x\in A \implies x\in B)\]
 We denote $A\subsetneq B$ to explicitly mean that $A\subset B$ and $A\neq B$; we call $A$ a \emph{proper subset} of $B$.
 
-\begin{proposition}[$\subset$ is transitive]
+\begin{lemma}[$\subset$ is transitive]
 If $A \subset B$ and $B \subset C$, then $A \subset C$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Let $x\in A$. 
@@ -48,10 +48,10 @@ Hence $A \subset C$.
 
 $A$ and $B$ are \vocab{equal} if and only if they contain the same elements, denoted by $A=B$. 
 
-\begin{proposition}[Double inclusion]
+\begin{lemma}[Double inclusion]
 Let $A\subset S$ and $B\subset S$. Then
 \[A=B\iff (A\subset B)\land(B\subset A)\]
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 We have 
@@ -127,13 +127,13 @@ and
 Note that $A\setminus B = A \cap B^c$.
 \end{enumerate}
 
-\begin{proposition}[Distributive laws]
+\begin{lemma}[Distributive laws]
 Let $A,B,C\subset S$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $A\cup(B\cap C)=(A\cup B)\cap(A\cup C)$;
 \item $A\cap(B\cup C)=(A\cap B)\cup(A\cap C)$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
@@ -156,13 +156,13 @@ By double inclusion, $(A\cup B)\cap(A\cup C)=A\cup(B\cap C)$.
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}[de Morgan's laws]
+\begin{lemma}[de Morgan's laws]
 Let $A,B\subset S$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $(A \cup B)^c = A^c \cap B^c$;
 \item $(A \cap B)^c = A^c \cup B^c$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
@@ -258,7 +258,7 @@ A \vocab{total order}\index{relation!total order} on $A$ is a partial order on $
 A \vocab{well order}\index{relation!well order} on $A$ is a total order on $A$ such that every non-empty subset of $A$ has a minimal element; that is, for each non-empty $B\subset A$ there exists $s\in B$ such that $s\le b$ for all $b\in B$.
 \end{definition}
 
-\begin{example}
+\begin{example} \
 \begin{itemize}
 \item Less than: the relation $<$ on $R$ is not reflexive, symmetric, or anti-symmetric, but it is transitive.
 \item Not equal to: the relation $\neq$ on $R$ is not reflexive, anti-symmetric or transitive, but it is symmetric.
@@ -325,9 +325,9 @@ The \vocab{quotient set}\index{equivalence relation!quotient set} is the set of 
 \begin{example}[Modular arithmetic]
 Let $n$ be a fixed positive integer. Define a relation on $\ZZ$ by
 \[a\sim b\iff n\mid(b-a).\]
-\begin{proposition}
+\begin{proposition*}
 $a\sim b$ is a equivalence relation.
-\end{proposition}
+\end{proposition*}
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
 \item $a\sim a$ so $\sim$ is reflexive.
@@ -357,12 +357,12 @@ Define addition and multiplication on $\ZZ/n\ZZ$ as follows: for $[a],[b]\in\ZZ/
 
 This means that to compute the sum / product of two elements $[a],[b]\in\ZZ/n\ZZ$, take any \emph{representative} $a\in[a]$, $b\in[b]$, and add / multiply integers $a$ and $b$ as usual in $\ZZ$, then take the congruence class containing the result.
 
-\begin{proposition}
+\begin{proposition*}
 Addition and mulltiplication on $\ZZ/n\ZZ$ are well-defined; that is, they do not depend on the choices of representatives for the classes involved. More precisely, if $a_1,a_2\in\ZZ$ and $b_1,b_2\in\ZZ$ with $\overline{a_1}=\overline{b_1}$ and $\overline{a_2}=\overline{b_2}$, then $\overline{a_1+a_2}=\overline{b_1+b_2}$ and $\overline{a_1a_2}=\overline{b_1b_2}$, i.e., If
 \[a_1\equiv b_1\pmod n,\quad a_2\equiv b_2\pmod n\]
 then
 \[a_1+a_2\equiv b_1+b_2\pmod n,\quad a_1a_2\equiv b_1b_2\pmod n.\]
-\end{proposition}
+\end{proposition*}
 
 \begin{proof}
 Suppose $a_1\equiv b_1\pmod n$, i.e., $n\mid(a_1-b_1)$. Then $a_1=b_1+sn$ for some integer $s$. Similarly, $a_2\equiv b_2\pmod n$ means $a_2=b_2+tn$ for some integer $t$.
@@ -375,10 +375,10 @@ Similarly, $a_1a_2=(b_1+sn)(b_2+tn)=b_1b_2+(b_1t+b_2s+stn)n$ shows that $a_1a_2\
 An important subset of $\ZZ/n\ZZ$ consists of the collection of congruence classes which have a multiplicative inverse in $\ZZ/n\ZZ$:
 \[(\ZZ/n\ZZ)^\times\coloneqq\{[a]\in\ZZ/n\ZZ\mid\exists[c]\in\ZZ/n\ZZ,[a][c]=[1]\}.\]
 
-\begin{proposition}
+\begin{proposition*}
 $(\ZZ/n\ZZ)^\times$ is also the collection of congruence classes whose representatives are relatively prime to $n$:
 \[(\ZZ/n\ZZ)^\times=\{[a]\in\ZZ/n\ZZ\mid(a,n)=1\}.\]
-\end{proposition}
+\end{proposition*}
 \end{example}
 
 \subsection{Axiom of Choice and Its Equivalences}
@@ -429,26 +429,12 @@ It is a non-trivial result that Zorn's lemma is independent of the usual (Zermel
 \pagebreak
 
 \section{Functions}
-\subsection{Definitions and Examples}
 \begin{definition}[Function]
 A \vocab{function}\index{function} $f:X\to Y$ is a mapping of every element of $X$ to some element of $Y$; $X$ and $Y$ are known as the \emph{domain} and \emph{codomain} of $f$ respectively.
 \end{definition}
 
 \begin{remark}
 The definition requires that a unique element of the codomain is assigned for every element of the domain. For example, for a function $f:\RR \to \RR$, the assignment $f(x)=\frac{1}{x}$ is not sufficient as it fails at $x=0$. Similarly, $f(x)=y$ where $y^2=x$ fails because $f(x)$ is undefined for $x<0$, and for $x>0$ it does not return a unique value; in such cases, we say the the function is \emph{ill-defined}. We are interested in the opposite; functions that are \emph{well-defined}.
-\end{remark}
-
-\begin{definition}
-Given a function $f:X \to Y$, the \vocab{image}\index{function!image} (or \emph{range}) of $f$ is
-\[f(X)\coloneqq\{f(x)\mid x\in X\}\subset Y.\]
-More generally, given $A \subset X$, the image of $A$ under $f$ is
-\[f(A)\coloneqq\{f(x)\mid x\in A\}\subset Y.\]
-Given $B \subset Y$, the \vocab{pre-image}\index{function!pre-image} of $B$ under $f$ is
-\[f^{-1}(B)\coloneqq\{x\mid f(x)\in B\}\subset X.\]
-\end{definition}
-
-\begin{remark}
-Note the distinction between ``codomain'' and ``range''.
 \end{remark}
 
 If a function is defined on some larger domain than we care about, it may be helpful to restrict the domain:
@@ -472,16 +458,98 @@ Given a set $X$, the \vocab{identity} $\id_X:X \to X$ is defined by
 If the domain is unambiguous, the subscript may be omitted.
 \end{notation}
 
+\subsection{Images and Pre-images}
+\begin{definition}
+Suppose $f:X\to Y$. The \vocab{image}\index{function!image} of $f$ is
+\[f(X)\coloneqq\{f(x)\mid x\in X\}\subset Y.\]
+More generally, the image of $A\subset X$ under $f$ is
+\[f(A)\coloneqq\{f(x)\mid x\in A\}\subset Y.\]
+The \vocab{pre-image}\index{function!pre-image} of $B\subset Y$ under $f$ is
+\[f^{-1}(B)\coloneqq\{x\in X\mid f(x)\in B\}.\]
+\end{definition}
+
+\begin{remark}
+Note the distinction between ``codomain'' and ``range''.
+\end{remark}
+
+\begin{lemma}
+Let $f:X\to Y$. Suppose $A\subset X$ and $B\subset Y$.
+\begin{enumerate}[label=(\roman*)]
+\item If $A=f^{-1}(B)$, then $f(A)\subset B$.
+\item If $B=f(A)$, then $A\subset f^{-1}(B)$. 
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Let $y=f(A)$. Then $y=f(x)$ for some $x\in A$. 
+Since $A=f^{-1}(B)$, then $x\in f^{-1}(B)$. Then $f(x)=w$ for some $w\in B$. 
+Thus $y=f(x)=w\in B$. Hence $f(A)\subset B$.
+
+\item Let $x\in A$. Then $f(x)\in f(A)=B$; let $f(x)=y$ for some $y\in B$. Consider $y\in B$; it could have one or more elements of $A$ mapped to it. Hence $A\subset f^{-1}(B)$. 
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+In general, we cannot conclude that $B=f(A)$ implies $A=f^{-1}(B)$.
+\end{remark}
+
+We can express the previous result as follows:
+\[f\brac{f^{-1}(B)}\subset B,\quad A\subset f^{-1}\brac{f(A)}.\]
+
+\begin{lemma}[Algebra of pre-images]
+Suppose $f:X\to Y$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $f^{-1}(A^c)=f^{-1}(A)^c$ for every $A\subset Y$;
+\item $f^{-1}\brac{\bigcup_{i\in I}A_i}=\bigcup_{i\in I}f^{-1}(A_i)$;
+\item $f^{-1}\brac{\bigcap_{i\in I}A_i}=\bigcap_{i\in I}f^{-1}(A_i)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Suppose $A\subset Y$. Let $x\in X$, then
+\begin{align*}
+x\in f^{-1}(A^c)&\iff f(x)\in A^c\\
+&\iff f(x)\notin A\\
+&\iff x\notin f^{-1}(A)\\
+&\iff x\in f^{-1}(A)^c
+\end{align*}
+Hence $f^{-1}(A^c)=f^{-1}(A)^c$.
+
+\item Suppose $\{A_i\mid i\in I\}$ is a collection of subsets of $Y$. Then
+\begin{align*}
+x\in f^{-1}\brac{\bigcup_{i\in I}A_i}
+&\iff f(x)\in\bigcup_{i\in I}A_i\\
+&\iff f(x)\in A_i\text{ for some }i\in I\\
+&\iff x\in f^{-1}(A_i)\text{ for some }i\in I\\
+&\iff x\in\bigcup_{i\in I}f^{-1}(A_i)
+\end{align*}
+Hence $f^{-1}\brac{\bigcup_{i\in I}A_i}=\bigcup_{i\in I}f^{-1}(A_i)$.
+
+\item Suppose $\{A_i\mid i\in I\}$ is a collection of subsets of $Y$. Then
+\begin{align*}
+x\in f^{-1}\brac{\bigcap_{i\in I}A_i}
+&\iff f(x)\in\bigcap_{i\in I}A_i\\
+&\iff f(x)\in A_i\text{ for every }i\in I\\
+&\iff x\in f^{-1}(A_i)\text{ for every }i\in I\\
+&\iff x\in\bigcap_{i\in I}f^{-1}(A_i)
+\end{align*}
+Hence $f^{-1}\brac{\bigcap_{i\in I}A_i}=\bigcap_{i\in I}f^{-1}(A_i)$.
+\end{enumerate}
+\end{proof}
+%https://math.stackexchange.com/questions/359693/overview-of-basic-results-about-images-and-preimages
+
+
 \subsection{Injectivity, Surjectivity, Bijectivity}
 \begin{definition}
-Let $f:X\to Y$ be a function.
+Suppose $f:X\to Y$.
 \begin{enumerate}[label=(\roman*)]
 \item $f$ is \vocab{injective}\index{function!injectivity} (or \emph{one-to-one}) if each element of $Y$ has at most one element of $X$ that maps to it:
 \[\forall x_1,x_2\in X,\quad f(x_1)=f(x_2) \implies x_1=x_2\]
 
 \item $f$ is \vocab{surjective}\index{function!surjectivity} (or \emph{onto}) if every element of $Y$ is mapped to at least one element of $X$:
 \[ \forall y\in Y,\quad\exists x\in X,\quad f(x)=y \]
-Equivalently, $f$ is surjective if $f(X)=Y$.
 
 \item $f$ is \vocab{bijective}\index{function!bijectivity} if it is both injective and surjective; a bijective function is termed a \emph{bijection}.
 \end{enumerate}
@@ -500,13 +568,13 @@ Given $f:X\to Y$ and $g:Y\to Z$, the \vocab{composition} $g\circ f:X\to Z$ is de
 The composition of functions is not commutative. However, composition is associative, as the following results shows:
 
 \begin{proposition}[Associativity of composition]
-Let $f:X\to Y$, $g:Y\to Z$, $h:Z\to W$. Then
+Suppose $f:X\to Y$, $g:Y\to Z$, $h:Z\to W$. Then
 \[f\circ (g\circ h)=(f\circ g)\circ h.\]
 \end{proposition}
 
 \begin{proof}
-Let $x \in X$. By the definition of composition, we have
-\[ (f \circ (g \circ h))(x) = f((g \circ h)(x)) = f(g(h(x))) = (f \circ g)(h(x)) = ((f \circ g) \circ h)(x). \]
+Let $x\in X$. By the definition of composition, we have
+\[(f\circ(g\circ h))(x)=f((g\circ h)(x))=f(g(h(x)))=(f\circ g)(h(x))=((f\circ g)\circ h)(x).\]
 \end{proof}
 
 \begin{proposition}[Composition preserves injectivity and surjectivity] \
@@ -589,11 +657,29 @@ Then when $y$ is not in the image of $f$, these two functions will satisfy $g_1 
 So conversely, if for any set $Z$ and any functions $g_i:Y \to Z$ we have $g_1 \circ f=g_2 \circ f \implies g_1=g_2$, such a value $y$ that is in the codomain but not in the range of $f$ cannot appear, and hence $f$ must be surjective.
 \end{proof}
 
+\begin{lemma}[Inverse image of composition]
+Suppose $f:X\to Y$, $g:Y\to Z$. Then
+\[(g\circ f)^{-1}(A)=f^{-1}\brac{g^{-1}(A)}\]
+for every $A\subset Z$.
+\end{lemma}
+
+\begin{proof}
+Suppose $A\subset Z$. Let $x\in X$, then we have
+\begin{align*}
+x\in(g\circ f)^{-1}(A)
+&\iff (g\circ f)(x)\in A\\
+&\iff g\brac{f(x)}\in A\\
+&\iff f(x)\in g^{-1}(A)\\
+&\iff x\in f^{-1}\brac{g^{-1}(A)}
+\end{align*}
+Hence $(g\circ f)^{-1}(A)=f^{-1}\brac{g^{-1}(A)}$.
+\end{proof}
+
 \subsection{Invertibility}
 Recalling that $\id_X$ is the identity map on $X$, we can define invertibility.
 
 \begin{definition}[Invertibility]
-Let $f:X\to Y$. We say that
+Suppose $f:X\to Y$. We say that
 \begin{enumerate}[label=(\roman*)]
 \item $f$ is \vocab{left-invertible} if there exists $g:Y\to X$ such that $g\circ f=\id_X$; $g$ is a \emph{left-inverse} of $f$;
 \item $f$ is \vocab{right-invertible} if there exists $h:Y\to X$ such that $f\circ h=\id_Y$; $h$ is a \emph{right-inverse} of $h$;
@@ -638,7 +724,7 @@ Note that directly from the definition, if $f$ is invertible then $f^{-1}$ is al
 The following result provides an important and useful criterion for invertibility.
 
 \begin{lemma}[Invertibility criterion]
-Let $f:X\to Y$. Then
+Suppose $f:X\to Y$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $f$ is left-invertible if and only if $f$ is injective;
 \item $f$ is right-invertible if and only if $f$ is surjective;
@@ -676,7 +762,7 @@ so $g=h$ is an inverse of $f$.
 The following result shows how to invert the composition of invertible functions.
 
 \begin{proposition}[Inverse of composition]
-Let $f:X \to Y$, $g:Y \to Z$. If $f$ and $g$ are invertible, then $g \circ f$ is invertible, and
+Suppose $f:X \to Y$, $g:Y \to Z$. If $f$ and $g$ are invertible, then $g \circ f$ is invertible, and
 \[(g \circ f)^{-1}=f^{-1}\circ g^{-1}.\]
 \end{proposition}
 
@@ -723,35 +809,6 @@ We need to prove (i) reflexivity, (ii) symmetry, and (iii) transitivity.
 \begin{theorem}[Cantor--Schr\"{o}der--Bernstein]
 If $f:X\to Y$ and $g:Y\to X$ are injective, then $A\sim B$.
 \end{theorem}
-
-\subsection{Monotonicity}
-\begin{definition}[Monotonicity]
-$f:[a,b]\to\RR$ is called
-\begin{enumerate}[label=(\roman*)]
-\item \vocab{increasing}, if any $a<x_1\le x_2<b$, there is $f(x_1)\le f(x_2)$;
-\item \vocab{decreasing}, if any $a<x_1\le x_2<b$, there is $f(x_1)\ge f(x_2)$;
-\end{enumerate}
-$f$ is \vocab{monotonic}\index{function!monotonicity} if it is increasing or decreasing.
-\end{definition}
-
-Suppose $f(x)$ is continuous in $[a,b]$. To locate the roots of $f(x)=0$:
-\begin{itemize}
-\item If $f(a)$ and $f(b)$ have \emph{opposite} signs, i.e. $f(a)f(b)<0$, then there is an odd number of real roots (counting repeated) in $[a,b]$.
-
-Furthermore, if $f$ is either strictly increasing or decreasing in $[a,b]$, then $f(x)=0$ has exactly one real root in $[a,b]$.
-
-\item If $f(a)$ and $f(b)$ have \emph{same} signs, i.e. $f(a)f(b)>0$, then there is an even number of roots (counting repeated) in $[a,b]$.
-\end{itemize}
-
-\begin{definition}[Convexity]
-A function $f$ is \vocab{convex} if for all $x_1,x_2\in D_f$ and $0\le t\le 1$, we have
-\[ f(tx_1+(1-t)x_2)\le tf(x_1)+(1-t)f(x_2).\]
-$f$ is \emph{strictly convex} if the $\le$ sign above is replaced with a strict inequality $<$.
-
-Similarly, $f$ is \vocab{concave} if for all $x_1,x_2\in D_f$ and $0\le t\le 1$, we have
-\[ f(tx_1+(1-t)x_2)\ge tf(x_1)+(1-t)f(x_2). \]
-$f$ is \emph{strictly concave} if the $\ge$ sign above is replaced with a strict inequality $>$.
-\end{definition}
 \pagebreak
 
 \section{Cardinality}
@@ -1060,7 +1117,7 @@ In either case, we have reached a contradiction. Hence there cannot exist a surj
 \pagebreak
 
 \section*{Exercises}
-\begin{prbm}
+\begin{exercise}
 Prove the following statements:
 \begin{enumerate}[label=(\roman*)]
 \item $f(A\cup B)=f(A)\cup f(B)$
@@ -1074,15 +1131,15 @@ Prove the following statements:
 \item $f^{-1}(A_1\cup\cdots\cup A_n)=f^{-1}(A_1)\cup\cdots\cup f^{-1}(A_n)$
 \item $f^{-1}(\bigcup_{\lambda\in A}A_\lambda)=\bigcup_{\lambda\in A}f^{-1}(A_\lambda)$
 \end{enumerate}
-\end{prbm}
+\end{exercise}
 
-\begin{prbm}
+\begin{exercise}
 Let $A$ be the set of all complex polynomials in $n$ variables. Given a subset $T \subset A$, define the \textit{zeros} of $T$ as the set
 \[ Z(T) = \{P=(a_1,\dots,a_n) \mid f(P)=0 \text{ for all } f \in T\} \]
 A subset $Y \in \CC^n$ is called an algebraic set if there exists a subset $T \subset A$ such that $Y=Z(T)$.
 
 Prove that the union of two algebraic sets is an algebraic set.
-\end{prbm}
+\end{exercise}
 \begin{proof}
 We would like to consider $T=\{f_1, f_2, \dots\}$ expressed as indexed sets $T=\{f_i\}$. Then $Z(T)$ can also be expressed as $\{P \mid \forall i, f_i(P)=0\}$.
 
@@ -1101,10 +1158,9 @@ Now the other direction is simpler and can actually be generalised: The intersec
 
 The basic result is that if $X=Z(S)$ and $Y=Z(T)$ then $X\cap Y=Z(S\cup T)$. 
 \end{proof}
-\pagebreak
 
-\begin{prbm}
-Let $A = \RR$ and for any $x, y \in A$, $x \sim y$ if and only if $x-y \in \ZZ$. For any two equivalence classes $[x], [y] \in A/\sim$, define
+\begin{exercise}
+Let $A=\RR$ and for any $x, y \in A$, $x \sim y$ if and only if $x-y \in \ZZ$. For any two equivalence classes $[x], [y] \in A/\sim$, define
 \[ [x] + [y] = [x + y] \text{ and } -[x] = [-x] \]
 \begin{enumerate}[label=(\alph*)]
 \item Show that the above definitions are well-defined.
@@ -1113,7 +1169,7 @@ Let $A = \RR$ and for any $x, y \in A$, $x \sim y$ if and only if $x-y \in \ZZ$.
 \item Show that for any $[x] \in X$,
 \[ \phi(-[x]) = \phi([x])^{-1} \]
 \end{enumerate}
-\end{prbm}
+\end{exercise}
 
 \begin{solution} \ 
 \begin{enumerate}[label=(\alph*)]
@@ -1139,9 +1195,8 @@ If we choose another representative $x^\prime$ then
 \[ \phi(-[x])\phi([x]) = \phi([-x])\phi([x]) = \phi([-x+x]) = \phi([0]) = 1 \]
 \end{enumerate}
 \end{solution}
-\pagebreak
 
-\begin{prbm}[Complex Numbers]
+\begin{exercise}[Complex Numbers]
 Let $\RR[x]$ denote the set of real polynomials. Define
 \[ \CC=\RR[x]/(x^2+1)\RR[x] \]
 where
@@ -1151,9 +1206,36 @@ The complex number $a+bi$ is defined to be the equivalence class of $a+bx$.
 \item Define the sum and product of two complex numbers and show that such definitions are well-defined.
 \item Define the reciprocal of a complex number.
 \end{enumerate}
-\end{prbm}
+\end{exercise}
 
-\begin{prbm}
-The set of all algebraic numbers is countable. (Exercise 2)
-\end{prbm}
-\pagebreak
+\begin{exercise}[\cite{rudin} 2.2]
+$z\in\CC$ is said to be \emph{algebraic} if there exist integers $a_0,\dots,a_n$, not all zero, such that
+\[a_0z^n+a_1z^{n-1}+\cdots+a_{n-1}z+a_n=0.\]
+Prove that the set of all algebraic numbers is countable. \emph{Hint}: For every positive integer $N$ there are only finitely many equations with
+\[n+|a_0|+|a_1|+\cdots+|a_n|=N.\]
+\end{exercise}
+
+\begin{solution}
+Following the hint, let $A_N$ be the set of numbers $z$ that satisfy $a_0z^n+a_1z^{n-1}+\cdots+a_{n-1}z+a_n=0$, for some coefficients $a_0,\dots,a_n$ which satisfy
+\[n+|a_0|+|a_1|+\cdots+|a_n|=N.\]
+
+By the fundamental theorem of algebra, $a_0z^n+a_1z^{n-1}+\cdots+a_{n-1}z+a_n=0$ has at most $n$ solutions, so each $A_N$ is finite. Hence the set of algebraic numbers, which is the union
+\[\bigcup_{N=2}^{\infty}A_N\]
+is at most countable. Since all rational numbers are algebraic, it follows that the set of algebraic numbers is exactly countable. 
+\end{solution}
+
+\begin{exercise}[\cite{rudin} 2.3]
+Prove that there exist real numbers which are not algebraic.
+\end{exercise}
+
+\begin{solution}
+By the previous exercise, the set of real algebraic numbers is countable. If every real number were algebraic, the entire set of real numbers would be countable, a contradiction.
+\end{solution}
+
+\begin{exercise}[\cite{rudin} 2.4]
+Is the set of irrational real numbers countable?
+\end{exercise}
+
+\begin{solution}
+No. If $\RR\setminus\QQ$ were countable, $\RR=\QQ\cup(\RR\setminus\QQ)$ would be countable, which is clearly false.
+\end{solution}

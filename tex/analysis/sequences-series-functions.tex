@@ -1,0 +1,697 @@
+\chapter{Sequences and Series of Functions}\label{chap:func-seq-series}
+Suppose $f_n:E\subset X\to Y$ is a sequence of functions. In some cases, we shall restrict ourselves to complex-valued functions (take $Y=\CC$).
+
+\section{Pointwise Convergence}
+A natural extension of convergence of sequences of numbers to sequences of functions is to fix a point $x\in E$, and consider the behaviour of the sequence $(f_n(x))$.
+
+\begin{definition}[Pointwise convergence]
+Suppose $(f_n)$ is a sequence of functions, and $\brac{f_n(x)}$ converges for every $x\in E$. We say $(f_n)$ \vocab{converges pointwise}\index{pointwise convergence} to $f$ on $E$, denoted by $f_n\to f$, if
+\[f(x)=\lim_{n\to\infty}f_n(x)\quad(\forall x\in E).\]
+That is, for all $x\in E$,
+\[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall n\ge N,\quad d\brac{f_n(x)-f(x)}<\epsilon.\]
+$f$ is called the \emph{limit} (or \emph{limit function}) of $(f_n)$.
+\end{definition}
+
+Similarly, if $\sum f_n(x)$ converges for every $x\in E$, and if we define
+\[f(x)=\sum_{n=1}^\infty f_n(x)\quad(\forall x\in E)\]
+the function $f$ is called the \emph{sum of the series} $\sum f_n$.
+
+\begin{example}
+The sequence of functions $f_n(x)=\frac{x}{n}$ converges pointwise to the zero function $f(x)=0$.
+\end{example}
+
+The main problem which arises is to determine whether important properties of functions are preserved by pointwise convergence. For instance, if $f_n$ are continuous, or differentiable, or integrable, is the same true of the limit function? What are the relations between $f_n^\prime$ and $f^\prime$, say, or between $\int f_n$ and $\int f$? 
+
+\begin{example}[Continuity]
+For $0<x<1$, the sequence of functions $f_n(x)=x^n$ converges pointwise to the function 
+\[f(x)=\begin{cases}
+1&(x=1)\\
+0&(0\le x<1)
+\end{cases}\]
+Evidently $f_n$ are continuous, but $f$ is discontinuous. Hence
+\[\lim_{x\to x_0}\lim_{n\to\infty}f_n(x)\neq\lim_{n\to\infty}\lim_{x\to x_0}f_n(x).\]
+\end{example}
+
+\begin{example}[Differentiability]
+For $x\in\RR$, let
+\[f_n(x)=\frac{\sin nx}{\sqrt{n}}\quad(n=1,2,\dots)\]
+so
+\[f(x)=\lim_{n\to\infty}f_n(x)=0.\]
+Then $f^\prime(x)=0$, and
+\[f_n^\prime(x)=\sqrt{n}\cos nx,\]
+so $(f_n^\prime)$ does not converge to $f^\prime$. 
+\end{example}
+
+This shows that the limit of the derivative does not equal the derivative of the limit.
+
+\begin{example}[Integrability]
+Let
+\[f_n(x)=\chi_{[n,n+1]}(x),\]
+Then $\displaystyle\int_\RR f_n(x)\dd{x}=1$, so
+\[\lim_{n\to\infty}\int_\RR f_n(x)\dd{x}=1.\]
+However
+\[\int_\RR\lim_{n\to\infty}f_n(x)\dd{x}=\int 0\dd{x}=0.\]
+\end{example}
+
+This shows that the limit of the integral does not equal the integral of the limit. Thus we may not switch the order of limits.
+
+\begin{comment}
+\begin{example}[Integrability]
+$f_n$ integrable, $f$ not integrable
+
+Recall that the Dirichlet function
+\[f(x)=\begin{cases}
+1&(x\in\QQ)\\
+0&(x\in\RR\setminus\QQ)
+\end{cases}\]
+is not integrable.
+
+We define a sequence of functions as follows:
+\[f_n(x)=\begin{cases}
+1&\text{if }x=\frac{p}{q},p\in\ZZ,q\in\ZZ\setminus\{0\},|q|\le n\\
+0&\text{if otherwise}
+\end{cases}\]
+\end{example}
+\end{comment}
+
+Pointwise convergence does not preserve many nice properties of functions. Hence, we need a stronger notion of convergence for sequences and series of functions.
+\pagebreak
+
+\section{Uniform Convergence}
+\begin{definition}[Uniform convergence]
+$(f_n)$ \vocab{converges uniformly}\index{uniform convergence} to $f$ over $E$, denoted by $f_n\rightrightarrows f$, if 
+\[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall x\in E,\quad\forall n\ge N,\quad d\brac{f_n(x)-f(x)}<\epsilon.\]
+\end{definition}
+
+Similarly, a series of functions $\sum f_n(x)$ converges uniformly on $E$ if the sequence of partial sums $(s_n)$ defined by
+\[s_n(x)=\sum_{k=1}^{n}f_k(x)\]
+converges uniformly on $E$.
+
+\begin{remark}
+Intuitively, uniform convergence can be visualised as the sequence of functions $(f_n)$ eventually contained in an $\epsilon$-tube around $f$, for sufficiently large $n$. 
+\end{remark}
+
+Uniform convergence is stronger than pointwise convergence, since $N$ is uniform (or ``fixed'') for all $x\in E$; for pointwise convergence, the choice of $N$ is determined by $x$.
+
+\begin{remark}
+Uniform convergence implies pointwise convergence, but not the other way around.
+\end{remark}
+
+\begin{example}
+Consider the sequence of functions $f_n(x)=x^n$ defined on $(0,1)$. Then $f_n\to0$. But $f_n\not\rightrightarrows 0$.
+\begin{proof}
+
+\end{proof}
+\end{example}
+
+The Cauchy criterion for uniform convergence is as follows.
+
+\begin{lemma}[Cauchy criterion]\label{lemma:uniform-convergence-cauchy}
+Suppose $(f_n)$ is a sequence of complex-valued functions. Then $f_n\rightrightarrows f$ on $E$ if and only if $(f_n)$ is uniformly Cauchy:
+\[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall x\in E,\quad\forall n,m\ge N,\quad\absolute{f_n(x)-f_m(x)}<\epsilon.\]
+\end{lemma}
+
+\begin{proof} \
+
+\fbox{$\implies$} Suppose $f_n\rightrightarrows f$ on $E$. Let $\epsilon>0$ be given. Then there exists $N\in\NN$ such that for all $x\in E$, for all $n\ge N$,
+\[\absolute{f_n(x)-f(x)}<\frac{\epsilon}{2}.\]
+Then for all $n,m\ge N$,
+\begin{align*}
+|f_n(x)-f_m(x)|
+&=\absolute{\brac{f_n(x)-f(x)}+\brac{f(x)-f_m(x)}}\\
+&\le|f_n(x)-f(x)|+|f_m(x)-f(x)|\\
+&<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.
+\end{align*}
+
+\fbox{$\impliedby$} Suppose $(f_n)$ is uniformly Cauchy. Then for every $x\in E$, the sequence $\brac{f_n(x)}$ is a Cauchy sequence and thus converges to a limit $f(x)$. Hence by definition, $f_n\to f$ on $E$. We are left to prove that the convergence is uniform.
+
+Let $\epsilon>0$ be given. There exists $N\in\NN$ such that for all $n,m\ge N$ and for all $x\in E$,
+\[\absolute{f_n(x)-f_m(x)}<\epsilon.\]
+Fix $n$, and let $m\to\infty$. Since $\displaystyle\lim_{m\to\infty}f_m(x)=f(x)$, thus for all $n\ge N$ and for all $x\in E$,
+\[\absolute{f_n(x)-f(x)}<\epsilon,\]
+which completes the proof.
+\end{proof}
+
+\begin{definition}
+Let $X$ and $Y$ be metric spaces. Then $\mathcal{C}(X,Y)$ denotes the space of continuous bounded functions from $X$ to $Y$. If $f\in\mathcal{C}(X,\CC)$, we define the \vocab{suprenum norm} of $f$ as
+\[\norm{f}\coloneqq\sup_{x\in X}|f(x)|.\]
+\end{definition}
+
+\begin{lemma}
+$\norm{f}$ gives a norm on $\mathcal{C}(X,\CC)$. Then $\mathcal{C}(X,\CC)$ is a metric space, with metric $d(f,g)=\norm{f-g}$.
+\end{lemma}
+
+\begin{proof}
+Check that $\norm{f}$ satisfies the conditions for a norm:
+\begin{enumerate}[label=(\roman*)]
+\item $|f(x)|\ge0$ for all $x\in X$, so $\norm{f}\ge0$. It is clear that $\norm{f}=0$ if and only if $f(x)=0$ for every $x\in X$, that is, only if $f=0$.
+\item For all $\lambda\in\CC$,
+\[\norm{\lambda f}=\sup_{x\in X}|\lambda f(x)|=|\lambda|\sup_{x\in X}|f(x)|=|\lambda|\norm{f}.\]
+\item If $h=f+g$, then for all $x\in X$,
+\[|h(x)|\le|f(x)|+|g(x)|\le\norm{f}+\norm{g}.\]
+Hence taking sup on the left gives $\norm{f+g}\le\norm{f}+\norm{g}$.
+\end{enumerate}
+Check conditions for metric space.
+\end{proof}
+
+The following criterion is sometimes useful.
+
+\begin{lemma}
+Suppose $(f_n)$ is a sequence of complex-valued functions defined on $E$. Then $f_n\rightrightarrows f$ on $E$ if and only if $f_n\to f$ on $E$ with respect to the metric of $\mathcal{C}(E,\CC)$.
+\end{lemma}
+
+\begin{proof}
+\begin{align*}
+f_n\to f
+&\iff\lim_{n\to\infty}\norm{f_n-f}=0\\
+&\iff\lim_{n\to\infty}\brac{\sup_{x\in E}|f_n(x)-f(x)|}=0\\
+&\iff\forall\epsilon>0,\exists N\in\NN,\forall n\ge N,\sup_{x\in E}|f_n(x)-f(x)|<\epsilon\\
+&\iff\forall\epsilon>0,\exists N\in\NN,\forall n\ge N,\forall x\in E,|f_n(x)-f(x)|<\epsilon
+\end{align*}
+which precisely means that $f_n\rightrightarrows f$ on $E$, by definition.
+
+Note that for the last step, the \fbox{$\impliedby$} direction is tricky, since the limit can equal $\epsilon$, so we take $\frac{\epsilon}{2}$ instead.
+\end{proof}
+
+For series, there is a very convenient test for uniform convergence, due to Weierstrass.
+
+\begin{lemma}[Weierstrass M-test]
+Suppose $(f_n)$ is a sequence of functions defined on $E$, and 
+\[|f_n(x)|\le M_n\quad(n=1,2,\dots,\:x\in E)\]
+If $\sum M_n$ converges, then $\sum f_n$ converges uniformly on $E$.
+\end{lemma}
+
+\begin{proof}
+Suppose $\sum M_n$ converges. Let $\epsilon>0$ be given, the partial sums of $\sum M_n$ form a Cauchy sequence, so there exists $N\in\NN$ such that for all $n\ge m\ge N$,
+\[\sum_{k=m}^{n}M_k<\epsilon.\]
+Then considering the partial sums of the series of functions,
+\[\absolute{\sum_{k=m}^{n}f_k(x)}\le\sum_{k=m}^{n}|f_k(x)|\le\sum_{k=m}^{n}M_k<\epsilon.\]
+By the Cauchy criterion (\cref{lemma:uniform-convergence-cauchy}), we are done.
+\end{proof}
+
+\begin{example}
+\begin{itemize}
+\item The series
+\[\sum_{n=1}^{\infty}\frac{\sin nx}{n^2}\]
+converges uniformly on $\RR$. (Note: this is a Fourier series, we'll see more of these later). That is because
+\[\absolute{\frac{\sin nx}{n^2}}\le\frac{1}{n^2}\quad\text{and}\quad\sum_{n=1}^{\infty}\frac{1}{n^2}\text{ converges}.\]
+
+\item The series
+\[\sum_{n=0}^{\infty}\frac{x^n}{n!}\]
+converges uniformly on any bounded interval. For example take the interval $[-r,r]\subset\RR$,
+\[\absolute{\frac{x^n}{n!}}\le\frac{r^n}{n!}\quad\text{and}\quad\sum_{n=1}^{\infty}\frac{r^n}{n!}\text{ converges by the ratio test.}\]
+\end{itemize}
+\end{example}
+\pagebreak
+
+\section{Properties of Uniform Convergence}
+We now consider properties preserved by uniform convergence.
+
+\subsection{Uniform Convergence and Continuity}
+We prove a more general result.
+
+\begin{proposition}
+Suppose $(f_n)$ is a sequence of complex-valued functions defined on $E$, such that $f_n\rightrightarrows f$ on $E$. Let $x\in X$ be a limit point of $E$, and suppose that
+\[\lim_{t\to x}f_n(t)=A_n\quad(n=1,2,\dots).\]
+Then $(A_n)$ converges, and $\displaystyle\lim_{t\to x}f(t)=\lim_{n\to\infty}A_n$.
+\end{proposition}
+
+In other words, the conclusion is that
+\[\lim_{t\to x}\lim_{n\to\infty}f_n(t)=\lim_{n\to\infty}\lim_{t\to x}f_n(t).\]
+
+\begin{proof}
+We first show that $(A_n)$ converges. Since $(f_n)$ uniformly converges on $E$, $(f_n)$ is uniformly Cauchy. Let $\epsilon>0$ be given, there exists $N\in\NN$ such that for all $n,m\ge N$, $t\in E$,
+\[|f_n(t)-f_m(t)|<\epsilon.\]
+Letting $t\to x$, since $\displaystyle\lim_{t\to x}f_n(t)=A_n$, we have that for all $n,m\ge N$,
+\[|A_n-A_m|<\epsilon.\]
+Thus $(A_n)$ is a Cauchy sequence and therefore converges, say to $A$.
+
+Next we will show that $\displaystyle\lim_{t\to x}f(t)=A$. Write
+\begin{equation*}\tag{1}
+|f(t)-A|\le|f(t)-f_n(t)|+|f_n(t)-A_n|+|A_n-A|.
+\end{equation*}
+By the uniform convergence of $(f_n)$, there exists $N_1\in\NN$ such that for all $n\ge N_1$,
+\[|f(t)-f_n(t)|<\frac{\epsilon}{3}\quad(t\in E).\]
+By the convergence of $(A_n)$, there exists $N_2\in\NN$ such that for all $n\ge N_2$,
+\[|A_n-A|<\frac{\epsilon}{3}.\]
+Choose $N=\max\{N_1,N_2\}$ such that the above two inequalities hold simultaneously. 
+Then for this $n$, since $\displaystyle\lim_{t\to x}f_n(t)=A_n$, we choose an open ball $B$ of $x$ such that if $t\in B\cap E$, $t\neq x$, then
+\[|f_n(t)-A_n|<\frac{\epsilon}{3}.\]
+Substituting the above inequalities into (1) gives
+\[|f(t)-A|<\frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}=\epsilon.\]
+provided $t\in B\cap E$, $t\neq x$. This is equivalent to $\displaystyle\lim_{t\to x}f(t)=A$.
+\end{proof}
+
+An immediate important corollary is that uniform convergence preserves continuity.
+
+\begin{corollary}\label{cor:uniform-continuity-preserve-continuity}
+Suppose $(f_n)$ are continuous on $E$, and $f_n\rightrightarrows f$ on $E$. Then $f$ is continuous on $E$.
+\end{corollary}
+
+\begin{proof}
+By continuity of $f_n$,
+\[\lim_{t\to x}f_n(t)=f_n(x).\]
+Then
+\[\lim_{t\to x}f(t)=\lim_{t\to x}\brac{\lim_{n\to\infty}f_n(t)}=\lim_{n\to\infty}\brac{\lim_{t\to x}f_n(t)}=\lim_{n\to\infty}f_n(x)=f(x),\]
+which precisely means that $f$ is continuous on $E$.
+\end{proof}
+
+\begin{remark}
+The converse is not true. Just because the limit is continuous doesn't mean that the convergence is uniform. For example, $f_n:(0,1)\to\RR$ defined by $f_n(x)=x^n$ converges to the zero function, but not uniformly.
+\end{remark}
+
+Let us see that we can have extra conditions such that the converse is true.
+
+\begin{proposition}[Dini's theorem]
+Suppose $K$ is compact, and $(f_n)$ is a sequence of continuous functions on $K$, $f_n\to f$ on $K$, and $(f_n)$ is monotonically decreasing:
+\[f_n(x)\ge f_{n+1}(x)\quad(n=1,2,\dots).\]
+Then $f_n\rightrightarrows f$ on $K$.
+\end{proposition}
+
+\begin{proof}
+Let $g_n=f_n-f$. Then $g_n$ is continuous, $g_n\to0$, and $g_n\ge g_{n+1}\ge0$. We have to prove that $g_n\rightrightarrows0$ on $K$.
+
+Let $\epsilon>0$ be given. For $n=1,2,\dots$, let
+\[K_n=\{x\in K\mid g_n(x)\ge\epsilon\}.\]
+Since $g_n$ is continuous, and the set $\{g_n(x)\mid g_n(x)\ge\epsilon\}$ is closed, by \cref{cor:continuity-preimage-closed}, its pre-image $K_n$ is closed. Since $K_n$ is a closed subset of a compact set $K$, then $K_n$ is compact (by \cref{prop:closed-compact}).
+
+Since $g_n\ge g_{n+1}$, we have $K_n\supset K_{n+1}$. Fix $x\in K$. Since $g_n(x)\to0$, we see that $x\notin K_n$ if $n$ is sufficiently large. Thus $x\notin\bigcap_{n=1}^{\infty}K_n$. In other words, $\bigcap_{n=1}^{\infty}K_n=\emptyset$. Hence $K_N=\emptyset$ for some $N$ (by the converse of Cantor's intersection theorem). It follows that $0\le g_n(x)<\epsilon$ for all $x\in K$ and for all $n\ge N$. This proves the theorem. 
+\end{proof}
+
+\begin{remark}
+The compactness in the hypotheses is necessary; for instance, for $0<x<1$, let
+\[f_n(x)=\frac{1}{nx+1}\quad(n=1,2,\dots).\]
+Then $f_n(x)\to0$ monotonically in $(0,1)$, but the convergence is not uniform.
+\end{remark}
+
+\begin{lemma}
+$\mathcal{C}(X,\CC)$ is a complete metric space.
+\end{lemma}
+
+\begin{proof}
+Let $(f_n)$ be a Cauchy sequence in $\mathcal{C}(X,\CC)$. Then fix $\epsilon>0$, there exists $N\in\NN$ such that for all $n,m\ge N$,
+\[\norm{f_n-f_m}<\epsilon.\]
+By the Cauchy criterion (\cref{lemma:uniform-convergence-cauchy}), $f_n\rightrightarrows f$ for some $f:X\to\CC$. 
+We now need to show that $f\in\mathcal{C}(X,\CC)$; that is, $f$ is continuous and bounded.
+\begin{itemize}
+\item $f$ is continuous by \cref{cor:uniform-continuity-preserve-continuity}.
+\item $f$ is bounded, since there is an $n$ such that $|f(x)-f_n(x)|<1$ for all $x\in X$, and $f_n$ is bounded.
+\end{itemize}
+Hence $f\in\mathcal{C}(X,\CC)$, and since $f_n\rightrightarrows f$ on $X$, we have $\norm{f-f_n}\to0$ as $n\to\infty$.
+\end{proof}
+\pagebreak
+
+\subsection{Uniform Convergence and Integration}
+The next result states that the limit and integral can be interchanged.
+
+\begin{proposition}
+Suppose $(f_n)$ is a sequence of functions defined over $[a,b]$ and $f_n\in\mathcal{R}_\alpha[a,b]$. If $f_n\rightrightarrows f$ on $[a,b]$, then $f\in \mathcal{R}_\alpha[a,b]$, and
+\[\lim_{n\to\infty}\int_a^b f_n\dd{\alpha}=\int_a^b f\dd{\alpha}.\]
+\end{proposition}
+
+\begin{proof}
+It suffices to prove this for real-valued $f_n$. Let
+\[\epsilon_n=\sup_{x\in[a,b]}|f_n(x)-f(x)|.\]
+Then
+\[f_n-\epsilon\le f\le f_n+\epsilon_n,\]
+so that the upper and lower integrals of $f$ (see Definition 6.2) satisfy
+\[\int_{a}^{b}(f_n-\epsilon_n)\dd{\alpha}\le\lowerint_{a}^{b}f\dd{\alpha}\le\upperint_{a}^{b}f\dd{\alpha}\le\int_{a}^{b}(f_n+\epsilon_n)\dd{\alpha}.\]
+Hence
+\[0\le\upperint_{a}^{b}f\dd{\alpha}-\lowerint_{a}^{b}f\dd{\alpha}\le 2\epsilon_n[\alpha(b)-\alpha(a)].\]
+Since $\epsilon_n\to0$ as $n\to\infty$ (Theorem 7.9), the upper and lower integrals of $f$ are equal. Thus $f\in\mathcal{R}_\alpha[a,b]$.
+
+Another application of (25) now yields
+\[\absolute{\int_{a}^{b}f\dd{\alpha}-\int_{a}^{b}f_n\dd{\alpha}}\le\epsilon_n[\alpha(b)-\alpha(a)].\]
+This implies
+\[\lim_{n\to\infty}\int_a^b f_n\dd{\alpha}=\int_a^b f\dd{\alpha}.\]
+\end{proof}
+
+\begin{corollary}
+Suppose $f_n\in \mathcal{R}_\alpha[a,b]$ and
+\[f(x)=\sum_{n=1}^\infty f_n(x)\]
+converges uniformly on $[a,b]$. Then
+\[\int_a^b f\dd{\alpha}=\sum_{n=1}^{\infty}\int_{a}^{b}f_n\dd{\alpha}. \]
+\end{corollary}
+
+In other words, we can swap the integral and sum, such that the series may be integrated term by term.
+
+\begin{proof}
+Consider the sequence of partial sums 
+\[f_n(x)=\sum_{k=1}^n f_k(x)\quad(n=1,2,\dots).\]
+It follows $f_n\in \mathcal{R}_\alpha[a,b]$ and $f_n\rightrightarrows f$. Apply above theorem to $(f_n)$ and the conclusion follows.
+\end{proof}
+
+\begin{example}
+Let us show how to integrate a Fourier series:
+\[\int_{0}^{x}\sum_{n=1}^{\infty}\frac{\cos nt}{n^2}\dd{t}=\sum_{n=1}^{\infty}\int_{0}^{x}\frac{\cos nt}{n^2}\dd{t}=\sum_{n=1}^{\infty}\frac{\sin nx}{n^3}.\]
+\end{example}
+\pagebreak
+
+\subsection{Uniform Convergence and Differentiation}
+\begin{proposition}
+Suppose $(f_n)$ are differentiable on $[a,b]$, and $\brac{f_n(x_0)}$ converges for some $x_0\in[a,b]$. If $f_n^\prime$ converges uniformly on $[a,b]$, then there exists a differentiable $f$ such that $f_n\rightrightarrows f$ on $[a,b]$, and
+\[f^\prime(x)=\lim_{n\to\infty}f_n^\prime(x)\quad(a\le x\le b).\]
+\end{proposition}
+
+\begin{proof}
+Let $\epsilon>0$ be given. Since $\brac{f_n(x_0)}$ converges, $\brac{f_n(x_0)}$ is a Cauchy sequence, so there exists $N\in\NN$ such that for all $n,m\ge N$,
+\[\absolute{f_n(x_0)-f_m(x_0)}<\frac{\epsilon}{2}.\]
+Since $(f_n^\prime)$ converges uniformly on $[a,b]$, then $(f_n^\prime)$ is uniformly Cauchy (by \cref{lemma:uniform-convergence-cauchy}), so
+\[\absolute{f_n^\prime(x)-f_m^\prime(x)}<\frac{\epsilon}{2(b-a)}\quad(a\le x\le b).\]
+Now apply the mean value theorem to the function $f_n-f_m$: for $x_0,x\in[a,b]$, there exists $t$ between $x_0$ and $x$ such that
+\[(f_n-f_m)(x_0)-(f_n-f_m)(x)=(f_n-f_m)^\prime(t)(x_0-x)\]
+and thus if $n,m\ge N$, then
+\begin{align*}
+\absolute{\brac{f_n(x)-f_m(x)}-\brac{f_n(t)-f_m(t)}}
+&=\absolute{f_n^\prime(t)-f_m^\prime(t)}|x_0-x|\\
+&<\frac{\epsilon}{2(b-a)}|x_0-x|\tag{1}\\
+&\le\frac{\epsilon}{2}
+\end{align*}
+Finally, by the triangle inequality,
+\begin{align*}
+|f_n(x)-f_m(x)|
+&\le\absolute{f_n(x)-f_m(x)-f_n(x_0)+f_m(x_0)}+|f_n(x_0)-f_m(x_0)|\\
+&<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.
+\end{align*}
+This holds true for all $x\in[a,b]$. Hence by \cref{lemma:uniform-convergence-cauchy}, $(f_n)$ converges uniformly on $[a,b]$.
+
+Let 
+\[f(x)=\lim_{n\to\infty}f_n(x)\quad(a\le x\le b).\]
+Fix $x\in[a,b]$, and let
+\[\phi_n(t)=\frac{f_n(t)-f_n(x)}{t-x},\quad\phi(t)=\frac{f(t)-f(x)}{t-x}\quad(a\le t\le b,\:t\neq x).\]
+To show that $f$ is differentiable, we need to show that $\displaystyle\lim_{t\to x}\phi(t)$ exists. Note that since $f_n$ are differentiable, we have
+\[\lim_{t\to x}\phi_n(t)=f_n^\prime(x)\quad(n=1,2,\dots).\]
+By (1), for all $n,m\ge N$,
+\[|\phi_n(t)-\phi_m(t)|\le\frac{\epsilon}{2(b-a)},\]
+so $(\phi_n)$ converges uniformly, for $t\neq x$. Since $(f_n)$ converges to $f$, we conclude from (31) that
+\[\lim_{n\to\infty}\phi_n(t)=\phi(t)\]
+uniformly for $a\le t\le b$, $t\neq x$. 
+
+If we now apply Theorem 7.11 to $(\phi_n)$, (32) and (33) show that
+\[\lim_{t\to x}\phi(t)=\lim_{n\to\infty}f_n^\prime(x),\]
+and this is (27), by the definition of $\phi(t)$. 
+\end{proof}
+
+\begin{example}[Weierstrass function]
+Let us construct a continuous nowhere differentiable function on $\RR$.
+
+Define
+\[\phi(x)=|x|\quad(-1\le x\le 1).\]
+We extend the definition of $\phi(x)$ to all of $\RR$ by making $\phi$ $2$-periodic: $\phi(x)=\phi(x+2)$. Then $\phi:\RR\to\RR$ is continuous as $|\phi(x)-\phi(y)|\le|x-y|$ (not hard to prove).
+
+Let the \emph{Weierstrass function} be defined as
+\[f(x)=\sum_{n=0}^{\infty}\brac{\frac{3}{4}}^n\phi(4^n x).\]
+\begin{claim}
+The Weierstrass function is continuous and nowhere differentiable on $\RR$.
+\end{claim}
+\begin{itemize}
+\item Since $\sum\brac{\frac{3}{4}}^n$ converges, and $|\phi(x)|\le1$ for all $x\in\RR$, by the Weierstrass M-test, $f(x)$ converges uniformly and hence is continuous.
+
+\item Fix $x\in\RR$ and $m\in\ZZ^+$, and define
+\[\delta_m=\pm\frac{1}{2}\cdot 4^{-m},\]
+where the sign is chosen in such a way so that there is no integer between $4^m x$ and $4^m(x+\delta_m)$, which can be done since $4^m|\delta_m|=\frac{1}{2}$. Define
+\[\gamma_n=\frac{\phi\brac{4^n(x+\delta_m)}-\phi(4^n x)}{\delta_m}.\]
+
+If $n>m$, then as $4^n\delta_m$ is an even integer. Then as $\phi$ is $2$-periodic we get that $\gamma_n=0$. 
+
+Furthermore, since there is no integer between $4^m x\pm\frac{1}{2}$ and $4^m x$, we have that
+\[\absolute{\phi\brac{4^m x\pm\frac{1}{2}}-\phi(4^m x)}=\absolute{\brac{4^m x\pm\frac{1}{2}}-4^m x}=\frac{1}{2}.\]
+Therefore
+\[|\gamma_n|=\absolute{\frac{\phi\brac{4^m x\pm\frac{1}{2}}-\phi(4^m x)}{\pm\frac{1}{2}\cdot4^{-m}}}=4^m.\]
+Similarly, if $n<m$, since $|\phi(s)-\phi(t)|\le|s-t|$,
+\[|\gamma_n|=\absolute{\frac{\phi\brac{4^n x\pm\frac{1}{2}\cdot4^{n-m}}-\phi(4^n x)}{\pm\frac{1}{2}\cdot4^{-m}}}\le\absolute{\frac{\pm\frac{1}{2}\cdot4^{n-m}}{\pm\frac{1}{2}\cdot4^{-m}}}=4^n.\]
+Finally,
+\begin{align*}
+\absolute{\frac{f(x+\delta_m)-f(x)}{\delta_m}}
+&=\absolute{\sum_{n=0}^{\infty}\brac{\frac{3}{4}}^n\frac{\phi(4^n(x+\delta_m))-\phi(4^n x)}{\delta_m}}=\absolute{\sum_{n=0}^{\infty}\brac{\frac{3}{4}}^n\gamma_n}\\
+&=\absolute{\sum_{n=0}^{m}\brac{\frac{3}{4}}^n\gamma_n}\\
+&\ge\absolute{\frac{3}{4}^m\gamma_m}-\absolute{\sum_{n=0}^{m-1}\brac{\frac{3}{4}}^n\gamma_n}\\
+&\ge3^m-\sum_{n=0}^{m-1}3^n=3^m-\frac{3^m-1}{3-1}=\frac{3^m+1}{2}.
+\end{align*}
+It is obvious that $\delta_m\to0$ as $m\to\infty$, but $\frac{3^m+1}{2}$ goes to infinity. Hence $f$ cannot be differentiable at $x$.
+\end{itemize}
+\end{example}
+\pagebreak
+
+\section{Equicontinuous Families of Functions}
+We would like an analogue of Bolzano--Weierstrass; that is, every bounded sequence of functions has a convergent subsequence.
+
+\begin{definition}
+Suppose $(f_n)$ is a sequence of functions. We say $(f_n)$ is \vocab{pointwise bounded} on $E$ if for every $x\in E$, the sequence $(f_n(x))$ is bounded; that is,
+\[\forall x\in E,\quad\exists M\in\RR,\quad\forall n\in\NN,\quad |f_n(x)|\le M.\]
+
+We say $(f_n)$ is \vocab{uniformly bounded} on $E$ if
+\[\exists M\in\RR,\quad\forall x\in E,n\in\NN,\quad |f_n(x)|\le M.\]
+\end{definition}
+
+\begin{lemma}
+Suppose $(f_n)$ is a pointwise bounded sequence of complex-valued functions on a countable set $E$. Then $(f_n)$ has a subsequence $(f_{n_k})$ such that $f_{n_k}(x)$ converges for every $x\in E$.
+\end{lemma}
+
+\begin{proof}
+We will use a very common and useful diagonal argument.
+
+Arrange the points of $E$ in a sequence $(x_i)$, where $i=1,2,\dots$. 
+
+Since $(f_n)$ is pointwise bounded on $E$, the sequence $\brac{f_n(x_1)}_{n=1}^{\infty}$ is bounded. By the Bolzano--Weierstrass theorem, there exists a subsequence, which we denote by $(f_{1,k})_{k=1}^{\infty}$, such that $\brac{f_{1,k}(x_1)}_{k=1}^{\infty}$ converges.
+
+Consider the array formed by the sequences $S_1,S_2,\dots$:
+\begin{align*}
+S_1&:\quad f_{1,1}\quad f_{1,2}\quad f_{1,3}\quad\cdots\\
+S_2&:\quad f_{2,1}\quad f_{2,2}\quad f_{2,3}\quad\cdots\\
+S_3&:\quad f_{3,1}\quad f_{3,2}\quad f_{3,3}\quad\cdots\\
+&\vdots
+\end{align*}
+and which have the following properties:
+\begin{enumerate}[label=(\roman*)]
+\item $S_n$ is a subsequence of $S_{n-1}$, for $n=2,3,\dots$
+\item $\brac{f_{n,k}(x_n)}$ converges, as $k\to\infty$ (the boundedness of $\brac{f_n(x_n)}$ makes it possible to choose $S_n$ in this way);
+\item The order in which the functions appear is the same in each sequence; i.e., if one function precedes another in $S_1$, they are in the same relation in every $S_n$, until one or the other is deleted. Hence, when going from one row in the above array to the next below, functions may move to the left but never to the right.
+\end{enumerate}
+
+We now go down the diagonal of the array; i.e., we consider the sequence
+\[S:\quad f_{1,1}\quad f_{2,2}\quad f_{3,3}\quad\cdots\]
+By (c), the sequence $S$ (except possibly its first $n-1$ terms) is a subsequence of $S_n$, for $n=1,2,\dots$. Hence (b) implies that $\brac{f_{n,n}(x_i)}$ converges, as $n\to\infty$, for every $x_i\in E$.\todo{to do}
+\end{proof}
+
+\begin{definition}
+A family $\mathscr{F}$ of functions $f:E\subset X\to\CC$ is \vocab{equicontinuous} on $E$ if
+\[\forall\epsilon>0,\quad\exists\delta>0,\quad\forall x,y\in E,f\in\mathscr{F},\quad d(x,y)<\delta\implies|f(x)-f(y)|<\epsilon.\]
+\end{definition}
+
+\begin{proposition}
+Suppose $X$ is a compact metric space, $f_n\in\mathcal{C}(X,\CC)$, and $(f_n)$ converges uniformly on $X$. Then $(f_n)$ is equicontinuous on $X$. 
+\end{proposition}
+
+\begin{proof}
+Let $\epsilon>0$ be given. Since $(f_n)$ converges uniformly on $X$, $f_n\to f$ on $X$ with respect to the metric of $\mathcal{C}(X,\CC)$. Then
+\[\lim_{n\to\infty}\norm{f_n-f}=0,\]
+i.e., there exists $N\in\NN$ such that for all $n\ge N$,
+\[\norm{f_n-f_N}<\frac{\epsilon}{3}.\]
+Since continuous functions are uniformly continuous on compact sets, $f_n$ are uniformly continuous on $K$, so there exists $\delta>0$ such that
+\[d(x,y)<\delta\implies|f_i(x)-f_i(y)|<\frac{\epsilon}{3}\]
+for $i=1,\dots,N$.
+If $n\ge N$ and $d(x,y)<\delta$, it follows that
+\begin{align*}
+|f_n(x)-f_n(y)|
+&\le|f_n(x)-f_N(x)|+|f_N(x)-f_N(y)|+|f_N(y)-f_n(y)|\\
+&<\frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}=\epsilon.
+\end{align*}
+In conjunction with (43), this proves the theorem.
+\end{proof}
+
+We first need the following lemma.
+
+\begin{lemma}
+A compact metric space $X$ contains a countable dense subset.
+\end{lemma}
+
+\begin{proof}
+For each $n\in\NN$, there exist finitely many balls of radius $\frac{1}{n}$ that cover $X$ (by compactness of $X$). That is, for every $n$, there exist finitely many points $x_{n,1},\dots,x_{n,k_n}$ such that
+\[X=\bigcup_{i=1}^{k_n}B_\frac{1}{n}\brac{x_{n,i}}.\]
+\begin{claim}
+$S=\{x_{n,i}\mid i=1,\dots,k_n\}$ is a countable dense subset of $X$.
+\end{claim}
+\begin{itemize}
+\item Since $S$ is a countable union of finite sets, $S$ is countable.
+\item For every $x\in X$ and every $\epsilon>0$, there exists $n\in\NN$ such that $\frac{1}{n}<\epsilon$ and an $x_{n,i}\in S$ such that
+\[x\in B_\frac{1}{n}(x_{n,i})\subset B_\epsilon(x_{n,i}).\]
+Hence $x\in\overline{S}$, so $\overline{S}=X$ and therefore $S$ is dense.
+\end{itemize}
+\end{proof}
+
+We can now prove the very useful Arzel\`{a}--Ascoli theorem about existence of convergent subsequences.
+
+\begin{theorem}[Arzel\`{a}--Ascoli theorem]
+Suppose $X$ is compact, $f_n\in\mathcal{C}(X,\CC)$, and $(f_n)$ is pointwise bounded and equicontinuous on $X$. Then $(f_n)$ is uniformly bounded on $X$, and contains a uniformly convergent subsequence.
+\end{theorem}
+
+\begin{proof}
+Let us first show that the sequence is uniformly bounded. 
+By equicontinuity, there exists $\delta>0$ such that
+\[B_\delta(x)\subset f_n^{-1}\brac{B_1(f_n(x))}\quad(x\in X).\]
+Since $X$ is compact, there exist finitely many points $x_1,\dots,x_k$ such that
+\[X=\bigcup_{j=1}^{k}B_\delta(x_j).\]
+Since $(f_n)$ is pointwise bounded, there exist $M_1,\dots,M_k$ such that
+\[|f_n(x_j)|\le M_j\quad(j=1,\dots,k)\]
+for all $n$. Let $M=1+\max\{M_1,\dots,M_k\}$. Now given any $x\in X$, $x\in B_\delta(x_j)$ for some $1\le j\le k$. Therefore, for all $n$ we have $x\in f_n^{-1}\brac{B_1(f_n(x_j))}$ or in other words
+\[|f_n(x)-fn(x_j)|<1.\]
+By reverse triangle inequality,
+\[|f_n(x)|<1+|fn(x_j)|\le 1+M_j\le M\]
+Since $x$ was arbitrary, $(f_n)$ is uniformly bounded.
+
+Next, pick a countable dense set $S$. By Theorem 7.23, there exists a subsequence $(f_{n_j})$ that converges pointwise on $S$. Write $g_j=f_{n_j}$ for simplicity. Note that $(g_n)$ is equicontinuous.
+
+Let $\epsilon>0$ be given, then pick $\delta>0$ such that for all $x\in X$,
+\[B_\delta(x)\subset g_n^{-1}\brac{B_\frac{\epsilon}{3}(g_n(x))}.\]
+By density of $S$, every $x\in X$ is in some $B_\delta(y)$ for some $y\in S$, and by compactness of $X$, there is a finite subset $\{x_1,\dots,x_k\}$ of $S$ such that
+\[X=\bigcup_{j=1}^{k}B_\delta(x_j).\]
+Now as there are finitely many points and we know that $(g_n)$ converges pointwise on $S$, there exists $N\in\NN$ such that for all $n,m\ge N$,
+\[|g_n(x_j)-g_m(x_j)|<\frac{\epsilon}{3}\quad(j=1,\dots,k).\]
+Let $x\in X$ be arbitrary. There is some $i$ such that $x\in B_\delta(x_i)$ and so we have for all $i\in\NN$,
+\[|g_i(x)-g_i(x_j)|<\frac{\epsilon}{3}\]
+and so $n,m\ge N$ that
+\begin{align*}
+|g_n(x)-g_m(x)|
+&\le|g_n(x)-g_n(x_j)|+|g_n(x_j)-g_m(x_j)|+|g_m(x_j)-g_m(x)|\\
+&<\frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}=\epsilon.
+\end{align*}
+\end{proof}
+
+\begin{corollary}
+Suppose $X$ is a compact metric space. Let $S\subset\mathcal{C}(X,\CC)$ be a closed, bounded and equicontinuous set. Then $S$ is compact.
+\end{corollary}
+
+\begin{corollary}
+Suppose $(f_n)$ is a sequence of differentiable functions on $[a,b]$, $(f_n^\prime)$ is uniformly bounded, and there exists $x_0\in[a,b]$ such that $\brac{f_n(x_0)}$ is bounded. Then there exists a uniformly convergent subsequence $(f_{n_k})$.
+\end{corollary}
+\pagebreak
+
+\section{Stone--Weierstrass Approximation Theorem}
+Perhaps surprisingly, even a very badly behaving continuous function is really just a uniform limit of polynomials. We cannot really get any ``nicer'' as a function than a polynomial.
+
+\subsection{Weierstrass's Version}
+\begin{theorem}[Weierstrass approximation theorem]
+If $f:[a,b]\to\CC$ is continuous, there exists a sequence of polynomials $(P_n)$ such that $P_n\rightrightarrows f$ on $[a,b]$.
+
+If $f$ is real, then $P_n$ may be taken real.
+\end{theorem}
+
+\begin{proof}
+WLOG assume that $[a,b]=[0,1]$. We may also assume that $f(0)=f(1)=0$. For if the theorem is proved for this case, consider
+\[g(x)=f(x)-f(0)-x[f(1)-f(0)]\quad(0\le x\le 1).\]
+Here $g(0)=g(1)=0$, and if $g$ can be obtained as the limit of a uniformly convergent sequence of polynomials, it is clear that the same is true for $f$, since $f-g$ is a polynomial.
+
+Furthermore, we define $f(x)$ to be zero for $x$ outside $[0,1]$. Then $f$ is uniformly continuous on the whole line.
+
+Let
+\[Q_n(x)=c_n(1-x^2)^n\quad(n=1,2,\dots),\]
+where $c_n$ is chosen such that
+\[\int_{-1}^{1}Q_n(x)\dd{x}=1\quad(n=1,2,\dots).\]
+We need some information about the order of magnitude of $c_n$. Since 
+\begin{align*}
+\int_{-1}^{1}(1-x^2)^n\dd{x}
+&=2\int_{0}^{1}(1-x^2)^n\dd{x}\\
+&\ge 2\int_{0}^{\frac{1}{\sqrt{n}}}(1-x^2)^n\dd{x}\\
+&\ge 2\int_{0}^{\frac{1}{\sqrt{n}}}(1-nx^2)\dd{x}\\
+&=\frac{4}{3\sqrt{n}}\\
+&>\frac{1}{\sqrt{n}},
+\end{align*}
+it follows from (48) that 
+\[c_n<\sqrt{n}.\]
+The inequality $(1-x^2)^n\ge 1-nx^2$ which we used above is easily shown to be true by considering the function
+\[(1-x^2)^n-1+nx^2\]
+which is zero at $x=0$ and whose derivative is positive in $(0,1)$.
+
+For any $\delta>0$, (49) implies
+\[Q_n(x)\le\sqrt{n}(1-\delta^2)^n\quad(\delta\le|x|\le1),\]
+so that $Q_n\rightrightarrows 0$ in $\delta\le|x|\le1$.
+
+Now let
+\[P_n(x)=\int_{-1}^{1}f(x+t)Q_n(t)\dd{t}\quad(0\le x\le 1).\]
+Our assumptions about $f$ show, by a simple change of variable, that
+\[P_n(x)=\int_{-x}^{1-x}f(x+t)Q_n(t)\dd{t}=\int_{0}^{1}f(t)Q_n(t-x)\dd{t},\]
+and the last integral is clearly a polynomial in $x$. Thus $(P_n)$ is a sequence of polynomials, which are real if $f$ is real.
+
+Given $\epsilon>0$, we choose $\delta>0$ such that
+\[|y-x|<\delta\implies|f(y)-f(x)|<\frac{\epsilon}{2}.\]
+Let $M=\sup|f(x)|$, Using (48), (50), and the fact that $Q_n(x)\ge0$, we see that for $0\le x\le 1$, 
+\begin{align*}
+|P_n(x)-f(x)|
+&=\absolute{\int_{-1}^{1}[f(x+t)-f(x)]Q_n(t)\dd{t}}\\
+&\le\int_{-1}^{1}|f(x+t)-f(x)|Q_n(t)\dd{t}\\
+&\le 2M\int_{-1}^{-\delta}Q_n(t)\dd{t}+\frac{\epsilon}{2}\int_{-\delta}^{\delta}Q_n(t)\dd{t}+2M\int_{\delta}^{1}Q_n(t)\dd{t}\\
+&\le 4M\sqrt{n}(1-\delta^2)^n+\frac{\epsilon}{2}\\
+&<\epsilon
+\end{align*}
+for all large enough $n$, which proves the theorem. 
+\end{proof}
+
+Think about the consequences of the theorem. If you have any property that gets preserved under uniform convergence and it is true for polynomials, then it must be true for all continuous functions.
+
+Let us note an immediate application of the Weierstrass theorem. We have already seen that countable dense subsets can be very useful.
+
+\begin{corollary}
+The metric space $\mathcal{C}\brac{[a,b],\CC}$ contains a countable dense subset.
+\end{corollary}
+
+\begin{corollary}
+For every interval $[-a,a]$, there exists a sequence of real polynomials $P_n$ such that $P_n(0)=0$ and
+\[\lim_{n\to\infty}P_n(x)=|x|\]
+uniformly on $[-a,a]$.
+\end{corollary}
+
+\subsection{Algebra of Functions}
+We shall now isolate those properties of the polynomials which make the Weierstrass theorem possible.
+
+\begin{definition}
+A family $\mathscr{A}$ of complex-valued functions $f:X\to\CC$ is an \vocab{algebra} if, for all $f,g\in\mathscr{A}$, $c\in\CC$,
+\begin{enumerate}[label=(\roman*)]
+\item $f+g\in\mathscr{A}$;\hfill(closed under addition)
+\item $fg\in\mathscr{A}$;\hfill(closed under multiplication)
+\item $cf\in\mathscr{A}$.\hfill(closed under scalar multiplication)
+\end{enumerate}
+If we talk of an algebra of real-valued functions, then of course we only need the above to hold for $c\in\RR$.
+
+$\mathscr{A}$ is \emph{uniformly closed} if the limit of every uniformly convergent sequence in $\mathscr{A}$ is also in $\mathscr{A}$.
+
+Let $\mathscr{B}$ be the set of all limits of uniformly convergent sequences in $\mathscr{A}$. Then $\mathscr{B}$ is the \emph{uniform closure} of $\mathscr{A}$.
+\end{definition}
+
+\begin{example}
+
+\end{example}
+
+\begin{proposition}
+Let $\mathscr{B}$ be the uniform closure of an algebra $\mathscr{A}$ of bounded functions. Then $\mathscr{B}$ is a uniformly closed algebra.
+\end{proposition}
+
+Now let us distill the right properties of polynomials that were sufficient for an approximation theorem.
+
+\begin{definition}
+Let $\mathscr{A}$ be a family of functions defined on $X$.
+
+We say $\mathscr{A}$ \emph{separates points} if for every $x,y\in X$, with $x\neq y$ there exists $f\in\mathscr{A}$ such that $f(x)\neq f(y)$.
+
+We say $\mathscr{A}$ \emph{vanishes at no point} if for every $x\in X$ there exists $f\in\mathscr{A}$ such that $f(x)\neq0$.
+\end{definition}
+
+\begin{example}
+
+\end{example}
+
+\begin{proposition}
+Suppose $\mathscr{A}$ is an algebra of functions on $X$, that separates points and vanishes at no point. Suppose $x,y$ are distinct points of $X$ and $c,d\in\CC$. Then there exists $f\in\mathscr{A}$ such that
+\[f(x)=c,\quad f(y)=d.\]
+\end{proposition}
+
+\subsection{The Theorem}
+We now have all the material needed for Stone's generalisation of the Weierstrass theorem. 
+
+\begin{theorem}[Stone--Weierstrass approximation theorem]
+Let $X$ be a compact metric space and $\mathscr{A}$ an algebra of real-valued continuous functions on $X$, such that $\mathscr{A}$ separates points and vanishes at no point. Then the uniform closure of $\mathscr{A}$ is all of $\mathcal{C}(X,\RR)$.
+\end{theorem}
+\pagebreak
+
+\section*{Exercises}
+\addcontentsline{toc}{section}{Exercises}

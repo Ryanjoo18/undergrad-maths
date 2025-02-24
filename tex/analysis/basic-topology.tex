@@ -1,5 +1,10 @@
 \chapter{Basic Topology}\label{chap:basic-topology}
-This chapter discusses basic notions of point set topology, which focuses on the metric space and its related structures. Then we introduce compactness and prove three major results (\cref{thrm:cantor-intersection}, \cref{thrm:heine-borel}, \cref{thrm:bolzano-weierstrass}). We also briefly talk about perfect sets, and connectedness of sets.
+\begin{summary}
+\item Metric space, subspace. Open ball, closed ball, boundedness. Open set, closed set. Interior, closure, boundary. Limit point.  
+\item Compactness. Cantor intersection theorem, Heine--Borel theorem, Bolzano--Weierstrass theorem. Sequential compactness.
+\item Perfect sets. Cantor set.
+\item Connectedness.
+\end{summary}
 
 \begin{table}[H]
 \centering
@@ -25,12 +30,12 @@ Cantor set & $C$
 \caption{Notation for \cref{chap:basic-topology}}
 \end{table}
 
-\section{Metric Space}
+\section{Metric Spaces}
 \subsection{Definitions and Examples}
 \begin{definition}[Metric space]
 A \vocab{metric space}\index{metric space} is a set $X$ with an associated \emph{metric} $d:X\times X\to\RR$, which satisfies the following properties for all $p,q,r\in X$:
 \begin{enumerate}[label=(\roman*)]
-\item $d(p,q)\ge0$, where equality holds if and only if $p=q$;\hfill(positive definitiveness)
+\item $d(p,q)\ge0$, where equality holds if and only if $p=q$;\hfill(positive definiteness)
 \item $d(p,q)=d(q,p)$;\hfill(symmetry)
 \item $d(p,q)\le d(p,r)+d(r,q)$.\hfill(triangle inequality)
 \end{enumerate}
@@ -281,7 +286,7 @@ d(p,s)&\le d(q,s)+d(p,q)\\
 and thus $s\in B_r(p)$. Since for all $q\in B_r(p)$ there exists $\epsilon>0$ such that $B_\epsilon(q)\subset B_r(p)$, we have that $B_r(p)$ is open.
 \end{proof}
 
-\begin{proposition}\label{prop:open-set-properties}
+\begin{proposition}\label{prop:open-set-properties} \
 \begin{enumerate}[label=(\roman*)]
 \item Both $\emptyset$ and $X$ are open.
 \item For any indexing set $I$ and collection of open sets $\{E_i\mid i\in I\}$, $\bigcup_{i\in I}E_i$ is open.
@@ -298,11 +303,7 @@ and thus $s\in B_r(p)$. Since for all $q\in B_r(p)$ there exists $\epsilon>0$ su
 \end{proof}
 
 \begin{remark}
-(i) is in fact a special case of (ii) and (iii), taking $I$ to be the empty set.
-\end{remark}
-
-\begin{remark}
-While the indexing set $I$ in (ii) can be arbitrary, the indexing set in (iii) must be finite. This is because in general, an arbitrary intersection of open sets is not open; for instance, the intervals $E_i=\brac{-\frac{1}{i},\frac{1}{i}}$ are all open in $\RR$, but their intersection $\bigcap_{i=1}^\infty E_i=\{0\}$, which is not an open set.
+While the indexing set $I$ in (ii) can be arbitrary, the indexing set in (iii) must be finite. For instance, $E_n=\brac{-\frac{1}{n},\frac{1}{n}}$ are open in $\RR$, but their intersection $\bigcap_{n=1}^\infty E_n=\{0\}$ is not open.
 \end{remark}
 
 Suppose $Y$ is a subspace of $X$. We say that $E$ is \emph{open relative} to $Y$ if for all $p\in E$, there exists $\epsilon>0$ such that $B_\epsilon(p)\cap Y\subset E$. (Note that $B_\epsilon(p)\cap Y$ is in the open ball in $Y$\footnote{notice that the definition of an open ball depends on the metric space!}, because the metric $d^\prime:Y\times Y\to R$ is the restriction to $Y\times Y$ of the metric $d:X\times X\to\RR$ on $X$.)
@@ -360,7 +361,7 @@ d(p,q)&\ge d(p,s)-d(q,s)\\
 Hence $q\in\overline{B}_r(p)^c$, and so $B_\epsilon(s)\subset\overline{B}_r(p)^c$. Therefore $\overline{B}_r(p)^c$ is open, so $\overline{B}_r(p)$ is closed.
 \end{proof}
 
-\begin{proposition}\label{prop:closed-set-properties}
+\begin{proposition}\label{prop:closed-set-properties} \
 \begin{enumerate}[label=(\roman*)]
 \item Both $\emptyset$ and $X$ are closed.
 \item For any indexing set $I$ and collection of closed sets $\{F_i\mid i\in I\}$, $\bigcap_{i\in I}F_i$ is closed.
@@ -422,7 +423,7 @@ Suppose $E\subset X$.
 \begin{enumerate}[label=(\roman*)]
 \item \fbox{$\implies$} Suppose $E$ is open. Then $E$ is an open subset of $X$ contained in $E$ (since $E\subset E$), so $E\subset E^\circ$. Conversely, suppose $A\subset E^\circ$. Then $A$ is an open subset of $X$ contained in $E$, so $A\subset E$, and hence $E^\circ\subset E$. Therefore $E=E^\circ$.
 
-\fbox{$\impliedby$} Since an arbitrary union of open sets is open, $E^\circ$ is itself an open set, and it is clearly the unique largest open subset of $X$ contained in $E$.
+\fbox{$\impliedby$} Since an arbitrary union of open sets is open, $E^\circ$ is itself an open set. Clearly $E^\circ$ is the unique largest open subset of $X$ contained in $E$, since all open subsets of $E$ are contained in $E^\circ$.
 
 \item \fbox{$\implies$} If $E$ is itself closed then evidently $E=\overline{E}$.
 
@@ -622,9 +623,7 @@ Every finite set is compact.
 \end{proposition}
 
 \begin{proof}
-Let $E$ be finite; let $E=\{p_1,\dots,p_n\}$.
-
-Let $\mathcal{U}=\{U_i\mid i\in I\}$ be an open cover of $E$. We need to construct a finite subcover of $E$.
+Let $E=\{p_1,\dots,p_n\}$. Let $\mathcal{U}=\{U_i\mid i\in I\}$ be an open cover of $E$. We need to construct a finite subcover of $E$.
 
 For each point $p_k\in E$, choose one $U_{i_k}$ such that $p_k\in U_{i_k}$. Then $\{U_{i_k}\mid k=1,\dots,n\}$ is a finite subcover of $\mathcal{U}$.
 \end{proof}
@@ -721,7 +720,7 @@ If $F$ is closed and $K$ is compact, then $F\cap K$ is compact.
 \begin{proof}
 Suppose $F$ is closed, $K$ is compact. By \cref{prop:compact-closed}, $K$ is closed. By \cref{prop:closed-set-properties}, the intersection of two closed sets is closed, so $F\cap K$ is closed.
 
-Since $F\cap K\subset K$ is closed, and $K$ is compact, by \cref{prop:closed-compact}, $F\cap K$ is compact.
+Since $F\cap K\subset K$ is a closed subset of a compact set $K$, by \cref{prop:closed-compact}, $F\cap K$ is compact.
 \end{proof}
 
 \subsection{Heine--Borel Theorem}
@@ -1173,7 +1172,7 @@ B&=\crbrac{(x,y)\mid x,y\in\QQ,x>\sqrt{2}},
 then note that $A\cup B=E$, as well as $A\cap\overline{B}=\emptyset$ and $\overline{A}\cap B=\emptyset$.
 \end{example}
 
-\begin{proposition}
+\begin{proposition}\label{prop:connected-closed-interval}
 Closed intervals in $\RR$ are connected.
 \end{proposition}
 
@@ -1183,7 +1182,7 @@ Suppose otherwise, for a contradiction, that a closed interval $[a,b]$ is not co
 Let $s=\sup A$. Then by \cref{prop:closure-sup}, $s\in\overline{A}$. Then $\overline{A}\cap B=\emptyset$ implies $s\notin B$, so $s\in A$. Thus $A\cap\overline{B}=\emptyset$ implies $s\notin\overline{B}$. Hence there exists an open interval $(s-\epsilon,s+\epsilon)$ around $s$ that is disjoint from $B$. But since $A\cup B=[a,b]$, we must have $(s-\epsilon,s+\epsilon)\subset A$. This contradicts the fact that $s$ is the supremum of $A$. 
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\label{prop:connected-interval-R}
 $E\subset\RR$ is connected if and only if it has the following property: if $x,y\in E$ and $x<z<y$, then $z\in E$.
 \end{proposition}
 
@@ -1195,53 +1194,11 @@ Since $x\in A_z$ and $y\in B_z$, $A$ and $B$ are non-empty. Since $A_z\subset(-\
 
 \fbox{$\implies$} Suppose $E$ is not connected. Then there are non-empty separated sets $A$ and $B$ such that $A\cup B=E$. Pick $x\in A$, $y\in B$, and WLOG assume that $x<y$. Define
 \[z\coloneqq\sup(A\cap[x,y].)\]
-By 
-\end{proof}
+By Theorem 2.28, $z\in\overline{A}$; hence $z\notin B$. In particular, $x\le z<y$.
 
-\begin{definition}
-We say that a metric space is \vocab{disconnected} if we can write it as the disjoint union of two nonempty open sets. We say that a space is \vocab{connected} if it is not disconnected.
-\end{definition}
+If $z\notin A$, it follows that $x<z<y$ and $z\notin E$.
 
-If $X$ is written as a disjoint union of two nonempty open sets $U$ and $V$ then we say that these sets \vocab{disconnect} $X$.
-
-\begin{example}
-If $X=[0,1]\cup[2,3]\subset\RR$ then we have seen that both $[0,1]$ and $[2,3]$ are open in $X$. Since $X$ is their disjoint union, $X$ is disconnected.
-\end{example}
-
-The following lemma gives some equivalent ways to formulate the concept of connected space.
-
-\begin{lemma}
-The following are equivalent:
-\begin{enumerate}[label=(\roman*)]
-\item $X$ is connected.
-\item If $f:X\to\{0,1\}$ is a continuous function then $f$ is constant.
-\item The only subsets of $X$ which are both open and closed are $X$ and $\emptyset$.
-\end{enumerate}
-(Here the set $\{0,1\}$ is viewed as a metric space via its embedding in $\RR$, or equivalently with the discrete metric.)
-\end{lemma}
-
-\begin{proof}
-
-\end{proof}
-
-Frequently one has a metric space $X$ and a subset $E$ of it whose connectedness or otherwise one wishes to ascertain. To this end, it is useful to record the following lemma.
-
-\begin{lemma}
-Let $E\subset X$, considered as a metric space with the metric induced from $X$. Then $E$ is connected if and only if the following is true: if $U,V$ are open subsets of $X$, and $U\cap V\cap E=\emptyset$, then $E\subset U\cup V$ implies either $E\subset U$ or $E\subset V$.
-\end{lemma}
-
-\begin{proof}
-
-\end{proof}
-
-We now turn to some basic properties of the notion of connectedness. These broadly conform with one's intuition about how connected sets should behave.
-
-\begin{lemma}[Sunflower lemma]
-Let $\{E_i\mid i\in I\}$ be a collection of connected subsets of $X$ such that $\bigcap_{i\in I}E_i\neq\emptyset$. Then $\bigcup_{i\in I}E_i$ is connected.
-\end{lemma}
-
-\begin{proof}
-
+If $z\in A$, then $z\notin B$, hence there exists $z_1$ such that $z<z_1<y$ and $z_1\notin B$. Then $x<z_1<y$ and $z_1\notin E$.
 \end{proof}
 
 \begin{proposition}
@@ -1250,7 +1207,8 @@ The Cantor set $C$ is totally disconnected.
 \pagebreak
 
 \section*{Exercises}
-\begin{prbm}
+\addcontentsline{toc}{section}{Exercises}
+\begin{exercise}
 Prove that the following are metrics.
 \begin{enumerate}[label=(\roman*)]
 \item On an arbitrary set $X$, define
@@ -1286,15 +1244,15 @@ When $n=2$, the distance between two lines is $\sin\theta$ where $\theta$ is the
 
 (This is known as the \emph{projective space}.)
 \end{enumerate}
-\end{prbm}
+\end{exercise}
 
-\begin{prbm}[Product space]
+\begin{exercise}[Product space]
 If $(X,d_X)$ and $(Y,d_Y)$ are metric spaces, set
 \[d_{X\times Y}\brac{(x_1,y_1),(x_2,y_2)}=\sqrt{d_X(x_1,x_2)^2+d_Y(y_1,y_2)^2.}\]
 for $x_1,x_2\in X$, $y_1,y_2\in Y$.
 
 Prove that $d_{X\times Y}$ gives a metric on $X\times Y$; we call $X\times Y$ the \emph{product space}.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 Reflexivity and symmetry are obvious. Less clear is the triangle inequality. We need to prove that
@@ -1314,3 +1272,4 @@ By Cauchy--Schwarz,
 \[a_1a_2+b_1b_2\le\sqrt{{a_1}^2+{b_1}^2}\sqrt{{a_2}^2+{b_2}^2}.\]
 Substituting this into the previous line gives precisely the square of (2), and (1) follows.
 \end{solution}
+

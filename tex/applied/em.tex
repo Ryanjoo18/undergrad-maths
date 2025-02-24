@@ -1,0 +1,176 @@
+\chapter{Electromagnetism}
+
+\vfill
+
+\begin{center}
+\textbf{MAXWELL EQUATIONS}
+\end{center}
+\begin{mdframed}
+\begin{align*}
+\nabla\cdot\vb{E}&=\frac{\rho}{\epsilon_0}&&\text{(Gauss' law)}\\[1em]
+\nabla\cdot\vb{B}&=0&&\text{(no magnetic monopoles)}\\[1em]
+\nabla\times\vb{E}+\pdv{\vb{B}}{t}&=0&&\text{(Faraday's law)}\\[1em]
+\nabla\times\vb{B}-\mu_0\epsilon_0\pdv{\vb{E}}{t}&=\mu_0\vb{J}&&\text{(Amp\`{e}re--Maxwell law)}
+\end{align*}
+\end{mdframed}
+
+\vfill
+
+\section{Electrostatics}
+\subsection{Point Charges and Coulomb's Law}
+It is a fact of nature that elementary particles have a property called \emph{electric charge}. In SI units, this is measured in \emph{Coulombs} C, and the electron and proton carry equal and opposite charges $\mp e$, where $e=1.6022\times10^{-19}\:\unit{C}$. Atoms consist of electrons orbiting a nucleus of protons and neutrons (with the latter carrying charge $0$), and thus all charges in stable matter, made of atoms, arise from these electron and proton charges.
+
+Electrostatics is the study of charges at rest. We model space by $\RR^3$, or a subset thereof, and represent the position of a stationary point charge $q$ by the position vector $\vb{r}\in\RR^3$.
+
+\begin{law}[Coulomb's law]
+Given two point charges $q_1$ and $q_2$ located at positions $\vb{r}_1$ and $\vb{r}_2$ respectively, the force exerted on $q_1$ due to $q_2$ is
+\[\vb{F}_1=\frac{q_1q_2}{4\pi\epsilon_0}\frac{\vb{r}_1-\vb{r}_2}{|\vb{r}_1-\vb{r}_2|^3}.\]
+\end{law}
+
+Note this only makes sense if $\vb{r}_1\neq\vb{r}_2$, which we thus assume. The constant $\epsilon_0$ is called the \emph{permittivity of free space}, which in SI units takes the value $\epsilon_0=8.8542\times10^{-12}\:\unit{C^2\,N^{-1}\,m^{-2}}$.
+
+WLOG assume the second charge is located at the origin $\vb{r}_2=\vb{0}$, denote $\vb{r}_1=\vb{r}$, $q_2=q$, and equivalently rewrite the above equation as
+\begin{equation}
+\vb{F}_1=\frac{q_1q}{4\pi\epsilon_0}\frac{1}{r^2}\hat{\vb{r}}
+\end{equation}
+where $r=|\vb{r}|$, and $\hat{\vb{r}}=\frac{\vb{r}}{r}$ is a unit vector.
+
+Moreover, electrostatic forces obey the Principle of Superposition. That is, if we have $n$ charges $q_i$ at positions $\vb{r}_i$ ($1\le i\le n$), then an additional charge $q$ at position $\vb{r}$ experiences a force
+\[\vb{F}=\frac{q}{4\pi\epsilon_0}\sum_{i=1}^{n}q_i\frac{\vb{r}-\vb{r}_i}{|\vb{r}-\vb{r}_i|^3}\]
+where we simply add up (superpose) the Coulomb force from each charge $q_i$.
+
+\subsection{Electric Field}
+Given a particular distribution of charges, as above, we define the \vocab{electric field} $\vb{E}=\vb{E}(\vb{r})$ to be the force on a unit test charge\footnote{Here the nomenclature ``test charge'' indicates that the charge is not regarded as part of the distribution of charges that it is ``probing''.} (i.e.\ $q=1$) at position $\vb{r}$. Then the force exerted on a charge $q$ is
+\[\vb{F}=q\vb{E}.\]
+
+Then the electric field at a point $\vb{r}$ due to a point charge $q$ at the point $\vb{r}_1$ is
+\begin{equation}
+\vb{E}(\vb{r})=\frac{q}{4\pi\epsilon_0}\frac{\vb{r}-\vb{r}_1}{|\vb{r}-\vb{r}_1|^3}.
+\end{equation}
+
+The superposition of forces due to many charges means that we may write the electric field at $\vb{r}$ due to a system of $n$ point charges $q_i$ located at $\vb{r}_i$ as the vector sum
+\[\vb{E}(\vb{r})=\frac{1}{4\pi\epsilon_0}\sum_{i=1}^{n}q_i \frac{\vb{r}-\vb{r}_i}{|\vb{r}-\vb{r}_i|^3}.\]
+
+Very often it is convenient to treat a distribution of electric charge as it were continuous. To do this, we proceed as follows. Suppose in some region of space of volume $\Delta V$ the total electric charge is $\Delta Q$. We define the average charge density as
+\[\rho_{\Delta V}=\frac{\Delta Q}{\Delta V}.\]
+Thus the \vocab{charge density}, defined as charge per unit volume, at the point $\vb{r}$ is the limit of $\rho_{\Delta V}$ as $\Delta V\to0$ about the point $\vb{r}$:
+\[\rho(\vb{r})=\lim_{\substack{\Delta V\to0\\ \text{about }\vb{r}}}\frac{\Delta Q}{\Delta V}=\lim_{\substack{\Delta V\to0\\ \text{about }\vb{r}}}\rho_{\Delta V}.\]
+If charge density is a function of time, then we write $\rho(\vb{r},t)$. The total charge $Q$ in some region of volume $V\subset\RR^3$ is then the volume integral of $\rho(\vb{r})$ over $V$; that is,
+\[Q=\iiint_V\rho(\vb{r})\dd{V},\]
+where $\dd{V}$ is a volume element.
+
+If the charges are so small and so numerous that they can be described by a charge density $\rho(\vb{r}^\prime)$, the sum is replaced by an integral
+\[\vb{E}(\vb{r})=\frac{1}{4\pi\epsilon_0}\iiint\rho(\vb{r}^\prime)\frac{\vb{r}-\vb{r}^\prime}{|\vb{r}-\vb{r}^\prime|^3}\dd{V^\prime}\]
+where $\dd{V^\prime}=\dd{x^\prime}\dd{y^\prime}\dd{z^\prime}$ denotes a volume element.
+
+\subsection{Gauss's Law}
+Consider a point charge $Q$ and a closed surface $S$. Let $r$ be the distance from the charge to a point on the surface, $\dd{A}$ be a surface element, $\dd{\vb{A}}$ be the outwardly directed unit normal to the surface element.
+
+If the electric field $\vb{E}$ at the point on the surface due to the charge $Q$ makes an angle $\theta$ with the unit normal, then the electric flux $\dd{\Phi}_{\vb{E}}$ through $\dd{A}$ is
+\[\dd{\Phi}_{\vb{E}}=\vb{E}\cdot\dd{\vb{A}}=\frac{Q}{4\pi\epsilon_0r^2}\cos\theta\dd{A}.\]
+
+Since $\vb{E}$ is directed along the line from the surface element to the charge $Q$,
+\[\cos\theta\dd{A}=r^2\dd{\Omega}\]
+where $\dd{\Omega}$ is the element of solid angle subtended by $\dd{A}$ at the position of the charge. Thus
+\[\vb{E}\cdot\dd{\vb{A}}=\frac{Q}{4\pi\epsilon_0}\dd{\Omega}.\]
+Integrating the normal component of $\vb{E}$ over the closed surface $S$, if the charge is inside (outside) $S$, the total solid angle subtended at the charge by the inner side of the surface is $4\pi$ (zero). Therefore
+\[\Phi_{\vb{E}}=\oiint_S\vb{E}\cdot\dd{\vb{A}}=\frac{Q}{\epsilon_0}\]
+if the charge $Q$ lies inside $S$, and the integral is zero if $Q$ lies outside $S$.
+
+\begin{law}[Gauss's Law]
+For a closed Gaussian surface, electric flux is given by:
+\begin{equation}\label{eqn:gauss-law-single}
+\Phi_{\vb{E}}=\oiint_S\vb{E}\cdot\dd{\vb{A}}=\frac{Q}{\epsilon_0}
+\end{equation}
+\end{law}
+
+This result is Gauss's law for a single point charge. For a discrete set of charges, we have
+\[\oiint_S\vb{E}\cdot\dd{\vb{A}}=\frac{1}{\epsilon_0}\sum_i q_i\]
+where the sum is over only those charges inside the surface $S$. For a continuous charge density $\rho(\vb{x})$, total charge in volume $V$ enclosed by $S$ is given by $Q=\iiint_V\dd{V}\rho(\vb{x})$, so Gauss's law becomes
+\[\oiint_S\vb{E}\cdot\dd{\vb{A}}=\frac{1}{\epsilon_0}\iiint_V\dd{V}\:\rho(\vb{x}).\]
+Using the divergence theorem, we can rewrite the above differential form of Gauss's law as
+\[\iiint_V\dd{V}\brac{\nabla\cdot\vb{E}-\frac{\rho}{\epsilon}}=0,\]
+for an arbitrary volume $V$. We can, in the usual way, put the integrand equal to zero to obtain
+\begin{equation}
+\nabla\cdot\vb{E}=\frac{\rho}{\epsilon_0},
+\end{equation}
+which is the differential form of Gauss's law.
+
+\subsection{Scalar Potential}
+From the generalised Coulomb's law
+\[\vb{E}(\vb{x})=\frac{1}{4\pi\epsilon_0}\iiint\dd{V^\prime}\rho(\vb{x}^\prime)\frac{\vb{x}-\vb{x}^\prime}{|\vb{x}-\vb{x}^\prime|^3}\]
+the vector factor in the integrand, viewed as a function of $\vb{x}$, is the negative gradient of the scalar $\frac{1}{|\vb{x}-\vb{x}^\prime|}$:
+\[\frac{\vb{x}-\vb{x}^\prime}{|\vb{x}-\vb{x}^\prime|^3}=-\nabla\brac{\frac{1}{|\vb{x}-\vb{x}^\prime|}}.\]
+
+Since the gradient operation involves $\vb{x}$, but not the integration variable $\vb{x}^\prime$, it can be taken outside the integral sign. Then the field can be written
+\[\vb{E}(\vb{x})=-\frac{1}{4\pi\epsilon_0}\nabla\iiint\dd{V^\prime}\frac{\rho(\vb{x}^\prime)}{|\vb{x}-\vb{x}^\prime|}.\]
+
+Since the curl of the gradient of any well-behaved scalar function of position vanishes, we have
+\begin{equation}
+\nabla\times\vb{E}=0
+\end{equation}
+which is the second of Maxwell's equations.
+
+We thus define the \vocab{scalar potential} by the equation
+\begin{equation}
+\vb{E}=-\nabla\phi
+\end{equation}
+where the scalar potential is
+\begin{equation}
+\phi(\vb{x})\coloneqq\frac{1}{4\pi\epsilon_0}\iiint\dd{V^\prime}\frac{\rho(\vb{x}^\prime)}{|\vb{x}-\vb{x}^\prime|}
+\end{equation}
+
+The scalar potential has a physical interpretation when we consider the work done on a test charge $q$ in transporting it from point A to point B in the presence of an electric field $\vb{E}(\vb{x})$. The force acting on the charge at any point is 
+\[\vb{F}=q\vb{E}\]
+so that the work done in moving the charge from A to B is
+\[W_{AB}=-\int_{A}^{B}\vb{F}\cdot\dd{\vb{s}}=-q\int_{A}^{B}\vb{E}\cdot\dd{\vb{s}}\]
+where the minus sign appears because we are calculating the work done on the charge against the action of the field. Using scalar potential,
+\[W_{AB}=q\int_{A}^{B}\nabla\phi\cdot\dd{\vb{s}}=q\int_{A}^{B}\dd{\phi}=q\brac{\phi_B-\phi_A}\]
+which shows that $q\phi$ can be interpreted as the potential energy of the test charge in the electrostatic field. Hence it can be seen that the line integral of the electric field between two points is independent of the path and is the negative of the potential difference between the points:
+\begin{equation}
+\int_{A}^{B}\vb{E}\cdot\dd{\vb{s}}=-\brac{\phi_B-\phi_A}.
+\end{equation}
+
+
+
+\subsection{Surface Distribution of Charges and Dipoles}
+\subsection{Electrostatic Potential Energy}
+
+
+
+\section{Magnetostatics}
+\subsection{Electric Currents}
+So far we have been dealing with stationary charges. In this subsection we consider how to describe charges in motion.
+
+To describe the movement of charge from one place to another, consider the \vocab{current density} $\vb{J}(\vb{x},t)$, defined as current per unit area. The current, which counts the charge per unit time passing through a surface $S$, is thus
+\[I=\iint_S\vb{J}\cdot\dd{\vb{S}}\]
+where $\dd{\vb{S}}$ is the unit normal to $S$.
+
+The above is a rather indirect definition of the current density. To get a more intuitive picture, consider a continuous charge distribution in which the velocity of a small volume, at point $\vb{x}$, is given by $\vb{v}(\vb{x},t)$. Then the current density is
+\[\vb{J}=\rho\vb{v}.\]
+
+As a simple example, consider charged particles moving along a wire, modelled as a long cylinder of cross-sectional area $A$. The electrons move with velocity $\vb{v}$, parallel to the axis of the wire. If there are $n$ electrons per unit volume, each with charge $q$, then the charge density is $\rho=nq$ and the current density is $\vb{J}=nq\vb{v}$. The current itself is $I=|\vb{J}|A$.
+
+\subsection{Continuity Equation}
+\begin{law}[Conservation of charge]
+Total charge in a system remains constant.
+\end{law}
+
+The property of local conservation means that $\rho$ can change in time only if there is a compensating current flowing into or out of that region. We express this in the continuity equation:
+\begin{equation}
+\pdv{\rho}{t}+\nabla\cdot\vb{J}=0.
+\end{equation}
+
+To see why the continuity equation captures the right physics, consider the change in the total charge $Q$ contained in some region $V$:
+\[\dv{Q}{t}=\iiint_V \dd{V^\prime}\:\pdv{\rho}{t}=-\iiint_V\dd{V^\prime}\:\nabla\cdot\vb{J}=-\iint_S\vb{J}\cdot\dd{\vb{S}}\]
+
+From our previous discussion, $\iint_S\vb{J}\cdot\dd{\vb{S}}$ is the total current flowing out through the boundary $S$ of the region $V$. (It is the total charge flowing out, rather than in, because $\dd{\vb{S}}$ is the outward normal to the region $V$). The minus sign is there to ensure that if the net flow of current is outwards, then the total charge decreases.
+
+If there is no current flowing out of the region, then $\dv{Q}{t}=0$. This is the statement of (global) conservation of charge. In many applications we will take $V$ to be all of space, $\RR^3$, with both charges and currents localised in some compact region. This ensures that the total charge remains constant.
+
+\subsection{Lorentz Force and the Magnetic Field}
+\subsection{Biot-Savart Law}
+\subsection{Magnetic Monopoles?}
+\subsection{Amp\`{e}re's Law}
+\subsection{Magnetostatic Vector Potential}
+\subsection{Multipole Expansion}

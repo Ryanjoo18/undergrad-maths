@@ -3,8 +3,9 @@
 \usepackage{soul,xcolor}
 \definecolor{darkblue}{rgb}{0.0, 0.0, 0.65}
 
-\usepackage{amsmath,amssymb}
-\usepackage[integrals]{wasysym}
+\usepackage{amsmath,amssymb,amsthm}
+%\usepackage[integrals]{wasysym}
+\usepackage{esint}
 %Define some macros
 \newcommand{\cbrt}[1]{\sqrt[3]{#1}}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
@@ -14,16 +15,17 @@
 \newcommand{\sqbrac}[1]{\left[#1\right]}
 \newcommand{\absolute}[1]{\left|#1\right|}
 \newcommand{\crbrac}[1]{\left\{#1\right\}}
-\providecommand{\arc}[1]{\wideparen{#1}}
-\newcommand{\vocab}[1]{{%\sffamily
-\color{darkblue}\bfseries\textit{#1}}}
+\newcommand{\angbrac}[1]{\left\langle#1\right\rangle}
+\newcommand{\vocab}[1]{{\color{darkblue}\bfseries\textit{#1}}}
 \renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
 \newcommand{\unit}[1]{\,\mathrm{#1}}
 \newcommand{\degC}{^\circ{\mathrm C}}
 \newcommand{\tab}{\hspace{0.5cm}}
 \newcommand{\per}[2]{^{#1}\mathrm{P}_{#2}}
 \newcommand{\com}[2]{^{#1}\mathrm{C}_{#2}}
 \newcommand{\leg}[2]{\brac{\dfrac{#1}{#2}}}
+\newcommand{\proj}[2]{\mathrm{proj}_{#1}\brac{{#2}}}
 
 %More commands and math operators
 \DeclareMathOperator{\cis}{cis}
@@ -52,8 +54,7 @@
 \DeclareMathOperator{\Ann}{Ann}
 \DeclareMathOperator{\Row}{Row}
 \DeclareMathOperator{\Col}{Col}
-\renewcommand{\le}{\leqslant}
-\renewcommand{\ge}{\geqslant}
+\DeclareMathOperator{\Int}{Int}
 
 %Inequalities
 \newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
@@ -61,31 +62,19 @@
 \newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
 \newcommand{\symprod}{\prod_{\mathrm{sym}}}
 
-%Convenient Environments
-\usepackage{amsthm}
-%\renewenvironment{proof}{{\bfseries Proof. }}{\qed}
-\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
-%\newenvironment{solution}{{\bfseries Solution. } }{\qed}
-%\newenvironment{notation}{{\bfseries Notation. }}{}
-%\newenvironment{derivation}{{\bfseries Derivation. }}{\qed}
-
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\newtheorem*{notation}{Notation}
-
 %Letters
 \newcommand{\BB}{\mathbf B}
-\newcommand{\CC}{\mathbf C}
+\newcommand{\CC}{\mathbb C}
 \newcommand{\DD}{\mathbf D}
 \newcommand{\EE}{\mathbf E}
 \newcommand{\FF}{\mathbf F}
 \newcommand{\KK}{\mathbf K}
-\newcommand{\NN}{\mathbf N}
+\newcommand{\NN}{\mathbb N}
 \newcommand{\PP}{\mathbf P}
-\newcommand{\QQ}{\mathbf Q}
-\newcommand{\RR}{\mathbf R}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\RR}{\mathbb R}
 \newcommand{\SSS}{\mathbf S}
-\newcommand{\ZZ}{\mathbf Z}
+\newcommand{\ZZ}{\mathbb Z}
 
 %Asymptote setup
 \usepackage{asymptote}
@@ -141,27 +130,18 @@ breaklines=true
 
 \lstset{style=mystyle}
 
-
-% Side captions
-\usepackage[rightcaption]{sidecap}
-
-% Wrap figures
-\usepackage{wrapfig}
-
-%\usepackage{MnSymbol} % Additional symbols
-
 % Customise lists (such as itemize, enumerate, description)
 \usepackage{enumerate}
 \usepackage{enumitem}
 
 % Create colored boxes for theorems, examples, etc.
-\usepackage[most,listings]{tcolorbox}
+\usepackage[most,listings,many]{tcolorbox}
 
 
 \usepackage{hyperref} % Hyperlink setup
 \hypersetup{
     colorlinks,
-    citecolor=darkblue,
+    citecolor=ForestGreen,
     filecolor=black,
     linkcolor=darkblue,
     urlcolor=darkblue,
@@ -174,7 +154,6 @@ breaklines=true
 
 \usepackage{setspace}
 \usepackage{array,tabularray,multirow,multicol,longtable,booktabs} % Tables
-
 
 \usepackage{physics} % Physics symbols and notation
 \usepackage{derivative} % Derivative notation
@@ -195,12 +174,9 @@ breaklines=true
 % Tools for writing packages
 \usepackage{etoolbox}
 
-
 \usepackage[bottom]{footmisc} % Bottom footnotes
 
-
 \usepackage[acronym]{glossaries} % Acronyms
-
 
 \usepackage{pdfpages} % Include PDF pages
 
@@ -213,74 +189,21 @@ breaklines=true
 \usepackage[version=4]{mhchem} % Chemistry
 \usepackage{plimsoll} % Chemistry
 
-
-
+%Theorem setup
 \usepackage{thmtools}
 \usepackage[framemethod=TikZ]{mdframed}
 \usetikzlibrary{shadows}
 
-\mdfdefinestyle{mdbluebox}{%
-    skipabove=12pt,
-    linewidth=3pt,
-    rightline=false,
-    leftline=true,
-    topline=false,
-    bottomline=false,
-    linecolor=blue,
-    backgroundcolor=TealBlue!5,
-    innerbottommargin=9pt,
-    skipbelow=2pt,
-    nobreak=true,
-}
-\declaretheoremstyle[
-    headfont=\sffamily\bfseries\color{MidnightBlue},
-    mdframed={style=mdbluebox},
-    headpunct={\\[3pt]},
-    postheadspace={0pt}
-]{thmbluebox}
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
 
-\mdfdefinestyle{mdgreenbox}{%
-    skipabove=12pt,
-    linewidth=3pt,
-    rightline=false,
-    leftline=true,
-    topline=false,
-    bottomline=false,
-    linecolor=ForestGreen,
-    backgroundcolor=ForestGreen!5,
-    innerbottommargin=9pt,
-    skipbelow=2pt,
-    nobreak=true,
-}
-\declaretheoremstyle[
-    headfont=%\sffamily
-    \bfseries\color{ForestGreen!70!black},
-    mdframed={style=mdgreenbox},
-    headpunct={\\[3pt]},
-    postheadspace={0pt},
-]{thmgreenbox}
-
-\mdfdefinestyle{mdblackbox}{%
-    skipabove=8pt,
-    linewidth=3pt,
-    rightline=false,
-    leftline=true,
-    topline=false,
-    bottomline=false,
-    linecolor=black,
-    backgroundcolor=RedViolet!5!gray!5,
-}
-\declaretheoremstyle[
-    headfont=\bfseries,
-    headpunct={\\[3pt]},
-    postheadspace={0pt},
-    mdframed={style=mdblackbox}
-]{thmblackbox}
-
-%Theorem setup
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[chapter]
 \newtheorem*{definition*}{Definition}
+\newtheorem*{claim}{Claim}
+\newtheorem{exercise}{Exercise}[chapter]
+\newtheorem{example}[definition]{Example}
+
+\theoremstyle{plain}
 \newtheorem{theorem}[definition]{Theorem}
 \newtheorem*{theorem*}{Theorem}
 \newtheorem{lemma}[definition]{Lemma}
@@ -289,39 +212,54 @@ breaklines=true
 \newtheorem*{proposition*}{Proposition}
 \newtheorem{corollary}[definition]{Corollary}
 \newtheorem*{corollary*}{Corollary}
-\newtheorem*{claim}{Claim}
-\newtheorem{prbm}{Problem}[chapter]
+\newtheorem{law}[definition]{Law}
 
-%\declaretheorem[style=thmbluebox,name=Theorem,numberwithin=chapter]{theorem}
-%\declaretheorem[style=thmredbox,name=Definition,sibling=theorem]{definition}
-%\declaretheorem[style=thmpurplebox,name=Lemma,sibling=theorem]{lemma}
-%\declaretheorem[style=thmpurplebox,name=Proposition,sibling=theorem]{proposition}
-%\declaretheorem[style=thmpurplebox,name=Corollary,sibling=theorem]{corollary}
-%\declaretheorem[style=thmpurplebox,name=Assumption,sibling=theorem]{assume}
-%\declaretheorem[style=thmbluebox,name=Theorem,numbered=no]{theorem*}
-%\declaretheorem[style=thmredbox,name=Definition,numbered=no]{definition*}
-%\declaretheorem[style=thmpurplebox,name=Lemma,numbered=no]{lemma*}
-%\declaretheorem[style=thmpurplebox,name=Proposition,numbered=no]{proposition*}
-%\declaretheorem[style=thmpurplebox,name=Corollary,numbered=no]{corollary*}
-%\declaretheorem[style=thmpurplebox,name=Assumption,numbered=no]{assume*}
-\declaretheorem[style=thmblackbox,name=Example,numbered=no]{example}
-%\declaretheorem[style=thmblackbox,name=Example,numbered=no]{example*}
-\declaretheorem[style=thmgreenbox,name=Exercise,numbered=no]{exercise}
-  
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+\newtheorem*{idea}{Idea}
+\AtBeginEnvironment{idea}{\begingroup\color{gray}}
+\AtEndEnvironment{idea}{\endgroup}
+
+\tcolorboxenvironment{definition}{
+  enhanced jigsaw,colframe=darkblue,interior hidden,
+breakable,before skip=10pt,after skip=10pt
+}
+\tcolorboxenvironment{example}{
+  enhanced jigsaw,colframe=black,interior hidden,
+breakable,before skip=10pt,after skip=10pt
+}
+\tcolorboxenvironment{theorem}{
+  enhanced jigsaw,colframe=ForestGreen,interior hidden,
+breakable,before skip=10pt,after skip=10pt
+}
+\tcolorboxenvironment{lemma}{
+  enhanced jigsaw,colframe=ForestGreen,interior hidden,
+breakable,before skip=10pt,after skip=10pt
+}
+\tcolorboxenvironment{proposition}{
+  enhanced jigsaw,colframe=ForestGreen,interior hidden,
+breakable,before skip=10pt,after skip=10pt
+}
+\tcolorboxenvironment{corollary}{
+  enhanced jigsaw,colframe=ForestGreen,interior hidden,
+breakable,before skip=10pt,after skip=10pt
+}
+
 % Customise section headings
 \usepackage{titlesec}
 \definecolor{darkred}{rgb}{0.9, 0.0, 0.0}
 \usepackage[T1]{fontenc}
 \titleclass{\part}{top}
 \titleformat{\part}[display]
-  {\Huge\bfseries\centering}{{\color{darkred}\thepart}}{0pt}{}
+  {\Huge\bfseries\centering}{{\thepart}}{0pt}{}
 \titlespacing*{\part}{0pt}{20pt}{50pt}
-\titleformat{\chapter}[hang]{\fontsize{60}{70}\bfseries}{{\color{darkred}\thechapter}\hspace{20pt}}{0pt}{\Huge\bfseries}
-\titlespacing*{\chapter}{0pt}{0pt}{0pt} % Spacing below chapter
-\titleformat{\section}{\LARGE\bfseries}{{\color{darkred}\S\thesection}}{1em}{}
-\titleformat{\subsection}{\Large\bfseries}{{\color{darkred}\S\thesubsection}}{1em}{\itshape}
+\titleformat{\chapter}[hang]{\fontsize{60}{70}\bfseries}{{\thechapter}}{15pt}{\Huge\bfseries}
+\titlespacing*{\chapter}{0pt}{0pt}{0pt}
+\titleformat{\section}{\LARGE\bfseries\itshape}{{\S\thesection}}{0.6em}{}
+\titleformat{\subsection}{\Large\bfseries}{{\S\thesubsection}}{1em}{\ul}
 \setcounter{secnumdepth}{1}
+\setcounter{tocdepth}{1}
 
 % Font
-\usepackage{tgpagella} % text only
-%\usepackage{mathpazo}  % math & text
+\usepackage{tgpagella}

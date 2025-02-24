@@ -1,9 +1,9 @@
 \chapter{Mathematical Reasoning and Logic}\label{chap:logic-proofs}
 
-\begin{learn}
-\item introduce basic logic;
-\item introduce common methods of proof.
-\end{learn}
+\begin{summary}
+\item Basic logic.
+\item Common methods of proof.
+\end{summary}
 
 \section{Zeroth-order Logic}
 A \vocab{proposition} is a sentence which has exactly one truth value, i.e. it is either true or false, but not both and not neither. A proposition is denoted by uppercase letters such as $P$ and $Q$. If the proposition $P$ depends on a variable $x$, it is sometimes helpful to denote it by $P(x)$. 
@@ -63,6 +63,7 @@ To prove $P \implies Q$, start by assuming that $P$ holds and try to deduce thro
 $P \iff Q$ is true exactly when $P$ and $Q$ have the same truth value.
 
 These statements are usually best thought of separately as ``if'' and ``only if'' statements. To prove $P \iff Q$, prove the statement in both directions, i.e. prove both $P \implies Q$ and $Q \implies P$. Remember to make very clear, both to yourself and in your written proof, which direction you are doing.
+\pagebreak
 
 \section{First-order Logic}
 The \vocab{universal quantifier} is denoted by $\forall$, which means ``for all'' or ``for every''. A \emph{universal statement} takes the form $\forall x\in X, P(x)$.
@@ -73,33 +74,6 @@ The \vocab{existential quantifier} is denoted by $\exists$, which means ``there 
 \[ \lnot \forall x\in X,P(x) \iff \exists x\in X,\lnot P(x) \]
 \[ \lnot \exists x\in X,P(x) \iff \forall x\in X,\lnot P(x) \]
 \end{proposition}
-
-\begin{exercise}
-Negate the statement
-\[ \text{for all real numbers } x, \text{ if } x>2, \text{ then } x^2>4 \]
-\end{exercise}
-\begin{solution}
-In logical notation, this statement is $(\forall x \in \RR)[x>2 \implies x^2>4]$.
-\begin{align*}
-\lnot\{(\forall x \in \RR)[x>2 \implies x^2>4]\} 
-&\iff (\exists x \in \RR) \lnot[x>2 \implies x^2>4] \\
-&\iff (\exists x \in \RR) \lnot [(x\le2) \lor (x^2>4)] \\
-&\iff (\exists x \in \RR) [(x>2) \land (x^2\le4)]
-\end{align*}
-\end{solution}
-
-\begin{exercise}
-Negate surjectivity.
-\end{exercise}
-\begin{solution}
-If $f:X\to Y$ is not surjective, then it means that there exists $y \in Y$ not in the image of $X$, i.e. for all $x$ in $X$ we have $f(x)\neq y$.
-\begin{align*}
-\lnot \forall y \in Y, \exists x \in X, f(x)=y 
-&\iff \exists y \in Y, \lnot (\exists x \in X, f(x)=y) \\
-&\iff \exists y \in Y, \forall x \in X, \lnot (f(x)=y) \\
-&\iff \exists y \in Y, \forall x \in X, f(x) \neq y
-\end{align*}
-\end{solution}
 
 To prove a statement of the form $\forall x \in X \suchthat P(x)$, start the proof with ``Let $x \in X$.'' or ``Suppose $x \in X$ is given.'' to address the quantifier with an arbitrary $x$; provided no other assumptions about $x$ are made during the course of proving $P(x)$, this will prove the statement for all $x \in X$. 
 
@@ -124,12 +98,11 @@ A \vocab{disproof by counterexample} is to providing a counterexample in order t
 A \vocab{proof by cases} is to first dividing the situation into cases which exhaust all the possibilities, and then show that the statement follows in all cases.
 
 \subsection{Proof by Contradiction}
-A \vocab{proof by contradiction} of $P$ involves first supposing $P$ is false, i.e. $\lnot P$; to prove $P \implies Q$ by contradiction, suppose $P\land\lnot Q$. Then show through some logical reasoning that this leads to a contradiction or inconsistency. We may arrive at something that contradicts the hypothesis $P$, or something that contradicts the initial supposition that $Q$ is not true, or we may arrive at something that we know to be universally false.
+A \vocab{proof by contradiction} of $P$ involves first supposing $P$ is false, i.e. $\lnot P$ (to prove $P \implies Q$ by contradiction, suppose $P\land\lnot Q$). Then show through some logical reasoning that this leads to a contradiction or inconsistency. We may arrive at something that contradicts the hypothesis $P$, or something that contradicts the initial supposition that $Q$ is not true, or we may arrive at something that we know to be universally false.
 
-\begin{exercise}[Irrationality of $\sqrt{2}$]
+\begin{example}[Irrationality of $\sqrt{2}$]
 Prove that $\sqrt{2}$ is irrational.
-\end{exercise}
-\begin{solution}
+\begin{proof}
 We prove by contradiction. Suppose otherwise, that $\sqrt{2}$ is rational. Then $\sqrt{2}=\dfrac{a}{b}$ for some $a,b\in\ZZ,b\neq 0$, $a,b$ coprime.
 
 Squaring both sides gives
@@ -137,24 +110,23 @@ Squaring both sides gives
 Since RHS is even, LHS must also be even. Hence it follows that $a$ is even. Let $a=2k$ where $k\in\ZZ$. Substituting $a = 2k$ into the above equation and simplifying it gives us
 \[b^2=2k^2.\]
 This means that $b^2$ is even, from which follows again that $b$ is even. This contradicts the assumption that $a$ and $b$ coprime, so we are done.
-\end{solution}
+\end{proof}
+\end{example}
 
-\begin{exercise}[Euclid]
+\begin{example}[Euclid]
 Prove that there are infinitely many prime numbers.
-\end{exercise}
 
-\begin{solution}
+\begin{proof}
 Suppose otherwise, that only finitely many prime numbers exist. List them as $p_1,\dots,p_n$. The number $N=p_1p_2\cdots p_n+1$ is divisible by a prime $p$, yet is coprime to $p_1,\dots,p_n$. Therefore, $p$ does not belong to our list of all prime numbers, a contradiction.
-\end{solution}
-
-To \vocab{prove uniqueness}, we can either assume $\exists x,y \in S$ such that $P(x) \land P(y)$ is true and show $x=y$, or argue by assuming that $\exists x,y \in S$ are distinct such that $P(x) \land P(y)$, then derive a contradiction. $\exists!$ denotes ``there exists a unique''. To prove uniqueness and existence, we also need to show that $\exists x \in S \suchthat P(x)$ is true.
+\end{proof}
+\end{example}
 
 \subsection{Proof of Existence}
 To prove existential statements, we can adopt two approaches:
 \begin{enumerate}
-\item Constructive proof (direct proof)
+\item \vocab{Constructive proof} (direct proof)
 
-To prove statements of the form $\exists x\in X \suchthat P(x)$, find or construct \vocab{a specific example} for $x$. To prove statements of the form $\forall y\in Y,\:\exists x\in X\suchthat P(x,y)$, construct example for $x$ in terms of $y$ (since $x$ is dependent on $y$).
+To prove statements of the form $\exists x\in X \suchthat P(x)$, find or construct \emph{a specific example} for $x$. To prove statements of the form $\forall y\in Y,\:\exists x\in X\suchthat P(x,y)$, construct example for $x$ in terms of $y$ (since $x$ is dependent on $y$).
 
 In both cases, you have to justify that your example $x$
 \begin{enumerate}
@@ -162,7 +134,7 @@ In both cases, you have to justify that your example $x$
 \item satisfies the condition $P$.
 \end{enumerate}
 
-\item Non-constructive proof (indirect proof)
+\item \vocab{Non-constructive proof} (indirect proof)
 
 Use when specific examples are not easy or not possible to find or construct.
 Make arguments why such objects have to exist.
@@ -170,42 +142,42 @@ May need to use proof by contradiction.
 Use definition, axioms or results that involve existential statements.
 \end{enumerate}
 
-\begin{exercise}
+To \vocab{prove uniqueness}, we can either assume $\exists x,y \in S$ such that $P(x) \land P(y)$ is true and show $x=y$, or argue by assuming that $\exists x,y \in S$ are distinct such that $P(x) \land P(y)$, then derive a contradiction. $\exists!$ denotes ``there exists a unique''. To prove uniqueness and existence, we also need to show that $\exists x \in S \suchthat P(x)$ is true.
+
+\begin{example}
 Prove that we can find $100$ consecutive positive integers which are all composite numbers.
-\end{exercise}
 
 \begin{proof}
-We can prove this existential statement via constructive proof.
-
-Our goal is to find integers $n,n+1,n+2,\dots,n+99$, all of which are composite.
-
-Take $n=101!+2$. Then $n$ has a factor of $2$ and hence is composite. Similarly, $n+k=101!+(k+2)$ has a factor $k+2$ and hence is composite for $k=1,2,\dots,99$.
+We proceed by constructive proof; we will construct integers $n,n+1,n+2,\dots,n+99$, all of which are composite.
+\begin{claim}
+$n=101!+2$.
+\end{claim}
+Then $n$ has a factor of $2$ and hence is composite. Similarly, $n+k=101!+(k+2)$ has a factor $k+2$ and hence is composite for $k=1,2,\dots,99$.
 
 Hence the existential statement is proven.
 \end{proof}
+\end{example}
 
-\begin{exercise}
-Prove that for all rational numbers $p$ and $q$ with $p<q$, there is a rational number $x$ such that $p<x<q$.
-\end{exercise}
+\begin{example}
+Prove that for all $p,q\in\QQ$ with $p<q$, there exists $x\in\QQ$ such that $p<x<q$.
 \begin{proof}
-We prove this by construction. Our goal is to find such a rational $x$ in terms of $p$ and $q$.
-
-We take the average. Let $x=\dfrac{p+q}{2}$ which is a rational number.
-
-Since $p<q$, 
-\[ x=\frac{p+q}{2}<\frac{q+q}{2}=q \implies x<q \]
+We prove by construction; we want to construct $x$ in terms of $p$ and $q$, which fulfils the required condition.
+\begin{claim}
+$x=\dfrac{p+q}{2}$.
+\end{claim}
+Evidently $x\in\QQ$. Since $p<q$, 
+\[x=\frac{p+q}{2}<\frac{q+q}{2}=q \implies x<q.\]
 Similarly,
-\[ x=\frac{p+q}{2}>\frac{p+p}{2}=p \implies p<x \]
-Hence we have shown the existence of rational number $x$ such that $p<x<q$.
+\[x=\frac{p+q}{2}>\frac{p+p}{2}=p \implies p<x.\]
 
 \begin{remark}
-For this type of question, there are two parts to prove: firstly, $x$ satisfies the given statement; secondly, $x$ is within the domain (for this question we do not have to prove $x$ is rational since $\QQ$ is closed under addition).
+There are two parts to prove: 1) $x$ satisfies the given statement 2) $x$ is within the domain (for this question we do not have to prove $x$ is rational since $\QQ$ is closed under addition).
 \end{remark}
 \end{proof}
+\end{example}
 
-\begin{exercise}
+\begin{example}
 Prove that for all rational numbers $p$ and $q$ with $p<q$, there is an irrational number $r$ such that $p<r<q$.
-\end{exercise}
 \begin{proof}
 We prove this by construction. Similarly, our goal is to find an irrational $r$ in terms of $p$ and $q$.
 
@@ -226,13 +198,14 @@ $\dfrac{q-p}{\sqrt{2}}<q-p$ so $r<p+(q-p)=q$.
 \item We prove by contradiction. Suppose $r$ is rational. We have $\sqrt{2}=\dfrac{q-p}{r-p}$. Since $p,q,r$ are all rational (and $r-p\neq0$), RHS is rational. This implies that LHS is rational, i.e.\ $\sqrt{2}$ is rational, which is a contradiction.
 \end{enumerate}
 \end{proof}
+\end{example}
 
-Non-constructive proof:
-\begin{exercise}
+\begin{example}
 Prove that every integer greater than $1$ is divisible by a prime.
-\end{exercise}
 
 \begin{proof}
+We proceed by a non-constructive proof.
+
 If $n$ is prime, then we are done as $n\mid n$.
 
 If $n$ is not prime, then $n$ is composite. So $n$ has a divisor $d_1$ such that $1<d_1<n$. If $d_1$ is prime then we are done as $d_1\mid n$. If $d_1$ is not prime then $d_1$ is composite, has divisor $d_2$ such that $1<d_2<n$.
@@ -245,26 +218,25 @@ where $d_i\mid n$ for all $i$.
 
 Since there can only be a finite number of $d_i$'s between $1$ and $n$, this process must stop after finite steps. On the other hand, the process will stop only if there is a $d_i$ which is a prime. Hence we conclude that there must be a divisor $d_i$ of $n$ that is prime.
 \end{proof}
+\end{example}
 
 \begin{remark}
 This proof is also known as \emph{proof by infinite descent}, a method which relies on the well-ordering principle on $\NN$.
 \end{remark}
 
-\begin{exercise}
+\begin{example}
 Prove that the equation $x^2+y^2=3z^2$ has no solutions $(x,y,z)$ in integers where $z\neq0$.
-\end{exercise}
 
 \begin{proof}
-Suppose we have a solution $(x,y,z)$. Without loss of generality, we may assume that $z>0$. By the least integer principle, we may also assume that our solution has $z$ minimal. Taking remainders modulo $3$, we see that
+Suppose $(x,y,z)$ is a solution. WLOG assume $z>0$. By the least integer principle, we may also assume that our solution has $z$ minimal. Taking remainders modulo $3$, we see that
 \[ x^2+y^2\equiv0\pmod3 \]
-Recalling that squares may only be congruent to $0$ or $1$ modulo $3$, we conclude that
-\[ x^2\equiv y^2\equiv 0 \implies x \equiv y \equiv 0 \pmod 3 \]
-Writing $x=3a$ and $y=3b$ we obtain
+Since perfect squares can only be congruent to $0$ or $1$ modulo $3$, we must have $x\equiv y\equiv 0\pmod 3$. Writing $x=3a$ and $y=3b$ for $a,b\in\ZZ$ gives
 \[ 9a^2+9b^2=3z^2 \implies 3(a^2+b^2)=z^2 \implies 3\mid z^2 \implies 3\mid z \]
 Now let $z=3c$ and cancel $3$'s to obtain
 \[ a^2+b^2=3c^2. \]
-We have therefore constructed another solution $(a,b,c)=\brac{\frac{x}{3},\frac{y}{3},\frac{z}{3}}$ to the original equation. However $0<c<z$ contradicts the minimality of $z$.
+We have therefore constructed another solution $(a,b,c)=\brac{\frac{x}{3},\frac{y}{3},\frac{z}{3}}$, but $0<c<z$ contradicts the minimality of $z$.
 \end{proof}
+\end{example}
 
 \subsection{Proof by Mathematical Induction}
 Induction is an extremely powerful method of proof used throughout mathematics. It deals with infinite families of statements which come in the form of lists. The idea behind induction is in showing how each statement follows from the previous one on the list---all that remains is to kick off this logical chain reaction from some starting point.
@@ -309,13 +281,14 @@ Then $P(n)$ is true for all $n\in\NN$.
 Apply the principle of induction to the set $S=\{n\in\NN\mid P(n)\text{ is true}\}$.
 \end{proof}
 
-\begin{exercise}
+We illustrate the application of this proving technique using a classical example.
+
+\begin{example}
 Prove that for any $n\in\NN$,
 \[\sum_{i=1}^n i=\frac{n(n+1)}{2}.\]
-\end{exercise}
 
 \begin{proof}
-We induct on $n$. Let $\displaystyle P(n):\sum_{i=1}^n i=\frac{n(n+1)}{2}$.
+Induct on $n$. Let $\displaystyle P(n):\sum_{i=1}^n i=\frac{n(n+1)}{2}$.
 
 Clearly $P(1)$ holds. Now suppose $P(k)$ holds for some $k\in\NN$, $k\ge1$; that is,
 \[\sum_{i=1}^k i=\frac{k(k+1)}{2}.\]
@@ -327,14 +300,14 @@ Adding $k+1$ to both sides,
 \end{align*}
 thus $P(k+1)$ is true. Hence by induction, the result holds.
 \end{proof}
+\end{example}
 
-\begin{exercise}[Bernoulli's inequality]
+\begin{example}[Bernoulli's inequality]
 Let $x\in\RR$, $x>-1$. Then for all $n\in\NN$,
 \[(1+x)^n\ge1+nx.\]
-\end{exercise}
 
 \begin{proof}
-We prove by induction on $n$. Fix $x>-1$. Let $P(n):(1+x)^n\ge1+nx$.
+Induct on $n$. Fix $x>-1$. Let $P(n):(1+x)^n\ge1+nx$.
 
 The base case $P(1)$ is clear. Suppose that $P(k)$ is true for some $k\in\ZZ^+$, $k\ge1$. That is, $(1+x)^k\ge1+kx$. Note that $1+x>0$, and $kx^2\ge0$ (since $k>0$ and $x^2\ge0$). Then
 \begin{align*}
@@ -345,6 +318,7 @@ The base case $P(1)$ is clear. Suppose that $P(k)$ is true for some $k\in\ZZ^+$,
 \end{align*}
 so $P(k+1)$ is true. Hence by induction, the result holds.
 \end{proof}
+\end{example}
 
 A corollary of induction is if the family of statements holds for $n\ge N$, rather than necessarily $n\ge0$:
 
@@ -376,9 +350,8 @@ Then $P(n)$ is true for all $n\in\NN$.
 Let $Q(n)$ be the statement ``$P(k)$ holds for $k=1,\dots,n$''. Then the conditions for the strong form are equivalent to (i) $Q(1)$ holds and (ii) for $n\in\NN$, $Q(n)\implies Q(n+1)$. By \cref{thrm:pmi}, $Q(n)$ holds for all $n\in\NN$, and hence $P(n)$ holds for all $n$.
 \end{proof}
 
-\begin{exercise}[Fundamental theorem of arithmetic]
+\begin{example}[Fundamental theorem of arithmetic]
 Prove that every natural number greater than $1$ may be expressed as a product of one or more prime numbers.
-\end{exercise}
 
 \begin{proof}
 Let $P(n)$ be the statement that $n$ may be expressed as a product of prime numbers. 
@@ -393,6 +366,7 @@ Clearly $P(2)$ holds, since $2$ is itself prime. Let $n\ge 2$ be a natural numbe
 
 In both cases, $P(n)$ holds. Hence by strong induction, $P(n)$ is true for all $n\in\NN$.
 \end{proof}
+\end{example}
 
 The following is also another variant on induction.
 
@@ -405,10 +379,9 @@ Let $P(n)$ be a family of statements indexed by $\NN_{\ge2}$. Suppose that
 Then $P(n)$ is true for all $n\in\NN_{\ge2}$.
 \end{theorem}
 
-\begin{exercise}[AM--GM inequality]
+\begin{example}[AM--GM inequality]
 Given $n\in\NN$, prove that for positive reals $a_1,a_2,\dots,a_n$,
 \[\frac{a_1+a_2+\cdots+a_n}{n}\ge\sqrt[n]{a_1a_2\cdots a_n}.\]
-\end{exercise}
 
 \begin{proof}
 Let $\displaystyle P(n):\frac{a_1+a_2+\cdots+a_n}{n}\ge\sqrt[n]{a_1a_2\cdots a_n}$.
@@ -422,42 +395,81 @@ The first inequality follows from $n$-variable AM--GM, which is true by assumpti
 Finally we show that $P(n)\implies P(n-1)$. By $n$-variable AM--GM, $\frac{a_1+a_2+\cdots+a_n}{n}\ge\sqrt[n]{a_1a_2\cdots a_n}$ Let $a_n=\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}$ Then we have\[\frac{a_1+a_2+\cdots+a_{n-1}+\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}}{n}=\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\]So,\[\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\ge\sqrt[n]{a_1a_2\cdots a_{n-1}\cdot \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}}\]\[\Rightarrow\left(\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\right)^n\ge a_1a_2\cdots a_{n-1}\cdot \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\]\[\Rightarrow\left(\frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\right)^{n-1}\ge a_1a_2\cdots a_{n-1}\]\[\Rightarrow \frac{a_1+a_2+\cdots+a_{n-1}}{n-1}\ge\sqrt[n-1]{a_1a_2\cdots a_{n-1}}\]
 By Cauchy induction, this proves the AM--GM inequality for $n$ variables.
 \end{proof}
+\end{example}
 
 \subsection{Pigeonhole Principle}
 \begin{theorem}[Pigeonhole principle]
 If $kn+1$ objects are distributed among $n$ boxes, one of the boxes will contain at least $k+1$ objects.
 \end{theorem}
 
-\begin{exercise}[IMO 1972]
-Prove that every set of 10 two-digit integer numbers has two disjoint subsets with the same sum of elements.
-\end{exercise}
+\begin{example}[IMO 1972]
+Prove that every set of $10$ two-digit integer numbers has two disjoint subsets with the same sum of elements.
 
-\begin{solution}
+\begin{proof}
 Let $S$ be the set of $10$ numbers. It has $2^{10}-2=1022$ subsets that differ from both $S$ and the empty set. They are the ``pigeons''.
 
 If $A\subset S$, the sum of elements of $A$ cannot exceed $91+92+\cdots+99=855$. The numbers between 1 and 855, which are all possible sums, are the ``holes''.
 
 Because the number of ``pigeons'' exceeds the number of ``holes'', there will be two ``pigeons'' in the same ``hole''. Specifically, there will be two subsets with the same sum of elements. Deleting the common elements, we obtain two disjoint sets with the same sum of elements.
-\end{solution}
+\end{proof}
+\end{example}
 
-\begin{exercise}[Putnam 2006]
+\begin{example}[Putnam 2006]
 Prove that for every set $X=\{x_1,x_2,\dots,x_n\}$ of $n$ real numbers, there exists a nonempty subset $S$ of $X$ and an integer $m$ such that
 \[\absolute{m+\sum_{x\in S}s}\le\frac{1}{n+1}.\]
-\end{exercise}
 
-\begin{solution}
-Recall that the fractional part of a real number $x$ is $x-\floor{x}$. Let us look at the fractional parts of the numbers $x_1,x_1+x_2,\dots,x_1+x_2+\cdots+x_n$. If any of them is either in the interval $\sqbrac{0,\frac{1}{n+1}}$ or $\sqbrac{\frac{n}{n+1},1}$, then we are done. If not, we consider these $n$ numbers as the ``pigeons'' and the $n-1$ intervals $\sqbrac{\frac{1}{n+1},\frac{2}{n+1}},\sqbrac{\frac{2}{n+1},\frac{3}{n+1}},\dots,\sqbrac{\frac{n-1}{n+1},\frac{n}{n+1}}$ as the ``holes''. By the pigeonhole principle, two of these sums, say $x_1+x_2+\cdots+x_k$ and $x_1+x_2+\cdots+x_{k+m}$, belong to the same interval. But then their difference $x_{k+1}+\cdots+x_{k+m}$ lies within a distance of $\frac{1}{n+1}$ of an integer, and we are done.
-\end{solution}
+\begin{proof}
+Recall that the fractional part of a real number $x$ is $x-\floor{x}$. Consider the fractional parts of the numbers $x_1,x_1+x_2,\dots,x_1+x_2+\cdots+x_n$.
+\begin{itemize}
+\item If any of them is either in the interval $\sqbrac{0,\frac{1}{n+1}}$ or $\sqbrac{\frac{n}{n+1},1}$, then we are done.
+\item If not, consider these $n$ numbers as the ``pigeons'' and the $n-1$ intervals $\sqbrac{\frac{1}{n+1},\frac{2}{n+1}},\sqbrac{\frac{2}{n+1},\frac{3}{n+1}},\dots,\sqbrac{\frac{n-1}{n+1},\frac{n}{n+1}}$ as the ``holes''. By the pigeonhole principle, two of these sums, say $x_1+x_2+\cdots+x_k$ and $x_1+x_2+\cdots+x_{k+m}$, belong to the same interval. But then their difference $x_{k+1}+\cdots+x_{k+m}$ lies within a distance of $\frac{1}{n+1}$ of an integer, and we are done.
+
+\end{itemize}
+\end{proof}
+\end{example}
+
+
 \pagebreak
 
 \section*{Exercises}
-\begin{prbm}
+\addcontentsline{toc}{section}{Exercises}
+
+\begin{exercise}
+Negate the statement
+\[ \text{for all real numbers } x, \text{ if } x>2, \text{ then } x^2>4 \]
+\end{exercise}
+
+\begin{solution}
+In logical notation, this statement is $(\forall x \in \RR)[x>2 \implies x^2>4]$.
+\begin{align*}
+\lnot\{(\forall x \in \RR)[x>2 \implies x^2>4]\} 
+&\iff (\exists x \in \RR) \lnot[x>2 \implies x^2>4] \\
+&\iff (\exists x \in \RR) \lnot [(x\le2) \lor (x^2>4)] \\
+&\iff (\exists x \in \RR) [(x>2) \land (x^2\le4)]
+\end{align*}
+\end{solution}
+
+\begin{exercise}
+Negate surjectivity.
+\end{exercise}
+
+\begin{solution}
+If $f:X\to Y$ is not surjective, then it means that there exists $y \in Y$ not in the image of $X$, i.e. for all $x$ in $X$ we have $f(x)\neq y$.
+\begin{align*}
+\lnot \forall y \in Y, \exists x \in X, f(x)=y 
+&\iff \exists y \in Y, \lnot (\exists x \in X, f(x)=y) \\
+&\iff \exists y \in Y, \forall x \in X, \lnot (f(x)=y) \\
+&\iff \exists y \in Y, \forall x \in X, f(x) \neq y
+\end{align*}
+\end{solution}
+
+\begin{exercise}
 Use the Unique Factorisation Theorem to prove that, if a positive integer $n$ is not a perfect square, then $\sqrt{n}$ is irrational.
 
 [The Unique Factorisation Theorem states that every integer $n>1$ has a unique standard factored form, i.e. there is exactly one way to express $n=p_1^{k_1}p_2^{k_2}\cdots p_t^{k_t}$ where $p_1<p_2<\cdots<p_t$ are distinct primes and $k_1,k_2,\dots,k_t$ are some positive integers.]
-\end{prbm}
+\end{exercise}
 
-\begin{proof}
+\begin{solution}
 Prove by contradiction. Suppose $n$ is not a perfect square and $\sqrt{n}$ is rational. Then $\sqrt{n}=\frac{a}{b}$ for some $a,b\in\ZZ$. Squaring both sides and clearing denominator gives 
 \begin{equation*}\tag{$\ast$}
 nb^2=a^2.
@@ -476,25 +488,25 @@ If $p_i\nmid b$, then $k_i=2c_i$ which is even. If $p_i\mid b$, then $p_i$ will 
 Hence $n=p_1^{k_1}p_2^{k_2}\cdots p_t^{k_t}=\brac{p_1^{\frac{k_1}{2}}p_2^{\frac{k_2}{2}}\cdots p_t^{\frac{k_t}{2}}}^2$.
 
 Since $\frac{k_i}{2}$ are all integers, $p_1^{\frac{k_1}{2}}p_2^{\frac{k_2}{2}}\cdots p_t^{\frac{k_t}{2}}$ is an integer and $n$ is a perfect square. This contradicts the given hypothesis that $n$ is not a perfect square.
-\end{proof}
+\end{solution}
 
-\begin{prbm}
+\begin{exercise}
 Prove that for every pair of irrational numbers $p$ and $q$ such that $p<q$, there is an irrational $x$ such that $p<x<q$.
-\end{prbm}
+\end{exercise}
 
-\begin{proof}
-Consider the average of $p$ and $q$: $p<\dfrac{p+q}{2}<q$.
+\begin{solution}
+Consider the average of $p$ and $q$. Evidently $p<\dfrac{p+q}{2}<q$.
+\begin{itemize}
+\item If $\dfrac{p+q}{2}$ is irrational, take $x=\dfrac{p+q}{2}$ and we are done.
+\item If $\dfrac{p+q}{2}$ is rational, call it $r$, take the average of $p$ and $r$: $p<\dfrac{p+r}{2}<r<q$. Since $p$ is irrational and $r$ is rational, $\dfrac{p+r}{2}$ is irrational. In this case, we take $x=\dfrac{3p+q}{4}$.
+\end{itemize}
+\end{solution}
 
-If $\dfrac{p+q}{2}$ is irrational, take $x=\dfrac{p+q}{2}$ and we are done.
+\begin{exercise}
+Given $n$ real numbers $a_1,a_2,\dots,a_n$. Show that there exists an $a_i$ ($1\le i\le n$) such that $a_i$ is greater than or equal to the mean of the $n$ numbers.
+\end{exercise}
 
-If $\dfrac{p+q}{2}$ is rational, call it $r$, take the average of $p$ and $r$: $p<\dfrac{p+r}{2}<r<q$. Since $p$ is irrational and $r$ is rational, $\dfrac{p+r}{2}$ is irrational. In this case, we take $x=\dfrac{3p+q}{4}$.
-\end{proof}
-
-\begin{prbm}
-Given $n$ real numbers $a_1,a_2,\dots,a_n$. Show that there exists an $a_i$ ($1\le i\le n$) such that $a_i$ is greater than or equal to the mean (average) value of the $n$ numbers.
-\end{prbm}
-
-\begin{proof}
+\begin{solution}
 Prove by contradiction.
 
 Let $\bar{a}$ denote the mean value of the $n$ given numbers. Suppose $a_i<\bar{a}$ for all $a_i$. Then
@@ -502,17 +514,17 @@ Let $\bar{a}$ denote the mean value of the $n$ given numbers. Suppose $a_i<\bar{
 We derive $\bar{a}<\bar{a}$, which is a contradiction.
 
 Hence there must be some $a_i$ such that $a_i>\bar{a}$.
-\end{proof}
+\end{solution}
 
-\begin{prbm}
+\begin{exercise}
 Prove that the following statement is false: there is an irrational number $a$ such that for all irrational number $b$, $ab$ is rational.
-\end{prbm}
+\end{exercise}
 
-\textbf{Thought process:} prove the negation of the statement: for every irrational number $a$, there is an irrational number $b$ such that $ab$ is irrational.
+\begin{idea}
+Prove the negation of the statement: for every irrational number $a$, there is an irrational number $b$ such that $ab$ is irrational. We shall adopt a constructive proof (note that we can consider multiple cases and construct more than one $b$).
+\end{idea}
 
-\textbf{Proving technique:} constructive proof (note that we can consider multiple cases and construct more than one $b$)
-
-\begin{proof}
+\begin{solution}
 Given an irrational number $a$, let us consider $\dfrac{\sqrt{2}}{a}$.
 
 \textbf{Case 1:} $\dfrac{\sqrt{2}}{a}$ is irrational.
@@ -522,13 +534,13 @@ Take $b=\dfrac{\sqrt{2}}{a}$. Then $ab=\sqrt{2}$ which is irrational.
 \textbf{Case 2:} $\dfrac{\sqrt{2}}{a}$ is rational.
 
 Then the reciprocal $\dfrac{a}{\sqrt{2}}$. Since $\sqrt{6}$ is irrational, the product $\brac{\dfrac{a}{\sqrt{2}}}\sqrt{6}=a\sqrt{3}$ is irrational. Take $b=\sqrt{3}$, which is irrational. Then $ab=a\sqrt{3}$ which is irrational.
-\end{proof}
+\end{solution}
 
-\begin{prbm}
+\begin{exercise}
 Prove that there are infinitely many prime numbers that are congruent to $3$ modulo $4$.
-\end{prbm}
+\end{exercise}
 
-\begin{proof}
+\begin{solution}
 Prove by contradiction.
 
 Suppose there are only finitely many primes that are congruent to $3$ modulo $4$. Let $p_1,p_2,\dots,p_m$ be the list of all the primes that are congruent to $3$ modulo $4$.
@@ -552,13 +564,13 @@ By (iii), $q_j$ cannot be any of the $p_i$. So all $q_j$ must be congruent to $1
 This contradicts (i) that $M$ is congruent to $3$ modulo $4$.
 
 Hence we conclude that there must be infinitely many primes that are congruent to $3$ modulo $4$.
-\end{proof}
+\end{solution}
 
-\begin{prbm}
+\begin{exercise}
 Prove that, for any positive integer $n$, there is a perfect square $m^2$ ($m$ is an integer) such that $n\le m^2\le 2n$.
-\end{prbm}
+\end{exercise}
 
-\begin{proof}
+\begin{solution}
 Prove by contradiction.
 
 Suppose otherwise, that $n>m^2$ and $(m+1)^2>2n$ so that there is no square between $n$ and $2n$, then
@@ -568,14 +580,14 @@ Since we are dealing with integers and the inequalities are strict, we get
 which simplifies to
 \[ 0\ge m^2-2m+1=(m-1)^2 \]
 The only value for which this is possible is $m=1$, but you can eliminate that easily enough.
-\end{proof}
+\end{solution}
 
-\begin{prbm}
+\begin{exercise}
 Prove that for every positive integer $n\ge4$,
 \[ n!>2^n. \]
-\end{prbm}
+\end{exercise}
 
-\begin{proof}
+\begin{solution}
 Let $P(n):n!>2^n$
 
 For the base case $P(4)$, the LHS equals to $4!=4\times3\times2\times1=24$, and the RHS equals $2^4=16<24$. Since LHS equals RHS, $P(4)$ is true.
@@ -590,14 +602,14 @@ k!&>2^k \\
 thus $P(k+1)$ is true, so we have shown $P(k)\implies P(k+1)$ for all $k\in\NN_{\ge4}$.
 
 By PMI, we have proven $P(n)$ for all integers $n\ge4$.
-\end{proof}
+\end{solution}
 
-\begin{prbm}
+\begin{exercise}
 Prove by mathematical induction, for $n\ge2$,
 \[ \sqrt[n]{n}<2-\frac{1}{n}. \]
-\end{prbm}
+\end{exercise}
 
-\begin{proof}
+\begin{solution}
 Let $P(n):\sqrt[n]{n}<2 - \dfrac{1}{n}$ for $n \ge 2$.
 
 For the base case, when $n=2$, $\sqrt{2}=1.41\dots<2-\dfrac{1}{2}=1.5$ which is true. Hence $P(2)$ is true.
@@ -619,14 +631,14 @@ Since $k>2$, we have
 Hence $P(k+1)$ is true.
 
 Since $P(2)$ is true and $P(k)\implies P(k+1)$, by mathematical induction $P(n)$ is true.
-\end{proof}
+\end{solution}
 
-\begin{prbm}
+\begin{exercise}
 Prove that for all integers $n \ge 3$, 
 \[ \brac{1+\frac{1}{n}}^n<n \]
-\end{prbm}
+\end{exercise}
 
-\begin{proof}
+\begin{solution}
 For the base case $P(3)$, $\brac{1+\dfrac{1}{3}}^3=\dfrac{64}{27}=2\dfrac{10}{27}<3$. Hence $P(3)$ is true.
 
 Assume that $P(k)$ is true for some $k\in\NN_{\ge3}$; that is,
@@ -636,18 +648,18 @@ Multiplying both sides by $\brac{1+\dfrac{1}{k}}$ (to get a $k+1$ in the power),
 Since $k<k+1 \iff \dfrac{1}{k}>\dfrac{1}{k+1}$, 
 \[ \brac{1+\frac{1}{k}}^{k+1} > \brac{1+\frac{1}{k+1}}^{k+1} \]
 The rest of the proof follows easily.
-\end{proof}
+\end{solution}
 
 A sequence of integers $F_i$, where integer $1\le i\le n$, is called the \emph{Fibonacci sequence} if and only if it is defined recursively by $F_1=1$, $F_2=1$, $F_n=F_{n-1}+F_{n-2}$ for $n>2$.
 
-\begin{prbm}
+\begin{exercise}
 Let $(a_n)$ be a sequence of integers defined recursively by the initial conditions $a_1=1$, $a_2=1$, $a_3=3$ and the recurrence relation $a_n=a_{n-1}+a_{n-2}+a_{n-3}$ for $n>3$.
 
 For all $n\in\NN$, prove that
 \[ a_n\le2^{n-1}. \]
-\end{prbm}
+\end{exercise}
 
-\begin{proof}
+\begin{solution}
 Let $P(n):a_n\le2^{n-1}$.
 
 Given the recurrence relation, it could be possible to use $P(k),P(k+1),P(k+2)$ to prove $P(k+3)$ for all $k\in\NN$.
@@ -671,14 +683,14 @@ a_{k+3} &= a_k+a_{k+1}+a_{k+2} \quad \text{[start from recurrence relation]} \\
 &= 2^{k+3}
 \end{align*}
 which is precisely $P(k+3):a_{k+3}\le2^{k+3}$.
-\end{proof}
+\end{solution}
 
-\begin{prbm}
+\begin{exercise}
 For $m,n\in\NN$, prove that
 \[ F_{n+m+1}=F_nF_m+F_{n+1}F_{m+1}. \]
-\end{prbm}
+\end{exercise}
 
-\begin{proof}
+\begin{solution}
 We induct on $n$. Let $P(n):F_{n+m+1}=F_nF_m+F_{n+1}F_{m+1}$ for all $m\in\NN$ in the cases $k=n$ and $k=n+1$.
 
 To show that $P(0)$ is true, note that
@@ -702,4 +714,4 @@ F_{n+m+3}
 &=F_{n+2}F_m+F_{n+3}F_{m+1}
 \end{align*}
 thus $P(n+1)$ is true, for all $m\in\NN$.
-\end{proof}
+\end{solution}

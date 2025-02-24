@@ -1,0 +1,88 @@
+\chapter{Lebesgue Theory}
+We will define a very powerful integral, far better than Riemann in the sense that it will allow us to integrate pretty much every reasonable function and we will also obtain strong convergence results. That is if we take a limit of integrable functions we will get an integrable function and the limit of the integrals will be the integral of the limit under very mild conditions. We will focus only on $\RR$, although the theory easily extends to more abstract contexts.
+
+In Riemann integral the basic block was a rectangle. If we wanted to integrate a function that was identically $1$ on an interval $[a,b]$, then the integral was simply the area of that rectangle, so $1\times(b-a)=b-a$. For Lebesgue integral, we replace the interval with a more general subset of $\RR$; that is, given $S\subset\RR$, take the characteristic function $\chi_S$ defined by
+\[\chi_S(x)=\begin{cases}
+1&(x\in S)\\
+0&(x\notin S)
+\end{cases}\]
+Then the integral of $\chi_S$ should really be equal to the area under the graph, which should be equal to the ``size'' of $S$.
+
+\section{Set Functions}
+\begin{definition}
+Let $X$ be a set. A collection of sets $\mathcal{M}\subset\mathcal{P}(X)$ is a \vocab{$\sigma$-algebra} if
+\begin{enumerate}[label=(\roman*)]
+\item $\mathcal{M}\neq\emptyset$;\hfill(non-empty)
+\item if $A\in\mathcal{M}$, then $A^c=X\setminus A\in\mathcal{M}$;\hfill(closed under complements)
+\item if $\{A_i\}$ is a countable collection of sets in $\mathcal{M}$, then $\bigcup_{i=1}^{\infty}A_i\in\mathcal{M}$.
+
+\hfill(closed under countable unions)
+\end{enumerate}
+If $\mathcal{M}$ is closed only under finite unions, then we say that $\mathcal{M}$ is an \emph{algebra}.
+
+The sets in $\mathcal{M}$ are usually called \emph{measurable sets}.
+\end{definition}
+
+\begin{definition}
+Let $\mathcal{M}$ be a $\sigma$-algebra. Let $\mu:\mathcal{M}\to\overline{\RR}$.
+\begin{itemize}
+\item We say $\mu$ is \emph{additive} if given disjoint $A,B\in\mathcal{M}$ then
+\[\mu(A\cup B)=\mu(A)+\mu(B).\]
+\item We say $\mu$ is \emph{countably additive} if given a collection of sets $\{A_i\}$ in $\mathcal{M}$ such that $A_i\cap A_j=\emptyset$ for all $i\neq j$, then
+\[\mu\brac{\bigcup_{i=1}^{\infty}A_i}=\sum_{i=1}^{\infty}\mu(A_i).\]
+[Of course the sums have to make sense, so usually we will assume that $\mu$ does not achieve both $-\infty$ and $\infty$.]
+
+We say $\mu$ is non-negative or monotonic if $\mu(A)\ge0$ for all $A\in\mathcal{M}$.
+
+\item We say $\mu$ is \emph{countably subadditive} if for every collection $\{A_i\}$ we have
+\[\mu\brac{\bigcup_{i=1}^{\infty}A_i}\le\sum_{i=1}^{\infty}\mu(A_i).\]
+\end{itemize}
+\end{definition}
+
+\begin{lemma}[Basic properties of additive functions]
+If $\mu:\mathcal{M}\to\overline{\RR}$ is additive, then
+\begin{enumerate}[label=(\roman*)]
+\item $\mu(\emptyset)=0$;
+\item $\mu(A_1\cup\cdots\cup A_n)=\mu(A_1)+\cdots+\mu(A_n)$ if $A_i\cap A_j=\emptyset$ for all $i\neq j$;
+\item $\mu(A\cup B)+\mu(A\cap B)=\mu(A)+\mu(B)$;
+\item If $\mu(A)\ge0$ for all $A$, and $A_1\subset A_2$, then $\mu(A_1)\le\mu(A_2)$;
+\item $\mu(A\setminus B)=\mu(A)-\mu(B)$ if $B\subset A$ and $|\mu(B)|<+\infty$.
+\end{enumerate}
+\end{lemma}
+
+\begin{lemma}[Limits]
+Suppose that $\mu$ is a countably additive function on a $\sigma$-algebra $\mathcal{M}$, and $A_1\subset A_2\subset\cdots$ are sets in $\mathcal{M}$, and $A=\bigcup_{i=1}^{\infty}A_i$, then
+\[\lim_{n\to\infty}\mu(A_n)=\mu(A).\]
+\end{lemma}
+
+\begin{definition}
+$\mu:\mathcal{M}\to\overline{\RR}$ is a \vocab{measure} if it is non-negative and countably additive.
+\end{definition}
+
+\begin{example}[Counting measure]
+Given a set $X$, let $\mathcal{M}=\mathcal{P}(X)$, and define $\mu(A)=|A|$, the cardinality of $A$. This $\mu$ is called the \emph{counting measure}.
+\end{example}
+
+
+
+\begin{definition}
+Let $E\subset\RR$. Let $\{I_i\}$ be a countable collection of bounded open intervals covering $E$, that is
+\[E\subset\bigcup_{i=1}^{\infty}I_i.\]
+Define the \vocab{outer measure} as
+\[m^*(E)=\inf\sum_{i=1}^{\infty}m(I_i)\]
+where the inf is taken over all coverings of $E$ by countably many bounded open intervals.
+\end{definition}
+
+It is immediate that $m^*$ is nonnegative ($m^*(A)\ge0$) and monotone (if $A\subset B$ then $m^*(A)\le m^*(B)$).
+
+\begin{proposition}
+If $I$ is a bounded interval, then $m(I)=m^*(I)$. Also $m^*$ is countably subadditive.
+\end{proposition}
+
+\begin{corollary}
+If $S\subset\RR$ is countable, then $m^*(S)=0$.
+\end{corollary}
+\pagebreak
+
+\section*{Exercises}
+\addcontentsline{toc}{section}{Exercises}

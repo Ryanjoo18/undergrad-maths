@@ -1,0 +1,516 @@
+\chapter{Inner Product Spaces}
+\section{Inner Products and Norms}
+\subsection{Inner Products}
+\begin{definition}
+An \vocab{inner product}\index{inner product} on $V$ is a map $\angbrac{\cdot,\cdot}:V\times V\to\FF$ such that for all $u,v,w\in V$, $\lambda\in\FF$,
+\begin{enumerate}[label=(\roman*)]
+\item $\angbrac{v,v}\ge0$, where equality holds if and only if $v=\vb{0}$;\hfill(positive definite)
+\item $\angbrac{u+v,w}=\angbrac{u,w}+\angbrac{v,w}$\hfill(sesquilinear)
+
+$\angbrac{\lambda u,v}=\lambda\angbrac{u,v}$;
+\item $\angbrac{u,v}=\overline{\angbrac{v,u}}$.\hfill(conjugate symmetric)
+\end{enumerate}
+An \vocab{inner product space}\index{inner product!inner product space} $\brac{V,\angbrac{\cdot,\cdot}}$ is a vector space $V$ along with an inner product on $V$.
+\end{definition}
+
+\begin{notation}
+If the inner product on $V$ is clear from context, we omit it and simply denote the inner product space as $V$.
+\end{notation}
+
+\begin{remark}
+Every real number equals its complex conjugate. Thus if we are dealing with a real vector space, then in (iii) we can dispense with the complex conjugate, so $\angbrac{u,v}=\angbrac{v,u}$ for all $u,v\in V$.
+\end{remark}
+
+\begin{example}
+\begin{itemize}
+\item The \emph{Euclidean inner product} on $\FF^n$ is defined by
+\[\angbrac{(w_1,\dots,w_n),(z_1,\dots,z_n)}=w_1\overline{z_1}+\cdots+w_n\overline{z_n}\]
+for all $(w_1,\dots,w_n),(z_1,\dots,z_n)\in\FF^n$.
+
+\item An inner product can be defined on the vector space $\mathcal{C}\brac{[-1,1],\RR}$ by
+\[\angbrac{f,g}=\int_{-1}^{1}fg\]
+for all $f,g\in\mathcal{C}\brac{[-1,1],\RR}$.
+\end{itemize}
+\end{example}
+
+\begin{lemma}[Basic properties of inner product] \
+\begin{enumerate}[label=(\roman*)]
+\item For each fixed $u\in V$, the function that sends $u\mapsto\angbrac{u,v}$ is a linear map from $V$ to $\FF$.
+\item $\angbrac{0,v}=0$ for every $v\in V$.
+\item $\angbrac{v,0}=0$ for every $v\in V$.
+\item $\angbrac{u,v+w}=\angbrac{u,v}+\angbrac{u,w}$ for all $u,v,w\in V$.
+\item $\angbrac{u,\lambda v}=\overline{\lambda}\angbrac{u,v}$ for all $\lambda\in\FF$, $u,v\in V$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item For $v\in V$, the linearity of $u\mapsto\angbrac{u,v}$ follows from the sesquilinearity of the inner product.
+\item Every linear map takes $0$ to $0$. Thus (ii) follows from (i).
+\item If $v\in V$, by conjugate symmetry and (ii),
+\[\angbrac{v,0}=\overline{\angbrac{0,v}}=\overline{0}=0.\]
+\item Suppose $u,v,w\in V$. Then
+\begin{align*}
+\angbrac{u,v+w}
+&=\overline{\angbrac{v+w,u}}\\
+&=\overline{\angbrac{v,u}+\angbrac{w,u}}\\
+&=\overline{\angbrac{v,u}}+\overline{\angbrac{w,u}}\\
+&=\angbrac{u,v}+\angbrac{u,w}.
+\end{align*}
+\item Suppose $\lambda\in\FF$, $u,v\in V$. Then
+\begin{align*}
+\angbrac{u,\lambda v}
+&=\overline{\lambda v,u}\\
+&=\overline{\lambda\angbrac{v,u}}\\
+&=\overline{\lambda}\overline{\angbrac{v,u}}\\
+&=\overline{\lambda}\angbrac{u,v}.
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+\subsection{Norms}
+Each inner product determines a norm.
+\begin{definition}[Norm]
+For $v\in V$, the \vocab{norm} of $v$ is
+\[\norm{v}\coloneqq\sqrt{\angbrac{v,v}}.\]
+\end{definition}
+
+\begin{lemma}[Basic properties of norm]
+Suppose $v\in V$.
+\begin{enumerate}[label=(\roman*)]
+\item $\norm{v}=0$ if and only if $v=\vb{0}$.
+\item $\norm{\lambda v}=|\lambda|\norm{v}$ for all $\lambda\in\FF$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item By positive definiteness of the inner product, $\angbrac{v,v}=0$ if and only if $v=\vb{0}$. Take square root to get $\norm{v}=0$.
+\item Suppose $\lambda\in\FF$. Then
+\begin{align*}
+\norm{\lambda v}^2
+&=\angbrac{\lambda v,\lambda v}\\
+&=\lambda\angbrac{v,\lambda v}\\
+&=\lambda\overline{\lambda}\angbrac{v,v}\\
+&=|\lambda|^2\norm{v}^2.
+\end{align*}
+Taking square roots yields the desired equality.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+Working with norms squared is usually easier than working directly with norms.
+\end{remark}
+
+Now we come to a crucial definition.
+
+\begin{definition}
+$u,v\in V$ are \vocab{orthogonal} if $\angbrac{u,v}=0$.
+\end{definition}
+
+\begin{lemma}[Orthogonality and $\vb{0}$] \
+\begin{enumerate}[label=(\roman*)]
+\item $\vb{0}$ is orthogonal to every vector in $V$.
+\item $\vb{0}$ is the only vector in $V$ that is orthogonal to itself.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Recall that $\angbrac{\vb{0},v}=0$ for every $v\in V$.
+\item  If $v\in V$ and $\angbrac{v,v}=0$, then $v=\vb{0}$, by positive definiteness.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}[Pythagoras' theorem]
+Suppose $u,v\in V$. If $u$ and $v$ are orthogonal, then
+\begin{equation}
+\norm{u+v}^2=\norm{u}^2+\norm{v}^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Suppose $\angbrac{u,v}=0$. Then
+\begin{align*}
+\norm{u+v}^2
+&=\angbrac{u+v,u+v}\\
+&=\angbrac{u,u+v}+\angbrac{v,u+v}\\
+&=\angbrac{u,u}+\angbrac{u,v}+\angbrac{v,u}+\angbrac{v,v}\\
+&=\norm{u}^2+0+\overline{0}+\norm{v}^2\\
+&=\norm{u}^2+\norm{v}^2
+\end{align*}
+as desired.
+\end{proof}
+
+We now introdoce a process known as \emph{orthogonal decomposition}.
+Suppose $u,v\in V$, $u\neq\vb{0}$.
+Then the \vocab{orthogonal projection} of $v$ onto $u$ is
+\[\proj{u}{v}=\frac{\angbrac{v,u}}{\angbrac{u,u}}u,\]
+which is parallel to $u$. We now need to check that $v-\proj{u}{v}$ and $u$ are orthogonal:
+\begin{align*}
+\angbrac{v-\proj{u}{v},u}
+&=\angbrac{v,u}-\angbrac{\frac{\angbrac{v,u}}{\angbrac{u,u}}u,u}\\
+&=\angbrac{v,u}-\frac{\angbrac{v,u}}{\angbrac{u,u}}\angbrac{u,u}=0.
+\end{align*}
+
+\begin{lemma}[Cauchy--Schwarz inequality]
+Suppose $u,v\in V$. Then
+\begin{equation}
+|\angbrac{u,v}|\le\norm{u}\norm{v},
+\end{equation}
+where equality holds if and only if $u=\lambda v$ for some scalar $\lambda$.
+\end{lemma}
+
+\begin{proof}
+If $u=\vb{0}$, then both sides of the desired inequality equal $0$. Thus assume $u\neq\vb{0}$. Consider the orthogonal decomposition of $v$:
+\[v=(v-\proj{u}{v})+\proj{u}{v}.\]
+By the Pythagoras' theorem,
+\[\norm{v}^2=\norm{v-\proj{u}{v}}^2+\norm{\proj{u}{v}}^2,\]
+so
+\begin{align*}
+\norm{v}&\ge\norm{\proj{u}{v}}\\
+&=\absolute{\frac{\angbrac{v,u}}{\angbrac{u,u}}}\norm{u}\\
+&=\frac{|\angbrac{v,u}|}{\norm{u}}
+\end{align*}
+and rearranging gives the desired inequality.
+
+Equality holds if and only if $v-\proj{u}{v}=\vb{0}$, i.e.,
+\[\frac{\angbrac{v,u}}{\angbrac{u,u}}u=v.\]
+\end{proof}
+
+\begin{lemma}[Triangle inequality]
+Suppose $u,v\in V$. Then
+\begin{equation}
+\norm{u+v}\le\norm{u}+\norm{v},
+\end{equation}
+where equality holds if and only if $u=\lambda v$ for some $\lambda\in\RR_{\ge0}$.
+\end{lemma}
+
+\begin{proof}
+We have
+\begin{align*}
+\norm{u+v}^2
+&=\angbrac{u+v,u+v}\\
+&=\angbrac{u,u}+\angbrac{v,v}+\angbrac{u,v}+\angbrac{v,u}\\
+&=\angbrac{u,u}+\angbrac{v,v}+\angbrac{u,v}+\overline{\angbrac{u,v}}\\
+&=\norm{u}^2+\norm{v}^2+2\Re\angbrac{u,v}\\
+&\le\norm{u}^2+\norm{v}^2+2|\angbrac{u,v}|\tag{1}\\
+&\le\norm{u}^2+\norm{v}^2+2\norm{u}\norm{v}\tag{2}\\
+&=\brac{\norm{u}+\norm{v}}^2,
+\end{align*}
+where (2) follows from the Cauchy--Schwarz inequality. Taking square roots of both sides of the above inequality gives the desired inequality.
+
+Equality holds if and only if equality holds in (1) and (2), i.e.,
+\[\angbrac{u,v}=\norm{u}\norm{v}.\]
+If $u=\lambda v$ for $\lambda\in\RR_{\ge0}$, then the above equation holds. Conversely, suppose the above equation holds. Then equality in the Cauchy--Schwarz inequality implies that $u=\lambda v$ for some scalar $\lambda$. By the above equation, $\lambda$ must be a non-negative real number, completing the proof.
+\end{proof}
+
+\begin{corollary}[Reverse triangle inequality]
+
+\end{corollary}
+
+\begin{lemma}[Parallelogram equality]
+Suppose $u,v\in V$. Then
+\begin{equation}
+\norm{u+v}^2+\norm{u-v}^2=2\brac{\norm{u}^2+\norm{v}^2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We have
+\begin{align*}
+\norm{u+v}^2+\norm{u-v}^2
+&=\angbrac{u+v,u+v}+\angbrac{u-v,u-v}\\
+&=\brac{\norm{u}^2+\norm{v}^2+\angbrac{u,v}+\angbrac{v,u}}+\brac{\norm{u}^2+\norm{v}^2-\angbrac{u,v}-\angbrac{v,u}}\\
+&=2\brac{\norm{u}^2+\norm{v}^2}
+\end{align*}
+as desired.
+\end{proof}
+\pagebreak
+
+\section{Orthonormal Bases}
+\subsection{Orthonormal Bases}
+\begin{definition}[Orthonormal basis]
+$\{e_1,\dots,e_n\}\subset V\setminus\{\vb{0}\}$ is \vocab{orthonormal} if
+\begin{enumerate}[label=(\roman*)]
+\item $\norm{e_i}=1$;
+\item the vectors are pairwise orthogonal.
+\end{enumerate}
+If additionally $\{e_1,\dots,e_n\}$ is a basis of $V$, then $\{e_1,\dots,e_n\}$ is a \vocab{orthonormal basis} of $V$.
+\end{definition}
+
+\begin{lemma}
+Suppose $\{e_1,\dots,e_n\}$ is a orthonormal set of vectors in $V$. Then
+\[\norm{a_1e_1+\cdots+a_ne_n}^2=|a_1|^2+\cdots+|a_n|^2\]
+for all $a_1,\dots,a_n\in\FF$.
+\end{lemma}
+
+\begin{proof}
+By the Pythagoras' theorem,
+\begin{align*}
+\norm{a_1e_1+\cdots+a_ne_n}^2
+&=\norm{a_1e_1}^2+\cdots+\norm{a_ne_n}^2\\
+&=|a_1|^2\norm{e_1}^2+\cdots+|a_n|^2\norm{e_n}^2\\
+&=|a_1|^2+\cdots+|a_n|^2
+\end{align*}
+since each $\norm{e_i}=1$.
+\end{proof}
+
+The result above has the following important corollary.
+
+\begin{corollary}
+Every orthonormal set of vectors is linearly independent.
+\end{corollary}
+
+\begin{proof}
+Suppose $\{e_1,\dots,e_n\}$ is an orthonormal set of vectors in $V$. Suppose $a_1,\dots,a_n\in\FF$ are such that
+\[a_1e_1+\cdots+a_ne_n=\vb{0}.\]
+By the previous result,
+\[|a_1|^2+\cdots+|a_n|^2=0,\]
+so $a_1=\cdots=a_n=0$. Hence $e_1,\dots,e_n$ are linearly independent.
+\end{proof}
+
+Hence every orthonormal set of vectors in $V$ of length $\dim V$ is an orthonormal basis of $V$.
+
+Now we come to an important inequality.
+
+\begin{lemma}[Bessel's inequality]
+Suppose $\{e_1,\dots,e_n\}$ is an orthonormal set of vectors in $V$. If $v\in V$ then
+\begin{equation}
+|\angbrac{v,e_1}|^2+\cdots+|\angbrac{v,e_n}|^2\le\norm{v}^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $v\in V$. For $i=1,\dots,n$, consider the orthogonal projection of $v$ onto $e_i$:
+\begin{align*}
+v&=(v-\proj{e_i}{v})+\proj{e_i}{v}\\
+&=\brac{v-\frac{\angbrac{v,e_i}}{\angbrac{e_i,e_i}}e_i}+\frac{\angbrac{v,e_i}}{\angbrac{e_i,e_i}}e_i\\
+&=\brac{v-\angbrac{v,e_i}e_i}+\angbrac{v,e_i}e_i.
+\end{align*}
+Then by Pythagoras' theorem,
+\begin{align*}
+\norm{v}^2
+&=\norm{v-\angbrac{v,e_i}e_i}^2+\norm{\angbrac{v,e_i}e_i}\\
+&=\norm{v-\angbrac{v,e_i}e_i}^2+|\angbrac{v,e_i}|^2.
+\end{align*}
+Write
+\begin{align*}
+v&=\proj{e_1}{v}+\cdots+\proj{e_n}{v}+w\\
+&=\angbrac{v,e_1}e_1+\cdots+\angbrac{v,e_n}e_n+w
+\end{align*}
+for some $w\in V$. Note that for $i=1,\dots,n$,
+\begin{align*}
+\angbrac{v,e_i}
+&=\angbrac{\angbrac{v,e_i}e_i,e_i}+\angbrac{w,e_i}\\
+&=\angbrac{v,e_i}+\angbrac{w,e_i}
+\end{align*}
+which implies $\angbrac{w,e_i}=0$, so $w$ is orthogonal to $e_1,\dots,e_n$. Thus $e_1,\dots,e_n,w$ are pairwise orthogonal. By Pythagoras' theorem,
+\begin{align*}
+\norm{v}^2
+&=|\angbrac{v,e_1}|^2+\cdots+|\angbrac{v,e_n}|^2+\underbrace{\norm{w}^2}_{\ge0}\\
+&\ge|\angbrac{v,e_1}|^2+\cdots+|\angbrac{v,e_n}|^2
+\end{align*}
+as desired. Equality holds for orthonormal bases (as we will see later).
+\end{proof}
+
+The next result states that a vector can be expressed as a linear combination of an orthonormal basis. Usually we write $v=\sum_{i=1}^{n}a_iv_i$, but with orthonormal basis we can just take $a_i=\angbrac{v,e_i}$.
+
+\begin{lemma}
+Suppose $\{e_1,\dots,e_n\}$ is an orthonormal basis of $V$, and $u,v\in V$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $v=\angbrac{v,e_1}e_1+\cdots+\angbrac{v,e_n}e_n$;
+\item $\norm{v}^2=|\angbrac{v,e_1}|^2+\cdots+|\angbrac{v,e_n}|^2$;\hfill(Parseval's identity)
+\item $\angbrac{u,v}=\angbrac{u,e_1}\overline{\angbrac{v,e_1}}+\cdots+\angbrac{u,e_n}\overline{\angbrac{v,e_n}}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Since $e_1,\dots,e_n$ is a basis of $V$, there exist $a_1,\dots,a_n\in\FF$ such that
+\[v=a_1e_1+\cdots+a_ne_n.\]
+Since $e_1,\dots,e_n$ are orthonormal, taking the inner product of both sides with $e_i$ gives
+\[\angbrac{v,e_i}=a_i\quad(i=1,\dots,n).\]
+Hence we are done.
+\item Apply Pythagoras' theorem to (i).
+\item Taking the inner product of $u$ with each side of (i),
+\begin{align*}
+\angbrac{u,v}&=\angbrac{u,\angbrac{v,e_1}e_1+\cdots+\angbrac{v,e_n}e_n}\\
+&=\angbrac{u,\angbrac{v,e_1}e_1}+\cdot+\angbrac{u,\angbrac{v,e_n}e_n}\\
+&=\overline{\angbrac{v,e_1}}\angbrac{u,e_1}+\cdots+\overline{\angbrac{v,e_n}}\angbrac{u,e_n}.
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+\subsection{Gram--Schmidt Procedure}
+The \emph{Gram--Schmidt procedure} is a method for constructing orthonormal basis, by turning a linearly independent set into an orthonormal set with the same span as the original set. It guarantees the existence of orthonormal bases.
+
+\begin{theorem}[Gram--Schmidt procedure]
+Suppose $v_1,\dots,v_n$ are linearly independent in $V$. Define
+\[u_i=\begin{cases}
+v_1&(i=1)\\
+v_i-\proj{u_1}{v_i}-\cdots-\proj{u_{i-1}}{v_i}&(i=2,\dots,n)
+\end{cases}\]
+and let
+\[e_i=\frac{u_i}{\norm{u_i}}.\]
+Then $\{e_1,\dots,e_n\}$ is an orthonormal set of vectors in $V$ such that
+\[\spn(v_1,\dots,v_i)=\spn(e_1,\dots,e_i)\]
+for $i=1,\dots,n$.
+\end{theorem}
+
+\begin{proof}
+Induct on $i$. For $i=1$, since $e_1=\frac{u_1}{\norm{u_1}}$ we have $\norm{e_1}=1$, and $\spn(v_1)=\spn(e_1)$ because $e_1$ is a non-zero multiple of $v_1$.
+
+Suppose the desired result holds for $i-1$; that is, the set $\{e_1,\dots,e_{i-1}\}$ generated by the above procedure is an orthonormal set, and
+\[\spn(v_1,\dots,v_{i-1})=\spn(e_1,\dots,e_{i-1}).\]
+Since $v_1,\dots,v_n$ are linearly independent, we have $v_i\notin\spn(v_1,\dots,v_{i-1})$. Thus $v_i\notin\spn(e_1,\dots,e_{i-1})=\spn(u_1,\dots,u_{i-1})$, which implies that $u_i\neq\vb{0}$ (so we are not dividing by $0$); thus $\norm{e_i}=1$.
+
+We now check that $e_1,\dots,e_i$ is an orthonormal set. For $j=1,\dots,i-1$,
+\begin{align*}
+\angbrac{e_i,e_j}
+&=\angbrac{\frac{u_i}{\norm{u_i}},\frac{u_j}{\norm{u_j}}}\\
+&=\frac{1}{\norm{u_i}\norm{u_j}}\angbrac{u_i,u_j}\\
+&=\frac{1}{\norm{u_i}\norm{u_j}}\angbrac{v_i-\proj{u_1}{v_i}-\cdots-\proj{u_j}{v_i}-\cdots-\proj{u_{i-1}}{v_i},u_j}\\
+&=\frac{1}{\norm{u_i}\norm{u_j}}\angbrac{v_i-\frac{\angbrac{v_i,u_1}}{\angbrac{u_1,u_1}}u_1-\cdots-\frac{\angbrac{v_i,u_j}}{\angbrac{u_j,u_j}}u_j-\cdots-\frac{\angbrac{v_i,u_{i-1}}}{\angbrac{u_{i-1},u_{i-1}}}u_{i-1},u_j}\\
+&=\frac{1}{\norm{u_i}\norm{u_j}}\brac{\angbrac{v_i,u_j}-\angbrac{\frac{\angbrac{v_i,u_j}}{\angbrac{u_j,u_j}}u_j,u_j}}\\
+&=\frac{1}{\norm{u_i}\norm{u_j}}\brac{\angbrac{v_i,u_j}-\angbrac{v_i,u_j}}=0
+\end{align*}
+so $e_i$ is orthogonal to $e_1,\dots,e_{i-1}$.
+
+
+\end{proof}
+
+\begin{corollary}
+Every finite-dimensional inner product space has an orthonormal basis.
+\end{corollary}
+
+\begin{corollary}
+Suppose $V$ is finite-dimensional. Then every orthonormal set of vectors in $V$ can be extended to an orthonormal basis of $V$.
+\end{corollary}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{corollary}
+Suppose $V$ is finite-dimensional. Then every orthonormal list of vectors in $V$ can be extended to an orthonormal basis of $V$.
+\end{corollary}
+
+\begin{proposition}
+Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. Then $T$ has an upper-triangular matrix with respect to some orthonormal basis of $V$ if and only if the minimal polynomial of $T$ equals $(z-\lambda_1)\cdots(z-\lambda_n)$ for some $\lambda_i\in\FF$.
+\end{proposition}
+
+\begin{theorem}[Schur's theorem]
+Every operator on a finite-dimensional complex inner product space has an upper-triangular matrix with respect to some orthonormal basis.
+\end{theorem}
+
+\subsection{Linear Functionals on Inner Product Spaces}
+\begin{theorem}[Riesz representation theorem]
+Suppose $V$ is finite-dimensional and $\phi$ is a linear functional on $V$. Then there exists a unique vector $v\in V$ such that
+\[\phi(u)=\angbrac{u,v}\]
+for every $u\in V$.
+\end{theorem}
+\pagebreak
+
+\section{Orthogonal Complements and Minimisation Problems}
+\subsection{Orthogonal Complements}
+\subsection{Minimisation Problems}
+\subsection{Pseudoinverse}
+
+\pagebreak
+
+\section*{Exercises}
+\begin{exercise}[\cite{axler} 6A Q1]
+Show that if $v_1,\dots,v_m\in V$, then
+\[\sum_{j=1}^{m}\sum_{k=1}^{m}\angbrac{v_j,v_k}\ge0.\]
+\end{exercise}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{exercise}[\cite{axler} 6A Q2]
+Suppose $S\in\mathcal{L}(V)$. Define $\angbrac{\cdot,\cdot}_1$ by
+\[\angbrac{u,v}_1=\angbrac{Su,Sv}\]
+for all $u,v\in V$. Show that $\angbrac{\cdot,\cdot}_1$ is an inner product on $V$ if and only if $S$ is injective.
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6A Q4]
+Suppose $T\in\mathcal{L}(V)$ is such that $\norm{Tv}\le\norm{v}$ for every $v\in V$. Prove that $T-\sqrt{2}I$ is injective.
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6A Q5]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6A Q6]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6A Q9]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6A Q14]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6A Q20]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6A Q26]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6A Q27]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q1]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q3]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q5]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q6(a)]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q9]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q10]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q13]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q14]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q15]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q16]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q17]
+
+\end{exercise}
+
+\begin{exercise}[\cite{axler} 6B Q23]
+
+\end{exercise}

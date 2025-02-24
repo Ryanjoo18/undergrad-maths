@@ -1,29 +1,47 @@
 \chapter{Numerical Sequences and Series}\label{chap:num-seq-series}
-Tthis chapter will deal primarily with sequences and series in $\RR$ (and also $\CC$). The basic facts about convergence, however, are just as easily explained in a more general setting (metric spaces).
+\begin{summary}
+\item Sequences. Convergence, subsequences, Cauchy sequences. Limit superior and inferior.
+\item Series. Convergence tests.
+\end{summary}
 
-As usual, let $(X,d)$ be a metric space.
+Throughout, let $(X,d)$ be a metric space.
 
 \section{Sequences}
 \subsection{Convergence}
-\begin{definition}[Sequence]
 A \vocab{sequence} $(x_n)$ in $X$ is a function $f:\NN\to X$ which maps $n\mapsto x_n$.
-\end{definition}
+
+The \emph{range} of a sequence $(x_n)$ is the set
+\[\{a\in X\mid\exists n\in\NN, a=x_n\}.\]
+Note that the range of a sequence may be a finite set or it may be infinite. $(x_n)$ is \emph{bounded} if its range is bounded.
 
 \begin{definition}
-The \vocab{range} of a sequence $(x_n)$ is the set
-\[\{a\in X\mid\exists n\in\NN, a=x_n\}.\]
-Note that the range of a sequence may be a finite set or it may be infinite. $(x_n)$ is \vocab{bounded} if its range is bounded.
-\end{definition}
-
-\begin{definition}[Convergence]
-A sequence $(x_n)$ \vocab{converges}\index{convergence of sequence} to $x\in X$, denoted by $x_n\to x$, if
+A sequence $(x_n)$ \vocab{converges}\index{convergence} to $x\in X$, denoted by $x_n\to x$, if
 \[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall n\ge N,\quad d(x_n,x)<\epsilon.\]
 We call $x$ a \emph{limit} of $(x_n)$. 
 If $(x_n)$ does not converge, it is said to \emph{diverge}.
 \end{definition}
 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw[color=blue, dashed, thick](6,0) circle (1.0cm);
+\draw[fill=black] (6,0) circle[radius=0.05cm] node [anchor=west] {$x$};
+\draw[<->] (6,0) -- (5.29,0.71) node [midway, below] {$\epsilon$};
+
+\draw[fill=black] (0,0) circle[radius=0.05cm] node [anchor=north] {$x_1$};
+\draw[fill=black] (1,1) circle[radius=0.05cm] node [anchor=north] {$x_2$};
+\draw[fill=black] (2,-0.5) circle[radius=0.05cm] node [anchor=north] {$x_3$};
+\draw[fill=black] (3,0.5) circle[radius=0.05cm];
+\draw[fill=black] (4,0) circle[radius=0.05cm];
+\draw[fill=black] (5.2,0.2) circle[radius=0.05cm] node [anchor=north] {$x_N$};
+\draw[fill=black] (5.4,-0.6) circle[radius=0.05cm] node [anchor=north] {$x_{N+1}$};
+\draw[fill=black] (6.5,-0.5) circle[radius=0.05cm] node [anchor=north] {$x_{N+2}$};
+\end{tikzpicture}
+\caption{Convergence of sequence}
+\end{figure}
+
 \begin{remark}
-This limit process conveys the intuitive idea that $x_n$ can be made arbitrarily close to $x$, provided that $n$ is sufficiently large.
+This limit process conveys the intuitive idea that $x_n$ can be made arbitrarily close to $x$, provided that $n$ is sufficiently large. (Equivalently, if we remove more and more initial terms from the sequence, we see that the \emph{tail} of the sequence should be increasingly closer to $x$.)
 \end{remark}
 
 \begin{remark}
@@ -36,18 +54,18 @@ From the definition, the convergence of a sequence depends not only on the seque
 \end{remark}
 
 \begin{example}
-Show that $\frac{1}{n}\to 0$.
-\begin{solution}
+$\frac{1}{n}\to 0$.
+\begin{proof}
 Fix $\epsilon>0$. By the Archimedian property, there exists $N\in\NN$ such that $\frac{1}{N}<\epsilon$. Take $N=\floor{\frac{1}{\epsilon}}+1$. Then for all $n\ge N$,
 \[\absolute{\frac{1}{n}-0}=\frac{1}{n}\le\frac{1}{N}=\frac{1}{\floor{\frac{1}{\epsilon}}+1}<\frac{1}{\frac{1}{\epsilon}}=\epsilon\]
 as desired. Therefore $\frac{1}{n}\to0$.
-\end{solution}
+\end{proof}
 \end{example}
 
 A useful tip for finding the required $N$ (in terms of $\epsilon$) is to work backwards from the result we wish to show, as illustrated in the following example.
 
 \begin{example}
-Let $a_n=1+(-1)^n\frac{1}{\sqrt{n}}$. Show that $a_n\to 1$.
+Let $a_n=1+(-1)^n\frac{1}{\sqrt{n}}$. Then $a_n\to 1$.
 
 Before our proof, we aim to find some $N\in\NN$ such that if $n\ge N$ then
 \begin{align*}
@@ -58,7 +76,7 @@ n&>\frac{1}{\epsilon^2}
 \end{align*}
 Hence take $N=\floor{\frac{1}{\epsilon^2}}+1$.
 
-\begin{solution}
+\begin{proof}
 Let $\epsilon>0$ be given. Take $N=\floor{\frac{1}{\epsilon^2}}+1$. If $n\ge N$, then
 \begin{align*}
 |a_n-1|&=\absolute{(-1)^n\frac{1}{\sqrt{n}}}=\frac{1}{\sqrt{n}}\\
@@ -66,7 +84,7 @@ Let $\epsilon>0$ be given. Take $N=\floor{\frac{1}{\epsilon^2}}+1$. If $n\ge N$,
 &<\frac{1}{\sqrt{\frac{1}{\epsilon^2}}}=\epsilon
 \end{align*}
 as desired. Therefore $a_n\to1$.
-\end{solution}
+\end{proof}
 \end{example}
 
 \begin{lemma}[Uniqueness of limit]
@@ -77,15 +95,13 @@ If a sequence converges, then its limit is unique.
 Let $(x_n)$ be a sequence in $X$. Suppose that $x_n\to x$ and $x_n\to x^\prime$ for $x,x^\prime\in X$. We will show that $x^\prime=x$.
 
 Let $\epsilon>0$ be given. Then there exists $N,N^\prime\in\NN$ such that
-\[n\ge N\implies d(x_n,x)<\frac{\epsilon}{2}\]
-and
-\[n\ge N^\prime\implies d(x_n,x^\prime)<\frac{\epsilon}{2}.\]
-Take $N_1\coloneqq\max\{N,N^\prime\}$. If $n\ge N_1$, then both hold. By the triangle inequality,
 \begin{align*}
-d(x,x^\prime)&\le d(x,x_n)+d(x_n,x^\prime)\\
-&<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon
+n\ge N&\implies d(x_n,x)<\frac{\epsilon}{2}\\
+n\ge N^\prime&\implies d(x_n,x^\prime)<\frac{\epsilon}{2}
 \end{align*}
-for all $\epsilon>0$. Hence $d(x,x^\prime)=0$ and thus $x=x^\prime$.
+Take $N_1\coloneqq\max\{N,N^\prime\}$. If $n\ge N_1$, then both hold. By the triangle inequality,
+\[d(x,x^\prime)\le d(x,x_n)+d(x_n,x^\prime)<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.\]
+Since this holds for all $\epsilon>0$, we must have $d(x,x^\prime)=0$. Hence $x=x^\prime$.
 \end{proof}
 
 Since the limit is unique, we can give it a notation.
@@ -234,6 +250,14 @@ or
 Hence $(c_n)$ is convergent, and $c_n\to L$.
 \end{proof}
 
+Given a complex sequence $(z_n)$, there are two associated real sequences $\brac{\Re(z_n)}$ and $\brac{\Im(z_n)}$. The next result relates convergence of $(z_n)$ to convergence of $\brac{\Re(z_n)}$ and $\brac{\Im(z_n)}$.
+
+\begin{proposition}[Complex sequences]
+Let $(z_n)$ be a complex sequence. Write $z_n=x_n+iy_n$ with $x_n,y_n\in\RR$, so that $(x_n)$ and $(y_n)$ are real sequences. Then $(z_n)$ converges if and only if both $(x_n)$ and $(y_n)$ converge. Moreover, in the case where $(z_n)$ converges, we have
+\[\lim_{n\to\infty}z_n=\lim_{x\to\infty}x_n+i\lim_{n\to\infty}y_n.\]
+\end{proposition}
+\pagebreak
+
 \subsection{Subsequences}
 \begin{definition}[Subsequence]
 Given a sequence $(x_n)$, consider a sequence $(n_k)$ of positive integers such that $n_1<n_2<\cdots$. Then $(x_{n_k})$ is called a \vocab{subsequence}\index{subsequence} of $(x_n)$.
@@ -263,11 +287,11 @@ In a compact metric space, any sequence has a convergent subsequence.
 \begin{proof}
 Suppose $(x_n)$ is a sequence in a compact metric space $X$.
 
-Let $E$ be the range of $(x_n)$. We have to consider two cases: (i) $E$ is finite, (ii) $E$ is infinite.
+Let $E$ be the range of $(x_n)$. We have to consider two cases: (i) $E$ is finite, (ii) $E$ is infinite. For both cases, we will construct the desired convergent subsequence.
 \begin{enumerate}[label=(\roman*)]
-\item We prove by directly constructing the desired convergent subsequence.
+\item Notice that there are infinitely many terms in the sequence $(x_n)$, but only finitely many distinct terms in $E$. Hence by the pigeonhole principle, at least one term of $E$ appears infinitely many times in the sequence.
 
-Notice that there are infinitely many terms in the sequence $(x_n)$, but only finitely many distinct terms in $E$. Hence by the pigeonhole principle, at least one term of $E$ appears infinitely many times in the sequence. That is, there exists $x\in E$ and a sequence $(n_k)$ with $n_1<n_2<\cdots$ such that
+That is, there exists $x\in E$ and a sequence $(n_k)$ with $n_1<n_2<\cdots$ such that
 \[x_{n_1}=x_{n_2}=\cdots=x.\]
 This subsequence $(x_{n_k})$ that we have constructed evidently converges to $x$.
 
@@ -278,7 +302,7 @@ We now construct a subsequence $(x_{n_k})$ of $(x_n)$ such that $x_{n_k}\to x$. 
 \end{proof}
 
 \begin{corollary}[Bolzano--Weierstrass]
-Every bounded sequence in $\RR^k$ contains a convergent subsequence.
+Every bounded sequence in $\RR^k$ has a convergent subsequence.
 \end{corollary}
 
 \begin{proof}
@@ -296,6 +320,7 @@ Choose $n_1$ so that $x_{n_1}\neq q$. (If no such $n_1$ exists, then $E$ has onl
 \[d(q,x_{n_k})<2^{1-i}\delta\]
 for $i=1,2,3,\dots$. This says that $(x_{n_k})$ converges to $q$. Hence $q\in E$.
 \end{proof}
+\pagebreak
 
 \subsection{Cauchy Sequences}
 This is a very helpful way to determine whether a sequence is convergent or divergent, as it does not require the limit to be known. In the future you will see many instances where the convergence of all sorts of limits are compared with similar counterparts; generally we describe such properties as \emph{Cauchy criteria}.
@@ -388,6 +413,7 @@ Let $n=2m$, then
 Hence $(x_n)$ is not a Cauchy sequence, so it does not converge.
 \end{proof}
 \end{example}
+\pagebreak
 
 \subsection{Monotonic Sequences}
 \begin{definition}[Monotonic sequence]
@@ -406,7 +432,9 @@ A monotonic sequence in $\RR$ converges if and only if it is bounded.
 \begin{proof}
 We show the case for monotically increasing sequences; the case for monotonically decreasing sequences is similar.
 
-\fbox{$\impliedby$} Suppose $(x_n)$ is a monotonically increasing sequence bounded above. Let $E$ be the range of $x_n$. By lub property of $\RR$, $E$ has a supremum in $\RR$; let $x=\sup E$.
+\fbox{$\implies$} We already proved that a convergent sequence is bounded.
+
+\fbox{$\impliedby$} Suppose $(x_n)$ is a monotonically increasing sequence bounded above. Let $E$ be the range of $x_n$. Since $E$ is bounded above, let $x=\sup E$.
 \begin{claim}
 $x_n\to x$.
 \end{claim}
@@ -416,6 +444,7 @@ otherwise $x-\epsilon$ would be an upper bound of $E$. Since $(x_n)$ is monotica
 \[x-\epsilon<x_n\le x,\]
 which implies $|x_n-x|<\epsilon$. Hence $x_n\to x$.
 \end{proof}
+\pagebreak
 
 \subsection{Limit Superior and Inferior}
 For divergent sequences, we have the following definition.
@@ -444,13 +473,13 @@ That is, limit superior is the ``largest'' subsequential limit; limit infimum is
 The limit superior and limit infimum exist due to the existence of supremum and infimum in $\overline{\RR}$.
 \end{remark}
 
-\begin{lemma}
-Equivalently, we can define the limit superior (limit inferior) as the limit of supremum (infimum) of tails:
+Equivalently, we can define limit superior (limit inferior) as the limit of supremum (infimum) of tails:
 \begin{align*}
-\limsup_{n\to\infty}x_n&=\lim_{n\to\infty}\brac{\sup_{k\ge n}x_k},\\
-\liminf_{n\to\infty}x_n&=\lim_{n\to\infty}\brac{\inf_{k\ge n}x_k}.
+\limsup_{n\to\infty}x_n&=\lim_{n\to\infty}\brac{\sup_{k\ge n}x_k}\\
+&=\lim_{n\to\infty}\brac{\sup\{a_n,a_{n+1},\dots\}}\\
+\liminf_{n\to\infty}x_n&=\lim_{n\to\infty}\brac{\inf_{k\ge n}x_k}\\
+&=\lim_{n\to\infty}\brac{\inf\{a_n,a_{n+1},\dots\}}\\
 \end{align*}
-\end{lemma}
 
 \begin{proposition}
 Suppose $(x_n)$ is a sequence in $\RR$. Then
@@ -543,6 +572,7 @@ The Cauchy criterion can be restated in the following form:
 $\sum a_n$ converges if and only if
 \[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall n\ge m\ge N,\quad\absolute{\sum_{k=m}^n a_k}\le\epsilon.\]
 \end{proposition}
+\pagebreak
 
 \subsection{Convergence Tests}
 To determine the convergence of a series, apart from using the definition and the Cauchy criterion, we also have the following methods:
@@ -757,23 +787,29 @@ Letting $m\to\infty$, we finally get
 \end{example}
 
 \begin{lemma}[Root test]\label{lemma:root-test}
-Given $\sum a_n$, put $\displaystyle\alpha=\limsup_{n\to\infty}\sqrt[n]{|a_n|}$. Then
+Given $\sum a_n$, let $\displaystyle\alpha=\limsup_{n\to\infty}\sqrt[n]{|a_n|}$.
 \begin{enumerate}[label=(\roman*)]
-\item if $\alpha<1$, $\sum a_n$ converges;
-\item if $\alpha>1$, $\sum a_n$ diverges;
-\item if $\alpha=1$, the test gives no information.
+\item If $\alpha<1$, $\sum a_n$ converges.
+\item If $\alpha>1$, $\sum a_n$ diverges.
+\item If $\alpha=1$, the test gives no information.
 \end{enumerate}
 \end{lemma}
 
+\begin{remark}
+We use limsup since the limsup of a sequence always exists (in $\overline{\RR}$), while the limit may not necessarily exist.
+\end{remark}
+
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item If $\alpha>1$, we can choose $\beta$ so that $\alpha<\beta<1$, and $n\in\NN$ such that for all $n\ge N$,
-\[\sqrt[n]{|a_n|}<\beta.\]
-by Theorem 3.17(b). Since $0<\beta<1$, $\sum\beta^n$ converges. Hence by the comparison test, $\sum a_n$ converges.
+\item If $\alpha<1$, choose $\beta$ such that $\alpha<\beta<1$. Since $\displaystyle\beta>\limsup_{n\to\infty}\sqrt[n]{|a_n|}$, there exists $n\in\NN$ such that for all $n\ge N$,
+\[\sqrt[n]{|a_n|}<\beta,\]
+or
+\[|a_n|<\beta^n.\]
+Note that $\sum\beta^n$ converges since $0<\beta<1$. By the comparison test, $\sum a_n$ converges.
 
-\item If $\alpha>1$, by Theorem 3.17, there is a sequence $(n_k)$ such that
+\item If $\alpha>1$, $\displaystyle\limsup_{n\to\infty}\sqrt[n]{|a_n|}>1$, so there exists a subsequence $(a_{n_k})$ such that
 \[\sqrt[n_k]{|a_{n_k}|}\to\alpha.\]
-Hence $|a_n|>1$ for infinitely many values of $n$ so that the condition $a_n\to0$, necessary for convergence of $\sum a_n$, does not hold (Theorem 3.23).
+Thus $|a_n|>1$ for infinitely many values of $n$. Hence $a_n\not\to0$, so by the divergence test, $\sum a_n$ diverges.
 
 \item Consider the series $\sum\frac{1}{n}$ and $\sum\frac{1}{n^2}$. For each of these series $\alpha=1$, but the first diverges, the second converges. Hence the condition that $\alpha=1$ does not give us information on the convergence of a series.
 \end{enumerate}
@@ -783,7 +819,7 @@ Hence $|a_n|>1$ for infinitely many values of $n$ so that the condition $a_n\to0
 The series $\sum a_n$
 \begin{enumerate}[label=(\roman*)]
 \item converges if $\displaystyle\limsup_{n\to\infty}\absolute{\frac{a_{n+1}}{a_n}}<1$;
-\item diverges if $\displaystyle\absolute{\frac{a_{n+1}}{a_n}}\ge1$ for all $n\ge n_0$, where $n_0$ is some fixed integer.
+\item diverges if $\displaystyle\absolute{\frac{a_{n+1}}{a_n}}\ge1$ for all $n\ge N_0$ (where $N_0$ is some fixed integer).
 \end{enumerate}
 \end{lemma}
 
@@ -791,19 +827,29 @@ The series $\sum a_n$
 \begin{enumerate}[label=(\roman*)]
 \item If $\displaystyle\limsup_{n\to\infty}\absolute{\frac{a_{n+1}}{a_n}}<1$, there exists $\beta<1$ and $N\in\NN$ such tht for all $n\ge N$,
 \[\absolute{\frac{a_{n+1}}{a_n}}<\beta.\]
-In particular, from $n=N$ to $n=N+p$,
+In particular, from $n=N$ to $n=N+k$,
 \begin{align*}
 |a_{N+1}|&<\beta|a_N|\\
 |a_{N+2}|&<\beta|a_{N+1}|<\beta^2|a_N|\\
 &\vdots\\
-|a_{N+p}|&<\beta^p|a_N|
+|a_{N+k}|&<\beta^k|a_N|
 \end{align*}
 Hence for all $n\ge N$,
-\[|a_n|<|a_N|\beta^{-N}\cdot\beta^n.\]
-Since $\sum\beta^n$ converges, by the comparison test, $\sum a_n$ converges.
-\item Suppose $\displaystyle\absolute{\frac{a_{n+1}}{a_n}}\ge1$ for all $n\ge n_0$, where $n_0$ is some fixed integer. Then $|a_{n+1}|\ge|a_n|$ for $n\ge n_0$, and it is easily seen that $a_n\not\to0$, so $\sum a_n$ diverges.
+\begin{align*}
+|a_n|&<|a_N|\beta^{n-N}\\
+&=\brac{|a_N|\beta^{-N}}\beta^n
+\end{align*}
+and taking the sum gives
+\[\sum|a_n|<|a_N|\beta^{-N}\sum\beta^n.\]
+Since $\beta<1$, $\sum\beta^n$ converges. By the comparison test, $\sum a_n$ converges.
+
+\item Suppose $\displaystyle\absolute{\frac{a_{n+1}}{a_n}}\ge1$ for all $n\ge N_0$. Then $|a_{n+1}|\ge|a_n|$ for $n\ge N_0$, so $a_n\not\to0$. By the divergence test, $\sum a_n$ diverges.
 \end{enumerate}
 \end{proof}
+
+\begin{remark}
+The ratio test is easier to apply than the root test (since it is usually easier to compute ratios than $n$-th roots), but the root test is more powerful, as shown by Theorem 3.37 of \cite{rudin}.
+\end{remark}
 
 The series $\sum a_n$ is said to \emph{converge absolutely} if the series $\sum|a_n|$ converges.
 
@@ -812,51 +858,29 @@ If $\sum a_n$ converges absolutely, then $\sum a_n$ converges.
 \end{lemma}
 
 \begin{proof}
-
+Suppose $\sum a_n$ converges absolutely; that is, $\sum|a_n|$ converges. Using the Cauchy criterion, fix $\epsilon>0$, there exists $N\in\NN$ such that for all $n\ge m\ge N$,
+\[\absolute{\sum_{k=m}^{n}|a_k|}<\epsilon.\]
+Since all the terms are non-negative, we can simply write
+\[\sum_{k=m}^{n}|a_k|<\epsilon.\]
+By the triangle inequality,
+\[\absolute{\sum_{k=m}^{n}a_k}\le\sum_{k=m}^{n}|a_k|<\epsilon.\]
+Hence by the Cauchy criterion, $\sum a_n$ converges.
 \end{proof}
 
-\begin{example}[Power series] \
-Given a sequence $(c_n)$ of complex numbers, the series
-\[\sum_{n=0}^{\infty}c_nz^n\]
-is called a \vocab{power series}. The numbers $c_n$ are called the \emph{coefficients} of the series.
+Note that the converse may not necessarily be true. We say that $\sum a_n$ is \emph{conditionally convergent} if it converges, but does not converge absolutely.
 
-In general, the series will converge or diverge, depending on the choice of $z$. More specifically, with every power series there is associated a circle, the circle of convergence, such that $\sum c_nz^n$ converges if $z$ is in the interior of the circle and diverges if $z$ is in the exterior.
-
-\begin{proposition*}
-Given the power series $\sum c_nz^n$, let
-\[\alpha=\limsup_{n\to\infty}\sqrt[n]{|c_n|},\quad R=\frac{1}{\alpha}.\]
-(If $\alpha=0$, $R=+\infty$; if $\alpha=+\infty$, $R=0$.) Then $\sum c_nz^n$
-\begin{enumerate}[label=(\roman*)]
-\item converges if $|z|<R$,
-\item diverges if $|z|>R$.
-\end{enumerate}
-\end{proposition*}
-
-$R$ is called the \emph{radius of convergence} of $\sum c_nz^n$.
-
-\begin{proof}
-Put $a_n=c_nz^n$, then apply the root test:
-\begin{align*}
-\limsup_{n\to\infty}\sqrt[n]{|a_n|}
-&=\limsup_{n\to\infty}\sqrt[n]{|c_nz^n|}\\
-&=|z|\limsup_{n\to\infty}\sqrt[n]{|c_n|}\\
-&=|z|\alpha\\
-&=\frac{|z|}{R}.
-\end{align*}
-\begin{enumerate}[label=(\roman*)]
-\item If $|z|<R$, then $\displaystyle\limsup_{n\to\infty}\sqrt[n]{|a_n|}<1$. By the root test, $\sum c_nz^n$ converges.
-\item If $|z|>R$, then $\displaystyle\limsup_{n\to\infty}\sqrt[n]{|a_n|}>1$. By the root test, $\sum c_nz^n$ diverges.
-\end{enumerate}
-\end{proof}
-
-Further properties of power series will be discussed in \cref{chap:special-functions}.
+\begin{example}
+The alternating harmonic series given by
+\[\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\]
+converges to $\ln 2$, but it is not absolutely convergent (since the harmonic series diverges).
 \end{example}
+\pagebreak
 
 \subsection{Summation by Parts}
-\begin{proposition}[Partial summation formula]
-Given two sequences $(a_n)$ and $(b_n)$, put
+\begin{proposition}[Partial summation formula]\label{prop:part-sum-formula}
+Given two sequences $(a_n)$ and $(b_n)$, let the $n$-partial sum of $(a_n)$ be denoted by
 \[A_n=\sum_{k=0}^{n}a_k\]
-if $n\ge0$; put $A_{-1}=0$. Then, if $0\le p\le q$, we have
+for $n\ge0$; let $A_{-1}=0$. Then, if $0\le p\le q$, we have
 \[\sum_{n=p}^{q}a_nb_n=\sum_{n=p}^{q-1}A_n(b_n-b_{n+1})+A_qb_q-A_{p-1}b_p.\]
 \end{proposition}
 
@@ -872,38 +896,75 @@ The RHS can be written as
 which is equal to the LHS.
 \end{proof}
 
-\begin{proposition}
-Suppose the partial sums $A_n$ of $\sum a_n$ form a bounded sequence, $b_0\ge b_1\ge b_2\ge\cdots$, and $\displaystyle\lim_{n\to\infty}b_n=0$. Then $\sum a_nb_n=0$.
+\begin{proposition}\label{prop:part-sum-limit}
+Suppose $(a_n)$ and $(b_n)$ are sequences such that
+\begin{itemize}
+\item the partial sums $A_n$ of $\sum a_n$ form a bounded sequence,
+\item $b_0\ge b_1\ge b_2\ge\cdots$,
+\item $b_n\to0$.
+\end{itemize}
+Then $\sum a_nb_n=0$.
 \end{proposition}
 
 \begin{proof}
-
+Since the partial sums $A_n$ form a bounded sequence, there exists $M$ such that
+\[|A_n|\le M\quad(\forall n\in\NN)\]
+Since $b_n\to0$, fix $\epsilon>0$, there exists $N\in\NN$ such that
+\[b_N\le\frac{\epsilon}{2M}.\]
+For $q\ge p\ge N$, by the partial summation formula, we have
+\begin{align*}
+\absolute{\sum_{n=p}^{q}a_nb_n}
+&=\absolute{\sum_{n=p}^{q-1}A_n(b_n-b_{n+1})+A_qb_q-A_{p-1}b_p}\\
+&\le M\absolute{\sum_{n=p}^{q-1}(b_n-b_{n+1})+b_q+b_p}\quad[\because |A_n|\le M]\\
+&=M\absolute{(b_p-b_q)+b_q+b_p}=2Mb_p\le 2Mb_n\le\epsilon.
+\end{align*}
+By the Cauchy criterion, $\sum a_nb_n$ converges to $0$.
 \end{proof}
 
-\begin{proposition}
-Suppose $|c_1|\ge|c_2|\ge|c_3|\ge\cdots$, $c_{2m-1}\ge0,c_{2m}\le0$ for $m=1,2,3,\dots$, and $\displaystyle\lim_{n\to\infty}c_n=0$. Then $\sum c_n$ converges.
-\end{proposition}
+\begin{corollary}[Alternating series test]
+Suppose $(c_n)$ is a sequence such that
+\begin{itemize}
+\item $|c_1|\ge|c_2|\ge|c_3|\ge\cdots$,
+\item $c_{2m-1}\ge0,c_{2m}\le0$ for $m=1,2,3,\dots$,
+\item $c_n\to0$.
+\end{itemize}
+Then $\sum c_n=0$.
+\end{corollary}
+
+\begin{proof}
+Let
+\[a_n=(-1)^{n+1},\quad b_n=|c_n|.\]
+Note that
+\begin{itemize}
+\item the partial sums of $(a_n)$ are 0s and 1s, so they are bounded;
+\item $b_0\ge b_1\ge b_2\ge\cdots$ holds by assumption;
+\item $c_n\to0$ implies $|c_n|\to0$, so $b_n\to0$.
+\end{itemize}
+Then by \cref{prop:part-sum-limit}, we have that $\sum a_nb_n=0$, so $\sum c_n=0$.
+\end{proof}
+\pagebreak
 
 \subsection{Addition and Multiplication of Series}
 \begin{proposition}
 If $\sum a_n=A$ and $\sum b_n=B$, then
 \begin{enumerate}[label=(\roman*)]
-\item $\sum(a_n+b_n)=A+B$,
-\item $\sum ca_n=cA$ for any fixed $c$.
+\item $\sum(a_n+b_n)=A+B$,\hfill(addition)
+\item $\sum ca_n=cA$ for some constant $c$.\hfill(scalar multiplication)
 \end{enumerate}
 \end{proposition}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item Let $A_n=\sum_{k=0}^{n}a_k$, $B_n=\sum_{k=0}^{n}b_k$. Then
-\[A_n+B_n=\sum_{k=0}^{n}(a_k+b_k).\]
-Since $\lim_{n\to\infty}A_n=A$ and $\lim_{n\to\infty}B_n=B$, we see that
-\[\lim_{n\to\infty}(A_n+B_n)=A+B.\]
-\item 
+\item Let the $n$-th partial sums be denoted by
+\[A_n=\sum_{k=0}^{n}a_k,\quad B_n=\sum_{k=0}^{n}b_k.\]
+Then
+\[\lim_{n\to\infty}\sum_{k=0}^{n}(a_k+b_k)=\lim_{n\to\infty}(A_n+B_n)=\lim_{n\to\infty}A_n+\lim_{n\to\infty}B_n=A+B.\]
+\item Simply factor out the constant $c$:
+\[\lim_{n\to\infty}\sum_{k=0}^{n}ca_k=c\lim_{n\to\infty}\sum_{k=0}^{n}a_k=cA.\]
 \end{enumerate}
 \end{proof}
 
-Thus two convergent series may be added term by term, and the resulting series converges to the sum of the two series. The situation becomes more complicated when we consider multiplication of two series. To begin with, we have to define the product. This can be done in several ways; we shall consider the so-called ``Cauchy product''. 
+The situation becomes more complicated when we consider multiplication of two series. To begin with, we have to define the product. This can be done in several ways; we shall consider the so-called ``Cauchy product''. 
 
 \begin{definition}[Cauchy product]
 Given $\sum a_n$ and $\sum b_n$, let
@@ -913,58 +974,70 @@ We call $\sum c_n$ the \emph{product} of the two given series.
 
 This definition may be motivated as follows. If we take two power series $\sum a_nz^n$ and $\sum b_nz^n$, multiply them term by term, and collect terms containing the same power of $z$, we get
 \begin{align*}
-\sum_{n=0}^{\infty}a_nz^n\cdot\sum_{n=0}^{\infty}b_nz^n
+\brac{\sum_{n=0}^{\infty}a_nz^n}\brac{\sum_{n=0}^{\infty}b_nz^n}
 &=\brac{a_0+a_1z+a_2z^2+\cdots}\brac{b_0+b_1z+b_2z^2+\cdots}\\
 &=a_0b_0+(a_0b_1+a_1b_0)z+(a_0b_2+a_1b_1+a_2b_0)z^2+\cdots\\
-&=c_0+c_1z+c_2z^2.
+&=c_0+c_1z+c_2z^2+\cdots
 \end{align*}
-Setting $z=1$, we arrive at the above definition. 
+Setting $z=1$, we arrive at the above definition.
 
-\begin{theorem}[Mertens]
-Suppose $\sum a_n=A$, $\sum b_n=B$, $\sum a_n$ converges absolutely. Then their Cauchy product converges to $AB$.
-\end{theorem}
+Note that $\sum c_n$ may not converge, even if $\sum a_n$ and $\sum b_n$ do. However $\sum c_n$ converges if an additional condition is imposed: at least one of the two series converges absolutely.
 
-That is, the product of two convergent series converges, and to the right value, if at least one of the two series converges absolutely.
+\begin{proposition}[Mertens' theorem]
+Suppose $\sum a_n=A$, $\sum b_n=B$, and $\sum a_n$ converges absolutely. Then their Cauchy product converges to $AB$.
+\end{proposition}
 
 \begin{proof}
-Let $\displaystyle A_n=\sum_{k=0}^{n}a_k$, $\displaystyle B_n=\sum_{k=0}^{n}b_k$, $\displaystyle C_n=\sum_{k=0}^{n}c_k$. Also let $\beta_n=B_n-B$. Then 
+Let $\sum c_n$ be the Cauchy product of $\sum a_n$ and $\sum b_n$. Let the $n$-th partial sums be denoted by
+\[A_n=\sum_{k=0}^{n}a_k,\quad B_n=\sum_{k=0}^{n}b_k,\quad C_n=\sum_{k=0}^{n}c_k.\]
+Also let $\beta_n=B_n-B$. Then 
 \begin{align*}
 C_n&=a_0b_0+(a_0b_1+a_1b_0)+\cdots+(a_0b_n+a_1b_{n-1}+\cdots+a_nb_0)\\
 &=a_0B_n+a_1B_{n-1}+\cdots+a_nB_0\\
 &=a_0(B+\beta_n)+a_1(B+\beta_{n-1})+\cdots+a_n(B+\beta_0)\\
-&=A_nB+a_0\beta_n+a_1\beta_{n-1}+\cdots+a_n\beta_0.
+&=A_nB+(a_0\beta_n+a_1\beta_{n-1}+\cdots+a_n\beta_0)
 \end{align*}
-Let
-\[\gamma_n=a_0\beta_n+a_1\beta_{n-1}+\cdots+a_n\beta_0.\]
-We wish to show that $C_n\to AB$. Since $A_nB\to AB$, it suffices to show that $\displaystyle\lim_{n\to\infty}\gamma_n=0$.
+Our goal is to show that $C_n\to AB$. Since $A_nB\to AB$, it suffices to show that
+\[\gamma_n=a_0\beta_n+a_1\beta_{n-1}+\cdots+a_n\beta_0\to0.\]
 
-Let 
-\[\alpha=\sum_{n=0}^{\infty}|a_n|.\]
-Let $\epsilon>0$. Since $B_n\to B$, $\beta_n\to0$. Hence we can choose $N\in\NN$ such that for all $n\ge N$, $|\beta_n|\le\epsilon$, in which case
+We now use the absolute convergence of $(a_n)$; let $\alpha=\sum|a_n|$. Fix $\epsilon>0$, there exists $N_1\in\NN$ such that
+\[n\ge N_1\implies \sum_{k=0}^{n}|a_k|-\alpha<\epsilon\]
+since the terms are non-negative. Since $B_n\to B$, $\beta_n\to0$. Then there exists $N_2\in\NN$ such that
+\[n\ge N_2\implies|\beta_n|\le\epsilon.\]
+Let $N=\max\{N_1,N_2\}$. Then for $n\ge N$, by triangle inequality,
 \begin{align*}
-|\gamma_n|&=|\beta_0a_n+\cdots+\beta_Na_{n-N}|+|\beta_{N+1}a_{n-N}a_{n-N-1}+\cdots+\beta_na_0|\\
+|\gamma_n|&=|\beta_0 a_n+\cdots+\beta_n a_0|\\
+&\le|\beta_0a_n+\cdots+\beta_Na_{n-N}|+|\beta_{N+1}a_{n-N-1}+\cdots+\beta_na_0|\\
+&\le|\beta_0a_n+\cdots+\beta_Na_{n-N}|+\epsilon(|a_{n-N-1}|+\cdots+|a_0|)\\
 &\le|\beta_0a_n+\cdots+\beta_Na_{n-N}|+\epsilon\alpha.
 \end{align*}
 Keeping $N$ fixed, and letting $n\to\infty$, we get
 \[\limsup_{n\to\infty}|\gamma_n|\le\epsilon\alpha,\]
-sine $a_k\to0$ as $k\to\infty$. Since $\epsilon$ is arbitrary, we have $\displaystyle\lim_{n\to\infty}\gamma_n=0$, as desired.
+sine $a_n\to0$. Since $\epsilon$ is arbitrary, we have $\gamma_n\to0$, as desired.
 \end{proof}
 
-\begin{theorem}[Abel]
-Let the series $\sum a_n$, $\sum b_n$, $\sum c_n$ converge to $A$, $B$, $C$ respectively, and $\sum c_n$ is the Cauchy product of $\sum a_n$ and $\sum b_n$. Then $C=AB$.
-\end{theorem}
+\begin{proposition}[Abel's theorem]
+Let $\sum a_n=A$, $\sum b_n=B$, $\sum c_n=C$, where $\sum c_n$ is the Cauchy product of $\sum a_n$ and $\sum b_n$. Then $C=AB$.
+\end{proposition}
+\pagebreak
 
 \subsection{Rearrangements}
 \begin{definition}[Rearrangement]
-Let $(k_n)$ be a sequence in which every positive integer appears once and only once. Putting
+Let $(k_n)$ be a sequence in which every positive integer appears once and only once. Let
 \[a_n^\prime=a_{k_n}\quad(\forall n\in\NN)\]
-we say that $\sum a_n^\prime$ is a \emph{rearrangement} of $\sum a_n$.
+We say that $\sum a_n^\prime$ is a \emph{rearrangement} of $\sum a_n$.
 \end{definition}
 
-\begin{proposition}
+If $(s_n)$ and $(s_n^\prime)$ are the sequences of partial sums of $(a_n)$ and $(a_n^\prime)$ respectively, it is easily seen that, in general, these two sequences consist of entirely different numbers. We are thus led to the problem of determining under what conditions all rearrangements of a convergent series will converge and whether the sums are necessarily the same.
+
+\begin{proposition}[Riemann]
 Let $\sum a_n$ be a series of real numbers which converges, but not absolutely. Suppose $-\infty\le\alpha\le\beta\le\infty$. Then there exists a rearrangement $\sum a_n^\prime$ with partial sums $s_n^\prime$ such that
 \[\liminf_{n\to\infty}s_n^\prime=\alpha,\quad\limsup_{n\to\infty}s_n^\prime=\beta.\]
 \end{proposition}
+
+\begin{proof}
+\todo{to do}
+\end{proof}
 
 \begin{proposition}
 If $\sum a_n$ is a series of complex numbers which converges absolutely, then every rearrangement of $\sum a_n$ converges, and they all converge to the same sum.
@@ -972,7 +1045,8 @@ If $\sum a_n$ is a series of complex numbers which converges absolutely, then ev
 \pagebreak
 
 \section*{Exercises}
-\begin{prbm}
+\addcontentsline{toc}{section}{Exercises}
+\begin{exercise}
 Show the following:
 \begin{enumerate}[label=(\roman*)]
 \item $\displaystyle\lim_{n\to\infty}\frac{1}{n^p}=0$ ($p>0$)
@@ -981,7 +1055,7 @@ Show the following:
 \item $\displaystyle\lim_{n\to\infty}\frac{n^\alpha}{(1+p)^n}=0$ ($p>0$, $\alpha\in\RR$)
 \item $\displaystyle\lim_{n\to\infty}x^n=0$ ($|x|<1$)
 \end{enumerate}
-\end{prbm}
+\end{exercise}
 
 \begin{solution} \
 \begin{enumerate}[label=(\roman*)]
@@ -997,17 +1071,54 @@ If $p>1$,
 \end{enumerate}
 \end{solution}
 
-\begin{prbm}
+\begin{exercise}
 Let $(x_n)$ be a sequence in $\RR$, let $\alpha\ge2$ be a constant. Define the sequence $(y_n)$ as follows:
 \[y_n=x_n+\alpha x_{n+1}\quad(n=1,2,\dots)\]
 Show that if $(y_n)$ is convergent, then $(x_n)$ is also convergent.
-\end{prbm}
+\end{exercise}
 
-\begin{prbm}[Contractive sequence]
+\begin{exercise}[\cite{rudin} 3.1]
+Prove that the convergence of $(x_n)$ implies the convergence of $(|x_n|)$. Is the converse true?
+\end{exercise}
+
+\begin{solution}
+Let $\epsilon>0$ be given. Since $(x_n)$ is a Cauchy sequence, there exists $N\in\NN$ such that for all $n,m\ge N$,
+\[|x_n-x_m|<\epsilon.\]
+See that
+\[\absolute{|x_n|-|x_m|}\le|x_n-x_m|<\epsilon,\]
+so $(|x_n|)$ is a Cauchy sequence, and therefore must converge.
+
+The converse is not true, as shown by the sequence $(x_n)$ with $x_n=(-1)^n$.
+\end{solution}
+
+\begin{exercise}[\cite{rudin} 3.3]
+The sequence $(x_n)$ is recursively defined by
+\[\begin{cases}
+x_0=\sqrt{2},\\
+x_{n+1}=\sqrt{2+x_n}\quad n\ge0.
+\end{cases}\]
+Show that $(x_n)$ converges.
+\end{exercise}
+
+\begin{solution}
+We first prove by induction that $x_n\le x_{n+1}\le 2$ for all $n\in\NN$. For $n=0$,
+\[x_0=\sqrt{2}\le\sqrt{2+\sqrt{2}}=x_1\le\sqrt{2+\sqrt{4}}=2.\]
+If $x_{n-1}\le x_n\le 2$, then
+\[x_n=\sqrt{2+x_{n-1}}\le\sqrt{2+x_n}=x_{n+1}\le\sqrt{2+2}=2.\]
+Hence $(x_n)$ is monotonically increasing and bounded above by $2$. By the monotone convergence theorem, $(x_n)$ converges; let $x_n\to x$. Applying the limit on both sides of $x_{n+1}=\sqrt{2+x_n}$,
+\begin{align*}
+\lim_{n\to\infty}x_{n+1}&=\lim_{n\to\infty}\sqrt{2+x_n}\\
+x&=\sqrt{2+x}\\
+x&=2\text{ or }1
+\end{align*}
+Since all $x_n\ge0$, we must have $x=2$.
+\end{solution}
+
+\begin{exercise}[Contractive sequence]
 A sequence $(x_n)$ in $\RR$ is \emph{contractive} if there exists $k\in[0,1)$ such that
 \[|x_{n+2}-x_{n+1}|\le k|x_{n+1}-x_n|\quad(\forall n\in\NN)\]
 Show that every contractive sequence is convergent.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 By induction on $n$, we have
@@ -1022,25 +1133,33 @@ Thus
 for all $n,p\in\NN$. Since $k^{n-1}\to0$ as $n\to\infty$ (independently of $p$), this implies $(a_n)$ is a Cauchy sequence (in $\RR$) and, hence, it is convergent.
 \end{solution}
 
-\begin{prbm}
-The sequence $(x_n)$ is recursively defined by
-\[\begin{cases}
-x_0=\sqrt{2},\\
-x_{n+1}=\sqrt{2+x_n}\quad n\ge0.
-\end{cases}\]
-Show that $(x_n)$ converges.
-\end{prbm}
+\begin{exercise}[\cite{rudin} 3.4]
+Find the limit superior and limit inferior of the sequence $(x_n)$ defined by
+\[x_1=0,\quad x_{2m}=\frac{x_{2m-1}}{2},\quad x_{2m+1}=x_{2m}+\frac{1}{2}.\]
+\end{exercise}
 
-\begin{proof}
-We first prove by induction that $x_n\le x_{n+1}\le 2$ for all $n\in\NN$. For $n=0$,
-\[x_0=\sqrt{2}\le\sqrt{2+\sqrt{2}}=x_1\le\sqrt{2+\sqrt{4}}=2.\]
-If $x_{n-1}\le x_n\le 2$, then
-\[x_n=\sqrt{2+x_{n-1}}\le\sqrt{2+x_n}=x_{n+1}\le\sqrt{2+2}=2.\]
-Hence $(x_n)$ is monotonically increasing and bounded above by $2$. By the monotone convergence theorem, $(x_n)$ converges; let $x_n\to x$. Applying the limit on both sides of $x_{n+1}=\sqrt{2+x_n}$,
-\begin{align*}
-\lim_{n\to\infty}x_{n+1}&=\lim_{n\to\infty}\sqrt{2+x_n}\\
-x&=\sqrt{2+x}\\
-x&=2\text{ or }1
-\end{align*}
-Since all $x_n\ge0$, we must have $x=2$.
-\end{proof}
+\begin{solution}
+We shall prove by induction that
+\[x_{2m}=\frac{1}{2}-\frac{1}{2^m},\quad x_{2m+1}=1-\frac{1}{2^m}\]
+for $m=1,2,\dots$. The second of these equalities is a direct consequence of the first, and so we need only prove the first. Immediate computation shows that $x_2=0$ and $x_3=\frac{1}{2}$. Hence assume that both formulae holds for $m\le r$. Then
+\[x_{2r+2}=\frac{1}{2}x_{2r+1}=\frac{1}{2}\brac{1-\frac{1}{2^r}}=\frac{1}{2}-\frac{1}{2^{r+1}}.\]
+This completes the induction. We thus have $\displaystyle\limsup_{n\to\infty}x_n=1$ and $\displaystyle\liminf_{n\to\infty}x_n=\frac{1}{2}$.
+\end{solution}
+
+\begin{exercise}[\cite{rudin} 3.7]
+Prove that the convergence of $\sum a_n$ implies the convergence of
+\[\sum\frac{\sqrt{a_n}}{n}\]
+if $a_n\ge0$.
+\end{exercise}
+
+\begin{exercise}[\cite{rudin} 3.8]
+If $\sum a_n$ converges, and if $(b_n)$ is monotonic and bounded, prove that $\sum a_nb_n$ converges.
+\end{exercise}
+
+\begin{exercise}[\cite{rudin} 3.13]
+Prove that the Cauchy product of two absolutely convergent series converges absolutely.
+\end{exercise}
+
+\begin{exercise}[\cite{rudin} 3.23]
+Suppose $(p_n)$ and $(q_n)$ are Cauchy sequences in a metric space $X$. Show that the sequence $\brac{d(p_n,q_n)}$ converges.
+\end{exercise}

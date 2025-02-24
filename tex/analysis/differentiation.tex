@@ -1,0 +1,404 @@
+\chapter{Differentiation}\label{chap:differentiation}
+\section{The Derivative of A Real Function}
+\begin{definition}[Derivative]
+Suppose $f:[a,b]\to\RR$. For any $x\in[a,b]$, if the limit
+\[\lim_{t\to x}\frac{f(t)-f(x)}{t-x}\quad(a<t<b,t\neq x)\]
+exists, we call it the \vocab{derivative} of $f$, denoted by $f^\prime$. 
+If $f^\prime$ is defined at $x$, we say that $f$ is \vocab{differentiable} at $x$. If $f^\prime$ is defined at every point of $E\subset[a,b]$, we say that $f$ is \emph{differentiable on} $E$.
+
+$f$ is \emph{continuously differentiable} on $E$ if $f^\prime$ exists at every point of $E$, and $f^\prime$ is continuous on $E$.
+\end{definition}
+
+\begin{lemma}[Differentiability implies continuity]\label{lemma:diff-cont}
+If $f:[a,b]\to\RR$ is differentiable at $x\in[a,b]$, then $f$ is continuous at $x$.
+\end{lemma}
+
+\begin{proof}
+Suppose $f:[a,b]\to\RR$ is differentiable at $x\in[a,b]$. Then the limit $\displaystyle\lim_{t\to x}\frac{f(t)-f(x)}{t-x}$ exists. Thus by arithmetic properties of limits,
+\begin{align*}
+\lim_{t\to x}[f(t)-f(x)]
+&=\lim_{t\to x}\sqbrac{\frac{f(t)-f(x)}{t-x}\cdot(t-x)}\\
+&=\lim_{t\to x}\frac{f(t)-f(x)}{t-x}\cdot\lim_{t\to x}(t-x)\\
+&=f^\prime(x)\cdot0=0.
+\end{align*}
+Since $\displaystyle\lim_{t\to x}f(t)=f(x)$, by \cref{lemma:continuity-limit}, $f$ is continuous at $x$.
+\end{proof}
+
+\begin{remark}
+The converse of \cref{lemma:diff-cont} is not true; it is easy to construct continuous functions which fail to be differentiable at isolated points.
+\end{remark}
+
+\begin{example}[Weierstrass function]
+Let $0<a<1$, let $b>1$ be an odd integer, and $ab>1+\frac{3}{2}\pi$. Then the function
+\[W(x)=\sum_{n=0}^{\infty}a^n\cos(b^n\pi x)\]
+is continuous and nowhere differentiable on $\RR$.
+\end{example}
+
+\begin{example}
+One family of pathological examples in calculus is functions of the form
+\[f(x)=x^p\sin\frac{1}{x}.\]
+For $p=1$, the function is continuous and differentiable everywhere other than $x=0$; for $p=2$, the function is differentiable everywhere, but the derivative is discontinuous.
+\end{example}
+
+\begin{notation}
+If $f$ has a derivative $f^\prime$ on an interval, and if $f^\prime$ is itself differentiable, we denote the derivative of $f^\prime$ by $f^{\prime\prime}$, and call $f^{\prime\prime}$ the \emph{second derivative} of $f$. Continuing in this manner, we obtain functions
+\[f,f^\prime,f^{\prime\prime},f^{(3)},f^{(4)},\dots,f^{(n)},\]
+each of which is the derivative of the preceding one. $f^{(n)}$ is called the $n$-th derivative (or the derivative or order $n$) of $f$.
+\end{notation}
+
+\begin{notation}
+$\mathcal{C}_1[a,b]$ denotes the set of differentiable functions over $[a,b]$ whose derivative is continuous. More generally, $\mathcal{C}_n[a,b]$ denotes the set of functions whose $n$-th derivative is continuous. In particular, $\mathcal{C}_0[a,b]$ is the set of continuous functions over $[a,b]$.
+\end{notation}
+
+\begin{lemma}[Differentiation rules]
+Suppose $f,g:[a,b]\to\RR$ are differentiable at $x\in[a,b]$. Then
+\begin{enumerate}[label=(\roman*)]
+\item For a constant $\alpha$, $\alpha f$ is differentiable at $x$, and\hfill(scalar multiplication)
+\[(\alpha f)^\prime(x)=\alpha f^\prime(x).\]
+\item $f+g$ is differentiable at $x$, and\hfill(addition)
+\[(f+g)^\prime(x)=f^\prime(x)+g^\prime(x).\]
+\item $fg$ is differentiable at $x$, and\hfill(product rule)
+\[(fg)^\prime(x)=f^\prime(x)g(x)+f(x)g^\prime(x).\]
+\item $\dfrac{f}{g}$ (when $g(x)\neq0$) is differentiable at $x$, and\hfill(quotient rule)
+\[\brac{\frac{f}{g}}^\prime(x)=\frac{f^\prime(x)g(x)-f(x)g^\prime(x)}{g(x)^2}.\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item \[(\alpha f)^\prime(x)=\lim_{t\to x}\frac{(\alpha f)(t)-(\alpha f)(x)}{t-x}=\alpha\lim_{t\to x}\frac{f(t)-f(x)}{t-x}=\alpha f^\prime(x).\]
+\item \begin{align*}
+(f\pm g)^\prime(x)
+&=\lim_{t\to x}\frac{(f+g)(t)-(f+g)(x)}{t-x}\\
+&=\lim_{t\to x}\frac{f(t)+g(t)-f(x)-g(x)}{t-x}\\
+&=\lim_{t\to x}\frac{f(t)-f(x)}{t-x}+\lim_{t\to x}\frac{g(t)-g(x)}{t-x}\\
+&=f^\prime(x)+g^\prime(x)
+\end{align*}
+
+\item \begin{align*}
+(fg)^\prime(x)
+&=\lim_{t\to x}\frac{(fg)(t)-(fg)(x)}{t-x}\\
+&=\lim_{t\to x}\frac{f(t)g(t)-f(x)g(x)}{t-x}\\
+&=\lim_{t\to x}\frac{\sqbrac{f(t)-f(x)}g(t)+f(x)\sqbrac{g(t)-g(x)}}{t-x}\\
+&=\lim_{t\to x}\frac{f(t)-f(x)}{t-x}\cdot g(t)+\lim_{t\to x}f(x)\cdot\frac{g(t)-g(x)}{t-x}\\
+&=f^\prime(x)g(x)+f(x)g^\prime(x)
+\end{align*}
+
+\item \begin{align*}
+\brac{\frac{f}{g}}^\prime(x)
+&=\lim_{t\to x}\frac{\brac{\frac{f}{g}}(t)-\brac{\frac{f}{g}}(x)}{t-x}\\
+&=\lim_{t\to x}\frac{1}{g(t)g(x)}\sqbrac{g(x)\cdot\frac{f(t)-f(x)}{t-x}-f(x)\cdot\frac{g(t)-g(x)}{t-x}}\\
+&=\frac{f^\prime(x)g(x)-f(x)g^\prime(x)}{g(x)^2}
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+By induction, we can obtain the following extensions of the differentiation rules.
+
+\begin{corollary}
+Suppose $f_1,f_2,\dots,f_n:[a,b]\to\RR$ are differentiable at $x\in[a,b]$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $f_1+f_2+\cdots+f_n$ is differentiable at $x$, and
+\[(f_1+f_2+\cdots+f_n)^\prime(x)={f_1}^\prime(x)+{f_2}^\prime(x)+\cdots+{f_n}^\prime(x).\]
+\item $f_1f_2\cdots f_n$ is differentiable at $x$, and
+\begin{align*}
+(f_1f_2\cdots f_n)^\prime(x)
+=&{f_1}^\prime(x)f_2(x)\cdots f_n(x)+f_1(x){f_2}^\prime(x)\cdots f_n(x)\\
+&+\cdots+f_1(x)f_2(x)\cdots {f_n}^\prime(x).
+\end{align*}
+\end{enumerate}
+\end{corollary}
+
+The next result concerns the derivative of composition of functions.
+
+\begin{lemma}[Chain rule]\label{lemma:chain-rule}
+Suppose $f$ is continuous on $[a,b]$, $f^\prime(x)$ exists at $x\in[a,b]$, $g$ is defined on $I$ that contains $f([a,b])$, and $g$ is differentiable at $f(x)$. Then $h=g\circ f$ is differentiable at $x$, and
+\begin{equation}
+h^\prime(x)=g^\prime\brac{f(x)}f^\prime(x).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By the definition of the derivative, we have
+\begin{equation*}\tag{1}
+f(t)-f(x)=(t-x)[f^\prime(x)+u(t)]
+\end{equation*}
+\begin{equation*}\tag{2}
+g(s)-g(f(x))=(s-f(x))[g^\prime(f(x))+v(s)]
+\end{equation*}
+where $t\in[a,b]$, $s\in I$, $\displaystyle\lim_{t\to x}u(t)=0$, $\displaystyle\lim_{s\to f(x)}v(s)=0$. ($u(t)$ and $v(s)$ can be viewed as some small error terms which eventually go to $0$.) Using first (2) and then (1), we obtain
+\begin{align*}
+h(t)-h(x)
+&=g\brac{f(t)}-g\brac{f(x)}\\
+&=[f(t)-f(x)]\cdot[g^\prime(f(x))+v(s)]\\
+&=(t-x)[f^\prime(x)+u(t)][g^\prime(f(x))+v(s)],
+\end{align*}
+or, if $t\neq x$,
+\[\frac{h(t)-h(x)}{t-x}=[g^\prime(f(x))+v(s)][f^\prime(x)+u(t)].\]
+Taking limits $t\to x$, we see that $u(t)$ and $v(s)$ eventually go to $0$, so
+\[h^\prime(x)=\lim_{t\to x}\frac{h(t)-h(x)}{t-x}=g^\prime\brac{f(x)}f^\prime(x)\]
+as desired.
+\end{proof}
+
+Later on when we talk about properties of differentiation such as the intermediate value theorems, we usually have the following requirement on the function:
+\begin{quote}
+$f$ is continuous on $[a,b]$, differentiable on $(a,b)$.
+\end{quote}
+\pagebreak
+
+\section{Mean Value Theorems}
+Let $(X,d)$ be a metric space.
+
+\begin{definition}[Local maximum and minimum]
+$f:X\to\RR$ has
+\begin{enumerate}[label=(\roman*)]
+\item a \vocab{local maximum} at $x_0\in X$ if there exists $\delta>0$ such that $f(x_0)\ge f(x)$ for all $x\in B_\delta(x_0)$;
+\item a \vocab{local minimum} at $x_0\in X$ if there exists $\delta>0$ such that $f(x_0)\le f(x)$ for all $x\in B_\delta(x_0)$.
+\end{enumerate}
+\end{definition}
+
+Our next result is the basis of many applications of differentiation. 
+
+\begin{lemma}[Fermat's theorem]
+Suppose $f:[a,b]\to\RR$. If $f$ has a local maximum or minimum at $x\in(a,b)$, and if $f^\prime(x)$ exists, then
+\[f^\prime(x)=0.\]
+\end{lemma}
+
+\begin{proof}
+We prove the case for local maxima; the proof for the case for local minima is similar.
+
+Since $x$ is a local maximum, choose $\delta>0$ such that
+\[a<x-\delta<x<x+\delta<b,\]
+and $f(x)\ge f(t)$ for all $x-\delta<t<x+\delta$. 
+\begin{itemize}
+\item If $x-\delta<t<x$, then
+\[\frac{f(t)-f(x)}{t-x}\ge0.\]
+Letting $t\to x$, we see that $f^\prime(x)\ge0$.
+\item If $x<t<x+\delta$, then
+\[\frac{f(t)-f(x)}{t-x}\le0.\]
+Letting $t\to x$, wee see that $f^\prime(x)\ge0$.
+\end{itemize}
+Hence $f^\prime(x)\ge0$.
+\end{proof}
+
+\begin{theorem}[Rolle's theorem]\label{thrm:rolle}
+Suppose $f$ is continuous on $[a,b]$, differentiable in $(a,b)$. If $f(a)=f(b)$, then there exists $c\in(a,b)$ such that 
+\[f^\prime(c)=0.\]
+\end{theorem}
+
+The idea is to show that $f$ has a local maximum/minimum, then by Fermat's theorem this will then be the stationary point that we're trying to find.
+
+\begin{proof}
+Since $f$ is continuous on $[a,b]$, by the extreme value theorem (\cref{thrm:extreme-value}), $f$ attains its maximum $M$ and minimum $m$.
+\begin{itemize}
+\item If $M$ and $m$ both equal $f(a)=f(b)$, then $f$ is simply a constant function; hence $f^\prime(x)=0$ for all $x\in[a,b]$.
+
+\item Otherwise, $f$ has a maximum/minimum that does not equal $f(a)=f(b)$. Then there exists $c\in(a,b)$ such that $f(c)$ is a local maximum/minimum. Since $f$ is differentiable on $(a,b)$, $f^\prime(c)$ exists, so by Fermat's theorem, $f^\prime(c)=0$.
+\end{itemize}
+\end{proof}
+
+\begin{theorem}[Generalised mean value theorem]\label{thrm:generalised-mvt}
+Suppose $f$ and $g$ are continuous on $[a,b]$ and differentiable in $(a,b)$. Then there exists $c\in(a,b)$ such that
+\begin{equation}
+[f(b)-f(a)]g^\prime(c)=[g(b)-g(a)]f^\prime(c).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For $t\in[a,b]$, consider the \emph{auxilliary function}
+\[h(t)=[f(b)-f(a)]g(t)-[g(b)-g(a)]f(t).\]
+Then $h$ is continuous on $[a,b]$, and $h$ is differentiable on $(a,b)$. Moreover,
+\[h(a)=f(b)g(a)-f(a)g(b)=h(b).\]
+By Rolle's theorem, there exists $c\in(a,b)$ such that $h^\prime(c)=0$; that is,
+\[[f(b)-f(a)]g^\prime(c)=[g(b)-g(a)]f^\prime(c)\]
+as desired.
+\end{proof}
+
+\begin{theorem}[Mean value theorem]\label{thrm:mvt}
+Suppose $f$ is continuous on $[a,b]$ and differentiable in $(a,b)$. Then there exists $c\in(a,b)$ such that
+\begin{equation}
+f(b)-f(a)=f^\prime(c)(b-a).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Take $g(x)=x$ in \cref{thrm:generalised-mvt}.
+\end{proof}
+
+\begin{lemma}
+Suppose $f$ is differentiable in $(a,b)$.
+\begin{enumerate}[label=(\roman*)]
+\item If $f^\prime(x)\ge0$ for all $x\in(a,b)$, then $f$ is monotonically increasing.
+\item If $f^\prime(x)=0$ for all $x\in(a,b)$, then $f$ is constant.
+\item If $f^\prime(x)\le0$ for all $x\in(a,b)$, then $f$ is monotonically decreasing.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+All conclusions can be read off from the equation
+\[f^\prime(x)=\frac{f(x_2)-f(x_1)}{x_2-x_1},\]
+which is valid, for each pair of numbers $x_1,x_2$ in $(a,b)$, for some $x$ between
+$x_1$ and $x_2$.
+\end{proof}
+\pagebreak
+
+\section{Continuity of Derivatives}
+The following result implies some sort of a ``intermediate value'' property of derivatives that is similar to continuous functions.
+
+\begin{theorem}[Darboux's theorem]
+Suppose $f$ is differentiable on $[a,b]$, and suppose $f^\prime(a)<c<f^\prime(b)$. Then there exists $x\in(a,b)$ such that $f^\prime(x)=c$.
+\end{theorem}
+
+\begin{proof}
+For $t\in(a,b)$, consider the auxilliary function
+\[g(t)=f(t)-ct.\]
+Then
+\[g^\prime(a)=f^\prime(a)-c<0,\]
+so there exists $t_1\in(a,b)$ such that $g(t_1)<g(a)$. Similarly,
+\[g^\prime(b)=f^\prime(b)-c>0,\]
+so there exists $t_2\in(a,b)$ such that $g(t_2)<g(b)$.
+
+By the extreme value theorem, $g$ attains its minimum on $[a,b]$. From above, $g(a)$ and $g(b)$ cannot be minimums, so $g$ attains its minimum at $x\in(a,b)$. By Fermat's theorem, $g^\prime(x)=0$. Hence $f^\prime(x)=c$, as desired.
+\end{proof}
+
+\begin{corollary}
+If $f$ is differentiable on $[a,b]$, then $f^\prime$ cannot have any simple discontinuities on $[a,b]$.
+\end{corollary}
+\pagebreak
+
+\section{L'Hopital's Rule}
+The following result is frequently used in the evaluation of limits.
+\todo{to do}
+\begin{lemma}[L'Hopital's rule]
+Suppose $f$ and $g$ are differentiable over $(a,b)$, with $g^\prime(x)\neq0$ for all $x\in(a,b)$, where $-\infty\le a<b\le+\infty$. If either
+\begin{enumerate}[label=(\roman*)]
+\item $\displaystyle\lim_{x\to a}f(x)=0$ and $\displaystyle\lim_{x\to a}g(x)=0$; or
+\item $\displaystyle\lim_{x\to a}|g(x)|=+\infty$,
+\end{enumerate}
+and
+\[\lim_{x\to a}\frac{f^\prime(x)}{g^\prime(x)}=A,\]
+then
+\[\lim_{x\to a}\frac{f(x)}{g(x)}=A.\]
+\end{lemma}
+
+\begin{proof}
+The entire proof is rather tedious because we have to many cases.
+
+We first consider the case in which $-\infty\le A<+\infty$. Choose $q\in\RR$ such that $A<q$, and choose $r\in\RR$ such that $A<r<q$.
+
+1. $\frac{0}{0}$ or $\frac{\infty}{\infty}$
+2. a is normal or $a=-\infty$
+3. A is normal or $A=\pm\infty$
+
+
+
+We'll only prove the most basic one here:
+0/0, a and A are normal
+This is the case which will be required for Taylor series
+
+First we define f(a)=g(a)=0, so that $f$ and $g$ are continuous at $x=a$
+
+Now let $x\in(a,b)$, then $f$ and $g$ are continuous on $[a,x]$ and differentiable in $(a,x)$
+:
+Thus by Cauchy's Mean Value Theorem, there exists $\xi\in(a,x)$ such that
+\[ \frac{f^\prime(\xi)}{g^\prime(\xi)}=\frac{f(x)-f(a)}{g(x)-g(a)}=\frac{f(x)}{g(x)} \]
+
+For each $x$, we pick $\xi$ which satisfies the above, so that $\xi$ may be seen as a function of $x$ satisfying $a<\xi(x)<x$
+
+Then by squeezing we have $\lim_{x\to a^+}\xi(x)=a$.
+
+Since $\frac{f^\prime}{g^\prime}$ is continuous near $a$, the theorem regarding the limit of composite functions give
+\[ \lim_{x\to a^+}\frac{f(x)}{g(x)} = \lim_{x\to a^+}\frac{f'(\xi)}{g'(\xi)} = \lim_{x\to a^+}\brac{\frac{f^\prime}{g^\prime}}(\xi(x)) = A \]
+
+Now the same reasoning can be used for $b$ where we will use lim(x→b-) to replace all the $\lim_{x\to a^+}$, and $\xi$ will be a function which maps to $(x,b)$.
+\end{proof}
+
+\section{Taylor's Theorem}
+\begin{theorem}[Taylor's theorem]
+Suppose $f:[a,b]\to\RR$, $f^{(n-1)}$ is continuous on $[a,b]$, $f^{(n)}$ exists on $(a,b)$. Assume that $c\in[a,b]$. Let the \emph{Taylor polynomial} of degree $n-1$ of $f$ at $x=c$ be
+\begin{align*}
+P_{n-1}(x)&=\sum_{k=0}^{n-1}\frac{f^{(k)}(c)}{k!}(x-c)^k\\
+&=f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots+\frac{f^{(n-1)}(c)}{(n-1)!}(x-c)^{n-1}.
+\end{align*}
+Then for every $x\in[a,b]$, $x\neq c$, there exists $z_x$ between $x$ and $c$ such that
+\begin{equation}\label{eqn:taylor-thrm}
+f(x)=P_{n-1}(x)+\frac{f^{(n)}(z_x)}{n!}(x-c)^n.
+\end{equation}
+\end{theorem}
+
+For $n=1$, this is just the mean value theorem. In general, the theorem shows that $f$ can be approximated by a polynomial of degree $n-1$, and that \cref{eqn:taylor-thrm} allows us to accurately estimate the error.
+
+\begin{proof}
+Let $M$ be the number defined by
+\[f(x)=P_{n-1}(x)+M(x-c)^n.\]
+We claim that $n!M=f^{(n)}(z_x)$ for some $z_x$ between $x$ and $c$.
+
+For all $x\in[a,b]$, let
+\[g(x)=f(x)-P_{n-1}(x)-M(x-c)^n.\]
+Then for all $x\in(a,b)$,
+\[g^{(n)}(x)=f^{(n)}(x)-n!M.\]
+Hence our proof will be complete if we can show that $g^{(n)}(z_x)=0$ for some $z_x$ between $c$ and $x$.
+
+Since $P_{n-1}^{(k)}(c)=f^{(k)}(c)$ for $k=0,\dots,n-1$, we have
+\[g(c)=g^\prime(c)=\cdots=g^{(n-1)}(c)=0.\]
+
+By our choice of $M$, we have that $g(x)=0$. By the mean value theorem, there exists $x_1$ between $x$ and $c$ such that $g^\prime(x_1)=0$. Since $g^\prime(c)=0$, we conclude similarly that $g^{\prime\prime}(x_2)=0$ for some $x_2$ between $x_1$ and $c$. After $n$ steps we arrive at the conclusion that $g^{(n)}(x_n)=0$ for some $x_n$ between $x_{n-1}$ and $c$, that is, between $x$ and $c$.
+\end{proof}
+
+\begin{example}
+\begin{align*}
+e^x &= 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots \\
+\sin x &= x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots \\
+\cos x &= 1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\cdots \\
+\ln(1+x) &= x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\cdots
+\end{align*}
+There's a lot of things to say about these equations, for example the one for $\ln(1+x)$ only works for $|x|<1$
+
+Also, if we want the RHS of the expression to be an infinite power series, $f(x)$ has to be smooth (infinitely differentiable).
+\end{example}
+
+\begin{comment}
+We'll be talking about the one given in the book, known as the Lagrange form:
+:
+Given that f is n times differentiable on $(a,b)$ such that $f^{(n-1)}$ is continuous on $[a,b]$, then
+\[ f(x)=f(a)+\frac{f^\prime(a)}{1!}(x-a)+\frac{f^{\prime\prime}(a)}{2!}(x-a)^2+\cdots+\frac{f^{(n-1)}(a)}{(n-1)!}(x-a)^(n-1)+\frac{f^{(n)}(\xi)}{n!}(x-a)^n \]
+
+Fix any $x\in(a,b)$, then we construct the functions
+\[ F(t)=f(x)-\brac{f(t)+\frac{f^\prime(t)}{1!}(x-t)+\frac{f^{\prime\prime}(t)}{2!}(x-t)^2+\cdots+\frac{f^{(n-1)}(t)}{(n-1)!}(x-t)^{n-1}} \]
+\[ G(t)=(x-t)^n \]
+
+We calculate $F^\prime(t)$ as follows:
+\[ -[f^\prime(t)+\frac{f^{\prime\prime}(t)}{1!}-f^\prime(t)+\frac{f^{\prime\prime\prime}(t)}{2!}-\frac{f^{\prime\prime}(t)}{1!}+\cdots+\frac{f^{(n)}(t)}{(n-1)!}(x-t)^{n-1}-\frac{f^{(n-1)}(t)}{(n-2)!}(x-t)^{n-2}]=-\frac{f^{(n)}(t)}{(n-1)!}(x-t)^{n-1} \]
+
+$G^\prime(t)=-n(x-t)^{n-1}$, so we have
+\[ \frac{F^\prime(t)}{G^\prime(t)}=\frac{f^{(n)}(t)}{n!} \]
+
+The main reason for why we come up with the strange-looking $F$ and $G$ is that we specifically swap out $a$ for $t$ so that $F(x)=G(x)=0$, in hopes of getting rid of $x$:
+
+We apply Cauchy's MVT to $F$ and $G$ on $[a,x]$, so that we obtain $\xi\in(a,x)$ satisfying
+\[ \frac{F^\prime(\xi)}{G^\prime(\xi)}=\frac{F(x)-F(a)}{G(x)-G(a)}=\frac{F(a)}{G(a)}. \]
+Thus the Lagrange form of the remainder is given by 
+\[ F(a)=\frac{f^{(n)}(\xi)}{n!}G(a). \]
+\end{comment}
+\pagebreak
+
+\section{Differentiation of Vector-valued Functions}
+Let $\vb{f}:(a,b)\to\RR^n$. Then $\vb{f}=(f_1,\dots,f_n)$, where each component $f_k:(a,b)\to\RR$. We say that $\vb{f}$ is differentiable at $x\in(a,b)$ if each component $f_k$ is differentiable at $xx$:
+\[\vb{f}^\prime(x)=\brac{f_1^\prime(x),\dots,f_n^\prime(x)}.\]
+
+\pagebreak
+
+\section*{Exercises}
+\addcontentsline{toc}{section}{Exercises}
+\begin{exercise}
+Let $f$ and $g$ be continuous on $[a,b]$ and differentiable on $(a,b)$. If $f^\prime(x)=g^\prime(x)$, then $f(x)=g(x)+C$.
+\end{exercise}
+
+\begin{exercise}
+Given that $f(x)=x^\alpha$ where $0<\alpha<1$. Prove that $f$ is uniformly continuous on $[0,+\infty)$.
+\end{exercise}
+
+\begin{exercise}
+Let $f$ be continuous on $[0,1]$ and differentiable on $(0,1)$ where $f(0)=f(1)=0$. Prove that there exists $c\in(0,1)$ such that
+\[ f(x)+f^\prime(x)=0. \]
+\end{exercise}

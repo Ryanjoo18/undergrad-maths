@@ -1,5 +1,5 @@
 \documentclass[11pt,a4paper,oneside]{book}
-\usepackage[top=1.0in, bottom=1.0in, left=0.8in, right=0.8in, heightrounded]{geometry}
+\usepackage[top=0.8in, bottom=1.0in, left=0.8in, right=0.8in, heightrounded]{geometry}
 \raggedbottom
 
 \usepackage{ryan}
@@ -9,27 +9,25 @@
 \usepackage{fancyhdr} 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\uppercase{\footnotesize\sffamily\leftmark}}
-\fancyhead[R]{{\footnotesize\sffamily\thepage}}
+\fancyhead[L]{\uppercase{\small\leftmark}}
+\fancyhead[R]{{\thepage}}
 
 \renewcommand{\headrulewidth}{0pt}
-\setlength{\headsep}{0.4in}
+\setlength{\headsep}{0.3in}
 \renewcommand{\arraystretch}{1.5}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.7em}
-\setstretch{1.2}
+\setlength{\parskip}{0.4em}
+\setstretch{1.15}
 
 \newcommand\nbvspace[1][3]{\vspace*{\stretch{#1}}} % command to provide stretchy vertical space in proportion
 
 % Conditionals
 \newif\ifprelim
-\newif\ifcalc
 \newif\iflinalg
 \newif\ifabsalg
-\newif\ifranalysis
-\newif\ifcanalysis
+\newif\ifanalysis
 \newif\iftop
-\newif\ifgraph
+\newif\ifapplied
 
 % Bibliography
 \usepackage[
@@ -44,12 +42,14 @@ sorting=nyt
 % Versions
 %\excludeversion{proof}
 
-\newenvironment{learn}{\begin{mdframed}
-{\itshape\bfseries\Large Learning Outcomes}
+\newenvironment{summary}{
+\underline{\bfseries Summary}
 
-In this chapter, we will
-\begin{itemize}[noitemsep,topsep=0pt]
-}{\end{itemize}\end{mdframed}}
+\begin{itemize}[noitemsep,topsep=0pt]\small
+}{\end{itemize}}
+
+\definecolor{smalt(darkpowderblue)}{rgb}{0.0, 0.0, 0.3}
+\definecolor{schoolbusyellow}{rgb}{1.0, 0.85, 0.0}
 
 % Upper and lower integral
 \makeatletter
@@ -88,13 +88,11 @@ In this chapter, we will
 \begin{document}
 %%%%%%%%%%%%%%% [TOPICS] %%%%%%%%%%%%%%%
 \prelimtrue %Prelim
-%\calctrue %Calc
 \absalgtrue %Abstract Algebra
 \linalgtrue %Linear Algebra
-\ranalysistrue %Real Analysis
-%\canalysistrue %Complex Analysis
-%\toptrue %Topology
-%\graphtrue %Graph Theory
+\analysistrue %Analysis
+\toptrue %Topology
+%\appliedtrue %Applied Maths
 
 \input{tex/frontmatter.tex}
 
@@ -106,16 +104,10 @@ In this chapter, we will
     \input{tex/prelim/set-theory.tex}
 \fi
 
-%%%%%%%%%%%%%%% CALC
-\ifcalc
-    \part{Calculus}
-    \input{tex/calc/single-var-calc.tex}
-    \input{tex/calc/multi-var-calc.tex}
-\fi
-
 %%%%%%%%%%%%%%% ABSTRACT ALGEBRA
 \ifabsalg
     \part{Abstract Algebra}\label{part:abstract-algebra}
+    Algebra is the study of collections of objects (sets, groups, rings, fields, etc). In algebra, we are concerned about the structures of these collections and how these collections interact than about the objects themselves. In fact, with homomorphism and isomorphisms, the original objects become irrelevant.
     \input{tex/abstract-algebra/groups.tex}
 %    \input{tex/abstract-algebra/rings.tex}
 %    \input{tex/abstract-algebra/modules-vec-spaces.tex}
@@ -127,41 +119,49 @@ In this chapter, we will
     \part{Linear Algebra}\label{part:linear-algebra}
     \input{tex/linear-algebra/vector-spaces.tex}
     \input{tex/linear-algebra/linear-maps.tex}
-    \input{tex/linear-algebra/polynomials.tex}
-    \input{tex/linear-algebra/eigen.tex}
+%    \input{tex/linear-algebra/polynomials.tex}
+%    \input{tex/linear-algebra/eigen.tex}
+%    \input{tex/linear-algebra/inner-product-spaces.tex}
 \fi
 
 %%%%%%%%%%%%%%% REAL ANALYSIS
-\ifranalysis
+\ifanalysis
     \part{Real Analysis}\label{part:real-analysis}
-    \input{tex/real-analysis/number-systems.tex}
-    \input{tex/real-analysis/basic-topology.tex}
-    \input{tex/real-analysis/sequences-series.tex}
-%    \input{tex/real-analysis/continuity.tex}
-%    \input{tex/real-analysis/differentiation.tex}
-%    \input{tex/real-analysis/integration.tex}
-%    \input{tex/real-analysis/sequences-series-functions.tex}
-%    \input{tex/real-analysis/special-functions.tex}
+    \emph{Real analysis} deals with the real numbers and real-valued functions of a real variable.
+
+    A great part of analysis deals with inequalities and error terms. This is evident from the very beginning, in the theory of epsilons and deltas. Instead of obtaining precise values, it is sufficient to show that epsilon and delta are within a certain range. In order to show convergence, we just need to show that the error terms are small. Thus, there is often no perfect bound or best approximation, and there need not be; all that is needed is for the bound or the approximation to be good enough.
+    \input{tex/analysis/number-systems.tex}
+    \input{tex/analysis/basic-topology.tex}
+    \input{tex/analysis/sequences-series.tex}
+    \input{tex/analysis/continuity.tex}
+    \input{tex/analysis/differentiation.tex}
+    \input{tex/analysis/integration.tex}
+    \input{tex/analysis/sequences-series-functions.tex}
+    \input{tex/analysis/special-functions.tex}
+%    \input{tex/analysis/functions-several-variables.tex}
+%    \input{tex/analysis/integration-differential-forms.tex}
+
+%    \part{Measure and Integration}
+%    \input{tex/analysis/lebesgue-theory.tex}
+%    \input{tex/analysis/abstract-integration.tex}
+
+%    \part{Complex Analysis}
+%    \input{tex/analysis/elementary-properties-holomorphic-functions.tex}
 \fi
 
-%%%%%%%%%%%%%%% COMPLEX ANALYSIS
-\ifcanalysis
-    \part{Complex Analysis}\label{part:complex-analysis}
-    \input{tex/complex-analysis/complex-num-func.tex}
-\fi
-
-%%%%%%%%%%%%%%% TOPOLOGY
+%%%%%%%%%%%%%%% GENERAL TOPOLOGY
 \iftop
-    \input{tex/topology/intro.tex}
+    \part{General Topology}\label{part:topology}
+
+    The study of topology simultaneously simplifies and generalises the theory of metric spaces. By discarding the metric, and focusing solely on the more basic and fundamental notion of an open set, many arguments and proofs are simplified. And many constructions (such as the important concept of a quotient space) cannot be carried out in the setting of metric spaces: they need the more general framework of topological spaces.
     \input{tex/topology/topological-spaces.tex}
 \fi
 
 %%%%%%%%%%%%%%% MISC
-\ifgraph
-    \part{Graph Theory}
-    A very early theorem of Graph Theory, perhaps even the first, was proved in $1766$ by Euler, concerning a popular problem of the time called ``the bridges of K\"{o}nigsberg''. K\"{o}nigsberg is divided into 4 districts by the river Pregel and has $7$ bridges. The problem was to decide whether it is possible to take a walk that crosses every bridge exactly once. To formulate this problem mathematically, we construct a graph in which there is a vertex for each district and an edge representing each bridge.
-
-    \input{tex/misc/graph-theory.tex}
+\ifapplied
+    \part{Applied Mathematics}
+    \input{tex/applied/graph-theory.tex}
+    \input{tex/applied/em.tex}
 \fi
 \pagebreak
 

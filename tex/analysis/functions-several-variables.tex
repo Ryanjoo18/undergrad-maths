@@ -1,0 +1,125 @@
+\chapter{Functions of Several Variables}
+\section{Linear Transformations}
+
+
+\section{Differentiation}
+Recall that for $f:(a,b)\to\RR$, we defined the derivative as
+\[\lim_{h\to0}\frac{f(x+h)-f(x)}{h}.\]
+In other words, there exists a number $a$ such that
+\[\lim_{h\to0}\absolute{\frac{f(x+h)-f(x)}{h}-a}=\lim_{h\to0}\absolute{\frac{f(x+h)-f(x)-ah}{h}}=\lim_{h\to0}\frac{|f(x+h)-f(x)-ah|}{|h|}=0.\]
+Multiplying by $a$ is a linear map in one dimension; that is, $a\in\mathcal{L}(\RR,\RR)$. Hence we can use this definition to extend differentiation to more variables.
+
+\begin{definition}
+Let $\vb{f}:U\subset\RR^n\to\RR^m$, where $U$ is an open subset of $\RR^n$. Then $\vb{f}$ is \vocab{differentiable} at $\vb{x}\in U$ if there exists $A\in\mathcal{L}(\RR^n,\RR^m)$ such that
+\[\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}}{\norm{\vb{h}}}=0.\]
+Then we write $\vb{f}^\prime(\vb{x})=A$, and say that $A$ is the \emph{derivative} of $\vb{f}$ at $\vb{x}$.
+
+If $\vb{f}$ is differentiable at every $\vb{x}\in U$, we say that $\vb{f}$ is \emph{differentiable on} $U$. 
+\end{definition}
+
+Note that the derivative is a function from $U$ to $\mathcal{L}(\RR^n,\RR^m)$.
+
+We now show that the above derivative is in fact unique.
+
+\begin{lemma}
+Let $\vb{f}:U\subset\RR^n\to\RR^m$, where $U$ is an open subset of $\RR^n$. Suppose $\vb{x}\in U$, and there exist $A,B\in\mathcal{L}(\RR^n,\RR^m)$ such that
+\[\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}}{\norm{\vb{h}}}=0\quad\text{and}\quad\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-B\vb{h}}}{\norm{\vb{h}}}=0.\]
+Then $A=B$.
+\end{lemma}
+
+\begin{proof}
+Write
+\begin{align*}
+\frac{\norm{(A-B)\vb{h}}}{\norm{\vb{h}}}
+&=\frac{\norm{\brac{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}-\brac{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-B\vb{h}}}}{\norm{\vb{h}}}\\
+&\le\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}}{\norm{\vb{h}}}+\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-B\vb{h}}}{\norm{\vb{h}}}.
+\end{align*}
+Taking the limit $\vb{h}\to\vb{0}$, we must have $\displaystyle\lim_{\vb{h}\to\vb{0}}\frac{\norm{(A-B)\vb{h}}}{\norm{\vb{h}}}=0$. For fixed $\vb{h}\neq\vb{0}$, it follows that
+\[\lim_{t\to0}\frac{\norm{(A-B)(t\vb{h})}}{\norm{t\vb{h}}}=0.\]
+The linearity of $A-B$ shows that the LHS of the above equation is independent of $t$. Thus $(A-B)\vb{h}=0$ for every $\vb{h}\in\RR^n$. Hence $A-B=0$, therefore $A=B$. 
+\end{proof}
+
+Another way to write the differentiability is to write
+\[\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})=\vb{f}^\prime(\vb{x})\vb{h}+\vb{r}(\vb{h})\]
+where the remainder $\vb{r}(\vb{h})$ satisfies $\displaystyle\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{r}(\vb{h})}}{\norm{\vb{h}}}=0$.
+
+\begin{example}
+If $A\in\mathcal{L}(\RR^n,\RR^m)$ and $\vb{x}\in\RR^n$, then
+\[A^\prime(\vb{x})=A.\]
+\begin{proof}
+
+\end{proof}
+\end{example}
+
+\begin{lemma}[Differentiability implies continuity]
+Let $\vb{f}:U\subset\RR^n\to\RR^m$, where $U$ is an open subset of $\RR^n$. If $\vb{f}$ is differentiable at $\vb{x}\in U$, then $\vb{f}$ is continuous at $\vb{x}$.
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+We now extend the chain rule to the present situation. 
+
+\begin{lemma}[Chain rule]
+Let $\vb{f}:U\subset\RR^n\to\RR^m$, where $U$ is an open subset of $\RR^n$, and $\vb{f}$ is differentiable at $\vb{x}\in U$. Let $V\subset\RR^m$ be open, $f(U)\subset V$, and let $g:V\to\RR^k$ be differentiable at $\vb{f}(\vb{x})$.
+
+Then $\vb{F}=\vb{g}\circ\vb{f}$ is differentiable at $\vb{x}$, and
+\[\vb{F}^\prime(\vb{x})=\vb{g}^\prime\brac{\vb{f}(\vb{x})}\vb{f}^\prime(\vb{x}).\]
+\end{lemma}
+
+There is another way to generalise the derivative from one dimension. We can simply hold all but one variables constant and take the regular derivative.
+
+Let $\{\vb{e}_1,\dots,\vb{e}_n\}$ and $\{\vb{u}_1,\dots,\vb{u}_m\}$ be the standard bases of $\RR^n$ and $\RR^m$.
+
+\begin{definition}[Partial derivative]
+Let $\vb{f}:U\subset\RR^n\to\RR^m$, where $U$ is an open subset of $\RR^n$. The \emph{components} of $\vb{f}$ are the real functions $f_1,\dots,f_m$ defined by
+\[\vb{f}(\vb{x})=\sum_{i=1}^{m}f_i(\vb{x})\vb{u}_i\quad(\vb{x}\in U),\]
+or equivalently, $f_i(\vb{x})=\vb{f}(\vb{x})\cdot\vb{u}_i$ for $i=1,\dots,n$.
+
+For $\vb{x}\in U$, $i=1,\dots,m$, $j=1,\dots,n$, we define the \vocab{partial derivative}
+\[\pdv{f_i}{x_j}(\vb{x})=\lim_{t\to0}\frac{f_i(\vb{x}+t\vb{e}_j)-f_i(\vb{x})}{t},\]
+provided the limit exists.
+\end{definition}
+
+Partial derivatives are easier to compute with all the machinery of calculus, and they provide a way to compute the total derivative of a function.
+
+\begin{proposition}
+Let $\vb{f}:U\subset\RR^n\to\RR^m$, where $U$ is an open subset of $\RR^n$. If $\vb{f}$ is differentiable at $\vb{x}\in U$, then the partial derivatives $\pdv{f_i}{x_j}$ exist, and
+\[\vb{f}^\prime(\vb{x})\vb{e}_j=\sum_{i=1}^{m}\pdv{f_i}{x_j}(\vb{x})\vb{u}_i\quad(j=1,\dots,n).\]
+\end{proposition}
+
+\begin{definition}[Gradient]
+Let $f:U\subset\RR^n\to\RR$, where $U$ is an open subset of $\RR^n$, and $f$ is a differentiable function. We call the following vector the \vocab{gradient}:
+\[(\nabla f)(\vb{x})\coloneqq\sum_{j=1}^{n}\pdv{f}{x_j}(\vb{x})\vb{e}_j.\]
+\end{definition}
+
+Let us prove a ``mean value theorem'' for vector-valued functions.
+
+\begin{theorem}
+If $\phi:[a,b]\to\RR^n$ is differentiable on $(a,b)$ and continuous on $[a,b]$, then there exists $t\in[a,b]$ such that
+\begin{equation}
+\norm{\phi(b)-\phi(a)}\le(b-a)\norm{\phi^\prime(t)}.
+\end{equation}
+\end{theorem}
+
+\begin{definition}
+$\vb{f}:U\subset\RR^n\to\RR^m$ is \vocab{continuously differentiable} if $\vb{f}$ is differentiable, and $\vb{f}^\prime:U\to\mathcal{L}(\RR^n,\RR^m)$ is continuous.
+\end{definition}
+
+\begin{proposition}
+Let $\vb{f}:U\subset\RR^n\to\RR^m$, where $U$ is an open subset of $\RR^n$. Then $\vb{f}$ is continuously differentiable if and only if all the partial derivatives $\pdv{f_i}{x_j}$ exist and are continuous on $U$.
+\end{proposition}
+
+\subsection{Inverse Function Theorem}
+The idea of a derivative is that if a function is differentiable, then it locally ``behaves like'' the derivative (which is a linear function). So for example, if a function is differentiable and the derivative is invertible, the function is (locally) invertible.
+
+\subsection{Implicit Function Theorem}
+
+\section{Derivatives of Higher Order}
+\section{Differentiation of Integrals}
+
+\pagebreak
+
+\section*{Exercises}
+\addcontentsline{toc}{section}{Exercises}

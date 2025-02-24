@@ -641,9 +641,9 @@ Since $u_1,\dots,u_m,v_1,\dots,v_j$ are linearly independent, we have $a_i=b_i=0
 \pagebreak
 
 \section*{Exercises}
-\begin{prbm}[\cite{axler} 1C Q12]
+\begin{exercise}[\cite{axler} 1C Q12]
 Suppose $W$ is a vector space over $\FF$, $V_1$ and $V_2$ are subspaces of $W$. Show that $V_1\cup V_2$ is a vector space over $\FF$ if and only if $V_1\subset V_2$ or $V_2\subset V_1$.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 The backward direction is trivial. We focus on proving the forward direction.
@@ -657,9 +657,9 @@ v_1,v_2\in V_1\cup V_2&\implies v_1+v_2\in V_1\cup V_2\\
 which is a contradiction.
 \end{solution}
 
-\begin{prbm}[\cite{axler} 1C Q13]
+\begin{exercise}[\cite{axler} 1C Q13]
 Suppose $W$ is a vector space over $\FF$, $V_1,V_2,V_3$ are subspaces of $W$. Then $V_1\cup V_2\cup V_3$ is a vector space over $\FF$ if and only if one of the $V_i$ contains the other two.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 We prove the forward direction. Suppose otherwise, then $v_1\in V_1\setminus(V_2+V_3)$, $v_2\in V_2\setminus(V_1+V_3)$, $v_3\in V_3\setminus(V_1+V_2)$. Consider
@@ -681,9 +681,9 @@ Similarly,
 This implies $(v_1+2v_2)-(v_1+v_2)=v_2\in V_3$, a contradiction.
 \end{solution}
 
-\begin{prbm}[\cite{axler} 2A Q12]
+\begin{exercise}[\cite{axler} 2A Q12]
 Suppose $\{v_1,\dots,v_n\}$ is linearly independent in $V$, $w\in V$. Prove that if $\{v_1+w,\dots,v_n+w\}$ is linearly dependent, then $w\in\spn(v_1,\dots,v_n)$.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 If $\{v_1+w,\dots,v_n+w\}$ is linearly dependent, then there exists $a_1,\dots,a_n\in\FF$, not all zero, such that
@@ -697,11 +697,11 @@ but the linear independence of $\{v_1,\dots,v_n\}$ implies that $a_1=\cdots=a_n=
 which is a linear combination of $v_1,\dots,v_n$. Thus by definition of span, $w\in\spn(v_1,\dots,v_n)$.
 \end{solution}
 
-\begin{prbm}[\cite{axler} 2A Q14]
+\begin{exercise}[\cite{axler} 2A Q14]
 Suppose $\{v_1,\dots,v_n\}\subset V$. Let
 \[w_i=v_1+\cdots+v_i\quad(i=1,\dots,n)\]
 Show that $\{v_1,\dots,v_n\}$ is linearly independent if and only if $\{w_1,\dots,w_n\}$ is linearly independent.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 Write
@@ -731,9 +731,9 @@ on solving simultaneously gives $a_1=\cdots=a_n=0$.
 \fbox{$\impliedby$} Similar to the above.
 \end{solution}
 
-\begin{prbm}[\cite{axler} 2A Q18]
+\begin{exercise}[\cite{axler} 2A Q18]
 Prove that $\FF^\infty$ is infinite-dimensional.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 To prove that $\FF^\infty$ has no finite spanning sets, we prove by contradiction. Suppose otherwise, that there exists a finite spanning set of $\FF^\infty$, say $\{v_1,\dots,v_n\}$.
@@ -753,19 +753,19 @@ for some $a_i\in\FF$. Then
 so $a_1=a_2=\cdots=a_{n+1}=0$. Thus $\{e_1,\dots,e_{n+1}\}$ is a linearly independent set, of length $n+1$. However, $\{v_1,\dots,v_n\}$ is a spanning set of length $n$. By \cref{prop:length-linind-span}, we have reached a contradiction.
 \end{solution}
 
-\begin{prbm}[\cite{axler} 2B Q5]
+\begin{exercise}[\cite{axler} 2B Q5]
 Suppose $V$ is finite-dimensional, $U,W\le V$ such that $V=U+W$. Prove that $V$ has a basis in $U\cup W$.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 Let $\{v_i\}_{i=1}^n$ denote the basis for $V$. By definition we have $v_i=u_i+w_i$ for some $u_i\in U$, $w_i\in W$. Then we have the spanning set of the vector space $V$ $\sum_{i=1}^{n}a_i(u_i+w_i)$, which can be reduced to a basis by the lemma.
 \end{solution}
 
-\begin{prbm}[\cite{axler} 2B Q7]
+\begin{exercise}[\cite{axler} 2B Q7]
 Suppose $\{v_1,v_2,v_3,v_4\}$ is a basis of $V$. Prove that
 \[\{v_1+v_2,v_2+v_3,v_3+v_4,v_4\}\]
 is also a basis of $V$.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 We know that $\{v_1,v_2,v_3,v_4\}$ is linearly independent and spans $V$. Then there exist $a_i\in\FF$ such that
@@ -784,29 +784,29 @@ v&=a_1v_1+a_2v_2+a_3v_3+a_4v_4\\
 which is a linear combination of $v_1+v_2,v_2+v_3,v_3+v_4,v_4$.
 \end{solution}
 
-\begin{prbm}[\cite{axler} 2B Q10]
+\begin{exercise}[\cite{axler} 2B Q10]
 Suppose $U,W\le V$ such that $V=U\oplus W$. Suppose also that $\{u_1,\dots,u_m\}$ is a basis of $U$, $\{w_1,\dots,w_n\}$ is a basis of $W$. Prove that
 \[\{u_1,\dots,u_m,w_1,\dots,w_n\}\]
 is a basis of $V$.
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 We know that this set is linearly independent (otherwise violating the direct sum assumption) so it suffices to prove the spanning. Let $v\in V$, then
 \[v=u+w=\sum_{i=1}^{m}a_iu_i+\sum_{i=1}^{n}b_jw_j.\]
 \end{solution}
 
-\begin{prbm}[\cite{axler} 2C Q8]
+\begin{exercise}[\cite{axler} 2C Q8]
 
-\end{prbm}
+\end{exercise}
 
-\begin{prbm}[\cite{axler} 2C Q16]
+\begin{exercise}[\cite{axler} 2C Q16]
 
-\end{prbm}
+\end{exercise}
 
-\begin{prbm}[\cite{axler} 2C Q17]
+\begin{exercise}[\cite{axler} 2C Q17]
 Suppose that $V_1,\dots,V_n\le V$ are finite-dimensional. Prove that $V_1+\cdots+V_n$ is finite-dimensional, and
 \[\dim(V_1+\cdots+V_n)\le\dim V_1+\cdots+\dim V_n.\]
-\end{prbm}
+\end{exercise}
 
 \begin{solution}
 We prove by induction on $n$. The base case is trivial. Assume the statement holds for $k$. Then for $k+1$, denoting $V_1+\cdots+V_k=M_k$, we have that
