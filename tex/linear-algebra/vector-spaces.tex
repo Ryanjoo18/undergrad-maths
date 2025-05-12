@@ -1,10 +1,6 @@
 \chapter{Vector Spaces}\label{chap:vector-spaces}
 \section{Definition of Vector Space}
-\begin{notation}
-A field is denoted by $\FF$, which can mean either $\RR$ or $\CC$. $\FF^n$ is the set of $n$-tuples whose elements belong to $\FF$:
-\[\FF^n\coloneqq\{(x_1,\dots,x_n)\mid x_i\in\FF\}\]
-For $(x_1,\dots,x_n)\in\FF^n$ and $i=1,\dots,n$, we say that $x_i$ is the $i$-th coordinate of $(x_1,\dots,x_n)$.
-\end{notation}
+Let $\FF$ denote a field, which can mean either $\RR$ or $\CC$.
 
 \begin{definition}[Vector space]
 $V$ is a \vocab{vector space}\index{vector space} over $\FF$ if the following properties hold:
@@ -24,98 +20,100 @@ Multiplication is associative: $(ab)v=a(bv)$ for all $v\in V$, $a,b\in\FF$
 For the rest of this text, $V$ denotes a vector space over $\FF$.
 \end{notation}
 
-\begin{example}
-$\RR^n$ is a vector space over $\RR$, $\CC^n$ is a vector space over $\CC$.
-\end{example}
-
 Elements of a vector space are called \emph{vectors} or \emph{points}.
 
-The scalar multiplication in a vector space depends on $\FF$. Thus when we
-need to be precise, we will say that $V$ is a vector space over $\FF$ instead of saying simply that $V$ is a vector space. For example, $\RR^n$ is a vector space over $\RR$, and $\CC^n$ is a vector space over $\CC$. A vector space over $\RR$ is called a \emph{real vector space}\index{vector space!real vector space}; a vector space over $\CC$ is called a \emph{complex vector space}\index{vector space!complex vector space}.
+\begin{remark}
+The scalar multiplication in a vector space depends on $\FF$. Thus when we need to be precise, we will say that $V$ is a vector space \emph{over $\FF$}. 
 
-\begin{proposition}[Uniqueness of additive identity]
+A vector space over $\RR$ is called a \emph{real vector space}\index{vector space!real vector space}; a vector space over $\CC$ is called a \emph{complex vector space}\index{vector space!complex vector space}.
+\end{remark}
+
+\begin{lemma}[Uniqueness of additive identity]
 A vector space has a unique additive identity.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
-Suppose otherwise, then $\vb{0}$ and $\vb{0}^\prime$ are additive identities of $V$. Then
+Suppose that $\vb{0}$ and $\vb{0}^\prime$ are additive identities of $V$. Then
 \[\vb{0}^\prime=\vb{0}^\prime+\vb{0}=\vb{0}+\vb{0}^\prime=\vb{0}\]
-where the first equality holds because $\vb{0}$ is an additive identity, the second equality comes from commutativity, and the third equality holds because $\vb{0}^\prime$ is an additive identity. Thus $\vb{0}^\prime=\vb{0}$.
+where the first equality holds because $\vb{0}$ is an additive identity, the second equality comes from commutativity, and the third equality holds because $\vb{0}^\prime$ is an additive identity.
 \end{proof}
 
-\begin{proposition}[Uniqueness of additive inverse]
+\begin{lemma}[Uniqueness of additive inverse]
 Every element in a vector space has a unique additive inverse.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
-Suppose otherwise, then for $v\in V$, $w$ and $w^\prime$ are additive inverses of $v$. Then
+Let $v\in V$. Suppose $w$ and $w^\prime$ are additive inverses of $v$. Then
 \[w=w+\vb{0}=w+(v+w^\prime)=(w+v)+w^\prime=\vb{0}+w^\prime=w^\prime.\]
-Thus $w=w^\prime$.
 \end{proof}
 
 Because additive inverses are unique, the following notation now makes sense.
 
 \begin{notation}
-Let $v,w\in V$. Then $-v$ denotes the additive inverse of $v$; $w-v$ is defined to be $w+(-v)$.
+Let $v,w\in V$. Then $-v$ denotes the additive inverse of $v$, and define $w-v$ to be $w+(-v)$.
 \end{notation}
 
 We now prove some seemingly trivial facts.
 
-\begin{proposition} \
+\begin{lemma} \
 \begin{enumerate}[label=(\roman*)]
 \item For every $v\in V$, $0v=\vb{0}$.
 \item For every $a\in\FF$, $a\vb{0}=\vb{0}$.
 \item For every $v\in V$, $(-1)v=-v$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item For $v\in V$, we have
+\item Let $v\in V$,
 \[0v=(0+0)v=0v+0v.\]
 Adding the additive inverse of $0v$ to both sides of the equation gives $\vb{0}=0v$.
 
-\item For $a\in\FF$, we have
+\item Let $a\in\FF$,
 \[a\vb{0}=a(\vb{0}+\vb{0})=a\vb{0}+a\vb{0}.\]
 Adding the additive inverse of $a\vb{0}$ to both sides of the equation gives $\vb{0}=a\vb{0}$.
 
-\item For $v\in V$, we have
+\item Let $v\in V$,
 \[v+(-1)v=1v+(-1)v=(1+(-1))v=0v=\vb{0}.\]
 Since $v+(-1)v=\vb{0}$, $(-1)v$ is the additive inverse of $v$.
 \end{enumerate}
 \end{proof}
 
-\begin{example}
-$\FF^\infty$ is defined to be the set of all sequences of elements of $\FF$:
-\[\FF^\infty\coloneqq\{(x_1,x_2,\dots)\mid x_i\in\FF\}\]
-\begin{itemize}
-\item Addition on $\FF^\infty$ is defined by
-\[(x_1,x_2,\dots)+(y_1,y_2,\dots)=(x_1+y_1,x_2+y_2,\dots)\]
-\item Scalar multiplication on $\FF^\infty$ is defined by
-\[\lambda(x_1,x_2,\dots)=(\lambda x_1,\lambda x_2,\dots)\]
-\end{itemize}
+\begin{example}[$n$-tuple space]
+Let $\FF^n$ be the set of $n$-tuples whose elements belong to $\FF$:
+\[\FF^n\colonequals\{(x_1,\dots,x_n)\mid x_i\in\FF\}\]
+For $x=(x_1,\dots,x_n)\in\FF^n$ and $i=1,\dots,n$, we say that $x_i$ is the $i$-th \emph{coordinate} of $x$.
 
-Verify that $\FF^\infty$ becomes a vector space over $\FF$. Also verify that the additive identity in $\FF^\infty$ is $\vb{0}=(0,0,\dots)$.
+Define addition and scalar multiplication on $\FF^n$ as
+\begin{align*}
+(x_1,\dots,x_n)+(y_1,\dots,y_n)&=(x_1+y_1,\dots,x_n+y_n)\\
+\lambda(x_1,\dots,x_n)&=(\lambda x_1,\dots,\lambda x_n)
+\end{align*}
+
+Then $\FF^n$ is a vector space over $\FF$.
 \end{example}
 
-Our next example of a vector space involves a set of functions.
-
 \begin{example}
-If $S$ is a set, $\FF^S\coloneqq\{f\mid f:S\to\FF\}$.
-\begin{itemize}
-\item Addition on $\FF^S$ is defined by 
-\[(f+g)(x)=f(x)+g(x)\quad(\forall x\in S)\]
-for all $f,g\in\FF^S$.
-\item Multiplication on $\FF^S$ is defined by
-\[(\lambda f)(x)=\lambda f(x)\quad(\forall x\in S)\]
-for all $\lambda\in\FF$, $f\in\FF^S$.
-\end{itemize}
+Let $\FF^\infty$ be the set of all sequences of elements of $\FF$:
+\[\FF^\infty\colonequals\{(x_1,x_2,\dots)\mid x_i\in\FF\}\]
+Define addition and scalar multiplication on $\FF^\infty$ as
+\begin{align*}
+(x_1,x_2,\dots)+(y_1,y_2,\dots)&=(x_1+y_1,x_2+y_2,\dots)\\
+\lambda(x_1,x_2,\dots)&=(\lambda x_1,\lambda x_2,\dots)
+\end{align*}
+Then $\FF^\infty$ is a vector space over $\FF$, where the additive identity is $\vb{0}=(0,0,\dots)$.
+\end{example}
 
-Verify that if $S$ is a non-empty set, then $\FF^S$ is a vector space over $\FF$.
-
-Also verify that the additive identity of $\FF^S$ is the function $0:S\to\FF$ defined by
+\begin{example}[Space of functions from a set to a field]
+If $S$ is a set, $\FF^S\colonequals\{f\mid f\colon S\to\FF\}$. Define addition and scalar multiplication on $\FF^S$ as
+\begin{align*}
+(f+g)(x)&=f(x)+g(x)\quad(x\in S)\\
+(\lambda f)(x)&=\lambda f(x)\quad(x\in S)
+\end{align*}
+for all $f,g\in\FF^S$, $\lambda\in\FF$.
+Then $\FF^S$ is a vector space over $\FF$ (if $S$ is a non-empty set), where the additive identity of $\FF^S$ is the function $0:S\to\FF$ defined as
 \[0(x)=0\quad(\forall x\in S)\]
-and for $f\in\FF^S$, additive inverse of $f$ is the function $-f:S\to\FF$ defined by
+and for $f\in\FF^S$, additive inverse of $f$ is the function $-f:S\to\FF$ defined as
 \[(-f)(x)=-f(x)\quad(\forall x\in S)\]
 \end{example}
 
@@ -126,14 +124,14 @@ $\FF^n$ and $\FF^\infty$ are special cases of the vector space $\FF^S$; think of
 \begin{example}[Complexification]
 Suppose $V$ is a real vector space. The \emph{complexifcation} of $V$, denoted by $V_\CC$, equals $V\times V$. An element of $V_\CC$ is an ordered pair $(u,v)$, where $u,v\in V$, which we write as $u+iv$.
 \begin{itemize}
-\item Addition on $V_\CC$ is defined by
+\item Addition on $V_\CC$ is defined as
 \[(u_1+iv_1)+(u_2+iv_2)=(u_1+u_2)+i(v_1+v_2)\]
 for all $u_1,v_2,u_2,v_2\in V$.
-\item Complex scalar multiplication on $V_\CC$ is defined by
+\item Complex scalar multiplication on $V_\CC$ is defined as
 \[(a+bi)(u+iv)=(au-bv)+i(av+bu)\]
 for all $a,b\in\RR$ and all $u,v\in V$.
 \end{itemize}
-You should verify that with the defnitions of addition and scalar multiplication as above, $V_\CC$ is a (complex) vector space.
+Then $V_\CC$ is a (complex) vector space.
 \end{example}
 \pagebreak
 
@@ -141,19 +139,19 @@ You should verify that with the defnitions of addition and scalar multiplication
 Whenever we have a mathematical object with some structure, we want to consider subsets that also have the same structure.
 
 \begin{definition}[Subspace]
-$U\subset V$ is a \vocab{subspace}\index{vector space!subspace} of $V$ if $U$ is also a vector space (with the same addition and scalar multiplication as on $V$). We denote this as $U\le V$.
+We say $U\subset V$ is a \vocab{subspace}\index{vector space!subspace} of $V$, denoted as $U\le V$, if $U$ is also a vector space (with the same addition and scalar multiplication as on $V$).
 \end{definition}
 
 The sets $\{\vb{0}\}$ and $V$ are always subspaces of $V$. The subspace $\{\vb{0}\}$ is called the \emph{zero subspace} or \emph{trivial subspace}. Subspaces other than $V$ are called \emph{proper subspaces}.
 
 The following result is useful in determining whether a given subset of $V$ is a subspace of $V$.
 
-\begin{lemma}[Subspace test]\label{lemma:subspace-conditions}
+\begin{lemma}[Subspace test]\label{lemma:subspace-test}
 Suppose $U\subset V$. Then $U\le V$ if and only if $U$ satisfies the following conditions:
 \begin{enumerate}[label=(\roman*)]
-\item Additive identity: $\vb{0}\in U$
-\item Closed under addition: $u+w\in U$ for all $u,w\in U$
-\item Closed under scalar multiplication: $\lambda u\in U$ for all $\lambda\in\FF$, $u\in U$
+\item $\vb{0}\in U$;\hfill(additive identity)
+\item $u+w\in U$ for all $u,w\in U$;\hfill(closed under addition)
+\item $\lambda u\in U$ for all $\lambda\in\FF$, $u\in U$.\hfill(closed under scalar multiplication)
 \end{enumerate}
 \end{lemma}
 
@@ -168,41 +166,39 @@ If $u\in U$, then $-u=(-1)u\in U$ by (iii). Hence every element of $U$ has an ad
 The other parts of the definition of a vector space, such as associativity and commutativity, are automatically satisfied for $U$ because they hold on the larger space $V$. Thus $U$ is a vector space and hence is a subspace of $V$.
 \end{proof}
 
-\begin{proposition}
-Suppose $U\le V$. Then
-\begin{enumerate}[label=(\roman*)]
-\item $U$ is a vector space over $\FF$. In fact, the only subsets of $V$ that are vector spaces over $\FF$ are the subspaces of $V$;
-\item if $W\le U$, then $W\le V$ (``a subspace of a subspace is a subspace'').
-\end{enumerate}
-\end{proposition}
+\begin{lemma}[A subspace of a subspace is a subspace]
+If $U\le V$ and $W\le U$, then $W\le V$.
+\end{lemma}
 
-\begin{proof} \
-\begin{enumerate}[label=(\roman*)]
-\item We first check that we have legitimate operations. Since $U$ is closed under addition, the operation $+$ restricted to $U$ gives a map $U\times U\to U$. Likewise since $U$ is closed under scalar multiplication, that operation restricted to $U$ gives a map $\FF\times U\to U$.
+\begin{proof}
+This is immediate from the definition of a subspace.
+\end{proof}
 
-We now check that $U$ satisfies the vector space axioms.
-\begin{enumerate}[label=(\roman*)]
-\item Commutativity and associativity of addition are inherited from $V$.
-\item There is an additive identity (by the subspace test).
-\item There are additive inverses: if $u\in U$ then multiplying by $-1\in\FF$ and shows that $-u=(-1)u\in U$.
-\item The remaining four properties are all inherited from $V$. That is, they apply to general vectors of $V$ and vectors in $U$ are vectors in $V$.
-\end{enumerate}
+\begin{lemma}[Intersection of subspaces is a subspace]
+Let $\{U_i\mid i\in I\}$ be a collection of subspaces of $V$. Then $\bigcap_{i\in I}U_i\le V$.
+\end{lemma}
 
-\item This is immediate from the definition of a subspace.
+\begin{proof}
+Let $U=\bigcap_{i\in I}U_i$. 
+\begin{enumerate}[label=(\roman*)]
+\item Since each $U_i\le V$, $\vb{0}\in U_i$ so $\vb{0}\in U$.
+\item Let $u,w\in U$, then $u,w\in U_i$. Since $U_i\le V$, $u+w\in U_i$ so $u+w\in U$.
+\item Let $\lambda\in\FF$, $u\in U$, then $u\in U_i$. Since $U_i\le V$, $\lambda u\in U_i$ so $\lambda u\in U$.
 \end{enumerate}
 \end{proof}
 
 \begin{definition}[Sum of subsets]
-Suppose $U_1,\dots,U_n\subset V$. The sum of $U_1,\dots,U_n$ is the set of all possible sums of elements of $U_1,\dots,U_n$:
-\[U_1+\cdots+U_n\coloneqq\{u_1+\cdots+u_n\mid u_i\in U_i\}.\]
+Suppose $U_1,\dots,U_n\subset V$. The \vocab{sum} of $U_1,\dots,U_n$ is the set of all possible sums of elements of $U_1,\dots,U_n$:
+\[U_1+\cdots+U_n\colonequals\{u_1+\cdots+u_n\mid u_i\in U_i\}.\]
 \end{definition}
 
-\begin{example}
-Suppose that $U=\{(x,0,0)\in\FF^3\mid x\in F\}$ and $W=\{(0,y,0)\in\FF^3\mid y\in\FF\}$. Then
+\begin{example} \
+\begin{itemize}
+\item Let $U=\{(x,0,0)\in\FF^3\mid x\in F\}$ and $W=\{(0,y,0)\in\FF^3\mid y\in\FF\}$. Then
 \[U+W=\{(x,y,0)\mid x,y\in\FF\}.\]
-
-Suppose that $U=\{(x,x,y,y)\in\FF^4\mid x,y\in\FF\}$ and $W=\{(x,x,x,y)\in\FF^4\mid x,y\in\FF\}$. Then
+\item Let $U=\{(x,x,y,y)\in\FF^4\mid x,y\in\FF\}$ and $W=\{(x,x,x,y)\in\FF^4\mid x,y\in\FF\}$. Then
 \[U+W=\{(x,x,y,z)\in\FF^4\mid x,y,z\in\FF\}.\]
+\end{itemize}
 \end{example}
 
 The next result states that the sum of subspaces is a subspace, and is in fact the smallest subspace containing all the summands.
@@ -214,92 +210,89 @@ Suppose $U_1,\dots,U_n\le V$. Then $U_1+\cdots+U_n$ is the smallest subspace of 
 \begin{proof}
 It is easy to see that $\vb{0}\in U_1+\cdots+U_n$ and that $U_1+\cdots+U_n$ is closed under addition and scalar multiplication. Hence by the subspace test, $U_1+\cdots+U_n\le V$.
 
-Let $M$ be the smallest subspace of $V$ containing $U_1,\dots,U_n$. We want to show that $U_1+\cdots+U_n=M$. To do so, we show double inclusion: $U_1+\cdots+U_n\subset M$ and $M\subset U_1+\cdots+U_n$.
-\begin{enumerate}[label=(\roman*)]
-\item For all $u_i\in U_i$ ($1\le i\le n$),
+Let $M$ be the smallest subspace of $V$ containing $U_1,\dots,U_n$. We want to show that $U_1+\cdots+U_n=M$. To do so, we show double inclusion.
+
+\fbox{$\supset$} For all $u_i\in U_i$ ($1\le i\le n$),
 \[u_i=\vb{0}+\cdots+\vb{0}+u_i+\vb{0}+\cdots+\vb{0}\in U_1+\cdots+U_n,\]
 where all except one of the $u$'s are $\vb{0}$. Thus $U_i\subset U_1+\cdots+U_n$ for $1\le i\le n$. Hence $M\subset U_1+\cdots+U_n$.
-\item Conversely, every subspace of $V$ containing $U_1,\dots,U_n$ contains $U_1+\cdots+U_n$ (because subspaces must contain all finite sums of their elements). Hence $U_1+\cdots+U_n\subset M$.
-\end{enumerate}
+
+\fbox{$\subset$} Conversely, every subspace of $V$ containing $U_1,\dots,U_n$ contains $U_1+\cdots+U_n$ (because subspaces must contain all finite sums of their elements). Hence $U_1+\cdots+U_n\subset M$.
 \end{proof}
 
 \begin{definition}[Direct sum]
-Suppose $U_1,\dots,U_n\le V$. If each element of $U_1+\cdots+U_n$ can be written in only one way as a sum $u_1+\cdots+u_n$, $u_i\in U_i$, then $U_1+\cdots+U_n$ is called a \vocab{direct sum}\index{direct sum}. In this case, we denote the sum as
+Suppose $U_1,\dots,U_n\le V$. We say $U_1+\cdots+U_n$ is a \vocab{direct sum}\index{direct sum} if each element of $U_1+\cdots+U_n$ can be written in only one way as a sum $u_1+\cdots+u_n$, $u_i\in U_i$. In this case, we denote the sum as
 \[U_1\oplus\cdots\oplus U_n.\]
 \end{definition}
 
-\begin{example}
-Suppose that $U=\{(x,y,0)\in\FF^3\mid x,y\in\FF\}$ and $W=\{(0,0,z)\in\FF^3\mid z\in\FF\}$. Then $\FF^3=U\oplus W$.
+\begin{example} \
+\begin{itemize}
+\item Suppose that $U=\{(x,y,0)\in\FF^3\mid x,y\in\FF\}$ and $W=\{(0,0,z)\in\FF^3\mid z\in\FF\}$. Then $\FF^3=U\oplus W$.
 
-Suppose $U_i$ is the subspace of $\FF^n$ of those vectors whose coordinates are all 0 except for the $i$-th coordinate; that is, $U_i=\{(0,\dots,0,x,0,\dots,0)\in\FF^n\mid x\in\FF\}$. Then $\FF^n=U_1\oplus\cdots\oplus U_n$.
+\item Suppose $U_i$ is the subspace of $\FF^n$ of those vectors whose coordinates are all 0 except for the $i$-th coordinate; that is, $U_i=\{(0,\dots,0,x,0,\dots,0)\in\FF^n\mid x\in\FF\}$. Then $\FF^n=U_1\oplus\cdots\oplus U_n$.
+\end{itemize}
 \end{example}
 
+The definition of direct sum requires
+every vector in the sum to have a unique representation as an appropriate sum.
+The next result shows that when deciding whether a sum of subspaces is a direct sum, we only need to consider whether $\vb{0}$ can be uniquely written as an appropriate sum.
+
 \begin{lemma}[Condition for direct sum]\label{lemma:condition-direct-sum}
-Suppose $V_1,\dots,V_n\le V$, let $W=V_1+\cdots+V_n$. Then the following are equivalent:
-\begin{enumerate}[label=(\roman*)]
-\item Any element in $W$ can be uniquely expressed as the sum of vectors in $V_1,\dots,V_n$.
-\item If $v_i\in V_i$ satisfies $v_1+\cdots+v_n=\vb{0}$, then $v_1=\cdots=v_n=\vb{0}$.
-\item For $k=2,\dots,n$, $(V_1+\cdots+V_{k-1})\cap V_k=\{\vb{0}\}$.
-\end{enumerate}
+Suppose $V_1,\dots,V_n\le V$. Then $V_1\oplus\cdots\oplus V_n$ if and only if $v_1+\cdots+v_n=\vb{0}$ implies $v_1=\cdots=v_n=\vb{0}$.
 \end{lemma}
 
 \begin{proof} \
 
-(i)$\iff$(ii) First suppose $W$ is a direct sum. Then by the definition of direct sum, the only way to write $\vb{0}$ as a sum $u_1+\cdots+u_n$ is by taking $u_i=\vb{0}$.
+\fbox{(i)$\implies$(ii)} Suppose $V_1+\cdots+V_n$ is a direct sum. Then by the definition of direct sum, the only way to write $\vb{0}$ as a sum $u_1+\cdots+u_n$ is by taking $u_i=\vb{0}$.
 
-Now suppose that the only way to write $\vb{0}$ as a sum $v_1+\cdots+v_n$ by taking $v_1=\cdots=v_n=\vb{0}$. For $v\in V_1+\cdots+V_n$, suppose that there is more than one way to represent $v$:
-\begin{align*}
-v&=v_1+\cdots+v_n\\
-v&=v_1^\prime+\cdots+v_n^\prime
-\end{align*}
-for some $v_i,v_i^\prime\in V_i$. Substracting the above two equations gives
+\fbox{(ii)$\implies$(i)} Suppose that the only way to write $\vb{0}$ as a sum $v_1+\cdots+v_n$ by taking $v_1=\cdots=v_n=\vb{0}$. 
+
+To show that $v\in V_1+\cdots+V_n$ is a direct sum, let $v\in V_1+\cdots+V_n$. Then
+\begin{equation*}\tag{I}
+v=v_1+\cdots+v_n
+\end{equation*}
+for some $v_i\in V_i$.
+To show that this representation is unique, suppose
+\begin{equation*}\tag{II}
+v=v_1^\prime+\cdots+v_n^\prime
+\end{equation*}
+for some $v_i^\prime\in V_i$.
+Substracting (II) from (I) gives
 \[\vb{0}=(v_1-v_1^\prime)+\cdots+(v_n-v_n^\prime).\]
-Since $v_i-v_i^\prime\in V_i$, we have $v_i-v_i^\prime=\vb{0}$ so $v_i=v_i^\prime$. Hence there is only one unique way to represent $v_1+\cdots+v_n$, thus $W$ is a direct sum.
-
-(ii)$\iff$(iii) First suppose if $v_i\in V_i$ satisfies $v_1+\cdots+v_n=\vb{0}$, then $v_1=\cdots=v_n=\vb{0}$. Let $v_k\in(V_1+\cdots+V_{k-1})\cap V_k$. Then $v_k=v_1+\cdots+v_{k-1}$ where $v_i\in V_i$ ($1\le i\le k-1$). Thus
-\begin{align*}
-v_1+\cdots+v_{k-1}-v_k&=\vb{0}\\
-v_1+\cdots+v_{k-1}+(-v_k)+\vb{0}+\cdots+\vb{0}&=\vb{0}
-\end{align*}
-by taking $v_{k+1}=\cdots=v_n=\vb{0}$. Then $v_1=\cdots=v_k=\vb{0}$.
-
-Now suppose that for $k=2,\dots,n$, $(V_1+\cdots+V_{k-1})\cap V_k=\{\vb{0}\}$.
-\begin{align*}
-v_1+\cdots+v_n&=\vb{0}\\
-v_1+\cdots+v_{n-1}&=-v_n
-\end{align*}
-where $v_1+\cdots+v_{n-1}\in V_1+\cdots+V_{n-1}$, $-v_n\in V_n$. Thus
-\[v_1+\cdots+v_{n-1}=-v_n\in(V_1+\cdots+V_{n-1})\cap V_n=\{\vb{0}\}\]
-so $v_1+\cdots+v_{n-1}=\vb{0}$, $v_n=\vb{0}$. Induction on $n$ gives $v_1=\cdots=v_{n-1}=v_n=\vb{0}$.
+Since $v_i-v_i^\prime\in V_i$, the equation above implies $v_i-v_i^\prime=\vb{0}$, so $v_i=v_i^\prime$. Hence there is only one unique way to represent $v_1+\cdots+v_n$.
 \end{proof}
 
-\begin{proposition}
+The next result provides a characterisation for direct sum.
+
+\begin{lemma}\label{lemma:direct-sum-intersection-zero}
 Suppose $U,W\le V$. Then $U+W$ is a direct sum if and only if $U\cap W=\{\vb{0}\}$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 
-\fbox{$\implies$} Suppose that $U+W$ is a direct sum. If $v\in U\cap W$, then $\vb{0}=v+(-v)$, where $v\in U$, $-v\in W$. By the unique representation of $\vb{0}$ as the sum of a vector in $U$ and a vector in $W$, we have $v=\vb{0}$. Thus $U\cap W=\{\vb{0}\}$.
+\fbox{$\implies$} Suppose that $U+W$ is a direct sum. Let $v\in U\cap W$, we will show that $v=\vb{0}$.
 
-\fbox{$\impliedby$} Suppose $U\cap W=\{\vb{0}\}$. Suppose $u\in U$, $w\in W$, and $0=u+w$. $u=-w\in W$, thus $u\in U\cap W$, so $u=w=\vb{0}$. By \cref{lemma:condition-direct-sum}, $U+W$ is a direct sum.
+Note that $\vb{0}=v+(-v)$, where $v\in U$, $-v\in W$. By the unique representation of $\vb{0}$ as the sum of a vector in $U$ and a vector in $W$, we must have $v=\vb{0}$. Hence $U\cap W=\{\vb{0}\}$.
+
+\fbox{$\impliedby$} Suppose $U\cap W=\{\vb{0}\}$. Suppose $u\in U$, $w\in W$, and $0=u+w$. $u=-w\in W$, thus $u\in U\cap W$, so $u=w=\vb{0}$. By \ref{lemma:condition-direct-sum}, $U+W$ is a direct sum.
 \end{proof}
 \pagebreak
 
 \section{Span and Linear Independence}
 \begin{definition}[Linear combination]
-$v$ is a \vocab{linear combination}\index{linear combination} of vectors $v_1,\dots,v_n\in V$ if there exists $a_1,\dots,a_n\in\FF$ such that
-\[v=a_1v_1+\cdots+a_nv_n.\]
+We say $v\in V$ is a \vocab{linear combination}\index{linear combination} of $v_1,\dots,v_n\in V$ if there exists $a_1,\dots,a_n\in\FF$ such that
+\begin{align*}
+v&=a_1v_1+\cdots+a_nv_n\\
+&=\sum_{i=1}^{n}a_iv_i.
+\end{align*}
 \end{definition}
 
 \begin{definition}[Span]
 The \vocab{span}\index{span} of $\{v_1,\dots,v_n\}$ is the set of all linear combinations of $v_1,\dots,v_n$:
-\[\spn(v_1,\dots,v_n)\coloneqq\{a_1v_1+\cdots+a_nv_n\mid a_i\in\FF\}.\]
-The span of the empty set $\{\:\}$ is defined to be $\{\vb{0}\}$.
+\[\spn(v_1,\dots,v_n)\colonequals\{a_1v_1+\cdots+a_nv_n\mid a_i\in\FF\}.\]
+We say $v_1,\dots,v_n$ \emph{spans} $V$ if $\spn(v_1,\dots,v_n)=V$.
 
-We say that $v_1,\dots,v_n$ \emph{spans} $V$ if $\spn(v_1,\dots,v_n)=V$.
-
-If $S\subset V$ is such that $\spn(S)=V$, then we say that $S$ \emph{spans} $V$, and that $S$ is a \emph{spanning set} for $V$:
-\[\spn(S)\coloneqq\{a_1v_1+\cdots+a_nv_n\mid v_i\in S, a_i\in\FF\}.\]
+If $S\subset V$ is such that $\spn(S)=V$, we say $S$ \emph{spans} $V$, and $S$ is a \emph{spanning set} for $V$:
+\[\spn(S)\colonequals\{a_1v_1+\cdots+a_nv_n\mid v_i\in S, a_i\in\FF\}.\]
 \end{definition}
 
 \begin{proposition}
@@ -314,34 +307,26 @@ First we show that $\spn(v_1,\dots,v_n)\le V$, using the subspace test.
 \item $\lambda(a_1v_1+a_nv_n)=(\lambda a_1)v_1+\cdots+(\lambda a_n)v_n\in\spn(v_1,\dots,v_n)$, so $\spn(v_1,\dots,v_n)$ is closed under scalar multiplication.
 \end{enumerate}
 
-Let $M$ be the smallest vector subspace of $V$ containing $v_1,\dots,v_n$. We claim that $M=\spn(v_1,\dots,v_n)$. To show this, we show that (i) $M\subset\spn(v_1,\dots,v_n)$ and (ii) $M\supset\spn(v_1,\dots,v_n)$.
-\begin{enumerate}[label=(\roman*)]
-\item Each $v_i$ is a linear combination of $v_1,\dots,v_n$, as
+Let $M$ be the smallest vector subspace of $V$ containing $v_1,\dots,v_n$. We claim that $M=\spn(v_1,\dots,v_n)$.
+
+\fbox{$\subset$} Each $v_i$ is a linear combination of $v_1,\dots,v_n$, as
 \[v_i=0\cdot v_1+\cdots+0\cdot v_{i-1}+1\cdot v_i+0\cdot v_{i+1}+\cdots+0\cdot v_n,\]
 so by the definition of the span as the collection of all linear combinations of $v_1,\dots,v_n$, we have that $v_i\in\spn(v_1,\dots,v_n)$. But $M$ is the smallest vector subspace containing $v_1,\dots,v_n$, so
 \[M\subset\spn(v_1,\dots,v_n).\]
-\item Since $v_i\in M$ ($1\le i\le n$) and $M$ is a vector subspace (closed under addition and scalar multiplication), it follows that
-\[a_1v_1+\dots+a_nv_n\in M\]
-for all $a_i\in\FF$ (i.e. $M$ contains all linear combinations of $v_1,\dots,v_n$). So
+
+\fbox{$\supset$} Since $v_i\in M$ ($1\le i\le n$) and $M$ is a vector subspace (closed under addition and scalar multiplication), it follows that
+\[a_1v_1+\cdots+a_nv_n\in M\]
+for all $a_i\in\FF$ (i.e., $M$ contains all linear combinations of $v_1,\dots,v_n$). Thus
 \[\spn(v_1,\dots,v_n)\subset M.\]
-\end{enumerate}
 \end{proof}
 
-\begin{definition}[Finite-dimensional vector space]
-$V$ is \vocab{finite-dimensional}\index{finite-dimensional} if there exists some list of vector $\{v_1,\dots,v_n\}$ that spans $V$; otherwise, it is \emph{infinite-dimensional}.
+\begin{definition}[Finite-dimensional]
+We say $V$ is \vocab{finite-dimensional}\index{finite-dimensional} if it has a finite spanning set; otherwise, it is \emph{infinite-dimensional}.
 \end{definition}
 
-\begin{remark}
-Recall that by defnition every list of vectors has finite length.
-\end{remark}
-
-\begin{remark}
-From this definition, infinite-dimensionality is the negation of finite-dimensionality (i.e. \emph{not} finite-dimensional). Hence to prove that a vector space is infinite-dimensional, we prove by contradiction; that is, first assume that the vector space is finite-dimensional, then try to come to a contradiction.
-\end{remark}
-
-\begin{exercise}
+\begin{example}
 For positive integer $n$, $\FF^n$ is finite-dimensional.
-\end{exercise}
+\end{example}
 
 \begin{proof}
 Suppose $(x_1,x_2,\dots,x_n)\in\FF^n$, then
@@ -352,30 +337,38 @@ The vectors $(1,0,\dots,0),(0,1,\dots,0),\dots,(0,\dots,0,1)$ spans $\FF^n$, so 
 \end{proof}
 
 \begin{definition}[Linear independence]
-A list of vectors $v_1,\dots,v_n$ is \vocab{linearly independent}\index{linear independence} in $V$ if the only choice of $a_1,\dots,a_n\in\FF$ that makes
-\[a_1v_1+\cdots+a_nv_n=\vb{0}\]
-is $a_1=\cdots=a_n=0$; otherwise, it is \emph{linearly dependent}.
+We say $v_1,\dots,v_n$ are \vocab{linearly independent}\index{linear independence} in $V$ if
+\[a_1v_1+\cdots+a_nv_n=\vb{0}\implies a_1=\cdots=a_n=0.\]
+Otherwise, the vectors are \emph{linearly dependent}.
 
-We say that $S\subset V$ is linearly independent if every finite subset of $S$ is linearly independent.
+We say $S\subset V$ is linearly independent if every finite subset of $S$ is linearly independent.
 \end{definition}
 
-\begin{proposition}[Compare coefficients]
+\begin{lemma}[Compare coefficients]
 Let $v_1,\dots,v_n$ be linearly independent in $V$. Then
 \[a_1v_1+\cdots+a_nv_n=b_1v_1+\cdots+b_nv_n\]
 if and only if $a_i=b_i$ ($1\le i\le n$).
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Exercise.
 \end{proof}
 
-The following result will often be useful; it states that given a linearly dependent set of vectors, one of the vectors is in the span of the previous ones; furthermore we can throw out that vector without changing the span of the original set.
+The following are easy consequences of the definition.
+\begin{enumerate}
+\item Any set which contains a linearly dependent set is linearly dependent.
+\item Any subset of a linearly independent set is linearly independent.
+\item Any set which contains $\vb{0}$ is linearly dependent.
+\item A set $S$ of vectors is linearly independent if and only if each finite subset of $S$ is linearly independent.
+\end{enumerate}
+
+The following result will often be useful; (i) states that given a linearly dependent set of vectors, one of the vectors is in the span of the previous ones; furthermore (ii) states that we can throw out that vector without changing the span of the original set.
 
 \begin{lemma}[Linear dependence lemma]\label{lemma:linear-dependence}
-Suppose $v_1,\dots,v_n$ are linearly dependent in $V$. Then there exists $v_k$ such that the following hold:
+Suppose $v_1,\dots,v_n$ are linearly dependent in $V$. Then there exists $v_i$ such that the following hold:
 \begin{enumerate}[label=(\roman*)]
-\item $v_k\in\spn\brac{v_1,\dots,v_{k-1}}$
-\item $\spn(v_1,\dots,v_{k-1},v_{k+1},\dots,v_n)=\spn(v_1,\dots,v_n)$
+\item $v_i\in\spn\brac{v_1,\dots,v_{i-1}}$
+\item $\spn(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n)=\spn(v_1,\dots,v_n)$
 \end{enumerate}
 \end{lemma}
 
@@ -383,48 +376,76 @@ Suppose $v_1,\dots,v_n$ are linearly dependent in $V$. Then there exists $v_k$ s
 \begin{enumerate}[label=(\roman*)]
 \item Since $v_1,\dots,v_n$ are linearly dependent, there exists $a_1,\dots,a_n\in\FF$, not all $0$, such that
 \[a_1v_1+\cdots+a_nv_n=0.\]
-Take $k=\max\{1,\dots,n\}$ such that $a_k\neq0$. Then
-\[v_k=-\frac{a_1}{a_k}v_1-\cdots-\frac{a_{k-1}}{a_k}v_{k-1},\]
-which means that $v_k$ can be written as a linear combination of $v_1,\dots,v_{k-1}$, so $v_k\in\spn\brac{v_1,\dots,v_{k-1}}$ by definition of span.
+Take $i=\max\{1,\dots,n\}$ such that $a_i\neq0$. Then
+\[v_i=-\frac{a_1}{a_i}v_1-\cdots-\frac{a_{i-1}}{a_i}v_{i-1},\]
+since $a_{i-1},\dots,a_n=0$.
+Thus $v_i$ can be written as a linear combination of $v_1,\dots,v_{i-1}$, so $v_i\in\spn\brac{v_1,\dots,v_{i-1}}$.
 
-\item Now suppose $k$ is such that $v_k\in\spn(v_1,\dots,v_{k-1})$. Then there exists $b_1,\dots,b_{k-1}\in\FF$ be such that
-\begin{equation*}\tag{1}
-v_k=b_1v_1+\cdots+b_{k-1}v_{k-1}.
+\item Now suppose $i$ is such that $v_i\in\spn(v_1,\dots,v_{i-1})$. Then there exists $b_1,\dots,b_{i-1}\in\FF$ be such that
+\begin{equation*}\tag{I}
+v_i=b_1v_1+\cdots+b_{i-1}v_{i-1}.
 \end{equation*}
 Suppose $u\in\spn(v_1,\dots,v_n)$. Then there exists $c_1,\dots,c_n\in\FF$ such that
-\begin{equation*}\tag{2}
+\begin{equation*}\tag{II}
 u=c_1v_1+\cdots+c_nv_n.
 \end{equation*}
-In (2), we can replace $v_k$ with the RHS of (1), which gives
+Substituting (I) into (II) gives
 \begin{align*}
-u&=c_1v_1+\cdots+c_{k-1}v_{k-1}+c_kv_k+c_{k+1}v_{k+1}+\cdots+c_nv_n\\
-&=c_1v_1+\cdots+c_{k-1}v_{k-1}+c_k(b_1v_1+\cdots+b_{k-1}v_{k-1})+c_{k+1}v_{k+1}+\cdots+c_nv_n\\
-&=c_1v_1+\cdots+c_{k-1}v_{k-1}+c_kb_1v_1+\cdots+c_kb_{k-1}v_{k-1}+c_{k+1}v_{k+1}+\cdots+c_nv_n\\
-&=(c_1+bc_k)v_1+\cdots+(c_{k-1}+b_{k-1}c_k)v_{k-1}+c_{k+1}v_{k+1}+\cdots+c_nv_n.
+u&=c_1v_1+\cdots+c_{i-1}v_{i-1}+c_iv_i+c_{i+1}v_{i+1}+\cdots+c_nv_n\\
+&=c_1v_1+\cdots+c_{i-1}v_{i-1}+c_i(b_1v_1+\cdots+b_{i-1}v_{i-1})+c_{i+1}v_{i+1}+\cdots+c_nv_n\\
+&=c_1v_1+\cdots+c_{i-1}v_{i-1}+c_ib_1v_1+\cdots+c_ib_{i-1}v_{i-1}+c_{i+1}v_{i+1}+\cdots+c_nv_n\\
+&=(c_1+bc_i)v_1+\cdots+(c_{i-1}+b_{i-1}c_i)v_{i-1}+c_{i+1}v_{i+1}+\cdots+c_nv_n.
 \end{align*}
-Thus $u\in\spn(v_1,\dots,v_{k-1},v_{k+1},\dots,v_n)$. This shows that removing $v_k$ from $v_1,\dots,v_n$ does not change the span of the list.
+Thus $u\in\spn(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n)$. This shows that removing $v_i$ from $v_1,\dots,v_n$ does not change the span of the set.
 \end{enumerate}
 \end{proof}
 
-The following result says that no linearly independent set in $V$ is longer than a spanning set in $V$.
+The next result says that no linearly independent set in $V$ is longer than a spanning set in $V$.
 
 \begin{proposition}\label{prop:length-linind-span}
 In a finite-dimensional vector space, the length of every linearly independent set of vectors is less than or equal to the length of every spanning set of vectors.
 \end{proposition}
 
-\begin{proof}
-Suppose $A=\{u_1,\dots,u_m\}$ is linearly independent in $V$, $B=\{w_1,\dots,w_n\}$ spans $V$. We want to prove that $m\le n$.
+That is,
+\begin{equation}
+\{\text{linearly independent}\}\le\{\text{spanning set}\}.
+\end{equation}
 
-Since $B$ spans $V$, if we add any other vector from $V$ to the list $B$, we will get a linearly dependent list, since this newly added vector can, by the definition of a span, be expressed as a linear combination of the vectors in $B$. In particular, if we add $u_1\in A$ to $B$, then the new list
+\begin{proof}
+Suppose $A=\{u_1,\dots,u_m\}$ is linearly independent in $V$, $B=\{w_1,\dots,w_n\}$ spans $V$. We want to show that $m\le n$.
+
+We do so through the process described below with $m$ steps; in each step, we add one of the $u$'s and remove one of the $w$'s.
+
+\begin{description}
+\item[Step 1] Since $B$ spans $V$, if we add any other vector to $B$, we will get a linearly dependent set, since this newly added vector can, by the definition of a span, be expressed as a linear combination of the vectors in $B$. In particular, if we add $u_1$ to $B$, then the new set
 \[\{u_1,w_1,\dots,w_n\}\]
-is linearly dependent. By the linear independence lemma, we can remove one of the $w_i$'s from $B$, so that the remaining list of $n$ vectors still spans $V$. For the sake of argument, let's say we remove $w_n$ (we can always order the $w_i$'s in the list so that the element we remove is at the end). Then we are left with the revised list
-\[B_1=\{u_1,w_1,\dots,w_{n-1}\}.\]
-We can repeat this process $m$ times, each time adding the next element $u_i$ from list $A$ and removing the last $w_i$. Because of the linear dependence lemma, we know that there must always be a $w_i$ that can be removed each time we add a $u_i$, so there must be at least as many $w_i$'s as $u_i$'s. In other words, $m\le n$ which is what we wanted to prove.
+is linearly dependent.
+
+By the linear independence lemma, one of the vectors in the above set is a linear combination of the previous vectors. 
+Since $\{u_1,\dots,u_m\}$ is linearly independent, $u_1\neq\vb{0}$ so $u_1\notin\spn\{\:\}=\{\vb{0}\}$.
+Hence the linear dependence lemma implies we can remove one of the $w$'s, so that the new set $B$ (of length $n$) consisting of $u_1$ and the remaining $w$'s spans $V$.
+
+\item[Step $i$ ($2\le i\le m$)] 
+The set $B$ (of length $n$) from step $i-1$ spans $V$. In particular, $u_i$ is in the span of $B$. If we add $u_i$ to $B$, placing it just after $u_1,\dots,u_{i-1}$, then the new set (of length $n+1$)
+\[\{u_1,\dots,u_{i-1},u_i,w\text{'s}\}\]
+is linearly dependent. 
+
+By the linear dependence lemma, one of the vectors in this set is in the span of the previous ones. Since $u_1,\dots,u_i$ are linearly independent, this vector cannot be one of the $u$'s.
+Hence there still must be at least one remaining $w$ at this step. We can remove from our new set (after adjoining $u_i$ in the proper place) a $w$ that is a linear combination of the previous vectors in the set, so that the new set $B$ (of length $n$) consisting of $u_1,\dots,u_i$ and the remaining $w$'s spans $V$.
+\end{description}
+
+After step $m$, we have added \emph{all} the $u$'s and the process stops. At each step as we add a $u$ to $B$, the linear dependence lemma implies that there is some $w$ to remove. 
+Hence there must be at least as many $w$'s as $u$'s.
 \end{proof}
 
-\begin{remark}
-We can use this result to show, without any computations, that certain lists are not linearly independent and that certain lists do not span a given vector space.
-\end{remark}
+We can use this result to show, without any computations, that certain sets are not linearly independent and that certain sets do not span a given vector space.
+
+\begin{example} \
+\begin{itemize}
+\item $(1,0,0), (0,1,0), (0,0,1)$ spans $\RR^3$. Thus no set of length larger than three is linearly independent in $\RR^3$.
+\item $(1,0,0,0), (0,1,0,0), (0,0,1,0), (0,0,0,1)$ is linearly independent in $\RR^4$. Thus no set of length less than four spans $\RR^4$.
+\end{itemize}
+\end{example}
 
 Our intuition suggests that every subspace of a finite-dimensional vector space should also be finite-dimensional. We now prove that this intuition is correct.
 
@@ -433,74 +454,87 @@ Every subspace of a finite-dimensional vector space is finite-dimensional.
 \end{proposition}
 
 \begin{proof}
-Suppose $V$ is finite-dimensional, $U\le V$. To show that $U$ is finite-dimensional, we need to find a spanning set of vectors in $U$. We prove by construction of this spanning set.
+Suppose $V$ is finite-dimensional, $U\le V$. To show that $U$ is finite-dimensional, we shall construct a spanning set of vectors in $U$, via the following steps.
 
-\begin{enumerate}
-\item[Step 1] If $U=\{\vb{0}\}$, then $U$ is finite-dimensional and we are done. Otherwise, choose $v_1\in U$, $v_1\neq\vb{0}$ and add it to our list of vectors.
-\item[Step $k$] Our list so far is $\{v_1,\dots,v_{k-1}\}$. If $U=\spn(v_1,\dots,v_{k-1})$, then $U$ is finite-dimensional and we are done. Otherwise, choose $v_k\in U$ such that $v_k\notin\spn(v_1,\dots,v_{k-1})$ and add it to our list.
-\end{enumerate}
+\begin{description}
+\item[Step 1] If $U=\{\vb{0}\}$, then $U$ is finite-dimensional and we are done. 
 
-After each step, we have constructed a list of vectors such that no vector in this list is in the span of the previous vectors; by the linear dependence lemma, our constructed list is a linearly independent set.
+Otherwise, choose $v_1\in U$, $v_1\neq\vb{0}$ and add it to our set of vectors.
 
-By \cref{prop:length-linind-span}, this linearly independent set cannot be longer than any spanning set of $V$. Thus the process must terminate after a finite number of steps, and we have constructed a spanning set of $U$. Hence $U$ is finite-dimensional.
+\item[Step $i$] Our set so far is $\{v_1,\dots,v_{i-1}\}$. 
+
+If $U=\spn(v_1,\dots,v_{i-1})$, then $U$ is finite-dimensional and we are done. 
+
+Otherwise, choose $v_i\in U$ such that $v_i\notin\spn(v_1,\dots,v_{i-1})$ and add it to our set.
+\end{description}
+
+After each step, we have constructed a set of vectors such that no vector in this set is in the span of the previous vectors; by the linear dependence lemma, our constructed set is linearly independent.
+
+By \ref{prop:length-linind-span}, this linearly independent set cannot be longer than any spanning set of $V$. Thus the process must terminate after a finite number of steps, and we have constructed a spanning set of $U$. Hence $U$ is finite-dimensional.
 \end{proof}
 \pagebreak
 
 \section{Bases}
 \begin{definition}[Basis]
-$B=\{v_1\dots,v_n\}$ is a \vocab{basis}\index{basis} of $V$ if
+We say $B=\{v_1\dots,v_n\}$ is a \vocab{basis}\index{basis} of $V$ if
 \begin{enumerate}[label=(\roman*)]
-\item $B$ is linearly independent in $V$;
+\item $B$ is linearly independent in $V$, and
 \item $B$ is a spanning set of $V$.
 \end{enumerate}
 \end{definition}
 
 \begin{example}[Standard basis]
-Let $\vb{e}_i=(0,\dots,0,1,0,\dots,0)$ where the $i$-th coordinate is $1$. $\{\vb{e}_1,\dots,\vb{e}_n\}$ is a basis of $\FF^n$, known as the \emph{standard basis} of $\FF^n$.
+Let $\vb{e}_i=(0,\dots,0,1,0,\dots,0)$, where the $i$-th coordinate is $1$. Then $\{\vb{e}_1,\dots,\vb{e}_n\}$ is a basis of $\FF^n$, known as the \emph{standard basis} of $\FF^n$.
 \end{example}
 
+The next result helps explain why bases are useful.
+
 \begin{lemma}[Criterion for basis]\label{lemma:basis-criterion}
-Let $B=\{v_1,\dots,v_n\}$ be a list of vectors in $V$. Then $B$ is a basis of $V$ if and only if every $v\in V$ can uniquely expressed as a linear combination of $v_1,\dots,v_n$.
+Let $B=\{v_1,\dots,v_n\}$ be a set of vectors in $V$. Then $B$ is a basis of $V$ if and only if every $v\in V$ can be uniquely expressed as a linear combination of $v_1,\dots,v_n$.
 \end{lemma}
 
 \begin{proof} \
 
-\fbox{$\implies$} Let $v\in V$. Since $B$ is a basis of $V$, there exists $a_1,\dots,a_n\in\FF$ such that
-\begin{equation*}\tag{1}
+\fbox{$\implies$} Let $v\in V$. Since $B$ is a basis of $V$, there exist $a_1,\dots,a_n\in\FF$ such that
+\begin{equation*}\tag{I}
 v=a_1v_1+\cdots+a_nv_n.
 \end{equation*}
 To show that the representation is unique, suppose that $c_1,\dots,c_n\in\FF$ also satisfy
-\begin{equation*}\tag{2}
+\begin{equation*}\tag{II}
 v=c_1v_1+\cdots+c_nv_n.
 \end{equation*}
-Subtracting (2) from (1) gives
+Subtracting (II) from (I) gives
 \[\vb{0}=(a_1-c_1)v_1+\cdots+(a_n-c_n)v_n.\]
-Since $v_1,\dots,v_n$ are linearly independent, we have $a_i-c_i=0$, or $a_i=c_i$ for all $i$ ($1\le i\le n$). Thus the representation of $v$ as a linear combination of $v_1,\dots,v_n$ is unique.
+Since $v_1,\dots,v_n$ are linearly independent, we have $a_i-c_i=0$, or $a_i=c_i$ for all $i$.
 
-\fbox{$\impliedby$} Suppose that every $v\in V$ can be uniquely expressed as a linear combination of $v_1,\dots,v_n$. This implies that $B$ spans $V$. To show that $B$ is linearly independent, suppose that $a_1,\dots,a_n\in\FF$ satisfy
+\fbox{$\impliedby$} Suppose every $v\in V$ can be uniquely expressed as a linear combination of $v_1,\dots,v_n$. This implies that $B$ spans $V$. 
+
+To show that $B$ is linearly independent, suppose that $a_1,\dots,a_n\in\FF$ are such that
 \[a_1v_1+\cdots+a_nv_n=\vb{0}.\]
-Since $\vb{0}$ can be uniquely expressed as a linear combination of $v_1,\dots,v_n$, we have $a_1=\cdots=a_n=0$, thus $B$ is linearly independent. Since $B$ is linearly independent and spans $V$, $B$ is a basis of $V$.
+Since $\vb{0}$ can be uniquely expressed as a linear combination of $v_1,\dots,v_n$, we have $a_1=\cdots=a_n=0$, thus $B$ is linearly independent. 
+
+Since $B$ is linearly independent and spans $V$, we conclude that $B$ is a basis of $V$.
 \end{proof}
 
-A spanning set in a vector space may not be a basis because it is not linearly independent. Our next result says that given any spanning set, some (possibly none) of the vectors in it can be discarded so that the remaining list is linearly independent and still spans the vector space.
+A spanning set in a vector space may not be a basis because it is not linearly independent. The next result says that given any spanning set, we can \emph{remove} some vectors so that the remaining set is linearly independent and still spans the vector space.
 
-\begin{lemma}\label{lemma:reduce-spanninglist-basis}
-Every spanning set in a vector space can be reduced to a basis of the vector space.
+\begin{lemma}\label{lemma:reduce-spanningset-basis}
+In a vector space, every spanning set can be reduced to a basis.
 \end{lemma}
 
 \begin{proof}
 Suppose $B=\{v_1,\dots,v_n\}$ spans $V$. We want to remove some vectors from $B$ so that the remaining vectors form a basis of $V$. We do this through the multistep process described below.
 
-\begin{enumerate}
+\begin{description}
 \item[Step 1] If $v_1=\vb{0}$, delete $v_1$ from $B$. If $v_1\neq\vb{0}$, leave $B$ unchanged.
-\item[Step $k$] If $v_k\in\spn(v_1,\dots,v_{k-1})$, delete $v_k$ from $B$. If $v_k\notin\spn(v_1,\dots,v_{k-1})$, leave $B$ unchanged.
-\end{enumerate}
+\item[Step $i$ ($2\le i\le n$)] If $v_i\in\spn(v_1,\dots,v_{i-1})$, delete $v_i$ from $B$. If $v_i\notin\spn(v_1,\dots,v_{i-1})$, leave $B$ unchanged.
+\end{description}
 
-Stop the process after step $n$, getting a list $B$. Since we only delete vectors from $B$ that are in the span of the previous vectors, by the linear dependence lemma, the list $B$ still spans $V$.
+Since we only delete vectors from $B$ that are in the span of the previous vectors, by the linear dependence lemma, the set $B$ still spans $V$.
 
 The process ensures that no vector in $B$ is in the span of the previous ones. By the linear dependence lemma, $B$ is linearly independent.
 
-Since $B$ is linearly independent and spans $V$, $B$ is a basis of $V$.
+Since $B$ is linearly independent and spans $V$, we conclude that $B$ is a basis of $V$.
 \end{proof}
 
 \begin{corollary}\label{cor:basis-fin-dim}
@@ -508,19 +542,19 @@ Every finite-dimensional vector space has a basis.
 \end{corollary}
 
 \begin{proof}
-We prove by construction. Suppose $V$ is finite-dimensional. By definition, there exists a spanning set of vectors in $V$. By \cref{lemma:reduce-spanninglist-basis}, the spanning set can be reduced to a basis.
+We prove by construction. Suppose $V$ is finite-dimensional. By definition, there exists a spanning set of vectors in $V$. By \ref{lemma:reduce-spanningset-basis}, the spanning set can be reduced to a basis.
 \end{proof}
 
-Now we show that given any linearly independent set, we can adjoin some additional vectors so that the extended list is still linearly independent but also spans the space.
+We now show that given any linearly independent set, we can \emph{add} some vectors so that the extended set is still linearly independent but also spans the space.
 
 \begin{lemma}\label{lemma:extend-linind-basis}
-Every linearly independent set of vectors in a finite-dimensional vector space can be extended to a basis of the vector space.
+In a finite-dimensional vector space, every linearly independent set can be extended to a basis.
 \end{lemma}
 
 \begin{proof}
-Suppose $u_1,\dots,u_m$ are linearly independent in $V$, $w_1,\dots,w_n$ span $V$. Then the list
+Suppose $\{u_1,\dots,u_m\}$ is linearly independent in $V$, and $\{w_1,\dots,w_n\}$ spans $V$. Then the set
 \[\{u_1,\dots,u_m,w_1,\dots,w_n\}\]
-spans $V$. By \cref{lemma:reduce-spanninglist-basis}, we can reduce this list to a basis of $V$ consisting $u_1,\dots,u_m$ (since $u_1,\dots,u_m$ are linearly independent, $u_i\notin\spn(u_1,\dots,u_{i-1})$ for all $i$, so none of the $u_i$'s are deleted in the process), and some of the $w_i$'s.
+spans $V$. By \ref{lemma:reduce-spanningset-basis}, we can reduce this set to a basis of $V$ consisting $u_1,\dots,u_m$ (since $u_1,\dots,u_m$ are linearly independent, $u_i\notin\spn(u_1,\dots,u_{i-1})$ for all $i$, so none of the $u_i$'s are deleted in the process), and some of the $w_i$'s.
 \end{proof}
 
 We now show that every subspace of a finite-dimensional vector space can be paired with another subspace to form a direct sum of the whole space.
@@ -530,24 +564,29 @@ Suppose $V$ is finite-dimensional, $U\le V$. Then there exists $W\le V$ such tha
 \end{corollary}
 
 \begin{proof}
-Since $V$ is finite-dimensional and $U\le V$, by \cref{prop:subspace-finite-dim}, $U$ is finite-dimensional, so $U$ has a basis $B$, by \cref{cor:basis-fin-dim}; let $B=\{u_1,\dots,u_n\}$. Since $B$ is linearly independent, by \cref{lemma:extend-linind-basis}, $B$ can be extended to a basis of $V$, say
+Since $V$ is finite-dimensional and $U\le V$, by \ref{prop:subspace-finite-dim}, $U$ is finite-dimensional. By \ref{cor:basis-fin-dim}, $U$ has a basis, say $B=\{u_1,\dots,u_n\}$.
+
+Since $B$ is linearly independent, by \ref{lemma:extend-linind-basis}, $B$ can be extended to a basis of $V$, say
 \[\{u_1,\dots,u_n,w_1,\dots,w_n\}.\]
-Take $W=\spn(w_1,\dots,w_n)$. We claim that $V=U\oplus W$. To show this, by \cref{lemma:condition-direct-sum}, we need to show that (i) $V=U+W$, and (ii) $U\cap W=\{\vb{0}\}$.
+\begin{claim}
+$W=\spn(w_1,\dots,w_n)$.
+\end{claim}
+We need to show that $V=U\oplus W$; by \ref{lemma:condition-direct-sum}, we need to show (i) $V=U+W$, and (ii) $U\cap W=\{\vb{0}\}$.
 \begin{enumerate}[label=(\roman*)]
-\item Suppose $v\in V$. Since $\{u_1,\dots,u_n,w_1,\dots,w_n\}$ spans $V$, there exists $a_1,\dots,a_n,b_1,\dots,b_n\in\FF$ such that
+\item Let $v\in V$. Since $\{u_1,\dots,u_n,w_1,\dots,w_n\}$ spans $V$, there exists $a_1,\dots,a_n,b_1,\dots,b_n\in\FF$ such that
 \[v=a_1u_1+\cdots+a_nu_n+b_1w_1+\cdots+b_nw_n.\]
 Take $u=a_1u_1+\cdots+a_nu_n\in U$, $w=b_1w_1+\cdots+b_nw_n\in W$. Then $v=u+w\in U+W$, so $V=U+W$.
-\item Suppose $v\in U\cap W$. Since $v\in U$, $v$ can be written as a linear combination of $u_1,\dots,u_n$:
-\begin{equation*}\tag{1}
+\item Let $v\in U\cap W$. Since $v\in U$, $v$ can be written as a linear combination of $u_1,\dots,u_n$:
+\begin{equation*}\tag{I}
 v=a_1u_1+\cdots+a_nu_n.
 \end{equation*}
 Since $v\in W$, $v$ can be written as a linear combination of $w_1,\dots,w_n$:
-\begin{equation*}\tag{2}
+\begin{equation*}\tag{II}
 v=b_1w_1+\cdots+b_nw_n.
 \end{equation*}
-Subtracting (2) from (1) gives
+Subtracting (II) from (I) gives
 \[\vb{0}=a_1u_1+\cdots+a_nu_n-b_1w_1-\cdots-b_nw_n.\]
-Since $u_1,\dots,u_n,w_1,\dots,w_n$ are linearly independent, we have $a_i=b_i=0$ for all $i$ ($1\le i\le n$). Thus $v=\vb{0}$, so $U\cap W=\{\vb{0}\}$.
+Since $u_1,\dots,u_n,w_1,\dots,w_n$ are linearly independent, we have $a_i=b_i=0$ for all $i$. Thus $v=\vb{0}$, so $U\cap W=\{\vb{0}\}$.
 \end{enumerate}
 \end{proof}
 \pagebreak
@@ -558,7 +597,7 @@ Any two bases of a finite-dimensional vector space have the same length.
 \end{lemma}
 
 \begin{proof}
-Suppose $V$ is finite-dimensional, let $B_1$ and $B_2$ be two bases of $V$. By definition, $B_1$ is linearly independent in $V$, and $B_2$ spans $V$, so by \cref{prop:length-linind-span}, $|B_1|\le|B_2|$.
+Suppose $V$ is finite-dimensional, let $B_1$ and $B_2$ be two bases of $V$. By definition, $B_1$ is linearly independent in $V$, and $B_2$ spans $V$, so by \ref{prop:length-linind-span}, $|B_1|\le|B_2|$.
 
 Similarly, by definition, $B_2$ is linearly independent in $V$ and $B_1$ spans $V$, so $|B_2|\le|B_1|$.
 
@@ -571,19 +610,18 @@ Since any two bases of a finite-dimensional vector space have the same length, w
 The \vocab{dimension}\index{dimension} of $V$ is the length of any basis of $V$, denoted by $\dim V$.
 \end{definition}
 
-\begin{proposition}\label{prop:dim-subspace}
+\begin{lemma}[Dimension of subspace]\label{lemma:dim-subspace}
 Suppose $V$ is finite-dimensional, $U\le V$. Then $\dim U\le\dim V$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Since $V$ is finite-dimensional and $U\le V$, $U$ is finite-dimensional. Let $B_U$ be a basis of $U$, and $B_V$ be a basis of $V$.
 
-By definition, $B_U$ is linearly independent in $V$, and $B_V$ spans $V$. By \cref{prop:length-linind-span}, $|B_U|\le|B_V|$, so
-\[\dim U=|B_U|\le|B_V|=\dim V,\]
-since $|B_U|=\dim U$ and $|B_V|=\dim V$ by definition.
+By definition, $B_U$ is linearly independent in $V$, and $B_V$ spans $V$. By \ref{prop:length-linind-span}, $|B_U|\le|B_V|$, so
+\[\dim U=|B_U|\le|B_V|=\dim V.\]
 \end{proof}
 
-To check that a list of vectors is a basis, we must show that it is linearly independent and that it spans the vector space. The next result shows that if the list in question has the right length, then we only need to check that it satisfies one of the two required properties.
+To check that a set of vectors is a basis, we must show that it is linearly independent and that it spans the vector space. The next result shows that if the set has the \emph{right length}, then we only need to check that it satisfies one of the two required properties.
 
 \begin{proposition}\label{prop:basis-length-dim}
 Suppose $V$ is finite-dimensional. Then
@@ -595,27 +633,39 @@ Suppose $V$ is finite-dimensional. Then
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item Suppose $\dim V=n$, $\{v_1,\dots,v_n\}$ is linearly independent in $V$. By \cref{lemma:extend-linind-basis}, $\{v_1,\dots,v_n\}$ can be extended to a basis of $V$. However, every basis of $V$ has length $n$ (by definition of dimension), which means that no elements are adjoined to $\{v_1,\dots,v_n\}$. Hence $\{v_1,\dots,v_n\}$ is a basis of $V$, as desired.
+\item Suppose $\dim V=n$, and $\{v_1,\dots,v_n\}$ is linearly independent in $V$. 
 
-\item Suppose $\dim V=n$, $\{v_1,\dots,v_n\}$ spans $V$. By \cref{lemma:reduce-spanninglist-basis}, $\{v_1,\dots,v_n\}$ can be reduced to a basis of $V$. However, every basis of $V$ has length $n$, which means that no elements are deleted from $\{v_1,\dots,v_n\}$. Hence $\{v_1,\dots,v_n\}$ is a basis of $V$, as desired.
+By \ref{lemma:extend-linind-basis}, $\{v_1,\dots,v_n\}$ can be extended to a basis of $V$. However, every basis of $V$ has length $n$, which means no elements are added to $\{v_1,\dots,v_n\}$. Hence $\{v_1,\dots,v_n\}$ is a basis of $V$.
+
+\item Suppose $\dim V=n$, and $\{v_1,\dots,v_n\}$ spans $V$. 
+
+By \ref{lemma:reduce-spanningset-basis}, $\{v_1,\dots,v_n\}$ can be reduced to a basis of $V$. However, every basis of $V$ has length $n$, which means no elements are removed from $\{v_1,\dots,v_n\}$. Hence $\{v_1,\dots,v_n\}$ is a basis of $V$.
 \end{enumerate}
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{cor:subspace-full-dimension-equals-whole-space}
 Suppose $V$ is finite-dimensional, $U\le V$. If $\dim U=\dim V$, then $U=V$.
 \end{corollary}
 
 \begin{proof}
-Let $\dim U=\dim V=n$, let $\{u_1,\dots,u_n\}$ be a basis of $U$. Then $\{u_1,\dots,u_n\}$ is linearly independent in $V$ (because it is a basis of $U$) of length $\dim V$. From \cref{prop:basis-length-dim}, $\{u_1,\dots,u_n\}$ is a basis of $V$. In particular every vector in $V$ is a linear combination of $u_1,\dots,u_n$. Thus $U=V$.
+Let $\dim U=\dim V=n$, let $\{u_1,\dots,u_n\}$ be a basis of $U$. 
+
+Then $\{u_1,\dots,u_n\}$ is linearly independent in $V$ (because it is a basis of $U$) of length $\dim V$. By \ref{prop:basis-length-dim}, $\{u_1,\dots,u_n\}$ is a basis of $V$. In particular every vector in $V$ is a linear combination of $u_1,\dots,u_n$. Thus $U=V$.
 \end{proof}
+
+The next result gives a formula for the dimension of the sum of two subspaces of a finite-dimensional vector space. 
 
 \begin{lemma}[Dimension of sum]
 Suppose $V$ is finite-dimensional, $U_1,U_2\le V$. Then
-\[\dim(U_1+U_2)=\dim U_1+\dim U_2-\dim(U_1\cap U_2).\]
+\begin{equation}
+\dim(U_1+U_2)=\dim U_1+\dim U_2-\dim(U_1\cap U_2).
+\end{equation}
 \end{lemma}
 
 \begin{proof}
-Let $\{u_1,\dots,u_m\}$ be a basis of $U_1\cap U_2$; thus $\dim(U_1\cap U_2)=m$. Since $\{u_1,\dots,u_m\}$ is a basis of $U_1\cap U_2$, it is linearly independent in $U_1$. By \cref{lemma:extend-linind-basis}, $\{u_1,\dots,u_m\}$ can be extended to a basis $\{u_1,\dots,u_m,v_1,\dots,v_j\}$ of $U_1$; thus $\dim U_1=m+j$. Similarly, extend $\{u_1,\dots,u_m\}$ to a basis $\{u_1,\dots,u_m,v_1,\dots,v_k\}$ of $U_2$; thus $\dim U_2=m+k$.
+Let $\{u_1,\dots,u_m\}$ be a basis of $U_1\cap U_2$; thus $\dim(U_1\cap U_2)=m$. 
+
+Since $\{u_1,\dots,u_m\}$ is a basis of $U_1\cap U_2$, it is linearly independent in $U_1$. By \ref{lemma:extend-linind-basis}, $\{u_1,\dots,u_m\}$ can be extended to a basis $\{u_1,\dots,u_m,v_1,\dots,v_j\}$ of $U_1$; thus $\dim U_1=m+j$. Similarly, extend $\{u_1,\dots,u_m\}$ to a basis $\{u_1,\dots,u_m,v_1,\dots,v_k\}$ of $U_2$; thus $\dim U_2=m+k$.
 
 We will show that
 \[\{u_1,\dots,u_m,v_1,\dots,v_j,w_1,\dots,w_k\}\]
@@ -627,21 +677,21 @@ is a basis of $U_1+U_2$. This will complete the proof because then we will have
 \end{align*}
 
 We just need to show that $\{u_1,\dots,u_m,v_1,\dots,v_j,w_1,\dots,w_k\}$ is linearly independent. To prove this, suppose
-\begin{equation*}\tag{1}
+\begin{equation*}\tag{I}
 a_1u_1+\cdots+a_mu_m+b_1v_1+\cdots+b_jv_j+c_1w_1+\cdots+c_kw_k=\vb{0},
 \end{equation*}
-where $a_i,b_i,c_i\in\FF$. We need to show that $a_i=b_i=c_i=0$ for all $i$. (1) can be rewritten as
+where $a_i,b_i,c_i\in\FF$. We need to show that $a_i=b_i=c_i=0$ for all $i$. (I) can be rewritten as
 \[c_1w_1+\cdots+c_kw_k=-a_1u_1-\cdots-a_mu_m-b_1v_1-\cdots-b_jv_j,\]
-which shows that $c_1w_1+\cdots+c_kw_k\in U_1$. But actually all the $w_i$'s are in $U_2$, so $c_1w_1+\cdots+c_kw_k\in U_2$, thus $c_1w_1+\cdots+c_kw_k\in U_1\cap U_2$. Then we can write
+which shows that $c_1w_1+\cdots+c_kw_k\in U_1$. But actually all the $w_i$'s are in $U_2$, so $c_1w_1+\cdots+c_kw_k\in U_2$. Thus $c_1w_1+\cdots+c_kw_k\in U_1\cap U_2$. Then we can write
 \[c_1w_1+\cdots+c_kw_k=d_1u_1+\cdots+d_mu_m\]
-for some $d_i\in\FF$. But $u_1,\dots,u_m,w_1,\dots,w_k$ are linearly independent, so $c_i=d_i=0$ for all $i$. Thus our original equation (1) becomes
+for some $d_i\in\FF$. But $u_1,\dots,u_m,w_1,\dots,w_k$ are linearly independent, so $c_i=d_i=0$ for all $i$. Thus our original equation (I) becomes
 \[a_1u_1+\cdots+a_mu_m+b_1v_1+\cdots+b_jv_j=\vb{0}.\]
-Since $u_1,\dots,u_m,v_1,\dots,v_j$ are linearly independent, we have $a_i=b_i=0$ for all $i$, as desired.
+Since $u_1,\dots,u_m,v_1,\dots,v_j$ are linearly independent, $a_i=b_i=0$ for all $i$, as desired.
 \end{proof}
 \pagebreak
 
 \section*{Exercises}
-\begin{exercise}[\cite{axler} 1C Q12]
+\begin{exercise}[\cite{ladr} 1C Q12]
 Suppose $W$ is a vector space over $\FF$, $V_1$ and $V_2$ are subspaces of $W$. Show that $V_1\cup V_2$ is a vector space over $\FF$ if and only if $V_1\subset V_2$ or $V_2\subset V_1$.
 \end{exercise}
 
@@ -657,7 +707,7 @@ v_1,v_2\in V_1\cup V_2&\implies v_1+v_2\in V_1\cup V_2\\
 which is a contradiction.
 \end{solution}
 
-\begin{exercise}[\cite{axler} 1C Q13]
+\begin{exercise}[\cite{ladr} 1C Q13]
 Suppose $W$ is a vector space over $\FF$, $V_1,V_2,V_3$ are subspaces of $W$. Then $V_1\cup V_2\cup V_3$ is a vector space over $\FF$ if and only if one of the $V_i$ contains the other two.
 \end{exercise}
 
@@ -681,7 +731,7 @@ Similarly,
 This implies $(v_1+2v_2)-(v_1+v_2)=v_2\in V_3$, a contradiction.
 \end{solution}
 
-\begin{exercise}[\cite{axler} 2A Q12]
+\begin{exercise}[\cite{ladr} 2A Q12]
 Suppose $\{v_1,\dots,v_n\}$ is linearly independent in $V$, $w\in V$. Prove that if $\{v_1+w,\dots,v_n+w\}$ is linearly dependent, then $w\in\spn(v_1,\dots,v_n)$.
 \end{exercise}
 
@@ -697,7 +747,7 @@ but the linear independence of $\{v_1,\dots,v_n\}$ implies that $a_1=\cdots=a_n=
 which is a linear combination of $v_1,\dots,v_n$. Thus by definition of span, $w\in\spn(v_1,\dots,v_n)$.
 \end{solution}
 
-\begin{exercise}[\cite{axler} 2A Q14]
+\begin{exercise}[\cite{ladr} 2A Q14]
 Suppose $\{v_1,\dots,v_n\}\subset V$. Let
 \[w_i=v_1+\cdots+v_i\quad(i=1,\dots,n)\]
 Show that $\{v_1,\dots,v_n\}$ is linearly independent if and only if $\{w_1,\dots,w_n\}$ is linearly independent.
@@ -731,13 +781,12 @@ on solving simultaneously gives $a_1=\cdots=a_n=0$.
 \fbox{$\impliedby$} Similar to the above.
 \end{solution}
 
-\begin{exercise}[\cite{axler} 2A Q18]
+\begin{exercise}[\cite{ladr} 2A Q18]
 Prove that $\FF^\infty$ is infinite-dimensional.
 \end{exercise}
 
 \begin{solution}
-To prove that $\FF^\infty$ has no finite spanning sets, we prove by contradiction. Suppose otherwise, that there exists a finite spanning set of $\FF^\infty$, say $\{v_1,\dots,v_n\}$.
-
+Suppose, for a contradiction, that $\FF^\infty$ is finite-dimensional, i.e., there exists a finite spanning set $\{v_1,\dots,v_n\}$.
 Let
 \begin{align*}
 e_1&=(1,0,\dots)\\
@@ -750,10 +799,10 @@ where $e_i$ has a $1$ at the $i$-th coordinate, and $0$'s for the remaining coor
 \[a_1e_1+\cdots+a_{n+1}e_{n+1}=\vb{0}\]
 for some $a_i\in\FF$. Then
 \[(a_1,a_2,\dots,a_{n+1},0,0,\dots)=\vb{0}\]
-so $a_1=a_2=\cdots=a_{n+1}=0$. Thus $\{e_1,\dots,e_{n+1}\}$ is a linearly independent set, of length $n+1$. However, $\{v_1,\dots,v_n\}$ is a spanning set of length $n$. By \cref{prop:length-linind-span}, we have reached a contradiction.
+so $a_1=a_2=\cdots=a_{n+1}=0$. Thus $\{e_1,\dots,e_{n+1}\}$ is a linearly independent set, of length $n+1$. However, $\{v_1,\dots,v_n\}$ is a spanning set of length $n$. By \ref{prop:length-linind-span}, we have reached a contradiction.
 \end{solution}
 
-\begin{exercise}[\cite{axler} 2B Q5]
+\begin{exercise}[\cite{ladr} 2B Q5]
 Suppose $V$ is finite-dimensional, $U,W\le V$ such that $V=U+W$. Prove that $V$ has a basis in $U\cup W$.
 \end{exercise}
 
@@ -761,7 +810,7 @@ Suppose $V$ is finite-dimensional, $U,W\le V$ such that $V=U+W$. Prove that $V$ 
 Let $\{v_i\}_{i=1}^n$ denote the basis for $V$. By definition we have $v_i=u_i+w_i$ for some $u_i\in U$, $w_i\in W$. Then we have the spanning set of the vector space $V$ $\sum_{i=1}^{n}a_i(u_i+w_i)$, which can be reduced to a basis by the lemma.
 \end{solution}
 
-\begin{exercise}[\cite{axler} 2B Q7]
+\begin{exercise}[\cite{ladr} 2B Q7]
 Suppose $\{v_1,v_2,v_3,v_4\}$ is a basis of $V$. Prove that
 \[\{v_1+v_2,v_2+v_3,v_3+v_4,v_4\}\]
 is also a basis of $V$.
@@ -784,7 +833,7 @@ v&=a_1v_1+a_2v_2+a_3v_3+a_4v_4\\
 which is a linear combination of $v_1+v_2,v_2+v_3,v_3+v_4,v_4$.
 \end{solution}
 
-\begin{exercise}[\cite{axler} 2B Q10]
+\begin{exercise}[\cite{ladr} 2B Q10]
 Suppose $U,W\le V$ such that $V=U\oplus W$. Suppose also that $\{u_1,\dots,u_m\}$ is a basis of $U$, $\{w_1,\dots,w_n\}$ is a basis of $W$. Prove that
 \[\{u_1,\dots,u_m,w_1,\dots,w_n\}\]
 is a basis of $V$.
@@ -795,15 +844,15 @@ We know that this set is linearly independent (otherwise violating the direct su
 \[v=u+w=\sum_{i=1}^{m}a_iu_i+\sum_{i=1}^{n}b_jw_j.\]
 \end{solution}
 
-\begin{exercise}[\cite{axler} 2C Q8]
+\begin{exercise}[\cite{ladr} 2C Q8]
 
 \end{exercise}
 
-\begin{exercise}[\cite{axler} 2C Q16]
+\begin{exercise}[\cite{ladr} 2C Q16]
 
 \end{exercise}
 
-\begin{exercise}[\cite{axler} 2C Q17]
+\begin{exercise}[\cite{ladr} 2C Q17]
 Suppose that $V_1,\dots,V_n\le V$ are finite-dimensional. Prove that $V_1+\cdots+V_n$ is finite-dimensional, and
 \[\dim(V_1+\cdots+V_n)\le\dim V_1+\cdots+\dim V_n.\]
 \end{exercise}

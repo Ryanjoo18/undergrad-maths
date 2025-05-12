@@ -1,0 +1,52 @@
+\section*{Prerequisite Tree}
+
+\vspace{2cm}
+
+\setcounter{diagheight}{50}
+\begin{chart}
+%\grid
+
+\reqhalfcourse 40,50:{Ch.\ 1--2}{Preliminary\\Topics}{}
+
+\reqhalfcourse 20,40:{Ch.\ }{Real\\Analysis}{}
+  \prereq 40,50,20,40:
+
+\reqhalfcourse 5,40:{Ch.\ }{General\\Topology}{}
+  \prereq 40,50,5,40:
+  \recomm 20,40,5,40:
+
+\reqhalfcourse 50,40:{Ch.\ }{Abstract\\Algebra}{}
+  \prereq 40,50,50,40:
+
+\reqhalfcourse 35,40:{Ch.\ }{Linear\\Algebra}{}
+  \prereq 40,50,35,40:
+  \recomm 50,40,35,40:
+
+\halfcourse 35,30:{Ch.\ }{Multivariable\\Analysis}{}
+  \prereq 20,40,35,30:
+  \prereq 35,40,35,30:
+
+\reqhalfcourse 20,30:{Ch.\ }{Complex\\Analysis}{}
+  \prereq 20,40,20,30:
+  \recomm 35,30,20,30:
+
+\halfcourse 5,30:{Ch.\ }{Measure\\Theory}{}
+  \prereq 20,40,5,30:
+  \prereq 5,40,5,30:
+
+
+
+%\reqhalfcourse 30,20:{Ch.\ }{Functional\\Analysis}{}
+%  \prereq 20,40,30,20:
+%  \recomm 35,40,30,20:
+\end{chart}
+
+\begin{center}
+\begin{minipage}{6.0in}
+\begin{itemize}
+\item A solid arrow \solidarrow\  indicates a required prerequisite, a dotted arrow \dottedarrow\ indicates a recommended prerequisite.
+
+\item Core topics are in \boldbox\ boxes; other courses (i.e.,~options or prerequisites) are in \lightbox\ boxes.
+\end{itemize}
+\end{minipage}
+\end{center}

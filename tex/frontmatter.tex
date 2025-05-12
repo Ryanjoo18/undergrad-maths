@@ -1,90 +1,68 @@
+\thispagestyle{empty}
+
+\
+
+\vspace{2cm}
+
+\hrule height 2pt 
+
+\vspace{1.5cm}
+
 \begin{center}
-\
+\textit{\fontsize{40}{48}\selectfont
+Topics in\\[0.5em]
+Undergraduate\\[0.5em]
+Mathematics}
 
-\vspace{3cm}
+\vspace{1.5cm}
 
-{\color{schoolbusyellow}\Huge
-\uppercase{Topics in}\\[1em]
-\uppercase{Pure Mathematics}}
+\hrule height 2pt 
 
-\vspace{9cm}
+\vspace{2cm}
 
-{\color{schoolbusyellow}\huge Ryan Joo}
+\textit{\bfseries\huge Ryan Joo}
 \end{center}
-\thispagestyle{empty}
-\pagecolor{smalt(darkpowderblue)}
-\pagebreak
-
-\pagecolor{white}
-\thispagestyle{empty}
-\
 
 \vfill
 
-\begin{quote}
-\textit{The mathematician does not study mathematics because it is useful; he studies it because he delights in it and he delights in it because it is beautiful.}
+Copyright \copyright{} 2025 by Ryan Joo.
 
-\begin{flushright}--- Henri Poincar\'{e} (1854--1912)\\
-French mathematician and theoretical physicist\end{flushright}
-\end{quote}
-
-\vfill
-
-Copyright \copyright \ 2025 by Ryan Joo.
-
-This book is licensed under the terms of the Creative Commons Attribution-NonCommercial 4.0 International License (\url{https://creativecommons.org/licenses/by-nc/4.0}), which permits any noncommercial use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to original author and source, provide a link to the Creative Commons license, and indicate if changes were made. The images or other third party material in this book are included in the book's Creative Commons license, unless indicated otherwise in a credit line to the material. If material is not included in the book's Creative Commons license and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder.
-
-This is (still!) an incomplete draft. Please send corrections and comments to \url{ryanjooruian18@gmail.com}, or pull-request at \url{https://github.com/Ryanjoo18/undergrad-maths}.
-
-Typeset using \LaTeX.
+This is (still!) an incomplete draft. For corrections and comments, please send an email to the author at \href{mailto:ryanjooruian18@gmail.com}{ryanjooruian18@gmail.com}, or create a pull request at \url{https://github.com/Ryanjoo18/undergrad-maths}.
 
 Last updated \today.
 \pagebreak
 
 \frontmatter
 \section*{Preface}
-\ifprelim
-The reader is not assumed to have any mathematical prerequisites, although some experience with proofs may be helpful. \textbf{Preliminary topics} such as logic and methods of proofs (\cref{chap:logic-proofs}), and basic set theory (\cref{chap:set-theory}) are covered in \cref{part:prelim}.
-\fi
+I began writing this book during the mid-year break in 2023, which was when I had a bit of free time to read up on undergraduate mathematics, and also started learning \LaTeX{} to write this book. 
 
-\ifabsalg
-\cref{part:abstract-algebra} covers \textbf{abstract algebra}, which follows \cite{dummit-foote,artin}.
-\begin{itemize}
-\item \cref{chap:groups} introduces groups.
-\end{itemize}
-\fi
+The objective of this book is to serve as a compilation of essential topics at the undergraduate level (as well as serving as my personal notes).
+The book covers (or aims to cover) the following topics:
+\begin{enumerate}
+\item Abstract algebra, which follows \cite{dummit-foote,lang-undergrad-algebra}.
+\item Linear algebra, which follows \cite{ladr}.
+\item Real analysis, which follows \cite{rudin,apostol}
+\item Multivariable analysis, which follows \cite{spivak-manifolds,rudin}.
+\item Complex analysis, which follows \cite{stein-shakarchi}.
+\item General topology, which follows \cite{munkres}.
+\item Measure theory, which follows \cite{folland}.
+%\item Functional analysis, which follows \cite{rudin-grandpa}.
+%\item Stochastic analysis
+%\item PDEs
+\end{enumerate}
 
-\iflinalg
-\cref{part:linear-algebra} covers \textbf{linear algebra}, which follows \cite{axler}.
-\begin{itemize}
-\item \cref{chap:vector-spaces} introduces vector spaces, subspaces, span, linear independence, bases and dimension.
-\item \cref{chap:linear-maps} concerns linear maps and related concepts.
-\end{itemize}
-\fi
+\subsection*{Prerequisites}
+This book is written such that it is accessible to high school students for self-study. 
+No formal prerequisites are required, although some experience with proofs may be helpful.
 
-\ifanalysis
-\cref{part:real-analysis} covers \textbf{real analysis}, which follows \cite{rudin,apostol}.
-\begin{itemize}
-\item \cref{chap:number-systems} introduces the real and complex number systems.
-\item \cref{chap:basic-topology} covers basic point-set topology, in the context of metric spaces.
-\item \cref{chap:num-seq-series} concerns numerical sequences and series, in particular their convergence.
-\item \cref{chap:real-analysis_continuity} covers continuity of functions.
-\item \cref{chap:differentiation} covers differentiation.
-\item \cref{chap:rs-integration} covers Riemann--Stieljes integration.
-\item \cref{chap:func-seq-series} covers sequences and series of functions.
-\item \cref{chap:special-functions} covers some special functions, most notably power series and the fourier series.
-\end{itemize}
-\fi
-
-\iftop
-\cref{part:topology} covers \textbf{general topology}, which follows \cite{munkres}.
-\fi
+\subsection*{Presentation}
+This book follows the typical style of ``Definition'', ``Theorem'', etc.
+As far as possible, I will try to make clear what I define, and what results I wish to show.
 
 For ease of reference, important terms are \vocab{coloured} when first defined, and are included in the glossary; less important terms are \emph{italicised} when first defined, and are not included in the glossary.
-\pagebreak
 
-\section*{Note on Problem Solving}
-Mathematics is about problem solving. In \cite{polya}, George P\'{o}lya outlined the following problem solving cycle.
+\subsection*{Note on Problem Solving}
+Mathematics is about problem solving. P\'{o}lya outlined the following problem solving cycle in \cite{polya}.
 \begin{enumerate}
 \item \textbf{Understand the problem}
 
@@ -167,8 +145,7 @@ Building on P\'{o}lya's problem solving strategy, Schoenfeld \cite{schoenfeld} c
 
 \item \textbf{Belief system}: one's perspectives regarding the nature of a discipline and how one goes about working on it.
 \end{enumerate}
-\pagebreak
 
-\tableofcontents
+\subsection*{Acknowledgements}
+I am greatly thankful to the authors listed in the Bibliography.
 \pagebreak
-%\printglossary[type=\acronymtype]

@@ -26,8 +26,8 @@ We write $x\le y$ if $x<y$ or $x=y$. We define $>$ and $\ge$ in the obvious way.
 \begin{definition}[Boundedness]
 Let $E\subset S$, where $S$ is an ordered set.
 \begin{enumerate}[label=(\roman*)]
-\item $E$ is \vocab{bounded above} if there exists $\beta\in S$ such that $x\le\beta$ for all $x\in E$; $\beta$ is called an \emph{upper bound} of $E$.
-\item $E$ is \vocab{bounded below} if there exists $\beta\in S$ such that $x\ge\beta$ for all $x\in E$; $\beta$ is called a \emph{lower bound} of $E$.
+\item $E$ is \vocab{bounded above} if there exists $\beta\in S$ such that $x\le\beta$ for all $x\in E$; we call $\beta$ an \emph{upper bound} of $E$.
+\item $E$ is \vocab{bounded below} if there exists $\beta\in S$ such that $x\ge\beta$ for all $x\in E$; we call $\beta$ a \emph{lower bound} of $E$.
 \end{enumerate}
 $E$ is \vocab{bounded} in $S$ if it is bounded above and below.
 \end{definition}
@@ -74,6 +74,7 @@ It is clear that $1$ is an upper bound for $E$. Suppose $\beta<1$. Since $1\in E
 It is clear that $0$ is a lower bound for $E$. Suppose $\beta>0$. Pick $n=\floor{\frac{1}{\beta}}+1$, then $\beta>\frac{1}{n}$, so $\beta$ is not a lower bound for $E$. Hence $\inf E=0$.
 \end{proof}
 \end{example}
+\pagebreak
 
 \subsection{Least-upper-bound Property}
 \begin{definition}
@@ -111,16 +112,17 @@ If $S$ has the greatest-lower-bound property, then it has the least-upper-bound 
 
 Hence $S$ has the least-upper-bound property if and only if $S$ has the greatest-lower-bound property.
 \end{corollary}
+\pagebreak
 
 \subsection{Properties of Suprema and Infima}
 This section discusses some fundamental properties of the supremum that will be useful in this text. There is a corresponding set of properties of the infimum that the reader should formulate for himself.
 
 The next result shows that a set with a supremum contains numbers arbitrarily close to its supremum.
 
-\begin{proposition}[Approximation property]\label{prop:sup-approx}
+\begin{lemma}[Approximation property]\label{lemma:sup-approx}
 Let $S\subset\RR$ be non-empty, $b=\sup S$. Then for every $a<b$ there exists $x\in S$ such that
 \[a<x\le b.\]
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 We first show $x\le b$. Since $b=\sup S$ is an upper bound of $S$, $x\le b$ for all $x\in S$.
@@ -130,12 +132,12 @@ We now show there exist $x\in S$ such that $a<x$. Suppose otherwise, for a contr
 
 For the rest of this section, suppose $S$ has the least-upper-bound property.
 
-\begin{proposition}[Additive property]
-Given non-empty subsets $A,B\subset S$, let
+\begin{lemma}[Additive property]
+Given non-empty $A,B\subset S$, let
 \[C=\{x+y\mid x\in A,y\in B\}.\]
 If each of $A$ and $B$ has a supremum, then $C$ has a supremum, and
 \[\sup C=\sup A+\sup B.\]
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Let $a=\sup A$, $b=\sup B$. Let $z\in C$, then $z=x+y$ for some $x\in A$, $y\in B$. Then
@@ -145,7 +147,7 @@ so $a+b$ is an upper bound for $C$. Since $C$ is non-empty and bounded above, by
 Let $c=\sup C$. To show that $a+b=c$, we need to show that (i) $a+b\ge c$, and (ii) $a+b\le c$.
 \begin{enumerate}[label=(\roman*)]
 \item Since $c$ is the \emph{least} upper bound for $C$, and $a+b$ is an upper bound for $C$, we must have that $c\le a+b$.
-\item Choose any $\epsilon>0$. By \cref{prop:sup-approx} there exist $x\in A$ and $y\in B$ such that
+\item Choose any $\epsilon>0$. By \ref{lemma:sup-approx} there exist $x\in A$ and $y\in B$ such that
 \[a-\epsilon<x,\quad b-\epsilon<y.\]
 Adding these inequalities gives
 \[a+b-2\epsilon<x+y\le c.\]
@@ -153,10 +155,10 @@ Thus $a+b<c+2\epsilon$ for every $\epsilon>0$. Hence $a+b\le c$.
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}[Comparison property]
+\begin{lemma}[Comparison property]
 Let non-empty $A,B\subset S$ such that $a\le b$ for every $a\in A$, $b\in B$. If $B$ has a supremum, then $A$ has a supremum, and
 \[\sup A\le\sup B.\]
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Let $\beta=\sup B$. Since $\beta$ is a supremum for $B$, then $b\le\beta$ for all $b\in B$.
@@ -166,9 +168,11 @@ Let $a\in A$ and choose any $b \in B$. Since $a \le b$ and $t \le \beta$, $a\le\
 Since $A$ is non-empty and bounded above, by the lub property of $S$, $A$ has a supremum in $S$; let $\alpha=\sup A$. Since $\beta$ is an upper bound for $A$, and $\alpha$ is the \emph{least} upper bound for $A$, we have that $\alpha\le\beta$, as desired.
 \end{proof}
 
-\begin{proposition}
-Let $B \subset S$ be non-empty and bounded below. Let $A = \{-b \mid b \in B\}$. Then $A$ is non-empty and bounded above. Furthermore, $\inf B$ exists, and $\inf B=-\sup A$.
-\end{proposition}
+\begin{lemma}\label{lemma:sup-inf-negative}
+Let $B\subset S$ be non-empty and bounded below. Let
+\[A=-B\colonequals\{-b\mid b\in B\}.\]
+Then $A$ is non-empty and bounded above. Furthermore, $\inf B$ exists, and $\inf B=-\sup A$.
+\end{lemma}
 
 \begin{proof}
 Since $B$ is non-empty, so is $A$. Since $B$ is bounded below, let $\beta$ be a lower bound for $B$. Then $b\ge\beta$ for all $b\in B$, which implies $-b\le-\beta$ for all $b\in B$. Hence $a\le-\beta$ for all $a\in A$, so $-\beta$ is an upper bound for $A$.
@@ -177,6 +181,7 @@ Since $A$ is non-empty and bounded above, by the lub property of $S$, $A$ has a 
 
 Also, we saw before that if $\beta$ is a lower bound for $B$ then $-\beta$ is an upper bound for $A$. Then $-\beta \ge \sup A$ (since $\sup A$ is the least upper bound), so $\beta \le -\sup A$. Therefore $-\sup A$ is the greatest lower bound of $B$.
 \end{proof}
+\pagebreak
 
 \subsection{Ordered Fields}
 \begin{definition}[Ordered field]
@@ -191,7 +196,7 @@ If $x>0$, we call $x$ \emph{positive}; if $x<0$, $x$ is \emph{negative}.
 
 All the familiar rules for working with inequalities apply in every ordered field: Multiplication by positive [negative] quantities preserves [reverses] inequalities, no square is negative, etc. The following result lists some of these. 
 
-\begin{proposition}[Basic properties]\label{prop:ordered-field-properties}
+\begin{lemma}[Basic properties]\label{lemma:ordered-field-properties}
 Let $F$ be an ordered field, $x,y,z\in F$.
 \begin{enumerate}[label=(\roman*)]
 \item If $x>0$ then $-x<0$, and vice versa.
@@ -200,7 +205,7 @@ Let $F$ be an ordered field, $x,y,z\in F$.
 \item If $x\neq0$ then $x^2>0$. In particular, $1>0$.
 \item If $0<x<y$ then $0<\frac{1}{y}<\frac{1}{x}$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
@@ -274,7 +279,7 @@ In the previous result, note that $B$ is the set of all upper bounds of $A$, and
 \subsection{Real Field}
 The sole objective of this subsection is to prove the following result.
 
-\begin{theorem}[Existence of real field]
+\begin{theorem}[Existence of real field]\label{thrm:existence-real-field}
 There exists an ordered field $\RR$ that
 \begin{enumerate}[label=(\roman*)]
 \item contains $\QQ$ as a subfield, and
@@ -282,16 +287,12 @@ There exists an ordered field $\RR$ that
 \end{enumerate}
 \end{theorem}
 
-\begin{proof}
-We prove by contruction, as follows. 
-\end{proof}
-
-We now want to construct $\RR$ from $\QQ$; one method to do so is using Dedekind cuts\footnote{proposed by German mathematician Richard Dedekind in 1872.}.
+We want to construct $\RR$ from $\QQ$; one method to do so is using Dedekind cuts.
 
 \begin{definition}[Dedekind cut]
-A \vocab{Dedekind cut}\index{Dedekind cut} $\alpha\subset\QQ$ satisfies the following properties:
+$\alpha\subset\QQ$ is a \vocab{Dedekind cut}\index{Dedekind cut}, if
 \begin{enumerate}[label=(\roman*)]
-\item $\alpha\neq\emptyset$, $\alpha\neq\QQ$;
+\item $\alpha\neq\emptyset$, $\alpha\neq\QQ$;\hfill(non-trivial)
 \item if $p\in\alpha$, $q\in\QQ$ and $q<p$, then $q\in\alpha$;
 \item if $p\in\alpha$, then $p<r$ for some $r\in\alpha$.
 \end{enumerate}
@@ -307,7 +308,7 @@ Note that (iii) simply says that $\alpha$ has no largest member; (ii) implies tw
 
 \begin{example}
 Let $r\in\QQ$ and define
-\[ \alpha_r\coloneqq\{p\in\QQ\mid p<r\}. \]
+\[ \alpha_r\colonequals\{p\in\QQ\mid p<r\}. \]
 We now check that this is indeed a Dedekind cut.
 \begin{enumerate}[label=(\roman*)]
 \item $p=1+r\notin\alpha_r$ thus $\alpha_r\neq\QQ$. $p=r-1\in\alpha_r$ thus $\alpha_r\neq\emptyset$.
@@ -332,7 +333,7 @@ $\sqrt[3]{2}$ is not rational, but it is real. $\sqrt[3]{2}$ corresponds to the 
 
 \begin{definition}
 The set of real numbers, denoted by $\RR$, is the set of all Dedekind cuts:
-\[\RR\coloneqq\{\alpha\subset\QQ\mid\alpha\text{ is a Dedekind cut}\}.\]
+\[\RR\colonequals\{\alpha\subset\QQ\mid\alpha\text{ is a Dedekind cut}\}.\]
 \end{definition}
 
 \begin{proposition}
@@ -383,8 +384,8 @@ The l.u.b.\ property of $\RR$ is also known as the \emph{completeness axiom} of 
 We now define operations on $\RR$.
 
 \begin{definition}[Addition]
-Given $\alpha,\beta\in\RR$,
-\[\alpha+\beta\coloneqq\{r\in\QQ\mid r=a+b,a\in\alpha,b\in\beta\}.\]
+Given $\alpha,\beta\in\RR$, define addition as
+\[\alpha+\beta\colonequals\{r\in\QQ\mid r=a+b,a\in\alpha,b\in\beta\}.\]
 \end{definition}
 
 We first check if the above definition makes sense. We want to show that addition on $\RR$ is closed: for all $\alpha,\beta\in\RR$, $\alpha+\beta\in\RR$.
@@ -404,14 +405,14 @@ $r=a+b$ for some $a\in\alpha,b\in\beta$. Then $r^\prime-a<b$. Since $\beta\in\RR
 \end{enumerate}
 \end{proof}
 
-\begin{proposition} \
+\begin{lemma} \
 \begin{enumerate}[label=(\roman*)]
 \item Addition on $\RR$ is commutative: $\alpha+\beta=\beta+\alpha$ for all $\alpha,\beta\in\RR$.
 \item Addition on $\RR$ is associative: $\alpha+(\beta+\gamma)=(\alpha+\beta)+\gamma$ for all $\alpha,\beta,\gamma\in\RR$.
-\item Additive identity: Define $0^*\coloneqq\{p\in\QQ\mid p<0\}$. Then $\alpha+0^*=\alpha$ for all $\alpha\in\RR$.
+\item Additive identity: Define $0^*\colonequals\{p\in\QQ\mid p<0\}$. Then $\alpha+0^*=\alpha$ for all $\alpha\in\RR$.
 \item Additive inverse: Fix $\alpha\in\RR$, define $\beta=\{p\in\QQ\mid\exists r>0,\:-p-r\notin\alpha\}$. Then $\alpha+\beta=0^*$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{remark}
 Recall that to prove that two sets are equal, show double inclusion.
@@ -459,9 +460,9 @@ so $p\in\beta$. Since $v=nw+p$ where $nw\in\alpha$, $p\in\beta$, $v\in\alpha+\be
 $\beta$ is denoted by the more familiar notation $-\alpha$.
 \end{notation}
 
-\begin{proposition}
+\begin{lemma}
 If $\alpha,\beta,\gamma\in\RR$ and $\beta<\gamma$, then $\alpha+\beta<\alpha+\gamma$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 
@@ -472,11 +473,11 @@ We say that a Dedekind cut $\alpha$ is \emph{positive} if $0\in\alpha$, and \emp
 Multiplication is a little more bothersome than addition in the present context, since products of negative rationals are positive. For this reason we confine ourselves first to $\RR^+$ (the set of all $\alpha\in\RR$ with $\alpha>0^*$).
 
 \begin{definition}
-For all $\alpha,\beta\in\RR^+$, we define multiplication as
-\[\alpha\beta\coloneqq\{p\in\QQ\mid p\le rs,\:r\in\alpha,s\in\beta,\:r,s>0\}.\]
+Given $\alpha,\beta\in\RR^+$, define multiplication as
+\[\alpha\beta\colonequals\{p\in\QQ\mid p\le rs,\:r\in\alpha,s\in\beta,\:r,s>0\}.\]
 \end{definition}
 
-We also define $1^*\coloneqq\{q\in\QQ\mid q<1\}$.
+We also define $1^*\colonequals\{q\in\QQ\mid q<1\}$.
 
 As again, check if the above definition makes sense. We want to show that multiplication on $\RR^+$ is closed: for all $\alpha,\beta\in\RR$, $\alpha\beta\in\RR$.
 
@@ -503,14 +504,14 @@ We now complete the definition of multiplication by setting $\alpha0^*=0^*=0^*\a
 \end{cases}\]
 where we make negative numbers positive, multiply, and then negate them as needed.
 
-\begin{proposition} \
+\begin{lemma} \
 \begin{enumerate}[label=(\roman*)]
 \item Multiplication on $\RR$ is commutative: $\alpha\beta=\beta\alpha$ for all $\alpha,\beta\in\RR$.
 \item Multiplication on $\RR$ is associative: $(\alpha\beta)\gamma=\alpha(\beta\gamma)$ for all $\alpha,\beta,\gamma\in\RR$.
 \item Multiplicative identity: $1\alpha=\alpha$ for all $\alpha\in\RR$.
 \item Multiplicative inverse: If $\alpha\in\RR$, $\alpha\neq0^*$, then there exists $\beta\in\RR$ such that $\alpha\beta=1^*$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 We associate each $r\in\QQ$ with the set
 \[r^*=\{p\in\QQ\mid p<r\}.\]
@@ -546,8 +547,11 @@ This shows that the ordered field $\QQ$ is isomorphic to the ordered field $\QQ^
 In fact, $\RR$ is the only ordered field with the l.u.b.\ property. Hence any other ordered field with the l.u.b.\ property is isomorphic to $\RR$.
 \end{remark}
 
+Therefore we have proven \ref{thrm:existence-real-field}.
+\pagebreak
+
 \subsection{Properties of $\RR$}
-\begin{proposition}[$\RR$ is archimedian]
+\begin{proposition}[Archimedean property]\label{prop:R-archimedean}
 For any $x\in\RR^+$, $y\in\RR$, there exists $n\in\NN$ such that
 \[nx>y.\]
 \end{proposition}
@@ -560,12 +564,12 @@ Since $A\subset R$ is non-empty and bounded above, by the l.u.b.\ property of $\
 Consider $\alpha-x$. Since $\alpha-x<\alpha=\sup A$, $\alpha-x$ is not an upper bound of $A$. Then $\alpha-x\le n_0x$ for some $n_0\in\NN$; rearranging gives $\alpha\le(n_0+1)x$. This implies that $\alpha$ is not an upper bound of $A$, which contradicts the fact that $\alpha$ is the supremum of $A$.
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{cor:R-archimedean-1/n}
 Let $\epsilon>0$. Then there exists $n\in\NN$ such that $0<\frac{1}{n}<\epsilon$.
 \end{corollary}
 
 \begin{proof}
-Take $x=\epsilon$ and $y=1$.
+In \ref{prop:R-archimedean}, take $x=\epsilon$ and $y=1$.
 \end{proof}
 
 \begin{proposition}[$\QQ$ is dense in $\RR$]
@@ -574,13 +578,18 @@ For any $x,y\in\RR$ with $x<y$, there exists $p\in\QQ$ such that
 \end{proposition}
 
 \begin{proof}
-We prove by construction; that is, construct the required $p$ from the given $x$ and $y$.
+We prove by construction (construct the required $p$ from the given $x$ and $y$).
 
-Since $x<y$, we have $y-x>0$. By the archimedian property, there exists $n\in\NN$ such that
+Since $x<y$, we have $y-x>0$. By \ref{cor:R-archimedean-1/n}, there exists $n\in\NN$ such that
 \[\frac{1}{n}<y-x.\]
-Consider the set comprising multiples of $\frac{1}{n}$. Since this set is unbounded, choose the first multiple $m\in\NN$ such that $\frac{m}{n}>x$.
+Consider the set comprising multiples of $\frac{1}{n}$:
+\[E=\crbrac{\frac{k}{n}\:\bigg|\:k\in\NN}.\]
+Since $E$ is unbounded, choose the first multiple $m\in\NN$ such that $\frac{m}{n}>x$.
 
-We now claim that $\frac{m}{n}<y$. If not, then
+\begin{claim}
+$x<\frac{m}{n}<y.$
+\end{claim}
+It suffices to show that $\frac{m}{n}<y$. If not, then
 \[\frac{m-1}{n}<x\quad\text{and}\quad\frac{m}{n}>y,\]
 where the first inequality follows from the minimality of $m$. But these two statements combined imply that $\frac{1}{n}>y-x$, a contradiction.
 \end{proof}
@@ -589,42 +598,67 @@ where the first inequality follows from the minimality of $m$. But these two sta
 For every $x\in\RR^+$ and every $n\in\NN$, there exists a unique $y\in\RR^+$ so that $y^n=x$.
 \end{proposition}
 
+We call the number $y$ the positive $n$-th root of $x$, and denote it by $\sqrt[n]{x}$ or $x^\frac{1}{n}$.
+
 \begin{proof}
-The uniqueness of such $y$ is clear, since $0<y_1<y_2$ implies ${y_1}^n<{y_2}^n$.
-\begin{claim}
-$y=\sup E$, where
+Let $x\in\RR^+$, fix $n\in\NN$.
+
+\fbox{Existence} Let
 \[E=\{t\in\RR^+\mid t^n<x\}.\]
+
+\begin{claim}
+$y=\sup E$ satisfies $y^n=x$.
 \end{claim}
-We first show that $E$ has a supremum, by showing that it is (i) non-empty, and (ii) bounded above:
+We first show that $E$ has a supremum.
 \begin{enumerate}[label=(\roman*)]
-\item Let $t=\frac{x}{1-x}$. Then $0\le t<1$, so $t^n\le t<x$. Hence $t\in E$, which implies $E\neq\emptyset$.
-\item We claim that $1+x$ is an upper bound for $E$. If $t>1+x$ then $t^n\ge t>x$, so that $t\notin E$. Hence $1+x$ is an upper bound of $E$.
+\item Let $t=\dfrac{x}{1+x}$. Then $0\le t<1$, so $t^n\le t<x$ implies $t^n<x$. Hence $t\in E$, so $E\neq\emptyset$.
+\item We claim that $1+x$ is an upper bound for $E$.
+
+If $t>1+x$, then $t^n\ge t>x$ implies $t^n>x$, so $t\notin E$. [This is the contrapositive of $t\in E\implies t\le1+x$.] Hence $1+x$ is an upper bound of $E$, so $E$ is bounded above.
 \end{enumerate}
 Hence $E$ has a supremum; let $y=\sup E$.
 
-To prove that $y^n=x$, we show that the inequalities (i) $y^n<x$ and (ii) $y^n>x$ lead to a contradiction. Consider the identity $b^n-a^n=(b-a)\brac{b^{n-1}+b^{n-2}a+\cdots+a^{n-1}}$, which yields the inequality
-\[b^n-a^n<(b-a)nb^{n-1}\]
-when $0<a<b$.
-\begin{enumerate}[label=(\roman*)]
-\item Suppose $y^n<x$. Choose $h$ so that $0<h<1$ and
+To prove that $y^n=x$, we show that both the inequalities $y^n<x$ and $y^n>x$ lead to a contradiction. Consider the identity $b^n-a^n=(b-a)\brac{b^{n-1}+b^{n-2}a+\cdots+a^{n-1}}$. If $0<a<b$, then
+\begin{equation*}\tag{1}
+b^n-a^n<(b-a)nb^{n-1}.
+\end{equation*}
+\begin{description}
+\item[Case 1: $y^n<x$.] 
+\begin{idea}
+We can find a \emph{small} $h>0$ such that $(y+h)^n<x$.
+\end{idea}
+Choose $h$ so that $0<h<1$ and
 \[h<\frac{x-y^n}{n(y+1)^{n-1}}.\]
-let $a=y$, $b=y+h$. Then
-\[(y+h)^n-y^n<hn(y+h)^{n-1}<hn(y+1)^{n-1}<x-y^n.\]
+In (1), take $b=y+h$, $a=y$. Then
+\begin{align*}
+(y+h)^n-y^n
+&<hn(y+h)^{n-1}\\
+&<hn(y+1)^{n-1}\\
+&<\frac{x-y^n}{\cancel{n(y+1)^{n-1}}}\cancel{n(y+1)^{n-1}}\\
+&=x-y^n.
+\end{align*}
 Thus $(y+h)^n<x$, and $y+h\in E$. Since $y+h>y$, this contradicts the fact that $y$ is an upper bound of $E$.
 
-\item Suppose $y^n>x$. Let
+\item[Case 2: $y^n>x$.] 
+\begin{idea}
+Similarly, we can find a \emph{small} $k>0$ such that $(y-k)^n>x$.
+\end{idea}
+Let
 \[k=\frac{y^n-x}{ny^{n-1}}.\]
-Then $0<k<y$. If $t\ge y-k$, we conclude that
-\[y^n-t^n\le y^n-(y-k)^n<kny^{n-1}=y^n-x.\]
+Then $0<k<y$, by (1). If $t\ge y-k$,
+\begin{align*}
+y^n-t^n&\le y^n-(y-k)^n\\
+&<kny^{n-1}\\
+&=\frac{y^n-x}{\cancel{ny^{n-1}}}\cancel{ny^{n-1}}\\
+&=y^n-x.
+\end{align*}
 Thus $t^n>x$, and $t\notin E$. It follows that $y-k$ is an upper bound of $E$. But $y-k<y$, which contradicts the fact that $y$ is the \emph{least} upper bound of $E$.
-\end{enumerate}
+\end{description}
 
-Hence $y^n=x$, and the proof is complete.
+\fbox{Uniqueness} Suppose, for a contradiction, that there exist distinct $y_1,y_2$ which are both $n$-th roots of $x$. WLOG assume that $0<y_1<y_2$. Then taking the $n$-th power gives ${y_1}^n<{y_2}^n$. 
+
+Since $y_1$ is a $n$-th root of $x$, then $x={y_1}^n$, so $x<{y_2}^n$ implies $x\neq {y_2}^n$. Hence $y_2$ cannot be a $n$-th root of $x$, a contradiction.
 \end{proof}
-
-\begin{notation}
-$y$ is denoted by $\sqrt[n]{x}$ or $x^\frac{1}{n}$.
-\end{notation}
 
 \begin{corollary}
 If $a,b\in\RR^+$ and $n\in\NN$, then
@@ -638,15 +672,45 @@ since multiplication is commutative. The uniqueness assertion of the previous re
 \[(ab)^\frac{1}{n}=\alpha\beta=a^\frac{1}{n}b^\frac{1}{n}.\]
 \end{proof}
 
+\begin{lemma}
+If $x\in\RR^+$ and $m,n\in\NN$, then
+\[(x^\frac{1}{n})^m=\brac{x^m}^\frac{1}{n}.\]
+\end{lemma}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+We can now define \emph{rational exponents} $x^r$, where $x>0$ and $r\in\QQ$.
+\begin{definition}[Rational exponents]
+For $x>0$ and $m,n\in\NN$, define
+\[x^\frac{m}{n}\colonequals\brac{x^\frac{1}{n}}^m\quad\text{and}\quad x^{-\frac{m}{n}}\colonequals\frac{1}{x^\frac{m}{n}}.\]
+(We also define $x^0=1$.)
+\end{definition}
+
+We need to check that the above definition of $x^r$ is well defined. That is, if $m,n,p,q\in\NN$ are such that $\frac{m}{n}=\frac{p}{q}$, then $(x^\frac{1}{n})^m=(x^\frac{1}{q})^p$. 
+To see this, note that $mq=np$ and
+\[\brac{(x^\frac{1}{n})^m}^q=(x^\frac{1}{n})^{mq}=(x^\frac{1}{n})^{np}=x^p.\]
+Thus $(x^\frac{1}{n})^m$ is the $q$-th root of $x^p$, i.e.,
+\[(x^\frac{1}{n})^m=(x^p)^\frac{1}{q}.\]
+
+\begin{lemma}[Properties of rational exponents] \
+\begin{enumerate}[label=(\roman*)]
+\item If $a>0$ and $r,s\in\QQ$, then $a^{r+s}=a^r a^s$ and $(a^r)^s=a^{rs}$.
+\item If $0<a<b$ and $r\in\QQ$ with $r>0$, then $a^r<b^r$.
+\item If $a>1$, $r,s\in\QQ$ with $r<s$, then $a^r<a^s$.
+\end{enumerate}
+\end{lemma}
+
 The next result shows that real numbers can be approximated to any desired degree of accuracy by rational numbers with finite decimal representations.
 
 \begin{proposition}
-Assume $x\ge0$. Then for every integer $n\ge1$ there exists a finite decimal $r_n=a_0.a_1a_2\cdots a_n$ such that
+Let $x\ge0$. Then for every integer $n\ge1$ there exists a finite decimal $r_n=a_0.a_1a_2\cdots a_n$ such that
 \[r_n\le x<r_n+\frac{1}{10^n}.\]
 \end{proposition}
 
 \begin{proof}
-We prove by construction; that is, we construct the required finite decimal from $x$.
+We prove by construction (construct the required finite decimal from $x$).
 
 Let
 \[S=\{k\in\ZZ\mid k\le x\}.\]
@@ -669,7 +733,7 @@ Furthermore, it is easy to verify that $\displaystyle x=\sup_{n\in\NN}r_n$.
 \subsection{Extended Real Number System}
 \begin{definition}[Extended real number system]
 The \vocab{extended real number system}\index{extended real number system} is defined to be the union
-\[\overline{\RR}\coloneqq\RR\cup\{-\infty,+\infty\},\]
+\[\overline{\RR}\colonequals\RR\cup\{-\infty,+\infty\},\]
 where we preserve the original order in $\RR$, and define $-\infty<x<+\infty$ for all $x\in\RR$.
 \end{definition}
 
@@ -697,16 +761,16 @@ If $x<0$ then
 When it is desired to make the distinction between real numbers on the one hand and the symbols $+\infty$ and $-\infty$ on the other quite explicit, the former are called \emph{finite}.
 \pagebreak
 \section{Complex Field}
-Consider the Cartesian product $\RR^2$. A \emph{complex number} is an ordered pair $(a,b)\in\RR^2$. 
-
-\begin{proposition}
-Let $x=(a,b)$, $y=(c,d)$ be two complex numbers. We write $x=y$ if and only if $a=c$ and $b=d$. $\RR^2$, with addition and multiplication defined as
+\begin{lemma}
+Let $(a,b),(c,d)\in\RR^2$. Define addition and multiplication on $\RR^2$ as
 \begin{align*}
-x+y&=(a+c,b+d)\\
-xy&=(ac-bd,ad+bc)
+(a,b)+(c,d)&=(a+c,b+d),\\
+(a,b)(c,d)&=(ac-bd,ad+bc).
 \end{align*}
-is a field. Note that the additive identity is $(0,0)$, and multiplicative identity is $(1,0)$. We call this structure $\CC$, the \vocab{complex field}.
-\end{proposition}
+Then $\RR^2$ is a field, with additive identity $(0,0)$ and multiplicative identity $(1,0)$.
+\end{lemma}
+
+We call this structure $\CC$, the \vocab{complex field}; its elements are called \emph{complex numbers}.
 
 \begin{proof}
 Check the field axioms.
@@ -714,13 +778,13 @@ Check the field axioms.
 
 The next result shows that the complex numbers of the form $(a,0)$ have the same arithmetic properties as the corresponding real numbers $a$. We can therefore identify $(a,0)\in\CC$ with $a\in\RR$. This identification implies that $\RR$ is a subfield of $\CC$.
 
-\begin{proposition}
+\begin{lemma}
 For any $a,b\in\RR$, we have
 \begin{align*}
 (a,0)+(b,0)&=(a+b,0),\\
 (a,0)(b,0)&=(ab,0).
 \end{align*}
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Exercise.
@@ -728,19 +792,12 @@ Exercise.
 
 You may have noticed that we have defined the complex numbers without referring to the mysterious square root of $-1$. We now show that the notation $(a,b)$ is equivalent to the more customary $a+bi$.
 
-Define the imaginary number $i=(0,1)$.
-
-\begin{proposition}
-$i^2=-1$.
-\end{proposition}
-
-\begin{proof}
+Define the imaginary number $i\colonequals(0,1)$. See that 
 \[i^2=(0,1)(0,1)=(-1,0)=-1.\]
-\end{proof}
 
-\begin{proposition}
+\begin{lemma}
 For $a,b\in\RR$, $(a,b)=a+bi$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 \begin{align*}
@@ -750,9 +807,9 @@ a+bi&=(a,0)+(b,0)(0,1)\\
 \end{align*}
 \end{proof}
 
-For $a,b\in\RR$, $z=a+bi$, we call $a$ and $b$ the \emph{real part} and \emph{imaginary part} of $z$ respectively, denoted by $a=\Re(z)$, $b=\Im(z)$; $\overline{z}=a-bi$ is called the \emph{conjugate} of $z$.
+For $a,b\in\RR$, we write $z=a+bi$; we call $a$ and $b$ the \emph{real part} and \emph{imaginary part} of $z$ respectively, denoted by $a=\Re(z)$, $b=\Im(z)$; $\overline{z}=a-bi$ is called the \emph{conjugate} of $z$.
 
-\begin{proposition}
+\begin{lemma}[Properties of conjugate]
 For $z,w\in\CC$,
 \begin{enumerate}[label=(\roman*)]
 \item $\overline{z+w}=\overline{z}+\overline{w}$
@@ -760,12 +817,12 @@ For $z,w\in\CC$,
 \item $z+\overline{z}=2\Re(z)$, $z-\overline{z}=2i\Im(z)$
 \item $z\overline{z}\in\RR$ and $z\overline{z}\ge0$
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 For $z\in\CC$, tbe \emph{absolute value} of $z$ is defined as
-\[|z|\coloneqq\brac{z\overline{z}}^\frac{1}{2}.\]
+\[|z|\colonequals\brac{z\overline{z}}^\frac{1}{2}.\]
 
-\begin{lemma}
+\begin{lemma}[Properties of absolute value]
 For $z,w\in\CC$,
 \begin{enumerate}[label=(\roman*)]
 \item $|z|\ge0$
@@ -791,12 +848,12 @@ and the desired result follows by taking square roots on both sides.
 \end{enumerate}
 \end{proof}
 
-\begin{theorem}[Triangle inequality]
+\begin{proposition}[Triangle inequality]
 For $z,w\in\CC$,
 \begin{equation}
 |z+w|\le|z|+|w|.
 \end{equation}
-\end{theorem}
+\end{proposition}
 
 \begin{proof}
 Let $z,w\in\CC$. Note that the conjugate of $z\overline{w}$ is $\overline{z}w$, so $z\overline{w}+\overline{z}w=2\Re(z\overline{w})$. Hence
@@ -844,28 +901,31 @@ Hence
 \end{enumerate}
 \end{proof}
 
-\begin{theorem}[Cauchy--Schwarz inequality]
+\begin{proposition}[Cauchy--Schwarz inequality]
 If $a_1,\dots,a_n,b_1,\dots,b_n\in\CC$, then
-\begin{equation}
+\begin{equation}\label{eqn:cauchy-schwarz-inequality}
 \absolute{\sum_{i=1}^{n}a_i\overline{b_i}}^2\le\sum_{i=1}^{n}|a_i|^2\sum_{i=1}^{n}|b_i|^2.
 \end{equation}
-\end{theorem}
+\end{proposition}
 
 \begin{proof}
+For simplicity, we shall drop the upper and lower limits of the sums. 
 Let
-\[A=\sum_{i=1}^{n}|a_i|^2,\quad B=\sum_{i=1}^{n}|b_i|^2,\quad C=\sum_{i=1}^{n}a_i\overline{b_i}.\]
+\[A=\sum|a_i|^2,\quad B=\sum|b_i|^2,\quad C=\sum a_i\overline{b_i}.\]
+Then \eqref{eqn:cauchy-schwarz-inequality} becomes
+\[|C|^2\le AB.\]
 If $B=0$, then $b_1=\cdots=b_n=0$, and the conclusion is trivial. Now assume that $B>0$. Then consider the sum
 \begin{align*}
-\sum_{i=1}^{n}|Ba_i-Cb_i|^2
-&=\sum_{i=1}^{n}(Ba_i-Cb_i)(\overline{Ba_i-Cb_i})\\
-&=\sum_{i=1}^{n}(Ba_i-Cb_i)(B\overline{a_i}-\overline{Cb_i})\\
-&=B^2\sum_{i=1}^{n}|a_i|^2-B\overline{C}\sum_{i=1}^{n}a_i\overline{b_j}-BC\sum_{i=1}^{n}\overline{a_i}b_i+|C|^2\sum_{i=1}^{n}|b_i|^2\\
+\sum |Ba_i-Cb_i|^2
+&=\sum (Ba_i-Cb_i)(\overline{Ba_i-Cb_i})\\
+&=\sum (Ba_i-Cb_i)(B\overline{a_i}-\overline{Cb_i})\\
+&=B^2\sum |a_i|^2-B\overline{C}\sum a_i\overline{b_i}-BC\sum \overline{a_i}b_i+|C|^2\sum |b_i|^2\\
 &=B^2A-B|C|^2\\
 &=B(AB-|C|^2).
 \end{align*}
-Since each term $\displaystyle\sum_{i=1}^{n}|Ba_i-Cb_i|^2$ is non-negative, we have that $\displaystyle\sum_{i=1}^{n}|Ba_i-Cb_i|^2\ge0$, and so
+Each term in $\displaystyle\sum |Ba_i-Cb_i|^2$ is non-negative, so $\displaystyle\sum |Ba_i-Cb_i|^2\ge0$. Thus
 \[B(AB-|C|^2)\ge0.\]
-Since $B>0$, it follows that $AB-|C|^2\ge0$. This is the desired inequality.
+Since $B>0$, it follows that $AB-|C|^2\ge0$, or $|C|^2\le AB$. This is the desired inequality.
 
 (when does equality hold?)
 \end{proof}
@@ -882,7 +942,7 @@ We can also define the norm of $\vb{a}\in\CC^n$:
 
 \section{Euclidean Space}
 For $n\in\NN$, define
-\[\RR^n\coloneqq\{(x_1,\dots,x_n)\mid x_i\in\RR\}\]
+\[\RR^n\colonequals\{(x_1,\dots,x_n)\mid x_i\in\RR\}\]
 where $\vb{x}=(x_1,\dots,x_n)$, $x_i$'s are called the coordinates of $\vb{x}$. The elements of $\RR^n$ are called \emph{points}, or \emph{vectors}.
 
 \begin{lemma}
@@ -899,17 +959,17 @@ These two operations satisfy the commutative, associatives, and distributive law
 \end{proof}
 
 We define the \emph{inner product} of $\vb{x}$ and $\vb{y}$ by
-\[\vb{x}\cdot\vb{y}\coloneqq\sum_{i=1}^nx_iy_i,\]
+\[\vb{x}\cdot\vb{y}\colonequals\sum_{i=1}^nx_iy_i,\]
 and the \emph{norm} of $\vb{x}$ by
-\[\norm{\vb{x}}\coloneqq\sqrt{\vb{x}\cdot\vb{x}}.\]
+\[\norm{\vb{x}}\colonequals\sqrt{\vb{x}\cdot\vb{x}}.\]
 The structure now defined (the vector space $\RR^n$ with the above inner product and norm) is called the \vocab{Euclidean $n$-space}.
 
 \begin{lemma}[Basic properties of norm]
 Suppose $\vb{x},\vb{y},\vb{z}\in\RR^n$, $\alpha\in\RR$.
 \begin{enumerate}[label=(\roman*)]
-\item $\norm{\vb{x}}\ge0$, where equality holds if and only if $\vb{x}=\vb{0}$.\hfill(positive definiteness)
+\item $\norm{\vb{x}}\ge0$, where equality holds if and only if $\vb{x}=\vb{0}$\hfill(positive definiteness)
 \item $\norm{\alpha\vb{x}}=|\alpha|\norm{\vb{x}}$\hfill(homogeneity)
-\item $\norm{\vb{x}\cdot\vb{y}}\le\norm{\vb{x}}\norm{\vb{y}}$
+\item $\norm{\vb{x}\cdot\vb{y}}\le\norm{\vb{x}}\norm{\vb{y}}$\hfill(Cauchy--Schwarz inequality)
 \item $\norm{\vb{x}+\vb{y}}\le\norm{\vb{x}}+\norm{\vb{y}}$\hfill(triangle inequality)
 \item $\norm{\vb{x}-\vb{z}}\le\norm{\vb{x}-\vb{y}}+\norm{\vb{y}-\vb{z}}$\hfill(triangle inequality)
 \end{enumerate}
@@ -919,7 +979,11 @@ Suppose $\vb{x},\vb{y},\vb{z}\in\RR^n$, $\alpha\in\RR$.
 \begin{enumerate}[label=(\roman*)]
 \item Obvious from definition.
 \item Obvious from definition.
-\item This is an immediate consequence of the Cauchy--Schwarz inequality.
+\item We want to show 
+\[\sqrt{\sum_{i=1}^{n}x_iy_i}\le\sqrt{\sum_{i=1}^{n}{x_i}^2}\sqrt{\sum_{i=1}^{n}{y_i}^2},\]
+or, squaring both sides,
+\[\sum_{i=1}^{n}x_iy_i\le\brac{\sum_{i=1}^{n}{x_i}^2}\brac{\sum_{i=1}^{n}{y_i}^2}.\]
+But this is simply the Cauchy--Schwarz inequality \eqref{eqn:cauchy-schwarz-inequality}. 
 \item By (iii) we have
 \begin{align*}
 \norm{\vb{x}+\vb{y}}&=(\vb{x}+\vb{y})\cdot(\vb{x}+\vb{y})\\
@@ -927,26 +991,12 @@ Suppose $\vb{x},\vb{y},\vb{z}\in\RR^n$, $\alpha\in\RR$.
 &\le\norm{\vb{x}}^2+2\norm{\vb{x}}\norm{\vb{y}}+\norm{\vb{y}}^2\\
 &=\brac{\norm{\vb{x}}+\norm{\vb{y}}}^2.
 \end{align*}
-\item This follows directly from (iv) by replacing $\vb{x}$ by $\vb{x}-\vb{y}$ and $\vb{y}$ by $\vb{y}-\vb{z}$.
+\item This follows directly from (iv) by replacing $\vb{x}$ by $\vb{x}-\vb{y}$, and $\vb{y}$ by $\vb{y}-\vb{z}$.
 \end{enumerate}
 \end{proof}
-
-\begin{comment}
-\begin{definition}
-The \vocab{distance between sets} $E\subset\RR^n$ and $F\subset\RR^n$ is defined as
-\[ d(E,F)\coloneqq\inf_{x\in E,y\in F}\norm{x-y}. \]
-\end{definition}
-
-Obviously $d(E,F)>0$ implies that $E$ and $F$ are disjoint, but $E$ and $F$ may still be disjoint even if $d(E,F)=0$. For example, the closed intervals $E=(-1,0)$ and $F=(0,1)$.
-
-\begin{exercise}
-Suppose that $E$ and $F$ are sets in $\RR^n$ where $E$ and $F$ is finite. Prove that $E$ and $F$ are disjoint if and only if $d(E,F)>0$.
-\end{exercise}
-\end{comment}
 \pagebreak
 
 \section*{Exercises}
-\addcontentsline{toc}{section}{Exercises}
 \begin{exercise}[\cite{rudin} 1.1]
 If $r\in\QQ\setminus\{0\}$ and $x\in\RR\setminus\QQ$, prove that $r+x\in\RR\setminus\QQ$ and $rx\in\RR\setminus\QQ$.
 \end{exercise}
@@ -976,7 +1026,7 @@ Prove that no order can be defined in $\CC$ that turns it into an ordered field.
 \end{exercise}
 
 \begin{solution}
-By \cref{prop:ordered-field-properties}, an order $<$ that makes $\CC$ an ordered field would have to satisfy $-1=i^2>0$, contradicting $1>0$.
+By \ref{lemma:ordered-field-properties}, an order $<$ that makes $\CC$ an ordered field would have to satisfy $-1=i^2>0$, contradicting $1>0$.
 \end{solution}
 
 \begin{exercise}[\cite{rudin} 1.9, lexicographic order]

@@ -1,143 +1,221 @@
 \chapter{Complex Functions}\label{chap:complex-functions}
-\begin{summary}
-\item 
-\end{summary}
+\section{The Complex Plane}
+$\CC$ is a metric space, with metric $d(z,w)=|z-w|$. Hence all notions defined for general metric spaces, as outlined in \cref{chap:basic-topology,chap:num-seq-series,chap:real-analysis_continuity,chap:special-functions}, are applicable to $\CC$.
 
-$\CC$ is a metric space, with metric $d(z,w)=|z-w|$ as defined in \cref{chap:number-systems}. Therefore all notions defined for general metric spaces, as outlined in \cref{chap:basic-topology,chap:num-seq-series,chap:real-analysis_continuity,chap:special-functions}, are applicable to $\CC$.
+If $z_0\in\CC$ and $r>0$, we define the \vocab{open disc} of radius $r$ centered at $z_0$ to be
+\[D_r(z_0)=\{z\in\CC\mid |z-z_0|<r\}.\]
+The \vocab{closed disc} $D_r(z_0)$ of radius $r$ centered at $z_0$ is defined by
+\[D_r(z_0)=\{z\in\CC\mid |z-z_0|\le r\}.\]
+The \vocab{boundary} of either the open or closed disc is the circle
+\[C_r(z_0)=\{z\in\CC\mid |z-z_0|=r\}.\]
+Since the \vocab{unit disc} (the open disc centered at the origin and of radius $1$) plays an important role, we will often denote it by $\DD$:
+\[\DD=\{z\in\CC\mid |z|<1\}.\]
 
-\section{Analytic Functions}
+The last notion we need is that of connectedness. An open set $\Omega\subset\CC$ is \vocab{connected} if it is not possible to find two disjoint non-empty open sets $\Omega_1$ and $\Omega_2$ such that 
+\[\Omega=\Omega_1\cup\Omega_2.\]
+A connected open set in $\CC$ is called a \vocab{region}. Similarly, a closed set $F$ is connected if one cannot write $F=F_1\cup F_2$ where $F_1$ and $F_2$ are disjoint non-empty closed sets.
+
+There is an equivalent definition of connectedness for open sets in terms of curves, which is often useful in practice: an open set $\Omega$ is connected if and only if any two points in $\Omega$ can be joined by a curve $\gamma$ entirely contained in $\Omega$.
+\pagebreak
+
+\section{Functions on The Complex Plane}
+\subsection{Holomorphic Functions}
+We present the complex analogue of differentiability, which, at first glance, seems no different from the real case.
+
 \begin{definition}
-Let $U\subset\CC$ be open. Then $f:U\to\CC$ is \vocab{differentiable} at $a\in U$ if
-\[\lim_{z\to a}\frac{f(z)-f(a)}{z-a}\]
-exists; the value of this limit is denoted by $f^\prime(a)$, known as the \emph{derivative} of $f$ at $a$.
-
-If $f$ is differentiable at every point of $U$, we say that $f$ is \emph{differentiable} on $U$; we call $f$ \vocab{analytic}.
+Let $\Omega\subset\CC$ be open. We say $f\colon\Omega\to\CC$ is \vocab{holomorphic} at $z_0\in\Omega$ if
+\begin{equation}\label{eqn:holomorphic-quotient-limit}
+\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}
+\end{equation}
+exists.
 \end{definition}
 
-Notice that if $f$ is differentiable on $U$, then $f^\prime$ defines a function from $U$ to $\CC$.
+The value of the limit in \eqref{eqn:holomorphic-quotient-limit} is known as the \emph{derivative} of $f$ at $z_0$; we write
+\[f^\prime(z_0)=\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}.\]
 
-\begin{lemma}[Differentiability implies continuity]
-If $f$ is differentiable at $a$, then $f$ is continuous at $a$.
+If $z=z_0+h$ for some $h\in\CC$, we can rewrite the above equation as 
+\[f^\prime(z_0)=\lim_{h\to 0}\frac{f(z_0+h)-f(z_0)}{h}.\]
+It should be emphasised that $h$ is a complex number that may approach $0$ from any direction.
+
+We can also rewrite
+\begin{equation}
+f(z_0+h)-f(z_0)-f^\prime(z_0)h=h\epsilon(h),
+\end{equation}
+where $\epsilon(h)\to0$ as $h\to 0$.
+
+If $f$ is holomorphic at every point of $\Omega$, we say $f$ is \emph{holomorphic on} $\Omega$. 
+If $C\subset\CC$ is closed, we say f is holomorphic on $C$ if $f$ is holomorphic in some open set containing $C$.
+Finally, we say $f$ is \vocab{entire} if $f$ is holomorphic in all of $\CC$.
+
+\begin{lemma}
+If $f$ is holomorphic at $z_0$, then $f$ is continuous at $z_0$.
 \end{lemma}
 
 \begin{proof}
+Suppose $f$ is holomorphic at $z_0$. Then the limit $\displaystyle\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}$ exists. Thus
 \begin{align*}
-\lim_{z\to a}f(z)-f(a)
-&=\lim_{z\to a}\frac{f(z)-f(a)}{z-a}(z-a)\\
-&=\lim_{z\to a}\frac{f(z)-f(a)}{z-a}\cdot\lim_{z\to a}(z-a)\\
-&=f^\prime(a)\cdot0=0
+\lim_{z\to z_0}f(z)-f(z_0)
+&=\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}(z-z_0)\\
+&=\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}\cdot\lim_{z\to z_0}(z-z_0)\\
+&=f^\prime(z_0)\cdot0=0.
 \end{align*}
-and hence $\displaystyle\lim_{z\to a}f(z)=f(a)$.
+Hence $\displaystyle\lim_{z\to z_0}f(z)=f(z_0)$, so $f$ is continuous at $z_0$.
 \end{proof}
 
-The following lemma collects the basic facts about derivatives. We omit the proof, which is essentially identical to the real case.
+The following lemma collects the basic facts about holomorphic functions. We omit the proof, which is essentially identical to the real case.
 
-\begin{lemma}[Properties of derivatives]
-Let $a\in\CC$, $U\subset\CC$ be open, and $f,g:U\to\CC$.
+\begin{lemma}
+Suppose $\Omega\subset\CC$ is open, and $f,g\colon\Omega\to\CC$ are holomorphic on $\Omega$. 
 \begin{enumerate}[label=(\roman*)]
-\item If $f,g$ are differentiable at $a$, then $f+g$ is differentiable at $a$, and\hfill(sums)
-\[(f+g)^\prime(a)=f^\prime(a)+g^\prime(a).\]
-\item If $f,g$ are differentiable at $a$, then $fg$ is differentiable at $a$, and\hfill(products)
-\[(fg)^\prime(a)=f^\prime(a)g(a)+f(a)g^\prime(a).\]
-\item If $f,g$ are differentiable at $a$ and $g(a)\neq0$ then $f/g$ is differentiable at $a$, and\hfill(quotients)
-\[\brac{\frac{f}{g}}^\prime(a)=\frac{f^\prime(a)g(a)-f(a)g^\prime(a)}{g(a)^2}.\]
-\item If $U$ and $V$ are open subsets of $\CC$ and $f:V\to U$, $g:U\to\CC$, where $f$ is differentiable at $a\in V$ and $g$ is differentiable at $f(a)\in U$, then $g\circ f$ is differentiable at $a$, and\hfill(chain rule)
-\[(g\circ f)^\prime(a)=g^\prime(f(a))f^\prime(a).\]
+\item $f+g$ is holomorphic on $\Omega$, and\hfill(sums)
+\[(f+g)^\prime=f^\prime+g^\prime.\]
+\item $fg$ is holomorphic on $\Omega$, and\hfill(products)
+\[(fg)^\prime=f^\prime g+f g^\prime.\]
+\item $f/g$ is holomorphic on $\Omega$ (provided $g(z)\neq0$), and\hfill(quotients)
+\[\brac{\frac{f}{g}}^\prime=\frac{f^\prime g-fg^\prime}{g^2}.\]
 \end{enumerate}
 \end{lemma}
 
-\begin{example}[Polynomials]
-Just as in the real case, the basic rules of differentiation stated above allow one to check that polynomial functions are differentiable:
-\begin{itemize}
-\item using the product rule and induction one sees that $z^n$ has derivative $nz^{n-1}$ for all $n\ge0$ (as a constant obviously has derivative $0$,
-\item and $f(z)=z$ has derivative $1$).
-\end{itemize}
-Then by linearity it follows every polynomial is differentiable.
-\end{example}
-
-Just as in the real-variable case, one can formulate complex differentiability in the following form, which is in fact the better form to use in most instances.
-
-\begin{lemma}
-Let $a\in\CC$, let $U$ be a neighbourhood of $a$ and let $f:U\to\CC$. Then $f$ is differentiable at $a$, with derivative $f^\prime(a)$, if and only if
-\[f(z)=f(a)+f^\prime(a)(z-a)+\epsilon(z)(z-a),\]
-where $\epsilon(z)\to0$ as $z\to a$.
+\begin{lemma}[Chain rule]
+Suppose $\Omega$ and $U$ are open subsets of $\CC$, and $f\colon\Omega\to U$ and $g\colon U\to\CC$ are holomorphic. Then
+\begin{equation}
+(g\circ f)^\prime(z)=g^\prime(f(z))f^\prime(z)\quad(z\in\Omega).
+\end{equation}
 \end{lemma}
 
-\begin{proof}
-check that this definition is indeed equivalent to (really just a reformulation of) the previous one.
-\end{proof}
+\begin{example}[Polynomials]
+$f(z)=z$ is holomorphic on any open set in $\CC$, and $f^\prime(z)=1$. In fact, any polynomial
+\[p(z)=a_nz^n+\cdots+a_1z+a_0\]
+is holomorphic in the entire complex plane, and
+\[p^\prime(z)=na_nz^{n-1}+\cdots+a_1.\]
+\end{example}
+
+\begin{example}
+$f(z)=\frac{1}{z}$ is holomorphic on any open set in $\CC$ that does not contain the origin, and $f^\prime(z)=-\frac{1}{z^2}$.
+\end{example}
+
+\begin{example}
+$f(z)=\overline{z}$ is not holomorphic. Indeed, we have
+\[\frac{f(z_0+h)-f(z_0)}{h}=\frac{\overline{h}}{h}\]
+which has no limit as $h\to 0$, as one can see by first taking $h$ real and then $h$ purely imaginary.
+\end{example}
 
 \subsection{Cauchy--Riemann Equations}
-Let $f:U\subset\CC\to\CC$ be analytic. For $x+iy\in U$, let
-\[u(x,y)=\Re f(x+iy),\quad v(x,y)=\Im f(x+iy);\]
-that is,
-\[f(x+iy)=u(x,y)+iv(x,y).\]
-Let us evaluate the limit
-\[f^\prime(z)=\lim_{h\to0}\frac{f(z+h)-f(z)}{h}\]
-in two different ways. First let $h\to0$ through real values of $h$; we get
-\begin{align*}
-f^\prime(z)&=\lim_{h\to0}\frac{f(z+h)-f(z)}{h}\\
-&=\lim_{h\to0}\frac{f(x+h+iy)-f(x+iy)}{h}\\
-&=\lim_{h\to0}\brac{\frac{u(x+h,y)-u(x,y)}{h}+i\frac{v(x+h,y)-v(x,y)}{h}}\\
-&=\lim_{h\to0}\frac{u(x+h,y)-u(x,y)}{h}+i\lim_{h\to0}\frac{v(x+h,y)-v(x,y)}{h}\\
-&=\pdv{u}{x}+i\pdv{v}{y}
-\end{align*}
-Now let $h\to0$ through purely imaginary values; that is, for real $h$,
-\begin{align*}
-f^\prime(z)
-&=\lim_{h\to0}\frac{f(z+ih)-f(z)}{ih}\\
-&=\lim_{h\to0}\brac{-i\frac{u(x,y+h)-u(x,y)}{h}+\frac{v(x,y+h)-v(x,y)}{h}}\\
-&=-i\pdv{u}{y}+\pdv{v}{y}
-\end{align*}
+To each complex-valued function $f=u+iv$, we associate the mapping $F(x,y)=(u(x,y), v(x,y))$ from $\RR^2$ to $\RR^2$.
 
-Equating the real and imaginary parts of the two expressions for $f^\prime(z)$, we obtain the \vocab{Cauchy--Riemann equations}:
+Recall from \cref{chap:multivariable-differentiation} that a function $F(x,y)=\brac{u(x, y),v(x,y)}$ is said to be \emph{differentiable} at a point $P_0=(x_0,y_0)$ if there exists a linear transformation $J\colon\RR^2\to\RR^2$ such that
+\[\lim_{|h|\to 0}\frac{F(P_0+h)-F(P_0)-J(h)}{|h|}=0.\]
+Equivalently, we can write
+\[F(P_0+h)-F(P_0)=J(h)+|h|\epsilon(h),\]
+with $\norm{\epsilon(h)}\to 0$ as $|h|\to 0$. The linear transformation $J$ is unique and is called the \emph{derivative} of $F$ at $P_0$. 
+
+If $F$ is differentiable, the partial derivatives of $u$ and $v$ exist, and the linear transformation $J$ can be described in the standard basis of $\RR^2$ by the Jacobian matrix of $F$:
+\[J=J_F(x,y)=\begin{pmatrix}
+\pdv{u}{x}&\pdv{u}{y}\\
+\pdv{v}{x}&\pdv{v}{y}
+\end{pmatrix}.\]
+
+In the case of complex differentiation, the derivative is a complex number $f^\prime(z_0)$; in the case of real derivatives, it is a matrix. There is, however, a connection between these two notions, which is given in terms of special relations that are satisfied by the entries of the Jacobian matrix, that is, the partials of $u$ and $v$.
+
+\begin{theorem}[Cauchy--Riemann equations]
+Suppose $f$ is holomorphic. Then its real and imaginary parts satisfy
 \begin{equation}\label{eqn:cauchy-riemann}
 \pdv{u}{x}=\pdv{v}{y},\quad\pdv{u}{y}=-\pdv{v}{x}.
 \end{equation}
+\end{theorem}
+
+\begin{proof}
+Consider the limit
+\[f^\prime(z_0)=\lim_{h\to0}\frac{f(z_0+h)-f(z_0)}{h}\]
+when $h$ is first real, say $h=h_1+ih_2$ with $h_2=0$. Then, if we write $z=x+iy$, $z_0=x_0+iy_0$, and $f(z)=f(x,y)$, we find that
+\begin{align*}
+f^\prime(z_0)&=\lim_{h_1\to 0}\frac{f(x_0+h_1,y_0)-f(x_0,y_0)}{h_1}\\
+&=\pdv{f}{x}(z_0).
+\end{align*}
+Now taking $h$ purely imaginary, say $h=ih_2$, a similar argument yields
+\begin{align*}
+f^\prime(z_0)&=\lim_{h_2\to 0}\frac{f(x_0,y_0+h_2)-f(x_0,y_0)}{ih_2}\\
+&=\frac{1}{i}\pdv{f}{y}(z_0)
+=-i\pdv{f}{y}(z_0).
+\end{align*}
+Hence
+\[\pdv{f}{x}=-i\pdv{f}{y}.\]
+Writing $f=u+iv$, we find after separating real and imaginary parts, that the partials of $u$ and $v$ exist, and they satisfy \eqref{eqn:cauchy-riemann}.
+\end{proof}
 
 \begin{remark}
 This suggests that complex differentiability is a much more rigid property than one might think at first sight; if $f$ is differentiable then these partial derivatives do exist, and moreover they are subject to a constraint.
 \end{remark}
 
-We shall prove later that the derivative of an analytic function is itself analytic. By this fact, $u$ and $v$ have continuous second partial derivatives. Differentiating \cref{eqn:cauchy-riemann} again gives
+We can clarify the situation further by defining two differential operators
+\begin{align*}
+\pdv{}{z}&=\frac{1}{2}\brac{\pdv{}{x}-i\pdv{}{y}},\\
+\pdv{}{\overline{z}}&=\frac{1}{2}\brac{\pdv{}{x}+i\pdv{}{y}}.
+\end{align*}
+
+\begin{proposition}
+If $f$ is holomorphic at $z_0$, then
+\[\pdv{f}{\overline{z}}=0\]
+and thus
+\[f^\prime(z_0)=\pdv{f}{z}(z_0)=2\pdv{u}{z}(z_0).\]
+If we write $F(x,y)=f(z)$, then $F$ is differentiable in the sense of real variables, and
+\[\det J_F(x_0,y_0)=|f^\prime(z_0)|^2.\]
+\end{proposition}
+
+\begin{proof}
+Taking real and imaginary parts, it is easy to see that the Cauchy--Riemann equations are equivalent to $\pdv{f}{\overline{z}}=0$.
+
+Moreover, by our earlier observation,
+\[f^\prime(z_0)
+=\frac{1}{2}\brac{\pdv{f}{x}(z_0)-i\pdv{f}{y}(z_0)}\\
+=\pdv{f}{z}(z_0),\]
+and the Cauchy--Riemann equations give
+\[\pdv{f}{z}=2\pdv{u}{z}.\]
+To prove that $F$ is differentiable it suffices to observe that if $h=(h_1,h_2)$ and $h=h_1+ih_2$, then the Cauchy--Riemann equations imply
+\[J_F(x_0,y_0)(h)=\brac{\pdv{u}{x}-i\pdv{u}{y}}(h_1+ih_2)=f^\prime(z_0)h,\]
+where we have identified a complex number with the pair of real and imaginary parts. 
+After a final application of the Cauchy--Riemann equations, the above results imply that
+\[\det J_F(x_0,y_0)
+=\pdv{u}{x}\pdv{v}{y}-\pdv{v}{x}\pdv{u}{y}
+=\brac{\pdv{u}{x}}^2+\brac{\pdv{u}{y}}^2=\absolute{2\pdv{u}{z}}^2=|f^\prime(z_0)|^2.\]
+\end{proof}
+
+So far, we have assumed that $f$ is holomorphic and deduced relations satisfied by its real and imaginary parts. The next result contains an important converse, which completes the circle of ideas presented here.
+
+\begin{proposition}
+Suppose $f=u+iv$ is a complex-valued function defined on an open set $\Omega\subset\CC$. If $u,v\colon\RR^2\to\RR$ are continuously differentiable and satisfy the Cauchy--Riemann equations on $\Omega$, then $f$ is holomorphic on $\Omega$ and $f^\prime(z)=\pdv{f}{z}$.
+\end{proposition}
+
+\begin{proof}
+Write
+\[u(x+h_1,y+h_2)-u(x,y)=\pdv{u}{x}h_1+\pdv{u}{y}h_2+|h|\epsilon_1(h)\]
+and
+\[v(x+h_1,y+h_2)-v(x,y)=\pdv{v}{x}h_1+\pdv{v}{y}h_2+|h|\epsilon_2(h)\]
+where the remainders $\epsilon_1(h),\epsilon_2(h)\to 0$ as $|h|\to 0$, and $h=h_1+ih_2$. Using the Cauchy--Riemann equations we find that
+\[f(z+h)-f(z)=\brac{\pdv{u}{x}-i\pdv{u}{y}}(h_1+ih_2)+|h|\epsilon(h),\]
+where $\epsilon(h)=\epsilon_1(h)+\epsilon_2(h)\to 0$ as $|h|\to 0$. Hence $f$ is holomorphic and
+\[f^\prime(z)=2\pdv{u}{z}=\pdv{f}{z}.\] 
+\end{proof}
+
+\begin{example}
+The function $f(z)=\bar{z}$ is not holomorphic.
+\begin{proof}
+Let $u,v:\RR^2\to\RR$ be the components of $f$. Then $u(x,y) = x$, $v(x,y)=-y$, and so
+\[\pdv{u}{x}=1,\quad\pdv{u}{y}=0,\quad\pdv{v}{x}=0,\quad\pdv{v}{y}=-1.\]
+Since $u$ and $v$ do not satisfy the Cauchy--Riemann equations, $f$ is not holomorphic.
+\end{proof}
+\end{example}
+
+We shall prove later that the derivative of an holomorphic function is itself holomorphic. By this fact, $u$ and $v$ have continuous second partial derivatives. Differentiating \eqref{eqn:cauchy-riemann} again gives
 \[\pdv[2]{u}{x}=\pdv{v}{x,y},\quad\pdv[2]{u}{y}=-\pdv{v}{y,x}.\]
 Hence
 \begin{equation}\label{eqn:harmonic-function-diff}
 \pdv[2]{u}{x}+\pdv[2]{u}{y}=0.
 \end{equation}
-\cref{eqn:harmonic-function-diff} is called \emph{Laplace's equation}. Solutions to \cref{eqn:harmonic-function-diff} are said to be \vocab{harmonic}. If two harmonic functions $u$ and $v$ satisfy the Cauchy--Riemann equations \cref{eqn:cauchy-riemann}, then $v$ is called the \emph{conjugate harmonic function} of $u$.
-
-\begin{theorem}
-Suppose $u,v:U\subset\RR^2\to\RR$ have continuous partial derivatives. Then $f:U\subset\RR^2\to\CC$ defined by $f(z)=u(z)+iv(z)$ is analytic if and only if $u$ and $v$ satisfy the Cauchy--Riemann equations.
-\end{theorem}
-
-\begin{proof} \
-
-\fbox{$\impliedby$} We can write
-\begin{align*}
-u(x+h,y+k)-u(x,y)&=\pdv{u}{x}h+\pdv{u}{y}k+\epsilon_1\\
-v(x+h,y+k)-v(x,y)&=\pdv{v}{x}h+\pdv{v}{y}k+\epsilon_2
-\end{align*}
-where the remainders $\epsilon_1,\epsilon_2$ tend to zero more rapidly than $h+ik$ (in the sense that $\epsilon_1/(h+ik)\to0$ and $\epsilon_2/(h+ik)\to0$ for $h+ik\to0$). With the notation $f(z)=u(x,y)+iv(x,y)$, by the Cauchy--Riemann equations we obtain
-\[f(z+h+ik)-f(z)=\brac{\pdv{u}{x}+i\pdv{v}{x}}(h+ik)+\epsilon_1+i\epsilon_2\]
-and hence
-\[\lim_{h+ik\to0}\frac{f(z+h+ik)-f(z)}{h+ik}=\pdv{u}{x}+i\pdv{v}{x}.\]
-Therefore $f(z)$ is analytic.
-
-
-\end{proof}
-
-\begin{example}
-The function $f(z)=\bar{z}$ is not analytic.
-\begin{proof}
-Let $u,v:\RR^2\to\RR$ be the components of $f$. Then $u(x,y) = x$, $v(x,y)=-y$, and so
-\[\pdv{u}{x}=1,\quad\pdv{u}{y}=0,\quad\pdv{v}{x}=0,\quad\pdv{v}{y}=-1.\]
-Since $u$ and $v$ do not satisfy the Cauchy--Riemann equations, $f$ is not analytic.
-\end{proof}
-\end{example}
+\eqref{eqn:harmonic-function-diff} is called \emph{Laplace's equation}. Solutions to \eqref{eqn:harmonic-function-diff} are said to be \vocab{harmonic}. If two harmonic functions $u$ and $v$ satisfy the Cauchy--Riemann equations \eqref{eqn:cauchy-riemann}, then $v$ is called the \emph{conjugate harmonic function} of $u$.
 
 \begin{proposition}
-Let $U$ be either $\CC$ or some open disk. If $u:U\to\RR$ is a harmonic function, then $u$ has a harmonic conjugate.
+Let $\Omega$ be either $\CC$ or some open disk. If $u\colon\Omega\to\RR$ is a harmonic function, then $u$ has a harmonic conjugate.
 \end{proposition}
 
 \begin{proof}
@@ -155,40 +233,155 @@ So it must be that $\phi^\prime(x)=-u_y(x,0)$. It is easily checked that $u$ and
 \[v(x,y)=\int_{0}^{y}u_x(x,t)\dd{t}-\int_{0}^{x}u_y(s,0)\dd{s}\]
 so satisfy the Cauchy--Riemann equations.
 \end{proof}
-\pagebreak
 
 \subsection{Power Series}
-\begin{proposition}
-Let $\displaystyle f(x)=\sum_{n=0}^{\infty}c_n(z-a)^n$ have radius of convergence $R>0$.
-\begin{enumerate}[label=(\roman*)]
-\item For each $k\ge1$, the series
-\[\sum_{n=k}^{\infty}n(n-1)\cdots(n-k+1)c_n(z-a)^{n-k}\]
-has radius of convergence $R$.
-\item $f$ is infinitely differentiable on $D_R(a)$, and
-\[f^{(k)}(z)=\sum_{n=k}^{\infty}n(n-1)\cdots(n-k+1)c_n(z-a)^{n-k}\]
-for all $k\ge1$ and $|z-a|<R$.
-\item For $n\ge0$,
-\[c_n=\frac{1}{n!}f^{(n)}(a).\]
-\end{enumerate}
+Recall our discussion of power series in \cref{chap:special-functions}, including Hadamard's formula \eqref{eqn:hadamard-formula-power-series} for the radius of convergence of a power series.
+
+Having defined complex differentiation, we now prove the complex analogue of \ref{prop:real-power-series-derivative}, concerning the derivative of complex power series.
+
+\begin{proposition}\label{prop:power-series-derivative}
+The power series $f(z)=\sum_{n=0}^{\infty}a_n z^n$ defines a holomorphic function in its disc of convergence. Then the derivative of $f$ is obtained by differentiating term-by-term the series of $f$:
+\begin{equation}
+f^\prime(z)=\sum_{n=0}^{\infty}na_n z^{n-1}.
+\end{equation}
+Moreover, $f^\prime$ has the same radius of convergence as $f$.
 \end{proposition}
 
-\begin{proof}
-WLOG asssume that $a=0$.
-\begin{enumerate}[label=(\roman*)]
-\item 
-\end{enumerate}
-\end{proof}
-\pagebreak
+\begin{corollary}
+A power series is infinitely complex differentiable in its disc of convergence, and the higher derivatives are also power series obtained by termwise differentiation.
+\end{corollary}
 
-\section{Analytic Functions as Mappings}
 \begin{definition}
-A \vocab{path} in a region $U\subset\CC$ is a continuous function $\gamma:[a,b]\to U$ for some interval $[a,b]\subset\RR$. If $\gamma$ is differentiable on $[a,b]$ and $\gamma^\prime$ is continuous, then $\gamma$ is a \emph{smooth path}.
+We say $f\colon\Omega\subset\CC\to\CC$ is \vocab{analytic} (or have a \emph{power series expansion}) at $z_0\in\Omega$ if there exists a power series $\sum a_n(z-z_0)^n$ centered at $z_0$, with positive radius of convergence, such that
+\[f(z)=\sum_{n=0}^{\infty}a_n(z-z_0)^n\quad\text{for all $z$ in a neighbourhood of $z_0$.}\]
+If $f$ has a power series expansion at every point in $\Omega$, we say $f$ is \emph{analytic on} $\Omega$.
 \end{definition}
 
+\subsubsection{Exponential Function}
+We are familiar with the exponential function $e^x$ of a real variable, which has the property that $(e^x)^\prime=e^x$. The complex exponential has the same property.
 
+\begin{lemma}
+$\exp^\prime(z)=\exp(z)$ for all $z\in\CC$.
+\end{lemma}
+
+\begin{proof}
+Using \ref{prop:power-series-derivative}, we calculate the derivative of $\exp(z)$ by differentiating term-by-term:
+\[\exp^\prime(z)=(1)^\prime+\sum_{n=1}^\infty\brac{\frac{z^n}{n!}}^\prime=\sum_{n=1}^\infty\frac{nz^{n-1}}{n!}=\sum_{n=1}^\infty\frac{z^{n-1}}{(n-1)!}=\exp(z).\]
+\end{proof}
+
+\begin{lemma}[Basic properties of $\exp$] \
+\begin{enumerate}[label=(\roman*)]
+\item There exists a positive number $\pi$ such that $e^\frac{\pi i}{2}=i$ and such that $e^z=1$ if and only if $\frac{z}{2\pi i}$ is an integer.
+\item $\exp$ is a periodic function, with period $2\pi i$. 
+\item The mapping $t\mapsto e^{it}$ maps the real axis onto the unit circle.
+\item If $w\in\CC$, $w\neq0$, then $w=e^z$ for some $z$.
+\end{enumerate}
+\end{lemma}
+
+We shall encounter the integral of $(1+x^2)^{-1}$ over the real line. To evaluate it, put $\phi(t)=\frac{\sin t}{\cos t}$ in $\brac{-\frac{\pi}{2},\frac{\pi}{2}}$. By (6), $\phi^\prime=1+\phi^2$. Hence $\phi$ is a monotonically increasing mapping of $\brac{-\frac{\pi}{2},\frac{\pi}{2}}$ onto $(-\infty,\infty)$, and we obtain 
+\[\int_{-\infty}^{\infty}\frac{1}{1+x^2}\dd{x}=\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\frac{\phi^\prime(t)}{1+\phi^2(t)}\dd{t}=\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\dd{t}=\pi.\]
+\pagebreak
+
+\section{Integration Along Curves}
+\begin{definition}
+A \vocab{parametrised curve} is a function $z(t)$ which maps a closed interval $[a,b]\subset\RR$ to $\CC$.
+
+We say that the parametrised curve is \vocab{smooth} if $z^\prime(t)$ exists and is continuous on $[a,b]$, and $z^\prime(t)\neq 0$ for $t\in[a,b]$.
+\end{definition}
+
+\begin{remark}
+At the endpoints $t=a$ and $t=b$, the quantities $z^\prime(a)$ and $z^\prime(b)$ are interpreted as the one-sided limits
+\[z^\prime(a)=\lim_{h\to 0^+}\frac{z(a+h)-z(a)}{h},\quad 
+z^\prime(b)=\lim_{h\to 0^-}\frac{z(b+h)-z(b)}{h},\]
+which are the right-hand derivative of $z(t)$ at $a$, and the left-hand derivative of $z(t)$ at $b$, respectively.
+\end{remark}
+
+Similarly we say that the parametrised curve is \vocab{piecewise-smooth} if $z$ is continuous on $[a,b]$ and if there exist points
+\[a=a_0<a_1<\cdots<a_n=b,\]
+where $z(t)$ is smooth in the intervals $[a_i,a_{i+1}]$.
+
+We say two parametrisations
+\[z\colon[a,b]\to\CC,\quad\overline{z}\colon[c,d]\to\CC\]
+are \emph{equivalent} if there exists a continuously differentiable bijection $s\mapsto t(s)$ from $[c,d]$ to $[a,b]$ so that $t^\prime(s)>0$ and
+\[\overline{z}(s)=z(t(s)).\]
+
+\begin{remark}
+The condition $t^\prime(s)>0$ says precisely that the orientation is preserved: as $s$ travels from $c$ to $d$, then $t(s)$ travels from $a$ to $b$.
+\end{remark}
+
+The family of all parametrisations that are equivalent to $z(t)$ determines a smooth curve $\gamma\subset\CC$, namely the image of $[a,b]$ under $z$ with the orientation given by $z$ as $t$ travels from $a$ to $b$. 
+
+The points $z(a)$ and $z(b)$ are called the \emph{end-points} of the curve, and are independent on the parametrisation. 
+Since $\gamma$ carries an orientation, it is natural to say that $\gamma$ begins at $z(a)$ and ends at $z(b)$.
+
+A smooth or piecewise-smooth curve is \vocab{closed} if $z(a)=z(b)$ for any of its parametrisations. 
+
+Finally, a smooth or piecewise-smooth curve is \vocab{simple} if it is not self-intersecting, that is, $z(t)\neq z(s)$ unless $s=t$. (Of course, if the curve is closed to begin with, then we say that it is simple whenever $z(t)\neq z(s)$ unless $s=t$, or $s=a$ and $t=b$.)
+
+For brevity, we shall call any piecewise-smooth curve a \emph{curve}, since these will be the objects we shall be primarily concerned with.
+
+A basic example consists of a circle. Consider the circle $C_r(z_0)$ centered at $z_0$ and of radius $r$:
+\[C_r(z_0)=\{z\in\CC\mid |z-z_0|=r\}.\]
+
+\begin{definition}[Orientation]
+The positive orientation (counterclockwise) is the one that is given by the standard parametrisation
+\[z(t)=z_0+re^{it}\quad(0\le t\le 2\pi).\]
+The negative orientation (clockwise) is given by
+\[z(t)=z_0+re^{-it}\quad(0\le t\le 2\pi).\]
+\end{definition}
+
+In the following chapters, we shall denote by $C$ a general positively oriented circle.
+
+\begin{definition}[Integral along curve]
+Given a smooth curve $\gamma\subset\CC$ parametrised by $z\colon[a,b]\to\CC$, and $f$ a continuous function on $\gamma$, define the \vocab{integral of $f$ along $\gamma$} by
+\begin{equation}
+\int_{\gamma}f(z)\dd{z}\colonequals\int_{a}^{b}f\brac{z(t)}z^\prime(t)\dd{t}.
+\end{equation}
+\end{definition}
+
+In order for this definition to be meaningful, we must show that the integral on the RHS is independent of the parametrisation chosen for $\gamma$.
+Suppose $\overline{z}$ is an equivalent parametrisation as above. Then the change of variables formula and the chain rule imply that
+\[\int_{a}^{b}f\brac{z(t)}z^\prime(t)\dd{t}
+=\int_{c}^{d}f\brac{z(t(s))}z^\prime\brac{t(s)}t^\prime(s)\dd{s}
+=\int_{c}^{d}f\brac{\overline{z}(s)}\overline{z}^\prime(s)\dd{s}.\]
+This proves that the integral of $f$ over $\gamma$ is well defined.
+
+If $\gamma$ is piecewise smooth, then the integral of $f$ over $\gamma$ is simply the sum of the integrals of $f$ over the smooth parts of $\gamma$, so if $z(t)$ is a piecewise-smooth parametrisation as before, then
+\[\int_{\gamma}f(z)\dd{z}=\sum_{i=1}^{n}\int_{a_{i-1}}^{a_i}f\brac{z(t)}z^\prime(t)\dd{t}.\]
+By definition, the \vocab{length} of the smooth curve $\gamma$ is
+\[\Lambda(\gamma)=\int_{a}^{b}|z^\prime(t)|\dd{t}.\]
+Arguing as we just did, it is clear that this definition is also independent of the parametrisation. 
+Also, if $\gamma$ is only piecewise-smooth, then its length is the sum of the lengths of its smooth parts.
+
+\begin{lemma}[Basic properties] \
+\begin{enumerate}[label=(\roman*)]
+\item Linearity: if $\alpha,\beta\in\CC$, then
+\[\int_{\gamma}\brac{\alpha f(z)+\beta g(z)}\dd{z}=\alpha\int_{\gamma}f(z)\dd{z}+\beta\int_{\gamma}g(z)\dd{z}.\]
+\item If $\gamma^-$ is $\gamma$ with the reverse orientation, then
+\[\int_{\gamma}f(z)\dd{z}=-\int_{\gamma^-}f(z)\dd{z}.\]
+\item One has the inequality
+\[\absolute{\int_{\gamma}f(z)\dd{z}}\le\sup_{z\in\gamma}|f(z)|\cdot\Lambda(\gamma).\]
+\end{enumerate}
+\end{lemma}
+
+A \vocab{primitive} for $f$ on $\Omega$ is a function $F$ that is holomorphic on $\Omega$ and such that $F^\prime(z)=f(z)$ for all $z\in\Omega$.
 
 \begin{proposition}
-If $f:U\subset\CC\to\CC$ is analytic, then $f$ preserves angles at each $z_0\in U$ where $f^\prime(z_0)\neq0$.
+If a continuous function $f$ has a primitive $F$ in $\Omega$, and $\gamma$ is a curve in $\Omega$ that begins at $w_1$ and ends at $w_2$, then
+\begin{equation}
+\int_{\gamma}f(z)\dd{z}=F(w_2)-F(w_1).
+\end{equation}
 \end{proposition}
 
-\subsection{M\"{o}bius Transformations}
+\begin{corollary}
+If $\gamma$ is a closed curve in an open set $\Omega$, and $f$ is continuous and has a primitive in $\Omega$, then
+\[\int_{\gamma}f(z)\dd{z}=0.\]
+\end{corollary}
+
+\begin{proof}
+This is immediate since the end-points of a closed curve coincide.
+\end{proof}
+
+\begin{corollary}
+If $f$ is holomorphic in a region $\Omega$ and $f^\prime=0$, then $f$ is constant.
+\end{corollary}

@@ -1,12 +1,6 @@
 \chapter{Set Theory}\label{chap:set-theory}
 
-\begin{summary}
-\item Basic definitions relating to sets (excluding detailed axiomatic discussions).
-\item Relations and related concepts including binary relation, partial order, total order, well order, equivalence relations, equivalence relations, equivalence class, quotient set, partition.
-\item Functions, injectivity, surjectivity, bijectivity, composition, invertibility.
-\end{summary}
-
-\section{Basics}
+\section{Basics of Naive Set Theory}
 \subsection{Definitions and Notations}
 A \vocab{set}\index{set} $S$ can be loosely defined as a collection of objects\footnote{\emph{Russell's paradox}, after the mathematician and philosopher Bertrand Russell (1872--1970), provides a warning as to the looseness of our definition of a set. Suppose $H$ is the collection of sets that are not elements of themselves; that is,
 \[H=\{S\mid S\notin S\}.\]
@@ -15,41 +9,42 @@ The problem arises when we ask the question of whether or not $H$ is itself in $
 
 The modern resolution of Russell's paradox is that we have taken too naive an understanding of ``collection'', and that Russell's ``set'' $H$ is in fact not a set. It does not fit within axiomatic set theory (which relies on the so-called ZF axioms), and so the question of whether or not $H$ is in $H$ simply doesn't make sense.}. For a set $S$, we write $x \in S$ to mean that $x$ is an \vocab{element}\index{set!element} of $S$, and $x \notin S$ if otherwise. 
 
-To describe a set, one can list its elements explicitly. A set can also be defined in terms of some property $P(x)$ that the elements $x \in S$ satisfy, denoted by the following set builder notation:
+To describe a set, one can list its elements explicitly. A set can also be defined in terms of some property $P(x)$ that the elements $x \in S$ satisfy, denoted by the \emph{set builder notation}:
 \[\{x\in S \mid P(x)\}\]
 
-Some basic sets (of numbers) you should be familiar with:
+The following sets of numbers are frequently encountered.
 \begin{itemize}
-\item $\NN=\{1,2,3,\dots\}$ denotes the natural numbers (non-negative integers).
-\item $\ZZ=\{\dots,-2,-1,0,1,2,\dots\}$ denotes the integers.
-\item $\QQ=\crbrac{\frac{p}{q}\:\big|\:p,q\in\ZZ, q\neq0}$ denotes the rational numbers.
-\item $\RR$ denotes the real numbers (the construction of which using Dedekind cuts will be discussed in \cref{chap:number-systems}).
-\item $\CC=\{x+yi \mid x,y\in\RR\}$ denotes the complex numbers.
+\item The natural numbers $\NN=\{1,2,3,\dots\}$ (some people include $0$, some do not).
+\item The integers $\ZZ=\{\dots,-2,-1,0,1,2,\dots\}$.
+\item The rational numbers $\QQ=\crbrac{\frac{p}{q}\:\big|\:p,q\in\ZZ, q\neq0}$.
+\item The real numbers $\RR$ (the construction of which, using Dedekind cuts, will be discussed in \cref{chap:number-systems}).
+\item The complex numbers $\CC=\{x+yi \mid x,y\in\RR\}$.
 \end{itemize}
 
-We have that $\NN\subset\ZZ\subset\QQ\subset\RR\subset\CC$.
+The \vocab{empty set}\index{set!empty set} $\emptyset$ is the set with no elements.
 
-The \vocab{empty set}\index{set!empty set} is the set with no elements, denoted by $\emptyset$.
+We say $A$ is a \vocab{subset}\index{set!subset} of $B$ if every element of $A$ is in $B$:
+\[A\subset B\quad\text{means}\quad(\forall x)(x\in A \implies x\in B)\]
+By construction, we have $\NN\subset\ZZ\subset\QQ\subset\RR\subset\CC$.
 
-$A$ is a \vocab{subset}\index{set!subset} of $B$ if every element of $A$ is in $B$, denoted by $A\subset B$:
-\[A\subset B\iff(\forall x)(x\in A \implies x\in B)\]
 We denote $A\subsetneq B$ to explicitly mean that $A\subset B$ and $A\neq B$; we call $A$ a \emph{proper subset} of $B$.
 
 \begin{lemma}[$\subset$ is transitive]
-If $A \subset B$ and $B \subset C$, then $A \subset C$.
+If $A\subset B$ and $B\subset C$, then $A\subset C$.
 \end{lemma}
 
 \begin{proof}
-Let $x\in A$. 
-Since $A \subset B$ and $x\in A$, $x\in B$. 
-Since $B \subset C$ and $x\in B$, $x\in C$. 
-Hence $A \subset C$.
+Since $A\subset B$, $x\in A\implies x\in B$. 
+Since $B \subset C$, $x\in B\implies x\in C$. 
+Combining these two implications, we have $x\in A\implies x\in C$.
+Hence $A\subset C$.
 \end{proof}
 
-$A$ and $B$ are \vocab{equal} if and only if they contain the same elements, denoted by $A=B$. 
+We say two sets $A$ and $B$ are \vocab{equal} if and only if they contain the same elements:
+\[A=B\quad\text{means}\quad x\in A\iff x\in B.\]
 
 \begin{lemma}[Double inclusion]
-Let $A\subset S$ and $B\subset S$. Then
+Let $A,B\subset S$. Then
 \[A=B\iff (A\subset B)\land(B\subset A)\]
 \end{lemma}
 
@@ -86,10 +81,26 @@ An interval of the first type $(a,b)$ is called an \emph{open interval}; an inte
 The \vocab{power set}\index{set!power set} $\mathcal{P}(A)$ of $A$ is the set of all subsets of $A$ (including the set itself and the empty set):
 \[\mathcal{P}(A)=\{S\mid S\subset A\}.\]
 
+\begin{lemma}
+Let $A,B\subset S$. Then
+\[A\subset B\iff\mathcal{P}(A)\subset\mathcal{P}(B).\]
+\end{lemma}
+
+\begin{proof} \
+
+\forward Suppose $A\subset B$. Let $X\in\mathcal{P}(A)$. Then $X\subset A$, so $X\subset B$. Thus $X\in\mathcal{P}(B)$. Hence $\mathcal{P}(A)\subset\mathcal{P}(B)$.
+
+\backward Suppose $A$ and $B$ are sets such that $\mathcal{P}(A)\subset\mathcal{P}(B)$.
+
+Let $x\in A$. Consider the set $C=\{x\}$. Then $C\subset A$, so $C\in\mathcal{P}(A)$. Thus $C\in\mathcal{P}(B)$, so $C\subset B$. 
+
+We know $x\in C$, so we get $x\in B$. Hence $A\subset B$.
+\end{proof}
+
 An \vocab{ordered pair}\index{set!ordered pair} is denoted by $(a,b)$, where the order of the elements matters. Two pairs $(a_1,b_1)$ and $(a_2,b_2)$ are equal if and only if $a_1=a_2$ and $b_1=b_2$.  Similarly, we have ordered triples $(a,b,c)$, quadruples $(a,b,c,d)$ and so on. If there are $n$ elements it is called an \emph{$n$-tuple}.
 
-The \vocab{Cartesian product}\index{set!Cartesian product} of sets $A$ and $B$, denoted by $A \times B$, is the set of all ordered pairs with the first element of the pair coming from $A$ and the second from $B$:
-\[A\times B\coloneqq\{(a,b)\mid a\in A,b\in B\}.\]
+The \vocab{Cartesian product}\index{set!Cartesian product} of sets $A$ and $B$ is the set of all ordered pairs with the first element of the pair coming from $A$ and the second from $B$:
+\[A\times B\colonequals\{(a,b)\mid a\in A,b\in B\}.\]
 More generally, we define $A_1 \times A_2 \times \cdots \times A_n$ to be the set of all ordered $n$-tuples $(a_1, a_2, \dots, a_n)$, where $a_i \in A_i$ for $1 \le i \le n$. If all the $A_i$ are the same, we write the product as $A^n$.
 
 \begin{example}
@@ -101,6 +112,42 @@ $\RR^2$ is the Euclidean plane, $\RR^3$ is the Euclidean space, and $\RR^n$ is t
 \end{align*}
 \end{example}
 
+\begin{lemma}
+Let $A,B,C,D$ be sets.
+\begin{enumerate}[label=(\roman*)]
+\item $A\times\emptyset=\emptyset\times A=\emptyset$.
+\item $A\times(B\cup C)=(A\cup B)\times(A\cup C)$.
+\item $A\times(B\cap C)=(A\cap B)\times(A\cap C)$.
+\item $(A\cap B)\times(C\cap D)=(A\cap C)\times(B\cap D)$.
+\item $(A\cup B)\times(C\cup D)\subset(A\cup C)\times(B\cup D)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Evidently $\emptyset\subset A\times\emptyset$, which is vacuously true.
+
+To show the opposite containment $A\times\emptyset\subset\emptyset$ is equivalent to showing
+\[(\forall x)x\in A\times\emptyset\implies x\in\emptyset;\]
+but $x\in\emptyset$ is always false, so this is equivalent to
+\[(\forall x)\lnot(x\in A\times\emptyset).\]
+Note that
+\begin{align*}
+x\in A\times\emptyset
+&\iff(\exists a\in A)(\exists b\in\emptyset)[x=(a,b)]\\
+&\iff(\exists a)(\exists b)[a\in A\land b\in\emptyset\land x=(a,b)]
+\end{align*}
+which is always false, since $b\in\emptyset$ is always false.
+
+Hence $(\forall x)\lnot(x\in A\times\emptyset)$ holds.
+
+\item 
+\item 
+\item 
+\item 
+\end{enumerate}
+\end{proof}
+
 \subsection{Algebra of Sets}
 We now disuss the algebra of sets. Given $A \subset S$ and $B \subset S$,
 \begin{enumerate}[label=(\roman*)]
@@ -110,10 +157,11 @@ We now disuss the algebra of sets. Given $A \subset S$ and $B \subset S$,
 \item The \vocab{intersection}\index{set!intersection} $A \cap B$ is the set consisting of elements that are in both $A$ and $B$:
 \[ A\cap B=\{x \in S \mid x\in A \land x\in B\} \]
 
-$A$ and $B$ are \vocab{disjoint}\index{set!disjoint} if both sets have no element in common: $A\cap B=\emptyset$.
+We say $A$ and $B$ are \vocab{disjoint}\index{set!disjoint} if both sets have no element in common; that is,
+\[A\cap B=\emptyset.\]
 \end{enumerate}
 
-More generally, we can take unions and intersections of arbitrary numbers of sets (could be finitely or infinitely many). Given a family of sets $\{A_i\mid i\in I\}$ where $I$ is an \emph{indexing set}, we write
+More generally, we can take unions and intersections of arbitrary numbers of sets (could be finitely or infinitely many). Given an indexed family of sets $\{A_i\mid i\in I\}$ where $I$ is an \emph{indexing set}, we write
 \[\bigcup_{i\in I}A_i=\{x \mid \exists i\in I, x\in A_i\},\]
 and
 \[\bigcap_{i\in I}A_i=\{x \mid \forall i\in I, x\in A_i\}.\]
@@ -135,24 +183,21 @@ Let $A,B,C\subset S$. Then
 \end{enumerate}
 \end{lemma}
 
+These properties are straightforward consequences of logic laws.
+
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item Suppose $x\in A\cup(B \cap C)$. Then
+\item We have
 \begin{align*}
 x\in A\cup(B \cap C)
-&\iff x\in A\quad\lor\quad x\in B\cap C\\
-&\iff x\in A\quad\lor\quad (x\in B)\land (x\in C)\\
-&\iff (x\in A)\lor (x\in B)\quad\land\quad (x\in A)\lor (x\in C)\\
-&\iff x\in A\cup B\quad\land\quad x\in A\cup C\\
+&\iff (x\in A)\lor(x\in B\cap C)\\
+&\iff (x\in A)\lor[(x\in B)\land (x\in C)]\\
+&\iff [(x\in A)\lor(x\in B)]\land[(x\in A)\lor(x\in C)]\\
+&\iff (x\in A\cup B)\land(x\in A\cup C)\\
 &\iff x\in (A\cup B)\cap(A\cup C).
 \end{align*}
-Thus $A \cup (B \cap C) \subset (A \cup B) \cap (A \cup C)$.
 
-Conversely suppose that $x \in (A \cup B) \cap (A \cup C)$. Then go in the reverse direction of the above steps to show that $(A\cup B)\cap (A\cup C)\subset A\cup(B\cap C)$.
-
-By double inclusion, $(A\cup B)\cap(A\cup C)=A\cup(B\cap C)$.
-
-\item Similar.
+\item Similar to (i).
 \end{enumerate}
 \end{proof}
 
@@ -183,21 +228,15 @@ De Morgan's laws extend naturally to any number of sets. Suppose $\{A_i\mid i\in
 \brac{\bigcup_{i\in I}A_i}^c&=\bigcap_{i\in I}{A_i}^c.
 \end{align*}
 
-\begin{exercise}
-Prove the following:
+\begin{lemma}
+The following hold:
 \begin{enumerate}[label=(\roman*)]
 \item $\brac{\bigcup_{i\in I}A_i}\cup B=\bigcup_{i\in I}(A_i\cup B)$
 \item $\brac{\bigcap_{i\in I}A_i}\cup B=\bigcap_{i\in I}(A_i\cup B)$
 \item $\brac{\bigcup_{i\in I}A_i}\cup\brac{\bigcup_{j\in J}B_j}=\bigcup_{(i,j)\in I\times J}(A_i\cup B_j)$
 \item $\brac{\bigcap_{i\in I}A_i}\cup\brac{\bigcap_{j\in J}B_j}=\bigcap_{(i,j)\in I\times J}(A_i\cup B_j)$
 \end{enumerate}
-\end{exercise}
-
-\begin{exercise}
-Let $S\subset A\times B$. Express the set $A_S$ of all elements of $A$ which appear as the first entry in at least one of the elements in $S$.
-
-($A_S$ here may be called the projection of $S$ onto $A$.)
-\end{exercise}
+\end{lemma}
 \pagebreak
 
 \section{Relations}
@@ -280,19 +319,18 @@ An equivalence relation provides a way of grouping together elements that can be
 
 \begin{definition}[Equivalence class]
 Given an equivalence relation $\sim$ on a set $A$, and given $x \in A$, the \vocab{equivalence class}\index{equivalence relation!equivalence class} of $x$ is
-\[[x]\coloneqq\{y\in A\mid y\sim x\}.\]
+\[[x]\colonequals\{y\in A\mid y\sim x\}.\]
 \end{definition}
 
 Grouping the elements of a set into equivalence classes provides a partition of the set, which we define as follows:
 
 \begin{definition}[Partition]
-A \vocab{partition}\index{equivalence relation!partition} of a set $A$ is a collection of subsets $\{A_i\subset A\mid i\in I\}$, where $I$ is an indexing set, with the property that
+A \vocab{partition}\index{equivalence relation!partition} of a set $A$ is a collection of subsets $\{A_i\mid i\in I\}$ such that
 \begin{enumerate}[label=(\roman*)]
-\item $A_i\neq\emptyset$ for all $i\in I$ (all the subsets are non-empty)
-\item $\bigcup_{i\in I}A_i=A$ (every member of $A$ lies in one of the subsets)
-\item $A_i\cap A_j=\emptyset$ for every $i\neq j$ (the subsets are disjoint)
+\item $A_i\neq\emptyset$ for all $i\in I$;\hfill(all subsets are non-empty)
+\item $\bigcup_{i\in I}A_i=A$;\hfill(every member of $A$ lies in one of the subsets)
+\item $A_i\cap A_j=\emptyset$ for every $i\neq j$.\hfill(the subsets are disjoint)
 \end{enumerate}
-The subsets are called the \emph{parts} of the partition.
 \end{definition}
 
 \begin{proposition}
@@ -310,9 +348,9 @@ To prove this, we need to show that
 \begin{enumerate}[label=(\roman*)]
 \item An equivalence class $[x]$ contains $x$ as $x\sim x$, by reflexivity of the relation. Thus $[x]\neq\emptyset$.
 \item From (i), note that every $x\in X$ is in the equivalence class $[x]$, so every element of $X$ is an element of at least one equivalence class.
-\item Suppose otherwise, for a contradiction, that some element of $X$ lies in more than one equivalence class. Let $x\in X$ such that $x\in[y]$ and $x\in[z]$; we want to show that $[y]=[z]$ (using double inclusion).
+\item Suppose, for a contradiction, that some element of $X$ lies in more than one equivalence class. Let $x\in X$ such that $x\in[y]$ and $x\in[z]$; we want to show that $[y]=[z]$ (using double inclusion).
 
-Let $a\in[y]$, so $a\sim y$. ALso $x\in[y]$ so $x\sim y$. By symmetry, $y\sim x$. By transitivity, $a\sim x$. Now $x\in[z]$ so $x\sim z$ and similarly $a\sim z$ thus $a\in[z]$. Hence $[y]\subset[z]$.
+Let $a\in[y]$, so $a\sim y$. Also $x\in[y]$ so $x\sim y$. By symmetry, $y\sim x$. By transitivity, $a\sim x$. Now $x\in[z]$ so $x\sim z$ and similarly $a\sim z$ thus $a\in[z]$. Hence $[y]\subset[z]$.
 
 By the same argument, $[z]\subset[y]$. Hence $[y]=[z]$.
 \end{enumerate}
@@ -323,31 +361,27 @@ The \vocab{quotient set}\index{equivalence relation!quotient set} is the set of 
 \end{definition}
 
 \begin{example}[Modular arithmetic]
-Let $n$ be a fixed positive integer. Define a relation on $\ZZ$ by
+Fix $n\in\ZZ^+$. Define a relation on $\ZZ$:
 \[a\sim b\iff n\mid(b-a).\]
-\begin{proposition*}
-$a\sim b$ is a equivalence relation.
-\end{proposition*}
+\begin{lemma*}
+$\sim$ is a equivalence relation on $\ZZ$.
+\end{lemma*}
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item $a\sim a$ so $\sim$ is reflexive.
-\item $a\sim b\implies b\sim a$ for any integers $a$ and $b$, so $\sim$ is symmetric.
-\item If $a\sim b$ and $b\sim c$ then $n\mid(a-b)$ and $n\mid(b-c)$, so $n\mid(a-b)+(b-c)=(a-c)$, so $a\sim c$ and $\sim$ is transitive.
+\item Since $n\mid a-a=0$, we have $a\sim a$.
+\item Suppose $a\sim b$. Then $n\mid a-b$ implies $n\mid b-a$, so $b\sim a$.
+\item Suppose $a\sim b$ and $b\sim c$. Then $n\mid(a-b)$ and $n\mid(b-c)$, so $n\mid(a-b)+(b-c)=(a-c)$. Thus $a\sim c$.
 \end{enumerate}
 \end{proof}
 
-\begin{notation}
-We write $a\equiv b\pmod n$ if $a\sim b$.
-\end{notation}
+We usually write $a\equiv b\pmod n$ if $a\sim b$.
 
-\begin{notation}
-For any $k\in\ZZ$ we denote the equivalence class of $a$ by $[a]$, called the \emph{congruence class} (or \emph{residue class}) of $a$ mod $n$, which consists of the integers which differ from $a$ by an integral multiple of $n$; that is,
+We denote the equivalence class of $a$ by $[a]$, called the \emph{congruence class} of $a$ mod $n$, which consists of the integers which differ from $a$ by an integral multiple of $n$; that is,
 \[[a]=\{a+kn\mid k\in\ZZ\}.\]
-\end{notation}
 
 There are precisely $n$ distinct congruence classes mod $n$, namely
-\[[0],[1],\dots,[n-1],\]
-determined by the possible remainders after division by $n$; and these residue classes partition the integers $\ZZ$. The set of equivalence classes under this equivalence relation is denoted by $\ZZ/n\ZZ$, and called the \emph{integers modulo $n$}.
+\[[0],[1],\dots,[n-1]\]
+determined by the possible remainders after division by $n$; and these congruence classes partition the integers $\ZZ$. The set of congruence classes is denoted by $\ZZ/n\ZZ\colonequals\ZZ/\sim$, called the \emph{integers modulo $n$}.
 
 Define addition and multiplication on $\ZZ/n\ZZ$ as follows: for $[a],[b]\in\ZZ/n\ZZ$,
 \begin{align*}
@@ -355,31 +389,60 @@ Define addition and multiplication on $\ZZ/n\ZZ$ as follows: for $[a],[b]\in\ZZ/
 [a][b]&=[ab].
 \end{align*}
 
-This means that to compute the sum / product of two elements $[a],[b]\in\ZZ/n\ZZ$, take any \emph{representative} $a\in[a]$, $b\in[b]$, and add / multiply integers $a$ and $b$ as usual in $\ZZ$, then take the congruence class containing the result.
-
-\begin{proposition*}
-Addition and mulltiplication on $\ZZ/n\ZZ$ are well-defined; that is, they do not depend on the choices of representatives for the classes involved. More precisely, if $a_1,a_2\in\ZZ$ and $b_1,b_2\in\ZZ$ with $\overline{a_1}=\overline{b_1}$ and $\overline{a_2}=\overline{b_2}$, then $\overline{a_1+a_2}=\overline{b_1+b_2}$ and $\overline{a_1a_2}=\overline{b_1b_2}$, i.e., If
-\[a_1\equiv b_1\pmod n,\quad a_2\equiv b_2\pmod n\]
-then
-\[a_1+a_2\equiv b_1+b_2\pmod n,\quad a_1a_2\equiv b_1b_2\pmod n.\]
-\end{proposition*}
+\begin{lemma*}
+Addition and mulltiplication on $\ZZ/n\ZZ$ are well-defined.
+\end{lemma*}
 
 \begin{proof}
-Suppose $a_1\equiv b_1\pmod n$, i.e., $n\mid(a_1-b_1)$. Then $a_1=b_1+sn$ for some integer $s$. Similarly, $a_2\equiv b_2\pmod n$ means $a_2=b_2+tn$ for some integer $t$.
+Suppose $[a_1]=[b_1]$ and $[a_2]=[b_2]$.
 
-Then $a_1+a_2=(b_1+b_2)+(s+t)n$ so that $a_1+a_2\equiv b_1+b_2\pmod n$, which shows that the sum of the residue classes is independent of the representatives chosen.
+Then $a_1\equiv b_1\pmod n$, or $n\mid(a_1-b_1)$; let $a_1=b_1+sn$ for some integer $s$. Similarly, let $a_2=b_2+tn$ for some integer $t$.
 
-Similarly, $a_1a_2=(b_1+sn)(b_2+tn)=b_1b_2+(b_1t+b_2s+stn)n$ shows that $a_1a_2\equiv b_1b_2\pmod n$ and so the product of the residue classes is also independent of the representatives chosen.
+Then $a_1+a_2=(b_1+b_2)+(s+t)n$, so $a_1+a_2\equiv b_1+b_2\pmod n$. Hence $[a_1+a_2]=[b_1+b_2]$.
+
+Similarly, $a_1a_2=(b_1+sn)(b_2+tn)=b_1b_2+(b_1t+b_2s+stn)n$ shows that $a_1a_2\equiv b_1b_2\pmod n$. Hence $[a_1a_2]=[b_1b_2]$.
 \end{proof}
 
-An important subset of $\ZZ/n\ZZ$ consists of the collection of congruence classes which have a multiplicative inverse in $\ZZ/n\ZZ$:
-\[(\ZZ/n\ZZ)^\times\coloneqq\{[a]\in\ZZ/n\ZZ\mid\exists[c]\in\ZZ/n\ZZ,[a][c]=[1]\}.\]
+Hence we have shown that if $a_1\equiv b_1\pmod n$ and $a_2\equiv b_2\pmod n$, then
+\[a_1+a_2\equiv b_1+b_2\pmod n,\quad a_1a_2\equiv b_1b_2\pmod n.\]
 
-\begin{proposition*}
-$(\ZZ/n\ZZ)^\times$ is also the collection of congruence classes whose representatives are relatively prime to $n$:
+An important subset of $\ZZ/n\ZZ$ consists of the collection of congruence classes which have a multiplicative inverse in $\ZZ/n\ZZ$:
+\[(\ZZ/n\ZZ)^\times\colonequals\{[a]\in\ZZ/n\ZZ\mid\exists[c]\in\ZZ/n\ZZ,[a][c]=[1]\}.\]
+
+\begin{lemma*}
+$(\ZZ/n\ZZ)^\times$ equals the collection of congruence classes whose representatives are relatively prime to $n$:
 \[(\ZZ/n\ZZ)^\times=\{[a]\in\ZZ/n\ZZ\mid(a,n)=1\}.\]
-\end{proposition*}
+\end{lemma*}
 \end{example}
+
+\begin{example}[Rationals]
+Define a relation on $\ZZ\times\ZZ^*$, where $\ZZ^*=\ZZ\setminus\{0\}$:
+\[(a,b)\sim(c,d)\iff ad=bc.\]
+Denote the congruence class of $(a,b)$ by $a/b$.
+
+Let $\QQ\colonequals\ZZ\times\ZZ^*$, with addition and multiplication defined by
+\begin{align*}
+\frac{a}{b}+\frac{c}{d}&=\frac{ad+bc}{bd}\\
+\frac{a}{b}\frac{c}{d}&=\frac{ac}{bd}
+\end{align*}
+Then $\QQ$ is a field.
+\end{example}
+
+\begin{definition}[Quotient map]
+The quotient map is the map
+\begin{align*}
+\pi\colon X&\to X/\sim\\
+x&\mapsto[x]
+\end{align*}
+\end{definition}
+
+\begin{lemma}
+Quotient maps are surjective.
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
 
 \subsection{Axiom of Choice and Its Equivalences}
 \begin{definition}
@@ -429,18 +492,19 @@ It is a non-trivial result that Zorn's lemma is independent of the usual (Zermel
 \pagebreak
 
 \section{Functions}
+\subsection{Definitions}
 \begin{definition}[Function]
-A \vocab{function}\index{function} $f:X\to Y$ is a mapping of every element of $X$ to some element of $Y$; $X$ and $Y$ are known as the \emph{domain} and \emph{codomain} of $f$ respectively.
+A \vocab{function}\index{function} $f\colon X\to Y$ is a mapping of every element of $X$ to some element of $Y$; $X$ and $Y$ are known as the \emph{domain} and \emph{codomain} of $f$ respectively.
 \end{definition}
 
 \begin{remark}
-The definition requires that a unique element of the codomain is assigned for every element of the domain. For example, for a function $f:\RR \to \RR$, the assignment $f(x)=\frac{1}{x}$ is not sufficient as it fails at $x=0$. Similarly, $f(x)=y$ where $y^2=x$ fails because $f(x)$ is undefined for $x<0$, and for $x>0$ it does not return a unique value; in such cases, we say the the function is \emph{ill-defined}. We are interested in the opposite; functions that are \emph{well-defined}.
+The definition requires that a unique element of the codomain is assigned for every element of the domain. For example, for a function $f\colon \RR \to \RR$, the assignment $f(x)=\frac{1}{x}$ is not sufficient as it fails at $x=0$. Similarly, $f(x)=y$ where $y^2=x$ fails because $f(x)$ is undefined for $x<0$, and for $x>0$ it does not return a unique value; in such cases, we say the the function is \emph{ill-defined}. We are interested in the opposite; functions that are \emph{well-defined}.
 \end{remark}
 
 If a function is defined on some larger domain than we care about, it may be helpful to restrict the domain:
 
 \begin{definition}[Restriction]
-Given a function $f:X \to Y$ and a subset $A \subset X$, the \vocab{restriction}\index{function!restriction} of $f$ to $A$ is the map $f|_A:A \to Y$.
+Suppose $f\colon X\to Y$. The \vocab{restriction}\index{function!restriction} of $f$ to $A\subset$ is the map $f|_A\colon A \to Y$.
 \end{definition}
 
 \begin{remark}
@@ -450,57 +514,74 @@ The restriction is almost the same function as the original function---just the 
 Another rather trivial but nevertheless important function is the identity map:
 
 \begin{definition}[Identity map]
-Given a set $X$, the \vocab{identity} $\id_X:X \to X$ is defined by
-\[\id_X(x)=x\quad(\forall x\in X)\]
+Given a set $X$, the \vocab{identity} $\id_X\colon X\to X$ is defined by
+\[\id_X(x)=x\quad(x\in X).\]
 \end{definition}
 
 \begin{notation}
 If the domain is unambiguous, the subscript may be omitted.
 \end{notation}
 
+\subsection{Injectivity, Surjectivity, Bijectivity}
+\begin{definition}
+Suppose $f\colon X\to Y$.
+\begin{enumerate}[label=(\roman*)]
+\item $f$ is \vocab{injective}\index{function!injectivity} (or \emph{one-to-one}) if each element of $Y$ has at most one element of $X$ that maps to it:
+\[\forall x_1,x_2\in X,\quad f(x_1)=f(x_2) \implies x_1=x_2\]
+
+\item $f$ is \vocab{surjective}\index{function!surjectivity} (or \emph{onto}) if every element of $Y$ is mapped to at least one element of $X$:
+\[ \forall y\in Y,\quad\exists x\in X,\quad f(x)=y \]
+
+\item $f$ is \vocab{bijective}\index{function!bijectivity} if it is both injective and surjective; a bijective function is termed a \emph{bijection}.
+\end{enumerate}
+\end{definition}
+
+\begin{notation}
+We write $X\sim Y$ if there exists a bijection $f\colon X\to Y$.
+\end{notation}
 \subsection{Images and Pre-images}
 \begin{definition}
-Suppose $f:X\to Y$. The \vocab{image}\index{function!image} of $f$ is
-\[f(X)\coloneqq\{f(x)\mid x\in X\}\subset Y.\]
-More generally, the image of $A\subset X$ under $f$ is
-\[f(A)\coloneqq\{f(x)\mid x\in A\}\subset Y.\]
+Suppose $f\colon X\to Y$. The \vocab{image}\index{function!image} of $A\subset X$ under $f$ is
+\[f(A)\colonequals\{y\in Y\mid\exists x\in A, y=f(x)\}.\]
 The \vocab{pre-image}\index{function!pre-image} of $B\subset Y$ under $f$ is
-\[f^{-1}(B)\coloneqq\{x\in X\mid f(x)\in B\}.\]
+\[f^{-1}(B)\colonequals\{x\in X\mid f(x)\in B\}.\]
 \end{definition}
 
 \begin{remark}
 Note the distinction between ``codomain'' and ``range''.
 \end{remark}
 
+A useful identity is
+\[x\in f^{-1}(A)\iff f(x)\in A.\]
+
 \begin{lemma}
-Let $f:X\to Y$. Suppose $A\subset X$ and $B\subset Y$.
+Let $f\colon X\to Y$.
 \begin{enumerate}[label=(\roman*)]
-\item If $A=f^{-1}(B)$, then $f(A)\subset B$.
-\item If $B=f(A)$, then $A\subset f^{-1}(B)$. 
+\item If $A\subset Y$, then $f\brac{f^{-1}(A)}\subset A$.
+\item If $A\subset X$, then $A\subset f^{-1}\brac{f(A)}$.
 \end{enumerate}
 \end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item Let $y=f(A)$. Then $y=f(x)$ for some $x\in A$. 
-Since $A=f^{-1}(B)$, then $x\in f^{-1}(B)$. Then $f(x)=w$ for some $w\in B$. 
-Thus $y=f(x)=w\in B$. Hence $f(A)\subset B$.
+\item \begin{align*}
+y\in f\brac{f^{-1}(A)}
+&\implies\exists x\in f^{-1}(A),\quad f(x)=y\\
+&\iff\exists f(x)\in A,\quad f(x)=y\\
+&\implies y\in A.
+\end{align*}
 
-\item Let $x\in A$. Then $f(x)\in f(A)=B$; let $f(x)=y$ for some $y\in B$. Consider $y\in B$; it could have one or more elements of $A$ mapped to it. Hence $A\subset f^{-1}(B)$. 
+\item \begin{align*}
+x\in A&\implies f(x)\in f(A)\\
+&\iff x\in f^{-1}\brac{f(A)}.
+\end{align*}
 \end{enumerate}
 \end{proof}
 
-\begin{remark}
-In general, we cannot conclude that $B=f(A)$ implies $A=f^{-1}(B)$.
-\end{remark}
-
-We can express the previous result as follows:
-\[f\brac{f^{-1}(B)}\subset B,\quad A\subset f^{-1}\brac{f(A)}.\]
-
 \begin{lemma}[Algebra of pre-images]
-Suppose $f:X\to Y$. Then
+Suppose $f\colon X\to Y$. Then
 \begin{enumerate}[label=(\roman*)]
-\item $f^{-1}(A^c)=f^{-1}(A)^c$ for every $A\subset Y$;
+\item $f^{-1}(A^c)=\sqbrac{f^{-1}(A)}^c$ for every $A\subset Y$;
 \item $f^{-1}\brac{\bigcup_{i\in I}A_i}=\bigcup_{i\in I}f^{-1}(A_i)$;
 \item $f^{-1}\brac{\bigcap_{i\in I}A_i}=\bigcap_{i\in I}f^{-1}(A_i)$.
 \end{enumerate}
@@ -538,37 +619,26 @@ x\in f^{-1}\brac{\bigcap_{i\in I}A_i}
 Hence $f^{-1}\brac{\bigcap_{i\in I}A_i}=\bigcap_{i\in I}f^{-1}(A_i)$.
 \end{enumerate}
 \end{proof}
-%https://math.stackexchange.com/questions/359693/overview-of-basic-results-about-images-and-preimages
 
-
-\subsection{Injectivity, Surjectivity, Bijectivity}
-\begin{definition}
-Suppose $f:X\to Y$.
+\begin{lemma}[Algebra of images]
+Suppose $f\colon X\to Y$. Then
 \begin{enumerate}[label=(\roman*)]
-\item $f$ is \vocab{injective}\index{function!injectivity} (or \emph{one-to-one}) if each element of $Y$ has at most one element of $X$ that maps to it:
-\[\forall x_1,x_2\in X,\quad f(x_1)=f(x_2) \implies x_1=x_2\]
-
-\item $f$ is \vocab{surjective}\index{function!surjectivity} (or \emph{onto}) if every element of $Y$ is mapped to at least one element of $X$:
-\[ \forall y\in Y,\quad\exists x\in X,\quad f(x)=y \]
-
-\item $f$ is \vocab{bijective}\index{function!bijectivity} if it is both injective and surjective; a bijective function is termed a \emph{bijection}.
+\item $f(A)^c\subset f(A^c)$;
+\item $f\brac{\bigcup_{i\in I}A_i}=\bigcup_{i\in I}f(A_i)$;
+\item $f\brac{\bigcap_{i\in I}A_i}\subset\bigcap_{i\in I}f(A_i)$.
 \end{enumerate}
-\end{definition}
-
-\begin{notation}
-We write $X\sim Y$ if there exists a bijection $f:X\to Y$.
-\end{notation}
+\end{lemma}
 
 \subsection{Composition}
 \begin{definition}[Composition]
-Given $f:X\to Y$ and $g:Y\to Z$, the \vocab{composition} $g\circ f:X\to Z$ is defined by
+Given $f\colon X\to Y$ and $g\colon Y\to Z$, the \vocab{composition} $g\circ f\colon X\to Z$ is defined by
 \[ (g \circ f)(x)=g(f(x))\quad(\forall x \in X)\]
 \end{definition}
 
 The composition of functions is not commutative. However, composition is associative, as the following results shows:
 
 \begin{proposition}[Associativity of composition]
-Suppose $f:X\to Y$, $g:Y\to Z$, $h:Z\to W$. Then
+Suppose $f\colon X\to Y$, $g\colon Y\to Z$, $h\colon Z\to W$. Then
 \[f\circ (g\circ h)=(f\circ g)\circ h.\]
 \end{proposition}
 
@@ -579,14 +649,14 @@ Let $x\in X$. By the definition of composition, we have
 
 \begin{proposition}[Composition preserves injectivity and surjectivity] \
 \begin{enumerate}[label=(\roman*)]
-\item If $f:X \to Y$ is injective and $g:Y \to Z$ is injective, then $g \circ f:X \to Z$ is injective.
-\item If $f:X\to Y$ is surjective and $g:Y\to Z$ is surjective, then $g \circ f:X\to Z$ is surjective.
+\item If $f\colon X \to Y$ is injective and $g\colon Y \to Z$ is injective, then $g \circ f\colon X \to Z$ is injective.
+\item If $f\colon X\to Y$ is surjective and $g\colon Y\to Z$ is surjective, then $g \circ f\colon X\to Z$ is surjective.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item Let $f:X \to Y$ and $g:Y \to Z$ be injective. To prove that $g \circ f:X\to Z$ is injective, we need to prove: for all $x,x^\prime\in X$, 
+\item Let $f\colon X \to Y$ and $g\colon Y \to Z$ be injective. To prove that $g \circ f\colon X\to Z$ is injective, we need to prove: for all $x,x^\prime\in X$, 
 \[(g \circ f)(x)=(g\circ f)(x^\prime) \implies x=x^\prime.\]
 
 Suppose that $(g \circ f)(x) = (g \circ f)(x^\prime)$. Then by definition
@@ -596,14 +666,14 @@ Injectivity of $g$ implies
 and injectivity of $f$ implies
 \[x=x^\prime.\]
 
-\item Let $f:X\to Y$ and $g:Y\to Z$ be surjective. To prove that $g\circ f:X\to Z$ is surjective, we need to prove that for any $z\in Z$, there exists $x\in X$ such that $(g\circ f)(x)=z$.
+\item Let $f\colon X\to Y$ and $g\colon Y\to Z$ be surjective. To prove that $g\circ f\colon X\to Z$ is surjective, we need to prove that for any $z\in Z$, there exists $x\in X$ such that $(g\circ f)(x)=z$.
 
-Let $z\in Z$. By surjectivity of $g:Y\to Z$, there exists $y\in Y$ such that $g(y)=z$. By surjectivity of $f:X\to Y$, there exists $x\in X$ such that $f(x)=y$. This means that there exists $x\in X$ such that $g\brac{f(x)}=g(y)=z$, as desired.
+Let $z\in Z$. By surjectivity of $g\colon Y\to Z$, there exists $y\in Y$ such that $g(y)=z$. By surjectivity of $f\colon X\to Y$, there exists $x\in X$ such that $f(x)=y$. This means that there exists $x\in X$ such that $g\brac{f(x)}=g(y)=z$, as desired.
 \end{enumerate}
 \end{proof}
 
 \begin{proposition}
-$f:X\to Y$ is injective if and only if for any set $Z$ and any functions $g_1,g_2:Z\to X$,
+$f\colon X\to Y$ is injective if and only if for any set $Z$ and any functions $g_1,g_2\colon Z\to X$,
 \[f\circ g_1=f\circ g_2 \implies g_1=g_2.\]
 \end{proposition}
 
@@ -617,8 +687,8 @@ so $g_1=g_2$ (since the choice of $z\in Z$ is arbitrary).
 
 \fbox{$\impliedby$} Pick $Z=\{1\}$, basically some random one-element set. Then for $x,y\in X$, define
 \begin{align*}
-g_1:Z\to X,&\quad g_1(1)=x,\\
-g_2:Z\to Y,&\quad g_2(1)=y.
+g_1\colon Z\to X,&\quad g_1(1)=x,\\
+g_2\colon Z\to Y,&\quad g_2(1)=y.
 \end{align*}
 Then for $x,y\in X$,
 \[ f(x)=f(y) \implies f(g_1(1))=f(g_2(1)) \implies g_1(1)=g_2(1) \implies x=y \]
@@ -626,7 +696,7 @@ which shows that $f$ is injective.
 \end{proof}
 
 \begin{proposition}
-$f:X\to Y$ is surjective if and only if for any set $Z$ and any functions $g_1,g_2:Y\to Z$,
+$f\colon X\to Y$ is surjective if and only if for any set $Z$ and any functions $g_1,g_2\colon Y\to Z$,
 \[g_1 \circ f=g_2 \circ f \implies g_1=g_2.\]
 \end{proposition}
 
@@ -636,7 +706,7 @@ $f:X\to Y$ is surjective if and only if for any set $Z$ and any functions $g_1,g
 \[g_1\circ f=g_2 \circ f\implies g_1\brac{f(x)}=g_2\brac{f(x)}\implies g_1(y)=g_2(y) \]
 so $g_1=g_2$.
 
-\fbox{$\impliedby$} We prove the contrapositive. Suppose $f$ is not surjective, then there exists $y \in Y$ such that for all $x \in X$ we have $f(x)\neq y$. We then aim to construct set $Z$ and $g_1,g_2:Y\to Z$ such that
+\fbox{$\impliedby$} We prove the contrapositive. Suppose $f$ is not surjective, then there exists $y \in Y$ such that for all $x \in X$ we have $f(x)\neq y$. We then aim to construct set $Z$ and $g_1,g_2\colon Y\to Z$ such that
 \begin{enumerate}[label=(\roman*)]
 \item $g_1(y) \neq g_2(y)$
 \item $\forall y^\prime \neq y, g_1(y^\prime)=g_2(y^\prime)$
@@ -648,17 +718,17 @@ We construct $Z=Y\cup\{1,2\}$ for some random $1,2 \notin Y$.
 
 Then we define
 \begin{align*}
-&g_1:Y\to Z,g_1(y)=1,g_1(y^\prime)=y^\prime\\
-&g_2:Y\to Z,g_2(y)=2,g_2(y^\prime)=y^\prime
+&g_1\colon Y\to Z,g_1(y)=1,g_1(y^\prime)=y^\prime\\
+&g_2\colon Y\to Z,g_2(y)=2,g_2(y^\prime)=y^\prime
 \end{align*}
 
 Then when $y$ is not in the image of $f$, these two functions will satisfy $g_1 \circ f=g_2 \circ f$ but not $g_1=g_2$.
 
-So conversely, if for any set $Z$ and any functions $g_i:Y \to Z$ we have $g_1 \circ f=g_2 \circ f \implies g_1=g_2$, such a value $y$ that is in the codomain but not in the range of $f$ cannot appear, and hence $f$ must be surjective.
+So conversely, if for any set $Z$ and any functions $g_i\colon Y \to Z$ we have $g_1 \circ f=g_2 \circ f \implies g_1=g_2$, such a value $y$ that is in the codomain but not in the range of $f$ cannot appear, and hence $f$ must be surjective.
 \end{proof}
 
 \begin{lemma}[Inverse image of composition]
-Suppose $f:X\to Y$, $g:Y\to Z$. Then
+Suppose $f\colon X\to Y$, $g\colon Y\to Z$. Then
 \[(g\circ f)^{-1}(A)=f^{-1}\brac{g^{-1}(A)}\]
 for every $A\subset Z$.
 \end{lemma}
@@ -679,11 +749,11 @@ Hence $(g\circ f)^{-1}(A)=f^{-1}\brac{g^{-1}(A)}$.
 Recalling that $\id_X$ is the identity map on $X$, we can define invertibility.
 
 \begin{definition}[Invertibility]
-Suppose $f:X\to Y$. We say that
+Suppose $f\colon X\to Y$. We say that
 \begin{enumerate}[label=(\roman*)]
-\item $f$ is \vocab{left-invertible} if there exists $g:Y\to X$ such that $g\circ f=\id_X$; $g$ is a \emph{left-inverse} of $f$;
-\item $f$ is \vocab{right-invertible} if there exists $h:Y\to X$ such that $f\circ h=\id_Y$; $h$ is a \emph{right-inverse} of $h$;
-\item $f$ is \vocab{invertible}\index{function!invertibility} if there exists $k:Y\to X$ which is a left and right inverse of $f$; $k$ is an \emph{inverse} of $f$.
+\item $f$ is \vocab{left-invertible} if there exists $g\colon Y\to X$ such that $g\circ f=\id_X$; we call $g$ a \emph{left-inverse} of $f$;
+\item $f$ is \vocab{right-invertible} if there exists $h\colon Y\to X$ such that $f\circ h=\id_Y$; we call $h$ a \emph{right-inverse} of $f$;
+\item $f$ is \vocab{invertible}\index{function!invertibility} if there exists $k\colon Y\to X$ which is a left and right inverse of $f$; we call $k$ an \emph{inverse} of $f$.
 \end{enumerate}
 \end{definition}
 
@@ -694,20 +764,20 @@ Notice that if $g$ is left-inverse to $f$ then $f$ is right-inverse to $g$. A fu
 \begin{example}
 Let
 \begin{align*}
-f:\RR\to[0,\infty),&\quad f(x)=x^2\\
-g:[0,\infty)\to\RR,&\quad g(x)=\sqrt{x}
+f\colon \RR\to[0,\infty),&\quad f(x)=x^2\\
+g\colon [0,\infty)\to\RR,&\quad g(x)=\sqrt{x}
 \end{align*}
 \begin{itemize}
 \item $f$ is not left-invertible. Suppose otherwise, for a contradiction, that $h$ is a left inverse of $f$, so that $hf=\id_\RR$. Then 
 \end{itemize}
 \end{example}
 
-\begin{proposition}[Uniqueness of inverse]
-If $f:X\to Y$ is invertible then its inverse is unique.
-\end{proposition}
+\begin{lemma}[Uniqueness of inverse]
+If $f\colon X\to Y$ is invertible, then its inverse is unique.
+\end{lemma}
 
 \begin{proof}
-Let $g_1$ and $g_2$ be two functions for which $g_i \circ f = \id_X$ and $f \circ g_i = \id_Y$. Using the fact that composition is associative, and the definition of the identity maps, we can write
+Let $g_1$ and $g_2$ be two functions for which $g_i\circ f=\id_X$ and $f\circ g_i=\id_Y$. Using the fact that composition is associative, and the definition of the identity maps, we can write
 \[ g_1 = g_1 \circ \id_Y = g_1 \circ (f \circ g_2) = (g_1 \circ f) \circ g_2 = \id_X \circ g_2 = g_2.\]
 \end{proof}
 
@@ -718,13 +788,13 @@ The inverse of $f$ is denoted by $f^{-1}$
 \end{notation}
 
 \begin{remark}
-Note that directly from the definition, if $f$ is invertible then $f^{-1}$ is also invertible, and $(f^{-1})^{-1}=f$.
+Immediately from the definition, if $f$ is invertible then $f^{-1}$ is also invertible, and $(f^{-1})^{-1}=f$.
 \end{remark}
 
 The following result provides an important and useful criterion for invertibility.
 
 \begin{lemma}[Invertibility criterion]
-Suppose $f:X\to Y$. Then
+Suppose $f\colon X\to Y$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $f$ is left-invertible if and only if $f$ is injective;
 \item $f$ is right-invertible if and only if $f$ is surjective;
@@ -738,7 +808,7 @@ Suppose $f:X\to Y$. Then
 
 Now suppose $f(a)=f(b)$. Then applying $g$ to both sides gives $g\brac{f(a)}=g\brac{f(b)}$, so $a=b$.
 
-\fbox{$\impliedby$} Let $f$ be injective. Choose any $x_0$ in the domain of $f$. Define $g:Y\to X$ as follows; note that each $y\in Y$ is either in the image of $f$ or not.
+\fbox{$\impliedby$} Let $f$ be injective. Choose any $x_0$ in the domain of $f$. Define $g\colon Y\to X$ as follows; note that each $y\in Y$ is either in the image of $f$ or not.
 \begin{itemize}
 \item If $y$ is in the image of $f$, it equals $f(x)$ for a \emph{unique} $x\in X$ (uniqueness is because of the injectivity of $f$), so define $g(y)=x$.
 \item If $y$ is not in the image of $f$, define $g(y)=x_0$. 
@@ -749,11 +819,11 @@ Clearly $g\circ f=\id_X$.
 
 Let $y\in Y$. Then $f\brac{g(y)}=\id_Y(y)=y$ so $y\in f(X)$. Thus $f(X)=Y$ so $f$ is surjective.
 
-\fbox{$\impliedby$} Suppose $f$ is surjective. Let $y\in Y$, then $y$ is in the image of $f$, so we can choose an element $g(y)\in X$ such that $f\brac{g(y)}=y$. This defines a function $g:Y\to X$ which is evidently a right-inverse of $f$.
+\fbox{$\impliedby$} Suppose $f$ is surjective. Let $y\in Y$, then $y$ is in the image of $f$, so we can choose an element $g(y)\in X$ such that $f\brac{g(y)}=y$. This defines a function $g\colon Y\to X$ which is evidently a right-inverse of $f$.
 
 \item \fbox{$\implies$} Suppose $f$ is invertible. Then $f$ is left-invertible and right-invertible. By (i) and (ii), $f$ is injective and surjective, so $f$ is bijective.
 
-\fbox{$\impliedby$} Suppose $f$ is bijective. Then by (i) and (ii), $f$ has a left-inverse $g:Y\to X$ and a right-inverse $h:Y\to X$. But ``invertible'' requires a single function to be \emph{both} a left and right inverse, so we need to show that $g=h$:
+\fbox{$\impliedby$} Suppose $f$ is bijective. Then by (i) and (ii), $f$ has a left-inverse $g\colon Y\to X$ and a right-inverse $h\colon Y\to X$. But ``invertible'' requires a single function to be \emph{both} a left and right inverse, so we need to show that $g=h$:
 \[g=g\circ\id_Y=g\circ(f\circ h)=(g\circ f)\circ h=\id_X\circ h=h\]
 so $g=h$ is an inverse of $f$.
 \end{enumerate}
@@ -762,7 +832,7 @@ so $g=h$ is an inverse of $f$.
 The following result shows how to invert the composition of invertible functions.
 
 \begin{proposition}[Inverse of composition]
-Suppose $f:X \to Y$, $g:Y \to Z$. If $f$ and $g$ are invertible, then $g \circ f$ is invertible, and
+Suppose $f\colon X \to Y$, $g\colon Y \to Z$. If $f$ and $g$ are invertible, then $g \circ f$ is invertible, and
 \[(g \circ f)^{-1}=f^{-1}\circ g^{-1}.\]
 \end{proposition}
 
@@ -801,13 +871,13 @@ $\sim$ is an equivalence relation between sets.
 We need to prove (i) reflexivity, (ii) symmetry, and (iii) transitivity.
 \begin{enumerate}[label=(\roman*)]
 \item The identity map gives a bijection from a set to itself.
-\item Suppose $f:X\to Y$ is a bijection. Then $f$ is invertible, with inverse $f^{-1}:Y\to X$. Since $f^{-1}$ is invertible (with inverse $f$), it is bijective.
-\item Suppose $f:X\to Y$ and $g:Y\to Z$ are bijections, and thus they are invertible. Then by the previous result, $g\circ f$ is invertible and thus bijective.
+\item Suppose $f\colon X\to Y$ is a bijection. Then $f$ is invertible, with inverse $f^{-1}\colon Y\to X$. Since $f^{-1}$ is invertible (with inverse $f$), it is bijective.
+\item Suppose $f\colon X\to Y$ and $g\colon Y\to Z$ are bijections, and thus they are invertible. Then by the previous result, $g\circ f$ is invertible and thus bijective.
 \end{enumerate}
 \end{proof}
 
 \begin{theorem}[Cantor--Schr\"{o}der--Bernstein]
-If $f:X\to Y$ and $g:Y\to X$ are injective, then $A\sim B$.
+If $f\colon X\to Y$ and $g\colon Y\to X$ are injective, then $A\sim B$.
 \end{theorem}
 \pagebreak
 
@@ -815,7 +885,7 @@ If $f:X\to Y$ and $g:Y\to X$ are injective, then $A\sim B$.
 This section is about formalising the notion of the ``size'' of a set.
 
 \begin{definition}
-$A$ and $B$ said to be \vocab{equivalent} (or have the same \emph{cardinality}), denoted by $A\sim B$, if there exists a bijection $f:A\to B$. 
+$A$ and $B$ said to be \vocab{equivalent} (or have the same \emph{cardinality}), denoted by $A\sim B$, if there exists a bijection $f\colon A\to B$. 
 \end{definition}
 
 \begin{notation}
@@ -830,7 +900,7 @@ n\NN&=\{nk\mid k\in\NN\}.
 For any set $A$, we say
 \begin{enumerate}[label=(\roman*)]
 \item $A$ is \vocab{finite} if $A\sim\NN_n$ for some integer $n\in\NN$, then the \emph{cardinality} of $A$ is $|A|=n$; $A$ is \emph{infinite} if $A$ is not finite;
-\item $A$ is \vocab{countable} if $A\sim \NN$; $A$ is \emph{uncountable} if $A$ is neither finite nor countable; $A$ is \emph{at most countable} if $A$ is finite or countable.
+\item $A$ is \vocab{countable} if $A\sim\NN$; $A$ is \emph{uncountable} if $A$ is neither finite nor countable; $A$ is \emph{at most countable} if $A$ is finite or countable.
 \end{enumerate}
 \end{definition}
 
@@ -838,18 +908,18 @@ For any set $A$, we say
 Any countable set can be ``listed'' in a sequence $a_1,a_2,\dots$ of distinct terms. This technique is particularly useful when there is not possible to deduce an explicit formula for a bijection.
 \end{remark}
 
-\begin{proposition}
+\begin{lemma}
 $\NN$ is infinite.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 We want to show that there does not exist a bijection from $\NN_n$ to $\NN$, for all $n\in\NN$. We prove by induction on $n$.
 
-For the base case $n=1$, if there exists a function $f_1:\{1\}\to\NN$, consider the set $\NN\setminus f_1(\{1\})$. It is not empty, so $f_1$ is not surjective, thus it is not bijective.
+For the base case $n=1$, if there exists a function $f_1\colon\{1\}\to\NN$, consider the set $\NN\setminus f_1(\{1\})$. It is not empty, so $f_1$ is not surjective, thus it is not bijective.
 
 For the inductive step, we want to show if there does not exist a bijection from $\NN_k$ to $\NN$, then there does not exist a bijection from $\NN_{k+1}$ to $\NN$. We prove the contrapositive: if there exists a bijection from $\NN_{k+1}\to\NN$, then there exists a bijection from $\NN_k$ to $\NN$.
 
-Suppose $h:\NN_{k+1}\to\NN$ is a bijection. If remove the element $k+1$, then there exists a bijection from $\NN_k$ to $\NN\setminus\{h(k+1)\}$. But $\NN\setminus\{h(k+1)\}\sim\NN$ so $\NN_k\sim\NN$.
+Suppose $h\colon\NN_{k+1}\to\NN$ is a bijection. If remove the element $k+1$, then there exists a bijection from $\NN_k$ to $\NN\setminus\{h(k+1)\}$. But $\NN\setminus\{h(k+1)\}\sim\NN$ so $\NN_k\sim\NN$.
 \end{proof}
 
 \begin{corollary}
@@ -880,7 +950,7 @@ For a set $A$, finite or infinite,
 \end{theorem}
 
 \begin{proof}
-Suppose, for a contradiction, that $|A|=|\mathcal{P}(A)|$. Then there exists a bijection $f:A\to\mathcal{P}(A)$. Put
+Suppose, for a contradiction, that $|A|=|\mathcal{P}(A)|$. Then there exists a bijection $f\colon A\to\mathcal{P}(A)$. Put
 \[B=\{x\in A\mid x\notin f(A)\}.\]
 
 Now consider any $x\in A$. In the first case, $x\in f(A)$, then
@@ -962,11 +1032,11 @@ $\NN$ is countable since the identity map from $\NN$ to $\NN$ is a bijection.
 \begin{example}
 $n\NN$ is countable.
 \begin{proof}
-Let $f:\NN\to n\NN$ which sends $k\mapsto nk$. We now need to show that $f$ is (i) injective, and (ii) surjective.
-\begin{enumerate}[label=(\roman*)]
+Let $f\colon\NN\to n\NN$ which sends $k\mapsto nk$. We need to show that $f$ is bijective:
+\begin{itemize}
 \item For any $k_1,k_2\in\NN$, $nk_1=nk_2$ implies $k_1=k_2$ so $f$ is injective.
 \item For any $x\in n\NN$, $x=nk$ for some $k\in\NN$, thus $\frac{x}{n}=k\in\NN$ so $f$ is surjective.
-\end{enumerate}
+\end{itemize}
 Hence $f$ is bijective, so $n\NN\sim\NN$ and we are done.
 \end{proof}
 \end{example}
@@ -979,7 +1049,7 @@ Consider the following arrangement of the elements of $\ZZ$ and $\NN$:
 \ZZ&:\quad0,1,-1,2,-2,3,-3,\dots\\
 \NN&:\quad1,2,3,4,5,6,7,\dots
 \end{align*}
-In fact we can write an explicit formula for a bijection $f:\NN\to\ZZ$ where
+In fact we can write an explicit formula for a bijection $f\colon \NN\to\ZZ$ where
 \[f(n)=\begin{cases}
 \dfrac{n}{2}&\text{($n$ even)}\\[1ex]
 -\dfrac{n-1}{2}&\text{($n$ odd)}
@@ -1105,7 +1175,7 @@ For any set $A$, we have $A\not\sim\mathcal{P}(A)$.
 \end{theorem}
 
 \begin{proof}
-Suppose otherwise, for a contradiction, that $A\sim\mathcal{P}(A)$. Then there exists a bijection $f:A\to\mathcal{P}(A)$. Then for each $x\in A$, $f(x)$ is a subset of $A$. Now consider the ``anti-diagonal'' set
+Suppose otherwise, for a contradiction, that $A\sim\mathcal{P}(A)$. Then there exists a bijection $f\colon A\to\mathcal{P}(A)$. Then for each $x\in A$, $f(x)$ is a subset of $A$. Now consider the ``anti-diagonal'' set
 \[B=\{x\in A\mid x\notin f(x)\}.\]
 That is, $B$ is the subset of $A$ containing all $x\in A$ such that $x$ is not in the set $f(x)$. Since $B\subset A$, we have $B\in\mathcal{P}(A)$. Since $f$ is bijective (in particular surjective), there exists $x\in A$ such that $f(x)=B$. Now there are two cases: (i) $x\in B$, or (ii) $x\notin B$.
 \begin{enumerate}[label=(\roman*)]
@@ -1118,29 +1188,35 @@ In either case, we have reached a contradiction. Hence there cannot exist a surj
 
 \section*{Exercises}
 \begin{exercise}
-Prove the following statements:
-\begin{enumerate}[label=(\roman*)]
-\item $f(A\cup B)=f(A)\cup f(B)$
-\item $f(A_1\cup\cdots\cup A_n)=f(A_1)\cup\cdots\cup f(A_n)$
-\item $f(\bigcup_{\lambda\in A}A_\lambda)=\bigcup_{\lambda\in A}f(A_\lambda)$
-\item $f(A\cap B)\subset f(A)\cap f(B)$
-\item $f^{-1}(f(A))\supset A$
-\item $f(f^{-1}(A))\subset A$
-\item $f^{-1}(A\cup B)=f^{-1}(A)\cup f^{-1}(B)$
-\item $f^{-1}(A\cap B)=f^{-1}(A)\cap f^{-1}(B)$
-\item $f^{-1}(A_1\cup\cdots\cup A_n)=f^{-1}(A_1)\cup\cdots\cup f^{-1}(A_n)$
-\item $f^{-1}(\bigcup_{\lambda\in A}A_\lambda)=\bigcup_{\lambda\in A}f^{-1}(A_\lambda)$
-\end{enumerate}
+Prove that the statement $\forall x\in\emptyset, P(x)$ is vacuously true.
 \end{exercise}
 
+\begin{solution}
+Let $S$ be the embedding set. 
+The statement $\forall x\in\emptyset, P(x)$ means
+\[\forall x\in S,\quad x\in\emptyset\implies P(x).\]
+But $x\in\emptyset$ is always false, by the definition of empty set. Hence the statement is always true, regardless of $x$.
+\end{solution}
+
 \begin{exercise}
-Let $A$ be the set of all complex polynomials in $n$ variables. Given a subset $T \subset A$, define the \textit{zeros} of $T$ as the set
-\[ Z(T) = \{P=(a_1,\dots,a_n) \mid f(P)=0 \text{ for all } f \in T\} \]
-A subset $Y \in \CC^n$ is called an algebraic set if there exists a subset $T \subset A$ such that $Y=Z(T)$.
+Prove that for any set $A\subset S$, $\emptyset\subset A$ and $A\subset A$.
+\end{exercise}
+
+\begin{solution}
+Let $A\subset S$. Let $x\in\emptyset$, then $x\in\emptyset\implies x\in A$ is vacuously true, so $\emptyset\subset A$.
+
+Likewise, let $x\in A$, then $x\in A\implies x\in A$ is always true, so $A\subset A$.
+\end{solution}
+
+\begin{exercise}
+Let $A$ be the set of all complex polynomials in $n$ variables. Given a subset $T\subset A$, define the \emph{zeros} of $T$ as the set
+\[Z(T)=\{P=(a_1,\dots,a_n)\mid f(P)=0 \text{ for all }f\in T\}.\]
+$Y\subset\CC^n$ is called an \emph{algebraic} set if there exists $T \subset A$ such that $Y=Z(T)$.
 
 Prove that the union of two algebraic sets is an algebraic set.
 \end{exercise}
-\begin{proof}
+
+\begin{solution}
 We would like to consider $T=\{f_1, f_2, \dots\}$ expressed as indexed sets $T=\{f_i\}$. Then $Z(T)$ can also be expressed as $\{P \mid \forall i, f_i(P)=0\}$.
 
 Suppose that we have two algebraic sets $X$ and $Y$. Let $X=Z(S)$, $Y=Z(T)$ where $S,T$ are subsets of $A$ (basically, they are certain sets of polynomials). Then
@@ -1157,50 +1233,13 @@ On the other hand if $P\in Z(U)$, suppose otherwise that $P$ is not in $X\cup Y$
 Now the other direction is simpler and can actually be generalised: The intersection of arbitrarily many algebraic sets is algebraic. 
 
 The basic result is that if $X=Z(S)$ and $Y=Z(T)$ then $X\cap Y=Z(S\cup T)$. 
-\end{proof}
-
-\begin{exercise}
-Let $A=\RR$ and for any $x, y \in A$, $x \sim y$ if and only if $x-y \in \ZZ$. For any two equivalence classes $[x], [y] \in A/\sim$, define
-\[ [x] + [y] = [x + y] \text{ and } -[x] = [-x] \]
-\begin{enumerate}[label=(\alph*)]
-\item Show that the above definitions are well-defined.
-\item Find a one-to-one correspondence $\phi:X \to Y$ between $X = A/\sim$ and $Y:|z| = 1$, i.e. the unit circle in $\CC$, such that for any $[x_1], [x_2] \in X$ we have
-\[ \phi([x_1])\phi([x_2]) = \phi([x_1 + x_2]) \]
-\item Show that for any $[x] \in X$,
-\[ \phi(-[x]) = \phi([x])^{-1} \]
-\end{enumerate}
-\end{exercise}
-
-\begin{solution} \ 
-\begin{enumerate}[label=(\alph*)]
-\item 
-\[ (x^\prime+y^\prime)-(x+y)=(x^\prime-x)+(y^\prime-y)\in \ZZ \]
-Thus $[x^\prime+y^\prime]=[x+y]$
-
-\[ (-x^\prime)-(-x)=-(x^\prime-x)\in \ZZ \]
-Thus $[-x^\prime]=[-x]$.
-
-\item Complex numbers in the polar form: $z=re^{i\theta}$
-
-Then the correspondence is given by $\phi([x])=e^{2\pi ix}$
-\[ [x]=[y] \iff x-y\in \ZZ \iff e^{2\pi i(x-y)}=1 \iff e^{2\pi ix}=e^{2\pi iy} \]
-Hence this is a bijection.
-
-Before that, we also need to show that $\phi$ is well-defined, which is almost the same as the above.
-
-If we choose another representative $x^\prime$ then
-\[ \phi([x])=e^{2\pi ix^\prime} = e^{2\pi ix}\cdot e^{2\pi i(x^\prime-x)} = e^{2\pi ix} \]
-
-\item You can either refer to the specific correspondence $\phi([x])=e^{2\pi ix}$ or use its properties.
-\[ \phi(-[x])\phi([x]) = \phi([-x])\phi([x]) = \phi([-x+x]) = \phi([0]) = 1 \]
-\end{enumerate}
 \end{solution}
 
-\begin{exercise}[Complex Numbers]
+\begin{exercise}[Complex numbers]
 Let $\RR[x]$ denote the set of real polynomials. Define
-\[ \CC=\RR[x]/(x^2+1)\RR[x] \]
+\[\CC=\RR[x]/(x^2+1)\RR[x]\]
 where
-\[ f(x)\sim g(x) \iff x^2+1 \text{ divides } f(x)-g(x). \]
+\[f(x)\sim g(x)\iff x^2+1\text{ divides }f(x)-g(x).\]
 The complex number $a+bi$ is defined to be the equivalence class of $a+bx$.
 \begin{enumerate}[label=(\alph*)]
 \item Define the sum and product of two complex numbers and show that such definitions are well-defined.
@@ -1209,7 +1248,7 @@ The complex number $a+bi$ is defined to be the equivalence class of $a+bx$.
 \end{exercise}
 
 \begin{exercise}[\cite{rudin} 2.2]
-$z\in\CC$ is said to be \emph{algebraic} if there exist integers $a_0,\dots,a_n$, not all zero, such that
+We say $z\in\CC$ is \emph{algebraic} if there exist integers $a_0,\dots,a_n$, not all zero, such that
 \[a_0z^n+a_1z^{n-1}+\cdots+a_{n-1}z+a_n=0.\]
 Prove that the set of all algebraic numbers is countable. \emph{Hint}: For every positive integer $N$ there are only finitely many equations with
 \[n+|a_0|+|a_1|+\cdots+|a_n|=N.\]

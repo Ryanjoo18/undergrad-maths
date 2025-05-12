@@ -1,0 +1,326 @@
+\chapter{Measures}\label{chap:measures}
+\section{Introduction}
+One of the most venerable problems in geometry is to determine the area of volume of a region in the plane or in 3-space.
+
+Ideally, for $n\in\NN$ we would like to have a function $\mu$ that assigns to each $E\subset\RR^n$ a number $\mu(E)\in[0,\infty]$, the $n$-dimensional measure of $E$.
+We desire such a function $\mu$ to possess the following properties:
+\begin{enumerate}
+\item If $E_1,E_2,\dots$ is a finite or infinite sequence of disjoint sets, then
+\[\mu(E_1\cup E_2\cup\cdots)=\mu(E_1)+\mu(E_2)+\cdots.\]
+\item If $E$ is congruent to $F$ (that is, if $E$ can be transformed into $F$ by translations, rotations, and reflections), then $\mu(E)=\mu(F)$.
+\item $\mu(Q)=1$, where $Q$ is the unit cube
+\[Q=\{x\in\RR^n\mid 0\le x_i<1,\:i=1,\dots,n\}.\]
+\end{enumerate}
+
+Unfortunately, these conditions are mutually inconsistent.
+
+\begin{proposition}
+There does not exist such a volume measure defined on $\mathcal{P}(\RR^n)$.
+\end{proposition}
+
+\begin{proof}
+It suffices to prove the case when $n=1$. Define an equivalence relation $\sim$ on $\RR$ by
+\[x\sim y\iff x-y\in\QQ.\]
+We check that this is an equivalence relation:
+\begin{enumerate}[label=(\roman*)]
+\item $x-x=0$ implies $x\sim x$.
+\item $x-y\in\QQ$ implies $y-x\in\QQ$.
+\item $x-y,y-z\in\QQ$ implies $x-z=(x-y)+(y-z)\in\QQ$.
+\end{enumerate}
+
+Let $N\subset[0,1)$ be a subset containing exactly one representative from each equivalence class of $\sim$. (To find such an $N$, one must invoke the axiom of choice.)
+
+Next, let $R=\QQ\cap[0,1)$, and for each $r\in R$ let
+\[N_r=\{x+r\mid x\in N\cap[0,1-r]\}\cup\{x+r-1\mid x\in N\cap[1-r,1]\}.\]
+That is, to obtain $N_r$, shift $N$ to the right by $r$ units and then shift the part that sticks out beyond $[0,1)$ one unit to the left.
+Then $N_r\subset[0,1)$, and every $x\in[0,1)$ belongs to precisely one $N_r$.
+
+Indeed, if $y$ is the element of $N$ that belongs to the equivalence class of $x$, then $x\in N_r$, where $r=x-y$ if $x\ge y$ or $r=x+y-1$ if $x<y$; on the other hand, if $x\in N_r\cap N_s$, then $x-r$ (or $x-r+1$) and $x-s$ (or $x-s+1$) would be distinct elements of $N$ belonging to the same equivalence class, which is impossible.
+
+Suppose now that $\mu\colon\mathcal{P}(\RR)\to[0,\infty]$ satisfies (1), (2) and (3). By (1) and (2),
+\[\mu(N)=\mu(N\cap[0,1-r))+\mu(N\cap[1-r,1])=\mu(N_r)\]
+for any $r\in R$. Also, since $R$ is countable and $[0,1)$ is the disjoint union of the $N_r$'s,
+\[\mu([0,1])=\sum_{r\in R}\mu(N_r)\]
+by (1) again. But $\mu([0,1])=1$ by (3), and since $\mu(N_r)=\mu(N)$, the sum on the right is either $0$ (if $\mu(N)=0$) or $\infty$ (if $\mu(N)>0$). Hence no such $\mu$ can exist.
+\end{proof}
+
+\begin{theorem}[Banach--Tarski paradox]
+Let $U$ and $V$ be arbitrary bounded open sets in $\RR^n$, $n\ge 3$. There exist $k\in\NN$ and subsets $E_1,\dots,E_k,F_1,\dots,F_k$ of $\RR^n$ such that
+\begin{enumerate}
+\item the $E_j$'s are disjoint and their union is $U$;
+\item the $F_j$'s are disjoint and their union is $V$;
+\item $E_j$ is congruent to $F_j$ for $j=1,\dots,k$.
+\end{enumerate}
+\end{theorem}
+\pagebreak
+
+\section{$\sigma$-algebras}
+\begin{definition}[$\sigma$-algebra]\label{defn:sigma-algebra}
+Let $X$ be a non-empty set. We say a non-empty collection of subsets $\mathcal{A}\subset\mathcal{P}(X)$ is an \vocab{algebra} on $X$ if
+\begin{enumerate}[label=(\roman*)]
+\item if $E_1,\dots,E_n\in\mathcal{A}$, then $\bigcup_{i=1}^{n}E_i\in\mathcal{A}$;\hfill(closed under finite unions)
+\item if $E\in\mathcal{A}$, then $E^c\in\mathcal{A}$.\hfill(closed under complements)
+\end{enumerate}
+A \vocab{$\sigma$-algebra} is an algebra that is closed under \emph{countable unions}.
+
+If $\mathcal{A}$ is a $\sigma$-algebra on $X$, then we say $(X,\mathcal{A})$ is a \vocab{measurable space}, and the members of $\mathcal{A}$ are called the \emph{measurable sets} in $X$.
+\end{definition}
+
+\begin{notation}
+If the $\sigma$-algebra $\mathcal{A}$ is clear, we simply omit it and denote a measurable space as $X$.
+\end{notation}
+
+Suppose $\mathcal{A}$ is an algebra of subsets of $X$. Then we immediately deduce the following properties.
+\begin{itemize}
+\item $X=E\cup E^c\in\mathcal{A}$ and $\emptyset=X^c\in\mathcal{A}$.
+\item If $E_1,\dots,E_n\in\mathcal{A}$, then by de Morgan's laws,
+\[\bigcap_{i=1}^{n}E_i=\brac{\bigcup_{i=1}^{n}{E_i}^c}^c\in\mathcal{A}\]
+so $\mathcal{A}$ is closed under finite intersections.
+If $\mathcal{A}$ is a $\sigma$-algebra, then $\mathcal{A}$ is closed under countable intersections.
+\item If $A,B\in\mathcal{A}$, since $A\setminus B=B^c\cap A$, then $A\setminus B\in\mathcal{A}$.
+\end{itemize}
+
+\begin{example} \
+\begin{itemize}
+\item If $X$ is any set, $\mathcal{P}(X)$ is a $\sigma$-algebra.
+\item If $X$ is any set, $\{\emptyset,X\}$ is a $\sigma$-algebra.
+\item If $X$ is any set, and $E\subset X$, $\{\emptyset,E,E^c,X\}$ is a $\sigma$-algebra.
+\item If $X$ is uncountable, then
+\[\mathcal{A}=\{E\subset X\mid\text{$E$ or $E^c$ is countable}\}\]
+is a $\sigma$-algebra, called the \emph{$\sigma$-algebra of countable or co-countable sets}.
+\end{itemize}
+\end{example}
+
+\begin{definition}
+Given $\mathcal{E}\subset\mathcal{P}(X)$, the $\sigma$-algebra \emph{generated} by $\mathcal{E}$, denoted by $\mathcal{M}(\mathcal{E})$, is the smallest $\sigma$-algebra containing $\mathcal{E}$.
+\end{definition}
+
+That is, $\mathcal{M}(\mathcal{E})$ is the intersection of all $\sigma$-algebras containing $\mathcal{E}$:
+\[\mathcal{M}(\mathcal{E})=\bigcap_{\substack{\mathcal{A}\supset\mathcal{E}\\ \text{$\mathcal{A}$ is $\sigma$-algebra}}}\mathcal{A}.\]
+
+$\mathcal{M}(\mathcal{E})$ exists since $\mathcal{P}(X)$ is a $\sigma$-algebra (so the intersection is non-empty), and the intersection of any family of $\sigma$-algebras on $X$ is itself a $\sigma$-algebra.
+
+The following observation is often useful:
+
+\begin{lemma}
+If $\mathcal{E}\subset\mathcal{M}(\mathcal{F})$, then $\mathcal{M}(\mathcal{E})\subset\mathcal{M}(\mathcal{F})$.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{M}(\mathcal{F})$ is a $\sigma$-algebra containing $\mathcal{E}$; it therefore contains $\mathcal{M}(\mathcal{E})$.
+\end{proof}
+
+We have come to an important example of a $\sigma$-algebra.
+
+\begin{definition}[Borel $\sigma$-algebra]
+If $X$ is any metric space (or topological space), the \vocab{Borel $\sigma$-algebra} on $X$, denoted by $\mathcal{B}(X)$, is the $\sigma$-algebra generated by the family of open sets in $X$.
+
+Its members are called \vocab{Borel sets}.
+\end{definition}
+
+$B_X$ thus includes open sets, closed sets, countable intersections of open sets, countable unions of closed sets, and so forth.
+
+We introduce some standard terminology for the levels in this hierarchy.
+\begin{itemize}
+\item A countable intersection of open sets is called a $G_\delta$ set.
+\item A countable union of closed sets is called a $F_\sigma$ set.
+\item A countable union of $G_\delta$ sets is called a $G_{\delta\sigma}$ set; a countable intersection of $F_\sigma$ sets is called a $F_{\sigma\delta}$ set; and so forth.
+\end{itemize}
+($\delta$ and $\sigma$ stand for the German ``Durchschnitt'' and ``Summe'', that is, intersection and union.)
+
+The Borel $\sigma$-algebra on $\RR$ will play a fundamental role in what follows. It can be generated in a number of different ways:
+
+\begin{proposition}
+$\mathcal{B}(\RR)$ is generated by each of the following:
+\begin{enumerate}[label=(\roman*)]
+\item the open intervals: $\mathcal{E}_1=\{(a,b)\mid a<b\}$;
+\item the closed intervals: $\mathcal{E}_2=\{[a,b]\mid a<b\}$;
+\item the half-open intervals: $\mathcal{E}_3=\{(a,b]\mid a<b\}$ or $\mathcal{E}_4=\{[a,b)\mid a<b\}$;
+\item the open rays: $\mathcal{E}_5=\{(a,\infty)\mid a\in\RR\}$ or $\mathcal{E}_6=\{(-\infty,a)\mid a\in\RR\}$;
+\item the closed rays: $\mathcal{E}_7=\{[a,\infty)\mid a\in\RR\}$ or $\mathcal{E}_8=\{(-\infty,a]\mid a\in\RR\}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+Suppose $(X,\mathcal{M},\mu)$ is a measure space. We say $E\in\mathcal{M}$ is a \emph{null set} if $\mu(E)=0$. 
+%By subadditivity, any countable union of null sets is a null set, a fact which we shall use frequently.
+
+If $\mu(E)=0$ and $F\subset E$, then $\mu(F)=0$ by monotonicity provided that $F\in\mathcal{M}$, but in general it need not be true that $F\in\mathcal{M}$.
+A measure whose domain includes all subsets of null sets is called \vocab{complete}.
+The next result states that completeness can be achieved by enlarging the domain of $\mu$.
+
+\begin{proposition}
+Suppose $(X,\mathcal{M},\mu)$ is a measure space. Let $\mathcal{N}=\{N\in\mathcal{M}\mid\mu(N)=0\}$ and
+\[\overline{\mathcal{M}}=\{E\cup F\mid E\in\mathcal{M},F\subset N\text{ for some }N\in\mathcal{N}\}.\]
+Then $\overline{\mathcal{M}}$ is a $\sigma$-algebra, and there exist a unique extension $\overline{\mu}$ of $\mu$ to a complete measure on $\overline{\mathcal{M}}$.
+\end{proposition}
+
+$\overline{\mu}$ is called the \emph{completion} of $\mu$; $\overline{\mathcal{M}}$ is called the \emph{completion} of $\mathcal{M}$ with respect to $\mu$.
+
+\begin{proof}
+We check that $\overline{\mathcal{M}}$ is a $\sigma$-algebra.
+\begin{enumerate}[label=(\roman*)]
+\item Since $\mathcal{M}$ and $\mathcal{N}$ are closed under countable unions, so is $\overline{\mathcal{M}}$.
+\item Let $E\cup F\in\overline{\mathcal{M}}$, where $E\in\mathcal{M}$ and $F\subset N\in\mathcal{N}$.
+\end{enumerate}
+\end{proof}
+\pagebreak
+
+\section{Measures}
+\begin{definition}[Measure]
+Let $X$ be a set equipped with a $\sigma$-algebra $\mathcal{M}$.
+A \vocab{measure}\index{measure} on $\mathcal{M}$ is a function $\mu\colon\mathcal{M}\to[0,\infty]$ such that
+\begin{enumerate}[label=(\roman*)]
+\item $\mu(\emptyset)=0$;
+\item if $E_1,E_2,\dots$ is a sequence of disjoint sets in $\mathcal{M}$, then $\mu\brac{\bigcup_{i=1}^{\infty}E_i}=\sum_{i=1}^{\infty}\mu(E_i)$.
+\end{enumerate}
+If $\mu$ is a measure on $(X,\mathcal{M})$, we call $(X,\mathcal{M},\mu)$ a \vocab{measure space}\index{measure space}.
+\end{definition}
+
+Property (ii) is called \emph{countable additivity}. It implies \emph{finite additivity}:
+\begin{enumerate}
+\item[(ii')] if $E_1,\dots,E_n$ are disjoint sets in $\mathcal{M}$, then $\mu(\bigcup_{i=1}^{n}E_i)=\sum_{i=1}^{n}\mu(E_i)$,
+\end{enumerate}
+because one can take $E_i=\emptyset$ for $i>n$. A function $\mu$ that satisfies (i) and (ii') but not necessarily (ii) is called a \emph{finitely additive measure}.
+
+We introduce some standard terminology concerning the ``size'' of $\mu$.
+\begin{itemize}
+\item If $\mu(X)<\infty$ (which implies that $\mu(E)<\infty$ for all $E\in\mathcal{M}$), $\mu$ is called \emph{finite}.
+\item If $X=\bigcup_{i=1}^{\infty}E_i$ where $E_i\in\mathcal{M}$ and $\mu(E_i)<\infty$ for all $i$, $\mu$ is called \emph{$\sigma$-finite}.
+\item More generally, if $E=\bigcup_{i=1}^{\infty}E_i$ where $E_i\in\mathcal{M}$ and $\mu(E_i)<\infty$ for all $i$, the set $E$ is said to be \emph{$\sigma$-finite} for $\mu$.
+\item If for each $E\in\mathcal{M}$ with $\mu(E)=\infty$ there exists $F\in\mathcal{M}$ with $F\subset E$ and $0<\mu(F)<\infty$, $\mu$ is called \emph{semifinite}.
+\end{itemize}
+
+\begin{example} \
+\begin{itemize}
+\item For any $E\subset X$, where $X$ is any set, define $\mu(E)=\infty$ if $E$ is an infinite set, and let $\mu(E)$ be the number of points in $E$ if $E$ is finite. This $\mu$ is called the \emph{counting measure} on $X$. 
+\item Fix $x_0\in X$. For any $E\subset X$, let
+\[\mu(E)=\begin{cases}
+1&(x_0\in E)\\
+0&(x_0\notin E)
+\end{cases}\]
+This $\mu$ is called the \emph{unit mass} concentrated at $x_0$.
+
+\item A \emph{probability measure} on $\Omega$ is a measure $\PP$ such that $\PP(\Omega)=1$.
+
+\item On $\mathcal{B}(\RR)$, define a measure $\mu\brac{(a,b)}=b-a$ for any $a,b\in\RR$, $a<b$. This is called the \emph{Lebesgue measure} on $\RR$.
+\end{itemize}
+\end{example}
+
+\begin{lemma}[Basic properties of measures]
+Suppose $(X,\mathcal{M},\mu)$ is a measure space.
+\begin{enumerate}[label=(\roman*)]
+\item If $E,F\in\mathcal{M}$ and $E\subset F$, then $\mu(E)\le\mu(F)$.\hfill(monotonicity)
+\item If $E_1,E_2,\dots\in\mathcal{M}$, then $\mu\brac{\bigcup_{n=1}^{\infty}E_i}\le\sum_{n=1}^{\infty}\mu(E_n)$.\hfill(subadditivity)
+\item If $E_1,E_2,\dots\in\mathcal{M}$ and $E_1\subset E_2\subset\cdots$, then\hfill(continuity from below)
+\[\mu\brac{\bigcup_{n=1}^{\infty}E_n}=\lim_{n\to\infty}\mu(E_n).\]
+\item If $E_1,E_2,\dots\in\mathcal{M}$, $E_1\supset E_2\supset\cdots$, and $\mu(E_1)<\infty$, then\hfill(continuity from above)
+\[\mu\brac{\bigcap_{n=1}^{\infty}E_n}=\lim_{n\to\infty}\mu(E_n).\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item If $E\subset F$, note that $F=E\cup(F\setminus E)$. Then
+\[\mu(F)=\mu(E)+\mu(F\setminus E)\ge\mu(E).\]
+
+\item Let $F_1=E_1$ and $F_n=E_n\setminus\brac{\bigcup_{i=1}^{n-1}E_i}$ for $n>1$. Then the $F_n$'s are disjoint and $\bigcup_{i=1}^{n}F_i=\bigcup_{i=1}^{n}E_i$ for all $n$. Hence by (i),
+\begin{align*}
+\mu\brac{\bigcup_{n=1}^{\infty}E_n}
+&=\mu\brac{\bigcup_{n=1}^{\infty}F_n}\\
+&=\sum_{n=1}^{\infty}\mu(F_n)&&[\text{by countable additivity}]\\
+&\le\sum_{n=1}^{\infty}\mu(E_n)&&[\text{by monotonicity, since $F_n\subset E_n$}]
+\end{align*}
+
+\item Suppose $E_1\subset E_2\subset\cdots$. Then we have
+\begin{align*}
+\mu\brac{\bigcup_{n=1}^{\infty}E_n}
+&=\mu\brac{\bigcup_{n=1}^{\infty}E_n\setminus E_{n-1}}&&[\text{setting $E_0=\emptyset$}]\\
+&=\sum_{n=1}^{\infty}\mu(E_n\setminus E_{n-1})&&[\text{by countable additivity}]\\
+&=\lim_{n\to\infty}\sum_{i=1}^{n}\mu(E_i\setminus E_{i-1})\\
+&=\lim_{n\to\infty}\mu(E_n)&&[\text{by finite additivity}]
+\end{align*}
+
+\item Let $F_n=E_1\setminus E_n$; then $F_1\subset F_2\subset\cdots$, $\mu(E_1)=\mu(F_n)+\mu(E_n)$, and $\bigcup_{n=1}^{\infty}F_n=E_1\setminus\brac{\bigcap_{n=1}^{\infty}E_n}$. By (iii),
+\begin{align*}
+\mu(E_1)&=\mu\brac{\bigcap_{n=1}^{\infty}E_n}+\lim_{n\to\infty}\mu(F_n)\\
+&=\mu\brac{\bigcap_{n=1}^{\infty}E_n}+\lim_{n\to\infty}\brac{\mu(E_1)-\mu(E_n)}\\
+&=\mu\brac{\bigcap_{n=1}^{\infty}E_n}+\mu(E_1)-\lim_{n\to\infty}\mu(E_n)
+\end{align*}
+Since $\mu(E_1)<\infty$, we may subtract it from both sides to yield the desired result.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}[Inclusion--exclusion formula]
+Suppose $(X,\mathcal{M},\mu)$ is a measure space. If $E,F\in\mathcal{M}$, then
+\[\mu(E)+\mu(F)=\mu(E\cup F)+\mu(E\cap F).\]
+\end{lemma}
+
+\begin{proof}
+We have
+\begin{align*}
+\mu(E)+\mu(F)
+&=\mu\brac{(E\setminus F)\cup(E\cap F)}+\mu\brac{(F\setminus E)\cup(E\cap F)}\\
+&=\mu(E\setminus F)+\mu(E\cap F)+\mu(F\setminus E)+\mu(E\cap F)\\
+&=\mu(E\cup F)+\mu(E\cap F).
+\end{align*}
+\end{proof}
+\pagebreak
+
+\section{Outer Measures}
+Recall the procedure used in calculus to define the area of a bounded region $E\subset\RR^2$: one draws a grid of rectangles in the plane and approximates the area of $E$ from above and below by the sum of areas of rectangles. 
+The limits of these approximations as the grid is taken finer and finer give the ``inner area'' and ``outer area'' of $E$; if they are equal, their common value is the ``area'' of $E$.
+
+
+
+\begin{definition}[Outer measure]
+An \vocab{outer measure}\index{outer measure} on a non-empty set $X$ is a function $\mu^*\colon\mathcal{P}(X)\to[0,\infty]$ such that
+\begin{enumerate}[label=(\roman*)]
+\item $\mu^*(\emptyset)=0$;
+\item if $A\subset B$, then $\mu^*(A)\le\mu^*(B)$;\hfill(monotonicity)
+\item $\mu^*\brac{\bigcup_{i=1}^{\infty}A_i}\le\sum_{i=1}^{\infty}\mu^*(A_i)$.\hfill(subadditivity)
+\end{enumerate}
+\end{definition}
+
+The most common way to obtain outer measures is to start with a family $\mathcal{E}$ of ``elementary sets'' on which a notion of measure is defined and then to approximate arbitrary sets ``from the outside'' by countable unions of members of $\mathcal{E}$.
+
+\begin{proposition}
+Let $\mathcal{E}\subset\mathcal{P}(X)$ and $\rho\colon\mathcal{E}\to[0,\infty]$ be such that $\emptyset\in\mathcal{E}$, $X\in\mathcal{E}$, and $\rho(\emptyset)=0$. For any $A\subset X$, define
+\[\mu^*(A)=\inf\crbrac{\sum_{n=1}^{\infty}\mu(E_n)\:\bigg|\:E_n\in\mathcal{E},\:A\subset\bigcup_{n=1}^{\infty}E_n}.\]
+Then $\mu^*$ is an outer measure.
+\end{proposition}
+
+\begin{theorem}[Carath\'{e}odory's theorem]
+
+\end{theorem}
+
+Our first applications of Carath\'{e}odory's theorem will be in the context of extending measures from algebras to $\sigma$-algebras.
+
+\begin{definition}[Premeasure]
+Suppose $\mathcal{A}\subset\mathcal{P}(X)$ is an algebra. We say $\mu_0\colon\mathcal{A}\to[0,\infty]$ is a \vocab{premeasure} if
+\begin{enumerate}[label=(\roman*)]
+\item $\mu_0(\emptyset)=0$;
+\item 
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+If $\mu_0$ is a premeasure on $\mathcal{A}$, and $\mu^*$ is defined by (1.12), then
+\begin{enumerate}[label=(\roman*)]
+\item $\mu^*|_{\mathcal{A}}=\mu_0$;
+\item every set in $\mathcal{A}$ is $\mu^*$ measurable.
+\end{enumerate}
+\end{proposition}
+
+\begin{theorem}
+
+\end{theorem}
+\pagebreak
+
+\section{Borel Measures on the Real Line}
+We are now in a position to construct a definitive theory for measuring subsets of $\RR$ based on the idea that the measure of an interval is its length. 
+We begin with a more general construction that yields a large family of measures on $\RR$ whose domain is the Borel $\sigma$-algebra $\mathcal{B}(\RR)$; such measures are called \emph{Borel measures} on $\RR$.
+

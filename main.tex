@@ -1,9 +1,14 @@
 \documentclass[11pt,a4paper,oneside]{book}
-\usepackage[top=0.8in, bottom=1.0in, left=0.8in, right=0.8in, heightrounded]{geometry}
+%\documentclass[reqno,
+%11pt
+%]{amsbook}
+\usepackage[top=1.0in, bottom=1.0in, left=1.0in, right=1.0in, heightrounded]{geometry}
 \raggedbottom
 
 \usepackage{ryan}
-\usetikzlibrary{hobby}    
+\usepackage{microtype}
+\usepackage{colonequals}
+\usetikzlibrary{hobby}
 
 % Header and footer
 \usepackage{fancyhdr} 
@@ -12,7 +17,7 @@
 \fancyhead[L]{\uppercase{\small\leftmark}}
 \fancyhead[R]{{\thepage}}
 
-\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\headrulewidth}{0.3pt}
 \setlength{\headsep}{0.3in}
 \renewcommand{\arraystretch}{1.5}
 \setlength{\parindent}{0pt}
@@ -23,11 +28,9 @@
 
 % Conditionals
 \newif\ifprelim
-\newif\iflinalg
-\newif\ifabsalg
+\newif\ifalg
 \newif\ifanalysis
 \newif\iftop
-\newif\ifapplied
 
 % Bibliography
 \usepackage[
@@ -39,7 +42,7 @@ sorting=nyt
 
 \makeindex % Print index
 
-% Versions
+%Versions
 %\excludeversion{proof}
 
 \newenvironment{summary}{
@@ -50,6 +53,9 @@ sorting=nyt
 
 \definecolor{smalt(darkpowderblue)}{rgb}{0.0, 0.0, 0.3}
 \definecolor{schoolbusyellow}{rgb}{1.0, 0.85, 0.0}
+
+\newcommand{\forward}{\fbox{$\implies$} }
+\newcommand{\backward}{\fbox{$\impliedby$} }
 
 % Upper and lower integral
 \makeatletter
@@ -85,16 +91,21 @@ sorting=nyt
 }
 \makeatother
 
+\usepackage{prerex}
+
 \begin{document}
 %%%%%%%%%%%%%%% [TOPICS] %%%%%%%%%%%%%%%
 \prelimtrue %Prelim
-\absalgtrue %Abstract Algebra
-\linalgtrue %Linear Algebra
+\algtrue %Algebra
 \analysistrue %Analysis
 \toptrue %Topology
-%\appliedtrue %Applied Maths
 
 \input{tex/frontmatter.tex}
+
+\tableofcontents
+\pagebreak
+
+\input{tex/prereq.tex}
 
 \mainmatter
 %%%%%%%%%%%%%%% PRELIMINARY TOPICS
@@ -104,24 +115,24 @@ sorting=nyt
     \input{tex/prelim/set-theory.tex}
 \fi
 
-%%%%%%%%%%%%%%% ABSTRACT ALGEBRA
-\ifabsalg
-    \part{Abstract Algebra}\label{part:abstract-algebra}
-    Algebra is the study of collections of objects (sets, groups, rings, fields, etc). In algebra, we are concerned about the structures of these collections and how these collections interact than about the objects themselves. In fact, with homomorphism and isomorphisms, the original objects become irrelevant.
-    \input{tex/abstract-algebra/groups.tex}
-%    \input{tex/abstract-algebra/rings.tex}
-%    \input{tex/abstract-algebra/modules-vec-spaces.tex}
-%    \input{tex/abstract-algebra/fields.tex}
-\fi
-
-%%%%%%%%%%%%%%% LINEAR ALGEBRA
-\iflinalg
+\ifalg
     \part{Linear Algebra}\label{part:linear-algebra}
     \input{tex/linear-algebra/vector-spaces.tex}
     \input{tex/linear-algebra/linear-maps.tex}
-%    \input{tex/linear-algebra/polynomials.tex}
-%    \input{tex/linear-algebra/eigen.tex}
-%    \input{tex/linear-algebra/inner-product-spaces.tex}
+    \input{tex/linear-algebra/polynomials.tex}
+    \input{tex/linear-algebra/eigen.tex}
+    \input{tex/linear-algebra/inner-product-spaces.tex}
+    \input{tex/linear-algebra/operators-inner-product-spaces.tex}
+    \input{tex/linear-algebra/operators-complex-vector-spaces.tex}
+%    \input{tex/linear-algebra/multilinear-algebra-determinants.tex}
+\fi
+
+\ifalg
+    \part{Abstract Algebra}\label{part:abstract-algebra}
+    Algebra is the study of collections of objects (sets, groups, rings, fields, etc). In algebra, we are concerned about the structures of these collections and how these collections interact than about the objects themselves. In fact, with homomorphism and isomorphisms, the original objects become irrelevant.
+    \input{tex/abstract-algebra/groups.tex}
+    \input{tex/abstract-algebra/rings.tex}
+    \input{tex/abstract-algebra/modules-vec-spaces.tex}
 \fi
 
 %%%%%%%%%%%%%%% REAL ANALYSIS
@@ -138,30 +149,48 @@ sorting=nyt
     \input{tex/analysis/integration.tex}
     \input{tex/analysis/sequences-series-functions.tex}
     \input{tex/analysis/special-functions.tex}
-%    \input{tex/analysis/functions-several-variables.tex}
-%    \input{tex/analysis/integration-differential-forms.tex}
 
-%    \part{Measure and Integration}
-%    \input{tex/analysis/lebesgue-theory.tex}
-%    \input{tex/analysis/abstract-integration.tex}
-
-%    \part{Complex Analysis}
-%    \input{tex/analysis/elementary-properties-holomorphic-functions.tex}
+    \part{Multivariable Analysis}
+    \input{tex/multivariable-analysis/differentiation.tex}
+    \input{tex/multivariable-analysis/integration.tex}
 \fi
 
-%%%%%%%%%%%%%%% GENERAL TOPOLOGY
+\ifanalysis
+    \part{Complex Analysis}
+    The starting point of our study is the idea of extending a function initially given for real values of the argument to one that is defined when the argument is complex. Thus, here the central objects are functions from the complex plane to itself
+    \[f\colon\CC\to\CC,\]
+    or more generally, complex-valued functions defined on open subsets of $\CC$.
+
+    \input{tex/complex-analysis/complex-functions.tex}
+\fi
+
 \iftop
     \part{General Topology}\label{part:topology}
 
     The study of topology simultaneously simplifies and generalises the theory of metric spaces. By discarding the metric, and focusing solely on the more basic and fundamental notion of an open set, many arguments and proofs are simplified. And many constructions (such as the important concept of a quotient space) cannot be carried out in the setting of metric spaces: they need the more general framework of topological spaces.
-    \input{tex/topology/topological-spaces.tex}
+    \input{tex/topology/topologies.tex}
 \fi
 
-%%%%%%%%%%%%%%% MISC
-\ifapplied
-    \part{Applied Mathematics}
-    \input{tex/applied/graph-theory.tex}
-    \input{tex/applied/em.tex}
+\ifanalysis
+    \part{Measure Theory}\label{part:measure}
+    In measure theory, the main idea is that we want to assign ``sizes'' to different sets. For example, we might think $[0,2]\subset\RR$ has size $2$, while perhaps $\QQ\subset\RR$ has size $0$. This is known as a \emph{measure}. 
+
+    One of the main applications of a measure is that we can use it to come up with a new definition of an integral, known as the \emph{Lebesgue integral}. Instead of integrating functions $[a,b]\to\RR$ only, we can replace the domain with any measure space, allowing us to integrate a much wider class of functions.
+
+    \input{tex/measure-theory/measures.tex}
+    \input{tex/measure-theory/integration.tex}
+
+    %papa rudin
+%    \input{tex/measure/positive-borel-measures.tex}
+%    \input{tex/measure/l-p-spaces.tex}
+\fi
+
+%    \part{Functional Analysis}
+%    \emph{Functional analysis} deals with the study of (topological) vector spaces, which can be considered ``infinite-dimensional linear algebra''. We are interested in the structure of such spaces, the behavior of operators on such spaces, etc.
+
+\ifalg
+%    \part{Category Theory}
+%    \input{tex/category/categories-functors-natural-transformations.tex}
 \fi
 \pagebreak
 

@@ -1,29 +1,29 @@
-\chapter{Eigenvalues and Eigenvectors}
+\chapter{Eigenvalues and Eigenvectors}\label{chap:eigenvalues-eigenvectors}
 \section{Invariant Subspaces}
 \subsection{Eigenvalues}
 \begin{definition}[Operator]
-A linear map from a vector space to itself is called an \vocab{operator}\index{operator}.
+An \vocab{operator}\index{operator} is a linear map from a vector space to itself.
 \end{definition}
 
 \begin{definition}[Invariant subspace]
-Suppose $T\in\mathcal{L}(V)$. $U\le V$ is called \vocab{invariant}\index{invariant subspace} under $T$ if $Tu\in U$ for all $u\in U$.
+Suppose $T\in\mathcal{L}(V)$. $U\le V$ is \vocab{invariant}\index{invariant subspace} under $T$ if $Tu\in U$ for all $u\in U$.
 \end{definition}
 
 \begin{example}
 Suppose $T\in\mathcal{L}(V)$. Then the following subspaces of $V$ are all invariant under $T$.
 \begin{enumerate}[label=(\roman*)]
-\item The subspace $\{\vb{0}\}$ is invariant under $T$ because if $u\in\{\vb{0}\}$, then $u=\vb{0}$ and hence $Tu=\vb{0}\in\{\vb{0}\}$.
-\item The subspace $V$ is invariant under $T$ because if $u\in V$, then $Tu\in V$. 
-\item The subspace $\ker T$ is invariant under $T$ because if $u\in\ker T$, then $Tu=\vb{0}$, and hence $Tu\in\ker T$, since a subspace must contain $\vb{0}$.
-\item The subspace $\im T$ is invariant under $T$ because if $u\in\im T$, then $Tu\in\im T$ by definition.
+\item The subspace $\{\vb{0}\}$ is invariant under $T$: if $u\in\{\vb{0}\}$, then $u=\vb{0}$ so $Tu=\vb{0}\in\{\vb{0}\}$.
+\item The subspace $V$ is invariant under $T$: if $u\in V$, then $Tu\in V$. 
+\item The subspace $\ker T$ is invariant under $T$: if $u\in\ker T$, then $Tu=\vb{0}$, and hence $Tu\in\ker T$, since a subspace must contain $\vb{0}$.
+\item The subspace $\im T$ is invariant under $T$: if $u\in\im T$, then $Tu\in\im T$ by definition.
 \end{enumerate}
 \end{example}
 
 \begin{definition}[Eigenvalue and eigenvector]
-Suppose $T\in\mathcal{L}(V)$. $\lambda\in\FF$ is called an \vocab{eigenvalue}\index{eigenvalue} of $T$ if there exists $v\in V\setminus\{\vb{0}\}$ such that $Tv=\lambda v$; $v$ is called an \vocab{eigenvector}\index{eigenvector} of $T$ corresponding to $\lambda$.
+Suppose $T\in\mathcal{L}(V)$. $\lambda\in\FF$ is an \vocab{eigenvalue}\index{eigenvalue} of $T$ if there exists $v\in V\setminus\{\vb{0}\}$ such that $Tv=\lambda v$; we say $v$ is an \vocab{eigenvector}\index{eigenvector} of $T$ corresponding to $\lambda$.
 \end{definition}
 
-\begin{lemma}[Equivalent conditions to be an eigenvalue]
+\begin{lemma}[Equivalent conditions to be an eigenvalue]\label{lemma:eigenvalue-equivalent-conditions}
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $\lambda\in\FF$. Then the following are equivalent:
 \begin{enumerate}[label=(\roman*)]
 \item $\lambda$ is an eigenvalue of $T$.
@@ -37,15 +37,15 @@ Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $\lambda\in\FF$. Then t
 
 \fbox{(i)$\iff$(ii)} $Tv=\lambda v$ is equivalent to the equation $(T-\lambda I)v=\vb{0}$, so $T-\lambda I$ is not injective.
 
-\fbox{(ii)$\iff$(iii)$\iff$(iv)} This directly follows from \cref{lemma:invertibility-criterion}.
+\fbox{(ii)$\iff$(iii)$\iff$(iv)} This directly follows from \ref{lemma:invertibility-criterion}.
 \end{proof}
 
 \begin{proposition}[Linearly independent eigenvectors]\label{prop:eigenvectors-linind}
-Suppose $T\in\mathcal{L}(V)$. Then every list of eigenvectors of $T$ corresponding to distinct eigenvalues of $T$ is linearly independent.
+Suppose $T\in\mathcal{L}(V)$. Then every set of eigenvectors of $T$ corresponding to distinct eigenvalues of $T$ is linearly independent.
 \end{proposition}
 
 \begin{proof}
-We prove by contradiction. Suppose, for a contradiction, that the desired result is false. Then there exists a smallest positive integer $m$ such that $v_1,\dots,v_m$ are linearly dependent eigenvectors of $T$ corresponding to distinct eigenvalues $\lambda_1,\dots,\lambda_m$ of $T$. The linear dependence implies there exists $a_1,\dots,a_m\in\FF$, none of which are $0$ (because of the minimality of $m$) such that
+Suppose, for a contradiction, that the desired result is false. Then there exists a smallest positive integer $m$ such that $v_1,\dots,v_m$ are linearly dependent eigenvectors of $T$ corresponding to distinct eigenvalues $\lambda_1,\dots,\lambda_m$ of $T$. The linear dependence implies there exists $a_1,\dots,a_m\in\FF$, none of which are $0$ (because of the minimality of $m$) such that
 \[a_1v_1+\cdots+a_mv_m=\vb{0}.\]
 Applying $T-\lambda_mI$ to both sides of the equation,
 \begin{align*}
@@ -63,8 +63,9 @@ Suppose $V$ is finite-dimensional. Then each operator on $V$ has at most $\dim V
 \begin{proof}
 Let $T\in\mathcal{L}(V)$. Suppose $\lambda_1,\dots,\lambda_m$ are distinct eigenvalues of $T$ with corresponding eigenvectors $v_1,\dots,v_m$.
 
-By \cref{prop:eigenvectors-linind}, the eigenvectors $v_1,\dots,v_m$ are linearly independent. Since the length of a linearly independent set is less than or equal to the length of a spanning set, we have that $m\le\dim V$, as desired.
+By \ref{prop:eigenvectors-linind}, the eigenvectors $v_1,\dots,v_m$ are linearly independent. Since the length of a linearly independent set is less than or equal to the length of a spanning set, we have that $m\le\dim V$, as desired.
 \end{proof}
+\pagebreak
 
 \subsection{Polynomials Applied to Operators}
 \begin{notation}
@@ -77,29 +78,26 @@ Having defined powers of an operator, we can now define what it means to apply a
 Suppose $T\in\mathcal{L}(V)$, $p\in\FF[z]$ is a polynomial given by
 \[p(z)=a_nz^n+\cdots+a_1z+a_0\quad(z\in\FF)\]
 Then $p(T)$ is the operator on $V$ defined by
-\[p(T)\coloneqq a_nT^n+\cdots+a_1T+a_0.\]
+\[p(T)\colonequals a_nT^n+\cdots+a_1T+a_0.\]
 \end{definition}
 
-\begin{remark}
-If we fix an operator $T\in\mathcal{L}(V)$, then the function $\FF[z]\to\mathcal{L}(V)$ given by $p\mapsto p(T)$ is linear.
-\end{remark}
+If we fix an operator $T\in\mathcal{L}(V)$, then the function $\FF[z]\to\mathcal{L}(V)$ given by $p\mapsto p(T)$ is linear:
+
 
 \begin{definition}[Product of polynomials]
 Suppose $p,q\in\FF[z]$. Then $pq\in\FF[z]$ is the polynomial defined by
 \[(pq)(z)=p(z)q(z)\quad(z\in\FF)\]
 \end{definition}
 
-\begin{proposition}
+\begin{lemma}
 Suppose $p,q\in\FF[z]$, $T\in\mathcal{L}(V)$. Then
 \begin{enumerate}[label=(\roman*)]
-\item $(pq)(T)=p(T)q(T)$;
-\item $p(T)q(T)=q(T)p(T)$.
+\item $(pq)(T)=p(T)q(T)$;\hfill(multiplicativity)
+\item $p(T)q(T)=q(T)p(T)$.\hfill(commutativity)
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
-\begin{remark}
 This means when a product of polynomials is expanded using the distributive property, it does not matter whether the symbol is $z$ or $T$.
-\end{remark}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
@@ -119,26 +117,27 @@ Thus
 \end{align*}
 
 \item Using (i) twice, we have
-\[p(T)q(T)=(pq)(T)=(qp)(T)=q(T)p(T).\]
+\[p(T)q(T)=(pq)(T)=(qp)(T)=q(T)p(T)\]
+since the multiplication of polynomials is commutative.
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}
+\begin{lemma}\label{lemma:ker-im-polynomial-invariant}
 Suppose $T\in\mathcal{L}(V)$, $p\in\FF[z]$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $\ker p(T)$ is invariant under $T$;
 \item $\im p(T)$ is invariant under $T$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 
 \begin{enumerate}[label=(\roman*)]
-\item Suppose $u\in\ker p(T)$. Then $p(T)u=\vb{0}$. Thus
+\item Let $u\in\ker p(T)$. Then $p(T)u=\vb{0}$. Thus
 \[\brac{p(T)}(Tu)=\brac{p(T)T}(u)=\brac{Tp(T)}(u)=T\brac{p(T)u}=T(\vb{0})=\vb{0}.\]
 Hence $Tu\in\ker p(T)$, so $\ker p(T)$ is invariant under $T$.
 
-\item Suppose $u\in\im p(T)$. Then there exists $v\in V$ such that $u=p(T)v$. Thus
+\item Let $u\in\im p(T)$. Then there exists $v\in V$ such that $u=p(T)v$. Thus
 \[Tu=T\brac{p(T)v}=p(T)(Tv).\]
 Hence $Tu\in\im p(T)$, so $\im p(T)$ is invariant under $T$.
 \end{enumerate}
@@ -147,20 +146,22 @@ Hence $Tu\in\im p(T)$, so $\im p(T)$ is invariant under $T$.
 
 \section{The Minimal Polynomial}
 \subsection{Existence of Eigenvalues on Complex Vector Spaces}
-\begin{theorem}[Existence of eigenvalues]
-Every operator on a finite-dimensional non-zero complex vector space has an eigenvalue.
+The following is one of the most important results in linear algebra.
+
+\begin{theorem}[Existence of eigenvalues]\label{thrm:existence-eigenvalues-complex-vector-spaces}
+Every operator on a finite-dimensional, non-zero, complex vector space has an eigenvalue.
 \end{theorem}
 
 \begin{proof}
 Suppose $V$ is a finite-dimensional complex vector space, $\dim V=n>0$, $T\in\mathcal{L}(V)$. Let $v\in V\setminus\{\vb{0}\}$. Consider the set
-\[\{v,Tv,T^2v,\dots,T^nv\}.\]
-Since $\dim V=n$ and this set has length $n+1$, this set is not linearly independent. Thus there exist $a_i\in\CC$ such that
-\[a_0v+\cdots+a_1Tv+a_2T^2v+\cdots+a_nT^nv=\vb{0},\]
+\[S=\{v,Tv,T^2v,\dots,T^nv\}.\]
+Since $\dim V=n$ and $S$ has length $n+1$, $S$ is not linearly independent. Thus there exist $a_0,\dots,a_n\in\CC$, not all $0$, such that
+\[a_0v+a_1Tv+a_2T^2v+\cdots+a_nT^nv=\vb{0},\]
 which we can write as
 \[p(T)v=\vb{0},\]
 where $p(z)=a_0+a_1z+\cdots+a_nz^n$, where we pick $p$ such that $\deg p$ is minimal.
 
-By the fundamental theorem of algebra, there exists a root of $p$ in $\CC$; let $\lambda\in\CC$ be a root of $p$. Then by the factor theorem,
+By the fundamental theorem of algebra (\ref{thrm:fundamental-theorem-of-algebra-first-version}), there exists a root of $p$ in $\CC$; let $\lambda\in\CC$ be a root of $p$. By the factor theorem,
 \[p(z)=(z-\lambda)q(z)\quad(z\in\CC).\]
 Thus
 \begin{align*}
@@ -172,9 +173,8 @@ Since $p$ is the minimal polynomial and $\deg q<\deg p$, we must have that $q(T)
 \end{proof}
 
 \begin{example}
-Note that the hypothesis in the result above that $\FF=\CC$ cannot be replaced with the hypothesis that $\FF=\RR$.
-
-Consider $T\in\mathcal{L}(\RR^2)$ defined by
+Note that the hypothesis in \ref{thrm:existence-eigenvalues-complex-vector-spaces} that $\FF=\CC$ cannot be replaced with the hypothesis that $\FF=\RR$.
+For instance, consider $T\in\mathcal{L}(\RR^2)$ defined by
 \begin{equation*}\tag{$\ast$}
 Tv=\begin{pmatrix}
 0&1\\
@@ -213,15 +213,16 @@ i\\1
 \end{pmatrix},\]
 so $i$ is an eigenvalue with corresponding eigenvector $\begin{pmatrix}i\\1\end{pmatrix}$.
 \end{example}
+\pagebreak
 
 \subsection{Eigenvalues and the Minimal Polynomial}
 A \emph{monic polynomial} is a polynomial whose highest-degree coefficient equals $1$.
 
 The following result shows the existence, uniqueness and degree of the \emph{minimal polynomial}.
 
-\begin{lemma}
+\begin{theorem}
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. Then there exists a unique monic polynomial $p\in\FF[z]$ of smallest degree such that $p(T)=0$. Furthermore, $\deg p\le\dim V$.
-\end{lemma}
+\end{theorem}
 
 \begin{proof} \
 
@@ -250,126 +251,355 @@ because $q(T)v\in\im q(T)$ and $s(T)|_{\im q(T)}=s(T|_{\im q(T)})=0$. Thus $sq$ 
 
 \fbox{Uniqueness} Let $p\in\FF[z]$ be a monic polynomial of smallest degree such that $p(T)=0$; let $r\in\FF[z]$ be a monic polynomial of same degree and $r(T)=0$. Then $(p-r)(T)=0$ and also $\deg(p-r)<\deg p$.
 
-We claim that $p-r=0$. Suppose otherwise, for a contradiction, that $p-r\neq0$. Then divide $p-r$ by the coefficient of the highest-order term in $p-r$ to get a monic polynomial $s\in\FF[z]$, which satisfies $s(T)=0$ and also $\deg s=\deg(p-r)<\deg p$, a contradiction.
+We claim that $p-r=0$. Suppose, for a contradiction, that $p-r\neq0$. Then divide $p-r$ by the coefficient of the highest-order term in $p-r$ to get a monic polynomial $s\in\FF[z]$, which satisfies $s(T)=0$ and also $\deg s=\deg(p-r)<\deg p$, a contradiction.
 \end{proof}
 
 \begin{definition}[Minimal polynomial]
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. The \vocab{minimal polynomial}\index{minimal polynomial} of $T$ is the unique monic polynomial $p\in\FF[z]$ of smallest degree such that $p(T)=0$.
 \end{definition}
 
-\begin{theorem}
-Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$.
-\begin{enumerate}[label=(\roman*)]
-\item The zeros of the minimal polynomial of $T$ are eigenvalues of $T$.
-\item If $V$ is a complex vector space, then the minimal polynomial of $T$ has the form
-\[(z-\lambda_1)\cdots(z-\lambda_m),\]
-where $\lambda_i$ are eigenvalues of $T$.
-\end{enumerate}
+\begin{theorem}\label{thrm:eigenvalues-minimal-polynomial-zeros}
+Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. Then the zeros of the minimal polynomial of $T$ are eigenvalues of $T$.
 \end{theorem}
 
 \begin{proof}
 Let $p$ be the minimal polynomial of $T$.
-\begin{enumerate}[label=(\roman*)]
-\item First suppose $\lambda\in\FF$ is a zero of $p$. Then $p$ can be written in the form
+
+\forward First suppose $\lambda\in\FF$ is a zero of $p$. Then $p$ can be written in the form
 \[p(z)=(z-\lambda)q(z)\]
 where $q$ is a monic polynomial with coefficients in $\FF$. Since $p(T)=0$, we have
 \[\vb{0}=(T-\lambda I)(q(T)v)\quad(v\in V).\]
 Since $\deg p<\deg p$ and $p$ is the minimal polynomial of $T$, there exists at least one $v\in V$ such that $q(T)v\neq\vb{0}$. The equation above thus implies that $\lambda$ is an eigenvalue of $T$, as desired.
 
-To prove that every eigenvalue of $T$ is a zero of $p$, now suppose $\lambda\in\FF$ is an eigenvalue of $T$. Thus there exists $v\in V\setminus\{\vb{0}\}$ such that $Tv=\lambda v$. Repeated applications of $T$ to both sides of this equation show that $T^k v=\lambda^k v$ for every nonnegative integer $k$. Thus
+\backward To prove that every eigenvalue of $T$ is a zero of $p$, now suppose $\lambda\in\FF$ is an eigenvalue of $T$. Thus there exists $v\in V\setminus\{\vb{0}\}$ such that $Tv=\lambda v$. Repeated applications of $T$ to both sides of this equation show that $T^k v=\lambda^k v$ for every nonnegative integer $k$. Thus
 \[p(T)v=p(\lambda)v.\]
 Since $p$ is the minimal polynomial of $T$, we have $p(T)v=\vb{0}$. Hence the equation above implies that $p(\lambda)=0$. Thus $\lambda$ is a zero of $p$, as desired.
-
-\item To get the desired result, use (a) and the second version of the fundamental theorem of algebra (see 4.13).
-\end{enumerate}
 \end{proof}
 
-\begin{proposition}
+If $V$ is a complex vector space, by the fundamental theorem of algebra (\ref{thrm:fundamental-theorem-of-algebra-second-version}), the minimal polynomial of $T$ has the factorisation
+\begin{equation}
+(z-\lambda_1)\cdots(z-\lambda_m),
+\end{equation}
+where $\lambda_1,\dots,\lambda_m$ are eigenvalues of $T$.
+
+The next result completely characterises the polynomials that when applied to an operator give the $0$ operator.
+
+\begin{proposition}\label{prop:minimal-polynomial-multiple}
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $q\in\FF[z]$. Then $q(T)=0$ if and only if $q$ is a polynomial multiple of the minimal polynomial of $T$.
 \end{proposition}
 
-\begin{proposition}
+\begin{proof}
+Let $p$ denote the minimal polynomial of $T$.
+
+\forward Suppose $q(T)=0$. By the division algorithm, there exist polynomials $s,r\in\FF[z]$ such that
+\begin{equation*}\tag{$\ast$}
+q+ps+r
+\end{equation*}
+and $\deg r<\deg p$. We have
+\[0=q(T)=p(T)s(T)+r(T)=r(T).\]
+The equation above implies that $r=0$ (otherwise, dividing $r$ by its highest-degree coefficient would produce a monic polynomial that when applied to $T$ gives $0$; this polynomial would have a smaller degree than the minimal polynomial, which would be a contradiction). 
+
+Thus ($\ast$) becomes $q=ps$, so $q$ is a polynomial multiple of $p$.
+
+\backward Suppose $q$ is a polynomial multiple of $p$. Thus $q=ps$ for some polynomial $s\in\FF[z]$, so
+\[q(T)=p(T)s(T)=0s(T)=0\]
+as desired.
+\end{proof}
+
+The following corollary concerns the minimal polynomial of a restriction operator.
+
+\begin{corollary}\label{cor:restriction-operator-minimal-polynomial-multiple}
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $U\le V$ is invariant under $T$. Then the minimal polynomial of $T$ is a polynomial multiple of the minimal polynomial of $T|_U$.
-\end{proposition}
+\end{corollary}
+
+\begin{proof}
+Let $p$ be the minimal polynomial of $T$. Then $p(T)v=\vb{0}$ for all $v\in V$. In particular,
+\[p(T)u=\vb{0}\quad(u\in U).\]
+Thus $p\brac{T|_U}=0$. By \ref{prop:minimal-polynomial-multiple} (applied to $T|_U$ in place of $T$), $p$ is a polynomial multiple of the minimal polynomial of $T|_U$.
+\end{proof}
+
+The next result shows that the constant term of the minimal polynomial of an operator determines whether the operator is invertible.
 
 \begin{corollary}
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. Then $T$ is not invertible if and only if the constant term of the minimal polynomial of $T$ is $0$.
 \end{corollary}
 
+\begin{proof}
+Suppose $T\in\mathcal{L}(V)$, let $p$ be the minimal polynomial of $T$. Then
+\begin{align*}
+T\text{ is not invertible}
+&\iff 0\text{ is an eigenvalue of }T&&[\text{by \ref{lemma:eigenvalue-equivalent-conditions}}]\\
+&\iff 0\text{ is a zero of }p&&[\text{by \ref{thrm:eigenvalues-minimal-polynomial-zeros}}]\\
+&\iff\text{constant term of $p$ is $0$.}
+\end{align*}
+\end{proof}
+\pagebreak
+
 \subsection{Eigenvalues on Odd-Dimensional Real Vector Spaces}
 The next result will be the key tool that we use to show that every operator on an odd-dimensional real vector space has an eigenvalue.
 
-\begin{proposition}
-Suppose $V$ is finite-dimensional, over $\RR$. Suppose also that $T\in\mathcal{L}(V)$ and $b,c\in\RR$ with $b^2<4c$. Then $\dim\ker(T^2+bT+cI)$ is an even number.
-\end{proposition}
+\begin{lemma}
+Suppose $V$ is a finite-dimensional, real vector space. Suppose $T\in\mathcal{L}(V)$ and $b,c\in\RR$ with $b^2<4c$. Then $\dim\ker(T^2+bT+cI)$ is even.
+\end{lemma}
 
-\begin{proposition}
+\begin{proof}
+By \ref{lemma:ker-im-polynomial-invariant}, $\ker(T^2+bT+cI)$ is invariant under $T$. By replacing $V$ with $\ker(T^2+bT+cI)$ and replacing $T$ with $T$ restricted to $\ker(T^2+bT+cI)$, we can assume that $T^2+bT+cI=0$; we now need to prove that $\dim V$ is even.
+
+Suppose $\lambda\in\RR$ and $v\in V$ are such that $Tv=\lambda v$. Then
+\[\vb{0}=(T^2+bT+cI)v=(\lambda^2+b\lambda+c)v=\underbrace{\brac{\brac{\lambda+\frac{b}{2}}^2+c-\frac{b^2}{4}}}_{>0}v\]
+implies $v=\vb{0}$. Hence we have shown that $T$ has no eigenvectors.
+
+Let $U\le V$ be invariant under $T$, and has the largest dimension among all subspaces of $V$ that are invariant under $T$ and have even dimension. 
+If $U=V$, then we are done; otherwise assume there exists $w\in V$ such that $w\notin U$.
+
+Let $W=\spn(w,Tw)$. Then $W$ is invariant under $T$, since $T(Tw)=-bTw-cw$. Furthermore, $\dim W=2$, since otherwise $w$ would be an eigenvector of $T$. Now
+\[\dim(U+W)=\dim U+\dim W-\dim(U\cap W)=\dim U+2,\]
+where $U\cap W=\{\vb{0}\}$ because otherwise $U\cap W$ would be a one-dimensional subspace of $V$ that is invariant under $T$ (impossible because $T$ has no eigenvectors).
+
+Because $U+W$ is invariant under $T$, the equation above shows that there exists a subspace of $V$ invariant under $T$ of even dimension larger than $\dim U$. Thus the assumption that $U\neq V$ was incorrect. Hence $V$ has even dimension.
+\end{proof}
+
+The next result states that on odd-dimensional vector spaces, every operator has an eigenvalue. We already know this result for finite-dimensional complex vectors spaces (without the odd hypothesis). Thus in the proof below, we will assume that $\FF=\RR$.
+
+\begin{theorem}
 Every operator on an odd-dimensional vector space has an eigenvalue.
-\end{proposition}
+\end{theorem}
+
+\begin{proof}
+Suppose $V$ is a finite-dimensional real vector space, $\dim V=n$ is odd. Let $T\in\mathcal{L}(V)$. We will induct on $n$ in steps of size two to show that $T$ has an eigenvalue. 
+
+The base case where $\dim V=1$ holds, because then every non-zero vector in $V$ is an eigenvector of $T$.
+
+Now suppose that $n\ge3$ and the desired result holds for all operators on all odd-dimensional vector spaces of dimension less than $n$. 
+
+Let $p$ be the minimal polynomial of $T$. 
+If $p$ is a polynomial multiple of $x-\lambda$ for some $\lambda\in\RR$, by \ref{thrm:eigenvalues-minimal-polynomial-zeros}, $\lambda$ is an eigenvalue of $T$ and we are done. 
+Thus we can assume that there exist $b,c\in\RR$ such that $b^2<4c$ and $p$ is a polynomial multiple of $x^2+bx+c$ (see \ref{thrm:factorisation-polynomial-R}).
+There exists a monic polynomial $q\in\RR[x]$ such that $p(x)=q(x)(x^2+bx+c)$ for all $x\in\RR$. Then
+\[0=p(T)=(q(T))(T^2+bT+cI),\]
+which means that $q(T)$ equals $0$ on $\im(T^2+bT+cI)$. 
+Since $\deg q<\deg p$ and $p$ is the minimal polynomial of $T$, this implies that $\im(T^2+bT+cI)\neq V$.
+
+By the fundamental theorem of linear maps,
+\[\underbrace{\dim V}_\text{odd}=\underbrace{\dim\ker(T^2+bT+cI)}_\text{even}+\dim\im(T^2+bT+cI)\]
+implies that $\dim\im(T^2+bT+cI)$ is odd.
+
+Hence $\im(T^2+bT+cI)$ is a subspace of $V$ that is invariant under $T$ (by \ref{lemma:ker-im-polynomial-invariant}) and that has odd dimension less than $\dim V$. Our induction hypothesis now implies that $T$ restricted to $\im(T^2+bT+cI)$ has an eigenvalue, which means that $T$ has an eigenvalue.
+\end{proof}
 \pagebreak
 
 \section{Upper-Triangular Matrices}
-\begin{definition}[Matrix of operator]
-Suppose $T\in\mathcal{L}(V)$. The matrix of $T$ with respect to a basis $\mathcal{V}=\{v_1,\dots,v_n\}$ of $V$ is the $n\times n$ matrix, whose entries $a_{ij}$ are defined by
-\[Tv_j=\sum_{i=1}^{n}a_{ij}v_i.\]
-\end{definition}
+Suppose $T\in\mathcal{L}(V)$. Recall that the matrix of $T$ with respect to a basis $\{v_1,\dots,v_n\}$ of $V$ is the $n\times n$ matrix whose entries $A_{ij}$ are defined by
+\[Tv_j=\sum_{i=1}^{n}A_{ij}v_i\quad(j=1,\dots,n).\]
 
 \begin{notation}
-The notation $\mathcal{M}_\mathcal{V}(T)$ is used if the basis is not clear from the context.
+If the basis is not clear from context, we denote the matrix of $T$ as $\mathcal{M}(T;\{v_1,\dots,v_n\})$.
 \end{notation}
 
 \begin{remark}
-Operators have square matrices.
+The matrices of operators are square matrices.
 \end{remark}
 
-\begin{definition}[Diagonal of matrix]
-The \vocab{diagonal} of a square matrix consists of the entries on the line from the upper left corner to the bottom right corner.
-\end{definition}
+The \emph{diagonal} of a square matrix consists of the entries on the line from the upper left corner to the bottom right corner.
 
 \begin{definition}[Upper-triangular matrix]
-A square matrix is called \vocab{upper triangular} if all the entries below the diagonal are $0$.
+A square matrix is called \vocab{upper triangular}\index{upper-triangular matrix} if all the entries below the diagonal are $0$.
 \end{definition}
 
-\begin{lemma}[Conditions for upper-triangular matrix]
+We represent an upper-triangular matrix in the form
+\[\begin{pmatrix}
+\lambda_1&&\ast\\
+&\ddots&\\
+0&&\lambda_n
+\end{pmatrix}\]
+where the $0$ indicates that
+all entries below the diagonal equal $0$, and $\ast$ denotes entries that we do not know or that are irrelevant to the questions being discussed.
+
+The next result provides a useful connection between upper-triangular matrices and invariant subspaces.
+
+\begin{lemma}[Conditions for upper-triangular matrix]\label{lemma:upper-triangular-matrix-conditions}
 Suppose $T\in\mathcal{L}(V)$, $\{v_1,\dots,v_n\}$ is a basis of $V$. Then the following are equivalent:
 \begin{enumerate}[label=(\roman*)]
-\item The matrix with respect to $\{v_1,\dots,v_n\}$ is upper triangular.
+\item $\mathcal{M}(T;\{v_1,\dots,v_n\})$ is upper triangular.
 \item $\spn(v_1,\dots,v_k)$ is invariant under $T$ for each $k=1,\dots,n$.
 \item $Tv_k\in\spn(v_1,\dots,v_k)$ for each $k=1,\dots,n$.
 \end{enumerate}
 \end{lemma}
 
-\begin{lemma}
-Suppose $T\in\mathcal{L}(V)$, $V$ has a basis with respect to which $T$ has an upper-triangular matrix with diagonal matrix with diagonal entries $\lambda_1,\dots,\lambda_m$. Then
-\[(T-\lambda_1I)\cdots(T-\lambda_mI)=0.\]
-\end{lemma}
+\begin{proof} \
 
-\begin{proposition}
+\fbox{(i)$\implies$(ii)} Suppose $k\in\{1,\dots,n\}$. Since the matrix of $T$ with respect to $\{v_1,\dots,v_n\}$ is upper triangular, if $j\in\{1,\dots,n\}$, then
+\[Tv_j\in\spn(v_1,\dots,v_j).\]
+If $j\le k$, then $\spn(v_1,\dots,v_j)\subset\spn(v_1,\dots,v_k)$, so
+\[Tv_j\in\spn(v_1,\dots,v_k)\]
+for each $j\in\{1,\dots,k\}$. Thus $\spn(v_1,\dots,v_k)$ is invariant under $T$.
+
+\fbox{(ii)$\implies$(iii)} Suppose (ii) holds, so $\spn(v_1,\dots,)$ is invariant under $T$ for each $k=1,\dots,n$. In particular, $Tv_k\in\spn(v_1,\dots,v_k)$ for each $k=1,\dots,n$.
+
+\fbox{(iii)$\implies$(i)} Suppose $Tv_k\in\spn(v_1,\dots,v_k)$ for each $k=1,\dots,n$.
+
+Then when writing each $Tv_k$ as a linear combination of basis vectors $v_1,\dots,v_n$, we need to use only $v_1,\dots,v_k$. 
+Hence all entries under the diagonal of $\mathcal{M}(T)$ are $0$, so $\mathcal{M}(T)$ is an upper-triangular matrix.
+\end{proof}
+
+The next result tells us that if $\mathcal{M}(T)$ is upper-triangular with respect to some basis of $V$, then $T$ satisfies a simple equation depending on the diagonal entries.
+
+\begin{proposition}\label{prop:upper-triangular-equation-diagonal-entries}
+Suppose $T\in\mathcal{L}(V)$ has an upper-triangular matrix with respect to some basis of $V$, with diagonal entries $\lambda_1,\dots,\lambda_n$. Then
+\begin{equation}
+(T-\lambda_1 I)\cdots(T-\lambda_n I)=0.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Let $\{v_1,\dots,v_n\}$ be a basis of $V$, with respect to which $T$ has an upper-triangular matrix with diagonal entries $\lambda_1,\dots,\lambda_n$:
+\[\mathcal{M}(T)=\begin{pmatrix}
+\lambda_1&&\ast\\
+&\ddots&\\
+0&&\lambda_n
+\end{pmatrix}.\]
+\begin{itemize}
+\item Considering the first column of $\mathcal{M}(T)$, we have
+\begin{align*}
+&Tv_1=\lambda_1v_1\\
+\implies&(T-\lambda_1 I)v_1=\vb{0}\\
+\implies&(T-\lambda_1 I)\cdots(T-\lambda_m I)v_1=\vb{0}\quad(m=1,\dots,n).
+\end{align*}
+
+\item Considering the second column of $\mathcal{M}(T)$, we have
+\begin{align*}
+&(T-\lambda_2 I)v_2\in\spn(v_1)\\
+\implies&(T-\lambda_1 I)(T-\lambda_2 I)v_2=\vb{0}\\
+\implies&(T-\lambda_1 I)\cdots(T-\lambda_m I)v_2=\vb{0}\quad(m=2,\dots,n).
+\end{align*}
+
+\item Considering the third column of $\mathcal{M}(T)$, we have
+\begin{align*}
+&(T-\lambda_3 I)v_3\in\spn(v_1,v_2)\\
+\implies&(T-\lambda_1 I)(T-\lambda_2 I)(T-\lambda_3 I)v_3=\vb{0}\\
+\implies&(T-\lambda_1 I)\cdots(T-\lambda_m I)v_3=\vb{0}\quad(m=3,\dots,n).
+\end{align*}
+\end{itemize}
+
+Continuing this pattern, we see that
+\[(T-\lambda_1 I)\cdots(T-\lambda_n I)v_k=\vb{0}\quad(k=1,\dots,n).\]
+Hence $(T-\lambda_1 I)\cdots(T-\lambda_n I)$ is the $0$ operator, because it is $\vb{0}$ on each vector in a basis of $V$.
+\end{proof}
+
+The next result tells us that the eigenvalues of an operator can be determined from the upper-triangular matrix.
+
+\begin{proposition}\label{prop:upper-triangular-matrix-eigenvalues}
 Suppose $T\in\mathcal{L}(V)$ has an upper-triangular matrix with respect to some basis of $V$. Then the eigenvalues of $T$ are precisely the entries on the diagonal of that upper-triangular matrix.
 \end{proposition}
 
-The following result gives a necessary and sufficient condition to have an upper-triangular matrix.
+\begin{proof}
+Let $\{v_1,\dots,v_n\}$ be a basis of $V$ with respect to which $T$ has an upper-triangular matrix:
+\[\mathcal{M}(T)=\begin{pmatrix}
+\lambda_1&&\ast\\
+&\ddots&\\
+0&&\lambda_n
+\end{pmatrix}.\]
+Since $Tv_1=\lambda_1v_1$, we see that $\lambda_1$ is an eigenvalue of $T$. 
 
-\begin{lemma}
-Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. Then $T$ has an upper-triangular matrix with respect to some basis of $V$ if and only if the minimal polynomial equals $(z-\lambda_1)\cdots(z-\lambda_m)$ for some $\lambda_i\in\FF$.
-\end{lemma}
+Let $k\in\{2,\dots,n\}$, then $(T-\lambda_k I)v_k\in\spn(v_1,\dots,v_{k-1})$, so $T-\lambda_k I$ maps $\spn(v_1,\dots,v_k)$ into $\spn(v_1,\dots,v_{k-1})$. Since
+\[\dim\spn(v_1,\dots,v_k)=k,\quad\dim\spn(v_1,\dots,v_{k-1})=k-1,\]
+this implies that $T-\lambda_k I$ restricted to $\spn(v_1,\dots,v_k)$ is not injective (by \ref{prop:smaller-not-injective}). Thus there exists $v\in\spn(v_1,\dots,v_k)$ such that $v\neq\vb{0}$ and $(T-\lambda_k I)v=\vb{0}$. Thus $\lambda_k$ is an eigenvalue of $T$. Hence every entry on the diagonal of $\mathcal{M}(T)$ is an eigenvalue of $T$.
 
-\begin{theorem}
+We now prove $T$ has no other eigenvalues. Let $q$ be the polynomial defined by
+\[q(z)=(z-\lambda_1)\cdots(z-\lambda_n).\]
+By \ref{prop:upper-triangular-equation-diagonal-entries}, $q(T)=0$. By \ref{prop:minimal-polynomial-multiple}, $q$ is a polynomial multiple of the minimal polynomial of $T$. Thus every zero of the minimal polynomial of $T$ is a zero of $q$. 
+
+By \ref{thrm:eigenvalues-minimal-polynomial-zeros}, the zeros of the minimal polynomial of $T$ are the eigenvalues of $T$. This implies that every eigenvalue of $T$ is a zero of $q$. 
+
+Hence the eigenvalues of $T$ are all contained in the set $\{\lambda_1,\dots,\lambda_n\}$.
+\end{proof}
+
+\begin{example}
+Define $T\in\mathcal{L}(\FF^3)$ by $T(x,y,z)=(2x+y,5y+3z,8z)$. The matrix of $T$ with respect to the standard basis is
+\[\mathcal{M}(T)=\begin{pmatrix}
+2&1&0\\
+0&5&3\\
+0&0&8
+\end{pmatrix}.\]
+Thus the eigenvalues of $T$ are $2$, $5$, and $8$.
+\end{example}
+
+The following result gives a \emph{necessary and sufficient condition} to have an upper-triangular matrix.
+
+\begin{proposition}\label{prop:upper-triangular-matrix-minimal-polynomial}
+Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. Then $T$ has an upper-triangular matrix with respect to some basis of $V$ if and only if the minimal polynomial equals
+\[(z-\lambda_1)\cdots(z-\lambda_m)\]
+for some $\lambda_1,\dots,\lambda_m\in\FF$.
+\end{proposition}
+
+\begin{proof} \
+
+\forward Suppose $T$ has an upper-triangular matrix with respect to some basis of $V$.
+Let $\alpha_1,\dots,\alpha_n$ denote the diagonal entries of that matrix.
+Define a polynomial $q\in\FF[z]$ by
+\[q(z)=(z-\alpha_1)\cdots(z-\alpha_n).\]
+By \ref{prop:upper-triangular-equation-diagonal-entries}, $q(T)=0$. 
+By \ref{prop:minimal-polynomial-multiple}, $q$ is a polynomial multiple of the minimal polynomial. 
+Thus the minimal polynomial of $T$ equals $(z-\lambda_1)\cdots(z-\lambda_m)$ for some $\lambda_1,\dots,\lambda_m\in\FF$ with $\{\lambda_1,\dots,\lambda_m\}\subset\{\alpha_1,\dots,\alpha_n\}$.
+
+\backward Suppose the minimal polynomial of $T$ equals $(z-\lambda_1)\cdots(z-\lambda_m)$ for some $\lambda_1,\dots,\lambda_m\in\FF$. We induct on $m$.
+
+For the base case $m=1$, $z-\lambda_1$ is the minimal polynomial of $T$, which implies that $T=\lambda_1 I$, so the matrix of $T$ (with respect to any basis of $V$) is upper-triangular.
+
+Now suppose $m>1$ and the desired result holds for all smaller positive integers. Let
+\[U=\im(T-\lambda_m I).\]
+Then $U$ is invariant under $T$ (by \ref{lemma:ker-im-polynomial-invariant}), so $T|_U$ is an operator on $U$.
+
+If $u\in U$, then $u=(T-\lambda_m I)v$ for some $v\in V$ and
+\[(T-\lambda_1 I)\cdots(T-\lambda_{m-1}I)u=(T-\lambda_1 I)\cdots(T-\lambda_m I)v=\vb{0}.\]
+Hence $(z-\lambda_1)\cdots(z-\lambda_{m-1})$ is a polynomial multiple of the minimal polynomial of $T|_U$, by \ref{prop:minimal-polynomial-multiple}. Thus the minimal polynomial of $T|_U$ is the product of at most $m-1$ terms of the form $z-\lambda_k$.
+
+By our induction hypothesis, there is a basis $\{u_1,\dots,u_M\}$ of $U$, with respect to which $T|_U$ has an upper-triangular matrix. Thus for each $k\in\{1,\dots,M\}$, we have
+(using \ref{lemma:upper-triangular-matrix-conditions})
+\begin{equation*}\tag{I}
+Tu_k=(T|_U)(u_k)\in\spn(u_1,\dots,u_k).
+\end{equation*}
+Extend $\{u_1,\dots,u_M\}$ to a basis $\{u_1,\dots,u_M,v_1,\dots,v_N\}$ of $V$. If $k\in\{1,\dots,N\}$, then
+\[Tv_k=(T-\lambda_m I)v_k+\lambda_m v_k.\]
+The definition of $U$ shows that $(T-\lambda_m I)v_k\in U=\spn(u_1,\dots,u_M)$. 
+Thus the equation above shows that
+\begin{equation*}\tag{II}
+Tv_k\in\spn(u_1,\dots,u_M,v_1,\dots,v_k).
+\end{equation*}
+From (I) and (II), we conclude (using \ref{lemma:upper-triangular-matrix-conditions}) that $T$ has an upper-triangular matrix with respect to the basis $\{u_1,\dots,u_M,v_1,\dots,v_N\}$ of $V$, as desired.
+\end{proof}
+
+We conclude with an important result: every operator on a finite-dimensional complex vector space has an upper-triangular matrix.
+
+\begin{theorem}\label{thrm:every-operator-upper-triangular-matrix}
 Suppose $V$ is finite-dimensional complex vector space, $T\in\mathcal{L}(V)$. Then $T$ has an upper-triangular matrix with respect to some basis of $V$.
 \end{theorem}
+
+\begin{proof}
+The desired result follows immediately from \ref{prop:upper-triangular-matrix-minimal-polynomial} and the second version of the fundamental theorem of algebra (\ref{thrm:fundamental-theorem-of-algebra-second-version}).
+\end{proof}
 \pagebreak
 
 \section{Diagonalisable Operators}
+\subsection{Diagonal Matrices}
 \begin{definition}[Diagonal matrix]
 A \vocab{diagonal matrix}\index{diagonal matrix} is a square matrix that is $0$ everywhere except possibly on the diagonal.
 \end{definition}
 
+That is, a diagonal matrix has the form
+\[\begin{pmatrix}
+\lambda_1&&0\\
+&\ddots&\\
+0&&\lambda_n
+\end{pmatrix}\]
+for some $\lambda_1,\dots,\lambda_n\in\FF$.
+
 \begin{remark}
-The entries on the diagonal are precisely the eigenvalue of the operator.
+If an operator has a diagonal matrix with respect to some basis, then the entries on the diagonal are precisely the eigenvalues of the operator, by \ref{prop:upper-triangular-matrix-eigenvalues}.
 \end{remark}
 
 \begin{definition}[Diagonalisable]
-An operator on $V$ is called \vocab{diagonalisable} if the operator has a diagonal matrix with respect to some basis of $V$.
+An operator on $V$ is called \vocab{diagonalisable}\index{diagonalisable operator} if the operator has a diagonal matrix with respect to some basis of $V$.
 \end{definition}
 
 \begin{remark}
@@ -378,21 +608,42 @@ Diagonalisation may require a different basis.
 
 \begin{definition}[Eigenspace]
 Suppose $T\in\mathcal{L}(V)$, $\lambda\in\FF$. The \vocab{eigenspace}\index{eigenspace} of $T$ corresponding to $\lambda$ is the subspace of $V$ defined by
-\[E(\lambda,T)\coloneqq\ker(T-\lambda I)=\{v\in V\mid Tv=\lambda v\}.\]
+\[E(\lambda,T)\colonequals\ker(T-\lambda I)=\{v\in V\mid Tv=\lambda v\}.\]
 \end{definition}
 
-\begin{remark}
 Hence $E(\lambda,T)$ is the set of all eigenvectors of $T$ corresponding to $\lambda$, along with the $\vb{0}$ vector.
-\end{remark}
+The definitions imply that $\lambda$ is an eigenvalue of $T$ if and only if $E(\lambda,T)\neq\{\vb{0}\}$.
 
-\begin{proposition}
+By \ref{lemma:ker-im-polynomial-invariant}, $E(\lambda,T)$ is a subspace of $V$. 
+
+The next result states that the sum of eigenspaces is a direct sum.
+
+\begin{proposition}\label{prop:sum-of-eigenspaces-direct-sum}
 Suppose $T\in\mathcal{L}(V)$, $\lambda_1,\dots,\lambda_m$ are distinct eigenvalues of $T$. Then
-\[E(\lambda_1,T)+\cdots+E(\lambda_m,T)\]
-is a direct sum. Furthermore, if $V$ is finite-dimensional, then
+\[E(\lambda_1,T)\oplus\cdots\oplus E(\lambda_m,T).\]
+Furthermore, if $V$ is finite-dimensional, then
 \[\dim E(\lambda_1,T)+\cdots+\dim E(\lambda_m,T)\le\dim V.\]
 \end{proposition}
 
-\begin{lemma}[Conditions equivalent to diagonalisability]
+\begin{proof}
+To show that $E(\lambda_1,T)+\cdots+E(\lambda_m,T)$ is a direct sum, suppose
+\[v_1+\cdots+v_m=\vb{0},\]
+where each $v_i\in E(\lambda_i,T)$. 
+By \ref{prop:eigenvectors-linind}, eigenvectors corresponding to distinct eigenvalues are linearly independent, so each $v_i=\vb{0}$. Thus by \ref{lemma:condition-direct-sum}, $E(\lambda_1,T)+\cdots+E(\lambda_m,T)$ is a direct sum.
+
+If $V$ is finite-dimensional, then
+\begin{align*}
+\dim E(\lambda_1,T)+\cdots+\dim E(\lambda_m,T)
+&=\dim\brac{E(\lambda_1,T)\oplus\cdots\oplus E(\lambda_m,T)}&&[\text{by \ref{prop:direct-sum-dimensions-add-up}}]\\
+&\le\dim V&&[\text{by \ref{lemma:dim-subspace}}]
+\end{align*}
+\end{proof}
+\pagebreak
+
+\subsection{Conditions for Diagonalisability}
+The following characterisations of diagonalisable operators will be useful.
+
+\begin{lemma}[Conditions equivalent to diagonalisability]\label{lemma:diagonalisability-equivalent-conditions}
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $\lambda_1,\dots,\lambda_m$ are distinct eigenvalues of $T$. Then the following are equivalent:
 \begin{enumerate}[label=(\roman*)]
 \item $T$ is diagonalisable.
@@ -402,55 +653,230 @@ Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $\lambda_1,\dots,\lambd
 \end{enumerate}
 \end{lemma}
 
+\begin{proof} \
+
+\fbox{(i)$\iff$(ii)} By definition, $T\in\mathcal{L}(V)$ is diagonalisable if and only if $T$ has a diagonal matrix
+\[\begin{pmatrix}
+\lambda_1&&0\\
+&\ddots&\\
+0&&\lambda_n
+\end{pmatrix}\]
+with respect to a basis $\{v_1,\dots,v_n\}$ of $V$, if and only if $Tv_i=\lambda_i v_i$ for each $i=1,\dots,n$.
+
+\fbox{(ii)$\implies$(iii)} Suppose $V$ has a basis consisting of eigenvectors of $T$.
+Hence every vector in $V$ can be written as a linear combination of $T$, which implies that
+\[V=E(\lambda_1,T)+\cdots+E(\lambda_m,T).\]
+By \ref{prop:sum-of-eigenspaces-direct-sum}, this is a direct sum.
+
+\fbox{(iii)$\implies$(iv)} This follows from \ref{prop:direct-sum-dimensions-add-up}.
+
+\fbox{(iv)$\implies$(ii)} Suppose
+\[\dim V=\dim E(\lambda_1,T)+\cdots+\dim E(\lambda_m,T).\]
+Choose a basis of each $E(\lambda_i,T)$; put all these bases together to form a set $\{v_1,\dots,v_n\}$ of eigenvectors of $T$, where $n=\dim V$.
+\begin{claim}
+$\{v_1,\dots,v_n\}$ is a basis of $T$.
+\end{claim}
+By \ref{prop:basis-length-dim}, it suffices to show that $\{v_1,\dots,v_n\}$ is linearly independent. Suppose $a_1,\dots,a_n\in\FF$ are such that
+\[a_1v_1+\cdots+a_nv_n=\vb{0}.\]
+For each $i=1,\dots,m$, let $u_i$ denote the sum of all the terms $a_j v_j$ such that $v_j\in E(\lambda_i,T)$. Thus each $u_i$ is in $E(\lambda_i,T)$, and
+\[u_1+\cdots+u_m=\vb{0}.\]
+By \ref{prop:eigenvectors-linind}, since eigenvectors corresponding to distinct eigenvalues are linearly independent, this implies that each $u_i$ equals $\vb{0}$. Because each $u_i$ is a sum of terms $a_jv_j$, where the $v_j$'s were chosen to be a basis of $E(\lambda_i,T)$, this implies that all $a_j$'s equal $0$. Thus $\{v_1,\dots,v_n\}$ is linearly independent and hence is a basis of $V$.
+\end{proof}
+
+The next result shows that if an operator has as many distinct eigenvalues as the dimension of its domain, then the operator is diagonalisable.
+
 \begin{corollary}
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$ has $\dim V$ distinct eigenvalues. Then $T$ is diagonalisable.
 \end{corollary}
 
-\begin{theorem}
+\begin{proof}
+Suppose $T$ has distinct eigenvalues $\lambda_1,\dots,\lambda_{\dim V}$, with corresponding eigenvectors $v_1,\dots,v_{\dim V}$. By \ref{prop:eigenvectors-linind}, eigenvectors corresponding to distinct eigenvalues are linearly independent, so $v_1,\dots,v_{\dim V}$ are linearly independent, and thus forms a basis of $V$.
+
+With respect to this basis consisting of eigenvectors, $T$ has a diagonal matrix.
+\end{proof}
+
+In later chapters, we will find additional conditions that imply that certain operators are diagonalisable. For example, see the real spectral theorem (\ref{thrm:real-spectral-theorem}) and the complex spectral theorem (\ref{thrm:complex-spectral-theorem}).
+
+The next result provides a necessary and sufficient condition for diagonalisability.
+
+\begin{theorem}\label{thrm:diagonalisability-minimal-polynomial}
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. Then $T$ is diagonalisable if and only if the minimal polynomial of $T$ equals $(z-\lambda_1)\cdots(z-\lambda_m)$ for distinct $\lambda_1,\dots,\lambda_m\in\FF$.
 \end{theorem}
 
-\begin{corollary}
+\begin{proof} \
+
+\forward Suppose $T$ is diagonalisable. Thus there is a basis $\{v_1,\dots,v_n\}$ of $V$ consisting of eigenvectors of $T$. Let $\lambda_1,\dots,\lambda_m$ be distinct eigenvalues of $T$.
+Then for each $v_j$, there exists $\lambda_k$ with $(T-\lambda_k I)v_j=\vb{0}$. Thus
+\[(T-\lambda_1 I)\cdots(T-\lambda_m I)v_j=\vb{0},\]
+which implies that the minimal polynomial of $T$ equals $(z-\lambda_1)\cdots(z-\lambda_m)$.
+
+\backward Suppose the minimal polynomial of $T$ equals $(z-\lambda_1)\cdots(z-\lambda_m)$ for distinct $\lambda_1,\dots,\lambda_m\in\FF$. Thus
+\begin{equation*}\tag{I}
+(T-\lambda_1 I)\cdots(T-\lambda_m I)=0.
+\end{equation*}
+We will prove that $T$ is diagonalisable by inducting on $m$. For the base case $m=1$, $T-\lambda_1 I=0$, which means that $T$ is a scalar multiple of the identity operator, so $T$ is diagonalisable.
+
+Now suppose that $m>1$ and the desired result holds for all smaller values of $m$. 
+The subspace $\im(T-\lambda_m I)$ is invariant under $T$ (by \ref{lemma:ker-im-polynomial-invariant}). Thus $T|_{\im(T-\lambda_m I)}\in\mathcal{L}(\im(T-\lambda_m I))$.
+
+If $u\in\im(T-\lambda_m I)$, then $u=(T-\lambda_m I)v$ for some $v\in V$, and (I) implies
+\begin{equation*}\tag{II}
+(T-\lambda_1 I)\cdots(T-\lambda_{m-1}I)u=(T-\lambda_1)\cdots(T-\lambda_m I)v=\vb{0}.
+\end{equation*}
+Hence $(z-\lambda_1)\cdots(z-\lambda_{m-1})$ is a polynomial multiple of the minimal polynomial of $T|_{\im(T-\lambda_m I)}$, by \ref{prop:minimal-polynomial-multiple}. Thus by induction hypothesis, there is a basis of $\im(T-\lambda_m I)$ consisting of eigenvectors of $T$.
+
+Let $u\in\im(T-\lambda_m I)\cap\ker(T-\lambda_m I)$. Then $Tu=\lambda_m u$. Now (II) implies that
+\begin{align*}
+\vb{0}&=(T-\lambda_1 I)\cdots(T-\lambda_{m-1}I)u\\
+&=(\lambda_m-\lambda_1)\cdots(\lambda_m-\lambda_{m-1})u.
+\end{align*}
+Since $\lambda_1,\dots,\lambda_m$ are distinct, the equation above implies that $u=\vb{0}$. Hence $\im(T-\lambda_m I)\cap\ker(T-\lambda_m I)=\{\vb{0}\}$.
+
+By \ref{lemma:direct-sum-intersection-zero}, this implies that $\im(T-\lambda_m I)+\ker(T-\lambda_m I)$ is a direct sum, whose dimension is $\dim V$ (by \ref{prop:direct-sum-dimensions-add-up} and the fundamental theorem of linear maps). 
+Hence $\im(T-\lambda_m I)\oplus\ker(T-\lambda_m I)=V$. 
+Every nonzero vector in $\ker(T-\lambda_m I)$ is an eigenvector of $T$ with eigenvalue $\lambda_m$.
+Earlier in this proof we saw that there is a basis of $\im(T-\lambda_m I)$ consisting of eigenvectors of $T$. 
+Adjoining to that basis a basis of $\ker(T-\lambda_m I)$ gives a basis of $V$ consisting of eigenvectors of $T$. 
+The matrix of $T$ with respect to this basis is a diagonal matrix, as desired.
+\end{proof}
+
+The next result states that the restriction of a diagonalisable operator to an invariant subspace is diagonalisable.
+
+\begin{corollary}\label{cor:restriction-diagonalisable-operator-invariant-subspace}
 Suppose $T\in\mathcal{L}(V)$ is diagonalisable, $U\le V$ is invariant under $T$. Then $T|_U$ is a diagonalisable operator on $U$.
 \end{corollary}
 
-\begin{definition}[Gershgorin disks]
-Suppose $T\in\mathcal{L}(V)$, $\{v_1,\dots,v_n\}$ is a basis of $V$. Let $A$ denote the matrix of $T$ with respect to this basis. A \vocab{Gershgorin disk} of $T$ with respect to the basis $\{v_1,\dots,v_n\}$ is a set of the form
-\[\crbrac{z\in\FF\:\bigg|\:|z-a_{ii}|\le\sum_{j=1,j\neq i}^{n}|a_{ij}|},\]
-where $i=1,\dots,n$.
-\end{definition}
+\begin{proof}
+Since $T$ is diagonalisable, by \ref{thrm:diagonalisability-minimal-polynomial}, the minimal polynomial of $T$ equals $(z-\lambda_1)\cdots(z-\lambda_m)$ for some distinct $\lambda_1,\dots,\lambda_m\in\FF$.
 
-\begin{theorem}[Gershgorin disk theorem]
-Suppose $T\in\mathcal{L}(V)$, $\{v_1,\dots,v_n\}$ is a basis of $V$. Then each eigenvalue of $T$ is contained in some Gershgorin disk of $T$ with respect to the basis $\{v_1,\dots,v_n\}$.
-\end{theorem}
+By \ref{cor:restriction-operator-minimal-polynomial-multiple}, the minimal polynomial of $T$ is a polynomial multiple of the minimal polynomial of $T|_U$. Hence the minimal polynomial of $T|_U$ has the form required by \ref{thrm:diagonalisability-minimal-polynomial}, which shows that $T|_U$ is diagonalisable.
+\end{proof}
 \pagebreak
 
 \section{Commuting Operators}
 \begin{definition}[Commute]
 Two operators $S$ and $T$ on the same vector space \vocab{commute} if $ST=TS$.
 
-Two square matrices $A$ and $B$ of the same size commute if $AB=BA$.
+Two square matrices $A$ and $B$ of the same size \emph{commute} if $AB=BA$.
 \end{definition}
 
-\begin{lemma}[commuting operators correspond to commuting matrices]
+The next result shows that two operators commute if and only if their matrices (with respect to the same basis) commute.
+
+\begin{lemma}\label{lemma:operators-commute-matrices-commute}
 Suppose $S,T\in\mathcal{L}(V)$ and $\{v_1,\dots,v_n\}$ is a basis of $V$. Then $S$ and $T$ commute if and only if $\mathcal{M}(S;\{v_1,\dots,v_n\})$ and $\mathcal{M}(T;\{v_1,\dots,v_n\})$ commute.
 \end{lemma}
 
-\begin{lemma}[Eigenspace is invariant under commuting operator]
+\begin{proof}
+We have
+\begin{align*}
+\text{$S$ and $T$ commute}
+&\iff ST=TS\\
+&\iff\mathcal{M}(ST)=\mathcal{M}(TS)\\
+&\iff\mathcal{M}(S)\mathcal{M}(T)=\mathcal{M}(T)\mathcal{M}(S)\\
+&\iff\text{$\mathcal{M}(S)$ and $\mathcal{M}(T)$ commute}
+\end{align*}
+as desired.
+\end{proof}
+
+The next result shows that if two operators commute, then every eigenspace for one operator is invariant under the other operator.
+
+\begin{lemma}\label{lemma:eigenspace-invariant-under-commuting-operator}
 Suppose $S,T\in\mathcal{L}(V)$ commute, $\lambda\in\FF$. Then $E(\lambda,S)$ is invariant under $T$.
 \end{lemma}
 
+\begin{proof}
+Let $v\in E(\lambda,S)$. Then
+\[S(Tv)=(ST)v=(TS)v=T(Sv)=T(\lambda v)=\lambda Tv\]
+so $Tv\in E(\lambda,S)$. Hence $E(\lambda,S)$ is invariant under $T$.
+\end{proof}
+
+Suppose we have two operators, each of which is diagonalisable. If we want to do computations involving both operators, then we want the two operators to be diagonalisable by the same basis, which according to the next result is possible when the two operators commute.
+
 \begin{proposition}
-Two diagonalizable operators on the same vector space have diagonal matrices with respect to the same basis if and only if the two operators commute.
+Two diagonalisable operators on the same vector space have diagonal matrices with respect to the same basis if and only if the two operators commute.
 \end{proposition}
 
-\begin{lemma}[Common eigenvector for commuting operators]
+\begin{proof} \
+
+\fbox{$\implies$} Suppose $S,T\in\mathcal{L}(V)$ have diagonal matrices with respect to the same basis.
+
+Since any two diagonal matrices of the same size commute, by \ref{lemma:operators-commute-matrices-commute}, $S$ and $T$ commute.
+
+\fbox{$\impliedby$} Suppose $S,T\in\mathcal{L}(V)$ are diagonalisable operators that commute, so $ST=TS$. 
+Let $\lambda_1,\dots,\lambda_m$ denote the distinct eigenvalues of $S$. 
+
+Since $S$ is diagonalisable, by \ref{lemma:diagonalisability-equivalent-conditions},
+\begin{equation*}\tag{$\ast$}
+V=E(\lambda_1,S)\oplus\cdots\oplus E(\lambda_m,S).
+\end{equation*}
+
+For each $i=1,\dots,m$, the subspace $E(\lambda_i,S)$ is invariant under $T$ (by \ref{lemma:eigenspace-invariant-under-commuting-operator}).
+Since $T$ is diagonalisable, by \ref{cor:restriction-diagonalisable-operator-invariant-subspace}, the restriction $T|_{E(\lambda_i,S)}$ is diagonalisable for each $i$. 
+
+Hence for each $i=1,\dots,m$, there is a basis of $E(\lambda_i,S)$ consisting of eigenvectors of $T$. Putting these bases together gives a basis of $V$ (because of ($\ast$)), with each vector in this basis being an eigenvector of both $S$ and $T$. Thus $S$ and $T$ both have diagonal matrices with respect to this basis, as desired.
+\end{proof}
+
+Suppose $V$ is a finite-dimensional nonzero complex vector space. Then every operator on $V$ has an eigenvector (by \ref{thrm:existence-eigenvalues-complex-vector-spaces}). 
+The next result shows that if two operators on $V$ commute, then there is a vector in $V$ that is an eigenvector for both operators (but the two commuting operators might not have a common eigenvalue).
+
+\begin{lemma}\label{lemma:commuting-operators-common-eigenvalue}
 Every pairs of commuting operators on a finite-dimensional nonzero complex vector space has a common eigenvector.
 \end{lemma}
 
-\begin{lemma}[Commuting operators are simultaneously upper triangular]
-Suppose $V$ is a finite-dimensional complex vector space, $S$ and $T$ are commuting operators on $V$. Then there is a basis of $V$ with respect to which both $S$ and $T$ have upper-triangular matrices.
-\end{lemma}
+\begin{proof}
+Suppose $V$ is a finite-dimensional nonzero complex vector space. Suppose $S,T\in\mathcal{L}(V)$ commute.
+
+Let $\lambda$ be an eigenvalue of $S$ (\ref{thrm:existence-eigenvalues-complex-vector-spaces} tells us that $S$ does indeed have an eigenvalue). Thus $E(\lambda,S)\neq\{\vb{0}\}$. Also, $E(\lambda,S)$ is invariant under $T$ (by \ref{lemma:eigenspace-invariant-under-commuting-operator}).
+
+Thus $T|_{E(\lambda,S)}$ has an eigenvector (again using \ref{thrm:existence-eigenvalues-complex-vector-spaces}), which is an eigenvector for both $S$ and $T$, completing the proof.
+\end{proof}
+
+\begin{remark}
+The hypothesis $\CC$ is needed, since all vector spaces over $\CC$ have eigenvalues, by \ref{thrm:existence-eigenvalues-complex-vector-spaces}.
+\end{remark}
+
+Recall that \ref{thrm:every-operator-upper-triangular-matrix} states that for every operator, there exists a basis that gives an upper-triangular matrix. We now extend this result to two commuting operators.
+
+\begin{proposition}\label{prop:commuting-operators-simultaneous-upper-triangular}
+Suppose $V$ is a finite-dimensional complex vector space, $S,T\in\mathcal{L}(V)$ commute. Then there exists a basis of $V$, with respect to which both $S$ and $T$ have upper-triangular matrices.
+\end{proposition}
+
+\begin{proof}
+Let $n=\dim V$. Induct on $n$.
+
+The desired result holds if $n=1$, since all $1\times1$ matrices are upper triangular.
+
+Now suppose $n>1$ and the desired result holds for all complex vector spaces whose dimension is $n-1$.
+
+Since $S$ and $T$ commute, by \ref{lemma:commuting-operators-common-eigenvalue}, let $v_1$ be any common eigenvalue of $S$ and $T$. Hence $Sv_1\in\spn(v_1)$ and $Tv_1\in\spn(v_1)$. Let $W$ be a subspace of $V$ such that
+\[V=\spn(v_1)\oplus W;\]
+see 2.33 for the existence of $W$. Define a linear map $P\colon V\to W$ by
+\[P(av_1+w)=w\quad(a\in\CC,\:w\in W).\]
+Define $\tilde{S},\tilde{T}\in\mathcal{L}(W)$ by
+\[\tilde{S}w=P(Sw),\quad \tilde{T}w=P(Tw)\]
+for each $w\in W$. 
+To apply the induction hypothesis to $\tilde{S}$ and $\tilde{T}$, we must first show that they commute.
+Let $w\in W$, then there exists $a\in\CC$ such that
+\[(\tilde{S}\tilde{T})w=\tilde{S}(P(Tw))=\tilde{S}(Tw-av_1)=P(S(Tw-av_1))=P((ST)w),\]
+where the last equality holds because $v_1$ is an eigenvector of $S$ and $Pv_1=0$. Similarly,
+\[(\tilde{T}\tilde{S})w=P((TS)w).\]
+Since $S$ and $T$ commute, the last two displayed equations show that $(\tilde{S}T)w=(\tilde{T}S)w$. Hence $\tilde{S}$ and $\tilde{T}$ commute.
+
+Thus we can use our induction hypothesis to state that there exists a basis $\{v_2,\dots,v_n\}$ of $W$ such that $\tilde{S}$ and $\tilde{T}$ both have upper-triangular matrices with respect to this basis. The list $\{v_1,\dots,v_n\}$ is a basis of $V$.
+
+If $k\in\{2,\dots,n\}$, then there exist $a_k,b_k\in\CC$ such that
+\begin{align*}
+Sv_k&=a_kv_1+\tilde{S}v_k\\
+Tv_k&=b_kv_1+\tilde{T}v_k
+\end{align*}
+
+Since $\tilde{S}$ and $\tilde{T}$ have upper-triangular matrices with respect to $\{v_2,\dots,v_n\}$, we know that $\tilde{S}v_k\in\spn(v_2,\dots,v_k)$ and $\tilde{T}v_k\in\spn(v_2,\dots,v_k)$. Hence the equations above imply that
+\[Sv_k\in\spn(v_1,\dots,v_k),\quad Tv_k\in\spn(v_1,\dots,v_k).\]
+
+Hence $S$ and $T$ have upper-triangular matrices with respect to $\{v_1,\dots,v_n\}$, as desired.
+\end{proof}
+
+In general, it is not possible to determine the eigenvalues of the sum or product of two operators from the eigenvalues of the two operators. However, the next result shows that something nice happens when the two operators commute.
 
 \begin{proposition}[Eigenvalues of sum and product of commuting operators]
 Suppose $V$ is a finite-dimensional complex vector space, $S$ and $T$ are commuting operators on $V$. Then
@@ -459,10 +885,32 @@ Suppose $V$ is a finite-dimensional complex vector space, $S$ and $T$ are commut
 \item every eigenvalue of $ST$ is an eigenvalue of $S$ times an eigenvalue of $T$.
 \end{enumerate}
 \end{proposition}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item By \ref{prop:commuting-operators-simultaneous-upper-triangular}, there exists a basis of $V$, with respect to which both $S$ and $T$ have upper-triangular matrices.
+With respect to that basis,
+\[\mathcal{M}(S+T)=\mathcal{M}(S)+\mathcal{M}(T).\]
+
+By definition of matrix addition, each entry on the diagonal of $\mathcal{M}(S+T)$ equals the sum of the corresponding entries on the diagonals of $\mathcal{M}(S)$ and $\mathcal{M}(T)$.
+Furthermore, $\mathcal{M}(S+T)$ is upper-triangular (as you should verify).
+
+By \ref{prop:upper-triangular-matrix-eigenvalues}, 
+\begin{itemize}
+\item every entry on the diagonal of $\mathcal{M}(S)$ is an eigenvalue of $S$,
+\item every entry on the diagonal of $\mathcal{M}(T)$ is an eigenvalue of $T$, and
+\item every eigenvalue of $S+T$ is on the diagonal of $\mathcal{M}(S+T)$.
+\end{itemize}
+
+Hence every eigenvalue of $S+T$ is an eigenvalue of $S$ plus an eigenvalue of $T$.
+
+\item Similar to above.
+\end{enumerate}
+\end{proof}
 \pagebreak
 
 \section*{Exercises}
-\begin{exercise}[\cite{axler} 5A Q1]
+\begin{exercise}[\cite{ladr} 5A Q1]
 Suppose $T\in\mathcal{L}(V)$, $U\le V$. Prove that
 \begin{enumerate}[label=(\roman*)]
 \item if $U\subset \ker T$, then $U$ is invariant under $T$;
@@ -476,3 +924,152 @@ Suppose $T\in\mathcal{L}(V)$, $U\le V$. Prove that
 \item Let $u\in U$. Then $Tu\in\im T\subset U$ so $Tu\in U$.
 \end{enumerate}
 \end{solution}
+
+\begin{exercise}[\cite{ladr} 5A Q4]
+
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5A Q8]
+
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5A Q11]
+
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5A Q13]
+
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5A Q28]
+
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5A Q32]
+
+\end{exercise}
+
+5B 2 7 10 11 13 17 18 22 
+
+\begin{exercise}[\cite{ladr} 5D Q1]
+Suppose $V$ is a finite-dimensional complex vector space and $T\in\mathcal{L}(V)$.
+\begin{enumerate}[label=(\roman*)]
+\item Prove that if $T^4=I$, then $T$ is diagonalisable.
+\item Prove that if $T^4=T$, then $T$ is diagonalisable.
+\item Give an example of an operator $T\in\mathcal{L}(\CC^2)$ such that $T^4=T^2$ and $T$ is not diagonalisable.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution} \
+\begin{enumerate}[label=(\roman*)]
+\item If $T^4=I$, then $T^4-I=0$. Let
+\begin{align*}
+p(x)&=x^4-1\\
+&=(x+1)(x-1)(x+i)(x-i).
+\end{align*}
+Let $m(x)$ be the minimal polynomial of $T$. 
+Then $m$ divides $p$, which implies $m$ only has simple roots (no repeated roots), so $T$ is diagonalisable, by 5.62.
+
+\item Similar to the above, consider $p(x)=x^4-x=x(x-1)(x+i)(x-i)$.
+
+\item Consider
+\[T=\begin{pmatrix}
+0&1\\
+0&0
+\end{pmatrix}.\]
+Then we have that
+\[T^2=\begin{pmatrix}
+0&0\\
+0&0
+\end{pmatrix}=T^4.\]
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 5D Q2]
+Suppose $T\in\mathcal{L}(V)$ has a diagonal matrix $A$ with respect to some basis of $V$. Prove that if $\lambda\in\FF$, then $\lambda$ appears on the diagonal of $A$ precisely $\dim E(\lambda,T)$ times.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5D Q3]
+Suppose $V$ is finite-dimensional and $T\in\mathcal{L}(V)$. Prove that if the operator $T$ is diagonalisable, then $V=\ker T\oplus\im T$.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5D Q4]
+Suppose $V$ is finite-dimensional and $T\in\mathcal{L}(V)$. Prove that the following are equivalent.
+\begin{enumerate}[label=(\roman*)]
+\item $V=\ker T\oplus\im T$.
+\item $V=\ker T+\im T$.
+\item $\ker T\cap\im T=\{\vb{0}\}$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5D Q5]
+Suppose $V$ is a finite-dimensional complex vector space and $T\in\mathcal{L}(V)$. Prove that $T$ is diagonalisable if and only if
+\[V=\ker(T-\lambda I)\oplus\im(T-\lambda I)\]
+for every $\lambda\in\CC$.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5D Q9]
+Suppose $R,T\in\mathcal{L}(\FF^3)$ each have $2$, $6$, $7$ as eigenvalues. Prove that there exists an invertible operator $S\in\mathcal{L}(\FF^3)$ such that $R=S^{-1}TS$.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5D Q14]
+Suppose $\FF=\CC$, $k$ is a positive integer, and $T\in\mathcal{L}(V)$ is invertible. Prove that $T$ is diagonalisable if and only if $T^k$ is diagonalisable.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5D Q20]
+Suppose $V$ is finite-dimensional and $T\in\mathcal{L}(V)$. Prove that $T$ is diagonalisable if and only if the dual operator $T^*$ is diagonalisable.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5E Q2]
+Suppose $\mathcal{E}$ is a subset of $\mathcal{L}(V)$ and every element of $\mathcal{E}$ is diagonalisable. Prove that there exists a basis of $V$ with respect to which every element of $\mathcal{E}$ has a diagonal matrix if and only if every pair of elements of $\mathcal{E}$ commutes.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5E Q3]
+Suppose $S,T\in\mathcal{L}(V)$ are such that $ST=TS$. Suppose $p\in\FF[z]$.
+\begin{enumerate}[label=(\roman*)]
+\item Prove that $\ker p(S)$ is invariant under $T$.
+\item Prove that $\im p(S)$ is invariant under $T$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5E Q4]
+Prove or give a counterexample: If $A$ is a diagonal matrix and $B$ is an upper-triangular matrix of the same size as $A$, then $A$ and $B$ commute.
+\end{exercise}
+
+\begin{solution}
+Counterexample:
+\begin{align*}
+\begin{pmatrix}
+1&0\\
+0&2
+\end{pmatrix}
+\begin{pmatrix}
+0&1\\
+0&0
+\end{pmatrix}&=
+\begin{pmatrix}
+0&1\\
+0&0
+\end{pmatrix}\\
+\begin{pmatrix}
+0&1\\
+0&0
+\end{pmatrix}
+\begin{pmatrix}
+1&0\\
+0&2
+\end{pmatrix}&=
+\begin{pmatrix}
+0&2\\
+0&0
+\end{pmatrix}
+\end{align*}
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 5E Q5]
+Prove that a pair of operators on a finite-dimensional vector space commute if and only if their dual operators commute.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 5E Q7]
+Suppose $V$ is a complex vector space, $S\in\mathcal{L}(V)$ is diagonalisable, and $T\in\mathcal{L}(V)$ commutes with $S$. Prove that there is a basis of $V$ such that $S$ has a diagonal matrix with respect to this basis and $T$ has an upper-triangular matrix with respect to this basis.
+\end{exercise}

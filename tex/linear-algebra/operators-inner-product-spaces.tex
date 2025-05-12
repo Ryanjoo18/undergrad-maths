@@ -1,0 +1,1803 @@
+\chapter{Operators on Inner Product Spaces}\label{chap:operators-inner-product-spaces}
+\section{Self-Adjoint and Normal Operators}
+\subsection{Adjoints}
+\begin{definition}[Adjoint]
+The \vocab{adjoint}\index{adjoint} of $T\in\mathcal{L}(V,W)$ is the function $T^*\colon W\to V$ such that
+\[\angbrac{Tv,w}=\angbrac{v,T^*w}\quad(v\in V,\:w\in W).\]
+\end{definition}
+
+To see why the definition above
+makes sense, suppose $T\in\mathcal{L}(V,W)$. Fix $w\in W$. Consider the linear functional on $V$ which maps
+\[v\mapsto\angbrac{Tv,w}.\]
+(Note that this linear functional depends on $T$ and $w$.) 
+By the Riesz representation theorem, there exists a unique vector in $V$ such that this linear functional is given by taking the inner product with it. We call this unique vector $T^*w$. In other words, $T^*w$ is the unique vector in $V$ such that
+\[\angbrac{Tv,w}=\angbrac{v,T^*w}\]
+for every $v\in V$.
+
+\begin{remark}
+In the equation above, the inner product on the LHS takes place in $W$, and the inner product on the right takes place in $V$. However, we use the same notation $\angbrac{\cdot,\cdot}$ for both inner products.
+\end{remark}
+
+We check that if $T\in\mathcal{L}(V,W)$, then $T^*\in\mathcal{L}(W,V)$; that is, the adjoint of a linear map is a linear map.
+\begin{enumerate}[label=(\roman*)]
+\item Let $v\in V$, $w_1,w_2\in W$. Then
+\begin{align*}
+\angbrac{Tv,w_1+w_2}
+&=\angbrac{Tv,w_1}+\angbrac{Tv,w_2}\\
+&=\angbrac{v,T^*w_1}+\angbrac{v,T^*w_2}\\
+&=\angbrac{v,T^*w_1+T^*w_2}.
+\end{align*}
+By the Riesz representation theorem, this implies that $T^*(w_1+w_2)=T^*w_1+T^*w_2$.
+
+\item Let $v\in V$, $\lambda\in\FF$, $w\in W$. Then
+\begin{align*}
+\angbrac{Tv,\lambda w}
+&=\overline{\lambda}\angbrac{Tv,w}\\
+&=\overline{\lambda}\angbrac{v,T^*w}\\
+&=\angbrac{v,\lambda T^*w}.
+\end{align*}
+By the Riesz representation theorem, this implies that $T^*(\lambda w)=\lambda T^*w$.
+\end{enumerate}
+
+\begin{remark}
+To compute $T^*$, start with a formula for $\angbrac{Tv,w}$, then manipulate it to get \emph{only} $v$ in the first slot; the entry in the second slot will then be $T^*w$.
+\end{remark}
+
+\begin{lemma}[Properties of adjoint]
+Suppose $T\in\mathcal{L}(V,W)$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $(S+T)^*=S^*+T^*$ for all $S\in\mathcal{L}(V,W)$
+\item $(\lambda T)^*=\overline{\lambda}T^*$ for all $\lambda\in\FF$
+\item $(T^*)^*=T$
+\item $(ST)^*=T^*S^*$ for all $S\in\mathcal{L}(W,U)$, where $U$ is a finite-dimensional inner product space over $\FF$
+\item $I^*=I$, where $I$ is the identity operator on $V$
+\item if $T$ is invertible, then $T^*$ is invertible, and $(T^*)^{-1}=(T^{-1})^*$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $v\in V$, $w\in V$.
+\begin{enumerate}[label=(\roman*)]
+\item If $S\in\mathcal{L}(V,W)$, then
+\begin{align*}
+\angbrac{(S+T)v,w}
+&=\angbrac{Sv,w}+\angbrac{Tv,w}\\
+&=\angbrac{v,S^*w}+\angbrac{v,T^*w}\\
+&=\angbrac{v,(S^*+T^*)w}.
+\end{align*}
+Hence $(S+T)^*w=(S^*+T^*)w$.
+
+\item Let $\lambda\in\FF$, then
+\[\angbrac{(\lambda T)v,w}
+=\lambda\angbrac{Tv,w}
+=\lambda\angbrac{v,T^*w}
+=\angbrac{v,\overline{\lambda}T^*w}.\]
+Hence $(\lambda T)^*w=\overline{\lambda}T^*w$.
+
+\item We have
+\[\angbrac{T^*w,v}
+=\overline{\angbrac{v,T^*w}}
+=\overline{\angbrac{Tv,w}}
+=\angbrac{w,Tv}.\]
+Hence $(T^*)^*v=Tv$.
+
+\item Let $S\in\mathcal{L}(W,U)$, $u\in U$. Then
+\[\angbrac{(ST)v,u}
+=\angbrac{S(Tv),u}
+=\angbrac{Tv,S^*u}
+=\angbrac{v,T^*(S^*u)}.\]
+Hence $(ST)^*u=T^*S^*u$.
+
+\item Let $u\in V$. Then
+\[\angbrac{Iu,v}=\angbrac{u,v}.\]
+Hence $I^*v=v$.
+
+\item Suppose $T$ is invertible. Then $T^{-1}T=I$. Taking adjoints of both sides and applying (iv) and (v) gives
+\[T^*(T^{-1})^*=I.\]
+Similarly, the equation $TT^{-1}=I$ implies
+\[(T^{-1})^*T^*=I.\]
+Hence $(T^{-1})^*$ is the inverse of $T^*$.
+\end{enumerate}
+\end{proof}
+
+If $\FF=\RR$, then the map $T\mapsto T^*$ is a linear map from $\mathcal{L}(V,W)$ to $\mathcal{L}(W,V)$, as follows from (i) and (ii). However if $\FF=\CC$, then this map is not linear due to the complex conjugate in (ii).
+
+The next result shows the relationship between the kernel and image of a linear map and its adjoint.
+
+\begin{lemma}[Kernel and image of $T^*$]\label{lemma:kernel-image-adjoint}
+Suppose $T\in\mathcal{L}(V,W)$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $\ker T^*=(\im T)^\perp$
+\item $\im T^*=(\ker T)^\perp$
+\item $\ker T=(\im T^*)^\perp$
+\item $\im T=(\ker T^*)^\perp$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Let $w\in W$. Then
+\begin{align*}
+w\in\ker T^*
+&\iff T^*w=0\\
+&\iff\angbrac{v,T^*w}=0\quad\forall v\in V\\
+&\iff\angbrac{Tv,w}=0\quad\forall v\in V\\
+&\iff w\in(\im T)^\perp.
+\end{align*}
+Hence $\ker T^*=(\im T)^\perp$.
+
+\item Replace $T$ with $T^*$ in (iv).
+
+\item Replace $T$ with $T^*$ in (i), and use the fact that $(T^*)^*=T$.
+
+\item Take the orthogonal complement of both sides of (i), and use the fact that $U=(U^\perp)^\perp$ if $U\le V$.
+\end{enumerate}
+\end{proof}
+
+As we will soon see, the next definition is closely related to the matrix of the adjoint of a linear map.
+
+\begin{definition}[Conjugate transpose]
+The \vocab{conjugate transpose}\index{conjugate transpose} of a $m\times n$ matrix $A$ is the $n\times m$ matrix $A^*$ obtained by taking the complex conjugate of each entry of $A^T$.
+\end{definition}
+
+That is, $(A^*)_{ij}=\overline{a_{ji}}$.
+
+The next result shows how to compute the matrix of $T^*$ from the matrix of $T$.
+
+\begin{lemma}
+Let $T\in\mathcal{L}(V,W)$. Suppose $\{e_1,\dots,e_n\}$ is an orthonormal basis of $V$, and $\{f_1,\dots,f_m\}$ is an orthonormal basis of $W$. Then
+\[\mathcal{M}(T^*)=\mathcal{M}(T)^*.\]
+\end{lemma}
+
+\begin{remark}
+$\mathcal{M}(T;\{e_1,\dots,e_n\},\{f_1,\dots,f_m\})$ and $\mathcal{M}(T^*;\{f_1,\dots,f_m\},\{e_1,\dots,e_n\})$.
+\end{remark}
+
+\begin{proof}
+Let $\mathcal{M}(T)=A$, $\mathcal{M}(T^*)=B$.
+
+Since $\{f_1,\dots,f_m\}$ is an orthonormal basis of $W$, we can write
+\[Te_j=\angbrac{Te_j,f_1}f_1+\cdots+\angbrac{Te_j,f_m}f_m\]
+where $j=1,\dots,n$.
+Thus $A_{ij}=\angbrac{Te_j,f_i}$.
+
+Replacing $T$ with $T^*$, and interchanging $\{e_1,\dots,e_n\}$ and $\{f_1,\dots,f_m\}$ gives
+\[B_{ij}=\angbrac{T^*f_j,e_i}=\angbrac{f_j,Te_i}=\overline{\angbrac{Te_i,f_j}}=\overline{A_{ji}}.\]
+
+Hence $\mathcal{M}(T^*)=\mathcal{M}(T)^*$.
+\end{proof}
+\pagebreak
+
+\subsection{Self-Adjoint Operators}
+\begin{definition}[Self-adjoint operator]
+An operator is \vocab{self-adjoint}\index{self-adjoint operator} if it equals its adjoint.
+\end{definition}
+
+That is, $T\in\mathcal{L}(V)$ is self-adjoint if $T=T^*$, i.e.,
+\[\angbrac{Tv,w}=\angbrac{v,Tw}\quad(v,w\in V).\]
+
+\begin{lemma}\label{lemma:eigenvalue-self-adjoint-real}
+Every eigenvalue of a self-adjoint operator is real.
+\end{lemma}
+
+\begin{proof}
+Suppose $T$ is a self-adjoint operator on $V$. Let $\lambda$ be an eigenvalue of $T$, and let $v\in V\setminus\{\vb{0}\}$ be an eigenvector corresponding to $\lambda$, i.e., $Tv=\lambda v$.
+Then
+\[\lambda\norm{v}^2
+=\angbrac{\lambda v,v}
+=\angbrac{Tv,v}
+=\angbrac{v,Tv}
+=\angbrac{v,\lambda v}
+=\overline{\lambda}\norm{v}^2.\]
+Since $v\neq\vb{0}$, we have $\lambda=\overline{\lambda}$, which means that $\lambda$ is real.
+\end{proof}
+
+\begin{lemma}\label{lemma:Tv-orthogonal-to-v-T-0}
+Suppose $V$ is a \emph{complex} inner product space, and $T\in\mathcal{L}(V)$. Then
+\[\angbrac{Tv,v}=0\quad\forall v\in V\iff T=0.\]
+\end{lemma}
+
+\begin{remark}
+This result does not hold for real inner product spaces. For instance, the operator $T\in\mathcal{L}(\RR^2)$ that is a counterclockwise rotation of $90^\circ$ around the origin; thus $T(x,y)=(-y,x)$. Notice that $Tv$ is orthogonal to $v$ for every $v\in\RR^2$, even though $T\neq0$.
+\end{remark}
+
+\begin{proof} \
+
+\fbox{$\impliedby$} Suppose $T=0$. If $u,w\in V$, then
+\begin{align*}
+\angbrac{Tu,w}
+&=\frac{\angbrac{T(u+w),u+w}-\angbrac{T(u-w),u-w}}{4}\\
+&+\frac{\angbrac{T(u+iw),u+iw}-\angbrac{T(u-iw),u-iw}}{4}i.
+\end{align*}
+Note that each term on the RHS is of the form $\angbrac{Tv,v}$ for appropriate $v\in V$.
+
+\fbox{$\implies$} Suppose $\angbrac{Tv,v}=0$ for every $v\in V$. 
+
+Then the equation above implies that $\angbrac{Tu,w}=0$ for all $u,w\in V$. Taking $w=Tu$ for every $u\in V$, we obtain $Tu=\vb{0}$ for every $u\in V$. Hence $T=0$ as desired.
+\end{proof}
+
+\begin{lemma}
+Suppose $V$ is a \emph{complex} inner product space, and $T\in\mathcal{L}(V)$. Then
+\[T\text{ is self-adjoint}\iff\angbrac{Tv,v}\in\RR\quad\forall v\in V.\]
+\end{lemma}
+
+\begin{remark}
+This result does not hold for real inner product spaces, by considering any operator on a real inner product space that is not self-adjoint.
+\end{remark}
+
+\begin{proof}
+If $v\in V$, then
+\begin{equation*}\tag{I}
+\angbrac{T^*v,v}=\overline{\angbrac{v,T^*v}}=\overline{\angbrac{Tv,v}}.
+\end{equation*}
+where the second equality follows since $T$ is self-adjoint. 
+Thus
+\begin{align*}
+T\text{ is self-adjoint}
+&\iff T=T^*\\
+&\iff T-T^*=0\\
+&\iff\angbrac{(T-T^*)v,v}=0\quad\forall v\in V&&[\text{by \ref{lemma:Tv-orthogonal-to-v-T-0}}]\\
+&\iff\angbrac{Tv,v}=\angbrac{T^*v,v}\quad\forall v\in V\\
+&\iff\angbrac{Tv,v}=\overline{\angbrac{Tv,v}}\quad\forall v\in V&&[\text{by (I)}]\\
+&\iff\angbrac{Tv,v}\in\RR\quad\forall v\in V.
+\end{align*}
+\end{proof}
+
+On a real inner product space $V$, a non-zero operator $T$ might satisfy $\angbrac{Tv,v}=0$ for all $v\in V$. 
+However, the next result shows that this cannot happen for a self-adjoint operator.
+
+\begin{lemma}
+Suppose $T$ is a self-adjoint operator on $V$. Then
+\[\angbrac{Tv,v}=0\quad\forall v\in V\iff T=0.\]
+\end{lemma}
+
+\begin{proof}
+We have already proved this (without the hypothesis that $T$ is self-adjoint) when $V$ is a complex inner product space (see \ref{lemma:Tv-orthogonal-to-v-T-0}). Thus we can assume that $V$ is a real inner product space.
+
+\fbox{$\impliedby$} Let $u,v\in V$, then
+\begin{equation*}\tag{I}
+\angbrac{Tu,w}=\frac{\angbrac{T(u+w),u+w}-\angbrac{T(u-w),u-w}}{4}
+\end{equation*}
+as can be proved by computing the RHS using $\angbrac{Tw,u}=\angbrac{w,Tu}=\angbrac{Tu,w}$, where the first equality holds because $T$ is self-adjoint, and the second equality holds because we are working in a real inner product space.
+
+\fbox{$\implies$} Suppose $\angbrac{Tv,v}=0$ for every $v\in V$.
+
+Since each term on the RHS of (I) is of the form $\angbrac{Tv,v}$ for appropriate $v$, this implies that $\angbrac{Tu,w}=0$ for all $u,w\in V$. 
+Thus taking $w=Tu$, we obtain $Tu=\vb{0}$ for every $u\in V$. 
+Hence $T=0$, as desired.
+\end{proof}
+\pagebreak
+
+\subsection{Normal Operators}
+\begin{definition}[Normal operator]
+An operator is \vocab{normal}\index{normal operator} if it commutes with its adjoint.
+\end{definition}
+
+That is, $T\in\mathcal{L}(V)$ is normal if $TT^*=T^*T$.
+
+\begin{remark}
+Every self-adjoint operator is normal, but not vice versa.
+\end{remark}
+
+The next result provides a useful characterisation of normal operators.
+
+\begin{lemma}[Characterisation of normal operators]\label{lemma:normal-operators-characterisation}
+Suppose $T\in\mathcal{L}(V)$. Then
+\[T\text{ is normal}\iff\norm{Tv}=\norm{T^*v}\quad\forall v\in V.\]
+\end{lemma}
+
+\begin{proof}
+We have
+\begin{align*}
+T\text{ is normal}
+&\iff TT^*=T^*T\\
+&\iff T^*T-TT^*=0\\
+&\iff\angbrac{(T^*T-TT^*)v,v}=0\quad\forall v\in V\\
+&\iff\angbrac{T^*Tv,v}=\angbrac{TT^*v=v}\quad\forall v\in V\\
+&\iff\angbrac{Tv,Tv}=\angbrac{T^*v,T^*v}\quad\forall v\in V\\
+&\iff\norm{Tv}=\norm{T^*v}\quad\forall v\in V.
+\end{align*}
+\end{proof}
+
+The next result presents several consequences of the result above. 
+
+\begin{lemma}\label{lemma:normal-operator-kernel-image-eigenvector}
+Suppose $T\in\mathcal{L}(V)$ is normal. Then
+\begin{enumerate}[label=(\roman*)]
+\item $\ker T=\ker T^*$
+\item $\im T=\im T^*$
+\item $V=\ker T\oplus\im T$
+\item $T-\lambda I$ is normal for every $\lambda\in\FF$
+\item if $v\in V$ and $\lambda\in\FF$, then $Tv=\lambda v\iff T^*v=\overline{\lambda}v$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Let $v\in V$. Then
+\begin{align*}
+v\in\ker T
+&\iff Tv=\vb{0}\\
+&\iff\norm{Tv}=0\\
+&\iff\norm{T^*v}=0&&[\text{by \ref{lemma:normal-operators-characterisation}}]\\
+&\iff T^*v=\vb{0}\\
+&\iff v\in\ker T^*
+\end{align*}
+
+\item We have
+\begin{align*}
+\im T&=(\ker T^*)^\perp&&[\text{by \ref{lemma:kernel-image-adjoint}}]\\
+&=(\ker T)^\perp&&[\text{by (i)}]\\
+&=\im T^*&&[\text{by \ref{lemma:kernel-image-adjoint}}]
+\end{align*}
+
+\item We have
+\begin{align*}
+V&=(\ker T)\oplus(\ker T)^\perp\\
+&=\ker T\oplus\im T^*&&[\text{by \ref{lemma:kernel-image-adjoint}}]\\
+&=\ker T\oplus\im T&&[\text{by (ii)}]
+\end{align*}
+
+\item Let $\lambda\in\FF$, then
+\begin{align*}
+(T-\lambda I)(T-\lambda I)^*
+&=(T-\lambda I)(T^*-\overline{\lambda}I)\\
+&=TT^*-\overline{\lambda}T-\lambda T^*+|\lambda|^2 I\\
+&=T^*T-\overline{\lambda}T-\lambda T^*+|\lambda|^2 I\\
+&=(T^*-\overline{\lambda}I)(T-\lambda I)\\
+&=(T-\lambda I)^*(T-\lambda I).
+\end{align*}
+Thus $T-\lambda I$ commutes with its adjoint. Hence $T-\lambda I$ is normal.
+
+\item Let $v\in V$, $\lambda\in\FF$. Then (iv) and \ref{lemma:normal-operators-characterisation} imply that
+\[\norm{(T-\lambda I)v}=\norm{(T-\lambda I)^*v}=\norm{(T^*-\overline{\lambda}I)v}.\]
+Thus $\norm{(T-\lambda I)v}=0$ if and only if $\norm{(T^*-\overline{\lambda}I)v}=0$. Hence $Tv=\lambda v$ if and only if $T^*v=\overline{\lambda}v$.
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+Suppose $T\in\mathcal{L}(V)$ is normal. Then the eigenvectors of $T$ corresponding to distinct eigenvalues are orthogonal.
+\end{proposition}
+
+\begin{proof}
+Let $\alpha,\beta$ be distinct eigenvalues of $T$, with corresponding eigenvectors $u,v$. Thus $Tu=\lambda u$ and $Tv=\beta v$.
+By \ref{lemma:normal-operator-kernel-image-eigenvector}, $Tv=\beta v\iff T^*v=\overline{\beta}v$.
+Thus
+\begin{align*}
+(\alpha-\beta)\angbrac{u,v}
+&=\angbrac{\alpha u,v}-\angbrac{\beta u,v}\\
+&=\angbrac{\alpha u,v}-\angbrac{u,\overline{\beta}v}\\
+&=\angbrac{Tu,v}-\angbrac{u,T^*v}\\
+&=0.
+\end{align*}
+Since $\alpha\neq\beta$, the equation above implies that $\angbrac{u,v}=0$. 
+Hence $u$ and $v$ are orthogonal, as desired.
+\end{proof}
+
+\begin{proposition}
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Then $T$ is normal if and only if there exist commuting self-adjoint operators $A$ and $B$ such that $T=A+iB$.
+\end{proposition}
+
+\begin{proof} \
+
+\forward Suppose $T$ is normal.
+\begin{claim}
+$A=\dfrac{T+T^*}{2}$, $B=\dfrac{T-T^*}{2}$.
+\end{claim}
+Then $A$ and $B$ are self-adjoint, and $T=A+iB$. A quick computation shows that
+\[AB-BA=\frac{T^*T-TT^*}{2i}.\]
+Since $T$ is normal, the RHS equals $0$. Thus $AB=BA$, so $A$ and $B$ commute.
+
+\backward Suppose there exist commuting self-adjoint operators $A$ and $B$ such that
+\[T=A+iB.\]
+Then 
+\[T^*=A-iB.\]
+Solving for $A$ and $B$ gives
+\[A=\frac{T+T^*}{2},\quad B=\frac{T-T^*}{2}.\]
+This implies that
+\[AB-BA=\frac{T^*T-TT^*}{2i}.\]
+Since $A$ and $B$ commute, the LHS equals $0$, so $T$ is normal, as desired.
+\end{proof}
+\pagebreak
+
+\section{Spectral Theorem}
+The \emph{spectral theorem} characterises the self-adjoint operators when $\FF=\RR$, and the normal operators when $\FF=\CC$.
+
+\subsection{Real Spectral Theorem}
+To prove the real spectral theorem, we will need two preliminary results. 
+These preliminary results hold on both real and complex inner product spaces, but they are not needed for the proof of the complex spectral theorem.
+
+\begin{lemma}[Invertible quadratic expressions]\label{lemma:invertible-quadratic-expressions}
+Suppose $T\in\mathcal{L}(V)$ is self-adjoint and $b,c\in\RR$ are such that $b^2<4c$. Then
+\[T^2+bT+cI\]
+is an invertible operator.
+\end{lemma}
+
+\begin{proof}
+It suffices to prove that $T^2+bT+cI$ is injective.
+
+Let $v\in V$ be a non-zero vector. Then
+\begin{align*}
+&\angbrac{(T^2+bT+cI)v,v}\\
+&=\angbrac{T^2v,v}+b\angbrac{Tv,v}+c\angbrac{v,v}\\
+&=\angbrac{Tv,Tv}+b\angbrac{Tv,v}+c\norm{v}^2\\
+&\ge\norm{Tv}^2-|b|\norm{Tv}\norm{v}+c\norm{v}^2&&[\text{by Cauchy--Schwarz inequality}]\\
+&=\brac{\norm{Tv}-\frac{|b|\norm{v}}{2}}^2+\brac{c-\frac{b^2}{4}}\norm{v}^2>0&&[\text{completing the square}]
+\end{align*}
+This implies that $(T^2+bT+cI)v\neq\vb{0}$ for all $v\neq\vb{0}$. Thus $\ker(T^2+bT+cI)=\{\vb{0}\}$, so $T^2+bT+cI$ is injective.
+\end{proof}
+
+\begin{lemma}[Minimal polynomial of self-adjoint operator]\label{lemma:minimal-polynomial-self-adjoint-operator}
+Suppose $T\in\mathcal{L}(V)$ is self-adjoint. Then the minimal polynomial of $T$ equals
+\[(z-\lambda_1)\cdots(z-\lambda_m)\]
+for some $\lambda_1,\dots,\lambda_m\in\RR$.
+\end{lemma}
+
+\begin{proof}
+First suppose $\FF=\CC$. By \ref{thrm:eigenvalues-minimal-polynomial-zeros}, the zeros of the minimal polynomial of $T$ are the eigenvalues of $T$. 
+By \ref{lemma:eigenvalue-self-adjoint-real}, all eigenvalues of $T$ are real. 
+Thus the second version of the fundamental theorem of algebra (\ref{thrm:fundamental-theorem-of-algebra-second-version}) tells us that the minimal polynomial of $T$ has the desired form.
+
+Now suppose $\FF=\RR$. By the factorisation of a polynomial over $\RR$ (\ref{thrm:factorisation-polynomial-R}), there exist $\lambda_1,\dots,\lambda_m\in\RR$ and $b_1,\dots,b_N,c_1,\dots,c_N\in\RR$ with ${b_i}^2<4c_i$ for each $i$ such that the minimal polynomial of $T$ equals
+\begin{equation*}\tag{I}
+(z-\lambda_1)\cdots(z-\lambda_m)(z^2+b_1z+c_1)\cdots(z^2+b_Nz+c_N);
+\end{equation*}
+here either $m$ or $N$ might equal $0$, meaning that there are no terms of the corresponding form. Now
+\[(T-\lambda_1 I)\cdots(T-\lambda_m I)(T^2+b_1 T+c_1 I)\cdots(T^2+b_N T+c_N I)=0.\]
+If $N>0$, then we could multiply both sides of the equation above on the right by the inverse of $T^2+b_N T+c_N I$ (which is an invertible operator, by \ref{lemma:invertible-quadratic-expressions}) to obtain a polynomial expression of $T$ that equals $0$. 
+The corresponding polynomial would have degree two less than the degree of (I), violating the minimality of the degree of the polynomial with this property. 
+Thus we must have $N=0$, which means that the minimal polynomial in (I) has the form $(z-\lambda_1)\cdots(z-\lambda_m)$, as desired.
+\end{proof}
+
+The next result, which gives a complete description of the self-adjoint operators on a real inner product space, is one of the major theorems in linear algebra.
+
+\begin{theorem}[Real spectral theorem]\label{thrm:real-spectral-theorem}
+Suppose $\FF=\RR$ and $T\in\mathcal{L}(V)$. Then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $T$ is self-adjoint.
+\item $T$ has a diagonal matrix with respect to some orthonormal basis of $V$.
+\item $V$ has an orthonormal basis consisting of eigenvectors of $T$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} \
+
+\fbox{(i)$\implies$(ii)} Suppose $T$ is self-adjoint. 
+Our results on minimal polynomials, specifically \ref{prop:upper-triangular-matrix-orthonormal-basis} and \ref{lemma:minimal-polynomial-self-adjoint-operator}, imply that $T$ has an upper-triangular matrix $\mathcal{M}(T)$ with respect to some orthonormal basis of $V$. With respect to this orthonormal basis, $\mathcal{M}(T^*)=\mathcal{M}(T)^T$. 
+
+However, $T^*=T$.
+Thus $\mathcal{M}(T)^T=\mathcal{M}(T)$. Since $\mathcal{M}(T)$ is upper-triangular, this means that all entries of the matrix above and below the diagonal are $0$. Hence the matrix of $T$ is a diagonal matrix with respect to the orthonormal basis.
+
+\fbox{(ii)$\implies$(i)} Suppose $T$ has a diagonal matrix $\mathcal{M}(T)$ with respect to some orthonormal basis of $V$. 
+
+That diagonal matrix equals its transpose. Thus with respect to that basis, $\mathcal{M}(T^*)=\mathcal{M}(T)$. Hence $T^*=T$, so $T$ is self-adjoint.
+
+\fbox{(ii)$\iff$(iii)} This follows from the definitions.
+\end{proof}
+\pagebreak
+
+\subsection{Complex Spectral Theorem}
+The next result gives a complete description of the normal operators on a complex inner product space.
+
+\begin{theorem}[Complex spectral theorem]\label{thrm:complex-spectral-theorem}
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $T$ is normal.
+\item $T$ has a diagonal matrix with respect to some orthonormal basis of $V$.
+\item $V$ has an orthonormal basis consisting of eigenvectors of $T$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} \
+
+\fbox{(i)$\implies$(ii)} Suppose $T$ is normal.
+
+By Schur's theorem, there exists an orthonormal basis $\{e_1,\dots,e_n\}$ of $V$, with respect to which $T$ has an upper-triangular matrix:
+\[\mathcal{M}(T;\{e_1,\dots,e_n\})=\begin{pmatrix}
+A_{11}&\cdots&A_{1n}\\
+&\ddots&\vdots\\
+0&&A_{nn}
+\end{pmatrix}.\]
+\begin{claim}
+$\mathcal{M}(T)$ is a diagonal matrix.
+\end{claim}
+We see that
+\begin{align*}
+\norm{Te_1}^2&=|A_{11}|^2\\
+\norm{T^*e_1}^2&=|A_{11}|^2+|A_{12}|^2+\cdots+|A_{1n}|^2.
+\end{align*}
+Since $T$ is normal, $\norm{Te_1}=\norm{T^*e_1}$ (by \ref{lemma:normal-operators-characterisation}). Thus the two equations above imply that all entries in the first row of $\mathcal{M}(T)$, except possibly the first entry $A_{11}$, equal $0$.
+
+Now since $A_{12}=0$, we have
+\begin{align*}
+\norm{Te_2}^2&=|A_{22}|^2\\
+\norm{T^*e_2}^2&=|A_{22}|^2+|A_{23}|^2+\cdots+|A_{2n}|^2.
+\end{align*}
+Since $T$ is normal, $\norm{Te_2}=\norm{T^*e_2}$. Thus the two equations above imply that all entries in the second row of $\mathcal{M}(T)$, except possibly the diagonal entry $A_{22}$, equal $0$.
+
+Continuing in this fashion, we see that all non-diagonal entries in $\mathcal{M}(T)$ equal 0. Thus $\mathcal{M}(T)$ is a diagonal matrix.
+
+\fbox{(ii)$\implies$(i)} Suppose $T$ has a diagonal matrix with respect to some orthonormal basis of $V$. The matrix of $T^*$ (with respect to the same basis) is obtained by taking the conjugate transpose of the matrix of $T$; hence $T^*$ also has a diagonal matrix. Any two diagonal matrices commute; thus $T$ commutes with $T^*$, which means that $T$ is normal.
+
+\fbox{(ii)$\iff$(iii)} This follows from the definitions.
+\end{proof}
+\pagebreak
+
+\section{Positive Operators}
+\begin{definition}[Positive operator]
+An operator $T\in\mathcal{L}(V)$ is called \vocab{positive} if
+\begin{enumerate}[label=(\roman*)]
+\item $T$ is self-adjoint, and
+\item $\angbrac{Tv,v}\ge0$ for all $v\in V$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Squared root]
+An operator $R$ is called a \vocab{square root} of an operator $T$ if $R^2=T$.
+\end{definition}
+
+\begin{lemma}[Characterisation of positive operators]\label{lemma:positive-operator-characterisation}
+Let $T\in\mathcal{L}(V)$. Then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $T$ is a positive operator.
+\item $T$ is self-adjoint and all eigenvalues of $T$ are non-negative.
+\item With respect to some orthonormal basis of $V$, the matrix of $T$ is a diagonal matrix with only non-negative numbers on the diagonal.
+\item $T$ has a positive square root.
+\item $T$ has a self-adjoint square root.
+\item $T=R^*R$ for some $R\in\mathcal{L}(V)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+
+\fbox{(i)$\implies$(ii)} Suppose $T$ is positive. Then $T$ is self-adjoint. 
+
+Suppose $\lambda$ is an eigenvalue of $T$, with corresponding eigenvector $v$. Then
+\[0\le\angbrac{Tv,v}=\angbrac{\lambda v,v}=\lambda\angbrac{v,v}.\]
+Thus $\lambda$ is a non-negative number.
+
+\fbox{(ii)$\implies$(iii)} Suppose $T$ is self-adjoint, and all eigenvalues of $T$ are non-negative. 
+
+By the spectral theorem (\ref{thrm:real-spectral-theorem} and \ref{thrm:complex-spectral-theorem}), there exists an orthonormal basis $\{e_1,\dots,e_n\}$ of $V$ consisting of eigenvectors of $T$. 
+Let $\lambda_1,\dots,\lambda_n$ be the eigenvalues of $T$ corresponding to $e_1,\dots,e_n$; thus each $\lambda_i$ is a non-negative number. 
+
+The matrix of $T$ with respect to $\{e_1,\dots,e_n\}$ is the diagonal matrix with $\lambda_1,\dots,\lambda_n$ on the diagonal.
+
+\fbox{(iii)$\implies$(iv)} Suppose $\{e_1,\dots,e_n\}$ is an orthonormal basis of $V$ such that the matrix of $T$ with respect to this basis is a diagonal matrix, with non-negative $\lambda_1,\dots,\lambda_n$ on the diagonal. 
+
+By the linear map lemma, there exists $R\in\mathcal{L}(V)$ such that
+\[Re_i=\sqrt{\lambda_i}e_i\quad(i=1,\dots,n).\]
+\begin{claim}
+$R$ is a positive square root of $T$.
+\end{claim}
+As you should verify, $R$ is a positive operator. Furthermore,
+\[R^2e_i=\lambda_ie_i=Te_i\]
+for each $i$, which implies that $R^2=T$. Thus $R$ is a positive square root of $T$.
+
+\fbox{(iv)$\implies$(v)} Every positive operator is self-adjoint (by definition of positive operator).
+
+\fbox{(v)$\implies$(vi)} Suppose $T$ has a self-adjoint square root. Then there exists a self-adjoint operator $R$ on $V$ such that $T=R^2$. Then $T=R^*R$ (since $R^*=R$).
+
+\fbox{(vi)$\implies$(i)} Let $R\in\mathcal{L}(V)$ be such that $T=R^*R$. Then
+\[T^*=(R^*R)^*=R^*(R^*)^*=R^*R=T.\]
+Hence $T$ is self-adjoint. Now for every $v\in V$,
+\[\angbrac{Tv,v}=\angbrac{R^*Rv,v}=\angbrac{Rv,Rv}\ge0.\]
+Thus $T$ is positive.
+\end{proof}
+
+Every non-negative number has a unique non-negative square root. The next result shows that positive operators enjoy a similar property.
+
+\begin{lemma}
+Every positive operator on $V$ has a unique positive square root.
+\end{lemma}
+
+\begin{proof}
+Suppose $T\in\mathcal{L}(V)$ is positive.
+Suppose $v\in V$ is an eigenvector of $T$.
+Hence there exists a real number $\lambda\ge0$ such that $Tv=\lambda v$.
+
+Let $R$ be a positive square root of $T$. We will prove that $Rv=\sqrt{\lambda}v$. This will imply that the behaviour of $R$ on the eigenvectors of $T$ is uniquely determined. 
+Since there is a basis of $V$ consisting of eigenvectors of $T$ (by the spectral theorem), this will imply that $R$ is uniquely determined.
+
+To prove that $Rv=\sqrt{\lambda}v$, note that the spectral theorem asserts that there is an orthonormal basis $\{e_1,\dots,e_n\}$ of $V$ consisting of eigenvectors of $R$. Since $R$ is a positive operator, all its eigenvalues are non-negative. Thus there exist non-negative numbers $\lambda_1,\dots,\lambda_n$ such that $Re_i=\sqrt{\lambda_i}e_i$ for each $i=1,\dots,n$.
+
+Since $\{e_1,\dots,e_n\}$ is a basis of $V$, we can write
+\[v=a_1e_1+\cdots+a_ne_n\]
+for some $a_1,\dots,a_n\in\FF$. Thus
+\[Rv=a_1\sqrt{\lambda_1}e_1+\cdots+a_n\sqrt{\lambda_n}e_n.\]
+Hence
+\[\lambda v=Tv=R^2v=a_1\lambda_1e_1+\cdots+a_n\lambda_ne_n.\]
+The equation above implies that
+\[a_1\lambda e_1+\cdots+a_n\lambda e_n=a_1\lambda_1e_1+\cdots+a_n\lambda_ne_n.\]
+Thus $a_i(\lambda-\lambda_i)=0$ for each $i=1,\dots,n$. Hence
+\[v=\sum_{\{i\mid\lambda_i=\lambda\}}a_ie_i.\]
+Thus
+\[Rv=\sum_{\{i\mid\lambda_i=\lambda\}}a_i\sqrt{\lambda}e_i=\sqrt{\lambda}v\]
+as desired.
+\end{proof}
+
+\begin{notation}
+For a positive operator $T$, let $\sqrt{T}$ denotes the unique positive square root of $T$.
+\end{notation}
+
+\begin{corollary}
+Suppose $T$ is a positive operator on $V$, and $v\in V$ is such that $\angbrac{Tv,v}=0$. Then $Tv=\vb{0}$.
+\end{corollary}
+
+\begin{proof}
+We have
+\[0=\angbrac{Tv,v}=\angbrac{\sqrt{T}\sqrt{T}v,v}=\angbrac{\sqrt{T}v,\sqrt{T}v}=\norm{\sqrt{T}v}^2.\]
+Hence $\sqrt{T}v=\vb{0}$. Thus $Tv=\sqrt{T}\brac{\sqrt{T}v}=\vb{0}$, as desired.
+\end{proof}
+\pagebreak
+
+\section{Isometries, Unitary Operators, and Matrix Factorisation}
+\subsection{Isometries}
+Linear maps that preserve norms are sufficiently important to deserve a name.
+
+\begin{definition}[Isometry]
+We call $S\in\mathcal{L}(V,W)$ an \vocab{isometry}\index{isometry} if
+\[\norm{Sv}=\norm{v}\quad(v\in V).\]
+\end{definition}
+
+That is, an isometry preserves norms.
+
+\begin{lemma}
+Every isometry is injective.
+\end{lemma}
+
+\begin{proof}
+Let $S\in\mathcal{L}(V,W)$ be an isometry. Then
+\[v\in\ker S
+\iff Sv=\vb{0}
+\iff\norm{Sv}=0
+\iff\norm{v}=0
+\iff v=\vb{0}.\]
+Thus $\ker S=\{\vb{0}\}$.
+\end{proof}
+
+\begin{lemma}[Characterisation of isometries]\label{lemma:isometry-characterisation}
+Suppose $S\in\mathcal{L}(V,W)$. Suppose $\{e_1,\dots,e_n\}$ is an orthonormal basis of $V$, and $\{f_1,\dots,f_m\}$ is an orthonormal basis of $W$. Then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $S$ is an isometry.
+\item $S^*S=I$.
+\item $\angbrac{Su,Sv}=\angbrac{u,v}$ for all $u,v\in V$.
+\item $\{Se_1,\dots,Se_n\}$ is an orthonormal set in $W$.
+\item The columns of $\mathcal{M}(S;\{e_1,\dots,e_n\},\{f_1,\dots,f_m\})$ form an orthonormal set in $\FF^m$ with respect to the Euclidean inner product.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+
+\fbox{(i)$\implies$(ii)} Suppose $S$ is an isometry. Let $v\in V$, then
+\begin{align*}
+\angbrac{(I-S^*S)v,v}
+&=\angbrac{v,v}-\angbrac{S^*Sv,v}\\
+&=\norm{v}^2-\angbrac{Sv,Sv}\\
+&=\norm{v}^2-\norm{Sv}^2=0.
+\end{align*}
+Hence the self-adjoint operator $I-S^*S$ equals $0$ (by 7.16). Thus $S^*S=I$.
+
+\fbox{(ii)$\implies$(iii)} Suppose $S^*S=I$. Let $u,v\in V$. Then
+\[\angbrac{Su,Sv}=\angbrac{S^*Su,u}=\angbrac{Iu,v}=\angbrac{u,v}.\]
+
+\fbox{(iii)$\implies$(iv)} Suppose $\angbrac{Su,Sv}=\angbrac{u,v}$ for all $u,v\in V$. 
+
+If $i,j\in\{1,\dots,n\}$, then
+\[\angbrac{Se_i,Se_j}=\angbrac{e_i,e_j}.\]
+Hence $\{Se_1,\dots,Se_n\}$ is an orthonormal set in $W$.
+
+\fbox{(iv)$\implies$(v)} Suppose $\{Se_1,\dots,Se_n\}$ is an orthonormal set in $W$.
+
+Let $A=\mathcal{M}(S;\{e_1,\dots,e_n\},\{f_1,\dots,f_m\})$. If $j,k\in\{1,\dots,n\}$, the $j$-th and $k$-th columns of $A$ are 
+\[\begin{pmatrix}
+A_{1j}\\\vdots\\A_{mj}
+\end{pmatrix}\quad\text{and}\quad
+\begin{pmatrix}
+A_{1k}\\\vdots\\A_{mk}
+\end{pmatrix}\]
+so the Euclidean inner product in $\FF^m$ of the two columns is
+\begin{align*}\tag{I}
+\sum_{i=1}^{m}A_{ij}\overline{A_{ik}}
+&=\angbrac{\sum_{i=1}^{m}A_{ij}f_i,\sum_{i=1}^{m}A_{ik}f_i}\\
+&=\angbrac{Se_j,Se_k}\\
+&=\begin{cases}
+1&(j=k)\\
+0&(j\neq k)
+\end{cases}
+\end{align*}
+Thus the columns of $A$ form an orthonormal set in $\FF^m$.
+
+\fbox{(v)$\implies$(i)} Suppose the columns of the matrix $A$ defined above form an orthonormal set in $\FF^m$. 
+Then (I) shows that $\{Se_1,\dots,Se_n\}$ is an orthonormal set in $W$. 
+
+Let $v\in V$. Then
+\[v=\angbrac{v,e_1}e_1+\cdots+\angbrac{v,e_n}e_n\]
+and
+\[\norm{v}^2=\absolute{\angbrac{v,e_1}}^2+\cdots+\absolute{\angbrac{v,e_n}}^2.\]
+Applying $S$ gives
+\[Sv=\angbrac{v,e_1}Se_1+\cdots+\angbrac{v,e_n}Se_n\]
+so
+\[\norm{Sv}^2=\absolute{\angbrac{v,e_1}}^2+\cdots+\absolute{\angbrac{v,e_n}}^2.\]
+Thus $\norm{Sv}=\norm{v}$, so $S$ is an isometry.
+\end{proof}
+\pagebreak
+
+\subsection{Unitary Operators}
+\begin{definition}[Unitary operator]
+An operator $S\in\mathcal{L}(V)$ is called \vocab{unitary}\index{unitary operator} if $S$ is an invertible isometry.
+\end{definition}
+
+\begin{lemma}[Characterisation of unitary operators]\label{lemma:unitary-operator-characterisation}
+Suppose $S\in\mathcal{L}(V)$, $\{e_1,\dots,e_n\}$ is an orthonormal basis of $V$. Then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $S$ is a unitary operator.
+\item $S^*S=SS^*=I$.
+\item $S$ is invertible, and $S^{-1}=S^*$.
+\item $\{Se_1,\dots,Se_n\}$ is an orthonormal basis of $V$.
+\item The rows of $\mathcal{M}(S;\{e_1,\dots,e_n\})$ form an orthonormal basis of $\FF^n$ with respect to the Euclidean inner product.
+\item $S^*$ is a unitary operator.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+
+\fbox{(i)$\implies$(ii)} Suppose $S$ is a unitary operator. Then $S$ is an isometry, so $S^*S=I$ (by \ref{lemma:isometry-characterisation}). 
+
+Multiplying both sides by $S^{-1}$ on the right yields $S^*=S^{-1}$. Thus $SS^*=SS^{-1}=I$ as desired.
+
+\fbox{(ii)$\implies$(iii)} This follows from the definitions of invertibility and inverse.
+
+\fbox{(iii)$\implies$(iv)} Suppose $S$ is invertible and $S^{-1}=S^*$. Thus $S^*S=I$. By \ref{lemma:isometry-characterisation}, $\{Se_1,\dots,Se_n\}$ is an orthonormal set in $V$. 
+
+Since this set has length $\dim V$, we conclude that $\{Se_1,\dots,Se_n\}$ is an orthonormal basis of $V$.
+
+\fbox{(iv)$\implies$(v)} Suppose $\{Se_1,\dots,Se_n\}$ is an orthonormal basis of $V$.
+By \ref{lemma:isometry-characterisation}, $S$ is an isometry.
+
+
+
+\fbox{(v)$\implies$(vi)} Suppose the rows of $\mathcal{M}(S;\{e_1,\dots,e_n\})$ form an orthonormal basis of $\FF^n$.
+
+Thus the columns of $\mathcal{M}(S^*;\{e_1,\dots,e_n\})$ form an orthonormal basis of $\FF^n$. By \ref{lemma:isometry-characterisation}, $S^*$ is an isometry.
+
+\fbox{(vi)$\implies$(i)} Suppose $S^*$ is a unitary operator. 
+\end{proof}
+
+\begin{lemma}\label{lemma:unitary-operator-eigenvalue}
+Suppose $\lambda$ is an eigenvalue of a unitary operator. Then $|\lambda|=1$.
+\end{lemma}
+
+\begin{proof}
+Suppose $S\in\mathcal{L}(V)$ is a unitary operator. 
+Let $\lambda$ be an eigenvalue of $S$, with corresponding eigenvector $v$. 
+Then
+\[|\lambda|\norm{v}=\norm{\lambda v}=\norm{Sv}=\norm{v}.\]
+Thus $|\lambda|=1$, as desired.
+\end{proof}
+
+The next result characterises unitary operators on finite-dimensional complex inner product spaces, using the complex spectral theorem as the main tool.
+
+\begin{lemma}
+Suppose $\FF=\CC$ and $S\in\mathcal{L}(V)$. Then $S$ is a unitary operator if and only if there exists an orthonormal basis of $V$ consisting of eigenvectors of $S$ whose corresponding eigenvalues all have absolute value $1$.
+\end{lemma}
+
+\begin{proof} \
+
+\forward Suppose $S$ is a unitary operator. By \ref{lemma:unitary-operator-characterisation}, $S^*S=SS^*=I$. Since $S$ commutes with its adjoint, $S$ is normal.
+
+By the complex spectral theorem (\ref{thrm:complex-spectral-theorem}), there exists an orthonormal basis $\{e_1,\dots,e_n\}$ of $V$ consisting of eigenvectors of $S$.
+By \ref{lemma:unitary-operator-eigenvalue}, every eigenvalue has absolute value $1$.
+
+\backward Let $\{e_1,\dots,e_n\}$ be an orthonormal basis of $V$ consisting of eigenvectors of $S$, whose corresponding eigenvalues $\lambda_1,\dots,\lambda_n$ all have absolute value $1$.
+Then $\{Se_1,\dots,Se_n\}$ is an orthonormal basis of $V$, because
+\begin{align*}
+\angbrac{Se_i,Se_j}
+&=\angbrac{\lambda_ie_i,\lambda_je_j}\\
+&=\lambda_i\overline{\lambda_j}\angbrac{e_i,e_j}\\
+&=\begin{cases}
+0&(i\neq j)\\
+1&(i=j)
+\end{cases}
+\end{align*}
+for all $i,j\in\{1,\dots,n\}$. By \ref{lemma:unitary-operator-characterisation}, $S$ is a unitary operator.
+\end{proof}
+\pagebreak
+
+\subsection{QR Factorisation}
+We begin by making the following definition, transferring the notion of a unitary operator to a unitary matrix.
+
+\begin{definition}[Unitary matrix]
+An $n\times n$ matrix is called \vocab{unitary} if its columns form an orthonormal set in $\FF^n$.
+\end{definition}
+
+\begin{lemma}[Characterisation of unitary matrices]
+Suppose $Q$ is an $n\times n$ matrix. Then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $Q$ is a unitary matrix.
+\item The rows of $Q$ form an orthonormal set in $\FF^n$.
+\item $\norm{Qv}=\norm{v}$ for every $v\in\FF^n$.
+\item $Q^*Q=QQ^*=I_n$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}[QR factorisation]
+Suppose $A$ is a square matrix with linearly independent columns. Then there exist unique unitary matrix $Q$, upper-triangular matrix $R$ with only positive numbers on its diagonal, such that
+\begin{equation}
+A=QR.
+\end{equation}
+\end{theorem}
+
+\begin{proof} \
+
+\fbox{Existence} Let $v_1,\dots,v_n$ denote the columns of $A$ (consider these as elements of $\FF^n$). Apply the Gram--Schmidt procedure to the linearly independent set $\{v_1,\dots,v_n\}$ to obtain an orthonormal basis of $\{e_1,\dots,e_n\}$ of $\FF^n$ such that
+\[\spn(v_1,\dots,v_i)=\spn(e_1,\dots,e_i)\]
+for each $i=1,\dots,n$.
+
+\begin{claim}
+Let $Q$ be the matrix whose columns are $e_1,\dots,e_n$.
+\end{claim}
+
+Then $Q$ is unitary.
+
+\begin{claim}
+Let $R$ be the $n\times n$ matrix defined by $R_{ij}=\angbrac{v_j,e_i}$.
+\end{claim}
+
+If $i>j$, then $e_i$ is orthogonal to $\spn(e_1,\dots,e_j)$ and hence $e_i$ is orthogonal to $v_j$ (by 7.59); thus $R_{ij}=\angbrac{v_j,e_i}=0$, so $R$ is upper-triangular.
+
+
+
+\fbox{Uniqueness} Suppose we also have $A=\hat{Q}\hat{R}$, where $\hat{Q}$ is unitary and $\hat{R}$ is upper-triangular with only positive numbers on its diagonal. 
+\end{proof}
+\pagebreak
+
+\subsection{Cholesky Factorisation}
+We begin this subsection with a characterisation of positive invertible operators in terms of inner products.
+
+\begin{lemma}[Positive invertible operator]
+A self-adjoint operator $T\in\mathcal{L}(V)$ is a positive invertible operator if and only if $\angbrac{Tv,v}>0$ for every non-zero $v\in V$.
+\end{lemma}
+
+\begin{proof} \
+
+\forward Suppose $T$ is a positive invertible operator. 
+
+Let $v\in V\setminus\{\vb{0}\}$. Since $T$ is invertible, $T$ is injective so $Tv\neq\vb{0}$. This implies that $\angbrac{Tv,v}\neq0$ (by 7.43). Hence $\angbrac{Tv,v}>0$.
+
+\backward Suppose $\angbrac{Tv,v}>0$ for every $v\in V\setminus\{\vb{0}\}$. Thus $Tv\neq\vb{0}$ for every $v\in V\setminus\{\vb{0}\}$.
+
+Hence $T$ is injective, and thus is invertible.
+\end{proof}
+
+\begin{definition}[Positive definite]
+A matrix $B\in\mathcal{M}_{n\times n}(\FF)$ is called \vocab{positive definite} if
+\begin{enumerate}[label=(\roman*)]
+\item $B$ is Hermitian ($B^*=B$), and
+\item $\angbrac{Bx,x}>0$ for every non-zero $x\in\FF^n$.
+\end{enumerate} 
+\end{definition}
+
+A matrix is upper triangular if and only if its conjugate transpose is lower triangular (meaning that all entries above the diagonal are $0$). 
+The factorisation below writes a positive definite matrix as the product of a lower triangular matrix and its conjugate transpose.
+
+\begin{theorem}[Cholesky factorisation]
+Suppose $B$ is a positive definite matrix. Then there exists a unique upper-triangular matrix $R$ with only positive numbers on its diagonal such that
+\begin{equation}
+B=R^*R.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+\pagebreak
+
+\section{Singular Value Decomposition}
+\subsection{Singular Values}
+We will need the following result in this section.
+
+\begin{lemma}[Properties of $T^*T$]
+Suppose $T\in\mathcal{L}(V,W)$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $T^*T$ is a positive operator on $V$;
+\item $\ker T^*T=\ker T$;
+\item $\im T^*T=\im T$;
+\item $\dim\im T=\dim\im T^*=\dim\im T^*T$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Since
+\[(T^*T)^*=T^*(T^*)^*=T^*T,\]
+$T^*T$ is self-adjoint. 
+
+Let $v\in V$. Then
+\[\angbrac{(T^*T)v,v}=\angbrac{T^*(Tv),v}=\angbrac{Tv,Tv}=\norm{Tv}^2\ge0.\]
+Thus $T^*T$ is a positive operator.
+
+\item \fbox{$\subset$} Let $v\in\ker T^*T$. Then 
+\[\norm{Tv}^2=\angbrac{Tv,Tv}=\angbrac{T^*Tv,v}=\angbrac{\vb{0},v}=0.\]
+Thus $Tv=\vb{0}$. Hence $\ker T^*T\subset\ker T$.
+
+\fbox{$\supset$} Let $v\in\ker T$. Then $Tv=\vb{0}$, so $T^*Tv=\vb{0}$. Hence $\ker T\subset\ker T^*T$.
+
+\item By (i), $T^*T$ is self-adjoint. Thus
+\[\im T^*T=(\ker T^*T)^\perp=(\ker T)^\perp=\ker T^*.\]
+
+\item For the first equality, 
+\[\dim\im T=\dim(\ker T^*)^\perp=\dim W-\dim\ker T^*=\dim\im T^*.\]
+The second equality $\dim\im T^*=\dim\im T^*T$ follows from (iii).
+\end{enumerate}
+\end{proof}
+
+\begin{definition}[Singular values]
+Suppose $T\in\mathcal{L}(V,W)$. The \vocab{singular values} of $T$ are the non-negative square roots of the eigenvalues of $T^*T$
+\[\sigma_1\ge\sigma_2\ge\cdots\ge\sigma_n\ge0,\]
+each included as many times as the dimension of the corresponding eigenspace of $T^*T$.
+\end{definition}
+
+\begin{lemma}[Role of positive singular values]
+Suppose $T\in\mathcal{L}(V,W)$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $T$ is injective $\iff$ $0$ is not a singular value of $T$;
+\item the number of positive singular values of $T$ equals $\dim\im T$;
+\item $T$ is surjective $\iff$ number of positive singular values of $T$ equals $\dim W$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item We have
+\begin{align*}
+T\text{ is injective}
+&\iff\ker T=\{\vb{0}\}\\
+&\iff\ker T^*T=\{\vb{0}\}\\
+&\iff 0\text{ is not an eigenvalue of }T^*T\\
+&\iff 0\text{ is not a singular value of }T.
+\end{align*}
+
+\item The spectral theorem applied to $T^*T$ shows that $\dim\im T^*T$ equals the number of positive eigenvalues of $T^*T$ (counting repetitions). Thus 7.64(d) implies that $\dim\im T$ equals the number of positive singular values of $T$.
+
+\item This follows from (ii) and 2.39.
+\end{enumerate}
+\end{proof}
+
+The next result characterises isometries in terms of singular values.
+
+\begin{lemma}
+Suppose $S\in\mathcal{L}(V,W)$. Then
+\[S\text{ is an isometry}\iff\text{all singular values of $S$ equal $1$.}\]
+\end{lemma}
+
+\begin{proof}
+We have
+\begin{align*}
+S\text{ is an isometry}
+&\iff S^*S=I\\
+&\iff\text{all eigenvalues of $S^*S$ equal $1$}\\
+&\iff\text{all singular values of $S$ equal $1$}
+\end{align*}
+\end{proof}
+\pagebreak
+
+\subsection{SVD for Linear Maps and for Matrices}
+The next result shows that every linear map from $V$ to $W$ has a remarkably clean description in terms of its singular values and orthonormal sets in $V$ and $W$; this is known as \emph{singular value decomposition} (SVD).
+
+\begin{theorem}[Singular value decomposition]
+Suppose $T\in\mathcal{L}(V,W)$ and the positive singular values of $T$ are $\sigma_1,\dots,\sigma_m$. 
+Then there exist orthonormal sets $\{e_1,\dots,e_m\}$ in $V$ and $\{f_1,\dots,f_m\}$ in $W$ such that
+\begin{equation}\label{eqn:svd-linear-maps}
+Tv=\sigma_1\angbrac{v,e_1}f_1+\cdots+\sigma_m\angbrac{v,e_m}f_m
+\end{equation}
+for every $v\in V$.
+\end{theorem}
+
+\begin{proof}
+Let $\sigma_1,\dots,\sigma_n$ denote the singular values of $T$ (thus $n=\dim V$). 
+\begin{enumerate}
+\item Since $T^*T$ is a positive operator, by the spectral theorem, there exists an orthonormal basis $\{e_1,\dots,e_n\}$ of $V$ with
+\[T^*Te_i=\sigma_ie_i^2\quad(i=1,\dots,n).\]
+\item For each $i=1,\dots,m$, let
+\[f_i=\frac{Te_i}{\sigma_i}.\]
+We check that $\{f_1,\dots,f_m\}$ is an orthonormal set in $W$. If $i,j\in\{1,\dots,m\}$, then
+\begin{align*}
+\angbrac{f_i,f_j}
+&=\angbrac{\frac{1}{\sigma_i}Te_i,\frac{1}{\sigma_j}Te_j}\\
+&=\frac{1}{\sigma_i\sigma_j}\angbrac{Te_i,Te_j}\\
+&=\frac{1}{\sigma_i\sigma_j}\angbrac{e_i,T^*Te_j}\\
+&=\frac{\sigma_j}{\sigma_i}\angbrac{e_i,e_j}\\
+&=\begin{cases}
+0&(i\neq j)\\
+1&(i=j)
+\end{cases}
+\end{align*}
+
+\item If $i\in\{1,\dots,n\}$ and $i>m$, then $\sigma_i=0$ and hence $T^*Te_i=0$, which implies that $Te_i=0$.
+
+Let $v\in V$. Then
+\begin{align*}
+Tv&=T\brac{\angbrac{v,e_1}e_1+\cdots+\angbrac{v,e_n}e_n}\\
+&=\angbrac{v,e_1}Te_1+\cdots+\angbrac{v,e_m}Te_m\\
+&=\sigma_1\angbrac{v,e_1}f_1+\cdots+\sigma_m\angbrac{v,e_m}f_m.
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+Suppose $T\in\mathcal{T}(V,W)$, with singular values $\sigma_1,\dots,\sigma_m$. Let $\{e_1,\dots,e_m\}$ and $\{f_1,\dots,f_m\}$ be such that \eqref{eqn:svd-linear-maps} holds. 
+Extend the orthonormal set $\{e_1,\dots,e_m\}$ to an orthonormal basis $\{e_1,\dots,e_{\dim V}\}$ of $V$, and extend the orthonormal set $\{f_1,\dots,f_m\}$ to an orthonormal basis $\{f_1,\dots,f_{\dim W}\}$ of $W$. 
+\eqref{eqn:svd-linear-maps} shows that
+\[Te_i=\begin{cases}
+\sigma_if_i&(1\le i\le m)\\
+0&(m<i\le\dim V)
+\end{cases}\]
+Thus the matrix of $T$ with respect to the orthonormal bases $\{e_1,\dots,e_{\dim V}\}$ and $\{f_1,\dots,f_{\dim W}\}$ is
+\[\mathcal{M}(T)_{ij}=\begin{cases}
+\sigma_i&(1\le i=j\le m)\\
+0&(\text{otherwise})
+\end{cases}\]
+
+If $\dim V=\dim W$ (when $V=W$), then the matrix described in the paragraph above is a diagonal matrix. 
+Let us extend the definition of diagonal matrix to matrices that are not necessarily square:
+
+\begin{quote}
+An $M\times N$ matrix $A$ is called a \emph{diagonal matrix} if all entries of the matrix are $0$ except possibly $A_{ii}$ for $i=1,\dots,\min\{M,N\}$.
+\end{quote}
+
+Then we have shown that \emph{every linear map has a diagonal matrix with respect to some orthonormal bases}.
+
+\begin{theorem}[Singular value decomposition of adjoint and pseudoinverse]
+Suppose $T\in\mathcal{L}(V,W)$ with singular values $\sigma_1,\dots,\sigma_m$. 
+Suppose $\{e_1,\dots,e_m\}$ and $\{f_1,\dots,f_m\}$ are orthonormal sets in $V$ and $W$ such that
+\[Tv=\sigma_1\angbrac{v,e_1}f_1+\cdots+\sigma_m\angbrac{v,e_m}f_m\]
+for every $v\in V$. Then
+\begin{equation}\label{eqn:svd-adjoint}
+T^*w=\sigma_1\angbrac{w,f_1}e_1+\cdots+\sigma_m\angbrac{w,f_m}e_m
+\end{equation}
+and
+\begin{equation}\label{eqn:svd-pseudoinverse}
+T^+w=\frac{\angbrac{w,f_1}}{\sigma_1}e_1+\cdots+\frac{\angbrac{w,f_m}}{\sigma_m}e_m
+\end{equation}
+for every $w\in W$.
+\end{theorem}
+
+\begin{proof} \
+
+\fbox{Adjoint} Let $v\in V$, $w\in W$. Then
+\begin{align*}
+\angbrac{Tv,w}
+&=\angbrac{\sigma_1\angbrac{v,e_1}f_1+\cdots+\sigma_m\angbrac{v,e_m}f_m,w}\\
+&=\sigma_1\angbrac{v,e_1}\angbrac{f_1,w}+\cdots+\sigma_m\angbrac{v,e_m}\angbrac{f_m,w}\\
+&=\angbrac{v,\sigma_1\angbrac{w,f_1}e_1+\cdots+\sigma_m\angbrac{w,f_m}e_m}.
+\end{align*}
+Thus \eqref{eqn:svd-adjoint} follows.
+
+\fbox{Pseudoinverse} Let $w\in W$. Let
+\[v=\frac{\angbrac{w,f_1}}{\sigma_1}e_1+\cdots+\frac{\angbrac{w,f_m}}{\sigma_m}e_m.\]
+Applying $T$ to both sides gives
+\begin{align*}
+Tv&=\frac{\angbrac{w,f_1}}{\sigma_1}Te_1+\cdots+\frac{\angbrac{w,f_m}}{\sigma_m}Te_m\\
+&=\angbrac{w,f_1}f_1+\cdots+\angbrac{w,f_m}f_m\\
+&=P_{\im T}w.
+\end{align*}
+... Thus $v=T^+w$, and \eqref{eqn:svd-pseudoinverse} follows.
+\end{proof}
+
+\begin{theorem}[Singular value decomposition, matrix]
+Suppose $A\in\mathcal{M}_{p\times n}(\FF)$ has rank $m\ge1$. Then
+\begin{equation}\label{eqn:svd-matrix}
+A=U\Sigma V^*
+\end{equation}
+for some $U\in\mathcal{M}_{p\times m}(\FF)$ with orthonormal columns, $\Sigma\in\mathcal{M}_{m\times m}(\FF)$ with positive numbers on the diagonal, $V\in\mathcal{M}_{n\times m}(\FF)$ with orthonormal columns. 
+\end{theorem}
+
+\begin{proof}
+Let $T\colon\FF^n\to\FF^p$ be the linear map whose matrix with respect to the standard bases equals $A$. Then $\dim\im T=m$. Let
+\[Tv=\sigma_1\angbrac{v,e_1}f_1+\cdots+\sigma_m\angbrac{v,e_m}f_m\]
+be a singular value decomposition of $T$.
+
+\begin{claim}
+Let
+\begin{itemize}
+\item $U$ be the $p\times m$ matrix whose columns are $f_1,\dots,f_m$,
+\item $\Sigma$ be the $m\times m$ diagonal matrix whose diagonal entries are $\sigma_1,\dots,\sigma_m$,
+\item $V$ be the $n\times m$ matrix whose columns are $e_1,\dots,e_m$.
+\end{itemize}
+\end{claim}
+
+We now show \eqref{eqn:svd-matrix} holds. 
+Let $\{u_1,\dots,u_m\}$ denote the standard basis of $\FF^m$. For each $i=1,\dots,m$,
+\begin{align*}
+(AV-U\Sigma)u_i
+&=A(Vu_i)-U(\Sigma u_i)\\
+&=Ae_i-U(\sigma_i u_i)\\
+&=\sigma_if_i-\sigma_if_i=0
+\end{align*}
+implies $AV=U\Sigma$. 
+Then multiply both sides by $V^*$ on the right to get
+\[AVV^*=U\Sigma V^*.\]
+\begin{claim}
+$AVV^*=A$.
+\end{claim}
+Note that the rows of $V^*$ are the complex conjugates of $e_1,\dots,e_m$. 
+Thus if $i\in\{1,\dots,m\}$, then the definition of matrix multiplication shows that $V^*e_i=u_i$; hence $VV^*e_i=e_i$. Thus $AVV^*v=Av$ for all $v\in\spn(e_1,\dots,e_m)$.
+
+If $v\in\brac{\spn(e_1,\dots,e_m)}^\perp$, then $Av=0$ (as follows from 7.81) and $V^*v=0$ (as follows from the definition of matrix multiplication). Hence $AVV^*v=Av$ for all $v\in\brac{\spn(e_1,\dots,e_m)}^\perp$.
+
+Since $AVV^*$ and $A$ agree on $\spn(e_1,\dots,e_m)$ and on $\brac{\spn(e_1,\dots,e_m)}^\perp$, we conclude that $AVV^*=A$. Thus \eqref{eqn:svd-matrix} follows.
+\end{proof}
+\pagebreak
+
+\section{Consequences of Singular Value Decomposition}
+\subsection{Norm of Linear Map}
+The singular value decomposition leads to an upper bound for $\norm{Tv}$.
+
+\begin{lemma}\label{lemma:norm-upper-bound}
+Suppose $T\in\mathcal{L}(V,W)$. Then $\norm{Tv}\le\sigma_1\norm{v}$ for all $v\in V$.
+\end{lemma}
+
+\begin{proof}
+Suppose $T\in\mathcal{L}(V,W)$, with singular values $\sigma_1,\dots,\sigma_m$. 
+Let $\{e_1,\dots,e_m\}$ be an orthonormal set in $V$, and $\{f_1,\dots,f_m\}$ be an orthonormal set in $W$ that provide a singular value decomposition of $T$. 
+Thus
+\[Tv=\sigma_1\angbrac{v,e_1}f_1+\cdots+\sigma_m\angbrac{v,e_m}f_m\]
+for all $v\in V$. Then
+\begin{align*}
+\norm{Tv}^2&={\sigma_1}^2|\angbrac{v,e_1}|^2+\cdots+{\sigma_m}^2|\angbrac{v,e_m}|^2\\
+&\le{\sigma_1}^2\brac{|\angbrac{v,e_1}|^2+\cdots+|\angbrac{v,e_m}|^2}\\
+&\le{\sigma_1}^2\norm{v}^2,
+\end{align*}
+where the last inequality follows from Bessel's inequality. 
+Taking square roots on both sides yields the desired inequality.
+\end{proof}
+
+\begin{definition}[Norm of linear map]
+Suppose $T\in\mathcal{L}(V,W)$. Then the \vocab{norm}\index{norm of linear map} of $T$ is
+\[\norm{T}\colonequals\sup_{\norm{v}\le 1}\norm{Tv}.\]
+\end{definition}
+
+\begin{lemma}[Basic properties of norm of linear map]
+Suppose $T\in\mathcal{L}(V,W)$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $\norm{T}\ge0$, where equality holds if and only if $T=0$;\hfill(positive definiteness)
+\item $\norm{\lambda T}=|\lambda|\norm{T}$ for all $\lambda\in\FF$;\hfill(homogeneity)
+\item $\norm{S+T}\le\norm{S}+\norm{T}$ for all $S\in\mathcal{L}(V,W)$.\hfill(triangle inequality)
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Since $\norm{Tv}\ge0$ for every $v\in V$, the definition of $\norm{T}$ implies $\norm{T}\ge0$.
+\item \forward Suppose $\norm{T}=0$. Thus $Tv=\vb{0}$ for all $v\in V$, $\norm{v}\le1$. 
+
+Let $u\in V$, $u\neq\vb{0}$. Then
+\[Tu=\norm{u}T\brac{\frac{u}{\norm{u}}}=\vb{0},\]
+where the last equality holds since $u/\norm{u}$ has norm $1$.
+Since $Tu=\vb{0}$ for all $u\in V$, we have $T=0$.
+
+\backward If $T=0$, then $Tv=\vb{0}$ for all $v\in V$. Hence $\norm{T}=0$.
+
+\item Let $\lambda\in\FF$. Then
+\[\norm{\lambda T}=\sup_{\norm{v}\le1}\norm{\lambda Tv}
+=|\lambda|\sup_{\norm{v}\le1}\norm{Tv}
+=|\lambda|\norm{T}.\]
+
+\item Let $S\in\mathcal{L}(V,W)$. 
+The definition of $\norm{S+T}$ implies there exists $v\in V$, $\norm{v}\le1$ such that $\norm{S+T}=\norm{(S+T)v}$. Then
+\[\norm{S+T}=\norm{(S+T)v}=\norm{Sv+Tv}\le\norm{Sv}+\norm{Tv}\le\norm{S}+\norm{T}.\]
+\end{enumerate}
+\end{proof}
+
+Hence $\mathcal{L}(V,W)$ is a metric space, with metric $d(S,T)=\norm{S-T}$ for $S,T\in\mathcal{L}(V,W)$.
+\begin{enumerate}[label=(\roman*)]
+\item $d(S,S)=\norm{S-S}=0$.
+If $S\neq T$, then $d(S,T)=\norm{S-T}=\sigma_\text{max}(S-T)$. Since $S-T\neq0$, its largest singular value is nonzero and therefore $d(S,T)>0$.
+
+\item $d(S,T)=\norm{S-T}=\norm{T-S}=d(T,S)$.
+
+\item $d(S,G)=\norm{S-G}\le\norm{S-T}+\norm{T-G}=d(S,T)+d(T,G)$.
+\end{enumerate}
+
+\begin{lemma}[Alternative formulae for $\norm{T}$]
+Suppose $T\in\mathcal{L}(V,W)$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $\norm{T}=\text{largest singular value of }T$;
+\item $\displaystyle\norm{T}=\sup_{\norm{v}=1}\norm{Tv}$;
+\item $\norm{T}=$ smallest number $c$ such that $\norm{Tv}\le c\norm{v}$ for all $v\in V$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item This follows from \ref{lemma:norm-upper-bound}.
+\item Let $v\in V$, $\norm{v}\le1$. Let $u=v/\norm{v}$. Then
+\[\norm{u}=\norm{\frac{v}{\norm{v}}}\]
+and
+\[\norm{Tu}=\norm{T\brac{\frac{v}{\norm{v}}}}=\frac{\norm{Tv}}{\norm{v}}\ge\norm{Tv}.\]
+Thus when finding the maximum of $\norm{Tv}$ with $\norm{v}\le1$, we can restrict our attention to vectors in $V$ with norm $1$, proving (ii).
+\item Let $v\in V$, $v\neq\vb{0}$. Then the definition of $\norm{T}$ implies that
+\[\norm{T\brac{\frac{v}{\norm{v}}}}\le\norm{T},\]
+which implies that
+\[\norm{Tv}\le\norm{T}\norm{v}.\]
+Now suppose $c\ge0$ and $\norm{Tv}\le c\norm{v}$ for all $v\in V$. This implies that
+\[\norm{Tv}\le c\]
+for all $v\in V$, $\norm{v}\le1$. Taking sup on the LHS over all $v\in V$, $\norm{v}\le1$ shows that $\norm{T}\le c$.
+Thus $\norm{T}$ is the smallest number $c$ such that $\norm{Tv}\le c\norm{v}$ for all $v\in V$. 
+\end{enumerate}
+\end{proof}
+
+An important inequality during the proof is
+\begin{equation}
+\norm{Tv}\le\norm{T}\norm{v}
+\end{equation}
+for all $v\in V$, $v\neq\vb{0}$.
+
+A linear map and its adjoint have the same norm, as shown by the next result.
+
+\begin{lemma}[Norm of adjoint]
+Suppose $T\in\mathcal{L}(V,W)$. Then $\norm{T^*}=\norm{T}$.
+\end{lemma}
+
+\begin{proof}
+Suppose $w\in W$. Then
+\[\norm{T^*w}^2=\angbrac{T^*w,T^*w}=\angbrac{TT^*w,w}\le\norm{TT^*w}\norm{w}\le\norm{T}\norm{T^*w}\norm{w}.\]
+The inequality above implies that
+\[\norm{T^*w}\le\norm{T}\norm{w}.\]
+But $\norm{T^*w}\le\norm{T^*}\norm{w}$, so we have $\norm{T^*}\le\norm{T}$.
+
+Replacing $T$ with $T^*$ shows that $\norm{T}\le\norm{T^*}$. Thus $\norm{T^*}=\norm{T}$, as desired.
+\end{proof}
+
+\subsection{Approximation by Linear Maps with Lower-Dimensional Range}
+\begin{theorem}[Best approximation by linear map whose image has dimension $\le k$]
+Suppose $T\in\mathcal{L}(V,W)$, and $\sigma_1,\dots,\sigma_m$ are the singular values of $T$. Suppose $1\le k<m$. Then
+\begin{equation}
+\min\{\norm{T-S}\mid S\in\mathcal{L}(V,W)\text{ and }\dim\im S\le k\}=\sigma_{k+1}.
+\end{equation}
+Furthermore, if
+\[Tv=\sigma_1\angbrac{v,e_1}f_1+\cdots+\sigma_m\angbrac{v,e_m}f_m\]
+is a singular value decomposition of $T$ and $T_k\in\mathcal{L}(V,W)$ is defined by
+\[T_k v=\sigma_1\angbrac{v,e_1}f_1+\cdots+\sigma_k\angbrac{v,e_k}f_k\]
+for each $v\in V$, then $\dim\im T_k=k$ and $\norm{T-T_k}=\sigma_{k+1}$.
+\end{theorem}
+
+\subsection{Polar Decomposition}
+Every non-zero complex number $z\in\CC$ can be written in the form
+\begin{align*}
+z&=\brac{\frac{z}{|z|}}|z|\\
+&=\brac{\frac{z}{|z|}}\sqrt{\bar{z}z}
+\end{align*}
+where $z/|z|$ has absolute value $1$, and $\sqrt{\bar{z}z}$ is positive.
+
+Our analogy leads us to guess that every operator $T\in\mathcal{L}(V)$ can be written as a unitary operator times $\sqrt{T^*T}$. 
+The corresponding result is called the \emph{polar decomposition}, which gives a beautiful description of an arbitrary operator on $V$.
+
+\begin{theorem}[Polar decomposition]
+Suppose $T\in\mathcal{L}(V)$. Then there exists a unitary operator $S\in\mathcal{L}(V)$ such that
+\begin{equation}
+T=S\sqrt{T^*T}.
+\end{equation}
+\end{theorem}
+
+\begin{remark}
+This holds for both $\CC$ and $\RR$.
+\end{remark}
+
+\begin{proof}
+Let $\sigma_1,\dots,\sigma_m$ be the positive singular values of $T$. Let $\{e_1,\dots,e_m\}$ and $\{f_1,\dots,f_m\}$ be orthonormal sets in $V$ such that
+\[Tv=\sigma_1\angbrac{v,e_1}f_1+\cdots+\sigma_m\angbrac{v,e_m}f_m\]
+for every $v\in V$. Extend $\{e_1,\dots,e_m\}$ and $\{f_1,\dots,f_m\}$ to orthonormal bases $\{e_1,\dots,e_n\}$ and $\{f_1,\dots,f_n\}$ of $V$.
+
+Recall that the singular value decomposition of the adjoint is
+\[T^*w=\sigma_1\angbrac{w,f_1}e_1+\cdots+\sigma_m\angbrac{w,f_m}e_m\]
+for all $w\in W$. Thus
+\[T^*Tv=\sigma_1^2\angbrac{v,e_1}e_1+\cdots+\sigma_m^2\angbrac{v,e_m}e_m\]
+for every $v\in V$. Then
+\[\sqrt{T^*T}v=\sigma_1\angbrac{v,e_1}e_1+\cdots+\sigma_m\angbrac{v,e_m}e_m\]
+because the operator that sends $v$ to the RHS of the equation above is a positive operator whose square equals $T^*T$.
+
+\begin{claim}
+Define $S\in\mathcal{L}(V)$ by
+\[Sv=\angbrac{v,e_1}f_1+\cdots+\angbrac{v,e_n}f_n\]
+for each $v\in V$.
+\end{claim}
+
+Then
+\begin{align*}
+\norm{Sv}^2&=\norm{\angbrac{v,e_1}f_1+\cdots+\angbrac{v,e_n}f_n}^2\\
+&=|\angbrac{v,e_1}|^2+\cdots+|\angbrac{v,e_n}|^2\\
+&=\norm{v}^2.
+\end{align*}
+Thus $S$ is a unitary operator. Now
+\begin{align*}
+S\sqrt{T^*T}v&=S\brac{\sigma_1\angbrac{v,e_1}e_1+\cdots+\sigma_m\angbrac{v,e_m}e_m}\\
+&=\sigma_1\angbrac{v,e_1}f_1+\cdots+\sigma_m\angbrac{v,e_m}f_m\\
+&=Tv.
+\end{align*}
+\end{proof}
+
+\subsection{Operators Applied to Ellipsoids and Parallelepipeds}
+\begin{definition}[Ball]
+The \vocab{unit ball} in $V$ centred at $\vb{0}$ is
+\[B\colonequals\{v\in V\mid\norm{v}\le1\}.\] 
+\end{definition}
+
+You can think of the ellipsoid defined below as obtained by starting with the ball $B$, and then stretching by a factor of $s_i$ along each $f_i$-axis.
+
+\begin{definition}[Ellipsoid]
+Suppose $\{f_1,\dots,f_n\}$ is an orthonormal basis of $V$, and $s_1,\dots,s_n>0$. The \vocab{ellipsoid} with principal axes $s_1f_1,\dots,s_nf_n$ is
+\[E(s_1f_1,\dots,s_nf_n)\colonequals\crbrac{v\in V\:\bigg|\:\frac{|\angbrac{v,f_1}|^2}{s_1}+\cdots+\frac{|\angbrac{v,f_n}|^2}{s_n}<1}.\]
+\end{definition}
+
+\begin{remark}
+If $\dim V=2$, the word ``disk'' is sometimes used to denote ball and the word ``ellipse'' is sometimes used to denote ellipsoid.
+\end{remark}
+
+The next result states that an invertible map takes a ball to an ellipsoid.
+
+\begin{proposition}
+Suppose $T\in\mathcal{L}(V)$ is invertible. Then $T$ maps the ball $B$ in $V$ to an ellipsoid in $V$.
+\end{proposition}
+
+\begin{proof}
+Suppose $T$ has the singular value decomposition
+\[Tv=\sigma_1\angbrac{v,e_1}f_1+\cdots+\sigma_n\angbrac{v,e_n}f_n\]
+for all $v\in V$, where $\{e_1,\dots,e_n\}$ and $\{f_1,\dots,f_n\}$ are orthonormal bases of $V$. 
+We will show that
+\[T(B)=E(\sigma_1f_1,\dots,\sigma_nf_n).\]
+\fbox{$\subset$} Let $v\in B$. Since $T$ is invertible, none of the singular values $\sigma_1,\dots,\sigma_n$ equal $0$. Thus
+
+\fbox{$\supset$} 
+\end{proof}
+
+The next result states that an invertible map takes an ellipsoid to an ellipsoid.
+
+\begin{proposition}
+Suppose $T\in\mathcal{L}(V)$ is invertible, and $E$ is an ellipsoid in $V$. Then $T(E)$ is an ellipsoid in $V$.
+\end{proposition}
+
+\begin{definition}[Parallelepiped]
+Suppose $\{v_1,\dots,v_n\}$ is a basis of $V$. Let
+\[P(v_1,\dots,v_n)\colonequals\{a_1v_1+\cdots+a_nv_n\mid a_i\in(0,1)\}.\]
+A \vocab{parallelepiped} is a set of the form $u+P(v_1,\dots,v_n)$ for some $u\in V$. 
+The vectors $v_1,\dots,v_n$ are called the \emph{edges} of the parallelepiped.
+\end{definition}
+
+The next result states an invertible operator takes a parallelepiped to a parallelepiped.
+
+\begin{proposition}
+Suppose $u\in V$, and $\{v_1,\dots,v_n\}$ is a basis of $V$. Suppose $T\in\mathcal{L}(V)$ is invertible. Then
+\[T(u+P(v_1,\dots,v_n))=Tu+P(Tv_1,\dots,Tv_n).\]
+\end{proposition}
+
+\begin{definition}[Box]
+A \vocab{box} is of the form
+\[u+P(r_1e_1,\dots,r_ne_n)\]
+where $u\in V$, $r_1,\dots,r_n>0$, and $\{e_1,\dots,e_n\}$ is an orthonormal basis of $V$.
+\end{definition}
+
+\subsection{Volume via Singular Values}
+\subsection{Properties of an Operator as Determined by Its Eigenvalues}
+\pagebreak
+
+\section*{Exercises}
+7A 1-12 15 16 17 18
+
+\begin{exercise}[\cite{ladr} 7A Q12]
+An operator $B\in\mathcal{L}(V)$ is called \emph{skew} if
+\[B^*=-B.\]
+Suppose $T\in\mathcal{L}(V)$. Prove that $T$ is normal if and only if there exist commuting operators $A$ and $B$ such that $A$ is self-adjoint, $B$ is a skew operator, and $T=A+B$.
+\end{exercise}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 7A Q19]
+Suppose $T\in\mathcal{L}(V)$ and $\norm{T^*v}\le\norm{Tv}$ for every $v\in V$. 
+Prove that $T$ is normal.
+\end{exercise}
+
+\begin{remark}
+This exercise fails on infinite-dimensional inner product spaces, leading to what are called \emph{hyponormal operators}.
+\end{remark}
+
+\begin{solution}
+Let $\{e_1,\dots,e_n\}$ be an orthonormal basis of $V$.
+For $i=1,\dots,n$, write
+\begin{align*}
+\norm{Te_i}^2&=\absolute{\angbrac{Te_i,e_1}}^2+\cdots+\absolute{\angbrac{Te_i,e_n}}^2\\
+&=\absolute{\angbrac{e_i,T^*e_1}}^2+\cdots+\absolute{\angbrac{e_i,T^*e_n}}^2.
+\end{align*}
+Summing over $i$,
+\begin{align*}
+\sum_{i=1}^{n}\norm{Te_i}^2
+&=\sum_{i=1}^{n}\absolute{\angbrac{e_i,T^*e_1}}^2+\cdots+\sum_{i=1}^{n}\absolute{\angbrac{e_i,T^*e_n}}^2\\
+&=\norm{T^*e_1}^2+\cdots+\norm{T^*e_n}^2.
+\end{align*}
+Since we are given $\norm{T^*v}\le\norm{Tv}$ for every $v\in V$, and equality holds, we must have $\norm{Te_i}=\norm{T^*e_i}$ for each $i=1,\dots,n$. Since the choice of orthonormal basis was arbitrary, we must have $\norm{Tu}=\norm{T^*u}$ for every unit vector $u\in V$.
+
+For every $v\in V$, $\frac{1}{\norm{v}}v\in V$ is a unit vector, so
+\[\norm{T\brac{\frac{1}{\norm{v}}v}}=\norm{T^*\brac{\frac{1}{\norm{v}}v}}\]
+which simplifies to $\norm{Tv}=\norm{T^*v}$. Hence by \ref{lemma:normal-operators-characterisation}, $T$ is normal.
+\end{solution}
+
+7A 20
+
+\begin{exercise}[\cite{ladr} 7A Q24]
+Suppose $T\in\mathcal{L}(V)$ and
+\[a_0+a_1z+a_2z^2+\cdots+a_{m-1}z^{m-1}+z^m\]
+is the minimal polynomial of $T$. Prove that the minimal polynomial of $T^*$ is
+\[\overline{a_0}+\overline{a_1}z+\overline{a_2}z^2+\cdots+\overline{a_{m-1}}z^{m-1}+z^m.\]
+\end{exercise}
+
+\begin{remark}
+This exercise shows that the minimal polynomial of $T^*$ equals the minimal polynomial of $T$ if $\FF=\RR$.
+\end{remark}
+
+\begin{solution}
+Let $p$ be the minimal polynomial of $T$.
+\begin{claim}
+If $f$ is any polynomial, then $f(T^*)=\overline{f(T)}^*$.
+\end{claim}
+Let $f(x)=c_nx^n+c_{n-1}x^{n-1}+\cdots+c_1x+c_0$. Then
+\begin{align*}
+f(T^*)&=c_n(T^*)^n+c_{n-1}(T^*)^{n-1}+\cdots+c_1T^*+c_0\\
+&=c_n(T^n)^*+\cdots+c_1T^*+c_0\\
+&=\brac{\overline{c_n}T^n+\cdots+\overline{c_1}T+\overline{c_0}}^*\\
+&=\overline{f(T)}^*
+\end{align*}
+as desired.
+
+Since $p$ is the minimal polynomial of $T$, we have $p(T)=0$, so
+\[\overline{p(T^*)}=p(T)^*=0^*=0\]
+which implies $\overline{p}$ is a zero polynomial of $T^*$.
+
+Let $q$ be the minimal polynomial of $T^*$. 
+Then $\overline{q}$ is the minimal polynomial of $(T^*)^*=T$. 
+Since $p$ is the minimal polynomial, $p\mid\overline{q}$ which implies $\overline{p}\mid q$. 
+Hence $\overline{p}=q$ by minimality of $q$.
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 7A Q25]
+Suppose $T\in\mathcal{L}(V)$. Prove that $T$ is diagonalisable if and only if $T^*$ is diagonalisable.
+\end{exercise}
+
+\begin{solution}
+
+\end{solution}
+
+7A 27 28 29
+
+\begin{exercise}[\cite{ladr} 7B Q1]
+Prove that a normal operator on a complex inner product space is self-adjoint if and only if all its eigenvalues are real.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 7B Q2]
+Suppose $\FF=\CC$. Suppose $T\in\mathcal{L}(V)$ is normal and has only one eigenvalue. Prove that $T$ is a scalar multiple of the identity operator.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 7B Q3]
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$ is normal. Prove that the set of eigenvalues of $T$ is contained in $\{0,1\}$ if and only if there is a subspace $U$ of $V$ such that $T=P_U$.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 7B Q4]
+Prove that a normal operator on a complex inner product space is skew (meaning it equals the negative of its adjoint) if and only if all its eigenvalues are purely imaginary.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 7B Q6]
+Suppose $V$ is a complex inner product space and $T\in\mathcal{L}(V)$ is a normal operator such that $T^9=T^8$. Prove that $T$ is self-adjoint and $T^2=T$.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 7B Q8]
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Prove that $T$ is normal if and only if every eigenvector of $T$ is also an eigenvector of $T^*$.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 7B Q9]
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Prove that $T$ is normal if and only if there exists a polynomial $p\in\CC[z]$ such that $T^*=p(T)$.
+\end{exercise}
+
+\begin{solution} \
+
+\fbox{$\impliedby$} Suppose there exists a polynomial $p\in\CC[z]$ such that $T^*=p(T)$. Since $Tp(T)=p(T)T$, this implies $TT^*=T^*T$ so $T$ is normal.
+
+\fbox{$\implies$} Let $\lambda_1,\dots,\lambda_r$ be eigenvalues of $T$. Then
+\[V=\bigoplus_{i=1}^{r}E(\lambda_i,T).\]
+Since $T$ is normal, we have $E(\lambda_i,T)=E(\overline{\lambda_i},T^*)$ for each $i$. Thus
+\[V=\bigoplus_{i=1}^{r}E(\overline{\lambda_i},T^*).\]
+Let $V_i=E(\lambda_i,T)=E(\overline{\lambda_i},T^*)$. Then
+\[T|_{V_i}=\lambda_i I_{V_i},\quad T^*|_{V_i}=\overline{\lambda_i} I_{V_i}.\]
+We want to express $T^*$ as a polynomial of $T$. 
+Define
+\[p(T)=\sum_{i=1}^{r}\overline{\lambda_i}\frac{(T-\lambda_1 I)\cdots(T-\lambda_{i-1}I)(T-\lambda_{i+1}I)\cdots(T-\lambda_r I)}{(\lambda_i-\lambda_1)\cdots(\lambda_i-\lambda_{i-1})(\lambda_i-\lambda_{i+1})\cdots(\lambda_i-\lambda_r)}.\]
+For each $v_i\in E(\lambda_i,T)$,
+\begin{align*}
+p(T)v_i
+&=\overline{\lambda_i}\frac{(T-\lambda_1 I)\cdots(T-\lambda_{i-1}I)(T-\lambda_{i+1}I)\cdots(T-\lambda_r I)v_i}{(\lambda_i-\lambda_1)\cdots(\lambda_i-\lambda_{i-1})(\lambda_i-\lambda_{i+1})\cdots(\lambda_i-\lambda_r)}\\
+&=\overline{\lambda_i}v_i=T^*v_i.
+\end{align*}
+$T$ is normal implies $T$ is diagonalisable. 
+Pick a basis of eigenvectors $v_1,\dots,v_n$ of $T$. 
+Then $p(T)v_i=T^*v_i$ for $i=1,\dots,n$ implies $T^*=p(T)$.
+\end{solution}
+
+7B 10 11 12(use Q9 to prove)
+
+\begin{exercise}[\cite{ladr} 7B Q17]
+Suppose $\FF=\RR$ and $\mathcal{E}\subset\mathcal{L}(V)$. Prove that there is an orthonormal basis of $V$ with respect to which every element of $\mathcal{E}$ has a diagonal matrix if and only if $S$ and $T$ are commuting self-adjoint operators for all $S,T\in\mathcal{E}$.
+\end{exercise}
+
+This exercise extends the real spectral theorem to the context of a collection of commuting self-adjoint operators.
+
+\begin{exercise}[\cite{ladr} 7B Q19]
+Suppose $T\in\mathcal{L}(V)$ is self-adjoint, and $U\le V$ is invariant under $T$.
+\begin{enumerate}[label=(\roman*)]
+\item Prove that $U^\perp$ is invariant under $T$.
+\item Prove that $T|_U\in\mathcal{L}(V)$ is self-adjoint.
+\item Prove that $T|_{U^\perp}\in\mathcal{L}(U^\perp)$ is self-adjoint.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution} \
+\begin{enumerate}[label=(\roman*)]
+\item Let $v\in U^\perp$. Then for all $w\in U$, $\angbrac{v,w}=0$.
+Since $U$ is invariant under $V$, $Tw\in U$, so
+\[\angbrac{Tv,w}=\angbrac{v,Tw}=0.\]
+Thus $Tw\in U^\perp$. Hence $U^\perp$ is invariant under $T$.
+
+\item For all $v,w\in U$, since $T\in\mathcal{L}(V)$ is self-adjoint, 
+\[\angbrac{Tv,w}=\angbrac{v,Tw}.\]
+Restricting $T$ to $U$ gives
+\[\angbrac{T|_U v,w}=\angbrac{v,T|_U w}.\]
+Hence $T|_U$ is self-adjoint.
+
+\item This follows from (i) and (ii).
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 7B Q20]
+Suppose $T\in\mathcal{L}(V)$ is normal, and $U\le V$ is invariant under $T$.
+\begin{enumerate}[label=(\roman*)]
+\item Prove that $U^\perp$ is invariant under $T$.
+\item Prove that $U$ is invariant under $T^*$.
+\item Prove that $(T|_U)^*=(T^*)|_U$.
+\item Prove that $T|_U\in\mathcal{L}(U)$ and $T|_{U^\perp}\in\mathcal{L}(U^\perp)$ are normal operators.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution} \
+\begin{enumerate}[label=(\roman*)]
+\item Let $v\in U^\perp$. Then $\angbrac{v,w}=0$ for all $w\in U$.
+Since $U$ is invariant under $T$, $Tw\in U$, so
+\[\angbrac{T^*v,w}=\angbrac{v,Tw}=0\]
+which implies that $T^*v\in U^\perp$. Hence $U^\perp$ is invariant under $T^*$.
+
+Using Exercise 9, $T^*$ is a polynomial of $T$. Let $T=p(T^*)$, then $U^\perp$ is invariant under $p(T^*)$, which implies that $U^\perp$ is invariant under $T$.
+
+Since $T$ is normal, $T$ is diagonalisable. Since $U$ is invariant, the restriction $T|_U\in\mathcal{L}(U)$ is diagonalisable. 
+Pick a basis of eigenvectors $\{u_1,\dots,u_m\}$ of $U$. Then
+\[Tu_1=\lambda_1 u_1,\quad\dots,\quad Tu_m=\lambda_m u_m.\]
+$T$ is normal implies
+\[T^*u_1=\overline{\lambda_1}u_1,\quad\dots,\quad T^*u_m=\overline{\lambda_m}u_m.\]
+For each $v\in U^\perp$, $\angbrac{v,u_1}=\cdots=\angbrac{v,u_m}=0$, so
+\[\angbrac{Tv,u_i}=\angbrac{v,T^*u_i}=\angbrac{v,\overline{\lambda_i}u_i}=\lambda_i\angbrac{v,u_i}=0\]
+for $i=1,\dots,n$. 
+Thus $Tv\in U^\perp$. Hence $U^\perp$ is invariant under $T$.
+
+\item This follows from (i).
+
+\item We know $T|_U,T^*|_U\in\mathcal{L}(U)$. For all $v,w\in U$,
+\[\angbrac{Tv,w}=\angbrac{v,T^*w}\]
+so
+\[\angbrac{T|_U v,w}=\angbrac{v,T^*|_U w}.\]
+Hence $(T|_U)^*w=T^*|_U w$.
+
+\item For each $v\in U$, $T^*Tv=TT^*v$ implies
+\[T^*|_U T|_U v=T|_U T^*|_U v\]
+so
+\[(T|_U)^* T|_U v=T|_U (T|_U)^*v.\]
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 7B Q21]
+Suppose that $T$ is a self-adjoint operator on a finite-dimensional inner product space, and that $2$ and $3$ are the only eigenvalues of $T$. Prove that
+\[T^2-5T+6I=0.\]
+\end{exercise}
+
+We say a matrix $A$ is \emph{symmetric} if $A^T=A$, and \emph{Hermitian} if $A^*=A$.
+
+\begin{exercise}[\cite{ladr} 7B Q24]
+Suppose $U$ is a finite-dimensional vector space, and $T\in\mathcal{L}(U)$.
+\begin{enumerate}[label=(\roman*)]
+\item Suppose $\FF=\RR$. Prove that T is diagonalisable if and only if there exists a basis of $U$ such that the matrix of $T$ with respect to this basis is symmetric.
+\item Suppose $\FF=\CC$. Prove that $T$ is diagonalisable if and only if there exists a basis of $U$ such that the matrix of $T$ with respect to this basis commutes with its conjugate transpose.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution} \
+\begin{enumerate}[label=(\roman*)]
+\item 
+\item 
+\end{enumerate}
+\end{solution}
+
+7C 1 3 5 6 7 11 13 14 15 16 17 18
+
+\begin{exercise}[\cite{ladr} 7C Q18]
+Suppose $S$ and $T$ are positive operators on $V$. Prove that $ST$ is a positive operator if and only if $S$ and $T$ commute.
+\end{exercise}
+
+\begin{solution} \
+
+\fbox{$\implies$} Suppose $ST$ is positive. Then $ST$ is self-adjoint, so
+\[ST=(ST)^*=T^*S^*=TS.\]
+Thus $S$ and $T$ commute.
+
+\fbox{$\impliedby$} Suppose $ST=TS$. Then
+\[(ST)^*=T^*S^*=TS=ST\]
+implies $ST$ is self-adjoint. Let $v\in V$, then
+\[\angbrac{STv,v}=\angbrac{S\sqrt{T}v,\sqrt{T}v}\ge0,\]
+since $S$ is positive.
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 7C Q22]
+Suppose $T\in\mathcal{L}(V)$ is a positive operator and $u\in V$ is such that $\norm{u}=1$, and $\norm{Tu}\ge\norm{Tv}$ for all $v\in V$ with $\norm{v}=1$. Show that $u$ is an eigenvector corresponding to the largest eigenvalue of $T$.
+\end{exercise}
+
+\begin{solution}
+Let $\{e_1,\dots,e_n\}$ be the orthogonal eigenbasis of $V$, with corresponding values $\lambda_1,\dots,\lambda_n$ sorted from smallest to largest.
+
+Let $u=a_1e_1+\cdots+a_ne_n$. Then
+\begin{align*}
+Tu&=a_1Te_1+\cdots+a_nTe_n\\
+&=a_1\lambda_1e_1+\cdots+a_n\lambda_ne_n,
+\end{align*}
+so
+\[\norm{Tu}^2=\norm{\sum_{i=1}^{n}a_i\lambda_ie_i}^2=\sum_{i=1}^{n}|a_i|^2{\lambda_i}^2.\]
+We can take $v=e_n$, then we have that
+\[\norm{Tu}^2=\sum_{i=1}^{n}|a_i|^2{\lambda_i}^2\ge\sum_{i=1}^{n}|a_i|^2{\lambda_n}^2={\lambda_n}^2=\norm{Tv}^2\]
+which shows the desired conclusion.
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 7C Q24]
+Suppose $S,T\in\mathcal{L}(V)$ are positive operators. Prove that
+\[\ker(S+T)=\ker S\cap\ker T.\]
+\end{exercise}
+
+\begin{proof} \
+
+\fbox{$\supset$} 
+\begin{align*}
+v\in\ker S\cap\ker T
+&\implies Sv=Tv=\vb{0}\\
+&\implies(S+T)v=\vb{0}\\
+&\implies v\in\ker(S+T)
+\end{align*}
+
+\fbox{$\subset$} 
+\begin{align*}
+&v\in\ker(S+T)\\
+\implies&(S+T)v=\vb{0}\\
+\implies&0=\angbrac{(S+T)v,v}=\underbrace{\angbrac{Sv,v}}_{\ge0}+\underbrace{\angbrac{Tv,v}}_{\ge0}\\
+\implies&\angbrac{Sv,v}=\angbrac{Tv,v}=0\\
+\implies&\angbrac{\sqrt{S}v,\sqrt{S}v}=\angbrac{\sqrt{T}v,\sqrt{T}v}=0\\
+\implies&\sqrt{S}v=\sqrt{T}v=\vb{0}\\
+\implies& Sv=Tv=\vb{0}
+\end{align*}
+\end{proof}
+
+7D 2 3 5 9 11
+
+\begin{exercise}[\cite{ladr} 7D Q18]
+Prove that if $A$ is a symmetric matrix with real entries, then there exists a unitary matrix $Q$ with real entries such that $Q^*AQ$ is a diagonal matrix.
+\end{exercise}
+
+\begin{solution}
+
+\end{solution}
+
+7E 1 2 4 7 8 9 10 11 13
+
+7F 1-7 19
+
+\begin{exercise}[\cite{ladr} 7F Q8] \
+\begin{enumerate}[label=(\roman*)]
+\item Prove that if $T\in\mathcal{L}(V)$ and $\norm{T}<1$, then $I+T$ is invertible.
+\item Suppose that $S\in\mathcal{L}(V)$ is invertible. Prove that if $T\in\mathcal{L}(V)$ and $\norm{S-T}<\dfrac{1}{\norm{S^{-1}}}$, then $T$ is invertible.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution} \
+\begin{enumerate}[label=(\roman*)]
+\item Let $v\in\ker(I+T)$. Then $(I+T)v=\vb{0}$, so $Tv=-v$. Taking the norm gives
+\[\norm{v}=\norm{Tv}\le\norm{T}\norm{v}.\]
+Thus
+\[(1-\norm{T})\norm{v}\le 0.\]
+Since $1-\norm{T}>0$, we must have $\norm{v}\le0$. Hence $v=\vb{0}$.
+
+\item Let $v\in\ker T$. Then $Tv=\vb{0}$, so
+\[Sv=(S-T)v.\]
+Since $S$ is invertible,
+\[v=S^{-1}(S+T)v.\]
+Taking norm,
+\begin{align*}
+\norm{v}&=\norm{S^{-1}(S+T)v}\\
+&=\norm{S^{-1}}\norm{S-T}\norm{v}.
+\end{align*}
+Thus 
+\[(\underbrace{1-\norm{S^{-1}}\norm{S-T}}_{>0})\norm{v}\le 0.\]
+This implies $\norm{v}=0$, so $v=\vb{0}$. Hence $T$ is injective, so $T$ is invertible.
+\end{enumerate}
+\end{solution}
+
+Then $B_{\frac{1}{\norm{S^{-1}}}}(S)$ is an open ball in $\mathcal{L}(V)$ consisting of invertible linear maps. 
+Hence the set of invertible operators in $\mathcal{L}(V)$ is an open subset of $\mathcal{L}(V)$.
+
+\begin{exercise}[\cite{ladr} 7F Q9]
+Suppose $T\in\mathcal{L}(V)$. Prove that
+\[\forall\epsilon>0,\quad\exists S\in\mathcal{L}(V)\text{ invertible},\quad 0<\norm{T-S}<\epsilon.\]
+\end{exercise}
+
+\begin{solution}
+Define $S=T+\delta I$ for some $0<\delta<\epsilon$. Then we have
+\[\norm{T-S}=\norm{\delta I}=\delta\]
+which satisifes the desired condition. Note that if $T$ is invertible, we can simply choose a sufficiently small $\delta<1/\norm{T^{-1}}$; if not, then any $\delta\in(0,1)$ can make $S$ invertible.
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 7F Q10]
+Suppose $\dim V>1$ and $T\in\mathcal{L}(V)$ is not invertible. Prove that
+\[\forall\epsilon>0,\quad\exists S\in\mathcal{L}(V)\text{ not invertible},\quad 0<\norm{T-S}<\epsilon.\]
+\end{exercise}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 7F Q11]
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Prove that
+\[\forall\epsilon>0,\quad\exists S\in\mathcal{L}(V)\text{ diagonalisable},\quad 0<\norm{T-S}<\epsilon.\]
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 7F Q12]
+Suppose $T\in\mathcal{L}(V)$ is a positive operator. Show that $\norm{\sqrt{T}}=\sqrt{\norm{T}}$.
+\end{exercise}
+
+\begin{solution}
+Let $\norm{T}=\sigma_1$, the largest singular value of $T$. Then $\norm{\sqrt{T}}=\sqrt{\sigma_1}=\sqrt{\norm{T}}$.
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 7F Q14]
+Suppose $U,W\le V$ are such that $\norm{P_U-P_W}<1$. Prove that $\dim U=\dim W$.
+\end{exercise}
+
+\begin{solution}
+We prove the contrapositive.  Suppose $\dim U<\dim W$. Then the orthogonal complement
+\[\dim U^\perp=\dim V-\dim U>\dim V-\dim W,\]
+or
+\[\dim W+\dim U^\perp>\dim W.\]
+We know
+\begin{align*}
+\dim V&\ge\dim(W+U^\perp)\\
+&=\dim W+\dim U^\perp-\dim(W\cap U^\perp)\\
+&>\dim V-\dim(W\cap U^\perp)
+\end{align*}
+which implies $\dim W\cap U^\perp>0$. Pick $v\in W\cap U^\perp$, $\norm{v}=1$. 
+Then $P_U v=\vb{0}$ and $P_W v=v$, so
+\[\norm{(P_U-P_w)v}=\norm{v}=1.\]
+Hence $\norm{P_U-P_W}\ge1$, so $\dim U\ge\dim W$.
+Similarly, $\norm{P_W-P_U}\le1$, so $\dim W\ge\dim U$.
+Therefore $\dim U=\dim W$.
+\end{solution}
+
+\begin{exercise}[\cite{ladr} 7F Q19]
+Prove that if $T\in\mathcal{L}(V,W)$, then $\norm{T^*T}=\norm{T}^2$.
+\end{exercise}
+
+\begin{solution}
+Let ${s_1}^2$ be the greatest eigenvalue of $T^*T$. Then $\norm{T}=s_1$, so $\norm{T}^2={s_1}^2=\norm{T^*T}$.
+\end{solution}

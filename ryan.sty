@@ -1,11 +1,14 @@
 %Colour
 \usepackage[dvipsnames]{xcolor}
 \usepackage{soul,xcolor}
-\definecolor{darkblue}{rgb}{0.0, 0.0, 0.65}
+\definecolor{darkred}{rgb}{0.5, 0.0, 0.13}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.5}
 
-\usepackage{amsmath,amssymb,amsthm}
+%AMS packages
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
 %\usepackage[integrals]{wasysym}
-\usepackage{esint}
+\usepackage{esint} %Extended set of integrals
+
 %Define some macros
 \newcommand{\cbrt}[1]{\sqrt[3]{#1}}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
@@ -16,75 +19,66 @@
 \newcommand{\absolute}[1]{\left|#1\right|}
 \newcommand{\crbrac}[1]{\left\{#1\right\}}
 \newcommand{\angbrac}[1]{\left\langle#1\right\rangle}
-\newcommand{\vocab}[1]{{\color{darkblue}\bfseries\textit{#1}}}
+\newcommand{\vocab}[1]{{\color{darkred}\bfseries\textit{#1}}}
 \renewcommand{\epsilon}{\varepsilon}
-\renewcommand{\emptyset}{\varnothing}
-\newcommand{\unit}[1]{\,\mathrm{#1}}
+%\newcommand{\unit}[1]{\,\mathrm{#1}}
 \newcommand{\degC}{^\circ{\mathrm C}}
 \newcommand{\tab}{\hspace{0.5cm}}
 \newcommand{\per}[2]{^{#1}\mathrm{P}_{#2}}
 \newcommand{\com}[2]{^{#1}\mathrm{C}_{#2}}
 \newcommand{\leg}[2]{\brac{\dfrac{#1}{#2}}}
 \newcommand{\proj}[2]{\mathrm{proj}_{#1}\brac{{#2}}}
+\newcommand{\cat}[1]{\mathsf{#1}}
 
 %More commands and math operators
 \DeclareMathOperator{\cis}{cis}
 \DeclareMathOperator*{\lcm}{lcm}
-\DeclareMathOperator*{\argmin}{arg min}
-\DeclareMathOperator*{\argmax}{arg max}
 \DeclareMathOperator{\diam}{diam}
 \DeclareMathOperator{\cosec}{cosec}
-\DeclareMathOperator{\Exp}{E}
+\DeclareMathOperator{\Exp}{\mathbb{E}}
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\Po}{Po}
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\ran}{ran}
 \DeclareMathOperator{\cs}{cis}
 \newcommand{\suchthat}{\text{ s.t. }}
-\DeclareMathOperator{\arsinh}{arsinh}
-\DeclareMathOperator{\arcosh}{arcosh}
-\DeclareMathOperator{\artanh}{artanh}
-\DeclareMathOperator{\cosech}{cosech}
 \DeclareMathOperator{\spn}{span}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\ch}{ch}
 \DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Ann}{Ann}
 \DeclareMathOperator{\Row}{Row}
 \DeclareMathOperator{\Col}{Col}
 \DeclareMathOperator{\Int}{Int}
-
-%Inequalities
-\newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
-\newcommand{\symsum}{\sum_{\mathrm{sym}}}
-\newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
-\newcommand{\symprod}{\prod_{\mathrm{sym}}}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\stab}{stab}
+\DeclareMathOperator{\ccl}{ccl}
+%\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\ob}{\mathsf{ob}}
+\DeclareMathOperator{\Hom}{\mathsf{Hom}}
 
 %Letters
 \newcommand{\BB}{\mathbf B}
 \newcommand{\CC}{\mathbb C}
-\newcommand{\DD}{\mathbf D}
+\newcommand{\DD}{\mathbb D}
 \newcommand{\EE}{\mathbf E}
 \newcommand{\FF}{\mathbf F}
 \newcommand{\KK}{\mathbf K}
+\newcommand{\HH}{\mathbb H}
 \newcommand{\NN}{\mathbb N}
-\newcommand{\PP}{\mathbf P}
+\newcommand{\PP}{\mathbb P}
 \newcommand{\QQ}{\mathbb Q}
 \newcommand{\RR}{\mathbb R}
 \newcommand{\SSS}{\mathbf S}
+\newcommand{\TT}{\mathbb T}
 \newcommand{\ZZ}{\mathbb Z}
+\usepackage{mathrsfs}
 
 %Asymptote setup
 \usepackage{asymptote}
-
-%Generic symbols for both text and math mode
-%Provides generic commands \degree, \celsius, \perthousand, \micro and \ohm which work both in text and maths mode.
-\usepackage{gensymb}
-
-% Fonts and math symbols
-\usepackage{lmodern,amsfonts,mathrsfs,mathtools,changepage,centernot}
 
 % Advanced positioning
 \usepackage{xcoffins,calc}
@@ -92,17 +86,19 @@
 %Ragged boxes
 \usepackage[raggedrightboxes]{ragged2e}
 
-%Strikeout text
-\usepackage{cancel}
+\usepackage{cancel} %Strikeout text
 
 % Pictures and images
 \usepackage{graphicx,float}
 \graphicspath{ {./images/} }
-\usepackage{tikz,pstricks} 
-\usetikzlibrary{calc,intersections,through,backgrounds,positioning}
-\usepackage{titlepic}
-
+\usepackage{tikz,pstricks}
+\usetikzlibrary{calc}
+\usetikzlibrary{intersections}
+\usetikzlibrary{through}
+%\usetikzlibrary{backgrounds}
+\usetikzlibrary{positioning}
 \usetikzlibrary{shapes.geometric, arrows}
+\usepackage{tikz-cd}
 %\usepackage[siunitx]{circuitikz}
 
 % Code environment
@@ -112,9 +108,6 @@ basicstyle=\small\ttfamily,
 columns=flexible,
 breaklines=true
 }
-
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
 \lstdefinestyle{mystyle}{
     backgroundcolor=\color{backcolour},
     basicstyle=\ttfamily\footnotesize,
@@ -137,14 +130,13 @@ breaklines=true
 % Create colored boxes for theorems, examples, etc.
 \usepackage[most,listings,many]{tcolorbox}
 
-
 \usepackage{hyperref} % Hyperlink setup
 \hypersetup{
     colorlinks,
-    citecolor=ForestGreen,
+%    citecolor=darkred,
     filecolor=black,
-    linkcolor=darkblue,
-    urlcolor=darkblue,
+    linkcolor=blue,
+    urlcolor=darkred,
 }
 
 % Cross referencing
@@ -162,14 +154,11 @@ breaklines=true
 % Plotting graphs
 \usepackage{pgfplots}
 
-% Formatting derivatives
-\usepackage{commath}
-
 % Formatting code
 \usepackage{fancyvrb} %\Verbatim[numbers=left,frame=single,formatcom=\color{red}] - this is used to print code
 
 % Page numbering
-\usepackage{lastpage}
+%\usepackage{lastpage}
 
 % Tools for writing packages
 \usepackage{etoolbox}
@@ -178,16 +167,10 @@ breaklines=true
 
 \usepackage[acronym]{glossaries} % Acronyms
 
-\usepackage{pdfpages} % Include PDF pages
-
 \usepackage[colorinlistoftodos]{todonotes} % Create todo notes
-\usepackage{comment}
+\usepackage{comment} %Comment out text
 \usepackage{version}
 \usepackage{imakeidx} % Index
-
-\usepackage{chemfig} % Chemistry
-\usepackage[version=4]{mhchem} % Chemistry
-\usepackage{plimsoll} % Chemistry
 
 %Theorem setup
 \usepackage{thmtools}
@@ -197,22 +180,21 @@ breaklines=true
 \newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
 
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[chapter]
+\newtheorem{definition}{\bfseries\color{darkred} Definition}[chapter]
 \newtheorem*{definition*}{Definition}
 \newtheorem*{claim}{Claim}
 \newtheorem{exercise}{Exercise}[chapter]
 \newtheorem{example}[definition]{Example}
 
 \theoremstyle{plain}
-\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{theorem}[definition]{\bfseries\color{darkblue} Theorem}
 \newtheorem*{theorem*}{Theorem}
-\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{lemma}[definition]{\bfseries\color{darkblue} Lemma}
 \newtheorem*{lemma*}{Lemma}
-\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{proposition}[definition]{\bfseries\color{darkblue} Proposition}
 \newtheorem*{proposition*}{Proposition}
-\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{corollary}[definition]{\bfseries\color{darkblue} Corollary}
 \newtheorem*{corollary*}{Corollary}
-\newtheorem{law}[definition]{Law}
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -222,44 +204,70 @@ breaklines=true
 \AtEndEnvironment{idea}{\endgroup}
 
 \tcolorboxenvironment{definition}{
-  enhanced jigsaw,colframe=darkblue,interior hidden,
-breakable,before skip=10pt,after skip=10pt
+  enhanced,
+  colback=darkred!5!white,
+  fonttitle=\bfseries,
+  sharp corners,
+  boxrule=0pt, frame hidden,
+  borderline west={2pt}{0pt}{darkred},
+  breakable,
 }
-\tcolorboxenvironment{example}{
-  enhanced jigsaw,colframe=black,interior hidden,
-breakable,before skip=10pt,after skip=10pt
-}
+%\tcolorboxenvironment{example}{
+%  enhanced jigsaw,colframe=gray,interior hidden,
+%breakable,before skip=10pt,after skip=10pt
+%}
 \tcolorboxenvironment{theorem}{
-  enhanced jigsaw,colframe=ForestGreen,interior hidden,
-breakable,before skip=10pt,after skip=10pt
+  enhanced,
+  colback=darkblue!5!white,
+  fonttitle=\bfseries,
+  sharp corners,
+  boxrule=0pt, frame hidden,
+  borderline west={2pt}{0pt}{darkblue},
+  breakable,
 }
 \tcolorboxenvironment{lemma}{
-  enhanced jigsaw,colframe=ForestGreen,interior hidden,
-breakable,before skip=10pt,after skip=10pt
+  enhanced,
+  colback=darkblue!5!white,
+  fonttitle=\bfseries,
+  sharp corners,
+  boxrule=0pt, frame hidden,
+  borderline west={2pt}{0pt}{darkblue},
+  breakable,
 }
 \tcolorboxenvironment{proposition}{
-  enhanced jigsaw,colframe=ForestGreen,interior hidden,
-breakable,before skip=10pt,after skip=10pt
+  enhanced,
+  colback=darkblue!5!white,
+  fonttitle=\bfseries,
+  sharp corners,
+  boxrule=0pt, frame hidden,
+  borderline west={2pt}{0pt}{darkblue},
+  breakable,
 }
 \tcolorboxenvironment{corollary}{
-  enhanced jigsaw,colframe=ForestGreen,interior hidden,
-breakable,before skip=10pt,after skip=10pt
+  enhanced,
+  colback=darkblue!5!white,
+  fonttitle=\bfseries,
+  sharp corners,
+  boxrule=0pt, frame hidden,
+  borderline west={2pt}{0pt}{darkblue},
+  breakable,
 }
 
 % Customise section headings
 \usepackage{titlesec}
-\definecolor{darkred}{rgb}{0.9, 0.0, 0.0}
-\usepackage[T1]{fontenc}
 \titleclass{\part}{top}
 \titleformat{\part}[display]
   {\Huge\bfseries\centering}{{\thepart}}{0pt}{}
 \titlespacing*{\part}{0pt}{20pt}{50pt}
-\titleformat{\chapter}[hang]{\fontsize{60}{70}\bfseries}{{\thechapter}}{15pt}{\Huge\bfseries}
-\titlespacing*{\chapter}{0pt}{0pt}{0pt}
-\titleformat{\section}{\LARGE\bfseries\itshape}{{\S\thesection}}{0.6em}{}
-\titleformat{\subsection}{\Large\bfseries}{{\S\thesubsection}}{1em}{\ul}
-\setcounter{secnumdepth}{1}
+%\titleformat{\chapter}[hang]{\fontsize{60}{70}\bfseries}{{\thechapter}}{15pt}{\Huge\bfseries}
+%\titlespacing*{\chapter}{0pt}{0pt}{0pt}
+%\titleformat{\section}{\LARGE\bfseries\itshape}{{\S\thesection}}{0.6em}{}
+%\titleformat{\subsection}{\Large\itshape}{{\S\thesubsection}}{1em}{}
+%\setcounter{secnumdepth}{1}
 \setcounter{tocdepth}{1}
 
 % Font
-\usepackage{tgpagella}
+%\usepackage{lmodern}
+%\usepackage[T1]{fontenc}
+%\usepackage{tgpagella}
+\usepackage{times}

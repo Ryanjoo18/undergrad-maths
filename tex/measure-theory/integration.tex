@@ -1,0 +1,303 @@
+\chapter{Integration}
+\section{Measurable Functions}
+\begin{definition}[Measurable function]
+Let $X$ be a measurable space, $Y$ be a topological space. We say $f\colon X\to Y$ is \vocab{measurable}\index{measurable function} if $f^{-1}(U)$ is a measurable set in $X$ for every open set $U$ in $Y$.
+\end{definition}
+
+That is, $f$ is measurable if the pre-image of every open set is measurable.
+
+The next result states that continuous functions of measurable functions are measurable.
+
+\begin{lemma}\label{lemma:composition-continuity}
+Let $X$ be a measurable space, $Y$ and $Z$ be topological spaces. If $f\colon X\to Y$ is measurable and $g\colon Y\to Z$ is continuous, then $h=g\circ f$ is measurable.
+\end{lemma}
+
+\begin{proof}
+Let $U$ be open in $Z$. By continuity of $g$, we have that $g^{-1}(U)$ is open in $Y$. Note that
+\[h^{-1}(U)=f^{-1}\brac{g^{-1}(U)}.\]
+If $f$ is measurable, it follows that $h^{-1}(U)$ is measurable, so $h$ is continuous.
+\end{proof}
+
+The next result states that the tuple of measurable functions is measurable.
+
+\begin{lemma}\label{lemma:tuple-measurable-function}
+Suppse $X$ is a measurable space, $Y$ is a topological space. Let $u,v\colon X\to\RR$ and $\Phi\colon\RR^2\to Y$. 
+Define
+\[h(x)=\Phi\brac{u(x),v(x)}.\]
+If $u$ and $v$ are measurable and $\Phi$ is continuous, then $h\colon X\to Y$ is measurable.
+\end{lemma}
+
+\begin{proof}
+Define $f\colon X\to\RR^2$ by $f(x)=\brac{u(x),v(x)}$. Then $h=\Phi\circ f$. By \ref{lemma:composition-continuity}, it suffices to show that $f$ is measurable.
+
+\begin{idea}
+We want to show that any open set in $\RR^2$ has a measurable pre-image. 
+Hint: every open set in $\RR^2$ is a countable union of sets of the form $I_1\times I_2$, where $I_1$ and $I_2$ are open intervals in $\RR$.
+\end{idea}
+
+If $R\subset\RR^2$ is any open rectangle with sides parallel to the axes, then $R=I_1\times I_2$ for two open intervals $I_1,I_2\subset\RR$. Then
+\begin{align*}
+f^{-1}(R)
+&=f^{-1}(I_1\times I_2)\\
+&=(u,v)^{-1}(I_1\times I_2)\\
+&=u^{-1}(I_1)\cap v^{-1}(I_2)
+\end{align*}
+
+Let $x\in f^{-1}(R)$ so that $f(x)\in R$. Then $u(x)\in I_1$ and $v(x)\in I_2$. Since $u$ is measurable, $u^{-1}(I_1)\in\mathcal{M}$; since $v$ is measurable, $v^{-1}(I_2)\in\mathcal{M}$. 
+Since $\mathcal{M}$ is a $\sigma$-algebra, it is closed under intersections, so $u^{-1}(I_1)\cap v^{-1}(I_2)\in\mathcal{M}$. Thus $f^{-1}(R)$ is measurable, for any rectangle $R$.
+
+Every open set $U$ in $\RR^2$ is a countable union of such rectangles $R_i$. Thus
+\[f^{-1}(U)=f^{-1}\brac{\bigcup_{i=1}^{\infty}R_i}=\bigcup_{i=1}^{\infty}f^{-1}(R_i).\]
+Since each term in the union is in $\mathcal{M}$, and since $\mathcal{M}$ is closed under countable unions, we have that $f^{-1}(U)\in\mathcal{M}$.
+Hence $f$ is measurable.
+\end{proof}
+
+We now prove some consequences of the above results, concerning the measurability of functions that we shall frequently encounter.
+
+\begin{proposition}
+Let $X$ be a measurable space.
+\begin{enumerate}[label=(\roman*)]
+\item Let $f\colon X\to\CC$ with $f=u+iv$, where $u$ and $v$ are real measurable functions on $X$. Then $f$ is complex measurable.
+
+\item If $f=u+iv$ is a complex measurable function on $X$, then $u$, $v$, and $|f|$ are real measurable functions on $X$.
+
+\item If $f$ and $g$ are complex measurable functions on $X$, then so are $f+g$ and $fg$.
+
+\item If $E$ is a measurable set in $X$ and the \emph{characteristic function} of $E$ is defined as
+\[\chi_E(x)=\begin{cases}
+1&(x\in E)\\
+0&(x\notin E)
+\end{cases}\]
+then $\chi_E$ is a measurable function.
+
+\item If $f$ is a complex measurable function on $X$, there is a complex measurable function $\alpha$ on $X$ such that $|\alpha|=1$ and $f=\alpha|f|$. 
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item This follows from \ref{lemma:tuple-measurable-function}, by taking $\Phi(z)=z$.
+
+\item This follows from \ref{lemma:composition-continuity}, by taking $g(z)=\Re(z)$, $g(z)=\Im(z)$, and $g(z)=|z|$ respectively.
+
+\item For real $f$ and $g$, this follows from \ref{lemma:tuple-measurable-function}, by taking $\Phi(s,t)=s+t$ and $\Phi(s,t)=st$ respectively. 
+
+The complex case then follows from (i) and (ii).
+
+\item Let $U$ be open in $\RR$. Then
+\[\chi_E^{-1}(U)=\begin{cases}
+X&(0,1\in U)\\
+E&(1\in U,\:0\notin U)\\
+E^c&(1\notin U,\:0\in U)\\
+\emptyset&(\text{otherwise})
+\end{cases}\]
+all those sets are measurable, since $E$ is measurable.
+
+\item Let $E=\{x\mid f(x)=0\}$. Let $Y=\CC\setminus\{0\}$, and define $\phi(z)=\dfrac{z}{|z|}$ for $z\in Y$. Let
+\[\alpha(x)=\phi\brac{f(x)+\chi_E(x)}\quad(x\in X).\]
+If $x\in E$, $\alpha(x)=1$; if $x\notin E$, $\alpha(x)=\dfrac{f(x)}{|f(x)|}$. This shows that $|\alpha|=1$.
+
+Since $\phi$ is continuous on $Y$, and $E$ is measurable (since $|f|$ is real measurable and $E^c=|f|^{-1}\brac{(0,\infty)}$), the measurability of $\alpha$ follows from (iii), (iv), and \ref{lemma:composition-continuity}. 
+\end{enumerate}
+\end{proof}
+
+
+\begin{definition}
+Suppose $X$ is a measurable space with Borel $\sigma$-algebra $\mathcal{B}$, and $Y$ is a topological space. If $f\colon X\to Y$ is such that $f^{-1}(U)\in\mathcal{B}$ for all $U\in\mathcal{T}$, we say $f$ is \vocab{Borel measurable}.
+\end{definition}
+
+In particular, continuous functions are Borel measurable.
+
+\begin{proposition}
+Suppose $\mathcal{M}$ is a $\sigma$-algebra in $X$, and $Y$ is a topological space. Let $f\colon X\to Y$.
+\begin{enumerate}[label=(\roman*)]
+\item If $\Omega$ is the collection of all sets $E\subset Y$ such that $f^{-1}(E)\in\mathcal{M}$, then $\Omega$ is a $\sigma$-algebra in $Y$.
+\item If $f$ is measurable and $E$ is a Borel set in $Y$, then $f^{-1}(E)\subset\mathcal{M}$.
+\item If $Y=[-\infty,\infty]$ and $f^{-1}\brac{(\alpha,\infty]}\in\mathcal{M}$ for every real $\alpha$, then $f$ is measurable.
+\item If $f$ is measurable, if $Z$ is a topological space, if $g\colon Y\to Z$ is a Borel mapping, and if $h=g\circ f$, then $h\colon X\to Z$ is measurable.
+\end{enumerate}
+\end{proposition}
+
+Suppose $(f_n)$ is a sequence of extended-real functions on a set $X$. 
+Then define
+\begin{align*}
+\brac{\sup_{n}f_n}(x)&\colonequals\sup_{n}\brac{f_n(x)},\\
+\brac{\limsup_{n\to\infty}f_n}(x)&\colonequals\limsup_{n\to\infty}\brac{f_n(x)}.
+\end{align*}
+
+If
+\[f(x)=\lim_{n\to\infty}f_n(x)\quad(x\in X),\]
+then we call $f$ the \emph{pointwise limit} of $(f_n)$.
+
+\begin{proposition}
+If $f_n:X\to[-\infty,\infty]$ is measurable, and
+\[g=\sup_{n\ge1}f_n,\quad h=\limsup_{n\to\infty}f_n,\]
+then $g$ and $h$ are measurable.
+\end{proposition}
+
+\begin{proof}
+Note that
+\[g^{-1}\brac{(\alpha,\infty]}=\bigcup_{n=1}^{\infty}f_n^{-1}\brac{(\alpha,\infty]}.\]
+Hence by Theorem 1.12(c), $g$ is measurable. 
+
+The same result holds with inf in place of sup, and since
+\[h=\inf_{k\ge1}\brac{\sup_{n\ge k}f_n},\]
+it follows that $h$ is measurable.
+\end{proof}
+
+\begin{corollary} \
+\begin{enumerate}[label=(\roman*)]
+\item The limit of every pointwise convergent sequence of complex measurable functions is measurable.
+\item If $f$ and $g$ are measurable (with range in $[-\infty,\infty]$), then so are $\max\{f,g\}$ and $\min\{f,g\}$. In particular, this is true of the functions
+\[f^+=\max\{f,0\}\quad\text{and}\quad f^-=-\min\{f,0\}.\] 
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Let $(f_n)$ be pointwise convergent, and
+\[f(x)=\lim_{n\to\infty}f_n(x)\quad(x\in X).\]
+
+\end{proof}
+
+We call $f^+$ and $f^-$ the \emph{positive and negative parts} of $f$. 
+
+We have $|f|=f^++f^-$ and $f=f^+-f^-$, a standard representation of $f$ as a difference of two non-negative functions, with a certain minimality property: 
+
+\begin{lemma}
+If $f=g-h$, $g\ge0$ and $h\ge0$, then $f^+\le g$ and $f^-\le h$.
+\end{lemma}
+
+\begin{proof}
+$f\le g$ and $0\le g$ clearly implies $\max\{f,0\}\le g$. 
+\end{proof}
+
+\section{Integration}
+\subsection{Simple Functions}
+\begin{definition}
+Let $X$ be a measurable space. We say $s:X\to\CC$ is a \vocab{simple function} if its range consists of only finitely many points. 
+\end{definition}
+
+Among these are the \emph{non-negative simple functions}, whose range is a finite subset of $[0,\infty)$. Note that we explicitly exclude $\infty$ from the values of a simple function.
+
+If $\alpha_1,\dots,\alpha_n$ are the distinct values of a simple function $s$, and if we set $A_i=\{x\mid s(x)=\alpha_i\}$, then clearly
+\[s=\sum_{i=1}^{n}\alpha_i\chi_{A_i}\]
+where $\chi_{A_i}$ is the characteristic function of $A_i$.
+
+It is also clear that $s$ is measurable if and only if each of the sets $A_i$ is measurable.
+
+\begin{proposition}
+Let $f\colon X\to[0,\infty]$ be measurable. There exist simple measurable functions $s_n$ on $X$ such that
+\begin{enumerate}[label=(\roman*)]
+\item $0\le s_1\le s_2\le\cdots\le f$;
+\item $\displaystyle\lim_{n\to\infty}s_n(x)=f(x)$, for every $x\in X$.
+\end{enumerate}
+\end{proposition}
+
+\subsection{Integration of Positive Functions}
+Let $\mathcal{M}$ be a $\sigma$-algebra in a set $X$, and let $\mu:\mathcal{M}\to[0,\infty]$ be a measure.
+
+\begin{definition}[Lebesgue integral]
+If $s:X\to[0,\infty)$ is a measurable simple function, of the form
+\[s=\sum_{i=1}^{n}\alpha_i\chi_{A_i},\]
+where $\alpha_1,\dots,\alpha_n$ are the distinct values of $s$, and if $E\in\mathcal{M}$, we define
+\[\int_{E}s\dd{\mu}\colonequals\sum_{i=1}^{n}\alpha_i\mu(A_i\cap E).\]
+If $f\colon X\to[0,\infty]$ is measurable, and $E\in\mathcal{M}$, we define the \vocab{Lebesgue integral} of $f$ over $E$ as
+\begin{equation}
+\int_{E}f\dd{\mu}\colonequals\sup\int_{E}s\dd{\mu}.
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Properties of Lebesgue integral]
+
+\end{lemma}
+
+We now come to the interesting part of the theory. One of its most remarkable features is the ease with which it handles limit operations.
+
+\begin{theorem}[Lebesgue's monotone convergence theorem]
+Let $(f_n)$ be a sequence of measurable functions on $X$, and suppose that
+\begin{enumerate}[label=(\roman*)]
+\item $0\le f_1(x)\le f_2(x)\le\cdots\le\infty$ for every $x\in X$,
+\item $f_n(x)\to f(x)$ pointwise for every $x\in X$.
+\end{enumerate}
+Then $f$ is measurable, and
+\begin{equation}
+\lim_{n\to\infty}\int_{X}f_n\dd{\mu}=\int_{X}f\dd{\mu}.
+\end{equation}
+\end{theorem}
+
+\begin{proposition}
+If $f_n:X\to[0,\infty]$ are measurable, and
+\[f(x)=\sum_{n=1}^{\infty}f_n(x)\quad(x\in X),\]
+then
+\begin{equation}
+\int_{X}f\dd{\mu}=\sum_{n=1}^{\infty}\int_{X}f_n\dd{\mu}.
+\end{equation}
+\end{proposition}
+
+If we let $\mu$ be the counting measure on a countable set, Theorem 1.27 is a statement about double series of nonnegative real numbers (which can of course be proved by more elementary means): 
+
+\begin{corollary}
+If $a_{ij}\ge0$ for $i,j=1,2,\dots$, then
+\[\sum_{i=1}^{\infty}\sum_{j=1}^{\infty}a_{ij}=\sum_{j=1}^{\infty}\sum_{i=1}^{\infty}a_{ij}.\]
+\end{corollary}
+
+\begin{theorem}[Fatau's lemma]
+Let $f_n:X\to[0,\infty]$ be a sequence of measurable functions. Then
+\begin{equation}
+\int_{X}\brac{\liminf_{n\to\infty}f_n}\dd{\mu}\le\liminf_{n\to\infty}\int_{X}f_n\dd{\mu}.
+\end{equation}
+\end{theorem}
+
+\begin{proposition}[Change of variables]
+Suppose $f\colon X\to[0,\infty]$ is measurable, and
+\[\phi(E)=\int_{E}f\dd{\mu}\quad(E\in\mathcal{M}.)\]
+Then $\phi$ is a measure on $\mathcal{M}$, and
+\begin{equation}
+\int_{X}g\dd{\phi}=\int_{X}gf\dd{\mu}
+\end{equation}
+for every measurable $g\colon X\to[0,\infty]$.
+\end{proposition}
+
+\subsection{Integration of Complex Functions}
+As before, let $\mu$ be a measure on an arbitrary measurable space $X$.
+
+\begin{definition}[Class of Lebesgue integrable functions]
+We define $L^1(\mu)$ to be the collection of complex measurable functions on $X$, for which
+\[\int_{X}|f|\dd{\mu}<\infty.\]
+[Note that the measurability of $f$ implies that of $|f|$, as we saw in Proposition 1.9(b); hence the above integral is defined.]
+
+The members of $L^1(\mu)$ are called \vocab{Lebesgue integrable functions} (with
+respect to $\mu$) or \emph{summable functions}.
+\end{definition}
+
+If $f=u+iv$, where $u$ and $v$ are real measurable functions on $X$, and if $f\in L^1(\mu)$, define
+\[\int_{E}f\dd{\mu}\colonequals\brac{\int_{E}u^+\dd{\mu}-\int_{E}u^-\dd{\mu}}+i\brac{\int_{E}v^+\dd{\mu}-\int_{E}v^-\dd{\mu}}\]
+for every measurable set $E$.
+
+Occasionally it is desirable to define the integral of a measurable function $f$ with range in $[-\infty,\infty]$ to be
+\[\int_{E}f\dd{\mu}\colonequals\int_{E}f^+\dd{\mu}-\int_{E}f^-\dd{\mu}\]
+provided that at least one of the integrals on the RHS is finite. The LHS is then a number in $[-\infty,\infty]$.
+
+\begin{lemma}[Linearity]
+Suppose $f,g\in L^1(\mu)$, and $\alpha,\beta\in\CC$. Then $\alpha f+\beta g\in L^1(\mu)$, and
+\[\int_{X}(\alpha f+\beta g)\dd{\mu}=\alpha\int_{X}f\dd{\mu}+\beta\int_{X}g\dd{\mu}.\]
+\end{lemma}
+
+\begin{lemma}[Triangle inequality]
+If $f\in L^1(\mu)$, then
+\[\absolute{\int_{X}f\dd{\mu}}\le\int_{X}|f|\dd{\mu}.\]
+\end{lemma}
+
+We conclude this section with another important convergence theorem. 
+This is like the monotone convergence theorem, but we are going to remove the increasing and non-negative measurable condition, and add in something else.
+
+\begin{theorem}[Lebesgue's dominated convergence theorem]
+Suppose $(f_n)$ is a sequence of complex measurable functions on $X$ such that
+\[f(x)=\lim_{n\to\infty}f_n(x)\quad(x\in X).\]
+If there exists $g\in L^1(\mu)$ such that
+\[|f_n(x)|\le g(x)\quad(n=1,2,\dots,\:x\in X),\]
+then $f\in L^1(\mu)$, and
+\begin{equation}
+\lim_{n\to\infty}\int_{X}f_n\dd{\mu}=\int_{X}f\dd{\mu}.
+\end{equation}
+\end{theorem}

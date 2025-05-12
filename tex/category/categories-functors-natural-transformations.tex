@@ -1,0 +1,45 @@
+\chapter{Categories, Functors and Natural Transformations}
+\section{Categories}
+\begin{definition}
+A \vocab{category} $\mathscr{C}$ consists of
+\begin{itemize}
+\item a collection $\ob(\mathscr{C})$ of objects;
+\item for each $A,B\in\ob(\mathscr{C})$, a collection $\mathscr{C}(A,B)$ of maps or arrows or morphisms from $A$ to $B$;
+\item for each $A,B,C\in\ob(\mathscr{C})$, a function
+\begin{align*}
+\mathscr{C}(B,C)\times\mathscr{C}(A,B)&\to\mathscr{C}(A,C)\\
+(g,f)&\mapsto g\circ f
+\end{align*}
+called \emph{composition};
+\item for each $A\in\ob(\mathscr{C})$, an element $1_A$ of $\mathscr{C}(A,A)$, called the \emph{identity} on $A$,
+\end{itemize}
+satisfying the following axioms:
+\begin{enumerate}[label=(\roman*)]
+\item $(h\circ g)\circ f=h\circ(g\circ f)$, for each $f\in\mathscr{C}(A,B), g\in\mathscr{C}(B,C), h\in\mathscr{C}(C,D)$\hfill(associativity)
+\item $f\circ 1_A=f=1_B\circ f$, for each $f\in\mathscr{C}(A,B)$\hfill(identity)
+\end{enumerate}
+\end{definition}
+
+\begin{notation}
+We often write:
+\begin{align*}
+A\in\mathscr{C}&\quad\text{to mean}\quad A\in\ob(\mathscr{C});\\
+f:A\to B\text{ or }A\xrightarrow{f}B&\quad\text{to mean}\quad f\in\mathscr{C}(A,B);\\
+gf&\quad\text{to mean}\quad g\circ f.
+\end{align*}
+People also write $\mathscr{C}(A,B)$ as $\Hom_\mathscr{C}(A,B)$ or $\Hom(A,B)$. The notation ``$\Hom$'' stands for homomorphism, from one of the earliest examples of a category.
+\end{notation}
+
+\begin{example}[Categories of mathematical structures] \
+\begin{itemize}
+\item There is a category $\cat{Set}$ described as follows. Its objects are sets. Given sets $A$ and $B$, a map from $A$ to $B$ in the category $\cat{Set}$ is exactly what is ordinarily called a map (or mapping, or function) from $A$ to $B$. Composition in the category is ordinary composition of functions, and the identity maps are again what you would expect.
+\item There is a category $\cat{Grp}$ of groups, whose objects are groups and whose maps are group homomorphisms.
+\item Similarly, there is a category $\cat{Ring}$ of rings and ring homomorphisms.
+\item For each field $\FF$, there is a category $\cat{Vect}_\FF$ of vector spaces over $\FF$ and linear maps between them; for each $A,B\in\cat{Vect}_\FF$, $\Hom(A,B)=\mathcal{L}(A,B)$.
+\item There is a category $\cat{Top}$ of topological spaces and continuous maps.
+\end{itemize}
+\end{example}
+
+\section{Functors}
+
+\section{Natural Transformations}

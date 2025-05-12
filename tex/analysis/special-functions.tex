@@ -8,27 +8,33 @@ where $z\in\CC$; the numbers $c_n$ are called the \emph{coefficients} of the ser
 
 The convergence of $\sum c_nz^n$ depends on the choice of $z$ (we would expect that a power series will be more likely to converge for small $|z|$ than for large $|z|$). More specifically, there is a ``circle of convergence'', where $\sum c_nz^n$ converges if $z$ is in the interior of the circle, and diverges if $z$ is in the exterior.
 
-\begin{lemma}[Cauchy--Hadamard theorem]
+\begin{lemma}[Cauchy--Hadamard theorem]\label{lemma:radius-convergence}
 Given the power series $\sum c_nz^n$, let
-\[\alpha=\limsup_{n\to\infty}\sqrt[n]{|c_n|},\quad R=\frac{1}{\alpha}.\]
-(If $\alpha=0$, $R=+\infty$; if $\alpha=+\infty$, $R=0$.) Then $\sum c_nz^n$
+\begin{equation}\label{eqn:hadamard-formula-power-series}
+\alpha=\limsup_{n\to\infty}\sqrt[n]{|c_n|},\quad R=\frac{1}{\alpha}.
+\end{equation}
+(If $\alpha=0$, $R=+\infty$; if $\alpha=+\infty$, $R=0$.) Then 
 \begin{enumerate}[label=(\roman*)]
-\item converges if $|z|<R$,
-\item diverges if $|z|>R$.
+\item If $|z|<R$, $\sum c_nz^n$ converges.
+\item If $|z|>R$, $\sum c_nz^n$ diverges.
 \end{enumerate}
 \end{lemma}
 
 $R$ is called the \vocab{radius of convergence} of $\sum c_n(z-a)^n$; the \vocab{disk of convergence} for the power series is
-\[D_R(a)\coloneqq\{z\in\CC:|z|<R\}.\]
+\[D_R(a)\colonequals\{z\in\CC:|z|<R\}.\]
 
 \begin{proof}
 Let $a_n=c_nz^n$. We apply the root test:
 \[\limsup_{n\to\infty}\sqrt[n]{|a_n|}=\limsup_{n\to\infty}\sqrt[n]{|c_nz^n|}=|z|\limsup_{n\to\infty}\sqrt[n]{|c_n|}=\frac{|z|}{R}.\]
 \begin{enumerate}[label=(\roman*)]
-\item If $|z|<R$, then $\displaystyle\limsup_{n\to\infty}\sqrt[n]{|a_n|}<1$. By the root test, $\sum c_nz^n$ converges.
+\item If $|z|<R$, then $\displaystyle\limsup_{n\to\infty}\sqrt[n]{|a_n|}<1$. By the root test, $\sum c_nz^n$ converges absolutely and thus converges.
 \item If $|z|>R$, then $\displaystyle\limsup_{n\to\infty}\sqrt[n]{|a_n|}>1$. By the root test, $\sum c_nz^n$ diverges.
 \end{enumerate}
 \end{proof}
+
+\begin{remark}
+On the boundary of the disc of convergence, $|z|=R$, the situation is more delicate as one can have either convergence or divergence.
+\end{remark}
 
 In the previous result, we have shown that the radius of convergence can be found by using the root test. We can also find it using the ratio test (which is easier to compute).
 
@@ -52,7 +58,7 @@ Suppose the radius of convergence of $\sum c_nz^n$ is $1$, and suppose $c_0\ge c
 \begin{proof}
 Let
 \[a_n=z^n,\quad b_n=c_n.\]
-Then the hypothesis of \cref{prop:part-sum-limit} are satisfied, since
+Then the hypothesis of \cref{lemma:dirichlet-test-product-series-converge} are satisfied, since
 \[|A_n|=\absolute{\sum_{k=0}^{n}z^k}=\absolute{\frac{1-z^{n+1}}{1-z}}\le\frac{2}{|1-z|}\]
 if $|z|=1$, $|z|\neq1$.
 \end{proof}
@@ -68,12 +74,12 @@ We shall restrict ourselves to real values of $x$ (since we have yet to define c
 
 As a matter of convenience, we shall often take $a=0$ without any loss of generality. If $\sum c_nx^n$ converges for all $x\in(-R,R)$, for some $R>0$, we say that $f$ is \emph{expanded in a power series} about the point $x=0$.
 
-\begin{proposition}
+\begin{proposition}\label{prop:real-power-series-derivative}
 Suppose $\sum c_nx^n$ converges for $|x|<R$. Let
 \[f(x)=\sum_{n=0}^{\infty}c_nx^n\quad(|x|<R).\]
 Then
 \begin{enumerate}[label=(\roman*)]
-\item $\sum c_nx^n$ converges uniformly on $[-R+\epsilon,R-\epsilon]$ for all $\epsilon>0$;
+\item $\sum c_nx^n$ converges absolutely and uniformly on $(-r,r)$ where $r<R$;
 \item $f(x)$ is continuous and differentiable on $(-R,R)$, and 
 \[f^\prime(x)=\sum_{n=1}^\infty nc_nx^{n-1}\quad(|x|<R).\]
 \end{enumerate}
@@ -81,178 +87,414 @@ Then
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item Let $\epsilon>0$ be given. For $|x|\le R-\epsilon$, we have
-\[|c_nx^n|\le|c_n(R-\epsilon)^n|\]
-and since
-\[\sum c_n(R-\epsilon)^n\]
-converges absolutely (every power series converges absolutely in the interior of its internal of convergence, by the root test), Theorem 7.10 show that $\sum c_nx^n$ uniformly converges on $[-R+\epsilon,R-\epsilon]$.
+\item We will show that $\sum c_nx^n$ converges absolutely and uniformly on $[-R+\epsilon,R-\epsilon]$ for all $\epsilon>0$. 
 
-\item Since $\sqrt[n]{n}\to1$ as $n\to\infty$, we have
+\begin{idea}
+Weierstrass M-test.
+\end{idea}
+
+Let $\epsilon>0$ be given. For $|x|\le R-\epsilon$, notice that we have
+\[|c_nx^n|\le|c_n|(R-\epsilon)^n\quad(n=1,2,\dots).\]
+Consider the series
+\[\sum |c_n|(R-\epsilon)^n.\]
+By \cref{lemma:radius-convergence}, which states that every power series converges (absolutely) in the interior of its internal of convergence, we have that $\sum |c_n|(R-\epsilon)^n$ converges.
+
+By the Weierstrass M-test, $\sum c_nx^n$ uniformly converges on $[-R+\epsilon,R-\epsilon]$.
+
+\item Since $\displaystyle\lim_{n\to\infty}\sqrt[n]{n}=1$, we have
 \[\limsup_{n\to\infty}\sqrt[n]{n|c_n|}=\limsup_{n\to\infty}\sqrt[n]{|c_n|},\]
-so that the series (4) and (5) have the same interval of convergence. Since (5) is a power series, it converges uniformly in $[-R+\epsilon,R-\epsilon]$, for every $\epsilon>0$, and we can apply Theorem 7.17 (for series instead of sequences). It follows that (5) holds if $|x|\le R-\epsilon$.
+so the series $\displaystyle\sum_{n=0}^{\infty} c_nx^n$ and $\displaystyle\sum_{n=1}^{\infty} nc_nx^{n-1}$ have the same radius of convergence; thus $\displaystyle\sum_{n=1}^{\infty} nc_nx^{n-1}$ has radius of convergence $R$.
 
-But, given any $x$ such that $|x|<R$, we can find an $\epsilon>0$ such that $|x|<R-\epsilon$. This shows that (5) holds for $|x|<R$.
+\begin{idea}
+Interchange limits and derivatives.
+\end{idea}
 
-Continuity of $f$ follows from the differentiability of $f$ on $(-R,R)$.
+Since $\displaystyle\sum_{n=1}^{\infty} nc_nx^{n-1}$ is a power series, by (i), it converges uniformly in $[-R+\epsilon,R-\epsilon]$, for every $\epsilon>0$. 
+
+Consider the partial sums $f_n(x)=\sum_{k=0}^{n}c_kx^k$; evidently $f_n$ are differentiable on $[-R+\epsilon,R-\epsilon]$, and $\brac{f_n(x)}$ converges whenever $|x|<R$. Also,
+\[f_n^\prime(x)=\sum_{k=1}^{n}kc_kx^{k-1},\]
+converge uniformly on $[-R+\epsilon,R-\epsilon]$. By \cref{prop:uniform-convergence-differentiation}, for all $|x|<R$,
+\[f^\prime(x)=\lim_{n\to\infty}f_n^\prime(x)
+=\lim_{n\to\infty}\sum_{k=1}^{n}kc_kx^{k-1}
+=\sum_{n=1}^\infty nc_nx^{n-1}.\]
+
+Since $f$ is differentiable on $(-R,R)$, by \cref{lemma:diff-cont}, $f$ is continuous on $(-R,R)$.
 \end{enumerate}
 \end{proof}
 
 \begin{corollary}
 $f$ is infinitely differentiable in $(-R,R)$; its derivatives are given by
-\[f^{(k)}(x)=\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)c_nx^{n-k}.\]
+\begin{equation}
+f^{(k)}(x)=\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)c_n x^{n-k}.
+\end{equation}
 In particular,
-\[f^{(k)}(0)=k!c_k,\quad k=0,1,2,\dots\]
+\begin{equation}\label{eqn:power-series-coefficients}
+f^{(k)}(0)=k!c_k\quad (k=0,1,2,\dots).
+\end{equation}
 \end{corollary}
 
 \begin{proof}
-Apply theorem successively to $f,f^\prime,f^{\prime\prime},\dots$. Put $x=0$.
+Apply the previous result successively to $f,f^\prime,f^{\prime\prime},\dots$.
+
+Then plug in $x=0$.
 \end{proof}
 
-If the series (3) converges at an endpoint, say at $x=R$, then/is continuous not only in $(-R,R)$, but also at $x=R$. This follows from the following result (for simplicity of notation, we take $R=1$).
+\begin{remark}
+\eqref{eqn:power-series-coefficients} is very interesting.
+\begin{itemize}
+\item It shows, on the one hand, that the coefficients of the power series development of $f$ are determined by the values of $f$ and its derivatives at a single point.
+\item On the other hand, if the coefficients are given, the values of the derivatives of $f$ at the center of the interval of convergence can be read off immediately from the power series.
+\end{itemize}
+\end{remark}
+
+If the series (3) converges at an endpoint, say at $x=R$, then $f$ is continuous not only in $(-R,R)$, but also at $x=R$, as shown by the following result (for simplicity of notation, we take $R=1$).
 
 \begin{proposition}[Abel's theorem]
 Suppose $\sum c_n$ converges. Let
 \[f(x)=\sum_{n=0}^\infty c_n x^n\quad(-1<x<1).\]
-Then $\displaystyle\lim_{x\to 1}f(x)=\sum_{n=0}^{\infty}c_n$.
+Then $f(x)$ is continuous at $x=1$.
 \end{proposition}
 
 \begin{proof}
+We want to show that $\displaystyle\lim_{x\to 1}f(x)=\sum_{n=0}^{\infty}c_n$.
+
 Let
 \[s_n=c_0+\cdots+c_n,\quad s_{-1}=0.\]
-Then
+Then we write
 \begin{align*}
 \sum_{n=0}^{m}c_nx^n
 &=\sum_{n=0}^{m}(s_n-s_{n-1})x^n\\
+&=\sum_{n=0}^{m}s_nx^n-\sum_{n=1}^{m}s_{n-1}x^n\\
+&=\sum_{n=0}^{m}s_nx^n-\sum_{n=0}^{m-1}s_nx^{n+1}\\
 &=(1-x)\sum_{n=0}^{m-1}s_nx^n+s_mx^m.
 \end{align*}
 For $|x|<1$, we let $m\to\infty$ and obtain
 \[f(x)=(1-x)\sum_{n=0}^{\infty}s_nx^n.\]
 
-Suppose $s_n\to s$. We will show that $\displaystyle\lim_{x\to1}f(x)=s$. Fix $\epsilon>0$, there exists $N\in\NN$ such that for all $n\ge N$,
-\[|s-s_n|<\frac{\epsilon}{2}.\]
+Suppose $s_n\to s$. We will show that $\displaystyle\lim_{x\to1}f(x)=s$. Fix $\epsilon>0$, there exists $N\in\NN$ such that
+\[n\ge N\implies|s_n-s|<\frac{\epsilon}{2}.\]
+Note that for $|x|<1$, since $\displaystyle\sum_{n=0}^{\infty}x^n=\frac{1}{1-x}$, we can write
+\[(1-x)\sum_{n=0}^{\infty}sx^n=s.\]
 If $x>1-\delta$, for some suitably chosen $\delta>0$, we have
 \begin{align*}
 |f(x)-s|
 &=\absolute{(1-x)\sum_{n=0}^\infty(s_n-s)x^n}\\
-&\le(1-x)\sum_{n=0}^{N}|s_n-s|\:|x|^n+\frac{\epsilon}{2}\\
-&\le\epsilon.
+&=(1-x)\absolute{\sum_{n=0}^{N}(s_n-s)x^n+\sum_{n=N+1}^{\infty}(s_n-s)x^n}\\
+&\le(1-x)\absolute{\sum_{n=0}^{N}(s_n-s)x^n}+(1-x){\sum_{n=N+1}^{\infty}(s_n-s)x^n}.
 \end{align*}
-Hence $\displaystyle\lim_{x\to1}f(x)=s$, as desired.
+
+Note that
+\begin{align*}
+(1-x)\absolute{\sum_{n=N+1}^{\infty}(s_n-s)x^n}
+&\le(1-x)\sum_{n=N+1}^{\infty}|s_n-s|\:|x|^n\\
+&<\frac{\epsilon}{2}(1-x)\sum_{n=N+1}^{\infty}x^n\\
+&=\frac{\epsilon}{2}(1-x)\frac{x^{N+1}}{1-x}<\frac{\epsilon}{2}
+\end{align*}
+and
+\begin{align*}
+(1-x)\absolute{\sum_{n=0}^{N}(s_n-s)x^n}
+&\le(1-x)\sum_{n=0}^{N}|s_n-s|\:|x|^n\\
+&<(1-x)\sum_{n=0}^{N}|s_n-s|
+\end{align*}
+which can be bounded by, say, $M$ because there are only finitely many terms in the sum. Choosing $\delta<\frac{\epsilon}{2M}$ gives
+\[(1-x)\sum_{n=0}^{N}|s_n-s|<\brac{1-(1-\delta)}\sum_{n=0}^{N}|s_n-s|<\delta M<\frac{\epsilon}{2}.\]
+Hence
+\[|f(x)-s|<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon,\]
+and therefore $\displaystyle\lim_{x\to1}f(x)=s$, as desired.
 \end{proof}
 
-We now require a theorem concerning an inversion in the order of summation.
+We now require a result concerning an inversion in the order of summation.
 
-\begin{proposition}
-Given a double sequence $(a_{ij})$, $i=1,2,3,\dots$, $j=1,2,3,\dots$, suppose that
-\[\sum_{j=1}^{\infty}|a_{ij}|=b_i\quad(i-1,2,3,\dots)\]
+\begin{proposition}[Fubini's theorem for sums]
+Given a double sequence $(a_{ij})$, $i=1,2,\dots$, $j=1,2,\dots$, suppose that
+\[\sum_{j=1}^{\infty}|a_{ij}|=b_i\quad(i=1,2,\dots)\]
 and $\sum b_i$ converges. Then
 \begin{equation}
 \sum_{i=1}^{\infty}\sum_{j=1}^{\infty}a_{ij}=\sum_{j=1}^{\infty}\sum_{i=1}^{\infty}a_{ij}.
 \end{equation}
 \end{proposition}
 
+\begin{remark}
+This is analogous to Fubini's theorem for the swapping of double integrals.
+\end{remark}
+
+\begin{proof}
+Let $E$ be a countable set:
+\[E=\{x_0,x_1,x_2,\dots\},\]
+and suppose $x_n\to x_0$ as $n\to\infty$. Define the sequence of functions $f_i:E\to\CC$ by
+\begin{align*}
+f_i(x_0)&=\sum_{j=1}^{\infty}a_{ij}\quad(i=1,2,\dots)\\
+f_i(x_n)&=\sum_{j=1}^{n}a_{ij}\quad(i,n=1,2,\dots)
+\end{align*}
+
+See that each $f_i$ is continuous at $x_0$.
+
+Since $|f_i(x)|\le b_i$ for $x\in E$ (by triangle inequality), and $\sum b_i$ converges, by the Weierstrass M-test, $\displaystyle\sum_{i=1}^{n}f_i(x)$ converges uniformly. Let
+\[g(x)=\sum_{i=1}^{\infty}f_i(x)\quad(x\in E).\]
+By 7.11, $g$ is continuous at $x_0$, so
+\[\lim_{n\to\infty}g(x_n)=g(x_0).\]
+It follows that 
+\begin{align*}
+\sum_{i=1}^{\infty}\sum_{j=1}^{\infty}a_{ij}
+&=\sum_{i=1}^{\infty}f_i(x_0)=g(x_0)=\lim_{n\to\infty}g(x_n)\\
+&=\lim_{n\to\infty}\sum_{i=1}^{\infty}f_i(x_n)=\lim_{n\to\infty}\sum_{i=1}^{\infty}\sum_{j=1}^{\infty}a_{ij}\\
+&=\lim_{n\to\infty}\sum_{j=1}^{n}\sum_{i=1}^{\infty}a_{ij}=\sum_{j=1}^{\infty}\sum_{i=1}^{\infty}a_{ij}.
+\end{align*}
+\end{proof}
+
 \begin{theorem}[Taylor's theorem]
 Suppose $\sum c_nx^n$ converges in $|x|<R$, let
 \[f(x)=\sum_{n=0}^{\infty}c_nx^n.\]
 If $a\in(-R,R)$, then $f$ can be expanded in a power series about the point $x=a$ which converges in $|x-a|<R-|a|$, and
-\begin{equation}
+\begin{equation}\label{eqn:taylor-theorem-power-series}
 f(x)=\sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(x-a)^n\quad(|x-a|<R-|a|).
 \end{equation}
 \end{theorem}
 
+\begin{proof}
+We have
+\begin{align*}
+f(x)&=\sum_{n=0}^{\infty}c_nx^n
+=\sum_{n=0}^{\infty}c_n\sqbrac{(x-a)+a}^n\\
+&=\sum_{n=0}^{\infty}c_n\sum_{m=0}^{n}\binom{n}{m}a^{n-m}(x-a)^m\\
+&=\sum_{m=0}^{\infty}\sqbrac{\sum_{n=m}^{\infty}\binom{n}{m}c_n a^{n-m}}(x-a)^m\tag{1}
+\end{align*}
+This is the desired expansion about the point $x=a$. We need to show that the swapping of summations in (1) is valid, which is applicable only if $\binom{n}{m}c_n a^{n-m}(x-a)^m$ satisfies Theorem 8.3, i.e.
+\[\sum_{n=0}^{\infty}\sum_{m=0}^{n}\absolute{c_n\binom{n}{m}a^{n-m}(x-a)^m}\]
+converges. Write
+\begin{align*}
+&\sum_{n=0}^{\infty}\sum_{m=0}^{n}\absolute{c_n\binom{n}{m}a^{n-m}(x-a)^m}\\
+&=\sum_{n=0}^{\infty}\sum_{m=0}^{\infty}\binom{n}{m}|c_n||a|^{n-m}|x-a|^m\\
+&=\sum_{n=0}^{\infty}|c_n|\brac{|x-a|+|a|}^n,
+\end{align*}
+which converges if and only if $|x-a|+|a|<R$.
+
+Finally, the form of the coefficients in \eqref{eqn:taylor-theorem-power-series} follows from \eqref{eqn:power-series-coefficients}: differentiate $f(x)$ repeatedly to obtain
+\begin{align*}
+f^{(m)}(x)
+&=\sum_{n=m}^{\infty}c_n n(n-1)\cdots(n-m-1)x^{n-m}\\
+&=\sum_{n=m}^{\infty}c_n m!\binom{n}{m}x^{n-m}
+\end{align*}
+and then plug in $x=a$.
+\end{proof}
+
 If two power series converge to the same function in $(-R,R)$, (7) shows that the two series must be identical, i.e., they must have the same coefficients. It is interesting that the same conclusion can be deduced from much weaker hypotheses: 
 
 \begin{proposition}
-Suppose $\sum a_nx^n$ and $\sum b_nx^n$ converge in $(-R,R)$. Let $E$ be the set of all $x\in(-R,R)$ such that
+Suppose $\sum a_nx^n$ and $\sum b_nx^n$ converge in $S=(-R,R)$. Let $E$ be the set of all $x\in S$ such that
 \[\sum_{n=0}^{\infty}a_nx^n=\sum_{n=0}^{\infty}b_nx^n.\]
-If $E$ has a limit point in $(-R,R)$, then $a_n=b_n$ for $n=0,1,2,\dots$. Hence (20) holds for all $x\in(-R,R)$. 
+If $E$ has a limit point in $S$, then $a_n=b_n$ for $n=0,1,2,\dots$. Hence (20) holds for all $x\in S$. 
 \end{proposition}
+
+\begin{proof}
+Let $c_n=a_n-b_n$, and let
+\[f(x)=\sum_{n=0}^{\infty}c_n x^n\quad(x\in S)\]
+We will show that $c_n=0$, so that $f(x)=0$ on $E$.
+
+Let $A$ be the set of all limit points of $E$ in $S$, and let $B$ consist of all other points of $S$. It is clear from the definition of ''limit point'' that $B$ is open. Suppose we can prove that $A$ is open. Then $A$ and $B$ are disjoint
+open sets. Hence they are separated (Definition 2.45). Since $S=A\cup B$,
+and $S$ is connected, one of $A$ and $B$ must be empty. By hypothesis, $A$ is
+not empty. Hence $B$ is empty, and $A=S$. Since $f$ is continuous in $S$,
+$A\subset E$. Thus $E=S$, and (7) shows that $c_n=0$ for n = 0, 1, 2, ... , which is the desired conclusion. 
+
+Thus we have to prove that $A$ is open. If $x_0\in A$, Theorem 8.4 shows that
+\[f(x)=\sum_{n=0}^{\infty}d_n(x-x_0)^n\quad\brac{|x-x_0|<R-|x_0|}.\]
+We claim that $d_n=0$ for all $n$. Otherwise, let $k$ be the smallest nonnegative integer such that $d_k\neq0$. Then
+\[f(x)=(x-x_0)^k g(x)\quad\brac{|x-x_0|<R-|x_0|},\]
+where
+\[g(x)=\sum_{m=0}^{\infty}d_{k+m}(x-x_0)^m.\]
+Since $g$ is continuous at $x_0$ and
+\[g(x_0)=d_k\neq0,\]
+there exists $\delta>0$ such that $g(x)\neq0$ if $|x-x_0|<\delta$. It follows from (23) that $f(x)\neq0$ if $0<|x-x_0|<\delta$. But this contradicts the fact that $x_0$ is a limit point of $E$.
+
+Thus $d_n=0$ for all $n$, so that $f(x)=0$ for all $x$ for which (22) holds, i.e., in a neighborhood of $x_0$. This shows that $A$ is open, and completes the proof. 
+
+\todo{to do}
+\end{proof}
 \pagebreak
 
 \subsection{Exponential and Logarithmic Functions}
 \begin{definition}[Exponential function]
 For $z\in\CC$, define
 \begin{equation}\label{eqn:exponential-function}
-\exp(z)\coloneqq\sum_{n=0}^\infty\frac{z^n}{n!}.
+\exp(z)\colonequals\sum_{n=0}^\infty\frac{z^n}{n!}.
 \end{equation}
 \end{definition}
 
-\begin{proposition}
+\begin{notation}
+We shall usually replace $\exp(z)$ by the customary shorter expression $e^z$.
+\end{notation}
+
+\begin{lemma}
 $\exp(z)$ converges for every $z\in\CC$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
-Ratio test.
+Let $a_n=\frac{z^n}{n!}$. Then
+\[\lim_{n\to\infty}\absolute{\frac{a_{n+1}}{a_n}}=\lim_{n\to\infty}\absolute{\frac{z}{n+1}}=|z|\lim_{n\to\infty}\frac{1}{n+1}=0<1.\]
+By the ratio test, the series converges absolutely for all $z\in\CC$, and thus converges for all $z\in\CC$.
 \end{proof}
 
-\begin{proposition}
+Thus $\exp(z)$ has infinite radius of convergence.
+
+The series converges uniformly on every bounded subset of the complex plane. Thus exp is a continuous function. 
+
+\begin{lemma}[Addition formula]
 For $z,w\in\CC$,
-\[\exp(z+w)=\exp(z)+\exp(w).\]
-\end{proposition}
-
-\begin{corollary}
-For $z\in\CC$,
-\[\exp(z)\exp(-z)=1.\]
-\end{corollary}
+\begin{equation}\label{eqn:exp-addition-formula}
+\exp(z+w)=\exp(z)\exp(w).
+\end{equation}
+\end{lemma}
 
 \begin{proof}
-Take $z=z$, $w=-z$ in the previous result.
+By multiplication of absolutely convergent series,
+\begin{align*}
+\exp(z)\exp(w)
+&=\sum_{n=0}^{\infty}\frac{z^n}{n!}\sum_{m=0}^{\infty}\frac{w^m}{m!}\\
+&=\sum_{k=0}^{\infty}\brac{\frac{z^k}{k!}+\frac{z^{k-1}}{(k-1)!}\frac{w}{1!}+\cdots+\frac{w^k}{k!}}\\
+&=\sum_{k=0}^{\infty}\frac{1}{k!}\sum_{m+n=k}\binom{k}{n}z^n w^{k-n}\\
+&=\sum_{k=0}^{\infty}\frac{1}{k!}(z+w)^k\\
+&=\exp(z+w)
+\end{align*}
 \end{proof}
 
-\begin{proposition}
-$\exp$ is strictly increasing in $\RR$.
-\end{proposition}
+An immediate consequence is
+\begin{equation}\label{eqn:exp-inverse-1}
+\exp(z)\exp(-z)=1
+\end{equation}
+for all $z\in\CC$.
+This shows that $\exp(z)\neq0$ for all $z\in\CC$.
 
-\begin{proposition}
-For $z\in\CC$,
-\[\exp^\prime(z)=\exp(z)\]
-\end{proposition}
+\begin{lemma}
+The restriction of $\exp$ to $\RR$ is a monotonically increasing positive function, and
+\[\lim_{x\to\infty}e^x=\infty,\quad \lim_{x\to-\infty}e^x=0.\]
+\end{lemma}
 
-Further,
-\[\exp^\prime(z)=\lim_{h\to0}\frac{\exp(z+h)-\exp(z)}{h}=\lim_{h\to0}\frac{\exp(z+h)-1}{h}\exp(z).\]
-Let $\exp(1)=e$. So $\exp(n)=\exp(1+\cdots+1)=\exp(1)\cdots\exp(1)=e^n$. This holds for any $n\in\QQ$.
+\begin{proof}
+By \eqref{eqn:exponential-function}, $\exp(x)>0$ if $x>0$ (since all the terms are positive); hence \eqref{eqn:exp-inverse-1} shows that $\exp(x)>0$ for all real $x$. 
+
+By \eqref{eqn:exponential-function}, $\exp(x)\to+\infty$ as $x\to+\infty$; hence \eqref{eqn:exp-inverse-1} shows that $\exp(x)\to 0$ as $x\to-\infty$ along the real axis. 
+
+By \eqref{eqn:exponential-function}, $0<x<y$ implies that $\exp(x)<\exp(y)$; by \eqref{eqn:exp-inverse-1}, it follows that $\exp(-y)<\exp(-x)$.
+\end{proof}
+
+\begin{lemma}
+$\exp^\prime(x)=\exp(x)$ for all $x\in\RR$.
+\end{lemma}
+
+\begin{proof}
+By the addition formula,
+\begin{align*}
+\exp^\prime(x)
+&=\lim_{h\to0}\frac{\exp(x+h)-\exp(x)}{h}\\
+&=\lim_{h\to0}\frac{\exp(x)\exp(h)-\exp(x)}{h}\\
+&=\exp(x)\lim_{h\to0}\frac{\exp(h)-1}{h}\\
+&=\exp(x).
+\end{align*}
+\end{proof}
+
+Since $\exp$ is strictly increasing and differentiable on $\RR$, it has an inverse function $\log$ which is also strictly increasing and differentiable and whose domain is $\exp(\RR)=\RR^+$. 
+Define the \vocab{logarithm function} $\log$ by 
+\[\exp(\log(y))=y\quad(y>0),\]
+or, equivalently, by 
+\[\log(\exp(x))=x\quad(x\in\RR).\]
+Differentiating this using the chain rule, we obtain
+\[\log^\prime(\exp(x))\exp(x)=1.\]
+Writing $y=\exp(x)$, this gives us
+\[\log^\prime(y)=\frac{1}{y}\quad(y>0).\]
+Taking $x=0$, we see that $\log(1)=0$. Hence
+\[\log y=\int_{1}^{y}\frac{1}{x}\dd{x}.\]
+
+\begin{lemma}[Addition formula]
+If $u,v>0$ then
+\begin{equation}
+\log(uv)=\log(u)+\log(v).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write $u=\exp(x)$, $v=\exp(y)$. Then
+\begin{align*}
+\log(uv)
+&=\log\brac{\exp(x)\exp(y)}\\
+&=\log\brac{\exp(x+y)}\\
+&=x+y\\
+&=\log(u)+\log(v).
+\end{align*}
+\end{proof}
+
+
 \pagebreak
 
 \subsection{Trigonometric Functions}
 \begin{definition}
 For $z\in\CC$, define
 \begin{equation}\label{eqn:trigonometric-functions}
-\begin{split}
-\cos z&\coloneqq\frac{1}{2}\brac{\exp(iz)+\exp(-iz)}\\
-\sin z&\coloneqq\frac{1}{2i}\brac{\exp(iz)-\exp(-iz)}
-\end{split}
+\cos z\colonequals\frac{e^{iz}+e^{-iz}}{2},\quad
+\sin z\colonequals\frac{e^{iz}-e^{-iz}}{2i}.
 \end{equation}
 \end{definition}
 
-By \cref{eqn:exponential-function}, we obtain the power series
+By \eqref{eqn:exponential-function}, we obtain the power series
 \begin{align*}
 \cos z&=\sum_{n=0}^{\infty}(-1)^n\frac{z^{2n}}{(2n)!}\\
 \sin z&=\sum_{n=0}^{\infty}(-1)^n\frac{z^{2n+1}}{(2n+1)!}
 \end{align*}
 
-We now state some properties of trigonometric functions:
-\begin{itemize}
-\item (Euler's identity) $\exp(iz)=\cos z+i\sin z$.
-\item For $x\in\RR$, $\cos^\prime x=-\sin x$ and $\sin^\prime x=\cos x$.
-\end{itemize}
+\begin{lemma}[Euler's identity]
+For $z\in\CC$,
+\[e^{iz}=\cos z+i\sin z.\]
+\end{lemma}
 
-\begin{proposition} \
+\begin{proof}
+This is immediate from \eqref{eqn:trigonometric-functions}.
+\end{proof}
+
+Let us now restrict ourselves to considering real values $x\in\RR$. Then $\cos x$ and $\sin x$ are real for real $x$. 
+By Euler's identity, $\cos x$ and $\sin x$ are the real and imaginary parts, respectively, of $e^{ix}$.
+
+By \eqref{eqn:exp-inverse-1},
+\[|e^{ix}|^2=e^{ix}\overline{e^{ix}}=e^{ix}e^{-ix}=1,\]
+so that
+\[|e^{ix}|=1\quad(x\in\RR).\]
+
+\begin{lemma}[Derivative of trigonometric functions]
+For $x\in\RR$,
+\[\cos^\prime x=-\sin x,\quad\sin^\prime x=\cos x.\]
+\end{lemma}
+
+Let $x_0$ be the smallest positive number such that $\cos x_0=0$. This exists, since the set of zeros of a continuous function is closed, and $\cos 0\neq0$. We define the number $\pi$ by
+\[\pi\colonequals 2x_0.\]
+Then $\cos\frac{\pi}{2}=0$, and (48) shows that $\sin\frac{\pi}{2}=\pm 1$. Since $\cos x>0$ in $\brac{0,\frac{\pi}{2}}$, $\sin$ is increasing in $\brac{0,\frac{\pi}{2}}$; hence $\sin\frac{\pi}{2}=1$. 
+
+\begin{lemma}
+$\exp$ is periodic, with period $2\pi i$.
+\end{lemma}
+
+\begin{proof} 
+\[\exp\brac{\frac{\pi i}{2}}=i,\]
+and the addition formula gives
+\[\exp(\pi i)=-1,\quad\exp(2\pi i)=1.\]
+Hence
+\[\exp(z+2\pi i)=\exp(z)\quad(z\in\CC).\]
+\end{proof}
+
+\begin{lemma} \
 \begin{enumerate}[label=(\roman*)]
-\item $\exp$ is periodic, with period $2\pi i$.
 \item $C$ and $S$ are periodic, with period $2\pi$.
 \item If $0<t<2\pi$, then $\exp(it)\neq1$.
 \item If $z\in\CC$, $|z|=1$, there exists a unique $t\in[0,2\pi)$ such that $\exp(it)=z$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 \pagebreak
 
 \section{Algebraic Completeness of the Complex Field}
 We now prove that the complex field is \emph{algebraically complete}; that is, every non-constant polynomial with complex coefficients has a complex root.
 
 \begin{theorem}[Fundamental Theorem of Algebra]
-Suppose $a_0,\dots,a_n$ are complex numbers, $n\ge1$, $a_n\neq0$,
-\[P(z)=\sum_{k=0}^n a_kz^k.\]
-Then $P(z)=0$ for some complex number $z$.
+For $a_i\in\CC$, let
+\[P(z)=\sum_{k=0}^n a_kz^k\]
+where $n\ge1$, $a_n\neq0$. Then $P(z)=0$ for some $z\in\CC$.
 \end{theorem}
 
 \begin{proof}
@@ -272,7 +514,7 @@ By Theorem 8.7(d) there is a real $\theta$ such that
 If $r>0$ and $r^k|b_k|<1$, the above equation implies
 \[|1+b_kr^ke^{ik\theta}|=1-r^k|b_k|,\]
 so that
-\[|Q(re^{i\theta}|\le 1-r^k\brac{|b_k|-r|b_{k+1}|-\cdots-r^{n-k}|b_n|}.\]
+\[\absolute{Q\brac{re^{i\theta}}}\le 1-r^k\brac{|b_k|-r|b_{k+1}|-\cdots-r^{n-k}|b_n|}.\]
 For sufficiently small $r$, the expression in braces is positive; hence $|Q(re^{i\theta})|<1$, a contradiction.
 
 Thus $\mu=0$, that is, $P(z_0)=0$.
@@ -282,12 +524,14 @@ Thus $\mu=0$, that is, $P(z_0)=0$.
 \section{Fourier Series}
 \begin{definition}
 A \vocab{trigonometric polynomial} is a finite sum of the form
-\[f(x)=a_0+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx)\quad(x\in\RR)\]
-where $a_0,\dots,a_N,b_1,\dots,b_N\in\CC$.
+\[f(x)=a_0+\sum_{n=1}^{N}(a_n\cos nx+b_n\sin nx)\quad(x\in\RR)\]
+where $a_0,a_1\dots,a_N,b_1,\dots,b_N\in\CC$.
 \end{definition}
 
-We can write the above in the form
-\[f(x)=\sum_{n=-N}^N c_ne^{inx}.\]
+Using \eqref{eqn:trigonometric-functions}, we can write the above in the form
+\[f(x)=\sum_{n=-N}^N c_ne^{inx}\]
+for some constants $c_n\in\CC$. This is a more convenient form of trigonometric polynomials, which we shall work with.
+
 It is clear that every trigonometric polynomial is periodic, with period $2\pi$.
 
 For non-zero integer $n$, $e^{inx}$ is the derivative of $\frac{1}{in}e^{inx}$, which also has period $2\pi$. Hence
@@ -296,82 +540,236 @@ For non-zero integer $n$, $e^{inx}$ is the derivative of $\frac{1}{in}e^{inx}$, 
 0&(n=\pm1,\pm2,\dots)
 \end{cases}\]
 
-\begin{definition}[Fourier coefficients]
-If $f$ is an integrable function on $[-\pi,\pi]$, the numbers $c_m$ defined by
-\[c_m=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{inx}\dd{x}\]
-for all integers $m$ are called the \vocab{Fourier coefficients}\index{Fourier coefficients} of $f$.
-\end{definition}
-
-\begin{definition}[Fourier series]
+\begin{definition}
+Let $f\in\mathcal{R}[-\pi,\pi]$. The \vocab{Fourier coefficients}\index{Fourier coefficients} of $f$ are the numbers $c_n$, defined by
+\[c_n=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-inx}\dd{x}.\]
 The series
 \[\sum_{n=-\infty}^{\infty}c_ne^{inx}\]
-formed with the Fourier coefficients is called the \vocab{Fourier series}\index{Fourier series} of $f$.
+formed with the Fourier coefficients is called the \vocab{Fourier series}\index{Fourier series} of $f$; in this case we write
+\[f\sim\sum_{n=-\infty}^{\infty}c_ne^{inx}.\]
 \end{definition}
+
+We say $f$ is an $L^2$ function if $|f|^2$ is Lebesgue integrable. The space of $L^2$ functions on a set $E$ is denoted by $L^2(E)$. For all $f,g\in L^2(E)$, define the inner product
+\[\angbrac{f,g}=\int_E f(x)\overline{g(x)}\dd{x}.\]
+Then the norm of $f$ squared is defined as
+\[\norm{f}^2\colonequals\angbrac{f,f}=\int_E|f(x)|^2\dd{x}.\]
+We say that $f$ and $g$ are \emph{orthogonal} if $\angbrac{f,g}=0$.
 
 \begin{definition}
-Let $(\phi_n)$ be a sequence of complex functions on $[a,b]$ such that
-\[\int_{a}^{b}\phi_n(x)\overline{\phi_m(x)}\dd{x}=0\quad(n\neq m).\]
-Then $(\phi_n)$ is said to be an \vocab{orthogonal system of functions}\index{orthogonal system of functions} on $[a,b]$. If in addition
-\[\int_{a}^{b}\absolute{\phi_n(x)}^2\dd{x}=1\quad(n=1,2,\dots)\]
-then $(\phi_n)$ is said to be \vocab{orthonormal}.
+Let $(\phi_n)$ be a sequence of complex functions on $[a,b]$.
+\begin{enumerate}[label=(\roman*)]
+\item We say $(\phi_n)$ is an \vocab{orthogonal system} of functions on $[a,b]$ if $\angbrac{\phi_n,\phi_m}=0$ for all $n\neq m$.
+\item We say $(\phi_n)$ is an \vocab{orthonormal system} of functions on $[a,b]$ if $(\phi_n)$ is an orthogonal system, and $\norm{\phi_n}=1$ for all $n$.
+\end{enumerate}
 \end{definition}
 
-\begin{example}
-The functions $\phi_n=\frac{1}{\sqrt{2\pi}}e^{inx}$ form an orthonormal system on $[-\pi,\pi]$.
+\begin{example} \
+\begin{itemize}
+\item $\displaystyle\crbrac{\frac{1}{\sqrt{2\pi}}e^{inx}}$ is an orthonormal system on $[-\pi,\pi]$.
+
+\item $\displaystyle\crbrac{\frac{1}{\sqrt{2\pi}},\frac{1}{\sqrt{\pi}}\cos nx,\frac{1}{\sqrt{\pi}}\sin nx}$ is an orthonormal system on $[-\pi,\pi]$.
+
+\begin{proof}
+We have
+\begin{align*}
+&\int_{-\pi}^{\pi}\cos nx\sin mx\dd{x}\\
+&=\int_{-\pi}^{\pi}\frac{e^{inx}+e^{-inx}}{2}\frac{e^{imx}-e^{-imx}}{2i}\dd{x}\\
+&=\int_{-\pi}^{\pi}\frac{e^{i(n+m)x}-e^{i(n-m)x}+e^{-i(n-m)x}-e^{-i(n+m)x}}{4i}\dd{x}=0
+\end{align*}
+and similarly
+\begin{align*}
+&\int_{-\pi}^{\pi}\cos nx\cos mx\dd{x}\\
+&=\int_{-\pi}^{\pi}\frac{e^{inx}+e^{-inx}}{2}\frac{e^{imx}+e^{-imx}}{2i}\dd{x}\\
+&=\int_{-\pi}^{\pi}\frac{e^{i(n+m)x}+e^{i(n-m)x}+e^{-i(n-m)x}+e^{-i(n+m)x}}{4}\dd{x}\\
+&=\begin{cases}
+\frac{1}{2}\cdot2\pi=\pi&(n=m)\\
+0&(n\neq m)
+\end{cases}
+\end{align*}
+\end{proof}
+\end{itemize}
 \end{example}
 
-If $(\phi_n)$ is orthonormal on $[a,b]$ and if
-\[c_n=\int_{a}^{b}f(t)\overline{\phi_n(t)}\dd{t}\quad(n=1,2,3,\dots)\]
-we call $c_n$ the $n$-th Fourier coefficient of $f$ relative to $(\phi_n)$. We write
-\[f(x)\sim\sum_{n=1}^{\infty}c_n\phi_n(x)\]
-and call this series the Fourier series of $f$ (relative to $(\phi_n)$).
+If $(\phi_n)$ is an orthonormal system of functions on $[a,b]$, then
+\[f\sim\sum_{n=1}^{\infty}c_n\phi_n\]
+where $c_n=\angbrac{f,\phi_n}$; we call $c_n$ the $n$-th Fourier coefficient of $f$ relative to $(\phi_n)$.
 
-\begin{remark}
-The symbol $\sim$ used above implies nothing about the convergence of the series; it merely says that the coefficients are given by (66).
-\end{remark} 
+\begin{example}
+In $\RR^3$, let
+\[\phi_1=(1,0,0),\quad\phi_2=(0,1,0),\quad\phi_3=(0,0,1).\]
+Suppose $f=(2,-1,3)$. Then
+\[\angbrac{f,\phi_1}=2,\quad\angbrac{f,\phi_2}=-1,\quad\angbrac{f,\phi_3}=3.\]
+Hence
+\[f\sim 2\phi_1-\phi_2+3\phi_3.\]
+\end{example}
+
+The following theorems show that the partial sums of the Fourier series of $f$ have a certain minimum property. We shall assume here and in the rest of this chapter that $f\in\mathcal{R}$, although this hypothesis can be weakened. 
 
 \begin{proposition}
-Let $(\phi_n)$ be orthonormal on $[a,b]$. Let
+Let $(\phi_n)$ be an orthonormal system of functions on $[a,b]$. Let
 \[s_n(x)=\sum_{k=1}^{n}c_k\phi_k(x)\]
-be the $n$-th partial sum of the Fourier series of $f$, and assume
+be the $n$-th partial sum of the Fourier series of $f$, and let
 \[t_n(x)=\sum_{k=1}^{n}\gamma_k\phi_k(x).\]
 Then
-\[\int_{a}^{b}|f-s_n|^2\dd{x}\le\int_{a}^{b}|f-t_n|^2\dd{x}\]
-and equality holds if and only if $\gamma_k=c_k$ for $k=1,\dots,n$.
+\begin{equation}
+\norm{f-s_n}\le\norm{f-t_n},
+\end{equation}
+where equality holds if and only if $\gamma_k=c_k$ for $k=1,\dots,n$.
 \end{proposition}
 
 That is to say, among all functions $t_n$, $s_n$ gives the best possible mean square approximation to $f$.
 
+\begin{proof}
+We want to show that
+\[\angbrac{f-s_n,f-s_n}\le\angbrac{f-t_n,f-t_n}.\]
+Note that
+\begin{align*}
+\angbrac{f,s_n}&=\angbrac{f,\sum_{k=1}^{n}c_k\phi_k}=\sum_{k=1}^{n}\overline{c_k}\angbrac{f,\phi_k}=\sum_{k=1}^{n}\overline{c_k}c_k=\sum_{k=1}^{n}|c_k|^2\\
+\angbrac{s_n,s_n}&=\angbrac{\sum_{k=1}^{n}c_k\phi_k,\sum_{k=1}^{n}c_k\phi_k}=\sum_{k=1}^{n}\angbrac{c_k\phi_k,c_k\phi_k}=\sum_{k=1}^{n}|c_k|^2\\
+\angbrac{f,t_n}&=\sum_{k=1}^{n}c_k\overline{\gamma_k}\\
+\angbrac{t_n,f}&=\sum_{k=1}^{n}\gamma_k\overline{c_k}\\
+\angbrac{t_n,t_n}&=\sum_{k=1}^{n}|\gamma_k|^2
+\end{align*}
+Hence we rewrite the desired inequality as
+\begin{align*}
+\iff&\angbrac{f,f}-\sum_{k=1}^{n}|c_k|^2\le\angbrac{f,f}-\sum_{k=1}^{n}c_k\overline{\gamma_k}-\sum_{k=1}^{n}\gamma_k\overline{c_k}+\sum_{k=1}^{n}|\gamma_k|^2\\
+\iff&\sum_{k=1}^{n}\brac{c_k\overline{c_k}-c_k\overline{\gamma_k}-\gamma_k\overline{c_k}+\gamma_k\overline{\gamma_k}}\ge0\\
+\iff&\sum_{k=1}^{n}(c_k-\gamma_k)(\overline{c_k}-\overline{\gamma_k})\ge0\\
+\iff&\sum_{k=1}^{n}|c_k-\gamma_k|^2\ge0
+\end{align*}
+which holds true. Then equality holds if and only if $|c_k-\gamma_k|=0$, i.e.,
+\[\gamma_k=c_k\quad(k=1,\dots,n).\]
+\end{proof}
+
 \begin{proposition}[Bessel inequality]
-If $(\phi_n)$ is orthonormal on $[a,b]$, and if
-\[f(x)\sim\sum_{n=1}^{\infty}c_n\phi_n(x)\]
-then
+Let $(\phi_n)$ be an orthonormal system of functions on $[a,b]$, and
+\[f(x)\sim\sum_{n=1}^{\infty}c_n\phi_n(x).\]
+Then
 \begin{equation}
-\sum_{n=1}^{\infty}|c_n|^2\le\int_{a}^{b}|f(x)|^2\dd{x}.
+\sum_{n=1}^{\infty}|c_n|^2\le\norm{f}.
 \end{equation}
 In particular, $c_n\to0$.
 \end{proposition}
+
+\begin{proof}
+Letting $n\to\infty$ in (72), we obtain (73)
+\end{proof}
+the case where equality holds is called Parseval's identity
+
+From now on we shall deal only with the trigonometric system. We shall consider functions $f$ that have period $2\pi$, and are Riemann-integrable on $[-\pi,\pi]$ (and hence on every bounded interval). The Fourier series of $f$ is then the series (63) whose coefficients en are given by the integrals (62), and 
+\[s_N(x)=s_N(f;x)=\sum_{n=-N}^{N}c_n e^{inx}\]
+is the $N$-th partial sum of the Fourier series of $f$. The inequality (72) now takes the form
+
+In order to obtain an expression for sN that is more manageable than (75) we introduce the \vocab{Dirichlet kernel}
+\[D_N(x)\colonequals\sum_{n=-N}^{N}e^{inx}.\]
+It follows that
+\begin{align*}
+D_N(x)&=\sum_{n=-N}^{N}e^{inx}\\
+&=\frac{e^{-iNx}\sqbrac{(e^{ix})^{2N+1}-1}}{e^{ix}-1}\\
+&=\frac{e^{i(N+1)x}-e^{iNx}}{e^{ix}-1}\\
+&=\frac{e^{i(N+\frac{1}{2})x}-e^{-i(N+\frac{1}{2})x}}{e^\frac{ix}{2}-e^\frac{-ix}{2}}\\
+&=\frac{\sin\brac{N+\frac{1}{2}}x}{\sin\frac{1}{2}x}
+\end{align*}
+Then, for some dummy variable $t$,
+\begin{align*}
+s_N(x)&=\sum_{n=-N}^{N}c_n e^{inx}=\sum_{n=-N}^{N}\sqbrac{\frac{1}{2\pi}\int_{-\pi}^{\pi}f(t)e^{-int}\dd{t}}e^{inx}\\
+&=\frac{1}{2\pi}\int_{-\pi}^{\pi}\sqbrac{\sum_{n=-N}^{N}f(t)e^{in(x-t)}}\dd{t}\\
+&=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(t)\sqbrac{\sum_{n=-N}^{N}e^{in(x-t)}}\dd{t}\\
+&=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(t)D_N(x-t)\dd{t}.
+\end{align*}
+
+Define the \emph{convolution} of $f$ and $g$ as
+\[(f\ast g)(t)\colonequals\int_E f(t)g(x-t)\dd{t}.\]
+
+The periodicity of all functions involved shows that it is immaterial over which interval we integrate, as long as its length is $2\pi$. This shows that
+\[s_N(x)=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(t)D_N(x-t)\dd{t}=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x-t)D_N(t)\dd{t}.\]
+
+We shall prove just one result about the pointwise convergence of Fourier series. Before that, we require the following result.
+
+\begin{proposition}[Riemann--Lebesgue lemma]
+Let $f\in\mathcal{R}[a,b]$. Then
+\begin{equation}
+\lim_{n\to\infty}\int_{a}^{b}f(x)\sin nx\dd{x}=0.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{proposition}[Pointwise convergence of Fourier series]
+Suppose for some $x\in[-\pi,\pi]$ there exists $M>0$, $\delta>0$ such that
+\[\forall t\in(-\delta,\delta),\quad|f(x+t)-f(x)|\le M|t|.\]
+Then
+\[\lim_{N\to\infty}s_N(f;x)=f(x).\]
+\end{proposition}
+
+\begin{proof}
+Since
+\[\frac{1}{2\pi}\int_{-\pi}^{\pi}D_N(x)\dd{x}=1,\]
+we can write
+\[f(x)=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)D_N(t)\dd{t}.\]
+Then
+\begin{align*}
+s_N(x)-f(x)
+&=\frac{1}{2\pi}\int_{-\pi}^{\pi}[f(x-t)-f(x)]D_N(t)\dd{t}\\
+&=\frac{1}{2\pi}\int_{-\pi}^{\pi}[f(x-t)-f(x)]\frac{\sin(N+\frac{1}{2})t}{\sin\frac{1}{2}t}\dd{t}
+\end{align*}
+Let $g(t)=\dfrac{f(x-t)-f(x)}{\sin\frac{1}{2}t}$, then
+\[s_N(x)-f(x)=\frac{1}{2\pi}\int_{-\pi}^{\pi}g(t)\sin\brac{N+\frac{1}{2}}t\dd{t}.\]
+By the Riemann--Lebesgue lemma, we are done.
+\end{proof}
+
+\begin{corollary}
+
+\end{corollary}
+
+Here is another formulation of this corollary: 
+
+This is usually called the localisation theorem. It shows that the behaviour of the sequence $\brac{s_N(f;x)}$, as far as convergence is concerned, depends only on the values of $f$ in some (arbitrarily small) neighbourhood of $x$. Two Fourier series may thus have the same behavior in one interval, but may behave in entirely different ways in some other interval. We have here a very striking contrast between Fourier series and power series (Theorem 8.5).
+
+We conclude with two other approximation theorems.
+
+\begin{theorem}
+If $f$ is continuous (with period $2\pi$) and if $\epsilon>0$, then there exists a trigonometric polynomial $P$ such that
+\[\absolute{P(x)-f(x)}<\epsilon\quad(x\in\RR).\]
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
 
 \begin{theorem}[Parseval's theorem]
 Suppose $f$ and $g$ are Riemann-integrable functions with period $2\pi$, and 
 \[f(x)\sim\sum_{n=-\infty}^{\infty}c_ne^{inx},\quad g(x)\sim\sum_{n=-\infty}^{\infty}\gamma_ne^{inx}.\]
 Then
-\[\lim_{N\to\infty}\norm{f-s_N(f)}_2^2=\lim_{N\to\infty}\frac{1}{2\pi}\int_{-\pi}^{\pi}\absolute{f(x)-s_N(f;x)}^2\dd{x}=0.\]
-Also
-\[\langle f,g\rangle=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)\overline{g(x)}\dd{x}=\sum_{n=-\infty}^{\infty}c_n\overline{\gamma_n}\]
-and
-\[\norm{f}_2^2=\frac{1}{2\pi}\int_{-\pi}^{\pi}|f(x)|^2\dd{x}=\sum_{n=-\infty}^{\infty}|c_n|^2.\]
+\begin{enumerate}[label=(\roman*)]
+\item \[\lim_{N\to\infty}\norm{f-s_N(f)}^2=0.\]
+\item \[\frac{1}{2\pi}\angbrac{f,g}=\sum_{n=-\infty}^{\infty}c_n\overline{\gamma_n}.\]
+\item \[\norm{f}^2=\sum_{n=-\infty}^{\infty}|c_n|^2.\]
+\end{enumerate}
 \end{theorem}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item 
+\item 
+\item 
+\end{enumerate}
+\end{proof}
 \pagebreak
 
 \section{Gamma Function}
+The \emph{Gamma function} simulates the factorial.
+
 \begin{definition}[Gamma function]
 For $0<x<\infty$, the \vocab{Gamma function}\index{Gamma function} is defined as
 \begin{equation}
-\Gamma(x)\coloneqq\int_0^\infty t^{x-1}e^{-t}\dd{t}.
+\Gamma(x)\colonequals\int_0^\infty t^{x-1}e^{-t}\dd{t}.
 \end{equation}
-The integral converges for these $x$. (When $x<1$, both $0$ and $\infty$ have to be looked at.)
 \end{definition}
+
+The integral converges for these $x$. (When $x<1$, both $0$ and $\infty$ have to be looked at.)
 
 \begin{lemma} \
 \begin{enumerate}[label=(\roman*)]
@@ -385,15 +783,38 @@ holds for $0<x<\infty$.
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item Integrate by parts.
-\item Since $\Gamma(1)=1$, (1) implies (2) by induction.
-\item 
+\item Integrate by parts:
+\begin{align*}
+\Gamma(x+1)
+&=\int_{0}^{\infty}t^x e^{-t}\dd{t}\\
+&=\sqbrac{-t^xe^{-t}}_{0}^{\infty}+\int_{0}^{\infty}xt^{x-1}e^{-t}\dd{t}\\
+&=0+x\Gamma(x)=x\Gamma(x).
+\end{align*}
+
+\item We have
+\[\Gamma(1)=\int_{0}^{\infty}e^{-t}\dd{t}=\sqbrac{-e^{-t}}_{0}^{\infty}=1.\]
+Since $\Gamma(1)=1$, (i) implies (ii) by induction.
+
+\item To show that $\log\Gamma(x)$ is convex, we need to show that for all $p,q>1$ with $\frac{1}{p}+\frac{1}{q}=1$,
+\[\log\Gamma\brac{\frac{x}{p}+\frac{y}{q}}\ge\frac{1}{p}\log\Gamma(x)+\frac{1}{q}\log\Gamma(y).\]
+This is equivalent to showing
+\[\Gamma\brac{\frac{x}{p}+\frac{y}{q}}\ge\Gamma(x)^\frac{1}{p}+\Gamma(y)^\frac{1}{q}.\]
+We have
+\begin{align*}
+&\Gamma\brac{\frac{x}{p}+\frac{y}{q}}
+=\int_{0}^{\infty}t^{\frac{x}{p}+\frac{y}{q}-1}e^{-t}\dd{t}\\
+&=\int_{0}^{\infty}t^{\frac{x-1}{p}+\frac{y-1}{q}}+e^{-t\brac{\frac{1}{p}+\frac{1}{q}}}\dd{t}\\
+&=\int_{0}^{\infty}\brac{t^{x-1}e^{-t}}^\frac{1}{p}\brac{t^{y-1}e^{-t}}^\frac{1}{q}\dd{t}\\
+&\le\sqbrac{\int_{0}^{\infty}\brac{t^{\frac{x-1}{p}}e^{-\frac{t}{p}}}^p\dd{t}}^\frac{1}{p}\sqbrac{\int_{0}^{\infty}\brac{t^{\frac{y-1}{q}}e^{-\frac{t}{q}}}^q\dd{t}}^\frac{1}{q}\\
+&=\Gamma(x)^\frac{1}{p}\Gamma(y)^\frac{1}{q}
+\end{align*}
+where the penultimate line holds as a result of Holder's inequality.
 \end{enumerate}
 \end{proof}
 
 In fact, these three properties characterise $\Gamma$ completely.
 
-\begin{lemma}[Characteristic properties of $\Gamma$] \label{lemma:gamma-char}
+\begin{lemma}[Characterisation of $\Gamma$] \label{lemma:gamma-char}
 If $f$ is a positive function on $(0,\infty)$ such that
 \begin{enumerate}[label=(\roman*)]
 \item $f(x+1)=xf(x)$,
@@ -409,7 +830,7 @@ then $f(x)=\Gamma(x)$.
 
 \begin{definition}[Beta function]
 For $x>0$ and $y>0$, the \vocab{beta function}\index{beta functions} is defined as
-\[B(x,y)\coloneqq\int_0^1 t^{x-1}(1-t)^{y-1}\dd{t}.\]
+\[B(x,y)\colonequals\int_0^1 t^{x-1}(1-t)^{y-1}\dd{t}.\]
 \end{definition}
 
 \begin{lemma}
@@ -483,7 +904,7 @@ Hence $B(x,y)=\dfrac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}$.
 
 More on polar coordinates:
 \begin{equation}
-I=\int_{-\infty}^{+\infty}e^{-x^2}\dd{x}
+I=\int_{-\infty}^{+\infty}e^{-x^2}\dd{x}=\sqrt{\pi}.
 \end{equation}
 
 \begin{proof}
@@ -536,9 +957,34 @@ This provides a simple approximate expression for $\Gamma(x+1)$ when $x$ is larg
 \end{lemma}
 
 \begin{proof}
+We have
+\begin{align*}
+B(p,1-p)
+&=\int_{0}^{1}t^{p-1}(1-t)^{-p}\dd{t}\\
+&=\int_{0}^{\infty}\brac{\frac{x}{1+x}}^{p-1}\brac{\frac{1}{1+x}}^{-p}\frac{1}{(1+x)^2}\dd{x}\quad[x=\frac{t}{1-t}]\\
+&=\int_{0}^{\infty}\frac{x^{p-1}}{1+x}\dd{x}\\
+&=\int_{0}^{1}\frac{x^{p-1}}{1+x}\dd{x}+\int_{1}^{\infty}\frac{x^{p-1}}{1+x}\dd{x}
+\end{align*}
 
+See that
+\begin{align*}
+\int_{1}^{\infty}\frac{x^{p-1}}{1+x}\dd{x}
+&=\int_{1}^{0}\frac{y^{1-p}}{1+\frac{1}{y}}\brac{-\frac{1}{y^2}}\dd{y}\quad[x=\frac{1}{y}]\\
+&=\int_{0}^{1}\frac{y^{-p}}{1+y}\dd{y}=\int_{0}^{1}\frac{x^{-p}}{1+x}\dd{x}
+\end{align*}
+
+so
+\begin{align*}
+B(p,1-p)
+&=\int_{0}^{1}\frac{x^{p-1}+x^{-p}}{1+x}\dd{x}\\
+&=\lim_{r\to1^-}\int_{0}^{r}(x^{p-1}+x^{-p})\sum_{k=0}^{\infty}(-1)^k x^k\dd{x}\\
+&=\lim_{r\to1^-}\int_{0}^{r}\brac{\sum_{k=0}^{\infty}(-1)^k x^{k+p-1}+\sum_{k=0}^{\infty}(-1)^k x^{k-p}}\dd{x}\\
+&=\lim_{r\to1^-}\sqbrac{\sum_{k=0}^{\infty}(-1)^k\frac{x^{k+p}}{k+p}+\sum_{k=0}^{\infty}(-1)^k\frac{x^{k-p+1}}{k-p+1}}_0^r\\
+&=\sum_{k=0}^{\infty}(-1)^k\frac{1}{k+p}+\sum_{k=0}^{\infty}(-1)^k\frac{1}{k-p+1}\\
+&=\frac{1}{p}+\sum_{k=1}^{\infty}(-1)^k\frac{1}{k+p}+\sum_{k=1}^{\infty}(-1)^{k-1}\frac{1}{k+p}\\
+&=\frac{1}{p}+\sum_{k=1}^{\infty}\frac{(-1)^k 2p}{p^2-k^2}
+\end{align*}
 \end{proof}
 \pagebreak
 
 \section*{Exercises}
-\addcontentsline{toc}{section}{Exercises}

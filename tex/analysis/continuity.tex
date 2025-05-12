@@ -1,27 +1,29 @@
 \chapter{Continuity}\label{chap:real-analysis_continuity}
-\section{Limit of Functions}
-Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $E\subset X$, then the metric $d_X$ induces a metric on $E$. Consider a function $f:E\to Y$. 
+Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $E\subset X$, then the metric $d_X$ induces a metric on $E$. Consider a function $f\colon E\to Y$. 
 In particular, if $Y=\RR$, $f$ is called a \emph{real-valued function}; if $Y=\CC$, $f$ is called a \emph{complex-valued function}.
+
+\section{Limit of Functions}
+Recall that we have previously defined limits for sequences. Now, we will define limits for functions.
 
 \begin{definition}[Limit of function]\label{defn:limit-function}
 Let $p$ be a limit point of $E$. We say $\displaystyle\lim_{x\to p}f(x)=q$\index{limit of function} if there exists $q\in Y$ such that
 \[\forall\epsilon>0,\quad\exists\delta>0,\quad\forall x\in E,\quad0<d_X(x,p)<\delta\implies d_Y\brac{f(x),q}<\epsilon.\]
 \end{definition}
 
-The definition conveys the intuitive idea that $f(x)$ can be made arbitrarily close to $q$ by taking $x$ sufficiently close to $p$.
+That is, we can get $f(x)$ close to $q$ as desired, by choosing $x$ sufficienly close to, but not equal to, $p$.
 
 \begin{remark}
 Note that $p\in X$, but it is not necessary that $p\in E$ in the above definition. Moreover, even if $p\in E$, we may very well have $\displaystyle f(p)\neq\lim_{x\to p}f(x)$.
 \end{remark}
 
 We can recast the above definition in terms of limits of sequences:
-\begin{lemma}\label{limit-func-seq}
+\begin{lemma}\label{lemma:limit-func-seq}
 Let $p$ be a limit point of $E$. Then
-\begin{equation*}\tag{1}
+\begin{equation*}\tag{I}
 \lim_{x\to p}f(x)=q
 \end{equation*}
 if and only if
-\begin{equation*}\tag{2}
+\begin{equation*}\tag{II}
 \lim_{n\to\infty}f(p_n)=q
 \end{equation*}
 for every sequence $(p_n)$ in $E\setminus\{p\}$ where $p_n\to p$.
@@ -29,17 +31,17 @@ for every sequence $(p_n)$ in $E\setminus\{p\}$ where $p_n\to p$.
 
 \begin{proof} \
 
-\fbox{$\implies$} Suppose (1) holds. Then fix $\epsilon>0$, there exists $\delta>0$ such that for all $x\in E$,
+\fbox{$\implies$} Suppose (I) holds. Then fix $\epsilon>0$, there exists $\delta>0$ such that for all $x\in E$,
 \[0<d_X(x,p)<\delta\implies d_Y\brac{f(x),q}<\epsilon.\]
 Let $(p_n)$ be a sequence in $E\setminus\{p\}$. Since $p_n\to p$, for the same $\epsilon>0$, there exists $N\in\NN$ such that for all $n\ge N$,
 \[0<d_X(p_n,p)<\delta.\]
 This implies that for $n\ge N$, $d_Y\brac{f(p_n),q}<\epsilon$. Hence by definition $\displaystyle\lim_{n\to\infty}f(p_n)=q$.
 
-\fbox{$\impliedby$} Suppose, for a contradiction, (2) holds and (1) does not hold. Then $\displaystyle\lim_{x\to p}f(x)\neq q$, so
+\fbox{$\impliedby$} Suppose, for a contradiction, (II) holds and (I) does not hold. Then $\displaystyle\lim_{x\to p}f(x)\neq q$, so
 \[\exists\epsilon>0,\quad\forall\delta>0,\quad\exists x\in E,\quad 0<d_X(x,p)<\delta\quad\text{and}\quad d_Y\brac{f(x),q}\ge\epsilon.\]
-Since (2) holds, taking $\delta_n=\frac{1}{n}$ ($n=1,2,\dots$), we thus find a sequence $(p_n)$ in $E\setminus\{p\}$ such that
+Since (II) holds, taking $\delta_n=\frac{1}{n}$ ($n=1,2,\dots$), we thus find a sequence $(p_n)$ in $E\setminus\{p\}$ such that
 \[0<d_X(p_n,p)<\frac{1}{n}\quad\text{and}\quad d_Y\brac{f(p_n),q}\ge\epsilon.\]
-Clearly $p_n\to p$ but $f(p_n)\not\to q$, contradicting (2).
+Clearly $p_n\to p$ but $f(p_n)\not\to q$, contradicting (II).
 \end{proof}
 
 \begin{corollary}
@@ -49,13 +51,22 @@ If $f$ has a limit at $p$, this limit is unique.
 \begin{proof}
 Suppose $\displaystyle\lim_{x\to p}f(x)=q$ and $\displaystyle\lim_{x\to p}f(x)=q^\prime$. We will show that $q=q^\prime$.
 
-By \cref{limit-func-seq}, for every sequence $(p_n)$ in $E\setminus\{p\}$ where $p_n\to p$, we have that
+By \ref{lemma:limit-func-seq}, for every sequence $(p_n)$ in $E\setminus\{p\}$ where $p_n\to p$, we have
 \[f(p_n)\to q\quad\text{and}\quad f(p_n)\to q^\prime.\]
 But the limit of a sequence is unique, so we must have $q=q^\prime$.
 \end{proof}
 
-\begin{lemma}[Arithmetic properties]
-Suppose $E\subset X$, $p$ is a limit point of $E$. Let $f,g:E\to\CC$, $\displaystyle\lim_{x\to p}f(x)=A$, $\displaystyle\lim_{x\to p}g(x)=B$. Then
+Suppose $f,g\colon E\to\CC$. 
+Define
+\[(f+g)(x)=f(x)+g(x)\quad(x\in E).\]
+We define the difference $f-g$, the product $fg$, and the quotient $f/g$ similarly, with the understanding that the quotient is defined only at $x\in E$ at which $g(x)\neq0$.
+
+Similarly, if $\vb{f},\vb{g}\colon E\to\RR^k$, we define
+\[(\vb{f}+\vb{g})(x)=\vb{f}(x)+\vb{g}(x),\quad(\vb{f}\cdot\vb{g})(x)=\vb{f}(x)\cdot\vb{g}(x);\]
+and if $\lambda$ is a real number, $(\lambda\vb{f})(x)=\lambda\vb{f}(x)$.
+
+\begin{lemma}[Arithmetic properties]\label{lemma:limit-function-arithmetic}
+Suppose $E\subset X$, $p$ is a limit point of $E$. Let $f,g\colon E\to\CC$, $\displaystyle\lim_{x\to p}f(x)=A$, $\displaystyle\lim_{x\to p}g(x)=B$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $\displaystyle\lim_{x\to p}(f+g)(x)=A+B$\hfill(sum)
 \item $\displaystyle\lim_{x\to p}(fg)(x)=AB$\hfill(product)
@@ -64,51 +75,30 @@ Suppose $E\subset X$, $p$ is a limit point of $E$. Let $f,g:E\to\CC$, $\displays
 \end{lemma}
 
 \begin{proof}
-These follow from \cref{limit-func-seq} and analagous properties of sequences in $\CC$.
-\begin{enumerate}[label=(\roman*)]
-\item 
-\item 
-\item 
-\end{enumerate}
+These follow from \ref{lemma:limit-func-seq} and analagous limit properties of sequences in $\CC$.
 \end{proof}
 
-\subsection{Infinite Limits and Limits at Infinity}
-To enable us to operate in the extended real number system, we shall now enlarge the scope of \cref{defn:limit-function}, reformulating it in terms of open balls.
-
-For any real number $x$, we have already defined an open ball of $x$ to be any open interval $(x-\delta,x+\delta)$.
-
-\begin{definition}
-For $c\in\RR$, the set $\{x\in\RR\mid x>c\}$ is called a neighbourhood of $+\infty$ and is written $(c,+\infty)$. Similarly, the set $(-\infty,c)$ is a neighbourhood of $-\infty$.
-\end{definition}
-
-\begin{definition}
-Let $f:E\subset\RR\to\RR$. We say that $\displaystyle\lim_{t\to x}f(t)=A$ where $A$ and $x$ are in the extended real number system, if for every neighbourhood of $U$ of $A$ there is a neighbourhood $V$ of $x$ such that $V\cap E$ is not empty, and such that $f(t)\in U$ for all $t\in V\cap E$, $t\neq x$.
-\end{definition}
-\todo{to do}
-A moment's consideration will show that this coincides with Definition
-4.1 when A and x are real.
-
-The analogue of Theorem 4.4 is still true, and the proof offers nothing new. We state it, for the sake of completeness. 
-
-\begin{lemma}
-Let $f,g:E\subset\RR\to\RR$. Suppose 
-\end{lemma}
+If $\vb{f},\vb{g}\colon E\to\RR^k$, then (i) remains true, and (ii) becomes $\displaystyle\lim_{x\to p}(\vb{f}\cdot\vb{g})(x)=\vb{A}\cdot\vb{B}$.
 \pagebreak
 
 \section{Continuous Functions}
 \begin{definition}[Continuity]\label{defn:continuity}
-$f:E\subset X\to Y$ is \vocab{continuous}\index{continuity} at $p\in E$ if 
+Suppose $E\subset X$. We say $f\colon E\to Y$ is \vocab{continuous}\index{continuity} at $p\in E$ if 
 \[\forall\epsilon>0,\quad\exists\delta>0,\quad\forall x\in E,\quad d_X(x,p)<\delta\implies d_Y\brac{f(x),f(p)}<\epsilon.\]
 If $f$ is continuous at every point of $E$, we say that $f$ is \emph{continuous on} $E$.
 \end{definition}
 
-\begin{remark}
 This definition reflects the intuitive idea that for any arbitrary target distance around $f(p)$, we can always find points $x\in E$ that are sufficiently close to $p$, such that their images under $f$ are within the target distance around $f(p)$.
-\end{remark}
 
 \begin{remark}
-Note that $f$ has to be defined at $p$ in order to be continuous at $p$. (Compare this with the remark following \cref{defn:limit-function}.) 
+For $f$ to be continuous at $p$, we require $f$ to be defined at $p$. (Compare this with the remark following \cref{defn:limit-function}.) 
 \end{remark}
+
+\begin{notation}
+Let $X$ and $Y$ be metric spaces. We denote the space of continuous bounded functions from $X$ to $Y$ as $\mathcal{C}(X,Y)$. 
+\end{notation}
+
+We will often use the next result to show that a function is continuous at a point.
 
 \begin{lemma}\label{lemma:continuity-limit}
 Let $p$ be a limit point of $E$. Then $f$ is continuous at $p$ if and only if
@@ -119,10 +109,8 @@ Let $p$ be a limit point of $E$. Then $f$ is continuous at $p$ if and only if
 Compare \cref{defn:limit-function,defn:continuity}.
 \end{proof}
 
-If $p$ is an isolated point of $E$, then our definition implies that every function $f$ which has $E$ as its domain of definition is continuous at $p$. For, no matter which $\epsilon>0$ we choose, we can pick $\delta>0$ so that the only point $x\in E$ for which $d_X(x,p)<\delta$ is $x=p$; then $d_Y\brac{f(x),f(p)}=0<\epsilon$.
-
 \begin{corollary}[Sequential criterion for continuity]
-$f:E\subset X\to Y$ is continuous on $E$ if and only if for every convergent sequence $(p_n)$ in $E$,
+$f\colon E\subset X\to Y$ is continuous on $E$ if and only if for every convergent sequence $(p_n)$ in $E$,
 \[\lim_{n\to\infty}f(p_n)=f\brac{\lim_{n\to\infty}p_n}.\]
 \end{corollary}
 
@@ -130,17 +118,19 @@ $f:E\subset X\to Y$ is continuous on $E$ if and only if for every convergent seq
 This means that for continuous functions, the limit symbol can be interchanged with the function symbol. Some care is needed in interchanging these symbols because sometimes $\brac{f(p_n)}$ converges when $(p_n)$ diverges.
 \end{remark}
 
-\begin{lemma}
-Let $f,g:X\to\CC$ be continuous on $X$. Then the following are continuous on $X$:
+\begin{lemma}\label{lemma:continuity-arithmetic}
+Let $f,g\colon X\to\CC$ be continuous on $X$. Then the following are continuous on $X$:
 \begin{enumerate}[label=(\roman*)]
 \item $f+g$\hfill(sum)
 \item $fg$\hfill(product)
-\item $\dfrac{f}{g}$ ($g(x)\neq0$ for all $x\in X$)\hfill(quotient)
+\item $f/g$ (provided $g(x)\neq0$ for all $x\in X$)\hfill(quotient)
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-At isolated points of X there is nothing to prove. At limit points, the statement follows from Theorems 4.4 and 4.6
+At isolated points of $X$, there is nothing to prove. 
+
+At limit points, the statement follows from \ref{lemma:limit-function-arithmetic} and \ref{lemma:continuity-limit}.
 \end{proof}
 
 \begin{example}
@@ -154,14 +144,34 @@ Repeated application of the previous result establishes the continuity of every 
 where $a_i\in\CC$.
 \end{example}
 
+We now prove the analogue for Euclidean spaces.
+
+\begin{lemma} \
+\begin{enumerate}[label=(\roman*)]
+\item Let $f_1,\dots,f_k:X\to\RR$, and let $\vb{f}:X\to\RR^k$ be defined by
+\[\vb{f}(x)=\brac{f_1(x),\dots,f_k(x)}\quad(x\in X).\]
+Then $\vb{f}$ is continuous if and only if each of its components $f_1,\dots,f_k$ is continuous.
+
+\item Let $\vb{f},\vb{g}:X\to\RR^k$ be continuous on $X$. Then $\vb{f}+\vb{g}$ and $\vb{f}\cdot\vb{g}$ are continuous on $X$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) follows from the inequalities
+\[|f_j(x)-f_j(y)|\le|\vb{f}(x)-\vb{f}(y)|=\brac{\sum_{i=1}^{k}|f_i(x)-f_i(y)|^2}^{1/2}\]
+for $j=1,\dots,k$.
+
+(ii) follows from (i) and \ref{lemma:continuity-arithmetic}.
+\end{proof}
+
 We now consider the composition of functions. The following result shows that a continuous function of a continuous function is continuous.
 
 \begin{proposition}
 Suppose $X,Y,Z$ are metric spaces, $E\subset X$. Let 
 \begin{itemize}
-\item $f:E\to Y$,
-\item $g:f(E)\subset Y\to Z$,
-\item $h:E\to Z$ is defined by $h=g\circ f$.
+\item $f\colon E\to Y$,
+\item $g\colon f(E)\subset Y\to Z$,
+\item $h\colon E\to Z$ is defined by $h=g\circ f$.
 \end{itemize}
 If $f$ is continuous at $p\in E$, and $g$ is continuous at $f(p)$, then $h$ is continuous at $p$.
 \end{proposition}
@@ -186,15 +196,15 @@ While functions are technically defined on a subset $E$ of a metric space, the c
 \pagebreak
 
 \subsection{Continuity and Pre-images of Open or Closed Sets}
-The following result is another characterisation of continuity.
+The next result is a characterisation of continuity; it states that continuous functions are maps whose pre-image of open sets are open.
 
-\begin{proposition}\label{prop:continuity-preimage-open}
-$f:X\to Y$ is continuous on $X$ if and only if $f^{-1}(U)$ is open in $X$ for every open set $U\subset Y$.
-\end{proposition}
+\begin{lemma}\label{lemma:continuity-preimage-open}
+$f\colon X\to Y$ is continuous on $X$ if and only if $f^{-1}(U)$ is open in $X$ for every open set $U\subset Y$.
+\end{lemma}
 
 \begin{proof} \
 
-\fbox{$\implies$} Suppose $f$ is continuous on $X$. Let $U\subset Y$ be open. Let $p\in f^{-1}(U)$. To show that $f^{-1}(U)$ is open in $X$, we will show that $p$ is an interior point of $f^{-1}(U)$.
+\fbox{$\implies$} Suppose $f$ is continuous on $X$. Let $U\subset Y$ be open. Let $p\in f^{-1}(U)$.
 
 Since $p\in f^{-1}(U)$, there exists $y\in U$ such that $f(p)=y$. By openness of $U$, there exists $\epsilon>0$ such that $B_\epsilon(y)\subset U$. 
 
@@ -204,7 +214,7 @@ or
 \[f\brac{B_\delta(p)}\subset B_\epsilon(y).\]
 Hence
 \[B_\delta(p)\subset f^{-1}\brac{f(B_\delta(p))}\subset f^{-1}\brac{B_\epsilon(y)}\subset f^{-1}(U),\]
-so $p$ is an interior point of $f^{-1}(U)$.
+so $f^{-1}(U)$ is open in $X$.
 
 \fbox{$\impliedby$} Suppose $f^{-1}(U)$ is open in $X$ for every open set $U\subset Y$. Fix $p\in X$, let $y=f(p)$. We will show that $f$ is continuous at $p$.
 
@@ -214,7 +224,7 @@ Therefore $f$ is continuous at $p$.
 \end{proof}
 
 \begin{corollary}\label{cor:continuity-preimage-closed}
-$f:X\to Y$ is continuous on $X$ if and only if $f^{-1}(C)$ is closed in $X$ for every closed set $C\subset Y$.
+$f\colon X\to Y$ is continuous on $X$ if and only if $f^{-1}(C)$ is closed in $X$ for every closed set $C\subset Y$.
 \end{corollary}
 
 \begin{proof}
@@ -223,17 +233,16 @@ This follows from the above result, since a set is closed if and only if its com
 \pagebreak
 
 \subsection{Continuity and Compactness}
-\begin{definition}
-$\vb{f}:E\to\RR^k$ is \emph{bounded} if there exists $M\in\RR$ such that $\norm{\vb{f}(x)}\le M$ for all $x\in E$.
-\end{definition}
+We say $\vb{f}\colon E\to\RR^k$ is \emph{bounded} if there exists $M\in\RR$ such that $\norm{\vb{f}(x)}\le M$ for all $x\in E$.
 
 The next result shows that continuous functions preserve compactness.
+
 \begin{proposition}\label{prop:continuity-image-compact}
-Suppose $f:X\to Y$ is continuous on $X$, where $X$ is compact. Then $f(X)$ is compact.
+Suppose $f\colon X\to Y$ is continuous on $X$, where $X$ is compact. Then $f(X)$ is compact.
 \end{proposition}
 
 \begin{proof}
-Let $\{U_i\mid i\in I\}$ be an open cover of $f(X)$. Since $f$ is continuous on $X$, by \cref{prop:continuity-preimage-open}, each of the sets $f^{-1}(U_i)$ is open.
+Let $\{U_i\mid i\in I\}$ be an open cover of $f(X)$. Since $f$ is continuous on $X$, by \ref{lemma:continuity-preimage-open}, each of the sets $f^{-1}(U_i)$ is open.
 
 Consider the open cover $\{f^{-1}(U_i)\mid i\in I\}$. Since $X$ is compact, there exist finitely many indices $i_1,\dots,i_n$ such that
 \[X\subset\bigcup_{k=1}^{n}f^{-1}(U_{i_k}).\]
@@ -247,37 +256,94 @@ If $\vb{f}:X\to\RR^k$ is continuous on $X$, where $X$ is compact, then $\vb{f}(X
 \end{corollary}
 
 \begin{proof}
-From the previous result, $\vb{f}(X)$ is compact. Since $\vb{f}(X)\subset\RR^k$, by the Heine--Borel theorem, $\vb{f}(X)$ is closed and bounded.
+By \ref{prop:continuity-image-compact}, $\vb{f}(X)$ is compact. Since $\vb{f}(X)\subset\RR^k$, by the Heine--Borel theorem, $\vb{f}(X)$ is closed and bounded.
 \end{proof}
 
 The result is particularly important when $f$ is a real-valued function; the next result states that a continuous real-valued function on a compact set must attain its minimum and maximum. 
 
 \begin{theorem}[Extreme value theorem]\label{thrm:extreme-value}
-Suppose $f:X\to\RR$ is continuous, $X$ is compact. Let
+Suppose $f\colon X\to\RR$ is continuous, $X$ is compact. Let
 \[M=\sup_{p\in X}f(p),\quad m=\inf_{p\in X}f(p).\]
-Then there exists $p,q\in X$ such that $f(p)=M$ and $f(q)=m$.
+Then there exist $p,q\in X$ such that $f(p)=M$ and $f(q)=m$.
 \end{theorem}
 
 \begin{proof}
-From the previous corollary, $f(X)$ is a closed and bounded set in $\RR$. Hence $f(X)$ contains its supremum and infimum, by \cref{prop:closure-sup}.
+From the previous corollary, $f(X)$ is a closed and bounded set in $\RR$. Hence $f(X)$ contains its supremum and infimum, by \ref{lemma:closure-sup}.
 \end{proof}
 
 \begin{proposition}
-Suppose $f:X\to Y$ is continuous on $X$ and bijective, $X$ is compact. Then $f^{-1}:Y\to X$ is continuous on $Y$.
+Suppose $f\colon X\to Y$ is continuous on $X$ and bijective, $X$ is compact. Then its inverse $f^{-1}:Y\to X$ is continuous on $Y$.
 \end{proposition}
 
 \begin{proof}
-Applying \cref{prop:continuity-preimage-open} to $f^{-1}$ in place of $f$, we see that to prove that $f^{-1}$ is continuous on $Y$, it suffices to prove that $f(U)$ is open in $Y$ for every open set $U$ in $X$. Fix such a set $U$.
+By \ref{lemma:continuity-preimage-open}, it suffices to prove that $f(U)$ is open in $Y$ for every open set $U$ in $X$. 
 
-Since $U$ is open in $X$, we have that $U^c$ is closed in $X$. Since $U^c$ is a closed subset of a compact set $X$, $U^c$ is compact. Thus by \cref{prop:continuity-image-compact}, $f(U^c)$ is a compact subset of $Y$, so $f(U^c)$ is closed in $Y$.
+Let $U$ be an open set in $X$. Then its complement $U^c$ is closed in $X$. Since $U^c$ is a closed subset of a compact set $X$, $U^c$ is compact. Thus by \ref{prop:continuity-image-compact}, $f(U^c)$ is a compact subset of $Y$, so $f(U^c)$ is closed in $Y$.
 
 Since $f$ is bijective and thus surjective, $f(U)$ is the complement of $f(U^c)$. Hence $f(U)$ is open.
 \end{proof}
 \pagebreak
 
+\subsection{Oscillation}
+If $f\colon X\to\RR$ is bounded, the extent to which $f$ fails to be continuous at $p\in X$ can be measured in a precise way. For $\delta>0$ let
+\begin{align*}
+M(p,f,\delta)&=\sup\{f(x)\mid x\in X, |x-p|<\delta\},\\
+m(p,f,\delta)&=\inf\{f(x)\mid x\in X, |x-p|<\delta\}.
+\end{align*}
+
+\begin{definition}[Oscillation]
+The \vocab{oscillation} $o(f,p)$ of $f$ at $p$ is defined by
+\[o(f,p)\colonequals\lim_{\delta\to0}\sqbrac{M(p,f,\delta)-m(p,f,\delta)}.\]
+\end{definition}
+
+This limit always exists, since $M(p,f,\delta)-m(p,f,\delta)$ decreases as $\delta$ decreases. 
+
+There are two important facts about $o(f,p)$.
+
+\begin{lemma}
+The bounded function $f$ is continuous at $p$ if and only if $o(f,p)=0$. 
+\end{lemma}
+
+\begin{proof} \
+
+\fbox{$\implies$} Suppose $f$ is continuous at $p$. 
+
+Let $\epsilon>0$ be given, there exists $\delta>0$ such that for all $x\in X$,
+\[|x-p|<\delta\implies|f(x)-f(p)|<\epsilon.\]
+Thus
+\[M(p,f,\delta)-m(p,f,\delta)\le2\epsilon.\]
+Since this is true for every $\epsilon$, we have $o(f,p)=0$.
+
+\fbox{$\impliedby$} 
+\end{proof}
+
+\begin{lemma}
+Let $E\subset\RR^n$ be closed. If $f\colon E\to\RR$ is bounded, then
+\[\{x\in E\mid o(f,x)\ge\epsilon\}\]
+is closed for any $\epsilon>0$.
+\end{lemma}
+
+\begin{proof}
+Let $F=\{x\in E\mid o(f,x)\ge\epsilon\}$. To show that $E$ is closed, we want to show that its complement $F^c$ is open.
+
+Let $x\in F^c$. Then either $x\notin E$, or $x\in E$ and $o(f,x)<\epsilon$. 
+\begin{description}
+\item[Case 1: $x\notin E$] 
+Since $E$ is closed, $E^c$ is open, so there exists an open ball $B$ containing $x$ such that $B\subset E^c\subset F^c$.
+
+\item[Case 2: $x\in E$ and $o(f,x)<\epsilon$] 
+Then there exists $\delta>0$ such that $M(x,f,\delta)-m(x,f,\delta)<\epsilon$. 
+
+Consider the open ball $B_\delta(x)$. Then if $y\in B_\delta(x)$, $|x-y|<\delta$. There exists $\delta_1$ such that $|x-z|<\delta$ for all $z$ satisfying $|z-y|<\delta_1$. 
+
+Thus $M(y,f,\delta_1)-m(y,f,\delta_1)<\epsilon$, and consequently $o(y,f)<\epsilon$. Hence $B_\delta(x)\subset F^c$.
+\end{description}
+\end{proof}
+\pagebreak
+
 \subsection{Bolzano's Theorem}
 \begin{lemma}[Sign-preserving property]
-Let $f:[a,b]\to\RR$ be continuous at $c\in[a,b]$, $f(c)\neq0$. Then there exists $\delta>0$ such that $f(x)$ has the same sign as $f(c)$ for $c-\delta<x<c+\delta$.
+Let $f\colon [a,b]\to\RR$ be continuous at $c\in[a,b]$, $f(c)\neq0$. Then there exists $\delta>0$ such that $f(x)$ has the same sign as $f(c)$ for $c-\delta<x<c+\delta$.
 \end{lemma}
 
 \begin{proof}
@@ -290,10 +356,10 @@ so $f(x)$ has the same sign as $f(c)$ for $c-\delta<x<c+\delta$.
 The proof is similar if $f(c)<0$, except that we take $\epsilon=-\frac{1}{2}f(c)$.
 \end{proof}
 
-The next result states that if the graph of $f:[a,b]\to\RR$ lies above the $x$-axis at $a$ and below the $x$-axis at $b$, then the graph must cross the axis somewhere in between. (This should be intuitively obvious.)
+The next result states that if the graph of $f\colon [a,b]\to\RR$ lies above the $x$-axis at $a$ and below the $x$-axis at $b$, then the graph must cross the axis somewhere in between. (This should be intuitively obvious.)
 
 \begin{theorem}[Bolzano]
-Suppose $f:[a,b]\to\RR$ is continuous, and $f(a)f(b)<0$ (that is, $f(a)$ and $f(b)$ have opposite signs). Then there exists $c\in(a,b)$ such that $f(c)=0$.
+Suppose $f\colon [a,b]\to\RR$ is continuous, and $f(a)f(b)<0$ (that is, $f(a)$ and $f(b)$ have opposite signs). Then there exists $c\in(a,b)$ such that $f(c)=0$.
 \end{theorem}
 
 \begin{proof}
@@ -314,13 +380,13 @@ Therefore we must have $f(c)=0$.
 
 \subsection{Continuity and Connectedness}
 \begin{proposition}
-Suppose $f:X\to Y$ is continuous. If $E\subset X$ is connected, then $f(E)$ is connected.
+Suppose $f\colon X\to Y$ is continuous. If $E\subset X$ is connected, then $f(E)$ is connected.
 \end{proposition}
 
 \begin{proof}
-We prove the contrapositive. Suppose $f(E)$ is not connected, i.e., separated. Then $A\cup B=f(E)$ for some $A,B\subset Y$ where $\overline{A}\cap B=\overline{B}\cap A=\emptyset$.
+We prove the contrapositive. Suppose $f(E)$ is not connected, then $f(E)=A\cup B$ for some $A,B\subset Y$ where $\overline{A}\cap B=\overline{B}\cap A=\emptyset$.
 
-Consider $\overline{A}$ and $\overline{B}$, which are closed in $Y$. Since $f$ is continuous, by \cref{cor:continuity-preimage-closed}, $f^{-1}(\overline{A})$ and $f^{-1}(\overline{B})$ are closed in $X$; let $K_A=f^{-1}(\overline{A})$, $K_B=f^{-1}(\overline{B})$. We now want to construct a separation of $E$.
+Consider $\overline{A}$ and $\overline{B}$, which are closed in $Y$. Since $f$ is continuous, by \ref{cor:continuity-preimage-closed}, $f^{-1}(\overline{A})$ and $f^{-1}(\overline{B})$ are closed in $X$; let $K_A=f^{-1}(\overline{A})$, $K_B=f^{-1}(\overline{B})$. We now want to construct a separation of $E$.
 
 Let $E_1=f^{-1}(A)\cap E$, $E_2=f^{-1}(B)\cap E$. Since $A\cap B=\emptyset$, we have that $E_1\cap E_2=\emptyset$. Since $A,B\neq\emptyset$, we have that $E_1,E_2\neq\emptyset$. 
 \begin{claim}
@@ -336,26 +402,37 @@ Therefore $E$ is separated.
 The next result says that a continuous real-valued function assumes all intermediate values on an interval. 
 
 \begin{theorem}[Intermediate value theorem]
-Suppose $f:[a,b]\to\RR$ is continuous. If $f(a)<f(b)$ and $f(a)<c<f(b)$, then there exists $x\in(a,b)$ such that $f(x)=c$.
+Suppose $f\colon [a,b]\to\RR$ is continuous. If $f(a)<f(b)$ and $f(a)<c<f(b)$, then there exists $x\in(a,b)$ such that $f(x)=c$.
 \end{theorem}
 
 \begin{proof}
-By \cref{prop:connected-closed-interval}, $[a,b]$ is connected. By the previous result, we have that $f([a,b])$ is a connected subset of $\RR$. Then apply \cref{prop:connected-interval-R} and we are done.
+By \ref{lemma:connected-closed-interval}, $[a,b]$ is connected. 
+By the previous result, $f([a,b])$ is a connected subset of $\RR$. 
+Then apply \ref{lemma:connected-interval-R} and we are done.
 \end{proof}
 
 \begin{remark}
-The converse is not necessarily true. For instance, consider the \emph{topologist's sine curve}:
+The converse is not necessarily true. For instance, the \emph{topologist's sine curve}
 \[f(x)=\begin{cases}
 0&(x=0)\\
 \sin\brac{\frac{1}{x}}&(x\neq0)
 \end{cases}\]
-$f$ satisfies the intermediate value property but $f$ is not continuous.
+satisfies the intermediate value property, but $f$ is not continuous.
 \end{remark}
+
+\begin{example}
+$x^5-2x^3+3x^2-1=0$ has a solution in the interval $[0,1]$.
+\begin{proof}
+Let $f(x)=x^5-2x^3+3x^2-1$. $f$ is continuous on $[0,1]$. In addition,
+\[f(0)=-1<0,\quad 0<1=f(1).\]
+By the intermediate value theorem, there exists $x$, with $0<x<1$, for which $x^5-2x^3+3x^2-1=0$.
+\end{proof}
+\end{example}
 \pagebreak
 
 \section{Uniform Continuity}
 \begin{definition}[Uniform continuity]
-$f:X\to Y$ is \vocab{uniformly continuous}\index{continuity!uniform continuity} on $X$ if
+We say $f\colon X\to Y$ is \vocab{uniformly continuous}\index{continuity!uniform continuity} on $X$ if
 \[\forall\epsilon>0,\quad\exists\delta>0,\quad\forall p,q\in X,\quad d_X(p,q)<\delta\implies d_Y\brac{f(p),f(q)}<\epsilon.\]
 \end{definition}
 
@@ -368,7 +445,7 @@ The difference between continuity and uniform continuity is that of one between 
 Hence uniform continuity is a stronger continuity condition than continuity; a function that is uniformly continuous is continuous but a function that is continuous is not necessarily uniformly continuous.
 \end{remark}
 
-\begin{example}
+\begin{example} \
 \begin{itemize}
 \item Let $f(x)=\frac{1}{x}$. Then $f$ is continuous on $(0,1]$ but not uniformly continuous on $(0,1]$. To prove this, let $\epsilon=10$, and suppose we could find a $\delta$ ($0\le\delta<1$) that satisfies the condition of the definition. Taking $p=\delta$, $q=\frac{\delta}{11}$, we obtain $|p-q|<\delta$ and
 \[|f(p)-f(q)|=\frac{11}{\delta}-\frac{1}{\delta}=\frac{10}{\delta}>10.\]
@@ -376,7 +453,7 @@ Hence, for these two points we would always have $|f(p)-f(q)|>10$, contradicting
 
 \item Let $f(x)=x^2$. Then $f$ is uniformly continuous on $(0,1]$. To prove this, observe that
 \[|f(p)-f(q)|=|p^2-q^2|=|(p+q)(p-q)|<2|p-q|.\]
-If $|p-q|<\delta$, then $|f(p)-f(q)|<2\delta$. Hence, for any given $\epsilon$, we need only take $\delta=\frac{\epsilon}{2}$ to guarantee that $|f(p)-f(q)|<\epsilon$ for every $p,q\in(0,1]$ with $|p-q|<\delta$. This shows that $f$ is uniformly continuous on $(0,1]$.
+If $|p-q|<\delta$, then $|f(p)-f(q)|<2\delta$. Hence, for any given $\epsilon$, we need only take $\delta=\frac{\epsilon}{2}$ to guarantee that $|f(p)-f(q)|<\epsilon$ for every $p,q\in(0,1]$ with $|p-q|<\delta$.
 \end{itemize}
 \end{example}
 
@@ -384,8 +461,8 @@ The next result concerns the relationship between continuity and uniform continu
 
 \begin{lemma}\label{lemma:continuity-uniform-continuity} \
 \begin{enumerate}[label=(\roman*)]
-\item If $f:X\to Y$ is uniformly continuous on $X$, then $f$ is continuous on $X$.
-\item (Heine--Cantor theorem) If $f:X\to Y$ is continuous on $X$, and $X$ is compact, then $f$ is uniformly continuous on $X$.
+\item If $f\colon X\to Y$ is uniformly continuous on $X$, then $f$ is continuous on $X$.
+\item (Heine--Cantor theorem) If $f\colon X\to Y$ is continuous on $X$, and $X$ is compact, then $f$ is uniformly continuous on $X$.
 \end{enumerate}
 \end{lemma}
 
@@ -442,8 +519,10 @@ For each $x$, $f(x)\ge\delta$ implies that at least one of the distances $d(x,{U
 \pagebreak
 
 \section{Discontinuities}
+We now focus our attention on real-valued functions defined on intervals of the real line.
+
 \begin{definition}[One-sided limits]
-Let $f:(a,b)\to\RR$. Let $x\in[a,b)$. The \vocab{right-hand limit}, denoted by $f(x+)$ or $\displaystyle\lim_{t\to x^+}f(t)$, exists if
+Let $f\colon (a,b)\to\RR$. Let $x\in[a,b)$. The \vocab{right-hand limit}, denoted by $f(x+)$ or $\displaystyle\lim_{t\to x^+}f(t)$, exists if
 \[\forall\epsilon>0,\quad\exists\delta>0,\quad x<t<x+\delta<b\implies\absolute{f(t)-f(x+)}<\epsilon.\]
 If $f$ is defined at $x$ and if $f(x+)=f(x)$, we say that $f$ is \emph{continuous from the right} at $x$.
 
@@ -488,19 +567,17 @@ We consider two cases.
 If $f$ is defined on an interval, it is customary to divide discontinuities into two types.
 
 \begin{definition}[Discontinuities]
-Let $f:(a,b)\to\RR$. Suppose $f$ is discontinuous at $x\in(a,b)$.
+Let $f\colon (a,b)\to\RR$. Suppose $f$ is discontinuous at $x\in(a,b)$.
 \begin{enumerate}[label=(\roman*)]
-\item $f$ has a \emph{discontinuity of the first kind} (or a \emph{simple discontinuity}) at $x$, if $f(x+)$ and $f(x-)$ exist;
-\item otherwise $f$ has a \emph{discontinuity of the second kind}.
+\item We say $f$ has a \emph{discontinuity of the first kind} (or a \emph{simple discontinuity}) at $x$, if $f(x+)$ and $f(x-)$ exist;
+\item we say $f$ has a \emph{discontinuity of the second kind} if otherwise.
 \end{enumerate}
 \end{definition}
 
 There are two ways in which a function can have a simple discontinuity: either $f(x+)\neq f(x)$ [in which case the value $f(x)$ is immaterial], or $f(x+)=f(x-)\neq f(x)$.
 
-\begin{example}
+\begin{example} \
 \begin{itemize}
-\item The Dirichlet function has a discontinuity of the second kind at every $x\in\RR$, since both $f(x+)$ and $f(x-)$ do not exist.
-\item The topologist's sine curve has a discontinuity of the second kind at $x=0$, since $f(x+)$ does not exist.
 \item The function
 \[f(x)=\begin{cases}
 x+2&(-3<x<-2)\\
@@ -508,6 +585,8 @@ x+2&(-3<x<-2)\\
 x+2&(0\le x<1)
 \end{cases}\]
 has a simple discontinuity at $x=0$, and is continuous at every other point of $(-3,1)$.
+\item The Dirichlet function has a discontinuity of the second kind at every $x\in\RR$, since both $f(x+)$ and $f(x-)$ do not exist.
+\item The topologist's sine curve has a discontinuity of the second kind at $x=0$, since $f(x+)$ does not exist.
 \end{itemize}
 \end{example}
 \pagebreak
@@ -516,7 +595,7 @@ has a simple discontinuity at $x=0$, and is continuous at every other point of $
 We now study those functions which never decrease (or never increase) on a given interval. 
 
 \begin{definition}[Monotonicity]
-$f:(a,b)\to\RR$ is said to be
+We say $f\colon (a,b)\to\RR$ is
 \begin{enumerate}[label=(\roman*)]
 \item \emph{monotonically increasing}, if $f(x_1)\le f(x_2)$ for any $a<x_1\le x_2<b$;
 \item \emph{monotonically decreasing}, if $f(x_1)\ge f(x_2)$ for any any $a<x_1\le x_2<b$;
@@ -537,7 +616,7 @@ $f$ is \emph{strictly concave} if the $\ge$ sign above is replaced with a strict
 \end{comment}
 
 \begin{proposition}
-Let $f:(a,b)\to\RR$ be monotonically increasing. Then $f(x+)$ and $f(x-)$ exist for all $x\in(a,b)$; more precisely,
+Let $f\colon (a,b)\to\RR$ be monotonically increasing. Then $f(x+)$ and $f(x-)$ exist for all $x\in(a,b)$; more precisely,
 \[\sup_{t\in(a,x)}f(t)=f(x-)\le f(x)\le f(x+)=\inf_{t\in(x,b)}f(t).\]
 Furthermore, if $a<x<y<b$, then
 \[f(x+)\le f(y-).\]
@@ -581,7 +660,7 @@ Monotonic functions have no discontinuities of the second kind.
 \end{corollary}
 
 \begin{proposition}
-Let $f:(a,b)\to\RR$ be monotonic. Then the set of points of $(a,b)$ at which $f$ is discontinuous is at most countable.
+Let $f\colon (a,b)\to\RR$ be monotonic. Then the set of points of $(a,b)$ at which $f$ is discontinuous is at most countable.
 \end{proposition}
 
 \begin{proof}
@@ -597,10 +676,10 @@ We have thus established a 1-1 correspondence between $D$ and a subset of $\QQ$ 
 \pagebreak
 
 \section{Lipschitz Continuity}
-\begin{definition}
-$f:X\to Y$ is \vocab{Lipschitz continuous} if there exists $K\ge0$ such that
+\begin{definition}[Lipschitz continuity]
+We say $f\colon X\to Y$ is \vocab{Lipschitz continuous} if there exists $K\ge0$ such that
 \[\forall x,y\in X,\quad d_Y\brac{f(x),f(y)}\le K d_X(x,y).\]
-$K$ is called a \emph{Lipschitz constant} for $f$; $f$ may also be referred to as \emph{$K$-Lipschitz}.
+$K$ is called a \emph{Lipschitz constant} for $f$; we also refer to $f$ as \emph{$K$-Lipschitz}.
 \end{definition}
 
 \begin{lemma}
@@ -608,34 +687,34 @@ Lipschitz continuity implies uniform continuity.
 \end{lemma}
 
 \begin{proof}
-Let $f:X\to Y$ be $K$-Lipschitz continuous.
+Let $f\colon X\to Y$ be $K$-Lipschitz continuous.
 
 Let $\epsilon>0$ be given, let $x,y\in X$. We consider two cases.
-\begin{itemize}
-\item First, suppose that $K\le0$. Then
+\begin{description}
+\item[Case 1: $K\le0$.] Then
 \[d_X(x,y)\le 0d_Y\brac{f(x),f(y)}\]
 so
 \[d_X(x,y)\le0 \implies d_X(x,y)=0\implies x=y\]
 for all $x,y\in X$. Hence $f$ is a constant function, which is uniformly continuous.
 
-\item Next, suppose that $K>0$. Take $\delta=\frac{\epsilon}{K}$. If $d_X(x,y)<\delta$, then
+\item[Case 2: $K>0$.] Take $\delta=\frac{\epsilon}{K}$. If $d_X(x,y)<\delta$, then
 \[Kd_X(x,y)<\epsilon.\]
-By Lipschitz continuity of $f$, we have that
+By Lipschitz continuity of $f$,
 \[d_Y\brac{f(x),f(y)}\le Kd_X(x,y).\]
 These last two statements together imply $d_Y\brac{f(x),f(y)}<\epsilon$. Hence $f$ is uniformly continuous on $X$.
-\end{itemize}
+\end{description}
 \end{proof}
 
-$f:X\to Y$ is a \emph{contraction} if it is a $K$-Lipschitz map for some $K<1$.
+We say $f\colon X\to Y$ is a \emph{contraction} if it is a $K$-Lipschitz map for some $K<1$.
 
-If $f:X\to X$ is a map, $x\in X$ is called a \emph{fixed point} if $f(x)=x$.
+Let $f\colon X\to X$, we say $x\in X$ is a \emph{fixed point} if $f(x)=x$.
 
 \begin{theorem}[Contraction mapping theorem]
-Let $X$ be a complete metric space, and $f:X\to X$ be a contraction. Then $f$ has a unique fixed point.
+Let $X$ be a complete metric space, and $f\colon X\to X$ be a contraction. Then $f$ has a unique fixed point.
 \end{theorem}
 
 \begin{remark}
-The hypotheses ``complete'' and ``contraction'' are necessary. For example, $f:(0,1)\to(0,1)$ defined by $f(x)=Kx$ for any $0<K<1$ is a contraction with no fixed point. Also, $f:\RR\to\RR$ defined by $f(x)=x+1$ is not a contraction ($K=1$) and has no fixed point.
+The hypotheses ``complete'' and ``contraction'' are necessary. For example, $f\colon (0,1)\to(0,1)$ defined by $f(x)=Kx$ for any $0<K<1$ is a contraction with no fixed point. Also, $f\colon \RR\to\RR$ defined by $f(x)=x+1$ is not a contraction ($K=1$) and has no fixed point.
 \end{remark}
 
 \begin{proof}
@@ -656,7 +735,7 @@ d(x_m,x_n)
 &\le K^n d(x_1,x_0)\sum_{i=0}^{\infty}K^i=\frac{K^n}{1-K}d(x_1,x_0).
 \end{align*}
 
-Thus $(x_n)$ is a Cauchy sequence. Since $X$ is complete, the sequence $(x_n)$ converges; let $\displaystyle\lim_{n\to\infty}x_n=x$ for some $x\in X$.
+Thus $(x_n)$ is a Cauchy sequence. Since $X$ is complete, $(x_n)$ converges; let $\displaystyle\lim_{n\to\infty}x_n=x$ for some $x\in X$.
 
 \begin{claim}
 $x$ is our unique fixed point.
@@ -666,30 +745,75 @@ Note that $f$ is continuous because it is a contraction. Hence
 \[f(x)=\lim_{n\to\infty}f(x_n)=\lim_{n\to\infty}x_{n+1}=x,\]
 so $x$ is a fixed point.
 
-Let $y$ also be a fixed point. Then
-\[d(x,y)=d\brac{f(x),f(y)}=K d(x,y).\]
-As $K<1$ this means that $d(x,y)=0$ and hence $x=y$. The theorem is proved.
+Let $x^\prime$ also be a fixed point. Then
+\[d(x,x^\prime)=d\brac{f(x),f(x^\prime)}=K d(x,x^\prime).\]
+As $K<1$ this means that $d(x,x^\prime)=0$ and hence $x=x^\prime$. The theorem is proved.
 \end{proof}
 
 Note that the proof is constructive. Not only do we know that a unique fixed point exists. We also know how to find it.
 \pagebreak
 
+\section{Infinite Limits and Limits at Infinity}
+To enable us to operate in the extended real number system, we shall now enlarge the scope of \cref{defn:limit-function}, reformulating it in terms of open balls.
+
+For any real number $x$, we have already defined an open ball of $x$ to be any open interval $(x-\delta,x+\delta)$.
+
+\begin{definition}
+Let $c\in\RR$. A \emph{neighbourhood of $+\infty$} is
+\[(c,+\infty)\colonequals\{x\in\RR\mid x>c\}.\]
+Similarly, the set $(-\infty,c)$ is a neighbourhood of $-\infty$.
+\end{definition}
+
+\begin{definition}\label{defn:limit-function-infinite}
+Let $f\colon E\subset\RR\to\RR$. We say that $\displaystyle\lim_{t\to x}f(t)=A$ where $A$ and $x$ are in the extended real number system, if for every neighbourhood of $U$ of $A$ there is a neighbourhood $V$ of $x$ such that $V\cap E$ is not empty, and such that $f(t)\in U$ for all $t\in V\cap E$, $t\neq x$.
+\end{definition}
+
+\begin{remark}
+When $A$ and $x$ are real, \cref{defn:limit-function-infinite} coincides with \cref{defn:limit-function}.
+\end{remark}
+
+\todo{to do}
+
+\begin{lemma}[Uniqueness of limit]
+Let $f\colon E\subset\RR\to\RR$. The limit of $f$ at a point $x$ is unique.
+\end{lemma}
+
+\begin{proof}
+Suppose
+\[\lim_{t\to x}f(t)=A,\quad\lim_{t\to x}f(t)=A^\prime.\]
+We will show that $A^\prime=A$.
+\end{proof}
+
+The analogue of Theorem 4.4 is still true, and the proof offers nothing new. We state it, for the sake of completeness. 
+
+\begin{lemma}
+Let $f,g\colon E\subset\RR\to\RR$. Suppose $\displaystyle\lim_{t\to x}f(t)=A$, $\displaystyle\lim_{t\to x}g(t)=B$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $\displaystyle\lim_{t\to x}(f+g)(t)=A+B$
+\item $\displaystyle\lim_{t\to x}(fg)(t)=AB$
+\item $\displaystyle\lim_{t\to x}(f/g)(t)=A/B$
+\end{enumerate}
+provided the RHS are defined.
+\end{lemma}
+
+Note that $\infty-\infty$, $0\cdot\infty$, $\infty/\infty$, $A/0$ are not defined (see Definition 1.23). 
+\pagebreak
+
 \section*{Exercises}
-\addcontentsline{toc}{section}{Exercises}
 \begin{exercise}[\cite{rudin} 4.1]
-Suppose $f:\RR\to\RR$ satisfies
+Suppose $f\colon \RR\to\RR$ satisfies
 \[\lim_{h\to0}\brac{f(x+h)-f(x-h)}=0\]
 for every $x\in\RR$. Does this imply that $f$ is continuous?
 \end{exercise}
 
 \begin{exercise}[\cite{rudin} 4.2]
-If $f:X\to Y$ is continuous, prove that
+If $f\colon X\to Y$ is continuous, prove that
 \[f(\overline{E})\subset\overline{f(E)}\]
 for every $E\subset X$.
 \end{exercise}
 
 \begin{exercise}[\cite{rudin} 4.3]
-Let $f:X\to\RR$ be continuous. Let the \emph{zero set} of $f$ be
+Let $f\colon X\to\RR$ be continuous. Let the \emph{zero set} of $f$ be
 \[Z(f)=\{x\in X\mid f(x)=0\}.\]
 Prove that $Z(f)$ is closed.
 \end{exercise}
@@ -701,7 +825,7 @@ Show that the conclusion is false if boundedness of $E$ is omitted from the hypo
 \end{exercise}
 
 \begin{exercise}[\cite{rudin} 4.11]
-Suppose $f:X\to Y$ is uniformly continuous on $X$. Prove that $\brac{f(x_n)}$ is a Cauchy sequence in $Y$ for every Cauchy sequence $(x_n)$ in $X$.
+Suppose $f\colon X\to Y$ is uniformly continuous on $X$. Prove that $\brac{f(x_n)}$ is a Cauchy sequence in $Y$ for every Cauchy sequence $(x_n)$ in $X$.
 \end{exercise}
 
 \begin{exercise}[\cite{rudin} 4.12]
@@ -713,7 +837,7 @@ Let $I=[0,1]$ be the closed unit interval. Suppose $f$ is a continuous mapping o
 \end{exercise}
 
 \begin{exercise}[\cite{rudin} 4.15]
-$f:X\to Y$ is said to be \emph{open} if $f(V)$ is an open set in $Y$ whenever $V$ is an open set in $X$.
+$f\colon X\to Y$ is said to be \emph{open} if $f(V)$ is an open set in $Y$ whenever $V$ is an open set in $X$.
 
 Prove that every continuous open mapping of $\RR$ into $\RR$ is monotonic.
 \end{exercise}
@@ -732,9 +856,13 @@ Prove that $f$ is continuous at every irrational point, and that $f$ has a simpl
 \end{exercise}
 
 \begin{exercise}[\cite{rudin} 4.26]
-Suppose $X, Y, Z$ are metric spaces, and $Y$ is compact. Let $f:X\to Y$, $g:Y\to Z$ be continuous and injective, and $h=g\circ f$.
+Suppose $X, Y, Z$ are metric spaces, and $Y$ is compact. Let $f\colon X\to Y$, $g\colon Y\to Z$ be continuous and injective, and $h=g\circ f$.
 
 Prove that $f$ is uniformly continuous if $h$ is uniformly continuous. \emph{Hint}: $g^{-1}$ has compact domain $g(Y)$, and $f(x)=g^{-1}\brac{h(x)}$.
 
 Prove also that $f$ is continuous if $h$ is continuous.
+\end{exercise}
+
+\begin{exercise}
+Show that $f\colon[0,+\infty)\to[0,+\infty), f(x)=\sqrt{x}$ is uniformly continuous.
 \end{exercise}

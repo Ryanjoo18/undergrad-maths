@@ -1,0 +1,375 @@
+\chapter{Operators on Complex Vector Spaces}
+\section{Generalised Eigenvectors and Nilpotent Operators}
+\subsection{Kernels of Powers of an Operator}
+We begin this chapter with a study of kernels of powers of an operator.
+The following result provides a sequence of increasing kernels.
+
+\begin{lemma}\label{lemma:kernels-power-sequence}
+Suppose $T\in\mathcal{L}(V)$. Then
+\[\{\vb{0}\}=\ker T^0\subset\ker T^1\subset\cdots\subset\ker T^k\subset\ker T^{k+1}\subset\cdots.\]
+\end{lemma}
+
+\begin{proof}
+Let $v\in\ker T^k$, for non-negative integer $k$. Then $T^k v=\vb{0}$, so $T^{k+1}v=T\brac{T^k v}=T(\vb{0})=\vb{0}$. Thus $v\in\ker T^{k+1}$.
+
+Hence $\ker T^k\subset\ker T^{k+1}$ for non-negative integers $k$.
+\end{proof}
+
+The next result states that if two consecutive terms in the sequence are equal, then all later terms are equal.
+
+\begin{lemma}\label{lemma:kernels-power-sequence-equality}
+Suppose $T\in\mathcal{L}(V)$, and $\ker T^m=\ker T^{m+1}$ for some non-negative integer $m$. Then
+\[\ker T^m=\ker T^{m+1}=\ker T^{m+1}=\ker T^{m+3}=\cdots.\]
+\end{lemma}
+
+\begin{proof}
+Let $k$ be a positive integer. We want to prove that
+\[\ker T^{m+k}=\ker T^{m+k+1}.\]
+\fbox{$\subset$} This follows from \ref{lemma:kernels-power-sequence}.
+
+\fbox{$\supset$} Let $v\in\ker T^{m+k+1}$. Then
+\[T^{m+1}(T^k v)=T^{m+k+1}v=\vb{0}.\]
+Hence
+\[T^k v\in\ker T^{m+1}=\ker T^m.\]
+Thus $T^{m+k}v=T^m(T^k v)=\vb{0}$, which means that $v\in\ker T^{m+k}$.
+\end{proof}
+
+The result above raises the question of whether there exists a non-negative integer $m$ such that $\ker T^m=\ker T^{m+1}$. 
+The next result shows that this equality holds, at least when $m=\dim V$.
+
+\begin{lemma}[Kernels stop growing]\label{lemma:kernels-power-sequence-dimension}
+Suppose $T\in\mathcal{L}(V)$. Then
+\[\ker T^{\dim V}=\ker T^{\dim V+1}=\ker T^{\dim V+2}=\cdots.\]
+\end{lemma}
+
+\begin{proof}
+By \ref{lemma:kernels-power-sequence-equality}, it suffices to prove that $\ker T^{\dim V}=\ker T^{\dim V+1}$. 
+Suppose, for a contradiction, that $\ker T^{\dim V}\neq\ker T^{\dim V+1}$.
+Then
+\[\{\vb{0}\}=\ker T^0\subsetneq\ker T^1\subsetneq\cdots\subsetneq\ker T^{\dim V}\subsetneq\ker T^{\dim V+1},\]
+where we have strict inclusions in the chain above. 
+At each of the strict inclusions, the dimension increases by at least $1$. Thus $\dim\ker T^{\dim V+1}\ge\dim V+1$. Since $\ker T^{\dim V+1}$ is a subspace of $V$, it cannot have a larger dimension than the whole space. Hence we have reached a contradiction.
+\end{proof}
+
+It is not true that $V=\ker T\oplus\im T$ for every $T\in\mathcal{L}(V)$. However, the next result can be a useful substitute.
+
+\begin{proposition}[Direct sum decomposition]\label{prop:kernel-image-power-direct-sum}
+Suppose $T\in\mathcal{L}(V)$. Then
+\[V=\ker T^{\dim V}\oplus\im T^{\dim V}.\]
+\end{proposition}
+
+\begin{proof}
+Let $n=\dim V$.
+\begin{itemize}
+\item We first show that $\ker T^n+\im T^n$ is a direct sum. 
+By \ref{lemma:direct-sum-intersection-zero}, we will show that 
+\[\ker T^n\cap\im T^n=\{\vb{0}\}.\]
+Let $v\in\ker T^n\cap\im T^n$. Then $T^n v=\vb{0}$, and there exists $u\in V$ such that $v=T^n u$.
+Applying $T^n$ to both sides gives
+\[T^n v=T^{2n}u=\vb{0}\]
+which implies
+\[T^n u=\vb{0}.\]
+Thus $v=T^n u=\vb{0}$.
+
+\item Next we show that $V=\ker T^n\oplus\im T^n$. We shall use \ref{cor:subspace-full-dimension-equals-whole-space} to show that the subspace $\ker T^n\oplus\im T^n$ equals the whole space $V$:
+\begin{align*}
+\dim(\ker T^n\oplus\im T^n)
+&=\dim\ker T^n+\dim\im T^n&&[\text{by \ref{prop:direct-sum-dimensions-add-up}}]\\
+&=\dim V&&[\text{by fundamental theorem of linear maps}]
+\end{align*}
+\end{itemize}
+\end{proof}
+
+\subsection{Generalised Eigenvectors}
+\begin{definition}[Generalised eigenvector]
+Suppose $T\in\mathcal{L}(V)$, and $\lambda\in\FF$ is an eigenvalue of $T$. We say $v\in V\setminus\{\vb{0}\}$ is a \vocab{generalised eigenvector}\index{generalised eigenvector} of $T$ corresponding to $\lambda$, if
+\[(T-\lambda I)^k v=\vb{0}\]
+for some positive integer $k$.
+\end{definition}
+
+That is, there exists $k\in\ZZ^+$ such that
+\[v\in\ker(T-\lambda I)^k.\]
+
+\begin{remark}
+If $k=1$, then this coincides with the usual eigenvector. Hence all eigenvectors are generalised eigenvectors.
+\end{remark}
+
+\begin{remark}
+We do not define generalised eigenvalues because they are no different from the usual eigenvalues. Reason: if $(T-\lambda I)^k$ is not injective for some positive integer $k$, then $T-\lambda I$ is not injective, and hence $\lambda$ is an eigenvalue of $T$.
+\end{remark}
+
+A non-zero vector $v\in V$ is a generalised eigenvector of $T$ corresponding to $\lambda$ if and only if
+\[(T-\lambda I)^{\dim V}v=\vb{0},\]
+as follows from applying \ref{lemma:kernels-power-sequence} and \ref{lemma:kernels-power-sequence-dimension} to the operator $T-\lambda I$.
+
+As we know, an operator on a complex vector space may not have enough eigenvectors to form a basis of the domain. 
+The next result shows that on a complex vector space, there are enough generalised eigenvectors to do this.
+
+\begin{proposition}
+Suppose $\FF=\CC$, and $T\in\mathcal{L}(V)$. Then $T$ has a basis of generalised eigenvectors in $V$.
+\end{proposition}
+
+\begin{proof}
+Let $n=\dim V$. We shall induct on $n$.
+
+If $n=1$, then every non-zero vector in $V$ is an eigenvector of $T$. Thus the desired result holds.
+
+Suppose $n>1$, and the desired result holds for all smaller values of $\dim V$. 
+Let $\lambda$ be an eigenvalue of $T$.
+Applying \ref{prop:kernel-image-power-direct-sum} to $T-\lambda I$ shows that
+\[V=\ker(T-\lambda I)^n\oplus\im(T-\lambda I)^n.\]
+If $\ker(T-\lambda I)^n=V$, then every non-zero vector in $V$ is a generalised eigenvector of $T$, and thus in this case there is a basis of $V$ consisting of generalised eigenvectors of $T$. Hence we can assume that $\ker(T-\lambda I)^n\neq V$, which implies that $\im(T-\lambda I)^n\neq\{\vb{0}\}$.
+Since $\lambda$ is an eigenvalue of $T$, we have $\ker(T-\lambda I)^n\neq\{\vb{0}\}$. Thus
+\[0<\dim\im(T-\lambda I)^n<n.\]
+Note that $\im(T-\lambda I)^n$ is invariant under $T$. Let $S\in\mathcal{L}(\im(T-\lambda I)^n)$ be defined by
+\[S=T|_{\im(T-\lambda I)^n}.\]
+By induction hypothesis applied to $S$, there is a basis of $\im(T-\lambda I)^n$ consisting of generalised eigenvectors of $S$, which of course are generalised eigenvectors of $T$. Adjoining that basis of $\im(T-\lambda I)^n$ to a basis of $\ker(T-\lambda I)^n$ gives a basis of $V$ consisting of generalised eigenvectors of $T$.
+\end{proof}
+
+Suppose $T\in\mathcal{L}(V)$. If $v$ is an eigenvector of $T$, then the corresponding eigenvalue $\lambda$ is uniquely determined by the equation $Tv=\lambda v$, which can be satisfied by only one $\lambda\in\FF$ (since $v\neq\vb{0}$). 
+The next result shows a similar result holds for generalised eigenvectors: if $v$ is a generalised eigenvector of $T$, then the equation $(T-\lambda I)^{\dim V}v=\vb{0}$ can be satisfied by only one $\lambda\in\FF$.
+
+\begin{lemma}
+Suppose $T\in\mathcal{L}(V)$. Then each generalised eigenvector of $T$ corresponds to only one eigenvalue of $T$.
+\end{lemma}
+
+\begin{proof}
+Suppose $T\in\mathcal{L}(V)$. Let $v\in V$ be a generalised eigenvector of $T$ corresponding to eigenvalues $\lambda$ and $\lambda^\prime$. 
+
+Let $m$ be the smallest positive integer such that $(T-\lambda^\prime I)^m v=\vb{0}$. 
+Let $n=\dim V$. 
+Then
+\begin{align*}
+\vb{0}&=(T-\lambda I)^n v\\
+&=\brac{(T-\lambda^\prime I)+(\lambda^\prime-\lambda)I}^n v\\
+&=\sum_{i=1}^{n}\binom{n}{i}(\lambda^\prime-\lambda)^{n-i}(T-\lambda^\prime I)^i v.
+\end{align*}
+Applying the operator $(T-\lambda I)^{m-1}$ to both sides gives
+\[\vb{0}=(\lambda^\prime-\lambda)^n(T-\lambda^\prime I)^{m-1}v.\]
+Since $(T-\lambda^\prime I)^{m-1}v\neq\vb{0}$, the equation above implies that $\lambda^\prime=\lambda$, as desired.
+\end{proof}
+
+Recall that by \ref{prop:eigenvectors-linind}, eigenvectors corresponding to distinct eigenvalues are linearly independent. 
+We now prove a similar result for generalised eigenvectors.
+
+\begin{proposition}
+Suppose $T\in\mathcal{L}(V)$. Then every set of generalised eigenvectors of $T$ corresponding to distinct eigenvalues of $T$ is linearly independent.
+\end{proposition}
+
+\begin{proof}
+Suppose, for a contradiction, that the desired result is false.
+Then there exists a smallest positive integer $m$ such that $\{v_1,\dots,v_m\}$ are linearly dependent generalised eigenvectors of $T$ corresponding to distinct eigenvalues $\lambda_1,\dots,\lambda_m$ of $T$.
+
+Thus there exist $a_1,\dots,a_m\in\FF$, none of which are $0$ (because of the minimality of $m$), such that
+\[a_1v_1+\cdots+a_mv_m=\vb{0}.\]
+Let $n=\dim V$. Applying $(T-\lambda_m I)^n$ to both sides gives
+\begin{equation*}\tag{I}
+a_1(T-\lambda_m I)^n v_1+\cdots+a_{m-1}(T-\lambda_m I)^n v_{m-1}=\vb{0}.
+\end{equation*}
+Let $i\in\{1,\dots,m-1\}$. Then
+\[(T-\lambda_m I)^n v_i\neq\vb{0},\]
+because otherwise $v_i$ would be a generalised eigenvector of $T$ corresponding to distinct eigenvalues $\lambda_i$ and $\lambda_m$, contradicting 8.11.
+However
+\[(T-\lambda_i I)^n\brac{(T-\lambda_m I)^n v_i}=(T-\lambda_m I)^n\brac{(T-\lambda_i I)^n v_i}=\vb{0}.\]
+Thus the last two equations show that $(T-\lambda_m I)^n v_i$ is a generalised eigenvector of $T$ corresponding to the eigenvalue $\lambda_i$. Hence
+\[(T-\lambda_m I)^n v_1,\dots,(T-\lambda_m I)^n v_{m-1}\]
+is a linearly dependent set (by (I)) of $m-1$ generalised eigenvectors corresponding to distinct eigenvalues, contradicting the minimality of $m$. 
+\end{proof}
+
+\subsection{Nilpotent Operators}
+\begin{definition}[Nilpotent operator]
+An operator is \vocab{nilpotent}\index{nilpotent operator} if some power of it equals $0$.
+\end{definition}
+
+Thus an operator $T\in\mathcal{L}(V)$ is nilpotent if and only if every non-zero vector in $V$ is a generalised eigenvector of $T$ corresponding to the eigenvalue $0$.
+
+\begin{lemma}
+Suppose $T\in\mathcal{L}(V)$ is nilpotent. Then $T^{\dim V}=0$.
+\end{lemma}
+
+\begin{proof}
+Since $T$ is nilpotent, there exists $k\in\ZZ^+$ such that $T^k=0$.
+
+Thus $\ker T^k=V$. Now \ref{lemma:kernels-power-sequence} and \ref{lemma:kernels-power-sequence-dimension} imply that $\ker T^{\dim V}=V$. Hence $T^{\dim V}=0$.
+\end{proof}
+
+The next result concerns the eigenvalues of nilpotent operators.
+
+\begin{proposition}
+Suppose $T\in\mathcal{L}(V)$.
+\begin{enumerate}[label=(\roman*)]
+\item If $T$ is nilpotent, then $0$ is the only eigenvalue of $T$.
+\item If $\FF=\CC$ and $0$ is the only eigenvalue of $T$, then $T$ is nilpotent.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Suppose $T$ is nilpotent. Then $T^m=0$ for some $m\in\ZZ^+$. This implies that $T$ is not injective. Thus $0$ is an eigenvalue of $T$.
+
+To show that $T$ has no other eigenvalues, suppose $\lambda$ is an eigenvalue of $T$. 
+Then there exists $v\in V\setminus\{\vb{0}\}$ such that
+\[\lambda v=Tv.\]
+Repeatedly applying $T$ to both sides of the equation gives
+\[\lambda^m v=T^m v=\vb{0}.\]
+Thus $\lambda=0$, as desired.
+
+\item Suppose $\FF=\CC$, and $0$ is the only eigenvalue of $T$. 
+By \ref{thrm:eigenvalues-minimal-polynomial-zeros}, the minimal polynomial of $T$ equals $z^m$ for some positive integer $m$.
+Thus $T^m=0$.
+Hence $T$ is nilpotent.
+\end{enumerate}
+\end{proof}
+
+The next result provides a characterisation of a nilpotent operator, in terms of its minimal polynomial and matrix.
+
+\begin{proposition}
+Suppose $T\in\mathcal{L}(V)$. Then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $T$ is nilpotent.
+\item The minimal polynomial of $T$ is $z^m$, for some positive integer $m$.
+\item $T$ has a strictly upper-triangular matrix with respect to some basis of $V$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} \
+
+\fbox{(i)$\implies$(ii)} Suppose $T$ is nilpotent. Then $T^n=0$ for some $n\in\ZZ^+$. 
+
+By \ref{prop:minimal-polynomial-multiple}, $z^n$ is a polynomial multiple of the minimal polynomial of $T$.
+Thus the minimal polynomial of $T$ is $z^m$ for some $m\in\ZZ^+$.
+
+\fbox{(ii)$\implies$(iii)} Suppose the minimal polynomial of $T$ must be $z^m$, for some $m\in\ZZ^+$.
+
+Since $0$ is the only zero of $z^m$, by \ref{thrm:eigenvalues-minimal-polynomial-zeros}, $0$ is the only eigenvalue of $T$.
+
+Thus by \ref{prop:upper-triangular-matrix-minimal-polynomial}, $T$ has an upper-triangular matrix with respect to some basis of $V$. 
+
+By \ref{prop:upper-triangular-equation-diagonal-entries}, since the eigenvalues of $T$ are the diagonal entries of the matrix, we conclude that all entries on the diagonal of this matrix are $0$.
+
+\fbox{(iii)$\implies$(i)} Suppose $T$ has a strictly upper-triangular matrix with respect to some basis of $V$.
+
+Then the diagonal entries are all $0$. By \ref{prop:upper-triangular-equation-diagonal-entries}, $T^{\dim V}=0$. 
+Hence $T$ is nilpotent.
+\end{proof}
+\pagebreak
+
+\section{Generalised Eigenspace Decomposition}
+\subsection{Generalised Eigenspaces}
+\begin{definition}[Generalised eigenspace]
+Suppose $T\in\mathcal{L}(V)$, and $\lambda\in\FF$. The \vocab{generalised eigenspace}\index{generalised eigenspace} of $T$ corresponding to $\lambda$ is
+\[G(\lambda,T)\colonequals\crbrac{v\in V\mid\exists k\in\ZZ^+, (T-\lambda I)^k v=\vb{0}}.\]
+\end{definition}
+
+That is, the generalised eigenspace of $T$ corresponding to $\lambda$ is the set of generalised eigenvectors of $T$ corresponding to $\lambda$, along with $\vb{0}$.
+
+\begin{remark}
+$E(\lambda,T)\subset G(\lambda,T)$.
+\end{remark}
+
+A consequence of the next result is $G(\lambda,T)$ is a subspace of $V$.
+
+\begin{lemma}
+Suppose $T\in\mathcal{L}(V)$, and $\lambda\in\FF$. Then
+\[G(\lambda,T)=\ker(T-\lambda I)^{\dim V}.\]
+\end{lemma}
+
+\begin{proof} \
+
+\fbox{$\supset$} Let $v\in\ker(T-\lambda I)^{\dim V}$. Then $(T-\lambda I)^{\dim V}=\vb{0}$. By definition, $v\in G(\lambda,T)$.
+
+\fbox{$\subset$} Let $v\in G(\lambda,T)$. Then $(T-\lambda I)^k v=\vb{0}$ for some $k\in\ZZ^+$, so $v\in\ker(T-\lambda I)^k$. 
+
+From \ref{lemma:kernels-power-sequence} and \ref{lemma:kernels-power-sequence-dimension} (with $T-\lambda I$ replacing $T$), we get $v\in\ker(T-\lambda I)^{\dim V}$. 
+\end{proof}
+
+\begin{theorem}[Generalised eigenspace decomposition]
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Let $\lambda_1,\dots,\lambda_m$ be distinct eigenvalues of $T$. Then
+\begin{equation}
+V=G(\lambda_1,T)\oplus\cdots\oplus G(\lambda_m,T).
+\end{equation}
+\end{theorem}
+
+\subsection{Multiplicity of an Eigenvalue}
+\begin{definition}[Multiplicity]
+Suppose $T\in\mathcal{L}(V)$. The \vocab{multiplicity}\index{multiplicity} of an eigenvalue $\lambda$ of $T$ is defined as
+\[\dim G(\lambda,T).\]
+\end{definition}
+
+Equivalently, the multiplicity of an eigenvalue $\lambda$ of $T$ equals
+\[\dim\ker(T-\lambda I)^{\dim V}.\]
+
+\begin{lemma}
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Then the sum of the multiplicities of all eigenvalues of $T$ equals $\dim V$.
+\end{lemma}
+
+\begin{definition}[Characteristic polynomial]
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Let $\lambda_1,\dots,\lambda_m$ be the distinct eigenvalues of $T$, with multiplicities $d_1,\dots,d_m$. The polynomial
+\[(z-\lambda_1)^{d_1}\cdots(z-\lambda_m)^{d_m}\]
+is called the \vocab{characteristic polynomial}\index{characteristic polynomial} of $T$.
+\end{definition}
+
+The next result concerns the degree and zeros of the characteristic polynomial.
+
+\begin{lemma}
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Then
+\begin{enumerate}[label=(\roman*)]
+\item the characteristic polynomial of $T$ has degree $\dim V$;
+\item the zeros of the characteristic polynomial of $T$ are the eigenvalues of $T$.
+\end{enumerate}
+\end{lemma}
+
+\begin{theorem}[Cayley--Hamilton theorem]
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Let $q$ be the characteristic polynomial of $T$. Then
+\[q(T)=0.\]
+\end{theorem}
+
+\begin{proposition}
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Then the characteristic polynomial of $T$ is a polynomial multiple of the minimal polynomial of $T$.
+\end{proposition}
+
+\begin{theorem}
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Suppose $\mathcal{M}(T)$ is upper-triangular with respect to a basis $\{v_1,\dots,v_n\}$ of $V$.
+Then the number of times that each eigenvalue $\lambda$ of $T$ appears on the diagonal of $\mathcal{M}(T)$ equals the multiplicity of $\lambda$ as an eigenvalue of $T$.
+\end{theorem}
+
+\subsection{Block Diagonal Matrices}
+Often we can understand a matrix better by thinking of it as composed of smaller matrices.
+
+\begin{definition}[Block diagonal matrix]
+A \vocab{block diagonal matrix} is a square matrix of the form
+\[\begin{pmatrix}
+A_1&&0\\
+&\ddots&\\
+0&&A_m
+\end{pmatrix}\]
+where $A_1,\dots,A_m$ are square matrices lying along the diagonal, and all other entries of the matrix equal $0$.
+\end{definition}
+
+\begin{proposition}
+Suppose $\FF=\CC$ and $T\in\mathcal{L}(V)$. Let $\lambda_1,\dots,\lambda_m$ be distinct eigenvalues of $T$, with multiplicities $d_1,\dots,d_m$. Then there is a basis of $V$ with respect to which $T$ has a block diagonal matrix of the form
+\[\begin{pmatrix}
+A_1&&0\\
+&\ddots&\\
+0&&A_m
+\end{pmatrix}\]
+where each $A_i$ is a $d_i\times d_i$ upper-triangular matrix of the form
+\[A_i=\begin{pmatrix}
+\lambda_i&&\ast\\
+&\ddots&\\
+0&&\lambda_i
+\end{pmatrix}.\]
+\end{proposition}
+\pagebreak
+
+\section{Consequences of Generalised Eigenspace Decomposition}
+\subsection{Square Roots of Operators}
+\subsection{Jordan Form}
+
+\section{Trace: A Connection Between Matrices and Operators}
+
+\section*{Exercises}
+8A Q 2 4 5 6-9
+\begin{exercise}[\cite{ladr} 8A]
+
+\end{exercise}

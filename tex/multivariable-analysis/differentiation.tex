@@ -1,0 +1,524 @@
+\chapter{Differentiation}\label{chap:multivariable-differentiation}
+We shall now switch to a different topic, namely that of differentiation in several variable calculus. More precisely, we shall be dealing with maps $\vb{f}\colon \RR^n\to\RR^m$ from one Euclidean space to another, and trying to understand what the derivative of such a map is.
+
+\section{Basic Definitions}
+Recall that for $f\colon\RR\to\RR$, we defined the derivative at $x$ as
+\[f^\prime(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}.\]
+This equation certainly makes no sense in the general case of a function $\vb{f}\colon\RR^n\to\RR^m$, but can reformulated in a way that does.
+If $A\colon\RR\to\RR$ is the linear transformation defined by $A(h)=f^\prime(x)\cdot h$, then we can rewrite
+\[\lim_{h\to0}\frac{f(x+h)-f(a)-Ah}{h}=0.\]
+Thus we reformulate the definition of differentiability as follows:
+\begin{quote}
+$f\colon\RR\to\RR$ is differentiable at $x\in\RR$ if there exists a linear transformation $A\in\mathcal{L}(\RR,\RR)$ such that
+\[\lim_{h\to0}\frac{f(x+h)-f(a)-Ah}{h}=0.\]
+\end{quote}
+
+In this form, the definition has a simple generalisation to higher dimensions:
+
+\begin{definition}[Differentiability]
+Let $U\subset\RR^n$ be open, $\vb{f}\colon U\to\RR^m$. We say $\vb{f}$ is \vocab{differentiable} at $\vb{x}\in U$ if there exists $A\in\mathcal{L}(\RR^n,\RR^m)$ such that
+\[\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}}{\norm{\vb{h}}}=0.\]
+\end{definition}
+
+\begin{remark}
+$\vb{h}$ is a point of $\RR^n$, and $\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}$ is a point of $\RR^m$, so the norm signs are essential.
+\end{remark}
+
+The linear transformation $A$ is denoted as $D\vb{f}(\vb{x})$, and called the \vocab{derivative} of $\vb{f}$ at $\vb{x}$.
+
+\begin{remark}
+If $n=m=1$, then $D\vb{f}(\vb{x})$ coincides with the familiar $f^\prime(x)$ in single-variable calculus.
+\end{remark}
+
+\begin{notation}
+Some authors also use $\vb{f}^\prime(\vb{x})$ to denote the derivative.
+\end{notation}
+
+If $\vb{f}$ is differentiable at every $\vb{x}\in U$, we say $\vb{f}$ is \emph{differentiable on} $U$. 
+
+The justification for the phrase ``\emph{the} linear transformation'' is as follows:
+
+\begin{lemma}[Uniqueness of derivative]
+Let $U\subset\RR^n$ be open, $\vb{f}\colon U\to\RR^m$. Suppose $\vb{x}\in U$, and there exist $A,B\in\mathcal{L}(\RR^n,\RR^m)$ such that
+\[\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}}{\norm{\vb{h}}}=0\quad\text{and}\quad\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-B\vb{h}}}{\norm{\vb{h}}}=0.\]
+Then $A=B$.
+\end{lemma}
+
+\begin{proof}
+Suppose $\vb{h}\neq\vb{0}$. Then
+\begin{align*}
+\lim_{\vb{h}\to\vb{0}}\frac{\norm{(A-B)\vb{h}}}{\norm{\vb{h}}}
+&=\lim_{\vb{h}\to\vb{0}}\frac{\norm{\brac{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}-\brac{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-B\vb{h}}}}{\norm{\vb{h}}}\\
+&\le\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}}{\norm{\vb{h}}}+\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-B\vb{h}}}{\norm{\vb{h}}}\\
+&=0+0=0.
+\end{align*}
+
+If $\vb{x}\in\RR^n$, then $t\vb{x}\to0$ as $t\to0$. Hence for $\vb{x}\neq\vb{0}$ we have
+\[0=\lim_{t\to0}\frac{\norm{A(t\vb{x})-B(t\vb{x})}}{\norm{t\vb{x}}}=\frac{\norm{A\vb{x}-B\vb{x}}}{\norm{\vb{x}}}.\]
+Therefore $A\vb{x}=B\vb{x}$, which implies $A=B$.
+\end{proof}
+
+\begin{example}
+Consider the function $f\colon\RR^2\to\RR$ defined by $f(x,y)=\sin x$. Then $f^\prime(a,b)=(\cos a)\cdot x$.
+
+To prove this, note that
+\[\lim_{(h,k)\to(0,0)}\frac{\norm{f(a+h,b+k)-f(a,b)-f^\prime(h,k)}}{\norm{(h,k)}}
+=\lim_{(h,k)\to(0,0)}\frac{|\sin(a+h)-\sin a-(\cos a)\cdot h|}{\norm{(h,k)}}.\]
+Since $\sin^\prime(a)=\cos a$, we have
+\[\lim_{h\to0}\frac{|\sin(a+h)-\sin a-(\cos a)\cdot h|}{|h|}=0.\]
+Since $\norm{(h,k)}\ge|h|$, it is also true that
+\[\lim_{(h,k)\to(0,0)}\frac{|\sin(a+h)-\sin a-(\cos a)\cdot h|}{\norm{(h,k)}}=0.\]
+\end{example}
+\pagebreak
+
+\section{Basic Theorems}
+\begin{lemma}[Differentiability implies continuity]
+Let $U\subset\RR^n$ be open, suppose $\vb{f}\colon U\to\RR^m$ is differentiable at $\vb{x}\in U$. Then $\vb{f}$ is continuous at $\vb{x}$.
+\end{lemma}
+
+\begin{proof}
+Another way to write the differentiability of $\vb{f}$ at $\vb{x}$ is to consider the \emph{remainder}:
+\[\vb{r}(\vb{h})\colonequals\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-D\vb{f}(\vb{x})\vb{h}.\]
+By definition, $\vb{f}$ is differentiable at $\vb{x}$ if $\displaystyle\lim_{\vb{h}\to\vb{0}}\norm{\vb{r}(\vb{h})}/\norm{\vb{h}}=0$. Thus $\displaystyle\lim_{\vb{h}\to\vb{0}}\vb{r}(\vb{h})=\vb{0}$.
+
+The mapping $\vb{h}\mapsto D\vb{f}(\vb{x})\vb{h}$ is a linear mapping between finite-dimensional spaces, hence continuous and $\displaystyle\lim_{\vb{h}\to\vb{0}}D\vb{f}(\vb{x})\vb{h}=\vb{0}$. Hence
+\[\lim_{\vb{h}\to\vb{0}}\vb{f}(\vb{x}+\vb{h})=\vb{f}(\vb{x}).\]
+This precisely means that $\vb{f}$ is continuous at $\vb{x}$.
+\end{proof}
+
+The next result implies that differentiation is a linear map on the space of differentiable functions.
+
+\begin{lemma}
+Let $U\subset\RR^n$ be open, suppose $\vb{f},\vb{g}\colon U\to\RR^m$ are differentiable at $\vb{x}\in U$, let $\alpha\in\RR$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $\vb{f}+\vb{g}$ is differentiable at $\vb{x}$, and\hfill(addition)
+\[D(\vb{f}+\vb{g})(\vb{x})=D\vb{f}(\vb{x})+D\vb{g}(\vb{x}).\]
+\item $\alpha\vb{f}$ is differentiable at $\vb{x}$, and\hfill(scalar multiplication)
+\[D(\alpha\vb{f})(\vb{x})=\alpha D\vb{f}(\vb{x}).\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $\vb{h}\in\RR^n$, $\vb{h}\neq\vb{0}$.
+\begin{enumerate}[label=(\roman*)]
+\item We have
+\begin{align*}
+&\frac{\norm{\vb{f}(\vb{x}+\vb{h})+\vb{g}(\vb{x}+\vb{h})-(\vb{f}(\vb{x})+\vb{g}(\vb{x}))-(D\vb{f}(\vb{x})+D\vb{g}(\vb{x}))\vb{h}}}{\norm{\vb{h}}}\\
+&\le\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-D\vb{f}(\vb{x})\vb{h}}}{\norm{\vb{h}}}+\frac{\norm{\vb{g}(\vb{x}+\vb{h})-\vb{g}(\vb{x})-D\vb{g}(\vb{x})\vb{h}}}{\norm{\vb{h}}}
+\end{align*}
+Then take limits $\vb{h}\to\vb{0}$ on both sides of the equation.
+
+\item Write
+\[\frac{\norm{\alpha\vb{f}(\vb{x}+\vb{h})-\alpha\vb{f}(\vb{x})-\alpha D\vb{f}(\vb{x})\vb{h}}}{\norm{\vb{h}}}=|\alpha|\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-D\vb{f}(\vb{x})\vb{h}}}{\norm{\vb{h}}}.\]
+Then take limits $\vb{h}\to\vb{0}$ on both sides of the equation.
+\end{enumerate}
+\end{proof}
+
+We now extend the chain rule to the present situation. 
+
+\begin{lemma}[Chain rule]
+Let $U\subset\RR^n$, $V\subset\RR^m$ be open. Suppose $\vb{f}\colon U\to\RR^m$ is differentiable at $\vb{x}\in U$, $\vb{f}(U)\subset V$, and $g:V\to\RR^k$ is differentiable at $\vb{f}(\vb{x})$.
+
+Then $\vb{g}\circ\vb{f}$ is differentiable at $\vb{x}$, and
+\[D(\vb{g}\circ\vb{f})(\vb{x})=D\vb{g}\brac{\vb{f}(\vb{x})}D\vb{f}(\vb{x}).\]
+\end{lemma}
+
+\begin{proof}
+Let $\vb{F}=\vb{g}\circ\vb{f}$. 
+Let $A=D\vb{f}(\vb{x})$ and $B=D\vb{g}\brac{\vb{f}(\vb{x})}$. 
+We will show that $D\vb{F}(\vb{x})=BA$.
+
+Take a non-zero $\vb{h}\in\RR^n$ and write $\vb{y}=\vb{f}(\vb{x})$, $\vb{k}=\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})$. Let
+\[\vb{r}(\vb{h})=\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}.\]
+Then $\vb{r}(\vb{h})=\vb{k}-A\vb{h}$ or $A\vb{h}=\vb{k}-\vb{r}(\vb{h})$, and $\vb{f}(\vb{x}+\vb{h})=\vb{y}+\vb{k}$. 
+We look at the quantity we need to go to zero:
+\begin{align*}
+\frac{\norm{\vb{F}(\vb{x}+\vb{h})-\vb{F}(\vb{x})-BA\vb{h}}}{\norm{\vb{h}}}
+&=\frac{\norm{\vb{g}(\vb{f}(\vb{x}+\vb{h}))-\vb{g}(\vb{f}(\vb{x}))-BA\vb{h}}}{\norm{\vb{h}}}\\
+&=\frac{\norm{\vb{g}(\vb{y}+\vb{k})-\vb{g}(\vb{y})-B(\vb{k}-\vb{r}(\vb{h}))}}{\norm{\vb{h}}}\\
+&\le\frac{\norm{\vb{g}(\vb{y}+\vb{k})-\vb{g}(\vb{y})-B\vb{k}}}{\norm{\vb{h}}}+\norm{B}\frac{\norm{\vb{r}(\vb{h})}}{\norm{\vb{h}}}\\
+&=\frac{\norm{\vb{g}(\vb{y}+\vb{k})-\vb{g}(\vb{y})-B\vb{k}}}{\norm{\vb{k}}}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})}}{\norm{\vb{h}}}+\norm{B}\frac{\norm{\vb{r}(\vb{h})}}{\norm{\vb{h}}}.
+\end{align*}
+Take the limit $\vb{h}\to\vb{0}$. 
+We examine the three terms:
+\begin{itemize}
+\item Since $\vb{f}$ is differentiable at $\vb{x}$, $\displaystyle\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{r}(\vb{h})}}{\norm{\vb{h}}}=0$.
+\item Since $\vb{f}$ is continuous at $\vb{x}$, $\vb{k}\to\vb{0}$ as $\vb{h}\to\vb{0}$. Thus since $\vb{g}$ is differentiable at $\vb{y}$,
+\[\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{g}(\vb{y}+\vb{k})-\vb{g}(\vb{y})-B\vb{k}}}{\norm{\vb{k}}}=0.\]
+\item We have
+\begin{align*}
+\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})}}{\norm{\vb{h}}}
+&\le\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}}{\norm{\vb{h}}}+\frac{\norm{A\vb{h}}}{\norm{\vb{h}}}\\
+&\le\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}}{\norm{\vb{h}}}+\norm{A}.
+\end{align*}
+Since $\vb{f}$ is differentiable at $\vb{x}$, for small enough $\vb{h}$, the quantity $\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}}{\norm{\vb{h}}}$ is bounded. 
+Thus the term $\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})}}{\norm{\vb{h}}}$ stays bounded as $\vb{h}\to\vb{0}$.
+\end{itemize}
+Therefore
+\[\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{F}(\vb{x}+\vb{h})-\vb{F}(\vb{x})-BA\vb{h}}}{\norm{\vb{h}}}=0,\]
+so $D\vb{F}(\vb{x})=BA$ as desired.
+\end{proof}
+
+We now show the derivatives of several basic functions.
+
+\begin{lemma} \
+\begin{enumerate}[label=(\roman*)]
+\item If $\vb{f}\colon\RR^n\to\RR^m$ is a constant function, then
+\[D\vb{f}(\vb{x})=\vb{0}.\]
+\item If $\vb{f}\colon\RR^n\to\RR^m$ is a linear transformation, then
+\[D\vb{f}(\vb{x})=\vb{f}.\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Suppose $\vb{f}(\vb{x})=\vb{y}$ for all $\vb{x}\in\RR^n$. Then
+\[\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-\vb{0}}}{\norm{\vb{h}}}=\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{y}-\vb{y}-\vb{0}}}{\norm{\vb{h}}}=0.\]
+
+\item We have
+\[\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-\vb{f}(\vb{h})}}{\norm{\vb{h}}}
+=\lim_{\vb{h}\to\vb{0}}\frac{\norm{\vb{f}(\vb{x})+\vb{f}(\vb{h})-\vb{f}(\vb{x})-\vb{f}(\vb{h})}}{\norm{\vb{h}}}=0.\]
+\end{enumerate}
+\end{proof}
+
+We are now assured of the differentiability of those functions $\vb{f}\colon\RR^n\to\RR^m$, whose component functions are obtained by addition, multiplication, division, and composition, from the functions $\pi_i$ (which are linear maps) and the functions which we can already differentiate by elementary calculus.
+
+Finding $D\vb{f}(\vb{x})$, however, may be a fairly formidable task.
+
+\begin{example}
+Let $f\colon\RR^2\to\RR$ be defined by $f(x,y)=\sin(xy^2)$. Since $f=\sin\circ(\pi_1\cdot(\pi_2)^2)$, we have
+\begin{align*}
+f^\prime(x,y)&=\sin^\prime(xy^2)\cdot[y^2(\pi_1)^\prime(x,y)+x((\pi_2)^2)^\prime(x,y)]\\
+&=\sin^\prime(xy^2)\cdot[y^2(\pi_1)^\prime(x,y)+2xy(\pi_2)^\prime(x,y)]\\
+&=(\cos(xy^2))\cdot[y^2(1,0)+2xy(0,1)]\\
+&=\brac{y^2\cos(xy^2),2xy\cos(xy^2)}.
+\end{align*}
+\end{example}
+
+Fortunately, we will soon discover a much simpler method of computing $D\vb{f}$.
+\pagebreak
+
+\section{Partial Derivatives}
+We begin the attack on the problem of finding derivatives ``one variable at a time''; that is, we hold all but one variables constant and take the regular derivative. This is known as a \emph{partial derivative}.
+
+\begin{definition}[Partial derivative]
+Let $U\subset\RR^n$ be open, $\vb{f}\colon U\to\RR^m$. The $j$-th partial derivative at $\vb{x}=(x_1,\dots,x_n)\in U$ is
+\begin{align*}
+D_j\vb{f}(\vb{x})&=\lim_{h\to0}\frac{\vb{f}(x_1,\dots,x_j+h,\dots,x_n)-\vb{f}(x_1,\dots,x_n)}{h}\\
+&=\lim_{t\to0}\frac{\vb{f}(\vb{x}+t\vb{e}_j)-\vb{f}(\vb{x})}{t}\quad(j=1,\dots,n)
+\end{align*}
+provided the limit exists.
+\end{definition}
+
+\begin{notation}
+Some authors also denote the $j$-th partial derivative at $\vb{x}$ by $\displaystyle\pdv{\vb{f}}{x_j}(\vb{x})$.
+\end{notation}
+
+Note that $D_j\vb{f}(\vb{x})$ is the ordinary derivative of a certain function; if $g\colon\RR\to\RR^m$ is defined by
+\[\vb{g}(x)=\vb{f}(x_1,\dots,x,\dots,x_n),\]
+then $D_j\vb{f}(\vb{x})=g^\prime(x_j)$. 
+This implies that the computation of $D_j\vb{f}(\vb{x})$ is a problem we can already solve.
+If $\vb{f}(x_1,\dots,x_n)$ is given by some formula involving $x_1,\dots,x_n$, then we find $D_j\vb{f}(x_1,\dots,x_n)$ by differentiating the function whose value at $x_j$ is given by the formula when all $x_i$, $i\neq j$, are thought of as constants.
+
+\begin{example}
+If $f(x,y)=\sin(xy^2)$, then
+\begin{align*}
+D_1 f(x,y)&=\pdv{f}{x}=y^2\cos(xy^2),\\
+D_2 f(x,y)&=\pdv{f}{y}=2xy\cos(xy^2).
+\end{align*}
+If $f(x,y)=x^y$, then
+\begin{align*}
+D_1 f(x,y)&=\pdv{f}{x}=yx^{y-1},\\
+D_2 f(x,y)&=\pdv{f}{y}=x^y\log x.
+\end{align*}
+\end{example}
+
+Partial derivatives can be used to find the maxima and minima of functions.
+
+\begin{proposition}
+Let $U\subset\RR^n$ be open. If the maximum (or minimum) of $\vb{f}\colon U\to\RR$ is at $\vb{x}\in U$, then
+\[D_j\vb{f}(\vb{x})=0,\]
+provided the partial derivatives exists.
+\end{proposition}
+
+\begin{proof}
+For each $j=1,\dots,n$, define $g_j(x)\colon\RR\to\RR^m$ by
+\[g_j(\vb{x})=\vb{f}(x_1,\dots,x,\dots,x_n).\]
+Then $g_j^\prime(x_j)=D_j\vb{f}(\vb{x})$. 
+
+Clearly $g_j$ has a maximum (or minimum) at $x_j$, and $g_j$ is defined in an open interval containing $x_j$. Hence $D_j\vb{f}(\vb{x})=g_j^\prime(x_j)=0$.
+\end{proof}
+
+\begin{remark}
+The converse is false even if $n=1$ (if $f\colon\RR\to\RR$ is defined by $f(x)=x^3$, then $f^\prime(0)=0$, but $0$ is not even a local maximum or minimum). 
+
+If $n>1$, the converse may fail to be true in a rather spectacular way. Let $f\colon\RR^2\to\RR$ be defined by $f(x,y)=x^2-y^2$. Since $g_1$ has a minimum at $0$, and $g_2$ has a maximum at $0$,
+\begin{align*}
+D_1 f(0,0)&=0,\\
+D_2 f(0,0)&=0,
+\end{align*}
+but clearly $(0,0)$ is neither a local maximum or minimum.
+\end{remark}
+
+Let $\{\vb{e}_1,\dots,\vb{e}_n\}$ and $\{\vb{u}_1,\dots,\vb{u}_m\}$ be the standard bases of $\RR^n$ and $\RR^m$.
+Let $U\subset\RR^n$ be open, $\vb{f}\colon U\to\RR^m$. The \emph{components} of $\vb{f}$ are the real-valued functions $f_1,\dots,f_m\colon U\to\RR$ defined by
+\[\vb{f}(\vb{x})=\sum_{i=1}^{m}f_i(\vb{x})\vb{u}_i\quad(\vb{x}\in U).\]
+Hence with respect to the standard bases of $\RR^m$, we can write
+\[[\vb{f}(\vb{x})]=\begin{pmatrix}
+f_1(\vb{x})&\cdots&f_m(\vb{x})
+\end{pmatrix},\]
+which we can identify with as a vector in $\RR^m$:
+\[\brac{f_1(\vb{x}),\dots,f_m(\vb{x})}.\]
+
+The next result states that in order to differentiate a function $\vb{f}$, we can differentiate each of its components.
+
+\begin{lemma}
+If $\vb{f}\colon\RR^n\to\RR^m$, then $\vb{f}$ is differentiable at $\vb{x}\in\RR^n$ if and only if each component $f_i$ is differentiable at $\vb{x}$, and
+\[D\vb{f}(\vb{x})=\brac{f_1^\prime(\vb{x}),\dots,f_m^\prime(\vb{x})}.\]
+Thus $D\vb{f}(\vb{x})$ is the $m\times n$ matrix whose $i$-th row is $(f_i)^\prime(\vb{x})$.
+\end{lemma}
+
+\begin{proof}
+Suppose each $f_i$ is differentiable at $\vb{x}$. Let
+\[A=\brac{f_1^\prime(\vb{x}),\dots,f_m^\prime(\vb{x})}.\]
+Then
+\begin{align*}
+&\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}\\
+&=\brac{f_1(\vb{x}+\vb{h}),\dots,f_m(\vb{x}+\vb{h})}-\brac{f_1(\vb{x}),\dots,f_m(\vb{x})}-\brac{f_1^\prime(\vb{x})\vb{h},\dots,f_m^\prime(\vb{x})\vb{h}}\\
+&=\brac{f_1(\vb{x}+\vb{h})-f_1(\vb{x})-f_1^\prime(\vb{x})\vb{h},\dots,f_m(\vb{x}+\vb{h})-f_m(\vb{x})-f_m^\prime(\vb{x})\vb{h}}.
+\end{align*}
+
+Therefore
+\[\lim_{h\to0}\frac{\norm{\vb{f}(\vb{x}+\vb{h})-\vb{f}(\vb{x})-A\vb{h}}}{\norm{\vb{h}}}
+\le\lim_{h\to0}\sum_{i=1}^{m}\frac{\norm{f_i(\vb{x}+\vb{h})-f_i(\vb{x})-f_i^\prime(\vb{x})\vb{h}}}{\norm{\vb{h}}}=0.\]
+\end{proof}
+\pagebreak
+
+\section{Derivatives}
+Likewise we can also take partial derivatives of each component: the $j$-th partial derivative of the $i$-th component of $\vb{f}$ at $\vb{x}\in U$ is
+\[D_j f_i(\vb{x})\colonequals\lim_{t\to0}\frac{f_i(\vb{x}+t\vb{e}_j)-f_i(\vb{x})}{t}\quad(1\le i\le m,\:1\le j\le n),\]
+provided the limit exists.
+
+Partial derivatives are easier to compute with all the machinery of calculus, and they provide a way to compute the total derivative of a function.
+
+\begin{theorem}
+Let $U\subset\RR^n$ be open, suppose $\vb{f}\colon U\to\RR^m$ is differentiable at $\vb{x}\in U$. Then all the partial derivatives at $\vb{x}$ exist, and the matrix of $D\vb{f}(\vb{x})$ with respect to the standard bases of $\RR^n$ and $\RR^m$ is
+\[\sqbrac{D\vb{f}(\vb{x})}_{ij}=D_j f_i(\vb{x}).\]
+\end{theorem}
+
+That is,
+\[\sqbrac{D\vb{f}(\vb{x})}=\begin{pmatrix}
+D_1f_1(\vb{x})&D_2f_1(\vb{x})&\cdots&D_nf_1(\vb{x})\\
+D_1f_2(\vb{x})&D_2f_2(\vb{x})&\cdots&D_nf_2(\vb{x})\\
+\vdots&\vdots&\ddots&\vdots\\
+D_1f_m(\vb{x})&D_2f_m(\vb{x})&\cdots&D_nf_m(\vb{x})
+\end{pmatrix}.\]
+We call $\sqbrac{D\vb{f}(\vb{x})}$ the \vocab{Jacobian matrix} of $\vb{f}$ at $\vb{x}$.
+
+\begin{remark}
+If $f\colon\RR\to\RR$, then $f^\prime(x)$ is a $1\times1$ matrix whose single entry is the number denoted as $f^\prime(x)$ in single-variable calculus.
+\end{remark}
+
+\begin{proof}
+Fix $j\in\{1,\dots,n\}$. We want to show that
+\[D\vb{f}(\vb{x})\vb{e}_j=\sum_{i=1}^{m}D_jf_i(\vb{x})\vb{u}_i.\]
+Since $\vb{f}$ is differentiable at $\vb{x}$, writing differentiability in terms of the remainder gives us
+\[\vb{f}(\vb{x}+t\vb{e}_j)-\vb{f}(\vb{x})=D\vb{f}(\vb{x})(t\vb{e}_j)+\vb{r}(t\vb{e}_j)\]
+where $\norm{\vb{r}(t\vb{e}_j)}/t\to0$ as $t\to0$. Taking the limit $t\to0$ on both sides, the linearity of $D\vb{f}(\vb{x})$ shows that
+\[\lim_{t\to0}\frac{\vb{f}(\vb{x}+t\vb{e}_j)-\vb{f}(\vb{x})}{t}=D\vb{f}(\vb{x})\vb{e}_j.\]
+If we now represent $\vb{f}$ in terms of its components, the above equation becomes
+\[\lim_{t\to0}\sum_{i=1}^{m}\frac{f_i(\vb{x}+t\vb{e}_j)-f_i(\vb{x})}{t}\vb{u}_i=D\vb{f}(\vb{x})\vb{e}_j.\]
+It follows that each quotient in this sum has a limit as $t\to0$ (see Theorem 4.10), so that each partial derivative $D_jf_i$ exists.
+Hence
+\[D\vb{f}(\vb{x})\vb{e}_j=\sum_{i=1}^{m}D_jf_i(\vb{x})\vb{u}_i\quad(j=1,\dots,n).\]
+\end{proof}
+
+The converse is true if one hypothesis is added.
+
+Let $U\subset\RR^n$ be open. 
+We say $\vb{f}\colon U\to\RR^m$ is \vocab{continuously differentiable} if $\vb{f}$ is differentiable, and $D\vb{f}$ is continuous; we also say that $\vb{f}$ is a $\mathcal{C}^\prime$-mapping, or that $\vb{f}\in\mathcal{C}^\prime(U)$.
+
+More explicitly, it is required that
+\[\forall\epsilon>0,\quad\exists\delta>0,\quad\forall x\in U,\quad\norm{\vb{x}-\vb{y}}<\delta\implies\norm{D\vb{f}(\vb{y})-D\vb{f}(\vb{x})}<\epsilon.\]
+
+\begin{theorem}
+Let $U\subset\RR^n$ be open, $\vb{f}\colon U\to\RR^m$. Then $\vb{f}$ is continuously differentiable if and only if all the partial derivatives $D_jf_i$ exist and are continuous on $U$.
+\end{theorem}
+
+\begin{proof} \
+
+\forward Suppose $\vb{f}\in\mathcal{C}^\prime(U)$. Then $\vb{f}$ is differentiable on $U$, so
+\[(D_jf_i)(\vb{x})=(D\vb{f}(x)\vb{e}_j)\cdot\vb{u}_i\]
+for all $i$, $j$, and for all $\vb{x}\in U$. Hence
+\[(D_jf_i)(\vb{y})-(D_jf_i)(\vb{x})=\brac{(D\vb{f}(\vb{y})-D\vb{f}(\vb{x}))\vb{e}_j}\cdot\vb{u}_i.\]
+Since $\norm{\vb{u}_i}=\norm{\vb{e}_j}=1$, it follows that
+\begin{align*}
+\norm{(D_jf_i)(\vb{y})-(D_jf_i)(\vb{x})}
+&\le\norm{(D\vb{f}(\vb{y})-D\vb{f}(\vb{x}))\vb{e}_j}\\
+&\le\norm{D\vb{f}(\vb{y})-D\vb{f}(\vb{x})}.
+\end{align*}
+Hence $D_jf_i$ is continuous.
+
+\backward  
+\end{proof}
+\pagebreak
+
+\subsection{Gradients, Curves, and Directional Derivatives}
+Let $\gamma$ be a differentiable mapping of $(a,b)\subset\RR$ into an open set $U\subset\RR^n$; that is, $\gamma$ is a differentiable curve in $U$. Let $f\colon U\to\RR$ be differentiable.
+
+For $t\in(a,b)$, define
+\[g(t)=f\brac{\gamma(t)}.\]
+By the chain rule,
+\[g^\prime(t)=f^\prime\brac{\gamma(t)}\gamma^\prime(t).\]
+Since $\gamma^\prime(t)\in\mathcal{L}(\RR,\RR^n)$ and $f^\prime\brac{\gamma(t)}\in\mathcal{L}(\RR^n,\RR)$, $g^\prime(t)$ is a linear operator on $\RR$; thus, we can regard $g^\prime(t)$ as a real number. 
+This number can be computed in terms of the partial derivatives of $f$ and the derivatives of the components of $\gamma_i$, as we shall now see.
+
+With respect to the standard basis $\{\vb{e}_1,\dots,\vb{e}_n\}$ of $\RR^n$, the matrix of $\gamma^\prime(t)$ is the $n\times1$ matrix which has $\gamma_i^\prime(t)$ in the $i$-th row, where $\gamma_1,\dots,\gamma_n$ are the components of $\gamma$. 
+For every $\vb{x}\in U$, the matrix of $f^\prime(\vb{x})$ is the $1\times n$ matrix which has $\pdv{f}{x_j}$ in the $j$-th column. 
+Hence the matrix of $g^\prime(t)$ is the $1\times1$ matrix whose only entry is the real number
+\[g^\prime(t)=f^\prime(\gamma(t))\gamma^\prime(t)=\sum_{j=1}^{n}\pdv{f}{x_j}(\gamma(t))\dv{\gamma_j}{t}(t)=\sum_{j=1}^{n}\pdv{f}{x_j}\dv{\gamma_j}{t}.\]
+
+\begin{definition}[Gradient]
+Let $U\subset\RR^n$ be open, suppose $f\colon U\to\RR$ is differentiable. The \vocab{gradient} at $\vb{x}\in U$ is defined as
+\begin{equation}
+(\nabla f)(\vb{x})\colonequals\sum_{j=1}^{n}\pdv{f}{x_j}(\vb{x})\vb{e}_j.
+\end{equation}
+\end{definition}
+
+Writing $\gamma^\prime(t)$ as components
+\[\gamma^\prime(t)=\sum_{j=1}^{n}\gamma_i^\prime(t)\vb{e}_j,\]
+using the scalar product, we can rewrite $g^\prime(t)$ as
+\begin{equation}\label{eqn:tangent-vector}
+g^\prime(t)=(\nabla f)(\gamma(t))\cdot\gamma^\prime(t).
+\end{equation}
+
+Let us now fix $\vb{x}\in U$, take a unit vector $\vb{u}\in\RR^n$, and let $\gamma$ be
+\[\gamma(t)=\vb{x}+t\vb{u}.\]
+Then $\gamma^\prime(t)=\vb{u}$ for every $t$. Hence \eqref{eqn:tangent-vector} shows that
+\[g^\prime(0)=(\nabla f)(\vb{x})\cdot\vb{u}.\]
+On the other hand, we have
+\[g(t)-g(0)=f(\vb{x}+t\vb{u})-f(\vb{x}).\]
+Hence
+\begin{equation}\label{eqn:directional-derivative}
+\lim_{t\to0}\frac{f(\vb{x}+t\vb{u})-f(x)}{t}=(\nabla f)(\vb{x})\cdot\vb{u}.
+\end{equation}
+We call this limit the \vocab{directional derivative} of $f$ at $\vb{x}$, in the direction of the unit vector $\vb{u}$, and may be denoted by $(D_{\vb{u}}f)(\vb{x})$.
+
+If $f$ and $\vb{x}$ are fixed, but $\vb{u}$ varies, then \eqref{eqn:directional-derivative} shows that $(D_{\vb{u}}f)(\vb{x})$ attains it maximum when $\vb{u}$ is a positive scalar multiple of $(\nabla f)(\vb{x})$. [The case $(\nabla f)(\vb{x})=\vb{0}$ should be excluded here.]
+
+If $\vb{u}=\sum_{j}u_j\vb{e}_j$, then \eqref{eqn:directional-derivative} shows that $(D_{\vb{u}}f)(\vb{x})$ can be expressed in terms of the partial derivatives of $f$ at $\vb{x}$:
+\begin{equation}
+(D_{\vb{u}}f)(\vb{x})=\sum_{j=1}^{n}\pdv{f}{x_i}(\vb{x})\vb{u}_i.
+\end{equation}
+
+\begin{proposition}
+Let $U\subset\RR^n$ be open and convex, suppose $\vb{f}\colon U\to\RR^m$ is differentiable on $U$, and there exists a real number $M$ such that
+\[\norm{D\vb{f}(\vb{x})}\le M\quad(\vb{x}\in U).\]
+Then for all $\vb{a},\vb{b}\in U$,
+\[\norm{\vb{f}(\vb{b})-\vb{f}(\vb{a})}\le M\norm{\vb{b}-\vb{a}}.\]
+\end{proposition}
+
+\begin{proof}
+Fix $\vb{a},\vb{b}\in U$. Define
+\[\gamma(t)=(1-t)\vb{a}+t\vb{b}\]
+for all $t\in\RR$ such that $\gamma(t)\in U$. 
+Since $U$ is convex, $\gamma(t)\in U$ if $0\le t\le 1$. 
+Put
+\[\vb{g}(t)=\vb{f}\brac{\gamma(t)}.\]
+Then
+\[\vb{g}^\prime(t)=D\vb{f}\brac{\gamma(t)}\gamma^\prime(t)=D\vb{f}\brac{\gamma(t)}(\vb{b}-\vb{a}),\]
+so that
+\[|\vb{g}^\prime(t)|\le\norm{D\vb{f}\brac{\gamma(t)}}|\vb{b}-\vb{a}|\le M|\vb{b}-\vb{a}|\]
+for all $t\in[0,1]$. By Theorem 5.19,
+\[\norm{\vb{g}(1)-\vb{g}(0)}\le M\norm{\vb{b}-\vb{a}}.\]
+But $\vb{g}(0)=\vb{f}(\vb{a})$ and $\vb{g}(1)=\vb{f}(\vb{b})$. This completes the proof. 
+\end{proof}
+
+\begin{corollary}
+If, in addition, $D\vb{f}(\vb{x})=\vb{0}$ for all $\vb{x}\in U$, then $\vb{f}$ is constant.
+\end{corollary}
+
+\begin{proof}
+To prove this, note that the hypotheses of the previous result hold now with $M=0$.
+\end{proof}
+
+\subsection{The Jacobian}
+\begin{definition}[Jacobian]
+Let $U\subset\RR^n$, suppose $\vb{f}\colon U\to\RR^m$ is differentiable. Define the \vocab{Jacobian} of $\vb{f}$ at $\vb{x}\in U$ as
+\[J_{\vb{f}}(\vb{x})\colonequals\det[D\vb{f}(\vb{x})].\]
+\end{definition}
+
+We shall also denote $J_{\vb{f}}$ as
+\[\frac{\partial(f_1,\dots,f_n)}{\partial(x_1,\dots,x_n)}.\]
+
+This last piece of notation may seem somewhat confusing, but it is quite useful when we need to specify the exact variables and function components used, as we will do, for example, in the implicit function theorem.
+
+The Jacobian determinant $J_{\vb{f}}$ is a real-valued function, and when $n=1$ it is simply the derivative. From the chain rule and $\det AB=\det A\det B$, it follows that
+\[J_{\vb{f}\circ\vb{g}}(\vb{x})=J_{\vb{f}}(\vb{g}(\vb{x}))J_{\vb{g}}(\vb{x}).\]
+
+The determinant of a linear mapping tells us what happens to area/volume under the mapping. Similarly, the Jacobian determinant measures how much a differentiable mapping stretches things locally, and if it flips orientation. In particular, if the Jacobian determinant is non-zero than we would assume that locally the mapping is invertible (and we would be correct as we will later see).
+
+\subsection{Continuity and The Derivative}
+Let us prove a ``mean value theorem'' for vector-valued functions.
+
+\begin{theorem}
+If $\phi:[a,b]\to\RR^n$ is differentiable on $(a,b)$ and continuous on $[a,b]$, then there exists $t\in[a,b]$ such that
+\begin{equation}
+\norm{\phi(b)-\phi(a)}\le(b-a)\norm{\phi^\prime(t)}.
+\end{equation}
+\end{theorem}
+\pagebreak
+
+\section{Inverse Functions}
+Suppose $f\colon\RR\to\RR$ is continuously differentiable in an open set containing $a$, and $f^\prime(a)\neq0$. If $f^\prime(a)>0$, there is an open interval $V$ containing $a$ such that $f^\prime(x)>0$ for all $x\in V$, and a similar statement holds if $f^\prime(a)<0$. 
+
+Thus $f$ is increasing (or decreasing) on $V$, and is therefore bijective with an inverse function $f^{-1}$ defined on some open interval $W$ containing $f(a)$. 
+Moreover it is not hard to show that $f^{-1}$ is differentiable, and 
+\[(f^{-1})^\prime(y)=\frac{1}{f^\prime(f^{-1}(y))}\quad(y\in W).\]
+
+An analogous discussion in higher dimensions is much more involved. 
+The inverse function theorem states, roughly speaking, that a continuously differentiable mapping $\vb{f}$ is invertible in a neighbourhood of any point $\vb{x}$ at which the linear map $D\vb{f}(\vb{x})$ is invertible:
+
+\begin{theorem}[Inverse function theorem]
+Let $U\subset\RR^n$ be open, suppose $\vb{f}\colon U\to\RR^n$ is a $\mathcal{C}^\prime$-mapping, and $D\vb{f}(\vb{a})$ is invertible for some $\vb{a}\in U$, and $\vb{b}=\vb{f}(\vb{a})$. Then
+\begin{enumerate}[label=(\roman*)]
+\item there exist open sets $U,V\subset\RR^n$ such that $\vb{a}\in U$, $\vb{b}\in V$, $\vb{f}$ is bijective on $U$, and $\vb{f}(U)=V$;
+\item if $\vb{g}$ is the inverse of $\vb{f}$ [which exists, by (i)], defined in $V$ by
+\[\vb{g}\brac{\vb{f}(\vb{x})}=\vb{x}\quad(\vb{x}\in U),\]
+then $\vb{g}\in\mathcal{C}^\prime(V)$. 
+\end{enumerate}
+\end{theorem}
+
+Writing the equation $\vb{y}=\vb{f}(\vb{x})$ in component form, we arrive at the following interpretation of the conclusion of the theorem: The system of $n$ equations
+\[y_i=f_i(x_1,\dots,x_n)\quad(i=1,\dots,n)\]
+can be solved for $x_1,\dots,x_n$ in terms of $y_1,\dots,y_n$, if we restrict $x$ and $y$ to small enough neighbourhoods of $\vb{a}$ and $\vb{b}$; the solutions are unique and continuously differentiable.
+
+\begin{corollary}
+Let $U\subset\RR^n$ be open, suppose $\vb{f}\colon U\to\RR^m$ is continuously differentiable on $U$.
+If $D\vb{f}(\vb{x})$ is invertible for every $\vb{x}\in U$, then $f(W)$ is an open subset of $\RR^n$ for every open set $W\subset U$.
+\end{corollary}
+\pagebreak
+
+\section{Implicit Functions}
+\begin{theorem}[Implicit function theorem]
+Let $U\subset\RR^n$ be open, 
+\end{theorem}
+
+\pagebreak
+
+\section{Derivatives of Higher Order}
+\begin{definition}
+Let $U\subset\RR^n$ be open, suppose $f\colon U\to\RR$, with partial derivatives $\pdv{f}{x_1},\dots,\pdv{f}{x_n}$. If the functions $\pdv{f}{x_j}$ are themselves differentiable, then the \emph{second-order partial derivatives} of $f$ are defined by
+\[\pdv{f}{x_i,x_j}=\pdv{}{x_i}\brac{\pdv{f}{x_j}}\quad(i,j=1,\dots,n).\]
+If all these functions $\pdv{f}{x_i,x_j}$ are continuous on $U$, we say that $f$ is of class $\mathcal{C}^{\prime\prime}$ in $U$, or that $f\in\mathcal{C}^{\prime\prime}(U)$.
+
+$\vb{f}\colon U\subset\RR^n\to\RR^m$ is said to be of class $\mathcal{C}^{\prime\prime}$ if each component of $\vb{f}$ is of class $\mathcal{C}^{\prime\prime}$.
+\end{definition}
+
+It can happen that 
+
+\section{Differentiation of Integrals}
+
+\pagebreak
+
+\section*{Exercises}

@@ -79,7 +79,7 @@ Pointwise convergence does not preserve many nice properties of functions. Hence
 
 \section{Uniform Convergence}
 \begin{definition}[Uniform convergence]
-$(f_n)$ \vocab{converges uniformly}\index{uniform convergence} to $f$ over $E$, denoted by $f_n\rightrightarrows f$, if 
+We say $(f_n)$ \vocab{converges uniformly}\index{uniform convergence} to $f$ on $E$, denoted by $f_n\rightrightarrows f$, if 
 \[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall x\in E,\quad\forall n\ge N,\quad d\brac{f_n(x)-f(x)}<\epsilon.\]
 \end{definition}
 
@@ -87,15 +87,15 @@ Similarly, a series of functions $\sum f_n(x)$ converges uniformly on $E$ if the
 \[s_n(x)=\sum_{k=1}^{n}f_k(x)\]
 converges uniformly on $E$.
 
-\begin{remark}
 Intuitively, uniform convergence can be visualised as the sequence of functions $(f_n)$ eventually contained in an $\epsilon$-tube around $f$, for sufficiently large $n$. 
-\end{remark}
 
-Uniform convergence is stronger than pointwise convergence, since $N$ is uniform (or ``fixed'') for all $x\in E$; for pointwise convergence, the choice of $N$ is determined by $x$.
+\todo{insert figure}
 
 \begin{remark}
-Uniform convergence implies pointwise convergence, but not the other way around.
+Uniform convergence is stronger than pointwise convergence, since $N$ is uniform (or ``fixed'') for all $x\in E$; for pointwise convergence, the choice of $N$ is determined by $x$.
 \end{remark}
+
+Uniform convergence implies pointwise convergence, but not the other way around.
 
 \begin{example}
 Consider the sequence of functions $f_n(x)=x^n$ defined on $(0,1)$. Then $f_n\to0$. But $f_n\not\rightrightarrows 0$.
@@ -104,11 +104,15 @@ Consider the sequence of functions $f_n(x)=x^n$ defined on $(0,1)$. Then $f_n\to
 \end{proof}
 \end{example}
 
+From now on, we shall restrict our focus to sequences of complex-valued functions defined on $E\subset X$, unless stated otherwise.
+
+We say that $(f_n)$ is \emph{uniformly Cauchy} if
+\[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall x\in E,\quad\forall n,m\ge N,\quad\absolute{f_n(x)-f_m(x)}<\epsilon.\]
+
 The Cauchy criterion for uniform convergence is as follows.
 
 \begin{lemma}[Cauchy criterion]\label{lemma:uniform-convergence-cauchy}
-Suppose $(f_n)$ is a sequence of complex-valued functions. Then $f_n\rightrightarrows f$ on $E$ if and only if $(f_n)$ is uniformly Cauchy:
-\[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall x\in E,\quad\forall n,m\ge N,\quad\absolute{f_n(x)-f_m(x)}<\epsilon.\]
+$f_n\rightrightarrows f$ on $E$ if and only if $(f_n)$ is uniformly Cauchy.
 \end{lemma}
 
 \begin{proof} \
@@ -123,7 +127,9 @@ Then for all $n,m\ge N$,
 &<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.
 \end{align*}
 
-\fbox{$\impliedby$} Suppose $(f_n)$ is uniformly Cauchy. Then for every $x\in E$, the sequence $\brac{f_n(x)}$ is a Cauchy sequence and thus converges to a limit $f(x)$. Hence by definition, $f_n\to f$ on $E$. We are left to prove that the convergence is uniform.
+\fbox{$\impliedby$} Suppose that $(f_n)$ is uniformly Cauchy.
+
+Then for every $x\in E$, the sequence $\brac{f_n(x)}$ is a Cauchy sequence and thus converges to a limit $f(x)$. Hence by definition, $f_n\to f$ on $E$. We are left to prove that the convergence is uniform.
 
 Let $\epsilon>0$ be given. There exists $N\in\NN$ such that for all $n,m\ge N$ and for all $x\in E$,
 \[\absolute{f_n(x)-f_m(x)}<\epsilon.\]
@@ -133,8 +139,8 @@ which completes the proof.
 \end{proof}
 
 \begin{definition}
-Let $X$ and $Y$ be metric spaces. Then $\mathcal{C}(X,Y)$ denotes the space of continuous bounded functions from $X$ to $Y$. If $f\in\mathcal{C}(X,\CC)$, we define the \vocab{suprenum norm} of $f$ as
-\[\norm{f}\coloneqq\sup_{x\in X}|f(x)|.\]
+If $f\in\mathcal{C}(X,\CC)$, we define the \vocab{suprenum norm} of $f$ as
+\[\norm{f}\colonequals\sup_{x\in X}|f(x)|.\]
 \end{definition}
 
 \begin{lemma}
@@ -154,10 +160,10 @@ Hence taking sup on the left gives $\norm{f+g}\le\norm{f}+\norm{g}$.
 Check conditions for metric space.
 \end{proof}
 
-The following criterion is sometimes useful.
+The following result provides another equivalent way to determine uniform convergence.
 
 \begin{lemma}
-Suppose $(f_n)$ is a sequence of complex-valued functions defined on $E$. Then $f_n\rightrightarrows f$ on $E$ if and only if $f_n\to f$ on $E$ with respect to the metric of $\mathcal{C}(E,\CC)$.
+$f_n\rightrightarrows f$ on $E$ if and only if $f_n\to f$ on $E$ with respect to the metric of $\mathcal{C}(E,\CC)$.
 \end{lemma}
 
 \begin{proof}
@@ -176,7 +182,7 @@ Note that for the last step, the \fbox{$\impliedby$} direction is tricky, since 
 For series, there is a very convenient test for uniform convergence, due to Weierstrass.
 
 \begin{lemma}[Weierstrass M-test]
-Suppose $(f_n)$ is a sequence of functions defined on $E$, and 
+Suppose $(f_n)$ is a sequence of complex-valued functions defined on $E$, and 
 \[|f_n(x)|\le M_n\quad(n=1,2,\dots,\:x\in E)\]
 If $\sum M_n$ converges, then $\sum f_n$ converges uniformly on $E$.
 \end{lemma}
@@ -186,19 +192,15 @@ Suppose $\sum M_n$ converges. Let $\epsilon>0$ be given, the partial sums of $\s
 \[\sum_{k=m}^{n}M_k<\epsilon.\]
 Then considering the partial sums of the series of functions,
 \[\absolute{\sum_{k=m}^{n}f_k(x)}\le\sum_{k=m}^{n}|f_k(x)|\le\sum_{k=m}^{n}M_k<\epsilon.\]
-By the Cauchy criterion (\cref{lemma:uniform-convergence-cauchy}), we are done.
+By the Cauchy criterion (\ref{lemma:uniform-convergence-cauchy}), we are done.
 \end{proof}
 
-\begin{example}
+\begin{example} \
 \begin{itemize}
-\item The series
-\[\sum_{n=1}^{\infty}\frac{\sin nx}{n^2}\]
-converges uniformly on $\RR$. (Note: this is a Fourier series, we'll see more of these later). That is because
+\item The series $\displaystyle\sum_{n=1}^{\infty}\frac{\sin nx}{n^2}$ converges uniformly on $\RR$. (Note: this is a Fourier series, we'll see more of these later). That is because
 \[\absolute{\frac{\sin nx}{n^2}}\le\frac{1}{n^2}\quad\text{and}\quad\sum_{n=1}^{\infty}\frac{1}{n^2}\text{ converges}.\]
 
-\item The series
-\[\sum_{n=0}^{\infty}\frac{x^n}{n!}\]
-converges uniformly on any bounded interval. For example take the interval $[-r,r]\subset\RR$,
+\item The series $\displaystyle\sum_{n=0}^{\infty}\frac{x^n}{n!}$ converges uniformly on any bounded interval. For example take the interval $[-r,r]\subset\RR$,
 \[\absolute{\frac{x^n}{n!}}\le\frac{r^n}{n!}\quad\text{and}\quad\sum_{n=1}^{\infty}\frac{r^n}{n!}\text{ converges by the ratio test.}\]
 \end{itemize}
 \end{example}
@@ -210,8 +212,8 @@ We now consider properties preserved by uniform convergence.
 \subsection{Uniform Convergence and Continuity}
 We prove a more general result.
 
-\begin{proposition}
-Suppose $(f_n)$ is a sequence of complex-valued functions defined on $E$, such that $f_n\rightrightarrows f$ on $E$. Let $x\in X$ be a limit point of $E$, and suppose that
+\begin{proposition}\label{prop:uniform-convergence-continuity}
+Suppose $f_n\rightrightarrows f$ on $E$. Let $x\in X$ be a limit point of $E$, and suppose that
 \[\lim_{t\to x}f_n(t)=A_n\quad(n=1,2,\dots).\]
 Then $(A_n)$ converges, and $\displaystyle\lim_{t\to x}f(t)=\lim_{n\to\infty}A_n$.
 \end{proposition}
@@ -219,14 +221,19 @@ Then $(A_n)$ converges, and $\displaystyle\lim_{t\to x}f(t)=\lim_{n\to\infty}A_n
 In other words, the conclusion is that
 \[\lim_{t\to x}\lim_{n\to\infty}f_n(t)=\lim_{n\to\infty}\lim_{t\to x}f_n(t).\]
 
-\begin{proof}
-We first show that $(A_n)$ converges. Since $(f_n)$ uniformly converges on $E$, $(f_n)$ is uniformly Cauchy. Let $\epsilon>0$ be given, there exists $N\in\NN$ such that for all $n,m\ge N$, $t\in E$,
+\begin{proof} \
+\begin{enumerate}
+\item We first show that $(A_n)$ converges. Since $(f_n)$ uniformly converges on $E$, by the Cauchy criterion (\ref{lemma:uniform-convergence-cauchy}), fix $\epsilon>0$, there exists $N\in\NN$ such that for all $n,m\ge N$, $t\in E$,
 \[|f_n(t)-f_m(t)|<\epsilon.\]
 Letting $t\to x$, since $\displaystyle\lim_{t\to x}f_n(t)=A_n$, we have that for all $n,m\ge N$,
 \[|A_n-A_m|<\epsilon.\]
 Thus $(A_n)$ is a Cauchy sequence and therefore converges, say to $A$.
 
-Next we will show that $\displaystyle\lim_{t\to x}f(t)=A$. Write
+\item Next we will show that $\displaystyle\lim_{t\to x}f(t)=A$.
+\begin{idea}
+We want to bound the term $|f(t)-A|$, using terms of known values.
+\end{idea}
+Write
 \begin{equation*}\tag{1}
 |f(t)-A|\le|f(t)-f_n(t)|+|f_n(t)-A_n|+|A_n-A|.
 \end{equation*}
@@ -240,6 +247,7 @@ Then for this $n$, since $\displaystyle\lim_{t\to x}f_n(t)=A_n$, we choose an op
 Substituting the above inequalities into (1) gives
 \[|f(t)-A|<\frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}=\epsilon.\]
 provided $t\in B\cap E$, $t\neq x$. This is equivalent to $\displaystyle\lim_{t\to x}f(t)=A$.
+\end{enumerate}
 \end{proof}
 
 An immediate important corollary is that uniform convergence preserves continuity.
@@ -257,10 +265,10 @@ which precisely means that $f$ is continuous on $E$.
 \end{proof}
 
 \begin{remark}
-The converse is not true. Just because the limit is continuous doesn't mean that the convergence is uniform. For example, $f_n:(0,1)\to\RR$ defined by $f_n(x)=x^n$ converges to the zero function, but not uniformly.
+The converse is not true; for instance, the sequence of functions $f_n:(0,1)\to\RR$ defined by $f_n(x)=x^n$ converges to the zero function, which is continuous, but the convergence is not uniform.
 \end{remark}
 
-Let us see that we can have extra conditions such that the converse is true.
+Let us see that we can have extra conditions such that the converse of the previous result is true.
 
 \begin{proposition}[Dini's theorem]
 Suppose $K$ is compact, and $(f_n)$ is a sequence of continuous functions on $K$, $f_n\to f$ on $K$, and $(f_n)$ is monotonically decreasing:
@@ -268,21 +276,22 @@ Suppose $K$ is compact, and $(f_n)$ is a sequence of continuous functions on $K$
 Then $f_n\rightrightarrows f$ on $K$.
 \end{proposition}
 
+\begin{remark}
+The compactness in the hypotheses is necessary; for instance, on $(0,1)$ define $f_n(x)=\dfrac{1}{nx+1}$. 
+Then $f_n(x)\to0$ monotonically in $(0,1)$, but the convergence is not uniform.
+\end{remark}
+
 \begin{proof}
 Let $g_n=f_n-f$. Then $g_n$ is continuous, $g_n\to0$, and $g_n\ge g_{n+1}\ge0$. We have to prove that $g_n\rightrightarrows0$ on $K$.
 
 Let $\epsilon>0$ be given. For $n=1,2,\dots$, let
 \[K_n=\{x\in K\mid g_n(x)\ge\epsilon\}.\]
-Since $g_n$ is continuous, and the set $\{g_n(x)\mid g_n(x)\ge\epsilon\}$ is closed, by \cref{cor:continuity-preimage-closed}, its pre-image $K_n$ is closed. Since $K_n$ is a closed subset of a compact set $K$, then $K_n$ is compact (by \cref{prop:closed-compact}).
+Since $g_n$ is continuous, and $\{g_n(x)\mid g_n(x)\ge\epsilon\}$ is closed, by \ref{cor:continuity-preimage-closed}, its pre-image $K_n$ is closed. Since $K_n$ is a closed subset of a compact set $K$, by \ref{prop:closed-compact}, $K_n$ is compact.
 
-Since $g_n\ge g_{n+1}$, we have $K_n\supset K_{n+1}$. Fix $x\in K$. Since $g_n(x)\to0$, we see that $x\notin K_n$ if $n$ is sufficiently large. Thus $x\notin\bigcap_{n=1}^{\infty}K_n$. In other words, $\bigcap_{n=1}^{\infty}K_n=\emptyset$. Hence $K_N=\emptyset$ for some $N$ (by the converse of Cantor's intersection theorem). It follows that $0\le g_n(x)<\epsilon$ for all $x\in K$ and for all $n\ge N$. This proves the theorem. 
+Since $g_n\ge g_{n+1}$, we have $K_n\supset K_{n+1}$. Fix $x\in K$. Since $g_n(x)\to0$, we see that $x\notin K_n$ if $n$ is sufficiently large. Thus $x\notin\bigcap_{n=1}^{\infty}K_n$. In other words, $\bigcap_{n=1}^{\infty}K_n=\emptyset$. Hence $K_N=\emptyset$ for some $N$ (by the converse of Cantor's intersection theorem). It follows that for all $x\in K$ and for all $n\ge N$,
+\[0\le g_n(x)<\epsilon.\]
+Therefore $g_n\rightrightarrows0$ on $K$, as desired.
 \end{proof}
-
-\begin{remark}
-The compactness in the hypotheses is necessary; for instance, for $0<x<1$, let
-\[f_n(x)=\frac{1}{nx+1}\quad(n=1,2,\dots).\]
-Then $f_n(x)\to0$ monotonically in $(0,1)$, but the convergence is not uniform.
-\end{remark}
 
 \begin{lemma}
 $\mathcal{C}(X,\CC)$ is a complete metric space.
@@ -291,10 +300,10 @@ $\mathcal{C}(X,\CC)$ is a complete metric space.
 \begin{proof}
 Let $(f_n)$ be a Cauchy sequence in $\mathcal{C}(X,\CC)$. Then fix $\epsilon>0$, there exists $N\in\NN$ such that for all $n,m\ge N$,
 \[\norm{f_n-f_m}<\epsilon.\]
-By the Cauchy criterion (\cref{lemma:uniform-convergence-cauchy}), $f_n\rightrightarrows f$ for some $f:X\to\CC$. 
+By the Cauchy criterion (\ref{lemma:uniform-convergence-cauchy}), $f_n\rightrightarrows f$ for some $f:X\to\CC$. 
 We now need to show that $f\in\mathcal{C}(X,\CC)$; that is, $f$ is continuous and bounded.
 \begin{itemize}
-\item $f$ is continuous by \cref{cor:uniform-continuity-preserve-continuity}.
+\item $f$ is continuous by \ref{cor:uniform-continuity-preserve-continuity}.
 \item $f$ is bounded, since there is an $n$ such that $|f(x)-f_n(x)|<1$ for all $x\in X$, and $f_n$ is bounded.
 \end{itemize}
 Hence $f\in\mathcal{C}(X,\CC)$, and since $f_n\rightrightarrows f$ on $X$, we have $\norm{f-f_n}\to0$ as $n\to\infty$.
@@ -304,30 +313,38 @@ Hence $f\in\mathcal{C}(X,\CC)$, and since $f_n\rightrightarrows f$ on $X$, we ha
 \subsection{Uniform Convergence and Integration}
 The next result states that the limit and integral can be interchanged.
 
-\begin{proposition}
-Suppose $(f_n)$ is a sequence of functions defined over $[a,b]$ and $f_n\in\mathcal{R}_\alpha[a,b]$. If $f_n\rightrightarrows f$ on $[a,b]$, then $f\in \mathcal{R}_\alpha[a,b]$, and
-\[\lim_{n\to\infty}\int_a^b f_n\dd{\alpha}=\int_a^b f\dd{\alpha}.\]
+\begin{proposition}\label{prop:uniform-convergence-integration}
+Suppose $f_n\rightrightarrows f$ on $[a,b]$, $f_n\in\mathcal{R}(\alpha)$ and $\alpha\nearrow$. Then $f\in\mathcal{R}(\alpha)$, and
+\begin{equation}\label{eqn:uniform-convergence-integration}
+\lim_{n\to\infty}\int_{a}^{b}f_n\dd{\alpha}=\int_{a}^{b}f\dd{\alpha}.
+\end{equation}
 \end{proposition}
 
 \begin{proof}
 It suffices to prove this for real-valued $f_n$. Let
 \[\epsilon_n=\sup_{x\in[a,b]}|f_n(x)-f(x)|.\]
-Then
-\[f_n-\epsilon\le f\le f_n+\epsilon_n,\]
-so that the upper and lower integrals of $f$ (see Definition 6.2) satisfy
+Then $|f_n-f|\le\epsilon$, so
+\[f_n-\epsilon_n\le f\le f_n+\epsilon_n,\]
+so that the upper and lower integrals of $f$ satisfy
 \[\int_{a}^{b}(f_n-\epsilon_n)\dd{\alpha}\le\lowerint_{a}^{b}f\dd{\alpha}\le\upperint_{a}^{b}f\dd{\alpha}\le\int_{a}^{b}(f_n+\epsilon_n)\dd{\alpha}.\]
 Hence
 \[0\le\upperint_{a}^{b}f\dd{\alpha}-\lowerint_{a}^{b}f\dd{\alpha}\le 2\epsilon_n[\alpha(b)-\alpha(a)].\]
-Since $\epsilon_n\to0$ as $n\to\infty$ (Theorem 7.9), the upper and lower integrals of $f$ are equal. Thus $f\in\mathcal{R}_\alpha[a,b]$.
+Since $f_n\rightrightarrows f$, we see that $\epsilon_n\to0$ as $n\to\infty$, the upper and lower integrals of $f$ are equal. Hence $f\in\mathcal{R}(\alpha)$.
 
-Another application of (25) now yields
-\[\absolute{\int_{a}^{b}f\dd{\alpha}-\int_{a}^{b}f_n\dd{\alpha}}\le\epsilon_n[\alpha(b)-\alpha(a)].\]
+We have
+\begin{align*}
+\absolute{\int_{a}^{b}f_n\dd{\alpha}-\int_{a}^{b}f\dd{\alpha}}
+&=\absolute{\int_{a}^{b}f_n-f\dd{\alpha}}\\
+&\le\int_{a}^{b}|f_n-f|\dd{\alpha}\\
+&\le[\alpha(b)-\alpha(a)]\sup_{x\in[a,b]}|f_n(x)-f(x)|\\
+&=\epsilon_n[\alpha(b)-\alpha(a)].
+\end{align*}
 This implies
 \[\lim_{n\to\infty}\int_a^b f_n\dd{\alpha}=\int_a^b f\dd{\alpha}.\]
 \end{proof}
 
 \begin{corollary}
-Suppose $f_n\in \mathcal{R}_\alpha[a,b]$ and
+Suppose $f_n\in \mathcal{R}(\alpha)$ and
 \[f(x)=\sum_{n=1}^\infty f_n(x)\]
 converges uniformly on $[a,b]$. Then
 \[\int_a^b f\dd{\alpha}=\sum_{n=1}^{\infty}\int_{a}^{b}f_n\dd{\alpha}. \]
@@ -338,7 +355,7 @@ In other words, we can swap the integral and sum, such that the series may be in
 \begin{proof}
 Consider the sequence of partial sums 
 \[f_n(x)=\sum_{k=1}^n f_k(x)\quad(n=1,2,\dots).\]
-It follows $f_n\in \mathcal{R}_\alpha[a,b]$ and $f_n\rightrightarrows f$. Apply above theorem to $(f_n)$ and the conclusion follows.
+It follows $f_n\in \mathcal{R}(\alpha)$ and $f_n\rightrightarrows f$. Apply above theorem to $(f_n)$ and the conclusion follows.
 \end{proof}
 
 \begin{example}
@@ -348,53 +365,72 @@ Let us show how to integrate a Fourier series:
 \pagebreak
 
 \subsection{Uniform Convergence and Differentiation}
-\begin{proposition}
+The next result shows that the process of limit and differentiation can be interchanged.
+
+\begin{proposition}\label{prop:uniform-convergence-differentiation}
 Suppose $(f_n)$ are differentiable on $[a,b]$, and $\brac{f_n(x_0)}$ converges for some $x_0\in[a,b]$. If $f_n^\prime$ converges uniformly on $[a,b]$, then there exists a differentiable $f$ such that $f_n\rightrightarrows f$ on $[a,b]$, and
-\[f^\prime(x)=\lim_{n\to\infty}f_n^\prime(x)\quad(a\le x\le b).\]
+\begin{equation}\label{eqn:uniform-convergence-differentiation}
+f^\prime(x)=\lim_{n\to\infty}f_n^\prime(x)\quad(a\le x\le b).
+\end{equation}
 \end{proposition}
 
 \begin{proof}
-Let $\epsilon>0$ be given. Since $\brac{f_n(x_0)}$ converges, $\brac{f_n(x_0)}$ is a Cauchy sequence, so there exists $N\in\NN$ such that for all $n,m\ge N$,
+We first show that $(f_n)$ converges uniformly on $[a,b]$, then show that the limit $f$ is differentiable, and finally show that \eqref{eqn:uniform-convergence-differentiation} holds.
+
+\begin{enumerate}
+\item Let $\epsilon>0$ be given. Since $\brac{f_n(x_0)}$ converges, $\brac{f_n(x_0)}$ is a Cauchy sequence; choose $N\in\NN$ such that for all $n,m\ge N$,
 \[\absolute{f_n(x_0)-f_m(x_0)}<\frac{\epsilon}{2}.\]
-Since $(f_n^\prime)$ converges uniformly on $[a,b]$, then $(f_n^\prime)$ is uniformly Cauchy (by \cref{lemma:uniform-convergence-cauchy}), so
+Since $(f_n^\prime)$ converges uniformly on $[a,b]$, by \ref{lemma:uniform-convergence-cauchy}, $(f_n^\prime)$ is uniformly Cauchy. Thus
 \[\absolute{f_n^\prime(x)-f_m^\prime(x)}<\frac{\epsilon}{2(b-a)}\quad(a\le x\le b).\]
-Now apply the mean value theorem to the function $f_n-f_m$: for $x_0,x\in[a,b]$, there exists $t$ between $x_0$ and $x$ such that
-\[(f_n-f_m)(x_0)-(f_n-f_m)(x)=(f_n-f_m)^\prime(t)(x_0-x)\]
-and thus if $n,m\ge N$, then
-\begin{align*}
+We now apply the mean value theorem (\ref{thrm:mvt-vector-valued-functions}) to the function $f_n-f_m$: for any $x,t\in[a,b]$, if $n,m\ge N$, then
+\begin{equation*}\tag{1}
 \absolute{\brac{f_n(x)-f_m(x)}-\brac{f_n(t)-f_m(t)}}
-&=\absolute{f_n^\prime(t)-f_m^\prime(t)}|x_0-x|\\
-&<\frac{\epsilon}{2(b-a)}|x_0-x|\tag{1}\\
-&\le\frac{\epsilon}{2}
-\end{align*}
+<\frac{\epsilon}{2(b-a)}|x-t|
+\le\frac{\epsilon}{2}
+\end{equation*}
 Finally, by the triangle inequality,
 \begin{align*}
 |f_n(x)-f_m(x)|
 &\le\absolute{f_n(x)-f_m(x)-f_n(x_0)+f_m(x_0)}+|f_n(x_0)-f_m(x_0)|\\
 &<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.
 \end{align*}
-This holds true for all $x\in[a,b]$. Hence by \cref{lemma:uniform-convergence-cauchy}, $(f_n)$ converges uniformly on $[a,b]$.
+This holds true for all $x\in[a,b]$. Hence by \ref{lemma:uniform-convergence-cauchy}, $(f_n)$ converges uniformly on $[a,b]$.
 
-Let 
+\item Let 
 \[f(x)=\lim_{n\to\infty}f_n(x)\quad(a\le x\le b).\]
-Fix $x\in[a,b]$, and let
+Fix a point $x\in[a,b]$, and let
 \[\phi_n(t)=\frac{f_n(t)-f_n(x)}{t-x},\quad\phi(t)=\frac{f(t)-f(x)}{t-x}\quad(a\le t\le b,\:t\neq x).\]
-To show that $f$ is differentiable, we need to show that $\displaystyle\lim_{t\to x}\phi(t)$ exists. Note that since $f_n$ are differentiable, we have
+\begin{idea}
+To show that $f$ is differentiable, we need to show that $\displaystyle\lim_{t\to x}\phi(t)$ exists. 
+\end{idea}
+Note that since $f_n$ are differentiable, we have
 \[\lim_{t\to x}\phi_n(t)=f_n^\prime(x)\quad(n=1,2,\dots).\]
+
 By (1), for all $n,m\ge N$,
-\[|\phi_n(t)-\phi_m(t)|\le\frac{\epsilon}{2(b-a)},\]
-so $(\phi_n)$ converges uniformly, for $t\neq x$. Since $(f_n)$ converges to $f$, we conclude from (31) that
-\[\lim_{n\to\infty}\phi_n(t)=\phi(t)\]
+\begin{align*}
+|\phi_n(t)-\phi_m(t)|
+&=\frac{1}{|t-x|}\absolute{\brac{f_n(t)-f_n(x)}-\brac{f_m(t)-f_m(x)}}\\
+&=\frac{1}{|x-t|}\absolute{\brac{f_n(x)-f_m(x)}-\brac{f_n(t)-f_m(t)}}\\
+&<\frac{1}{\cancel{|x-t|}}\cdot\frac{\epsilon}{2(b-a)}\cancel{|x-t|}=\frac{\epsilon}{2(b-a)},
+\end{align*}
+so $(\phi_n)$ converges uniformly, for $t\neq x$. Since $(f_n)$ converges to $f$, we conclude that
+\[\lim_{n\to\infty}\phi_n(t)
+=\lim_{n\to\infty}\frac{f_n(t)-f_n(x)}{t-x}
+=\frac{f(t)-f(x)}{t-x}
+=\phi(t)\]
 uniformly for $a\le t\le b$, $t\neq x$. 
 
-If we now apply Theorem 7.11 to $(\phi_n)$, (32) and (33) show that
-\[\lim_{t\to x}\phi(t)=\lim_{n\to\infty}f_n^\prime(x),\]
-and this is (27), by the definition of $\phi(t)$. 
+Applying \ref{prop:uniform-convergence-continuity} to $(\phi_n)$, we obtain
+\[\lim_{t\to x}\phi(t)
+=\lim_{t\to x}\lim_{n\to\infty}\phi_n(t)
+=\lim_{n\to\infty}\lim_{t\to x}\phi_n(t)
+=\lim_{n\to\infty}f_n^\prime(x),\]
+which is precisely \eqref{eqn:uniform-convergence-differentiation}. 
+\end{enumerate}
 \end{proof}
 
 \begin{example}[Weierstrass function]
-Let us construct a continuous nowhere differentiable function on $\RR$.
-
+We will now construct a continuous nowhere differentiable function on $\RR$. 
 Define
 \[\phi(x)=|x|\quad(-1\le x\le 1).\]
 We extend the definition of $\phi(x)$ to all of $\RR$ by making $\phi$ $2$-periodic: $\phi(x)=\phi(x+2)$. Then $\phi:\RR\to\RR$ is continuous as $|\phi(x)-\phi(y)|\le|x-y|$ (not hard to prove).
@@ -471,7 +507,8 @@ and which have the following properties:
 
 We now go down the diagonal of the array; i.e., we consider the sequence
 \[S:\quad f_{1,1}\quad f_{2,2}\quad f_{3,3}\quad\cdots\]
-By (c), the sequence $S$ (except possibly its first $n-1$ terms) is a subsequence of $S_n$, for $n=1,2,\dots$. Hence (b) implies that $\brac{f_{n,n}(x_i)}$ converges, as $n\to\infty$, for every $x_i\in E$.\todo{to do}
+By (iii), the sequence $S$ (except possibly its first $n-1$ terms) is a subsequence of $S_n$, for $n=1,2,\dots$. 
+Hence (ii) implies that $\brac{f_{n,n}(x_i)}$ converges, as $n\to\infty$, for every $x_i\in E$.\todo{to do}
 \end{proof}
 
 \begin{definition}
@@ -491,7 +528,7 @@ i.e., there exists $N\in\NN$ such that for all $n\ge N$,
 Since continuous functions are uniformly continuous on compact sets, $f_n$ are uniformly continuous on $K$, so there exists $\delta>0$ such that
 \[d(x,y)<\delta\implies|f_i(x)-f_i(y)|<\frac{\epsilon}{3}\]
 for $i=1,\dots,N$.
-If $n\ge N$ and $d(x,y)<\delta$, it follows that
+If $n\ge N$ and $d(x,y)<\delta$,
 \begin{align*}
 |f_n(x)-f_n(y)|
 &\le|f_n(x)-f_N(x)|+|f_N(x)-f_N(y)|+|f_N(y)-f_n(y)|\\
@@ -572,7 +609,7 @@ Perhaps surprisingly, even a very badly behaving continuous function is really j
 
 \subsection{Weierstrass's Version}
 \begin{theorem}[Weierstrass approximation theorem]
-If $f:[a,b]\to\CC$ is continuous, there exists a sequence of polynomials $(P_n)$ such that $P_n\rightrightarrows f$ on $[a,b]$.
+If $f:\colon[a,b]\to\CC$ is continuous, there exists a sequence of polynomials $(P_n)$ such that $P_n\rightrightarrows f$ on $[a,b]$.
 
 If $f$ is real, then $P_n$ may be taken real.
 \end{theorem}
@@ -658,8 +695,10 @@ $\mathscr{A}$ is \emph{uniformly closed} if the limit of every uniformly converg
 Let $\mathscr{B}$ be the set of all limits of uniformly convergent sequences in $\mathscr{A}$. Then $\mathscr{B}$ is the \emph{uniform closure} of $\mathscr{A}$.
 \end{definition}
 
-\begin{example}
-
+\begin{example} \
+\begin{itemize}
+\item $\mathcal{C}(X,Y)$ is an algebra of functions.
+\end{itemize}
 \end{example}
 
 \begin{proposition}
@@ -694,4 +733,3 @@ Let $X$ be a compact metric space and $\mathscr{A}$ an algebra of real-valued co
 \pagebreak
 
 \section*{Exercises}
-\addcontentsline{toc}{section}{Exercises}

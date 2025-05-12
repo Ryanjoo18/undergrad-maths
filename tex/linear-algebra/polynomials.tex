@@ -1,17 +1,19 @@
-\chapter{Polynomials}
+\chapter{Polynomials}\label{chap:polynomials-linearalg}
 \section{Definitions}
 \begin{definition}[Polynomial]
-$p:\FF\to\FF$ is a \vocab{polynomial}\index{polynomial} with coefficients in $\FF$ if there exist $a_i\in\FF$ such that
+We say $p:\FF\to\FF$ is a \vocab{polynomial}\index{polynomial} with coefficients in $\FF$ if there exist $a_i\in\FF$ such that
 \[p(z)=a_0+a_1z+\cdots+a_nz^n\quad(z\in\FF)\]
 \end{definition}
 
 \begin{notation}
-The set of polynomials with coefficients in $\FF$ is denoted by $\FF[z]$.
+Let $\FF[z]$ denote the set of polynomials with coefficients in $\FF$.
 \end{notation}
 
-\begin{proposition}
-With the usual operations of addition and scalar multiplication, $\FF[z]$ is a vector space over $\FF$, as you should verify. Hence $\FF[z]$ is a subspace of $\FF^\FF$ (vector space of functions from $\FF$ to $\FF$).
-\end{proposition}
+\begin{lemma}
+With the usual operations of addition and scalar multiplication, $\FF[z]$ is a vector space over $\FF$.
+
+Hence $\FF[z]$ is a subspace of $\FF^\FF$ (vector space of functions from $\FF$ to $\FF$).
+\end{lemma}
 
 \begin{definition}[Degree]
 A polynomial $p\in\FF[z]$ is has \vocab{degree}\index{polynomial!degree} $n$, denoted by $\deg p=n$, if there exist scalars $a_0,a_1,\dots,a_n\in\FF$ with $a_n\neq0$ such that $p(z)=a_0+a_1z+\cdots+a_nz^n$ for all $z\in\FF$.
@@ -21,17 +23,17 @@ A polynomial $p\in\FF[z]$ is has \vocab{degree}\index{polynomial!degree} $n$, de
 For non-negative integer $n$, $\FF_n[z]$ denotes the set of polynomials with coefficients in $\FF$ and degree at most $n$.
 \end{notation}
 
-\begin{proposition}
+\begin{lemma}
 For non-negative integer $n$, $\FF_n[z]$ is finite-dimensional.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 $\FF_n[z]=\spn(1,z,z^2,\dots,z^n)$ [here we slightly abuse notation by letting $z^k$ denote a function]. 
 \end{proof}
 
-\begin{proposition}
+\begin{lemma}
 $\FF[z]$ is infinite-dimensional.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Consider any list of elements of $\FF[z]$. Let $n$ denote the highest degree of the polynomials in this list. Then every polynomial in the span of this list has degree at most $n$. Thus $z^{n+1}$ is not in the span of our list. Hence no list spans $\FF[z]$. Thus $\FF[z]$ is infnite-dimensional.
@@ -40,21 +42,19 @@ Consider any list of elements of $\FF[z]$. Let $n$ denote the highest degree of 
 
 \section{Zeros of Polynomials}
 \begin{definition}[Zero of polynomial]
-$\lambda\in\FF$ is called a \vocab{zero}\index{polynomial!zero} (or \emph{root}) of a polynomial $p\in\FF[z]$ if
+We call $\lambda\in\FF$ a \vocab{zero}\index{polynomial!zero} of a polynomial $p\in\FF[z]$ if
 \[p(\lambda)=0.\]
 \end{definition}
 
-The next result is the key tool that we will use to show that the degree of a polynomial is unique.
-
-\begin{lemma}[Factor theorem]\label{lemma:factor-thm}
-Suppose $n\in\ZZ^+$, $p\in\FF_n[z]$. Suppose $\lambda\in\FF$, then $p(\lambda)=0$ if and only if there exists $q\in\FF_{n-1}[z]$ such that
-\[p(z)=(z-\lambda)q(z)\quad(\forall z\in\FF)\]
+\begin{lemma}[Factor theorem]\label{lemma:factor-theorem}
+Suppose $n\in\NN$, $p\in\FF_n[z]$. Suppose $\lambda\in\FF$, then $p(\lambda)=0$ if and only if there exists $q\in\FF_{n-1}[z]$ such that
+\[p(z)=(z-\lambda)q(z)\quad(z\in\FF).\]
 \end{lemma}
 
 \begin{proof} \
 
 \fbox{$\implies$} Suppose $p(\lambda)=0$. Let $a_0,a_1,\dots,a_n\in\FF$ be such that
-\[p(z)=a_nz^n+\cdots+a_1z+a_0\quad(\forall z\in\FF)\]
+\[p(z)=a_nz^n+\cdots+a_1z+a_0\quad(z\in\FF).\]
 Then for all $z\in\FF$,
 \begin{align*}
 p(z)&=p(z)-p(\lambda)\\
@@ -66,7 +66,7 @@ Note that for each $k=1,\dots,n$, we can factorise
 Thus $p$ equals $z-\lambda$ times some polynomial of degree $n-1$, as desired.
 
 \fbox{$\impliedby$} Now suppose that there exists a polynomial $q\in\FF[z]$ such that
-\[p(z)=(z-\lambda)q(z)\quad(\forall z\in\FF)\]
+\[p(z)=(z-\lambda)q(z)\quad(z\in\FF).\]
 Then
 \[p(\lambda)=(\lambda-\lambda)q(\lambda)=0,\]
 as desired.
@@ -75,7 +75,7 @@ as desired.
 Now we can prove that the degree of a polynomials determines how many zeros it has.
 
 \begin{proposition}
-Suppose $n\in\ZZ^+$, $p\in\FF_n[z]$. Then $p$ has at most $n$ zeros in $\FF$.
+Suppose $n\in\NN$, $p\in\FF_n[z]$. Then $p$ has at most $n$ zeros in $\FF$.
 \end{proposition}
 
 \begin{proof}
@@ -83,7 +83,7 @@ Prove by induction on $n$.
 
 The desired result holds for $n=1$ because if $a_1\neq0$ then the polynomial $a_0+a_1z$ has only one zero (which equals $-\frac{a_0}{a_1}$).
 
-Now assume the desired result holds for $n-1$. If $p$ has no zeros in $\FF$, then the desired result holds and we are done. Thus suppose $p$ has a zero $\lambda\in\FF$. By \cref{lemma:factor-thm}, there exists $q\in\FF[z]$ of degree $n-1$ such that
+Now assume the desired result holds for $n-1$. If $p$ has no zeros in $\FF$, then the desired result holds and we are done. Thus suppose $p$ has a zero $\lambda\in\FF$. By \ref{lemma:factor-theorem}, there exists $q\in\FF[z]$ of degree $n-1$ such that
 \[p(z)=(z-\lambda)q(z)\quad(\forall z\in\FF)\]
 By the induction hypothesis, $q$ has at most $n-1$ zeros in $\FF$. The equation above shows that the zeros of $p$ in $\FF$ are exactly the zeros of $q$ in $\FF$ along with $\lambda$. Thus $p$ has at most $n$ zeros in $\FF$.
 \end{proof}
@@ -100,16 +100,33 @@ Suppose $p,s\in\FF[z]$, $s\neq0$. Then there exists unique polynomials $q,r\in\F
 \begin{proof}
 Let $n=\deg p$, $m=\deg s$. If $n<m$, take $q=0$ and $r=p$ to get the desired equation.
 
-Now assume that $n\ge m$.
+Now assume that $n\ge m$. The set
+\[S=\{1,z,\dots,z^{m-1},s,zs,\dots,z^{n-m}s\}\]
+is linearly independent in $\FF[z]$ because each polynomial in $S$ has a different degree. Also, $S$ has length $n+1$, which equals $\dim\FF[z]$. Hence $S$ is a basis of $\FF[z]$.
+
+Since $p\in\FF[z]$ and $S$ is a basis of $\FF[z]$, there exist unique constants $a_0,a_1,\dots,a_{m-1}\in\FF$ and $b_0,b_1,\dots,b_{n-m}\in\FF$ such that
+\begin{align*}
+p&=a_0+a_1z+\cdots+a_{m-1}z^{m-1}+b_0s+b_1zs+\cdots+b_{n-m}z^{n-m}s\\
+&=\underbrace{a_0+a_1z+\cdots+a_{m-1}z^{m-1}}_{r}+s\brac{\underbrace{b_0+b_1z+\cdots+b_{n-m}z^{n-m}}_{q}}.
+\end{align*}
+With $r$ and $q$ as defined above, we see that $p$ can be written as $p=sq+r$ with $\deg r<\deg s$, as desired.
+
+The uniqueness of $q,r\in\FF[z]$ satisfying these conditions follows from the uniqueness of the constants $a_0,a_1,\dots,a_{m-1}\in\FF$ and $b_0,b_1,\dots,b_{n-m}\in\FF$.
 \end{proof}
 \pagebreak
 
 \section{Factorisation of Polynomials over $\CC$}
-\begin{theorem}[Fundamental theorem of algebra, first version]
+\begin{theorem}[Fundamental theorem of algebra, first version]\label{thrm:fundamental-theorem-of-algebra-first-version}
 Every non-constant polynomial with complex coefficients has a zero in $\CC$.
 \end{theorem}
 
-\begin{theorem}[Fundamental theorem of algebra]
+\begin{remark}
+The fundamental theorem of algebra is an existence theorem. Its proof does not lead to a method for finding zeros. 
+
+The quadratic formula gives the zeros explicitly for polynomials of degree 2. Similar but more complicated formulas exist for polynomials of degree 3 and 4. However no such formulas exist for polynomials of degree 5 and above.
+\end{remark}
+
+\begin{theorem}[Fundamental theorem of algebra, second version]\label{thrm:fundamental-theorem-of-algebra-second-version}
 If $p\in\CC[z]$ is a non-constant polynomial, then $p$ has a unique factorisation (except for the order of the factors) of the form
 \[p(z)=c(z-\lambda_1)\cdots(z-\lambda_n),\]
 where $c,\lambda_1,\dots,\lambda_n\in\CC$.
@@ -121,11 +138,25 @@ A polynomial with real coefficients may have no real zeros. For example, the pol
 
 To obtain a factorisation theorem over $\RR$, we will use our factorisation theorem over $\CC$. We begin with the next result.
 
-\begin{proposition}
-Suppose $p\in\CC[z]$ is a polynomial with real coefficients. If $\lambda\in\CC$ is a zero of $p$, then so is the conjugate $\overline{\lambda}$.
-\end{proposition}
+\begin{lemma}
+Suppose $p\in\CC[z]$ is a polynomial with real coefficients. If $\lambda\in\CC$ is a zero of $p$, then so is its conjugate $\overline{\lambda}$.
+\end{lemma}
+
+\begin{proof}
+Let
+\[p(z)=a_0+a_1z+\cdots+a_nz^n,\]
+where $a_0,\dots,a_n\in\RR$. Suppose $\lambda\in\CC$ is a zero of $p$, then
+\[a_0+a_1\lambda+\cdots+a_n\lambda^n=0.\]
+Taking the complex conjugate on both sides of the equation gives
+\[a_0+a_1\overline{\lambda}+\cdots+a_n\overline{\lambda}^n=0.\]
+Hence $\overline{\lambda}$ is a zero of $p$.
+\end{proof}
 
 We want a factorisation theorem for polynomials with real coefficients. We begin with the following result.
+
+\begin{remark}
+Think about the quadratic formula in connection with the result below.
+\end{remark}
 
 \begin{lemma}[Factorisation of quadratic polynomial]
 Suppose $b,c\in\RR$. Then there is a polynomial factorisation of the form
@@ -133,8 +164,25 @@ Suppose $b,c\in\RR$. Then there is a polynomial factorisation of the form
 with $\lambda_1,\lambda_2\in\RR$ if and only if $b^2\ge 4c$.
 \end{lemma}
 
-\begin{theorem}[Factorisation of polynomial over $\RR$]
+\begin{proof}
+Completing the square gives
+\begin{equation*}\tag{I}
+x^2+bx+c=\brac{x+\frac{b}{2}}^2+\brac{c-\frac{b^2}{4}}.
+\end{equation*}
+\fbox{$\implies$} We prove the contrapositive. Suppose $b^2<4c$, then the RHS of (I) is positive for every $x\in\RR$. Hence the polynomial $x^2+bx+c$ has no real zeros and thus cannot be factored in the form $(x-\lambda_1)(x-\lambda_2)$ with $\lambda_1,\lambda_2\in\RR$.
+
+\fbox{$\impliedby$} Suppose $b^2\ge4c$. 
+Then there is a real number $d$ such that $d^2=\frac{b^2}{4}-c$. 
+We can rewrite (I) as
+\begin{align*}
+x^2+bx+c&=\brac{x+\frac{b}{2}}^2-d^2\\
+&=\brac{x+\frac{b}{2}+d}\brac{x+\frac{b}{2}-d},
+\end{align*}
+which gives the desired factorisation.
+\end{proof}
+
+\begin{theorem}[Factorisation of polynomial over $\RR$]\label{thrm:factorisation-polynomial-R}
 Suppose $p\in\RR[x]$ is a non-constant polynomial. Then $p$ has a unique factorisation (except for the order of the factors) of the form
 \[p(x)=c(x-\lambda_1)\cdots(x-\lambda_n)(x^2+b_1x+c_1)\cdots(x^2+b_Nx+c_N),\]
-where $c,\lambda_1,\dots,\lambda_n,b_1,\dots,b_N,c_1,\dots,c_N\in\RR$, with ${b_k}^2<4c_k$ for each $k$.
+where $c,\lambda_1,\dots,\lambda_n,b_1,\dots,b_N,c_1,\dots,c_N\in\RR$, with ${b_i}^2<4c_i$ for each $i$.
 \end{theorem}

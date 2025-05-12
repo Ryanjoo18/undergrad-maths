@@ -1,32 +1,42 @@
 \chapter{Linear Maps}\label{chap:linear-maps}
 \section{Vector Space of Linear Maps}
 \begin{definition}[Linear map]
-A \vocab{linear map}\index{linear map} from $V$ to $W$ is a function $T:V\to W$ satisfying the following properties:
+A \vocab{linear map}\index{linear map} from $V$ to $W$ is a function $T\colon V\to W$ satisfying the following properties:
 \begin{enumerate}[label=(\roman*)]
-\item Additivity: $T(v+w)=Tv+Tw$ for all $v,w\in V$
-\item Homogeneity: $T(\lambda v)=\lambda T(v)$ for all $\lambda\in\FF$, $v\in V$
+\item $T(v+w)=Tv+Tw$ for all $v,w\in V$;\hfill(additivity)
+\item $T(\lambda v)=\lambda T(v)$ for all $\lambda\in\FF$, $v\in V$.\hfill(homogeneity)
 \end{enumerate}
 \end{definition}
 
 \begin{notation}
-The set of linear maps from $V$ to $W$ is denoted by $\mathcal{L}(V,W)$; the set of linear maps on $V$ (from $V$ to $V$) is denoted by $\mathcal{L}(V)$.
+If there is no ambiguity, we omit the parantheses and write $Tv$ instead of $T(v)$.
 \end{notation}
 
-The existence part of the next result means that we can find a linear map that takes on whatever values we wish on the vectors in a basis. The uniqueness part of the next result means that a linear map is completely determined by its values on a basis.
+\begin{notation}
+Let $\mathcal{L}(V,W)$ denote the set of linear maps from $V$ to $W$, and let $\mathcal{L}(V)$ denote the set of linear maps on $V$ (from $V$ to $V$).
+\end{notation}
+
+\begin{example}
+If $V$ is any vector space, the \emph{identity map} $I$, defined by $Iv=v$, is a linear map on $V$. The \emph{zero map} $0$, defined by $0v=v$, is a linear map on $V$.
+\end{example}
+
+The existence part of the next result means that we can find a linear map that takes on whatever values we wish on the vectors in a basis. 
+The uniqueness part of the next result means that a linear map is completely determined by its values on a basis.
 
 \begin{lemma}[Linear map lemma]
-Suppose $\{v_1,\dots,v_n\}$ is a basis of $V$, and $w_1,\dots,w_n\in W$. Then there exists a unique linear map $T:V\to W$ such that
+Suppose $\{v_1,\dots,v_n\}$ is a basis of $V$, and $w_1,\dots,w_n\in W$. Then there exists a unique linear map $T\in\mathcal{L}(V,W)$ such that
 \[Tv_i=w_i\quad(i=1,\dots,n)\]
 \end{lemma}
 
-\begin{proof}
-First we show the existence of a linear map $T$ with the desired property. Define $T:V\to W$ by
+\begin{proof} \
+
+\fbox{Existence} Define $T\colon V\to W$ as
 \[T(c_1v_1+\cdots+c_nv_n)=c_1w_1+\cdots+c_nw_n,\]
-for some $c_i\in\FF$. Since $\{v_1,\dots,v_n\}$ is a basis of $V$, by \cref{lemma:basis-criterion}, each $v\in V$ can be uniquely expressed as a linear combination of $v_1,\dots,v_n$, thus the equation above does indeed define a function $T:V\to W$. For $i$ ($1\le i\le n$), take $c_i=1$ and the other $c$'s equal to $0$, then
+for some $c_i\in\FF$. Since $\{v_1,\dots,v_n\}$ is a basis of $V$, by \ref{lemma:basis-criterion}, each $v\in V$ can be uniquely expressed as a linear combination of $v_1,\dots,v_n$, thus the equation above does indeed define a function $T\colon V\to W$. For $i$ ($1\le i\le n$), take $c_i=1$ and the other $c$'s equal to $0$, then
 \[T\brac{0v_1+\cdots+1v_i+\cdots+0v_n}=0w_1+\cdots+1w_i+\cdots+0w_n\]
 which shows that $Tv_i=w_i$.
 
-We now show that $T:V\to W$ is a linear map:
+We now show that $T\colon V\to W$ is a linear map:
 \begin{enumerate}[label=(\roman*)]
 \item For $u,v\in V$ with $u=a_1v_1+\cdots+a_nv_n$ and $c_1v_1+\cdots+c_nv_n$,
 \begin{align*}
@@ -45,74 +55,70 @@ T(\lambda v)&=T(\lambda c_1v_1+\cdots+\lambda c_nv_n)\\
 \end{align*}
 \end{enumerate}
 
-To prove uniqueness, now suppose that $T\in\mathcal{L}(V,W)$ and $Tv_i=w_i$ for $i=1,\dots,n$. Let $c_i\in\FF$. The homogeneity of $T$ implies that $T(c_iv_i)=c_iw_i$. The additivity of $T$ now implies that 
+\fbox{Uniqueness} Suppose that $T\in\mathcal{L}(V,W)$ and $Tv_i=w_i$ for $i=1,\dots,n$. Let $c_i\in\FF$. The homogeneity of $T$ implies that $T(c_iv_i)=c_iw_i$. The additivity of $T$ now implies that 
 \[T(c_1v_1+\cdots+c_nv_n)=c_1w_1+\cdots+c_nw_n.\]
-Thus T is uniquely determined on $\spn\{v_1,\dots,v_n\}$. Since $\{v_1,\dots,v_n\}$ is a basis of $V$, this implies that $T$ is uniquely determined on $V$.
+Thus $T$ is uniquely determined on $\spn\{v_1,\dots,v_n\}$. Since $\{v_1,\dots,v_n\}$ is a basis of $V$, this implies that $T$ is uniquely determined on $V$.
 \end{proof}
 
-\begin{proposition}
-$\mathcal{L}(V,W)$ is a vector space, with the operations addition and scalar multiplication defined as follows: suppose $S,T\in\mathcal{L}(V,W)$, $\lambda\in\FF$,
-\begin{enumerate}[label=(\roman*)]
-\item $(S+T)(v)=Sv+Tv$
-\item $(\lambda T)(v)=\lambda(Tv)$
-\end{enumerate}
+\begin{lemma}
+$\mathcal{L}(V,W)$ is a vector space, with addition and scalar multiplication defined as follows: for all $S,T\in\mathcal{L}(V,W)$, $\lambda\in\FF$,
+\begin{align*}
+(S+T)(v)&=Sv+Tv\\
+(\lambda T)(v)&=\lambda(Tv)
+\end{align*}
 for all $v\in V$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Exercise.
 \end{proof}
 
 \begin{definition}[Product of linear maps]
-$T\in\mathcal{L}(U,V)$, $S\in\mathcal{L}(V,W)$, then the \vocab{product} $ST\in\mathcal{L}(U,W)$ is defined by
-\[(ST)(u)=S(Tu)\quad(\forall u\in U)\]
+Suppose $T\in\mathcal{L}(U,V)$, $S\in\mathcal{L}(V,W)$. Define the \vocab{product} $ST\in\mathcal{L}(U,W)$ by
+\[(ST)(u)\colonequals S(Tu)\quad(u\in U).\]
 \end{definition}
 
-\begin{remark}
 In other words, $ST$ is just the usual composition $S\circ T$ of two functions.
-\end{remark}
 
 \begin{remark}
 $ST$ is defined only when $T$ maps into the domain of $S$.
 \end{remark}
 
-\begin{proposition}[Algebraic properties of products of linear maps] \
+\begin{lemma}[Algebraic properties of products of linear maps] \
 \begin{enumerate}[label=(\roman*)]
 \item Associativity: $(T_1T_2)T_3=T_1(T_2T_3)$ for all linear maps $T_1,T_2,T_3$ such that the products make sense (meaning that $T_3$ maps into the domain of $T_2$, $T_2$ maps into the domain of $T_1$)
-\item Iidentity: $TI=IT=T$ for all $T\in\mathcal{L}(V,W)$ (the first $I$ is the identity map on $V$, and the second $I$ is the identity map on $W$)
+\item Identity: $TI=IT=T$ for all $T\in\mathcal{L}(V,W)$ (the first $I$ is the identity map on $V$, and the second $I$ is the identity map on $W$)
 \item Distributive: $(S_1+S_2)T=S_1T+S_2T$ and $S(T_1+T_2)=ST_1+ST_2$ for all $T,T_1,T_2\in\mathcal{L}(U,V)$ and $S,S_1,S_2\in\mathcal{L}(V,W)$
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Exercise.
 \end{proof}
 
-\begin{proposition}\label{prop:linear-map-0-0}
+\begin{lemma}\label{lemma:linear-map-0-0}
 Suppose $T\in\mathcal{L}(V,W)$. Then $T(\vb{0})=\vb{0}$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
-By additivity, we have
+By additivity,
 \[T(\vb{0})=T(\vb{0}+\vb{0})=T(\vb{0})+T(\vb{0}).\]
-Add the additive inverse of $T(\vb{0})$ to each side of the equation to conclude that $T(\vb{0})=\vb{0}$.
+Add the additive inverse of $T(\vb{0})$ to each side of the equation to obtain $T(\vb{0})=\vb{0}$.
 \end{proof}
 \pagebreak
 
 \section{Kernel and Image}
 \begin{definition}[Kernel]
-Suppose $T\in\mathcal{L}(V,W)$. The \vocab{kernel}\index{kernel} of $T$ is the subset of $V$ consisting of those vectors that $T$ maps to $\vb{0}$:
-\[\ker T\coloneqq\{v\in V\mid Tv=\vb{0}\}\subset V.\]
+Suppose $T\in\mathcal{L}(V,W)$. The \vocab{kernel}\index{kernel} of $T$ is
+\[\ker T\colonequals\{v\in V\mid Tv=\vb{0}\}.\]
 \end{definition}
 
-\begin{proposition}
-Suppose $T\in\mathcal{L}(V,W)$. Then $\ker T\le V$.
-\end{proposition}
+That is, $\ker T$ is the subset of $V$ consisting of those vectors that $T$ maps to $\vb{0}$.
 
-\begin{proof}
-By \cref{lemma:subspace-conditions}, we check the conditions of a subspace:
+
+We check that if $T\in\mathcal{L}(V,W)$, then $\ker T\le V$.
 \begin{enumerate}[label=(\roman*)]
-\item By \cref{prop:linear-map-0-0}, $T(\vb{0})=\vb{0}$, so $\vb{0}\in\ker T$.
+\item By \ref{lemma:linear-map-0-0}, $T(\vb{0})=\vb{0}$, so $\vb{0}\in\ker T$.
 \item For all $v,w\in\ker T$, 
 \[T(v+w)=Tv+Tw=\vb{0}\implies v+w\in\ker T\]
 so $\ker T$ is closed under addition.
@@ -120,16 +126,17 @@ so $\ker T$ is closed under addition.
 \[T(\lambda v)=\lambda Tv=\vb{0}\implies\lambda v\in\ker T\]
 so $\ker T$ is closed under scalar multiplication.
 \end{enumerate}
-\end{proof}
 
 \begin{definition}[Injectivity]
-Suppose $T\in\mathcal{L}(V,W)$. $T$ is \vocab{injective}\index{injectivity} if
+Suppose $T\in\mathcal{L}(V,W)$. We say $T$ is \vocab{injective}\index{injectivity} if
 \[Tu=Tv\implies u=v.\]
 \end{definition}
 
-\begin{proposition}
+The next result provides a useful characterisation of injective linear maps.
+
+\begin{lemma}
 Suppose $T\in\mathcal{L}(V,W)$. Then $T$ is injective if and only if $\ker T=\{\vb{0}\}$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 
@@ -143,15 +150,13 @@ By definition of kernel, $u-v\in\ker T=\{\vb{0}\}$, so $u-v=\vb{0}$, which impli
 \end{proof}
 
 \begin{definition}[Image]
-Suppose $T\in\mathcal{L}(V,W)$. The \vocab{image}\index{image} of $T$ is the subset of $W$ consisting of those vectors that are of the form $Tv$ for some $v\in V$:
-\[\im T\coloneqq\{Tv\mid v\in V\}\subset W.\]
+Suppose $T\in\mathcal{L}(V,W)$. The \vocab{image}\index{image} of $T$ is
+\[\im T\colonequals\{Tv\mid v\in V\}.\]
 \end{definition}
 
-\begin{proposition}
-Suppose $T\in\mathcal{L}(V,W)$. Then $\im T\le W$.
-\end{proposition}
+That is, $\im T$ is the subset of $W$ consisting of those vectors that are of the form $Tv$ for some $v\in V$.
 
-\begin{proof} \
+We check that if $T\in\mathcal{L}(V,W)$, then $\im T\le W$.
 \begin{enumerate}[label=(\roman*)]
 \item $T(\vb{0})=\vb{0}$ implies that $\vb{0}\in\im T$.
 \item For $w_1,w_2\in\im T$, there exist $v_1,v_2\in V$ such that $Tv_1=w_1$ and $Tv_2=w_2$. Then
@@ -159,11 +164,11 @@ Suppose $T\in\mathcal{L}(V,W)$. Then $\im T\le W$.
 \item For $w\in\im T$ and $\lambda\in\FF$, there exists $v\in V$ such that $Tv=w$. Then
 \[\lambda w=\lambda Tv=T(\lambda v)\in\im T\implies\lambda w\in\im T.\]
 \end{enumerate}
-\end{proof}
 
 \begin{definition}[Surjectivity]
 Suppose $T\in\mathcal{L}(V,W)$. $T$ is \vocab{surjective}\index{surjectivity} if $\im T=W$.
 \end{definition}
+\pagebreak
 
 \subsection{Fundamental Theorem of Linear Maps}
 \begin{theorem}[Fundamental theorem of linear maps]
@@ -205,38 +210,34 @@ Since $u_1,\dots,u_m,v_1,\dots,v_n$ are linearly independent, $c_i=d_i=0$. Since
 
 We now show that no linear map from a finite-dimensional vector space to a ``smaller'' vector space can be injective, where ``smaller'' is measured by dimension.
 
-\begin{proposition}
+\begin{proposition}\label{prop:smaller-not-injective}
 Suppose $V$ and $W$ are finite-dimensional vector spaces, $\dim V>\dim W$. Then there does not exist $T\in\mathcal{L}(V,W)$ such that $T$ is injective.
 \end{proposition}
 
 \begin{proof}
-Since $W$ is finite-dimensional and $\im T\le W$, by \cref{prop:dim-subspace}, we have that $\dim\im T\le\dim W$.
+Since $W$ is finite-dimensional and $\im T\le W$, by \ref{lemma:dim-subspace}, we have that $\dim\im T\le\dim W$.
 
 Let $T\in\mathcal{L}(V,W)$. Then
 \begin{align*}
-\dim\ker T&=\dim V-\dim\im T\tag{1}\\
-&\ge\dim V-\dim W\tag{2}\\
-&>0
+\dim\ker T&=\dim V-\dim\im T&&\text{[by fundamental theorem of linear maps]}\\
+&\ge\dim V-\dim W>0.
 \end{align*}
-where (1) follows from the fundamental theorem of linear maps, (2) follows from the above claim.
-
-Since $\dim\ker T>0$. This means that $\ker T$ contains some $v\in V\setminus\{\vb{0}\}$. Since $\ker T\neq\{\vb{0}\}$, $T$ is not injective.
+Since $\dim\ker T>0$, this means that $\ker T$ contains some $v\in V\setminus\{\vb{0}\}$, so $\ker T\neq\{\vb{0}\}$; hence $T$ is not injective.
 \end{proof}
 
 The next result shows that no linear map from a finite-dimensional vector space to a ``bigger'' vector space can be surjective, where ``bigger'' is also measured by dimension.
 
-\begin{proposition}
+\begin{proposition}\label{prop:larger-not-surjective}
 Suppose $V$ and $W$ are finite-dimensional vector spaces, $\dim V<\dim W$. Then there does not exist $T\in\mathcal{L}(V,W)$ such that $T$ is surjective.
 \end{proposition}
 
 \begin{proof}
 Let $T\in\mathcal{L}(V,W)$. Then
 \begin{align*}
-\dim\im T&=\dim V-\dim\ker T\tag{1}\\
-&\le\dim V\tag{2}\\
-&<\dim W,
+\dim\im T&=\dim V-\dim\ker T&&[\text{by fundamental theorem of linear maps}]\\
+&\le\dim V&&[\because\dim\ker T\ge0]\\
+&<\dim W.
 \end{align*}
-where (1) follows from the fundamental theorem of linear maps, (2) follows since the dimension of a vector space is non-negative so $\dim\ker T\ge0$.
 
 Since $\dim\im T<\dim W$, $\im T\neq W$ so $T$ is not surjective.
 \end{proof}
@@ -247,14 +248,14 @@ Consider the homogeneous system of linear equations
 \begin{split}
 a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n&=0\\
 a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n&=0\\
-\vdots&\\
+\vdots\\
 a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n&=0
 \end{split}
 \end{equation*}
 where $a_{ij}\in\FF$.
 
-Define $T:\FF^n\to\FF^m$ by
-\[T\brac{x_1,\dots,x_n}=\brac{\sum_{i=1}^{n}a_{1i}x_i,\dots,\sum_{i=1}^{m}a_{mi}x_i}.\]
+Define $T\colon \FF^n\to\FF^m$ by
+\[T\brac{x_1,\dots,x_n}=\brac{\sum_{i=1}^{n}a_{1i}x_i,\dots,\sum_{i=1}^{n}a_{mi}x_i}.\]
 The solution set of $(\ast)$ is given by
 \[\ker T=\crbrac{(x_1,\dots,x_n)\in\FF^n\:\bigg|\:\sum_{i=1}^{n}a_{1i}x_i=0,\dots,\sum_{i=1}^{n}a_{mi}x_i=0}.\]
 
@@ -276,15 +277,12 @@ A system of linear equations with more equations than variables has no solution 
 \end{proposition*}
 
 \begin{proof}
-If $n<m$, then
-\begin{align*}
-\dim\FF^n<\dim\FF^m&\implies T\text{ is not surjective}\\
-&\implies\exists(c_1,\dots,c_m)\in\FF^m, \forall(x_1,\dots,x_n)\in\FF^n, T(x_1,\dots,x_n)\neq(c_1,\dots,c_m)
-\end{align*}
+If $n<m$, then $\dim\FF^n<\dim\FF^m$, so $T$ is not surjective. Hence there exists $(c_1,\dots,c_m)\in\FF^m$ such that
+\[\forall(x_1,\dots,x_n)\in\FF^n,\quad T(x_1,\dots,x_n)\neq(c_1,\dots,c_m).\]
 Thus the choice of constant terms $(c_1,\dots,c_m)$ is such that the system of linear equations
 \begin{align*}
 a_{11}x_1+\cdots+a_{1n}x_n&=c_1\\
-\vdots&\\
+\vdots\\
 a_{m1}x_1+\cdots+a_{mn}x_n&=c_m
 \end{align*}
 has no solutions $(x_1,\dots,x_n)$.
@@ -297,31 +295,31 @@ has no solutions $(x_1,\dots,x_n)$.
 \begin{definition}[Matrix]
 Suppose $m,n\in\NN$. An $m\times n$ \vocab{matrix}\index{matrix} $A$ is a rectangular array with $m$ rows and $n$ columns:
 \[A=\begin{pmatrix}
-a_{11} & \cdots & a_{1n}\\
+A_{11} & \cdots & A_{1n}\\
 \vdots & & \vdots\\
-a_{m1} & \cdots & a_{mn}
+A_{m1} & \cdots & A_{mn}
 \end{pmatrix}\]
-where $a_{ij}\in\FF$ denotes the entry in row $i$, column $j$. We also denote $A=(a_{ij})_{m\times n}$, and drop the subscript if there is no ambiguity.
+where $A_{ij}\in\FF$ denotes the entry in row $i$, column $j$.
 \end{definition}
 
 \begin{notation}
-$i$ is used for indexing across the $m$ rows, $j$ is used for indexing across the $n$ columns.
+We use $i$ for indexing across the $m$ rows, and $j$ for indexing across the $n$ columns.
 \end{notation}
 
-\begin{notation}
-$\mathcal{M}_{m\times n}(\FF)$ denotes the set of $m\times n$ matrices with entries in $\FF$.
-\end{notation}
+Let $\mathcal{M}_{m\times n}(\FF)$ denotes the set of $m\times n$ matrices with entries in $\FF$.
 
 As we will soon see, matrices provide an efficient method of recording the values of $Tv_j$'s in terms of a basis of $W$.
 
 \begin{definition}[Matrix of linear map]
-Suppose $T\in\mathcal{L}(V,W)$, $\mathcal{V}=\{v_1,\dots,v_n\}$ is a basis of $V$, $\mathcal{W}=\{w_1,\dots,w_m\}$ is a basis of $W$. The matrix of $T$\index{matrix of linear map} with respect to these bases is the $m\times n$ matrix $\mathcal{M}(T)$, whose entries $a_{ij}$ are defined by
-\[Tv_j=\sum_{i=1}^{m}a_{ij}w_i.\]
-That is, the $j$-th column of $\mathcal{M}(T)$ consists of the scalars $a_{1j},\dots,a_{mj}$ needed to write $Tv_j$ as a linear combination of the bases of $W$.
+Suppose $T\in\mathcal{L}(V,W)$, $\{v_1,\dots,v_n\}$ is a basis of $V$, $\{w_1,\dots,w_m\}$ is a basis of $W$. The \vocab{matrix of $T$}\index{matrix of linear map} with respect to these bases is the $m\times n$ matrix $\mathcal{M}(T)$, whose entries $A_{ij}$ are defined by
+\[Tv_j=\sum_{i=1}^{m}A_{ij}w_i.\]
 \end{definition}
 
+That is, the $j$-th column of $\mathcal{M}(T)$ consists of the scalars $A_{1j},\dots,A_{mj}$ needed to write $Tv_j$ as a linear combination of the bases of $W$.
+
 \begin{notation}
-If the bases of $V$ and $W$ are not clear from the context, we adopt the notation $\mathcal{M}(T;\mathcal{V},\mathcal{W})$.
+If the bases of $V$ and $W$ are not clear from the context, we adopt the notation
+\[\mathcal{M}(T;\{v_1,\dots,v_n\},\{w_1,\dots,w_m\}).\]
 \end{notation}
 
 %A useful way to remember how $\mathcal{M}(T)$ is constructed from $T$ is to write the bases of $V$ across the top of the matrix, and the bases in $W$ along the left:
@@ -354,301 +352,294 @@ a_{m1}&a_{m2}&\cdots&a_{mn}
 \end{pmatrix}
 \end{align*}
 \end{comment}
+\pagebreak
 
 \subsection{Addition and Scalar Multiplication of Matrices}
-\begin{definition}[Matrix operations] \
-\begin{enumerate}[label=(\roman*)]
-\item Addition: the sum of two matrices of the same size is the matrix obtained by adding corresponding entries in the matrices:
-\[\begin{pmatrix}
-a_{11}&\cdots&a_{1n}\\
-\vdots&&\vdots\\
-a_{m1}&\cdots&a_{mn}
-\end{pmatrix}+
-\begin{pmatrix}
-c_{11}&\cdots&c_{1n}\\
-\vdots&&\vdots\\
-c_{m1}&\cdots&c_{mn}
-\end{pmatrix}=
-\begin{pmatrix}
-a_{11}+c_{11}&\cdots&a_{1n}+c_{1n}\\
-\vdots&&\vdots\\
-a_{m1}+c_{m1}&\cdots&a_{mn}+c_{mn}
-\end{pmatrix}.\]
+Define addition and scalar multiplication on $\mathcal{M}_{m\times n}(\FF)$ as
+\begin{align*}
+(A+B)_{ij}&=A_{ij}+B_{ij}\\
+(\lambda A)_{ij}&=\lambda A_{ij}
+\end{align*}
 
-\item Scalar multiplication: the product of a scalar and a matrix is the matrix obtained by multiplying each entry in the matrix by the scalar:
-\[\lambda\begin{pmatrix}
-a_{11}&\cdots&a_{1n}\\
-\vdots&&\vdots\\
-a_{m1}&\cdots&a_{mn}
-\end{pmatrix}=
-\begin{pmatrix}
-\lambda a_{11}&\cdots&\lambda a_{1n}\\
-\vdots&&\vdots\\
-\lambda a_{m1}&\cdots&\lambda a_{mn}
-\end{pmatrix}.\]
-\end{enumerate}
-\end{definition}
-
-\begin{proposition}
+\begin{lemma}
 Suppose $S,T\in\mathcal{L}(V,W)$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $\mathcal{M}(S+T)=\mathcal{M}(S)+\mathcal{M}(T)$;
 \item $\mathcal{M}(\lambda T)=\lambda\mathcal{M}(T)$ for $\lambda\in\FF$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Suppose $S,T\in\mathcal{L}(V,W)$, $\{v_1,\dots,v_n\}$ is a basis of $V$, $\{w_1,\dots,w_m\}$ is a basis of $W$.
 \begin{enumerate}[label=(\roman*)]
-\item By definition, $\mathcal{M}(S)$ is the matrix whose entries $a_{ij}$ are defined by
-\[Sv_j=\sum_{i=1}^{m}a_{ij}w_i.\]
-Similarly, $\mathcal{M}(T)$ is the matrix whose entries $b_{ij}$ are defined by
-\[Tv_j=\sum_{i=1}^{m}b_{ij}w_i.\]
-$\mathcal{M}(S+T)$ is the matrix whose entries $c_{ij}$ are defined by
+\item Let $\mathcal{M}(S)=A$, $\mathcal{M}(T)=B$. Then
+\[Sv_j=\sum_{i=1}^{m}A_{ij}w_i,\quad
+Tv_j=\sum_{i=1}^{m}B_{ij}w_i.\]
+Let $\mathcal{M}(S+T)=C$. Then
 \begin{align*}
-(S+T)v_j&=\sum_{i=1}^{m}c_{ij}w_i\\
-Sv_j+Tv_j&=\sum_{i=1}^{m}c_{ij}w_i\\
-\sum_{i=1}^{m}a_{ij}w_i+\sum_{i=1}^{m}b_{ij}w_i&=\sum_{i=1}^{m}c_{ij}w_i\\
-\sum_{i=1}^{m}(a_{ij}+b_{ij})w_i&=\sum_{i=1}^{m}c_{ij}w_i\\
-a_{ij}+b_{ij}&=c_{ij}.
+(S+T)v_j&=\sum_{i=1}^{m}C_{ij}w_i\\
+Sv_j+Tv_j&=\sum_{i=1}^{m}C_{ij}w_i\\
+\sum_{i=1}^{m}A_{ij}w_i+\sum_{i=1}^{m}B_{ij}w_i&=\sum_{i=1}^{m}C_{ij}w_i\\
+\sum_{i=1}^{m}(A_{ij}+B_{ij})w_i&=\sum_{i=1}^{m}C_{ij}w_i\\
+A_{ij}+B_{ij}&=C_{ij}
 \end{align*}
+which implies $A+B=C$. Hence $\mathcal{M}(S+T)=\mathcal{M}(S)+\mathcal{M}(T)$.
 
-\item By definition, $\mathcal{M}(T)$ is the matrix whose entries $a_{ij}$ are defined by
-\[Tv_j=\sum_{i=1}^{m}a_{ij}w_i.\]
-Then for $\lambda\in\FF$, $\mathcal{M}(\lambda T)$ is the matrix whose entries $b_{ij}$ are defined by
+\item Let $\mathcal{M}(T)=A$. Then
+\[Tv_j=\sum_{i=1}^{m}A_{ij}w_i.\]
+Let $\lambda\in\FF$, $\mathcal{M}(\lambda T)=B$. Then
 \begin{align*}
-\lambda Tv_j&=\sum_{i=1}^{m}b_{ij}w_i\\
-\lambda\sum_{i=1}^{m}a_{ij}w_i&=\sum_{i=1}^{m}b_{ij}w_i\\
-\lambda a_{ij}&=b_{ij}.
+\lambda Tv_j&=\sum_{i=1}^{m}B_{ij}w_i\\
+\lambda\sum_{i=1}^{m}A_{ij}w_i&=\sum_{i=1}^{m}B_{ij}w_i\\
+\lambda A_{ij}&=B_{ij}
 \end{align*}
+which implies $\lambda A=B$. Hence $\mathcal{M}(\lambda T)=\lambda\mathcal{M}(T)$.
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}
+\begin{lemma}
 With addition and scalar multiplication defined as above, $\mathcal{M}_{m\times n}(\FF)$ is a vector space of dimension $mn$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
-The verification that $\mathcal{M}_{m\times n}(\FF)$ is a vector space is left to the reader. Note that the additive identity of $\mathcal{M}_{m\times n}(\FF)$ is the $m\times n$ matrix all of whose entries equal $0$.
+The verification that $\mathcal{M}_{m\times n}(\FF)$ is a vector space is left to the reader. Note that the additive identity of $\mathcal{M}_{m\times n}(\FF)$ is the \emph{zero matrix}; the $m\times n$ matrix all of whose entries equal $0$.
 
 The reader should also verify that the list of distinct $m\times n$ matrices that have $0$ in all entries except for a $1$ in one entry is a basis of $\mathcal{M}_{m\times n}(\FF)$. There are $mn$ such matrices, so the dimension of $\mathcal{M}_{m\times n}(\FF)$ equals $mn$.
 \end{proof}
+\pagebreak
 
 \subsection{Matrix Multiplication}
+Note that we define the product of two matrices only when the number of columns of the first matrix equals the number of rows of the second matrix.
+
 \begin{definition}[Matrix multiplication]
-Suppose $A=(a_{ij})_{m\times n}$, $B=(b_{jk})_{n\times p}$. Then $AB=(c_{ik})_{m\times p}$ has entries defined by
-\[c_{ik}=\sum_{j=1}^{n}a_{ij}b_{jk}.\]
+Suppose $A\in\mathcal{M}_{m\times n}(\FF)$, $B\in\mathcal{M}_{n\times p}(\FF)$. Then $AB\in\mathcal{M}_{m\times p}$ is defined as
+\[(AB)_{ij}=\sum_{k=1}^{n}A_{ik}B_{kj}.\]
 \end{definition}
 
-\begin{remark}
-Thus the entry in row $j$, column $k$ of $AB$ is computed by taking row $j$ of $A$ and column $k$ of $B$, multiplying together corresponding entries, and then summing.
-\end{remark}
-
-\begin{remark}
-Note that we define the product of two matrices only when the number of columns of the first matrix equals the number of rows of the second matrix.
-\end{remark}
+This means that the entry in row $i$, column $j$ of $AB$ is computed by taking row $i$ of $A$ and column $j$ of $B$, multiplying together corresponding entries, and then summing.
 
 In the next result, we assume that the same basis of $V$ is used in considering $T\in\mathcal{L}(U,V)$ and $S\in\mathcal{L}(V,W)$, the same basis of $W$ is used in considering $S\in\mathcal{L}(V,W)$ and $ST\in\mathcal{L}(U,W)$, and the same basis of $U$ is used in considering $T\in\mathcal{L}(U,V)$ and $ST\in\mathcal{L}(U,W)$.
 
-\begin{proposition}[Matrix of product of linear maps]
+\begin{lemma}[Matrix of product of linear maps]
 If $T\in\mathcal{L}(U,V)$ and $S\in\mathcal{L}(V,W)$, then $\mathcal{M}(ST)=\mathcal{M}(S)\mathcal{M}(T)$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
-Suppose $\{v_1,\dots,v_n\}$ is a basis of $V$, $\{w_1,\dots,w_m\}$ is a basis of $W$, $\{u_1,\dots,u_p\}$ is a basis of $U$.
+Let $\{v_1,\dots,v_n\}$ be a basis of $V$, $\{w_1,\dots,w_m\}$ be a basis of $W$, $\{u_1,\dots,u_p\}$ be a basis of $U$.
 
-Let $\mathcal{M}(S)=(a_{ij})_{m\times n}$, $\mathcal{M}(T)=(b_{jk})_{n\times p}$, where
+Let $\mathcal{M}(S)=A$, $\mathcal{M}(T)=B$. For $j=1,\dots,p$,
 \begin{align*}
-Sv_j&=\sum_{i=1}^{m}a_{ij}w_i\\
-Tu_k&=\sum_{j=1}^{n}b_{jk}v_j.
-\end{align*}
-
-For $k=1,\dots,p$, we have
-\begin{align*}
-(ST)u_k&=S(Tu_k)\\
-&=S\brac{\sum_{j=1}^{n}b_{jk}v_j}\\
-&=\sum_{j=1}^{n}b_{jk}Sv_j\\
-&=\sum_{j=1}^{n}b_{jk}\brac{\sum_{i=1}^{m}a_{ij}w_i}\\
-&=\sum_{i=1}^{m}\brac{\sum_{j=1}^{n}a_{ij}b_{jk}}w_i.
+(ST)u_j&=S(Tu_j)\\
+&=S\brac{\sum_{k=1}^{n}B_{kj}v_k}\\
+&=\sum_{k=1}^{n}B_{kj}Sv_k\\
+&=\sum_{k=1}^{n}B_{kj}\brac{\sum_{i=1}^{m}A_{ik}w_i}\\
+&=\sum_{i=1}^{m}\brac{\sum_{k=1}^{n}A_{ik}B_{kj}}w_i.
 \end{align*}
 \end{proof}
 
 \begin{notation}
-$A_{i,\cdot}$ denotes the row vector corresponding to the $i$-th row of $A$; $A_{\cdot,j}$ denotes the column vector corresponding to the $j$-th column of $A$.
+Let $A_{i,\cdot}$ denote the row vector corresponding to the $i$-th row of $A$, and let $A_{\cdot,j}$ denote the column vector corresponding to the $j$-th column of $A$.
 \end{notation}
 
-\begin{proposition}
-Suppose $A=(a_{ij})_{m\times n}$, $B=(b_{jk})_{n\times p}$. Let $AB=(c_{ik})_{m\times p}$. Then
-\[c_{ik}=A_{i,\cdot}B_{\cdot,k}\]
-That is, the entry in row $i$, column $k$ of $AB$ equals (row $i$ of $A$) times (column $k$ of $B$).
-\end{proposition}
+\begin{lemma}
+Suppose $A\in\mathcal{M}_{m\times n}(\FF)$, $B\in\mathcal{M}_{n\times p}(\FF)$. Then
+\[(AB)_{ij}=A_{i,\cdot}B_{\cdot,j}.\]
+\end{lemma}
+
+That is, the entry in row $i$, column $j$ of $AB$ equals (row $i$ of $A$) times (column $j$ of $B$).
 
 \begin{proof}
-By definition,
-\begin{align*}
-A_{i,\cdot}B_{\cdot,k}
-&=\begin{pmatrix}
-a_{i1}&\cdots&a_{in}
+By definition of matrix multiplication,
+\[A_{i,\cdot}B_{\cdot,j}
+=\begin{pmatrix}
+A_{i1}&\cdots&A_{in}
 \end{pmatrix}
 \begin{pmatrix}
-b_{1k}\\\vdots\\b_{nk}
-\end{pmatrix}\\
-&=a_{i1}b_{1k}+\cdots+a_{in}b_{nk}\\
-&=\sum_{j=1}^{n}a_{ij}b_{jk}\\
-&=c_{ik}.
-\end{align*}
+B_{1j}\\\vdots\\B_{nj}
+\end{pmatrix}
+=\sum_{k=1}^{n}a_{ik}b_{kj}
+=(AB)_{ij}.\]
 \end{proof}
 
-\begin{proposition}
-Suppose $A=(a_{ij})_{m\times n}$, $B=(b_{jk})_{n\times p}$. Then
-\[(AB)_{\cdot,k}=AB_{\cdot,k}\]
-That is, column $k$ of $AB$ equals $A$ times column $k$ of $B$.
-\end{proposition}
+\begin{lemma}
+Suppose $A\in\mathcal{M}_{m\times n}(\FF)$, $B\in\mathcal{M}_{n\times p}(\FF)$. Then
+\[(AB)_{\cdot,j}=AB_{\cdot,j}\quad(j=1,\dots,p).\]
+\end{lemma}
+
+That is, column $j$ of $AB$ equals $A$ times column $j$ of $B$.
 
 \begin{proof}
 Using the previous result,
-\[AB_{\cdot,k}=\begin{pmatrix}
-A_{1,\cdot}B_{\cdot,k}\\
+\[AB_{\cdot,j}=\begin{pmatrix}
+A_{1,\cdot}B_{\cdot,j}\\
 \vdots\\
-A_{n,\cdot}B_{\cdot,k}
+A_{n,\cdot}B_{\cdot,j}
 \end{pmatrix}=\begin{pmatrix}
-c_{1k}\\\vdots\\c_{nk}
-\end{pmatrix}=(AB)_{\cdot,k}\]
+(AB)_{1j}\\\vdots\\(AB)_{nj}
+\end{pmatrix}=(AB)_{\cdot,j}\]
 \end{proof}
 
-\begin{proposition}[Linear combination of columns]
-Suppose $A=(a_{ij})_{m\times n}$, $b=\begin{pmatrix}
+\begin{lemma}[Linear combination of columns]
+Suppose $A\in\mathcal{M}_{m\times n}(\FF)$, $b=\begin{pmatrix}
 b_1\\\vdots\\b_n
 \end{pmatrix}$. Then
 \[Ab=b_1A_{\cdot,1}+\cdots+b_nA_{\cdot,n}.\]
+\end{lemma}
+
 That is, $Ab$ is a linear combination of the columns of $A$, with the scalars that multiply the columns coming from $b$.
-\end{proposition}
 
 \begin{proof}
+We have
 \begin{align*}
 Ab&=\begin{pmatrix}
-a_{11}b_1+\cdots+a_{1n}b_n\\
+A_{11}b_1+\cdots+A_{1n}b_n\\
 \vdots\\
-a_{m1}b_1+\cdots+a_{mn}b_n
-\end{pmatrix}\\
-&=\begin{pmatrix}
-a_{11}b_1\\\vdots\\a_{m1}b_1
+A_{m1}b_1+\cdots+A_{mn}b_n
+\end{pmatrix}
+=\begin{pmatrix}
+A_{11}b_1\\\vdots\\A_{m1}b_1
 \end{pmatrix}+\cdots+\begin{pmatrix}
-a_{1n}b_n\\\vdots\\a_{mn}b_n
+A_{1n}b_n\\\vdots\\A_{mn}b_n
 \end{pmatrix}\\
 &=b_1\begin{pmatrix}
-a_{11}\\\vdots\\a_{m1}
+A_{11}\\\vdots\\A_{m1}
 \end{pmatrix}+\cdots+b_n\begin{pmatrix}
-a_{1n}\\\vdots\\a_{mn}
-\end{pmatrix}\\
-&=b_1A_{\cdot,1}+\cdots+b_nA_{\cdot,n}.
+A_{1n}\\\vdots\\A_{mn}
+\end{pmatrix}
+=b_1A_{\cdot,1}+\cdots+b_nA_{\cdot,n}.
 \end{align*}
 \end{proof}
 
-The following result states that matrix multiplication can be expressed as linear combinations of columns or rows.
+The next result is the main tool used to prove the column--row factorisation \ref{prop:column-row-factorisation} and to prove that the column rank of a matrix equals the row rank. 
+To be consistent with the notation often used with the column--row factorisation, we denote the matrices as $C$ and $R$ instead of $A$ and $B$.
 
-\begin{proposition}
-Suppose $C=(c_{ij})_{m\times c}$, $R=(r_{jk})_{c\times n}$. Then
+\begin{lemma}\label{lemma:matrix-multiplication-linear combinations-of-columns-or-rows}
+Suppose $C\in\mathcal{M}_{m\times c}(\FF)$, $R\in\mathcal{M}_{c\times n}(\FF)$. Then
 \begin{enumerate}[label=(\roman*)]
-\item Columns: for $k=1,\dots,n$, $(CR)_{\cdot,k}$ is a linear combination of $C_{\cdot,1},\dots,C_{\cdot,c}$, with coefficients coming from $R_{\cdot,k}$.
+\item Columns: for $j=1,\dots,n$, $(CR)_{\cdot,j}$ is a linear combination of $C_{\cdot,1},\dots,C_{\cdot,c}$, with coefficients coming from $R_{\cdot,j}$.
 \item Rows: for $i=1,\dots,m$, $(CR)_{i,\cdot}$ is a linear combination of $R_{1,\cdot},\dots,R_{c,\cdot}$, with coefficients coming from $C_{j,\cdot}$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item 
-\item 
+\item Suppose $j\in\{1,\dots,n\}$. 
+\[(CR)_{\cdot,j}=CR_{\cdot,j}\]
+and then apply the previous result.
+\item Similar.
 \end{enumerate}
 \end{proof}
+\pagebreak
 
 \subsection{Rank of a Matrix}
+We begin by defining two non-negative integers associated with each matrix.
+
 \begin{definition}
-Suppose $A\in\mathcal{M}_{m\times n}(\FF)$. Then the \emph{row space}\index{rank!row space} of $A$ is the span of its rows, and the \emph{column space}\index{rank!column space} of $A$ is the span of its columns:
+Suppose $A\in\mathcal{M}_{m\times n}(\FF)$. The \emph{row space}\index{rank!row space} of $A$ is the span of its rows, and the \emph{column space}\index{rank!column space} of $A$ is the span of its columns:
 \begin{align*}
-\Row(A)&\coloneqq\spn\brac{A_{i,\cdot}\mid 1\le i\le m},\\
-\Col(A)&\coloneqq\spn\brac{A_{\cdot,j}\mid 1\le j\le n}.
+\Row(A)&\colonequals\spn\brac{A_{i,\cdot}\mid 1\le i\le m},\\
+\Col(A)&\colonequals\spn\brac{A_{\cdot,j}\mid 1\le j\le n}.
 \end{align*}
 The \vocab{row rank}\index{rank!row rank} and \vocab{column rank}\index{rank!column rank} of $A$ are defined as
 \begin{align*}
-r(A)&\coloneqq\dim\Row(A),\\
-c(A)&\coloneqq\dim\Col(A).
+r(A)&\colonequals\dim\Row(A),\\
+c(A)&\colonequals\dim\Col(A).
 \end{align*}
 \end{definition}
 
+If $A$ is an $m\times n$ matrix, then the column rank of $A$ is at most $n$ (because $A$ has $n$ columns) and the column rank of $A$ is also at most $m$ (because $\dim\mathcal{M}_{m\times 1}=m$).
+Similar remarks hold for the row rank of $A$.
+
+We now define the \emph{transpose} of a matrix.
+
 \begin{definition}[Transpose]
-Suppose $A=(a_{ij})_{m\times n}$. Then the \vocab{transpose}\index{matrix!transpose} of $A$ is the matrix $A^T=(b_{ij})_{n\times m}$, whose entries are defined by
-\[b_{ij}=a_{ji}.\]
+Suppose $A\in\mathcal{M}_{m\times n}(\FF)$. The \vocab{transpose}\index{matrix!transpose} of $A$ is the $n\times m$ matrix $A^T$ whose entries are defined by
+\[(A^T)_{ij}=A_{ji}.\]
 \end{definition}
 
-\begin{proposition}[Properties of transpose]
+\begin{lemma}[Properties of transpose]
 Suppose $A,B\in\mathcal{M}_{m\times n}(\FF)$, $C\in\mathcal{M}_{n\times p}(\FF)$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $(A+B)^T=A^T+B^T$;
 \item $(\lambda A)^T=\lambda A^T$ for $\lambda\in\FF$;
 \item $(AC)^T=C^TA^T$.
 \end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item ${(A+B)^T}_{ij}=(A+B)_{ji}=A_{ji}+B_{ji}=(A^T)_{ij}+(B^T)_{ij}$
+\item ${(\lambda A)^T}_{ij}=(\lambda A)_{ji}=\lambda A_{ji}=\lambda (A^T)_{ij}$
+\item ${(AC)^T}_{ij}=(AC)_{ji}=\sum_{k=1}^{n}A_{jk}C_{ji}=\sum_{k=1}^{n}C_{ji}A_{jk}=\sum_{k=1}^{n}(C^T)_{ik}(A^T)_{kj}=(C^T A^T)_{ij}$
+\end{enumerate}
+\end{proof}
+
+The next result will be the main tool used to prove that the column rank equals the row rank.
+
+\begin{proposition}[Column-row factorisation]\label{prop:column-row-factorisation}
+Suppose $A\in\mathcal{M}_{m\times n}(\FF)$, $c(A)\ge1$. Then there exist $C\in M_{m\times c(A)}(\FF)$, $R\in M_{c(A)\times n}(\FF)$ such that $A=CR$.
 \end{proposition}
 
-\begin{lemma}[Column-row factorisation]\label{lemma:column-row-factorisation}
-Suppose $A\in\mathcal{M}_{m\times n}(\FF)$, $c(A)\ge1$. Then there exist  $C\in M_{m\times c(A)}(\FF)$, $R\in M_{c(A)\times n}(\FF)$ such that $A=CR$.
-\end{lemma}
-
 \begin{proof}
-We prove by construction, i.e. construct the required matrices $C$ and $R$.
+We prove by construction, i.e., construct the required matrices $C$ and $R$.
 
 Each column of $A$ is a $m\times1$ matrix. The set of columns of $A$
-\[\{A_{\cdot,1},\dots,A_{\cdot,n}\}\] 
-can be reduced to a basis of $\Col(A)$, which has length $c(A)$, by the definition of column rank. The $c(A)$ columns in this basis can be put together to form a $m\times c(A)$ matrix, which we call $C$.
+\[\{A_{\cdot,1},\dots,A_{\cdot,n}\}\]
+is a spanning set of $\Col(A)$, so it can be reduced to a basis of $\Col(A)$, by \ref{lemma:reduce-spanningset-basis}. This basis has length $c(A)$, by the definition of column rank. 
 
-For $k=1,\dots,n$, the $k$-th column of $A$ is a linear combination of the columns of $C$. Make the coefficients of this linear combination into column $k$ of a $c\times n$ matrix, which we call $R$. By , it follows that $A=CR$.
+The $c(A)$ columns in this basis can be put together to form a $m\times c(A)$ matrix, which we call $C$.
+
+For $j\in\{1,\dots,n\}$, the $j$-th column of $A$ is a linear combination of the columns of $C$. Make the coefficients of this linear combination into column $j$ of a $c(A)\times n$ matrix, which we call $R$. By \ref{lemma:matrix-multiplication-linear combinations-of-columns-or-rows}(i), it follows that $A=CR$.
 \end{proof}
 
-\begin{lemma}[Column rank equals row rank]
-The column rank of a matrix equals to its row rank.
-\end{lemma}
+\begin{theorem}\label{thrm:column-rank-equals-row-rank}
+The column rank of a matrix equals its row rank.
+\end{theorem}
 
 \begin{proof}
-Suppose $A\in\mathcal{M}_{m\times n}(\FF)$. Let $A=CR$ be the column-row factorisation of $A$, where $C\in\mathcal{M}_{m\times c(A)}(\FF)$, $R\in\mathcal{M}_{c(A)\times n}(\FF)$.
+Suppose $A\in\mathcal{M}_{m\times n}(\FF)$. Let $A=CR$ be the column-row factorisation of $A$ given by \ref{prop:column-row-factorisation}, where $C\in\mathcal{M}_{m\times c(A)}(\FF)$, $R\in\mathcal{M}_{c(A)\times n}(\FF)$.
 
+Then \ref{lemma:matrix-multiplication-linear combinations-of-columns-or-rows}(ii) tells us that every row of $A$ is a linear combination of the rows of $R$. Because $R$ has $c(A)$ rows, this implies that the row rank of $A$ is less than or equal to the column rank $c(A)$ of $A$.
 
+To prove the inequality in the other direction, apply the result in the previous paragraph to $A^T$, getting 
+\begin{align*}
+c(A)&=r(A^T)\\
+&\le c(A^T)\\
+&=r(A).
+\end{align*}
+
+Thus the column rank of $A$ equals the row rank of $A$.
 \end{proof}
 
-Since column rank equals row rank, we can dispense with the terms ``column rank'' and ``row rank'', and just use the simpler
-term ``rank''.
+Since the column rank equals row rank, we can dispense with the terms ``column rank'' and ``row rank'', and just use the simpler term ``rank''.
 
 \begin{definition}[Rank]
 The \vocab{rank}\index{rank} of a matrix $A$ is defined as
-\[\rank A\coloneqq r(A)=c(A).\]
+\[\rank A\colonequals r(A)=c(A).\]
 \end{definition}
 \pagebreak
 
 \section{Invertibility and Isomorphism}
 \subsection{Invertibility}
-\begin{notation}
-$I_V\in\mathcal{L}(V)$ denotes the identity map on $V$:
-\[Iv=v\quad(\forall v\in V)\]
-The subscript is omitted if there is no ambiguity.
-\end{notation}
+We begin this section by defining the notions of invertible and inverse in the context of linear maps.
 
 \begin{definition}[Invertibility]
-$T\in\mathcal{L}(V,W)$ is \vocab{invertible}\index{invertibility} if there exists $S\in\mathcal{L}(W,V)$ such that $ST=I_V$, $TS=I_W$; $S$ is known as an \emph{inverse} of $T$.
+We say $T\in\mathcal{L}(V,W)$ is \vocab{invertible}\index{invertibility} if there exists $S\in\mathcal{L}(W,V)$ such that $ST=I_V$, $TS=I_W$; we call $S$ an \emph{inverse} of $T$.
 \end{definition}
 
-\begin{proposition}[Uniqueness of inverse]
+\begin{lemma}
 The inverse of an invertible linear map is unique.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Suppose $T\in\mathcal{L}(V,W)$ is invertible, $S_1,S_2\in\mathcal{L}(W,V)$ are inverses of $T$. Then
 \[S_1=S_1I_W=S_1(TS_2)=(S_1T)S_2=I_VS_2=S_2.\]
-Thus $S_1=S_2$.
 \end{proof}
 
-Now that we know that the inverse is unique, we can give it a notation.
+Since the inverse is unique, we can give it a notation.
 
 \begin{notation}
-If $T$ is invertible, then its inverse is denoted by $T^{-1}$.
+If $T$ is invertible, we denote its inverse by $T^{-1}$.
 \end{notation}
 
 The following result is useful in determing if a linear map is invertible.
@@ -663,7 +654,9 @@ Suppose $T\in\mathcal{L}(V,W)$.
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item \fbox{$\implies$} Suppose $T\in\mathcal{L}(V,W)$ is invertible, which has inverse $T^{-1}$. Suppose $Tu=Tv$. Applying $T^{-1}$ to both sides of the equation gives
+\item \fbox{$\implies$} Suppose $T\in\mathcal{L}(V,W)$ is invertible with inverse $T^{-1}$. 
+
+Suppose $Tu=Tv$. Applying $T^{-1}$ to both sides of the equation gives
 \[u=T^{-1}Tu=T^{-1}Tv=v\]
 so $T$ is injective.
 
@@ -675,20 +668,16 @@ Define $S\in\mathcal{L}(W,V)$ such that for each $w\in W$, $S(w)$ is the unique 
 
 \item It suffices to only prove $T\text{ is injective}\iff T\text{ is surjective}$. Then apply the previous result.
 
-\fbox{$\implies$} Suppose $T$ is injective. Then $\dim\ker T=0$. By the fundamental theorem of linear maps, 
-\begin{align*}
-\dim\im T&=\dim V-\dim\ker T\\
-&=\dim V\\
-&=\dim W
-\end{align*}
+\fbox{$\implies$} Suppose $T$ is injective. Then $\ker T=\{\vb{0}\}$, so $\dim\ker T=0$. By the fundamental theorem of linear maps,
+\[\dim\im T=\dim V-\dim\ker T
+=\dim V
+=\dim W\]
 which implies that $T$ is surjective.
 
-\fbox{$\impliedby$} Suppose $T$ is surjective, then $\dim\im T=\dim W$. By the fundamental theorem of linear maps,
-\begin{align*}
-\dim\ker T&=\dim V-\dim\im T\\
-&=\dim V-\dim W\\
-&=0
-\end{align*}
+\fbox{$\impliedby$} Suppose $T$ is surjective. Then $\dim\im T=\dim W$. By the fundamental theorem of linear maps,
+\[\dim\ker T=\dim V-\dim\im T
+=\dim V-\dim W
+=0\]
 which implies that $T$ is injective.
 \end{enumerate}
 \end{proof}
@@ -701,18 +690,22 @@ Suppose $V$ and $W$ are finite-dimensional, $\dim V=\dim W$, $S\in\mathcal{L}(W,
 
 \fbox{$\implies$} Suppose $ST=I$. Let $v\in\ker T$. Then
 \[v=Iv=(ST)v=S(Tv)=S(\vb{0})=\vb{0}\implies \ker T=\{\vb{0}\}\]
-so $T$ is injective. Since $\dim V=\dim W$, by the previous result, $T$ is invertible.
+so $T$ is injective. Since $\dim V=\dim W$, by \ref{lemma:invertibility-criterion}, $T$ is invertible.
 
 Since $ST=I$, then
 \[S=STT^{-1}=IT^{-1}=T^{-1}\]
 so $TS=TT^{-1}=I$, as desired.
 
-\fbox{$\impliedby$} Similar to above; reverse the roles of $S$ and $T$ (and $V$ and $W$) to show that if $TS=I$ then $ST=I$.
+\fbox{$\impliedby$} Similar to the above; reverse the roles of $S$ and $T$ (and $V$ and $W$) to show that if $TS=I$ then $ST=I$.
 \end{proof}
+\pagebreak
 
 \subsection{Isomorphism}
+The next definition captures the idea of two vector spaces that are essentially the same, except for the names of their elements.
+
 \begin{definition}[Isomorphism]
-An \vocab{isomorphism}\index{isomorphism} is an invertible linear map. $V$ and $W$ are \vocab{isomorphic}, denoted by $V\cong W$, if there exists an isomorphism $T\in\mathcal{L}(V,W)$.
+An \vocab{isomorphism}\index{isomorphism} is an invertible linear map. 
+We say $V$ is \vocab{isomorphic}\index{isomorphic} to $W$, and denote $V\cong W$, if there exists an isomorphism $T\in\mathcal{L}(V,W)$.
 \end{definition}
 
 The following result shows that we need to look at only at the dimension to determine whether two vector spaces are isomorphic.
@@ -724,7 +717,7 @@ Suppose $V$ and $W$ are finite-dimensional. Then
 
 \begin{proof} \
 
-\fbox{$\implies$} Suppose $V\cong W$, then there exists an isomorphism $T\in\mathcal{L}(V,W)$, which is invertible, so $T$ is both injective and surjective, thus $\ker T=\{\vb{0}\}$ and $\im T=W$, implying $\dim\ker T=0$ and $\dim\im T=\dim W$.
+\fbox{$\implies$} Suppose $V\cong W$. Then there exists an isomorphism $T\in\mathcal{L}(V,W)$, which is invertible. By \ref{lemma:invertibility-criterion}, $T$ is both injective and surjective. Thus $\ker T=\{\vb{0}\}$ and $\im T=W$, implying $\dim\ker T=0$ and $\dim\im T=\dim W$.
 
 By the fundamental theorem of linear maps,
 \begin{align*}
@@ -760,12 +753,14 @@ We already noted that $\mathcal{M}$ is linear. We need to prove that $\mathcal{M
 Since $v_1,\dots,v_n$ is a basis of $V$, this implies $T=\vb{0}$, so $\ker\mathcal{M}=\{\vb{0}\}$. Thus $\mathcal{M}$ is injective.
 
 \item Suppose $A\in\mathcal{M}_{m\times n}(\FF)$. By the linear map lemma, there exists $T\in\mathcal{L}(V,W)$ such that
-\[Tv_j=\sum_{i=1}^{m}a_{ij}w_i\quad(j=1,\dots,n)\]
+\[Tv_j=\sum_{i=1}^{m}A_{ij}w_i\quad(j=1,\dots,n)\]
 Since $\mathcal{M}(T)=A$, $\im\mathcal{M}=\mathcal{M}_{m\times n}(\FF)$ so $\mathcal{M}$ is surjective.
 \end{enumerate}
 \end{proof}
 
-\begin{corollary}\label{cor:dimension-product}
+Now we can determine the dimension of the vector space of linear maps from one finite-dimensional vector space to another.
+
+\begin{corollary}\label{cor:dimension-vector-space-of-linear-maps}
 Suppose $V$ and $W$ are finite-dimensional. Then $\mathcal{L}(V,W)$ is finite-dimensional and
 \[\dim\mathcal{L}(V,W)=(\dim V)(\dim W).\]
 \end{corollary}
@@ -774,6 +769,7 @@ Suppose $V$ and $W$ are finite-dimensional. Then $\mathcal{L}(V,W)$ is finite-di
 Since $\mathcal{L}(V,W)\cong\mathcal{M}_{m\times n}(\FF)$,
 \[\dim\mathcal{L}(V,W)=\dim\mathcal{M}_{m\times n}(\FF)=mn=(\dim V)(\dim W).\]
 \end{proof}
+\pagebreak
 
 \subsection{Linear Maps Thought of as Matrix Multiplication}
 Previously we defned the matrix of a linear map. Now we defne the matrix of a vector.
@@ -788,33 +784,33 @@ where $b_1,\dots,b_n\in\FF$ are such that
 \end{definition}
 
 \begin{example}
-If $x=(x_1,\dots,x_n)\in\FF^n$, then the matrix of the vector $x$ with respect to the standard basis is
+If $x=(x_1,\dots,x_n)\in\FF^n$, then the matrix of the vector $x$ with respect to the standard basis of $\FF^n$ is
 \[\mathcal{M}(x)=\begin{pmatrix}
 x_1\\\vdots\\x_n
 \end{pmatrix}.\]
 \end{example}
 
-\begin{proposition}
+\begin{lemma}
 Suppose $T\in\mathcal{L}(V,W)$. Let $\{v_1,\dots,v_n\}$ be a basis of $V$, $\{w_1,\dots,w_m\}$ be a basis of $W$. Then
 \[\mathcal{M}(T)_{\cdot,j}=\mathcal{M}(Tv_j)\quad(j=1,\dots,n)\]
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 By definition, the entries of $\mathcal{M}(T)$ are defined such that
-\[Tv_j=\sum_{i=1}^{m}a_{ij}w_i\quad(j=1,\dots,n)\]
+\[Tv_j=\sum_{i=1}^{m}A_{ij}w_i\quad(j=1,\dots,n)\]
 Then since $Tv_j\in W$, by definition, the matrix of $Tv_j$ with respect to the basis $\{w_1,\dots,w_m\}$ is
 \[\mathcal{M}(Tv_j)=\begin{pmatrix}
-a_1j\\\vdots\\a_{mj}
+A_1j\\\vdots\\A_{mj}
 \end{pmatrix}\]
-which is precisely the $j$-th column of $\mathcal{M}(T)_{\cdot,j}$, for $j=1,\dots,n$.
+which is precisely the $j$-th column of $\mathcal{M}(T)_{\cdot,j}$.
 \end{proof}
 
 The following result shows that linear maps act like matrix multiplication.
 
-\begin{proposition}
+\begin{lemma}
 Suppose $T\in\mathcal{L}(V,W)$. Let $\{v_1,\dots,v_n\}$ be a basis of $V$, $\{w_1,\dots,w_m\}$ be a basis of $W$. Let $v\in V$, then
 \[\mathcal{M}(Tv)=\mathcal{M}(T)\mathcal{M}(v).\]
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Suppose $v=b_1v_1+\cdots+b_nv_n$ for some $b_1,\dots,b_n\in\FF$. Then
@@ -847,44 +843,40 @@ The restriction of this isomorphism to $\im T$ [which equals $\spn(Tv_1,\dots,Tv
 \[\dim\ker T=\rank\mathcal{M}(T),\]
 as desired.
 \end{proof}
+\pagebreak
 
 \subsection{Change of Basis}
-\begin{definition}[Identity matrix]
 For $n\in\NN$, the $n\times n$ \vocab{identity matrix}\index{matrix!identity matrix} is
 \[I_n=\begin{pmatrix}
 1&&0\\
 &\ddots&\\
 0&&1
 \end{pmatrix}.\]
-\end{definition}
 
 \begin{remark}
 Note that the symbol $I$ is used to denote both the identity operator and the identity matrix. The context indicates which meaning of $I$ is intended. For example, consider the equation $\mathcal{M}(I)=I$; on LHS $I$ denotes the identity operator, and on RHS $I$ denotes the identity matrix.
 \end{remark}
 
-\begin{proposition}
+The next result justifies the name ``identity matrix''.
+
+\begin{lemma}
 Suppose $A\in\mathcal{M}_{n\times n}(\FF)$. Then $AI_n=I_nA=A$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Exercise.
 \end{proof}
 
 \begin{definition}[Invertible matrix]
-$A\in\mathcal{M}_{n\times n}(\FF)$ is called \emph{invertible} if there exists $B\in\mathcal{M}_{n\times n}(\FF)$ such that $AB=BA=I$; we call $B$ an \emph{inverse} of $A$
+We say $A\in\mathcal{M}_{n\times n}(\FF)$ is \vocab{invertible}\index{invertible matrix} if there exists $B\in\mathcal{M}_{n\times n}(\FF)$ such that $AB=BA=I$; we call $B$ an \emph{inverse} of $A$.
 \end{definition}
 
-\begin{proposition}[Uniqueness of inverse]
-Suppose $A$ is an invertible square matrix. Then there exists a unique matrix $B$ such that $AB=BA=I$.
-\end{proposition}
+\begin{lemma}[Uniqueness of inverse]
+The inverse of an invertible square matrix is unique.
+\end{lemma}
 
 \begin{proof}
-Suppose otherwise, for a contradiction, that $A$ does not have a unique inverse. Let $B$ and $C$ be inverses of $A$; that is,
-\begin{align*}
-AB&=BA=I,\\
-AC&=CA=I.
-\end{align*}
-Then 
+Let $A$ be an invertible square matrix, let $B$ and $C$ be inverses of $A$. Then
 \[B=BI=BAC=IC=C.\]
 \end{proof}
 
@@ -894,18 +886,20 @@ Since the inverse of a matrix is unique, we can give it a notation.
 The inverse of a matrix $A$ is denoted by $A^{-1}$.
 \end{notation}
 
-\begin{proposition} \
+\begin{lemma} \
 \begin{enumerate}[label=(\roman*)]
 \item Suppose $A$ is an invertible square matrix. Then $(A^{-1})^{-1}=A$.
 \item Suppose $A$ and $C$ are invertible square matrices of the same size. Then $AC$ is invertible, and $(AC)^{-1}=C^{-1}A^{-1}$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item \[A^{-1}A=AA^{-1}=I,\]
+\item We have
+\[A^{-1}A=AA^{-1}=I,\]
 so the inverse of $A^{-1}$ is $A$.
-\item \begin{align*}
+\item We have
+\begin{align*}
 (AC)(C^{-1}A^{-1})
 &=A(CC^{-1})A^{-1}\\
 &=AIA^{-1}\\
@@ -916,29 +910,36 @@ and similarly $(C^{-1}A^{-1})(AC)=I$.
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}[Matrix of product of linear maps]
-Suppose $T\in\mathcal{L}(U,V)$, $S\in\mathcal{L}(V,W)$. Let $\mathcal{U}=\{u_1,\dots,u_m\}$ be a basis of $U$, $\mathcal{V}=\{v_1,\dots,v_n\}$ be a basis of $V$, $\mathcal{W}=\{w_1,\dots,w_p\}$ be a basis of $W$. Then
-\[\mathcal{M}\brac{ST;\mathcal{U},\mathcal{W}}=\mathcal{M}\brac{S;\mathcal{V},\mathcal{W}}\mathcal{M}\brac{T;\mathcal{U},\mathcal{V}}.\]
-\end{proposition}
+\begin{lemma}[Matrix of product of linear maps]
+Suppose $T\in\mathcal{L}(U,V)$, $S\in\mathcal{L}(V,W)$. Let $\{u_1,\dots,u_m\}$ be a basis of $U$, $\{v_1,\dots,v_n\}$ be a basis of $V$, $\{w_1,\dots,w_p\}$ be a basis of $W$. Then
+\begin{multline*}
+\mathcal{M}\brac{ST;\{u_1,\dots,u_m\},\{w_1,\dots,w_p\}}=\\
+\mathcal{M}\brac{S;\{v_1,\dots,v_n\},\{w_1,\dots,w_p\}}\mathcal{M}\brac{T;\{u_1,\dots,u_m\},\{v_1,\dots,v_n\}}.
+\end{multline*}
+\end{lemma}
 
 \begin{proof}
 Refer to previous section. Now we are just being more explicit about the bases involved.
 \end{proof}
 
 \begin{corollary}
-Suppose that $\mathcal{U}=\{u_1,\dots,u_n\}$ and $\mathcal{V}=\{v_1,\dots,v_n\}$ are bases of $V$. Then the matrices
-\[\mathcal{M}\brac{I;\mathcal{U},\mathcal{V}}\quad\text{and}\quad\mathcal{M}\brac{I;\mathcal{V},\mathcal{U}}\]
+Let $\{u_1,\dots,u_n\}$ and $\{v_1,\dots,v_n\}$ be bases of $V$. Then the matrices
+\[\mathcal{M}\brac{I;\{u_1,\dots,u_n\},\{v_1,\dots,v_n\}}\quad\text{and}\quad\mathcal{M}\brac{I;\{v_1,\dots,v_n\},\{u_1,\dots,u_n\}}\]
 are invertible, and each is the inverse of the other.
 \end{corollary}
 
 \begin{proof}
-
+In the previous result, replace $w_i$ with $u_i$, and replace $S$ and $T$ with $I$, to obtain
+\[I=\mathcal{M}(I;\{v_1,\dots,v_n\},\{u_1,\dots,u_n\})\mathcal{M}(I;\{u_1,\dots,u_n\},\{v_1,\dots,v_n\}).\]
+Now interchange the roles of $u$'s and $v$'s, which gives
+\[I=\mathcal{M}(I;\{u_1,\dots,u_n\},\{v_1,\dots,v_n\})\mathcal{M}(I;\{v_1,\dots,v_n\},\{u_1,\dots,u_n\}).\]
+These two equations above give the desired result.
 \end{proof}
 
 \begin{theorem}[Change-of-basis formula]
-Suppose $T\in\mathcal{L}(V)$. Let $\mathcal{U}=\{u_1,\dots,u_n\}$ and $\mathcal{V}=\{v_1,\dots,v_n\}$ be bases of $V$. Let
-\[A=\mathcal{M}(T;\mathcal{U}),\quad B=\mathcal{M}(T;\mathcal{V}),\]
-and $C=\mathcal{M}(I;\mathcal{U},\mathcal{V})$. Then
+Suppose $T\in\mathcal{L}(V)$. Let $\{u_1,\dots,u_n\}$ and $\{v_1,\dots,v_n\}$ be bases of $V$. Let
+\[A=\mathcal{M}(T;\{u_1,\dots,u_n\}),\quad B=\mathcal{M}(T;\{v_1,\dots,v_n\}),\]
+and $C=\mathcal{M}(I;\{u_1,\dots,u_n\},\{v_1,\dots,v_n\})$. Then
 \begin{equation}
 A=C^{-1}BC.
 \end{equation}
@@ -947,18 +948,20 @@ A=C^{-1}BC.
 \begin{proof}
 Note that
 \begin{align*}
-\mathcal{M}(T;\mathcal{U},\mathcal{V})
-&=\underbrace{\mathcal{M}(T;\mathcal{V})}_{B}\underbrace{\mathcal{M}(I;\mathcal{U},\mathcal{V})}_{C}\\
-&=\underbrace{\mathcal{M}(I;\mathcal{U},\mathcal{V})}_{C}\underbrace{\mathcal{M}(T;\mathcal{U})}_{A}
+\mathcal{M}(T;\{u_1,\dots,u_n\},\{v_1,\dots,v_n\})
+&=\underbrace{\mathcal{M}(T;\{v_1,\dots,v_n\})}_{B}\underbrace{\mathcal{M}(I;\{u_1,\dots,u_n\},\{v_1,\dots,v_n\})}_{C}\\
+&=\underbrace{\mathcal{M}(I;\{u_1,\dots,u_n\},\{v_1,\dots,v_n\})}_{C}\underbrace{\mathcal{M}(T;\{u_1,\dots,u_n\})}_{A}
 \end{align*}
 Hence $BC=CA$, and the desired result follows.
 \end{proof}
 
-\begin{proposition}
+THe next result states that the matrix of inverse equals the inverse of matrix.
+
+\begin{lemma}
 Suppose $\{v_1,\dots,v_n\}$ is a basis of $V$, $T\in\mathcal{L}(V)$ is invertible. Then
 \[\mathcal{M}\brac{T^{-1}}=\brac{\mathcal{M}(T)}^{-1},\]
 where both matrices are with respect to the basis $\{v_1,\dots,v_n\}$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 We have that
@@ -968,31 +971,39 @@ We have that
 
 \section{Products and Quotients of Vector Spaces}
 \subsection{Products of Vector Spaces}
+As usual when dealing with more than one vector space, all vector spaces in use should be over the same field.
+
 \begin{definition}[Product]
 Suppose $V_1,\dots,V_n$ are vector spaces over $\FF$. The \vocab{product}\index{product of vector spaces} $V_1\times\cdots\times V_n$ is defined by
-\[V_1\times\cdots\times V_n\coloneqq\{(v_1,\dots,v_n)\mid v_i\in V_i\}.\]
+\[V_1\times\cdots\times V_n\colonequals\{(v_1,\dots,v_n)\mid v_i\in V_i\}.\]
 \end{definition}
 
 \begin{remark}
 This is analagous to the Cartesian product of sets.
 \end{remark}
 
-\begin{proposition}
+\begin{lemma}
 $V_1\times\cdots\times V_n$ is a vector space over $\FF$, with addition and scalar multiplication defined by
 \begin{align*}
 (u_1,\dots,u_n)+(v_1,\dots,v_n)&=(u_1+v_1,\dots,u_n+v_n)\\
 \lambda(v_1,\dots,v_n)&=(\lambda v_1,\dots,\lambda v_n)
 \end{align*}
-\end{proposition}
+\end{lemma}
 
-The following result shows that the dimension of a product is the sum of dimensions.
+The next result shows that the dimension of a product is the sum of dimensions.
 
-\begin{proposition}
+\begin{lemma}[Dimension of product]\label{lemma:dimension-product}
 Suppose $V_1,\dots,V_n$ are finite-dimensional. Then $V_1\times\cdots\times V_n$ is finite-dimensional, and
 \[\dim(V_1\times\cdots\times V_n)=\dim V_1+\cdots+\dim V_n.\]
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
+Choose a basis of each $V_i$. For each basis vector of each $V_i$, consider the element of $V_1\times\cdots\times V_n$ that equals the basis vector in the $i$-th slot and $0$ in the other slots. 
+The set of all such vectors is linearly independent and spans $V_1\times\cdots\times V_n$.
+Thus it is a basis of $V_1\times\cdots\times V_n$. 
+The length of this basis is $\dim V_1+\cdots+\dim V_n$, as desired.
+
+\begin{comment}
 For each $V_k$ ($k=1,\dots,n$), choose a basis:
 \[\mathcal{B}_k=\crbrac{e_{k1},\dots,e_{k\dim V_k}}.\]
 For each basis vector of each $V_k$, consider the set consisting of elements of $V_1\times\cdots\times V_n$ that equal the basis vector in the $k$-th slot and $0$ in the other slots:
@@ -1030,6 +1041,8 @@ Hence
 &=|\mathcal{B}_1|+\cdots+|\mathcal{B}_n|\\
 &=\dim V_1+\cdots+\dim V_n.
 \end{align*}
+\end{comment}
+
 \end{proof}
 
 Products are also related to direct sums, by the following result.
@@ -1043,53 +1056,52 @@ Suppose that $V_1,\dots,V_n\le V$. Define a linear map
 Then $V_1+\cdots+V_n$ is a direct sum if and only if $\Gamma$ is injective.
 \end{proposition}
 
-\begin{proof} \
-
-\fbox{(i)$\iff$(ii)} Suppose $V_1+\cdots+V_n$ is a direct sum. Let $(v_1,\dots,v_n)\in\ker\Gamma$. Then
+\begin{proof}
 \begin{align*}
-\Gamma(v_1,\dots,v_n)&=\vb{0}\\
-v_1+\cdots+v_n&=\vb{0}\\
-v_1=\cdots=v_n&=\vb{0}
+\Gamma\text{ is injective}&\iff\ker\Gamma=\{\vb{0}\}\\
+&\iff(v_1,\dots,v_n)=\vb{0}\\
+&\iff v_1=\cdots=v_n=0\\
+&\iff V_1\oplus\cdots\oplus V_n&&[\text{by \ref{lemma:condition-direct-sum}}]
 \end{align*}
-so $(v_1,\dots,v_n)=0$. Hence $\ker\Gamma=0$, thus $\Gamma$ is injective.
-
-\fbox{(ii)$\iff$(i)} Similar to the above proof.
 \end{proof}
 
 The next result says that a sum is a direct sum if and only if dimensions add up.
 
-\begin{proposition}
+\begin{proposition}\label{prop:direct-sum-dimensions-add-up}
 Suppose $V$ is finite-dimensional, $V_1,\dots,V_n\le V$. Then $V_1+\cdots+V_n$ is a direct sum if and only if
 \[\dim(V_1+\cdots+V_n)=\dim V_1+\cdots+\dim V_n.\]
 \end{proposition}
 
 \begin{proof}
 The map $\Gamma$ defined in the previous result is surjective. Thus by the fundamental theorem of linear maps, $\Gamma$ is injective if and only if
-\[\dim(V_1+\cdots+V_n)=\dim(V_1\times V_n).\]
+\[\dim(V_1+\cdots+V_n)=\dim(V_1\times\cdots\times V_n).\]
 Then use the previous two results above.
 \end{proof}
+\pagebreak
 
 \subsection{Quotient Spaces}
+We begin our approach to quotient spaces by defining a \emph{coset}.
+
 \begin{definition}[Coset]
-Suppose $v\in V$, $U\subset V$. Then $v+U$ is called a \vocab{coset}\index{coset} of $U$, defined by
-\[v+U\coloneqq\{v+u\mid u\in U\}.\]
+Suppose $v\in V$, $U\subset V$. We call $v+U$ a \vocab{coset}\index{coset} of $U$, defined by
+\[v+U\colonequals\{v+u\mid u\in U\}.\]
 \end{definition}
 
 \begin{definition}[Quotient space]
 Suppose $U\le V$. Then the \vocab{quotient space}\index{quotient space} $V/U$ is the set of cosets of $U$:
-\[V/U\coloneqq\{v+U\mid v\in V\}.\]
+\[V/U\colonequals\{v+U\mid v\in V\}.\]
 \end{definition}
 
 \begin{example}
 If $U=\{(x,2x)\in\RR^2\mid x\in\RR\}$, then $\RR^2/U$ is the set of lines in $\RR^2$ that have gradient of $2$.
 \end{example}
 
-It is obvious that two cosets of a subspace are equal or disjoint. We shall now prove this.
+The next result shows that two cosets of a subspace are equal or disjoint.
 
-\begin{proposition}
+\begin{lemma}\label{lemma:cosets-equal-disjoint}
 Suppose $U\le V$, and $v,w\in V$. Then
 \[v-w\in U\iff v+U=w+U\iff(v+U)\cap(w+U)=\emptyset.\]
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 First suppose $v-w\in U$. If $u\in U$, then
@@ -1103,43 +1115,142 @@ Now suppose $(v+U)\cap(w+U)\neq\emptyset$. Thus there exist $u_1,u_2\in U$ such 
 Thus $v-w=u_2-u_1$. Hence $v-w\in U$, showing that $(v+U)\cap(w+U)\neq\emptyset$ implies $v-w\in U$, which completes the proof.
 \end{proof}
 
-\begin{proposition}
+We can define a vector space structure on $V/U$.
+
+\begin{lemma}
 Suppose $U\le V$. Then $V/U$ is a vector space, with addition and scalar multiplication defined by
 \begin{align*}
 (v+U)+(w+U)&=(v+w)+U\\
 \lambda(v+U)&=(\lambda v)+U
 \end{align*}
 for all $v,w\in V$, $\lambda\in\FF$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
+We first need to show that addition and scalar multiplication are well-defined.
+\begin{description}
+\item[Addition] Suppose $v_1,v_2,w_1,w_2\in V$ are such that
+\[v_1+U=v_2+U,\quad w_1+U=w_2+U.\]
+By \ref{lemma:cosets-equal-disjoint},
+\[v_1-v_2\in U,\quad w_1-w_2\in U.\]
+Since $U\le V$, $U$ is closed under addition, so $(v_1-v_2)+(w_1-w_2)\in U$. Thus $(v_1+w_1)-(v_2+w_2)\in U$. Using \ref{lemma:cosets-equal-disjoint} again, we see that
+\[(v_1+w_1)+U=(v_2+w_2)+U,\]
+as desired. 
+Hence addition on $V/U$ is well-defined.
 
+\item[Scalar multiplication] Suppose $v_1,v_2\in V$ are such that $v_1+U=v_2+U$, suppose $\lambda\in\FF$.
+
+Since $U\le V$, $U$ is closed under scalar multiplication, so $\lambda(v_1-v_2)\in U$. Thus $\lambda v_1-\lambda v_2\in U$. By \ref{lemma:cosets-equal-disjoint},
+\[(\lambda v_1)+U=(\lambda v_2)+U.\]
+Hence scalar multiplication on $V/U$ is well-defined.
+\end{description}
+
+The verification that addition and scalar multiplication make $V/U$ into a vector space is straightforward and is left to the reader. Note that the additive identity of $V/U$ is $0+U$ (which equals $U$) and that the additive inverse of $v+U$ is $(-v)+U$.
 \end{proof}
 
 \begin{definition}[Quotient map]
-Suppose $U\le V$. The \vocab{quotient map}\index{quotient map} $\pi:V\to V/U$ is the linear map defined by
-\[\pi(v)=v+U\]
+Suppose $U\le V$. The \vocab{quotient map}\index{quotient map} is the map
+\begin{align*}
+\pi:V&\to V/U\\
+v&\mapsto v+U
+\end{align*}
 for all $v\in V$.
 \end{definition}
 
-\begin{proposition}[Dimension of quotient space]
+\begin{notation}
+Although $\pi$ depends on $U$ as well as $V$, these spaces are left out of the notation because they should be clear from the context.
+\end{notation}
+
+We check that the quotient map is a linear map: let $v,w\in V$, $\lambda\in\FF$,
+\begin{enumerate}[label=(\roman*)]
+\item $\pi(v)+\pi(w)=(v+U)+(w+U)=(v+w)+U=\pi(v+w)$.
+\item $\pi(\lambda v)=(\lambda v)+U=\lambda(v+U)=\lambda(\pi v)$.
+\end{enumerate}
+
+\begin{lemma}[Dimension of quotient space]
 Suppose $V$ is finite-dimensional, $U\le V$. Then
 \[\dim V/U=\dim V-\dim U.\]
-\end{proposition}
+\end{lemma}
+
+\begin{idea}
+Since dimensions are involved, think of the fundamental theorem of linear maps.
+\end{idea}
+
+\begin{proof}
+Let the quotient map $\pi:V\to V/U$. 
+\begin{itemize}
+\item Let $v\in V$. Then
+\begin{align*}
+v\in\ker\pi
+&\iff\pi(v)=\vb{0}+U=U\\
+&\iff v+U=U\quad[\text{by \ref{lemma:cosets-equal-disjoint}}]\\
+&\iff v\in U
+\end{align*}
+so $\ker\pi=U$.
+\item The definition of $\pi$ implies $\im\pi=V/U$.
+\end{itemize}
+
+By the fundamental theorem of linear maps,
+\begin{align*}
+\dim V&=\dim\ker\pi+\dim\im\pi\\
+&=\dim U+\dim V/U
+\end{align*}
+which gives the desired result.
+\end{proof}
+
+Each linear map $T$ on $V$ induces a linear map $\tilde{T}$ on $V/\ker T$, as defined below.
 
 \begin{definition}
-Suppose $T\in\mathcal{L}(V,W)$. Define $\tilde{T}:V/\ker T\to W$ by
-\[\tilde{T}(v+\ker T)=Tv.\]
+Suppose $T\in\mathcal{L}(V,W)$. Define
+\begin{align*}
+\tilde{T}:V/\ker T&\to W\\
+v+\ker T&\mapsto Tv
+\end{align*}
 \end{definition}
 
-\begin{proposition}
+\[
+\begin{tikzcd}[column sep=huge,row sep=huge]
+V \arrow[r,"\tilde{T}"] \arrow[dr,swap,"T"] &
+  V/\ker T \arrow[d,"\pi"] \\
+& W %\arrow[u,shift left=.75ex,"Y"]
+\end{tikzcd}
+\]
+
+We first show that $\tilde{T}$ is well-defined.
+\begin{proof}
+Suppose $u,v\in V$ are such that
+\[u+\ker T=v+\ker T.\]
+By \ref{lemma:cosets-equal-disjoint}, $u-v\in\ker T$. Thus $T(u-v)=\vb{0}$, so $Tu=Tv$.
+\end{proof}
+
+We then check that $\tilde{T}$ is a linear map from $V/\ker T$ to $W$.
+
+The next result shows that we can think of $\tilde{T}$ as a modified version of $T$, with a domain that produces an injective map.
+
+\begin{lemma}
 Suppose $T\in\mathcal{L}(V,W)$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $\tilde{T}\circ\pi=T$, where $\pi$ is the quotient map of $V$ onto $V/\ker T$;
 \item $\tilde{T}$ is injective;
 \item $\im\tilde{T}=\im T$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item Let $v\in V$. Then
+\[(\tilde{T}\circ\pi)(v)=\tilde{T}\brac{\pi(v)}=\tilde{T}(v+\ker T)=Tv.\]
+\item Let $v+\ker T\in\ker\tilde{T}$. Then
+\begin{align*}
+\tilde{T}(v+\ker T)=\vb{0}
+&\implies Tv=\vb{0}\\
+&\implies v\in\ker T\\
+&\implies v+\ker T=\ker T
+\end{align*}
+so $\ker\tilde{T}=\{\vb{0}+\ker T\}$.
+\item The definition of $\tilde{T}$ shows that $\im\tilde{T}=\im T$.
+\end{enumerate}
+\end{proof}
 
 \begin{theorem}[First isomorphism theorem]
 Suppose $T\in\mathcal{L}(V,W)$ is an isomorphism. Then
@@ -1148,151 +1259,376 @@ V/\ker T\cong\im T.
 \end{equation}
 \end{theorem}
 
+\begin{proof}
+(ii) and (iii) imply that if we think of $\tilde{T}$ as mapping into $\im T$, then $\tilde{T}$ is an isomorphism from $V/\ker T$ onto $\im T$.
+\end{proof}
 
+\begin{theorem}[Second isomorphism theorem]
+Suppose $U,W\le V$. Then
+\begin{equation}
+(U+W)/W\cong U/(U\cap W).
+\end{equation}
+\end{theorem}
+
+\begin{theorem}[Third isomorphism theorem]
+$U\subset V\subset W$, then
+\begin{equation}
+W/V\cong(W/U)/(V/U).
+\end{equation}
+\end{theorem}
 \pagebreak
 
 \section{Duality}
 \subsection{Dual Space and Dual Map}
-Linear maps into the scalar field $\FF$ play a special role in linear algebra, and thus they get a special name.
+Linear maps into the scalar field $\FF$ play a special role in linear algebra, so they get a special name.
 
-\begin{definition}[Linear funtional]
-A \vocab{linear functional}\index{linear functional} on $V$ is a linear map from $V$ to $\FF$; that is, a linear functional is an element of $\mathcal{L}(V,\FF)$.
+\begin{definition}[Linear functional]
+A \vocab{linear functional}\index{linear functional} on $V$ is a linear map from $V$ to $\FF$.
 \end{definition}
 
-The vector space $\mathcal{L}(V,\FF)$ also gets a special name and special notation.
+That is, a linear functional is an element of $\mathcal{L}(V,\FF)$.
+
+\begin{example}
+$\phi:\RR^3\to\RR$ defined by $\phi(x,y,z)=x+y+z$ is a linear functional on $\RR^3$.
+\end{example}
 
 \begin{definition}[Dual space]
-The \vocab{dual space} of $V$ is the vector space of linear functionals on $V$; that is, $V^*\coloneqq\mathcal{L}(V,\FF)$.
+The \vocab{dual space}\index{dual space} $V^\prime$ of $V$ is the vector space of linear functionals on $V$.
 \end{definition}
 
-\begin{lemma}
-Suppose $V$ is finite-dimensional. Then $V^*$ is also finite-dimensional, and
-\[\dim V^*=\dim V.\]
+That is, $V^\prime\colonequals\mathcal{L}(V,\FF)$.
+
+\begin{lemma}[Dimension of dual space]\label{lemma:dimension-dual-space}
+Suppose $V$ is finite-dimensional. Then $V^\prime$ is finite-dimensional, and
+\[\dim V^\prime=\dim V.\]
 \end{lemma}
 
 \begin{proof}
-By , we have
-\[\dim V^*\coloneqq\dim\mathcal{L}(V,\FF)=(\dim V)(\dim\FF)=\dim V\]
-as desired.
+By \ref{cor:dimension-vector-space-of-linear-maps},
+\[\dim V^\prime\colonequals\dim\mathcal{L}(V,\FF)=(\dim V)(\dim\FF)=\dim V.\]
 \end{proof}
 
 \begin{definition}[Dual basis]
-If $\{v_1,\dots,v_n\}$ is a basis of $V$, then the \vocab{dual basis}\index{dual basis} of $\{v_1,\dots,v_n\}$ is
-\[\{\phi_1,\dots,\phi_n\}\subset V^*,\]
+Let $\{v_1,\dots,v_n\}$ be a basis of $V$. Then the \vocab{dual basis}\index{dual basis} of $\{v_1,\dots,v_n\}$ is
+\[\{\phi_1,\dots,\phi_n\}\subset V^\prime,\]
 where each $\phi_i$ is the linear functional on $V$ such that
-\[\phi_i(v_j)=\begin{cases}
+\[\phi_i(v_j)=\delta_{ij}=\begin{cases}
 1&(i=j)\\
 0&(i\neq j)
 \end{cases}\]
 \end{definition}
 
-The following result states that dual basis gives coefficients for linear combination.
+\begin{example}[Dual basis of the standard basis of $\FF^n$]
+Fix a positive integer $n$. For $i=1,\dots,n$, define $\phi_i$ to be the linear functional on $\FF^n$ that selects the $i$-th coordinate of a vector in $\FF^n$:
+\[\phi_i(x_1,\dots,x_n)=x_i\]
+for each $(x_1,\dots,x_n)\in\FF^n$.
+
+Let $\{e_1,\dots,e_n\}$ be the standard basis of $\FF^n$. Then
+\[\phi_i(e_j)=\begin{cases}
+1&(i=j)\\
+0&(i\neq j)
+\end{cases}\]
+Thus $\phi_1,\dots,\phi_n$ is the dual basis of the standard basis $e_1,\dots,e_n$ of $\FF^n$.
+\end{example}
+
+The next result shows that the dual basis of a basis of $V$ consists of the linear functionals on $V$ that give the coefficients for expressing a vector in $V$ as a linear combination of the basis vectors.
 
 \begin{proposition}
 Suppose $\{v_1,\dots,v_n\}$ is a basis of $V$, and $\{\phi_1,\dots,\phi_n\}$ is the dual basis. Then for each $v\in V$,
 \[v=\phi_1(v)v_1+\cdots+\phi_n(v)v_n.\]
 \end{proposition}
 
-The following result states that the dual basis is a basis of the dual space.
+\begin{proof}
+Let $v\in V$. Since $\{v_1,\dots,v_n\}$ is a basis of $V$, there exist $c_1,\dots,c_n\in\FF$ such that
+\[v=c_1v_1+\cdots+c_nv_n.\]
+For $i=1,\dots,n$, applying $\phi_i$ to both sides of the equation above gives
+\[\phi_i(v)=c_i.\]
+\end{proof}
 
-\begin{proposition}
-Suppose $V$ is finite-dimensional. Then the dual basis of a basis of $V$ is a basis of $V^*$.
-\end{proposition}
+The next result shows that the dual basis is a basis of the dual space. Thus the terminology ``dual basis'' is justified.
+
+\begin{lemma}
+Suppose $V$ is finite-dimensional. Then the dual basis of a basis of $V$ is a basis of $V^\prime$.
+\end{lemma}
+
+\begin{proof}
+Suppose $\{v_1,\dots,v_n\}$ is a basis of $V$. Let $\{\phi_1,\dots,\phi_n\}$ denote the dual basis. 
+
+Since $\{\phi_1,\dots,\phi_n\}$ has length $\dim V$, in order to show that it is a basis of $V^\prime$, it suffices to show that it is linearly independent in $V^\prime$.
+
+Suppose $a_1,\dots,a_n\in\FF$ are such that
+\begin{equation*}\tag{I}
+a_1\phi_1+\cdots+a_n\phi_n=0.
+\end{equation*}
+Now for each $i=1,\dots,n$,
+\[(a_1\phi_1+\cdots+a_n\phi_n)(v_i)=a_i.\]
+Thus (I) shows that $a_1=\cdots=a_n=0$. Hence $\{\phi_1,\dots,\phi_n\}$ is linearly independent.
+\end{proof}
 
 \begin{definition}[Dual map]
-Suppose $T\in\mathcal{L}(V,W)$. The \vocab{dual map}\index{dual map} of $T$ is the linear map $T^*\in\mathcal{L}(V,W)$ defined for each $\phi\in W^*$ by
-\[T^*(\phi)=\phi\circ T.\]
+Suppose $T\in\mathcal{L}(V,W)$. The \vocab{dual map}\index{dual map} of $T$ is the linear map
+\begin{align*}
+T^\prime:W^\prime&\to V^\prime\\
+\phi&\mapsto\phi\circ T
+\end{align*}
 \end{definition}
 
-\begin{proposition}[Algebraic properties of dual map]
-Suppose $T\in\mathcal{L}(V,W)$. Then
-\begin{enumerate}[label=(\arabic*)]
-\item $(S+T)^*=S^*+T^*$ for all $S\in\mathcal{L}(V,W)$
-\item $(\lambda T)^*=\lambda T^*$ for all $\lambda\in\FF$
-\item $(ST)^*=T^* S^*$ for all $S\in\mathcal{L}(V,W)$
+If $T\in\mathcal{L}(V,W)$ and $\phi\in W^\prime$, then $T^\prime(\phi)$ is defined above to be the composition of the linear maps $\phi$ and $T$. Thus $T^\prime(\phi)$ is indeed a linear map from $V$ to $\FF$, i.e., $T^\prime(\phi)\in V^\prime$.
+
+We check that $T^\prime\in\mathcal{L}(W^\prime,V^\prime)$: let $\phi,\psi\in W^\prime$, $\lambda\in\FF$,
+\begin{enumerate}[label=(\roman*)]
+\item $T^\prime(\phi+\psi)=(\phi+\psi)\circ T=\phi\circ T+\psi\circ T=T^\prime(\phi)+T^\prime(\psi)$
+\item $T^\prime(\lambda\phi)=(\lambda\phi)\circ T=\lambda(\phi\circ T)=\lambda(T^\prime(\phi))$
 \end{enumerate}
-\end{proposition}
+
+\begin{lemma}[Algebraic properties of dual map]
+Suppose $T\in\mathcal{L}(V,W)$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $(S+T)^\prime=S^\prime+T^\prime$ for all $S\in\mathcal{L}(V,W)$
+\item $(\lambda T)^\prime=\lambda T^\prime$ for all $\lambda\in\FF$
+\item $(ST)^\prime=T^\prime S^\prime$ for all $S\in\mathcal{L}(W,U)$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item 
+\item 
+\item Let $\phi\in U^\prime$. Then
+\[(ST)^\prime(\phi)=\phi\circ(ST)=(\phi\circ S)\circ T=T^\prime(\phi\circ S)=T^\prime(S^\prime(\phi))=(T^\prime S^\prime)(\phi).\]
+\end{enumerate}
+\end{proof}
+
+(i) and (ii) imply that the function that takes $T$ to $T^\prime$ is a linear map from $\mathcal{L}(V,W)$ to $\mathcal{L}(W^\prime,V^\prime)$.
+\pagebreak
 
 \subsection{Kernel and Image of Dual of Linear Map}
-The goal of this section is to describe $\ker T^*$ and $\im T^*$ in terms of $\im T$ and $\ker T$.
+The goal of this section is to describe $\ker T^\prime$ and $\im T^\prime$ in terms of $\im T$ and $\ker T$. 
+To do this, we will need the next definition.
 
 \begin{definition}[Annihilator]
 For $U\subset V$, the \vocab{annihilator}\index{annihilator} of $U$ is defined by
-\[U^\circ\coloneqq\{\phi\in V^*\mid\phi(u)=0,\forall u\in U\}.\]
+\[U^0\colonequals\{\phi\in V^\prime\mid\phi(u)=\vb{0},\:\forall u\in U\}.\]
 \end{definition}
 
-\begin{proposition}
-$U^\circ\le V$.
-\end{proposition}
+\begin{example}
+$\{\vb{0}\}^0=V^\prime$ and $V^0=\{\vb{0}\}$.
+\end{example}
 
-\begin{proposition}[Dimension of annihilator]
-Suppose $V$ is finite-dimensional, $U\le V$. Then
-\[\dim U^\circ=\dim V-\dim U.\]
-\end{proposition}
-
-The following are conditions for the annihilator to equal $\{\vb{0}\}$ or the whole space.
-
-\begin{proposition}
-Suppose $V$ is finite-dimensional, $U\le V$. Then
+We check that $U^0\le V$:
 \begin{enumerate}[label=(\roman*)]
-\item $U^\circ=\{\vb{0}\}\iff U=V$;
-\item $U^\circ=V^*\iff U=\{\vb{0}\}$.
+\item Note that $0\in U^0$ (here $0$ is the zero linear functional on $V$) because the zero linear functional applied to every vector in $U$ equals $\vb{0}\in\FF$.
+\item Suppose $\phi,\psi\in U^0$. Thus $\phi,\psi\in V^\prime$ and $\phi(u)=\psi(u)=\vb{0}$ for every $u\in U$.
+
+Let $u\in U$, then
+\[(\phi+\psi)(u)=\phi(u)+\psi(u)=\vb{0}+\vb{0}=\vb{0}.\]
+Thus $\phi+\psi\in U^0$, so $U^0$ is closed under addition.
+
+\item Suppose $\phi\in U^0$, $\lambda\in\FF$, let $u\in U$, then
+\[\phi(\lambda u)=\lambda\phi(u)=\vb{0}\]
+so $\lambda\phi\in U^0$, so $U^0$ is closed under scalar multiplication.
 \end{enumerate}
-\end{proposition}
 
-The following result concerns $\ker T^*$.
+\begin{lemma}[Dimension of annihilator]\label{lemma:dimension-annihilator}
+Suppose $V$ is finite-dimensional, and $U\le V$. Then
+\[\dim U^0=\dim V-\dim U.\]
+\end{lemma}
 
-\begin{proposition}
+\begin{proof}
+Let $i\in\mathcal{L}(U,V)$ be the inclusion map defined by $i(u)=u$ for each $u\in U$.
+Thus the dual map $i^\prime$ is a linear map from $V^\prime$ to $U^\prime$. The fundamental theorem of linear maps applied to $i^\prime$ shows that
+\begin{equation*}\tag{I}
+\dim\ker i^\prime+\dim\im i^\prime=\dim V^\prime.
+\end{equation*}
+
+However, $\ker i^\prime=U^0$ (as can be seen by thinking about the definitions) and $\dim V^\prime=\dim V$ (by \ref{lemma:dimension-dual-space}), so we can rewrite (I) as
+\begin{equation*}\tag{II}
+\dim U^0+\dim\im i^\prime=\dim V.
+\end{equation*}
+
+If $\phi\in U^\prime$, then $\phi$ can be extended to a linear functional $\psi$ on $V$ (see, for example, Exercise 13 in Section 3A). The definition of $i^\prime$ shows that $i^\prime(\psi)=\phi$. Thus $\phi\in\im i^\prime$, which implies that $\im i^\prime=U^\prime$. Hence
+\[\dim\ker i^\prime=\dim U^\prime=\dim U,\]
+and then (II) becomes the equation $\dim U+\dim U^0=\dim V$, as desired.
+\end{proof}
+
+The next result provides conditions for the annihilator to equal $\{\vb{0}\}$ or the whole space.
+
+\begin{lemma}\label{lemma-annihilator-equal-0-or-whole-space}
+Suppose $V$ is finite-dimensional, and $U\le V$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $U^0=\{\vb{0}\}\iff U=V$
+\item $U^0=V^\prime\iff U=\{\vb{0}\}$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item \begin{align*}
+U^0=\{\vb{0}\}&\iff\dim U^0=0\\
+&\iff\dim U=\dim V&&[\text{by \ref{lemma:dimension-annihilator}}]\\
+&\iff U=V
+\end{align*}
+\item \begin{align*}
+U^0=V^\prime&\iff\dim U^0=\dim V^\prime\\
+&\iff\dim U^0=\dim V&&[\text{by \ref{lemma:dimension-dual-space}}]\\
+&\iff\dim U=0&&[\text{by \ref{lemma:dimension-annihilator}}]\\
+&\iff U=\{\vb{0}\}
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+The next result concerns $\ker T^\prime$.
+
+\begin{lemma}\label{lemma:dual-map-kernel}
 Suppose $V$ and $W$ are finite-dimensional, $T\in\mathcal{L}(V,W)$. Then
 \begin{enumerate}[label=(\roman*)]
-\item $\ker T^*=(\im T)^\circ$;
-\item $\dim\ker T^*=\dim\ker T+\dim W-\dim V$.
+\item $\ker T^\prime=(\im T)^0$
+\item $\dim\ker T^\prime=\dim\ker T+\dim W-\dim V$
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
-The next result can be useful because sometimes it is easier to verify that $T^*$ is injective than to show directly that $T$ is surjective.
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item \fbox{$\subset$} Let $\phi\in\ker T^\prime$. Then $0=T^\prime(\phi)=\phi\circ T$. Hence
+\[0=(\phi\circ T)(v)=\phi(Tv)\quad(\forall v\in V).\]
+Thus $\phi\in(\im T)^0$. This implies that $\ker T^\prime\subset(\im T)^0$.
 
-\begin{proposition}
+\fbox{$\supset$} Let $\phi\in(\im T)^0$. Then $\phi(Tv)=0$ for every $v\in V$. Hence $0=\phi\circ T=T^\prime(\phi)$, i.e., $\phi\in\ker T^\prime$. Thus $\phi\in\ker T^\prime$, which shows that $(\im T)^0\subset\ker T^\prime$.
+
+\item We have
+\begin{align*}
+\dim\ker T^\prime
+&=\dim(\im T)^0&&[\text{by (i)}]\\
+&=\dim W-\dim\im T&&[\text{by \ref{lemma:dimension-annihilator}}]\\
+&=\dim W-(\dim W-\dim\ker T)&&[\text{by fundamental theorem of linear maps}]\\
+&=\dim\ker T+\dim W-\dim V.
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+The next result can be useful because sometimes it is easier to verify that $T^\prime$ is injective than to show directly that $T$ is surjective.
+
+\begin{lemma}
 Suppose $V$ and $W$ are finite-dimensional, $T\in\mathcal{L}(V,W)$. Then
-\[T\text{ is surjective}\iff T^*\text{ is injective.}\]
-\end{proposition}
+\[T\text{ is surjective}\iff T^\prime\text{ is injective.}\]
+\end{lemma}
 
-The following result concerns $\im T^*$.
+\begin{proof}
+Let $T\in\mathcal{L}(V,W)$. 
+We have
+\begin{align*}
+T\text{ is surjective}
+&\iff\im T=W\\
+&\iff(\im T)^0=\{\vb{0}\}&&[\text{by \ref{lemma-annihilator-equal-0-or-whole-space}}]\\
+&\iff\im T^\prime=\{\vb{0}\}&&[\text{by \ref{lemma:dual-map-kernel}}]\\
+&\iff T^\prime\text{ is injective}
+\end{align*}
+\end{proof}
 
-\begin{proposition}
+The following result concerns $\im T^\prime$.
+
+\begin{lemma}\label{lemma:dual-map-image}
 Suppose $V$ and $W$ finite-dimensional, $T\in\mathcal{L}(V,W)$. Then
 \begin{enumerate}[label=(\roman*)]
-\item $\dim\im T^*=\dim\im T$;
-\item $\dim T^*=(\ker T)^\circ$.
+\item $\dim\im T^\prime=\dim\im T$
+\item $\im T^\prime=(\ker T)^0$
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
-\begin{proposition}
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item We have
+\begin{align*}
+\dim\im T^\prime
+&=\dim W^\prime-\dim\ker T^\prime&&[\text{by fundamental theorem of linear maps}]\\
+&=\dim W-\dim(\ker T)^0&&[\text{by \ref{lemma:dimension-dual-space} and \ref{lemma:dual-map-kernel}}]\\
+&=\dim\im T&&[\text{by \ref{lemma:dimension-annihilator}}]
+\end{align*}
+
+\item We first show that $\im T^\prime\subset(\ker T)^0$.
+
+Let $\phi\in\ker T^\prime$. Then there exists $\psi\in W^\prime$ such that $\phi=T^\prime(\psi)$.
+
+If $v\in\ker T$, then
+\[\phi(v)=\brac{T^\prime(\psi)}v=(\psi\circ T)(v)=\psi(Tv)=\psi(\vb{0})=\vb{0}.\]
+Hence $\phi\in(\ker T)^0$. This implies that $\im T^\prime\in(\ker T)^0$.
+
+We will complete the proof by showing that $\im T^\prime$ and $(\ker T)^0$ have the same dimension. 
+To do this, note that
+\begin{align*}
+\dim\im T^\prime
+&=\dim\im T&&[\text{by \ref{lemma:dimension-dual-space}}]\\
+&=\dim V-\ker T&&[\text{by fundamental theorem of linear maps}]\\
+&=\dim(\ker T)^0&&[\text{by \ref{lemma:dimension-annihilator}}]
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
 Suppose $V$ and $W$ are finite-dimensional, $T\in\mathcal{L}(V,W)$. Then
-\[T\text{ is injective}\iff T^*\text{ is surjective.}\]
-\end{proposition}
+\[T\text{ is injective}\iff T^\prime\text{ is surjective.}\]
+\end{lemma}
+
+\begin{proof}
+Let $T\in\mathcal{L}(V,W)$. 
+We have
+\begin{align*}
+T\text{ is injective}
+&\iff\ker T=\{\vb{0}\}\\
+&\iff(\ker T)^0=V^\prime&&[\text{by \ref{lemma-annihilator-equal-0-or-whole-space}}]\\
+&\iff\im T^\prime=V^\prime&&[\text{by \ref{lemma:dual-map-image}}]
+\end{align*}
+\end{proof}
+\pagebreak
 
 \subsection{Matrix of Dual of Linear Map}
-\begin{proposition}
+The setting for the next result is the assumption that we have a basis $\{v_1,\dots,v_n\}$ of $V$, along with its dual basis $\{\phi_1,\dots,\phi_n\}$ of $V^\prime$.
+We also have a basis $\{w_1,\dots,w_m\}$ of $W$, along with its dual basis $\{\psi_1,\dots,\psi_m\}$ of $W^\prime$. 
+
+Thus $\mathcal{M}(T)$ is computed with respect to the aforementioned bases of $V$ and $W$, and $\mathcal{M}(T^\prime)$ is computed with respect to the aforementioned dual bases of $W^\prime$ and $V^\prime$. 
+Using these bases gives the following result.
+
+\begin{lemma}
 Suppose $V$ and $W$ are finite-dimensional, $T\in\mathcal{L}(V,W)$. Then
-\[\mathcal{M}(T^*)=\brac{\mathcal{M}(T)}^t.\]
-\end{proposition}
+\[\mathcal{M}(T^\prime)=\mathcal{M}(T)^T.\]
+\end{lemma}
 
+\begin{proof}
+Let $\mathcal{M}(T)=A$, $\mathcal{M}(T^\prime)=C$. 
+From the definition of $\mathcal{M}(T^\prime)$ we have
+\[T^\prime(\psi_i)=\sum_{k=1}^{n}C_{ki}\phi_k.\]
+The left side of the equation above equals $\psi_i\circ T$. Thus applying both sides of the equation above to $v_j$ gives
+\begin{align*}
+(\psi_i\circ T)(v_j)
+&=\sum_{k=1}^{n}C_{ki}\phi_k(v_j)\\
+&=C_{ji}.
+\end{align*}
 
+We also have
+\begin{align*}
+(\psi_i\circ T)(v_j)
+&=\psi_i(Tv_j)\\
+&=\psi_i\brac{\sum_{k=1}^{m}A_{kj}w_k}\\
+&=\sum_{k=1}^{m}A_{kj}\psi_i(w_k)\\
+&=A_{ij}.
+\end{align*}
+
+Comparing the last line of the last two sets of equations, we have $C_{ji}=A_{ij}$. Thus $C=A^T$, so $\mathcal{M}(T^\prime)=\mathcal{M}(T)^T$ as desired.
+\end{proof}
 \pagebreak
 
 \section*{Exercises}
-\begin{exercise}[\cite{axler} 3A]
-Suppose $b,c\in\RR$. Define $T:\RR^3\to\RR^2$ by
+\begin{exercise}[\cite{ladr} 3A]
+Suppose $b,c\in\RR$. Define $T\colon \RR^3\to\RR^2$ by
 \[T(x,y,z)=(2x-4y+3z+b,6x+cxyz).\]
 Show that $T$ is linear if and only if $b=c=0$.
 \end{exercise}
 
-\begin{exercise}[\cite{axler} 3A Q11]
+\begin{exercise}[\cite{ladr} 3A Q11]
 Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$. Prove that $T$ is a scalar multiple of the identity if and only if $ST=TS$ for all $S\in\mathcal{L}(V)$.
 \end{exercise}
 
-\begin{exercise}[\cite{axler} 3B Q9]
+\begin{exercise}[\cite{ladr} 3B Q9]
 Suppose $T\in\mathcal{L}(V,W)$ is injective, $\{v_1,\dots,v_n\}$ is linearly independent in $V$. Prove that $\{Tv_1,\dots,Tv_n\}$ is linearly independent in $W$.
 \end{exercise}
 
@@ -1309,7 +1645,7 @@ Since $T$ is injective,
 since $\{v_1,\dots,v_n\}$ is linearly independent.
 \end{solution}
 
-\begin{exercise}[\cite{axler} 3B Q11]
+\begin{exercise}[\cite{ladr} 3B Q11]
 Suppose that $V$ is finite-dimensional, $T\in\mathcal{L}(V,W)$. Prove that there exists $U\le V$ such that
 \[U\cap\ker T=\{\vb{0}\}\quad\text{and}\quad\im T=T(U).\]
 \end{exercise}
@@ -1318,7 +1654,7 @@ Suppose that $V$ is finite-dimensional, $T\in\mathcal{L}(V,W)$. Prove that there
 
 \end{solution}
 
-\begin{exercise}[\cite{axler} 3B Q19]
+\begin{exercise}[\cite{ladr} 3B Q19]
 Suppose $W$ is finite-dimensional, $T\in\mathcal{L}(V,W)$. Prove that $T$ is injective if and only if there exists $S\in\mathcal{L}(W,V)$ such that $ST$ is the identity operator on $V$.
 \end{exercise}
 
@@ -1326,11 +1662,11 @@ Suppose $W$ is finite-dimensional, $T\in\mathcal{L}(V,W)$. Prove that $T$ is inj
 
 \end{solution}
 
-\begin{exercise}[\cite{axler} 3B Q20]
+\begin{exercise}[\cite{ladr} 3B Q20]
 Suppose $W$ is finite-dimensional, $T\in\mathcal{L}(V,W)$. Prove that $T$ is surjective if and only if there exists $S\in\mathcal{L}(W,V)$ such that $TS$ is the identity operator on $W$.
 \end{exercise}
 
-\begin{exercise}[\cite{axler} 3B 22]
+\begin{exercise}[\cite{ladr} 3B 22]
 Suppose $U,V$ are finite-dimensional, $S\in\mathcal{L}(V,W)$, $T\in\mathcal{L}(U,V)$. Prove that
 \[\dim\ker ST\le\dim\ker S+\dim\ker T.\]
 \end{exercise}
@@ -1339,7 +1675,7 @@ Suppose $U,V$ are finite-dimensional, $S\in\mathcal{L}(V,W)$, $T\in\mathcal{L}(U
 
 \end{solution}
 
-\begin{exercise}[\cite{axler} 3D]
+\begin{exercise}[\cite{ladr} 3D]
 Suppose $T\in\mathcal{L}(V,W)$ is invertible. Show that $T^{-1}$ is invertible and
 \[\brac{T^{-1}}^{-1}=T.\]
 \end{exercise}
@@ -1350,9 +1686,11 @@ $T^{-1}$ is invertible because there exists $T$ such that $TT^{-1}=T^{-1}T=I$. S
 thus $\brac{T^{-1}}^{-1}=T$.
 \end{solution}
 
+3C Q15,16,17
+
 3D Q11,12,17,22,23,24
 
-\begin{exercise}[\cite{axler} 3D]
+\begin{exercise}[\cite{ladr} 3D]
 Suppose $T\in\mathcal{L}(U,V)$ and $S\in\mathcal{L}(V,W)$ are both invertible linear maps. Prove that $ST\in\mathcal{L}(U,W)$ is invertible and that $(ST)^{-1}=T^{-1}S^{-1}$.
 \end{exercise}
 
@@ -1360,7 +1698,7 @@ Suppose $T\in\mathcal{L}(U,V)$ and $S\in\mathcal{L}(V,W)$ are both invertible li
 \[(ST)(T^{-1}S^{-1})=S(TT^{-1})S^{-1}=I=T^{-1}S^{-1}ST.\]
 \end{solution}
 
-\begin{exercise}[\cite{axler} 3D]
+\begin{exercise}[\cite{ladr} 3D]
 Suppose $V$ is finite-dimensional and $T\in\mathcal{L}(V,W)$. Prove that the following are equivalent:
 \begin{enumerate}[label=(\roman*)]
 \item $T$ is invertible;
@@ -1380,10 +1718,62 @@ since $T$ is injective and thus the only solution is all $a_i$ are identically z
 (iii)$\implies$(i) By the linear map lemma, there exists $S\in\mathcal{L}(V)$ such that $S(Tv_i)=v_i$ for all $i$. Such $S$ is the inverse of $T$ (one can verify) and thus $T$ is invertible.
 \end{solution}
 
-\begin{exercise}[\cite{axler} 3E]
-Suppose $U\le V$, $V/U$ is finite-dimensional. Prove that $V\cong U\times(V/U)$.
+\begin{exercise}[\cite{ladr} 3E Q3]
+Suppose $V_1,\dots,V_m$ are vector spaces. Prove that
+\[\mathcal{L}(V_1\times\cdots\times V_m,W)\cong\mathcal{L}(V_1,W)\times\cdots\times\mathcal{L}(V_m,W).\]
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 3E Q4]
+Suppose $V_1,\dots,V_m$ are vector spaces. Prove that
+\[\mathcal{L}(V,W_1\times\cdots\times W_m)\cong\mathcal{L}(V,W_1)\times\cdots\times\mathcal{L}(V,W_m).\]
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 3E Q5]
+For a positive integer $m$, define $V^m$ by
+\[V^m=\underbrace{V\times\cdots\times V}_{m\text{ times}}.\]
+Prove that $V^m\cong\mathcal{L}(\FF^m,V)$.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 3E Q6]
+Suppose that $v,x\in V$ and $U,W\le V$ are such that $v+U=x+W$. Prove that $U=W$.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 3E Q12, Barycentric coordinates]
+Suppose $v_1,\dots,v_m\in V$. Let
+\[A=\{\lambda_1v_1+\cdots+\lambda_mv_m\mid\lambda_i\in\FF,\lambda_1+\cdots+\lambda_m=1\}.\]
+\begin{enumerate}[label=(\roman*)]
+\item Prove that $A$ is a coset of some subspace of $V$.
+\item Prove that if $B$ is a coset of some subspace of $V$, and $\{v_1,\dots,v_m\}\subset B$, then $A\subset B$.
+\item Prove that $A$ is a coset of some subspace of $V$, where $\dim V<m$.
+\end{enumerate}
+
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 3E Q13]
+Suppose $U\le V$, and $V/U$ is finite-dimensional. Prove that $V\cong U\times(V/U)$.
 \end{exercise}
 
 \begin{solution}
 \[\dim V=\dim U+(\dim V-\dim U)=\dim U+\dim(V/U).\]
 \end{solution}
+
+\begin{exercise}[\cite{ladr} 3E Q14]
+Suppose $U,W\le V$ such that $V=U\oplus W$. Suppose $w_1,\dots,w_m$ is a basis of $W$. Prove that $w_1+U,\dots,w_m+U$ is a basis of $V/U$.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 3E Q15]
+
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 3E Q16]
+ Suppose $\phi\in\mathcal{L}(V,\FF)$ and $\phi\neq0$. Prove that $\dim V/\ker\phi=1$.
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 3E Q18]
+
+\end{exercise}
+
+\begin{exercise}[\cite{ladr} 3E Q19]
+Suppose $T\in\mathcal{L}(V,W)$ and $U\le V$. Let $\pi$ denote the quotient map from $V$ to $V/U$. Prove that there exists $S\in\mathcal{L}(V/U,W)$ such that
+\[T=S\circ\pi\iff U\subset\ker T.\]
+\end{exercise}

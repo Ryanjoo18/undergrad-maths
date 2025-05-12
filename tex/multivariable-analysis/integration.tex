@@ -1,0 +1,162 @@
+\chapter{Integration}
+\section{Basic Definitions}
+Recall that a partition $P$ of a closed interval $[a,b]$ is a set of points $t_0,\dots,t_k$ where
+\[a=t_0\le t_1\le\cdots\le t_k=b.\]
+The partition $P$ divides the interval $[a,b]$ into $k$ subintervals $[t_{i-1},t_i]$.
+
+More generally, a \emph{partition} of a rectangle $[a_1,b_1]\times\cdots\times[a_n,b_n]$ is a collection
+\[P=(P_1,\dots,P_n),\]
+where each $P_i$ is a partition of the interval $[a_i,b_i]$. 
+
+\begin{example}
+Suppose $P_1=\{t_0,\dots,t_k\}$ is a partition of $[a_1,b_1]$ and $P_2=\{s_0,\dots,s_l\}$ is a partition of $[a_2,b_2]$. Then the partition $P=(P_1,P_2)$ of $[a_1,b_1]\times[a_2,b_2]$ divides the closed rectangle into $k\cdot l$ subrectangles of the form $[t_{i-1},t_i]\times[s_{j-1},s_j]$.
+\end{example}
+
+In general, if $P_i$ divides $[a_i,b_i]$ into $N_i$ subintervals, then $P=(P_1,\dots,P_n)$ divides $[a_1,b_1]\times\cdots\times[a_n,b_n]$ into $N=N_1\cdots N_n$ subrectangles. 
+These subrectangles are called \emph{subrectangles of the partition} $P$.
+
+Let $A\subset\RR^n$ be a rectangle, $f\colon A\to\RR$ be a bounded function, and $P$ be a partition of $A$. For each subrectangle $S$ of the partition, let
+\begin{align*}
+m_S(f)&=\inf_{x\in S}f(x)\\
+M_S(f)&=\sup_{x\in S}f(x)
+\end{align*}
+and let $v(S)$ be the volume of $S=[a_1,b_1]\times\cdots\times[a_n,b_n]$, defined by
+\[v(S)=(b_1-a_1)\cdots(b_n-a_n).\]
+
+The \emph{lower} and \emph{upper sums} of $f$ for $P$ are defined by
+\begin{align*}
+L(f,P)&=\sum_{S}m_S(f)\cdot v(S),\\
+U(f,P)&=\sum_{S}M_S(f)\cdot v(S).
+\end{align*}
+Clearly $L(f,P)\le U(f,P)$.
+
+We say a partition $P^\prime$ \emph{refines} $P$ if each subrectangle of $P^\prime$ is in a subrectangle of $P$.
+
+\begin{lemma}
+Suppose the partition $P^\prime$ refines $P$. Then
+\[L(f,P)\le L(f,P^\prime)\quad\text{and}\quad U(f,P^\prime)\le U(f,P).\]
+\end{lemma}
+
+\begin{proof}
+Each subrectangle $S$ of $P$ is divided into several subrectangles $S_1,\dots,S_\alpha$ of $P^\prime$, so $v(S)=v(S_1)+\cdots+v(S_\alpha)$. Now $m_S(f)\le m_{S_i}(f)$, since the values $f(x)$ for $x\in S$ include all values $f(x)$ for $x\in S_i$ (and possibly smaller ones). Thus
+\begin{align*}
+m_S(f)\cdot v(S)
+&=m_S(f)\cdot v(S_1)+\cdots+m_S(f)\cdot v(S_\alpha)\\
+&\le m_{S_1}(f)\cdot v(S_1)+\cdots+m_{S_\alpha}(f)\cdot v(S_\alpha).
+\end{align*}
+The sum, for all $S$, of the terms on the LHS is $L(f,P)$, while the sum of all the terms on the RHS is $L(f,P^\prime)$. Hence $L(f,P)<L(f,P^\prime)$. 
+The proof for upper sums is similar.
+\end{proof}
+
+\begin{corollary}
+If $P$ and $P^\prime$ are any two partitions, then $L(f,P^\prime)\le U(f,P)$.
+\end{corollary}
+
+\begin{proof}
+Let $P^{\prime\prime}$ be a partition which refines both $P$ and $P^\prime$. Then
+\[L(f,P^\prime)\le L(f,P^{\prime\prime})\le U(f,P^{\prime\prime})\le U(f,P).\]
+\end{proof}
+
+Define the \emph{upper} and \emph{lower integrals} of $f$ over $A$ by
+\begin{align*}
+\upperint_{A}f&=\inf_{P\in\mathcal{P}(A)}U(f,P)\\
+\lowerint_{A}f&=\sup_{P\in\mathcal{P}(A)}L(f,P)
+\end{align*}
+where $\mathcal{P}(A)$ denotes the set of all partitions of $A$.
+
+The previous result implies that the sup of all lower sums for $f$ is less than or equal to the inf of all upper sums for $f$; in other words,
+\[\lowerint_{A}f\le\upperint_{A}f.\]
+
+If the two values coincide, we say $f$ is integrable:
+
+\begin{definition}
+We say a bounded function $f\colon A\to\RR$ is \vocab{integrable} on the rectangle $A$ if
+\[\lowerint_{A}f=\upperint_{A}f.\]
+\end{definition}
+
+This common number is called the \emph{integral} of $f$ over $A$, and denoted 
+\[\int_A f.\]
+Often, the notation
+\[\int_{A} f(x_1,\dots,x_n)\dd{x_1}\cdots\dd{x_n}\]
+is used.
+If $f\colon[a,b]\to\RR$, then this coincides with the Riemann integral: $\int_{a}^{b}f=\int_{[a,b]}f$.
+
+A simple but useful criterion for integrability is provided by the next result.
+
+\begin{lemma}[Integrability criterion]
+A bounded function $f\colon A\to\RR$ is integrable if and only if
+\[\forall\epsilon>0,\quad\exists P,\quad U(f,P)-L(f,P)<\epsilon.\]
+\end{lemma}
+
+This means we can make the upper and lower sums arbitrarily close.
+
+\begin{proof} \
+
+\forward Suppose $f$ is integrable. Then 
+\[\sup_{P\in\mathcal{P}(A)}L(f,P)=\inf_{P\in\mathcal{P}(A)}U(f,P).\]
+Thus for any $\epsilon>0$, there exists partitions $P$ and $P^\prime$ such that
+\[U(f,P)-L(f,P^\prime)<\epsilon.\]
+Let $P^{\prime\prime}$ be a common refinement of $P$ and $P^\prime$. Then
+\[U(f,P^{\prime\prime})-L(f,P^{\prime\prime})\le U(f,P)-L(f,P^\prime)<\epsilon.\]
+
+\backward Let $\epsilon>0$ be given. Suppose there exists a partition $P$ such that $U(f,P)-L(f,P)<\epsilon$. 
+Then it is clear that
+\[\sup_{P\in\mathcal{P}(A)}L(f,P)=\inf_{P\in\mathcal{P}(A)}U(f,P).\]
+Hence $f$ is integrable.
+\end{proof}
+
+In the following sections we will characterize the integrable functions and discover a method of computing integrals. 
+For the present we consider two functions, one integrable and one not.
+
+\begin{example}[Constant function]
+Let $f\colon A\to\RR$ be a constant function, $f(x)=c$. Then for any partition $P$ and subrectangle $S$, we have
+\[m_S(f)=M_S(f)=c,\]
+so that
+\[L(f,P)=U(f,P)=\sum_{S}c\cdot v(S)=c\cdot v(A).\]
+Hence $\int_{A}f=c\cdot v(A)$.
+\end{example}
+
+\begin{example}[Dirichlet's function]
+Let $f\colon[0,1]\times[0,1]\to\RR$ be defined by
+\[f(x,y)=\begin{cases}
+0&(x\in\QQ)\\
+1&(x\in\RR\setminus\QQ)
+\end{cases}\]
+If $P$ is a partition, then every subrectangle $S$ will contain points $(x,y)$ with $x$ rational, and also points $(x,y)$ with $x$ irrational. 
+Hence $m_S(f)=0$ and $M_S(f)=1$, so
+\begin{align*}
+L(f,P)&=\sum_{S}0\cdot v(S)=0\\
+U(f,P)&=\sum_{S}1\cdot v(S)=v\brac{[0,1]\times[0,1]}=1.
+\end{align*}
+Therefore $f$ is not integrable.
+\end{example}
+
+\section{Measure Zero and Content Zero}
+\begin{definition}[Measure zero]
+We say $A\subset\RR^n$ has \vocab{measure $0$}, if for every $\epsilon>0$ there exists a cover $\{U_1,U_2,\dots\}$ of $A$ by closed rectangles such that
+\[\sum_{n=1}^{\infty}v(U_n)<\epsilon.\]
+\end{definition}
+
+It is obvious (but nevertheless useful to remember) that if $A$ has measure $0$ and $B\subset A$, then $B$ has measure $0$. 
+The reader may verify that open rectangles may be used instead of closed rectangles in the definition of measure $0$.
+
+\begin{example}
+A set with only finitely many points clearly has measure $0$.
+\end{example}
+
+\begin{lemma}
+If $A$ has countably many points, then $A$ also has measure $0$.
+\end{lemma}
+
+\begin{lemma}
+If $A=A_1\cup A_2\cup\cdots$ and each $A_n$ has measure $0$, then $A$ has measure $0$.
+\end{lemma}
+
+\begin{definition}[Content zero]
+
+\end{definition}
+
+\section{Integrable Functions}
+\section{Fubini's Theorem}
+\section{Partitions of Unity}
+\section{Change of Variables}

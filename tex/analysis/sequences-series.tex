@@ -1,52 +1,48 @@
 \chapter{Numerical Sequences and Series}\label{chap:num-seq-series}
-\begin{summary}
-\item Sequences. Convergence, subsequences, Cauchy sequences. Limit superior and inferior.
-\item Series. Convergence tests.
-\end{summary}
-
 Throughout, let $(X,d)$ be a metric space.
 
 \section{Sequences}
 \subsection{Convergence}
-A \vocab{sequence} $(x_n)$ in $X$ is a function $f:\NN\to X$ which maps $n\mapsto x_n$.
+A \vocab{sequence} $(a_n)$ in $X$ is a function $f\colon\NN\to X$ which maps $n\mapsto a_n$.
 
-The \emph{range} of a sequence $(x_n)$ is the set
-\[\{a\in X\mid\exists n\in\NN, a=x_n\}.\]
-Note that the range of a sequence may be a finite set or it may be infinite. $(x_n)$ is \emph{bounded} if its range is bounded.
+The \emph{range} of a sequence $(a_n)$ is the set
+\[\{x\in X\mid\exists n\in\NN, x=a_n\}.\]
+Note that the range of a sequence may be a finite set or it may be infinite. $(a_n)$ is \emph{bounded} if its range is bounded.
 
 \begin{definition}
-A sequence $(x_n)$ \vocab{converges}\index{convergence} to $x\in X$, denoted by $x_n\to x$, if
-\[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall n\ge N,\quad d(x_n,x)<\epsilon.\]
-We call $x$ a \emph{limit} of $(x_n)$. 
-If $(x_n)$ does not converge, it is said to \emph{diverge}.
+A sequence $(a_n)$ \vocab{converges}\index{convergence} to $a\in X$, denoted by $a_n\to a$, if
+\[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall n\ge N,\quad d(a_n,a)<\epsilon.\]
+We call $a$ a \emph{limit} of $(a_n)$. 
+If $(a_n)$ does not converge, it is said to \emph{diverge}.
 \end{definition}
 
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \draw[color=blue, dashed, thick](6,0) circle (1.0cm);
-\draw[fill=black] (6,0) circle[radius=0.05cm] node [anchor=west] {$x$};
+\draw[fill=black] (6,0) circle[radius=0.05cm] node [anchor=west] {$a$};
 \draw[<->] (6,0) -- (5.29,0.71) node [midway, below] {$\epsilon$};
 
-\draw[fill=black] (0,0) circle[radius=0.05cm] node [anchor=north] {$x_1$};
-\draw[fill=black] (1,1) circle[radius=0.05cm] node [anchor=north] {$x_2$};
-\draw[fill=black] (2,-0.5) circle[radius=0.05cm] node [anchor=north] {$x_3$};
+\draw[fill=black] (0,0) circle[radius=0.05cm] node [anchor=north] {$a_1$};
+\draw[fill=black] (1,1) circle[radius=0.05cm] node [anchor=north] {$a_2$};
+\draw[fill=black] (2,-0.5) circle[radius=0.05cm] node [anchor=north] {$a_3$};
 \draw[fill=black] (3,0.5) circle[radius=0.05cm];
 \draw[fill=black] (4,0) circle[radius=0.05cm];
-\draw[fill=black] (5.2,0.2) circle[radius=0.05cm] node [anchor=north] {$x_N$};
-\draw[fill=black] (5.4,-0.6) circle[radius=0.05cm] node [anchor=north] {$x_{N+1}$};
-\draw[fill=black] (6.5,-0.5) circle[radius=0.05cm] node [anchor=north] {$x_{N+2}$};
+\draw[fill=black] (5.2,0.2) circle[radius=0.05cm] node [anchor=north] {$a_N$};
+\draw[fill=black] (5.4,-0.6) circle[radius=0.05cm] node [anchor=north] {$a_{N+1}$};
+\draw[fill=black] (6.5,-0.5) circle[radius=0.05cm] node [anchor=north] {$a_{N+2}$};
 \end{tikzpicture}
 \caption{Convergence of sequence}
 \end{figure}
 
 \begin{remark}
-This limit process conveys the intuitive idea that $x_n$ can be made arbitrarily close to $x$, provided that $n$ is sufficiently large. (Equivalently, if we remove more and more initial terms from the sequence, we see that the \emph{tail} of the sequence should be increasingly closer to $x$.)
+This limit process conveys the intuitive idea that $a_n$ can be made arbitrarily close to $a$, provided that $n$ is sufficiently large. 
+(Equivalently, if we remove more and more initial terms from the sequence, the \emph{tail} of the sequence is increasingly closer to $a$.)
 \end{remark}
 
 \begin{remark}
-If $x_n\not\to x$, simply negate the definition for convergence:
-\[\exists\epsilon>0,\quad\forall N\in\NN,\quad\exists n\ge N,\quad d(x_n,x)\ge\epsilon.\]
+If $a_n\not\to a$, simply negate the definition for convergence:
+\[\exists\epsilon>0,\quad\forall N\in\NN,\quad\exists n\ge N,\quad d(a_n,a)\ge\epsilon.\]
 \end{remark}
 
 \begin{remark}
@@ -56,23 +52,23 @@ From the definition, the convergence of a sequence depends not only on the seque
 \begin{example}
 $\frac{1}{n}\to 0$.
 \begin{proof}
-Fix $\epsilon>0$. By the Archimedian property, there exists $N\in\NN$ such that $\frac{1}{N}<\epsilon$. Take $N=\floor{\frac{1}{\epsilon}}+1$. Then for all $n\ge N$,
+Fix $\epsilon>0$. By the Archimedean property, there exists $N\in\NN$ such that $\frac{1}{N}<\epsilon$. Take $N=\floor{\frac{1}{\epsilon}}+1$. Then for all $n\ge N$,
 \[\absolute{\frac{1}{n}-0}=\frac{1}{n}\le\frac{1}{N}=\frac{1}{\floor{\frac{1}{\epsilon}}+1}<\frac{1}{\frac{1}{\epsilon}}=\epsilon\]
 as desired. Therefore $\frac{1}{n}\to0$.
 \end{proof}
 \end{example}
 
-A useful tip for finding the required $N$ (in terms of $\epsilon$) is to work backwards from the result we wish to show, as illustrated in the following example.
+A useful tip for finding the required $N$ (in terms of $\epsilon$) is to \emph{work backwards} from the result we wish to show, as illustrated in the following example.
 
 \begin{example}
 Let $a_n=1+(-1)^n\frac{1}{\sqrt{n}}$. Then $a_n\to 1$.
 
 Before our proof, we aim to find some $N\in\NN$ such that if $n\ge N$ then
 \begin{align*}
-|a_n-1|&<\epsilon\\
-\frac{1}{\sqrt{n}}=\absolute{(-1)^n\frac{1}{\sqrt{n}}}&<\epsilon\\
-\frac{1}{n}&<\epsilon^2\\
-n&>\frac{1}{\epsilon^2}
+&|a_n-1|<\epsilon\\
+\iff&\frac{1}{\sqrt{n}}=\absolute{(-1)^n\frac{1}{\sqrt{n}}}<\epsilon\\
+\iff&\frac{1}{n}<\epsilon^2\\
+\iff&n>\frac{1}{\epsilon^2}
 \end{align*}
 Hence take $N=\floor{\frac{1}{\epsilon^2}}+1$.
 
@@ -92,69 +88,74 @@ If a sequence converges, then its limit is unique.
 \end{lemma}
 
 \begin{proof}
-Let $(x_n)$ be a sequence in $X$. Suppose that $x_n\to x$ and $x_n\to x^\prime$ for $x,x^\prime\in X$. We will show that $x^\prime=x$.
+Let $(a_n)$ be a sequence in $X$. Suppose that $a_n\to a$ and $a_n\to a^\prime$ for $a,a^\prime\in X$. We will show that $a^\prime=a$.
 
 Let $\epsilon>0$ be given. Then there exists $N,N^\prime\in\NN$ such that
 \begin{align*}
-n\ge N&\implies d(x_n,x)<\frac{\epsilon}{2}\\
-n\ge N^\prime&\implies d(x_n,x^\prime)<\frac{\epsilon}{2}
+n\ge N&\implies d(a_n,a)<\frac{\epsilon}{2}\\
+n\ge N^\prime&\implies d(a_n,a^\prime)<\frac{\epsilon}{2}
 \end{align*}
-Take $N_1\coloneqq\max\{N,N^\prime\}$. If $n\ge N_1$, then both hold. By the triangle inequality,
-\[d(x,x^\prime)\le d(x,x_n)+d(x_n,x^\prime)<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.\]
-Since this holds for all $\epsilon>0$, we must have $d(x,x^\prime)=0$. Hence $x=x^\prime$.
+Take $N_1\colonequals\max\{N,N^\prime\}$. If $n\ge N_1$, then both hold. By the triangle inequality,
+\[d(a,a^\prime)\le d(a,a_n)+d(a_n,a^\prime)<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.\]
+Since this holds for all $\epsilon>0$, we must have $d(a,a^\prime)=0$. Hence $a=a^\prime$.
 \end{proof}
 
 Since the limit is unique, we can give it a notation.
 
 \begin{notation}
-If $(x_n)$ converges to $x$, we denote $\displaystyle\lim_{n\to\infty}x_n=x$.
+If $(a_n)$ converges to $a$, denote $\displaystyle\lim_{n\to\infty}a_n=a$.
 \end{notation}
 
 We now outline some important properties of convergent sequences in metric spaces.
 
-\begin{proposition}
-Let $(x_n)$ be a sequence in $X$.
+\begin{lemma}
+Let $(a_n)$ be a sequence in $X$.
 \begin{enumerate}[label=(\roman*)]
-\item $x_n\to x$ if and only if every open ball of $x$ contains $x_n$ for all but finitely many $n$.
-\item If $(x_n)$ converges, then $(x_n)$ is bounded.
-\item Suppose $E\subset X$. Then $x$ is a limit point of $E$ if and only if there exists a sequence $(x_n)$ in $E\setminus\{x\}$ such that $x_n\to x$.
+\item $a_n\to a$ if and only if every open ball of $a$ contains $a_n$ for all but finitely many $n$.
+\item Every convergent sequence is bounded.
+\item Suppose $E\subset X$. Then $a$ is a limit point of $E$ if and only if there exists a sequence $(a_n)$ in $E\setminus\{a\}$ such that $a_n\to a$.
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item \fbox{$\implies$} Suppose $x_n\to x$. Let $\epsilon>0$ be given, then there exists $N\in\NN$ such that
-\[n\ge N\implies d(x_n,x)<\epsilon.\]
-Corresponding to this $\epsilon$, consider the open ball $B_\epsilon(x)$. Then by definition, for $y\in X$, 
-\[d(y,x)<\epsilon\implies y\in B_\epsilon(x).\]
-Hence $n\ge N$ implies $x_n\in B_\epsilon(x)$.
+\item \fbox{$\implies$} Suppose $a_n\to a$. Let $\epsilon>0$ be given, there exists $N\in\NN$ such that
+\[n\ge N\implies d(a_n,a)<\epsilon\implies B_\epsilon(a).\]
+Hence $n\ge N$ implies $a_n\in B_\epsilon(a)$.
 
-\fbox{$\impliedby$} Suppose every open ball of $x$ contains all but finitely many of the $x_n$.
+\fbox{$\impliedby$} Suppose every open ball of $a$ contains all but finitely many of the $a_n$.
 
-Let $\epsilon>0$ be given. Consider the open ball $B_\epsilon(x)$. Since $B_\epsilon(x)$ is a open ball of $x$, it will also eventually contain all $x_n$; that is, there exists $N\in\NN$ such that if $n\ge N$, then $x_n\in B_\epsilon(x)$, i.e. $d(x_n,x)<\epsilon$. Hence $x_n\to x$.
+Let $\epsilon>0$ be given. Consider the open ball $B_\epsilon(a)$. Since $B_\epsilon(a)$ is a open ball of $a$, it will also eventually contain all $a_n$; that is, there exists $N\in\NN$ such that if $n\ge N$, then $a_n\in B_\epsilon(a)$, i.e. $d(a_n,a)<\epsilon$. Hence $a_n\to a$.
 
-\item Suppose $x_n\to x$. Let $\epsilon>0$ be given. Then there exists $N\in\NN$ such that $n\ge N$ implies $d(x_n,x)<1$. Now let
-\[r=\max\{1,d(x_1,x),\dots,d(x_N,x)\}.\]
-Then $d(x_n,x)\le r$ for $n=1,2,\dots,N$, so the range of $x_n$ is bounded by $B_r(x)$. Hence $(x_n)$ is bounded.
+\item Suppose $a_n\to a$. Take $\epsilon=1$, there exists $N\in\NN$ such that
+\[n\ge N\implies d(a_n,a)<1.\]
+Let
+\[r=\max\{1,d(a_1,a),\dots,d(a_N,a)\},\]
+then $d(a_n,a)\le r$, so the range of $a_n$ is bounded by $B_r(a)$. Hence $(a_n)$ is bounded.
 
-\item \fbox{$\implies$} Suppose $x$ is a limit point of $E$. 
+\item \fbox{$\implies$} Suppose $a$ is a limit point of $E$. 
 
-Consider a sequence of open balls $\brac{B_\frac{1}{n}(x)}$, for $n\in\NN$. Since $x$ is a limit point, each open ball intersects with $E$ at some point which is not $x$. We pick one such point $x_n$ from each $B_\frac{1}{n}(x)\cap E$. Then
-\[d(x_n,x)<\frac{1}{n}.\]
-Let $\epsilon>0$ be given. Then by the Archimedian property, there exists $N\in\NN$ such that $\frac{1}{N}<\epsilon$. If $n\ge N$,
-\[d(x_n,x)\le\frac{1}{n}\le\frac{1}{N}<\epsilon,\]
-which shows that $x_n\to x$.
+Consider a sequence of open balls $\brac{B_\frac{1}{n}(a)}$, for $n\in\NN$. Since $a$ is a limit point, each open ball intersects with $E$ at some point which is not $a$. We pick one such point $a_n$ from each $B_\frac{1}{n}(a)\cap E$. Then
+\[d(a_n,a)<\frac{1}{n}.\]
+Let $\epsilon>0$ be given. By the Archimedean property, there exists $N\in\NN$ such that $\frac{1}{N}<\epsilon$. If $n\ge N$,
+\[d(a_n,a)\le\frac{1}{n}\le\frac{1}{N}<\epsilon,\]
+which shows that $a_n\to a$.
 
-\fbox{$\impliedby$} Suppose that there exists a sequence $(x_n)$ in $E\setminus\{x\}$ such that $x_n\to x$. Then for each open ball $B_\epsilon(x)$, we can find some $N\in\NN$ such that if $n\in\NN$ then
-\[x_n\in B_\epsilon(x).\]
-Since $x_n\in E\setminus\{x\}$, this shows that $x$ is a limit point of $E$.
+\fbox{$\impliedby$} Suppose that there exists a sequence $(a_n)$ in $E\setminus\{a\}$ such that $a_n\to a$. Then for each open ball $B_\epsilon(a)$, we can find some $N\in\NN$ such that if $n\in\NN$ then
+\[a_n\in B_\epsilon(a).\]
+Since $a_n\in E\setminus\{a\}$, this shows that $a$ is a limit point of $E$.
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}[Ordering]
+\begin{remark}
+A consequence of (ii) is its contrapositive: any unbounded sequence is divergent. 
+Note that the converse is not true; a counterexample is $(-1)^n$.
+\end{remark}
+
+\begin{lemma}[Ordering]
 Suppose $(a_n)$ and $(b_n)$ are convergent sequences, and $a_n \le b_n$. Then
 \[\lim_{n\to\infty}a_n\le\lim_{n\to\infty}b_n.\]
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Let $\displaystyle a=\lim_{n\to\infty}a_n$, $\displaystyle b=\lim_{n\to\infty}b_n$. Suppose, for a contradiction, that $a>b$.
@@ -175,7 +176,7 @@ so $a_n>b_n$, which is a contradiction.
 If $a_n<b_n$, we may not necessarily have $\displaystyle\lim_{n\to\infty}a_n<\lim_{n\to\infty}b_n$. For instance, $-\frac{1}{n}<\frac{1}{n}$ but their limits are both $0$.
 \end{remark}
 
-\begin{proposition}[Arithmetic properties]
+\begin{lemma}[Arithmetic properties]\label{lemma:arithmetic-properties-limit-sequences}
 Suppose $(a_n)$ and $(b_n)$ are convergent seqeunces in $\CC$; let $\displaystyle a=\lim_{n\to\infty}a_n$, $\displaystyle b=\lim_{n\to\infty}b_n$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $\displaystyle\lim_{n\to\infty}ca_n=ca$, where $c$ is a constant\hfill(scalar multiplication)
@@ -183,7 +184,7 @@ Suppose $(a_n)$ and $(b_n)$ are convergent seqeunces in $\CC$; let $\displaystyl
 \item $\displaystyle\lim_{n\to\infty}(a_n b_n)=ab$\hfill(multiplication)
 \item $\displaystyle\lim_{n\to\infty}\frac{a_n}{b_n}=\frac{a}{b}$ ($b_n\neq0$, $b\neq0$)\hfill(division)
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
@@ -230,10 +231,43 @@ Hence for $n\ge N$,
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}[Squeeze theorem]
+We now prove the analogue for Euclidean spaces.
+
+\begin{lemma} \
+\begin{enumerate}[label=(\roman*)]
+\item Suppose $\vb{x}_n\in\RR^k$ ($n=1,2,\dots$) and
+\[\vb{x}_n=(\alpha_{1,n},\dots,\alpha_{k,n}).\]
+Then $(\vb{x}_n)$ converges to $\vb{x}=(\alpha_1,\dots,\alpha_k)$ if and only if
+\[\lim_{n\to\infty}\alpha_{i,n}=\alpha_i\quad(1\le i\le k).\]
+
+\item Suppose $(\vb{x}_n)$ and $(\vb{y}_n)$ are sequences in $\RR^k$, $(\beta_n)$ is a sequence of real numbers, and $\vb{x}_n\to\vb{x}$, $\vb{y}_n\to\vb{y}$, $\beta_n\to\beta$. Then
+\[\lim_{n\to\infty}(\vb{x}_n+\vb{y}_n)=\vb{x}+\vb{y},\quad\lim_{n\to\infty}\vb{x}_n\cdot\vb{y}_n=\vb{x}\cdot\vb{y},\quad\lim_{n\to\infty}\beta_n\vb{x}_n=\beta\vb{x}.\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} \
+\begin{enumerate}[label=(\roman*)]
+\item \forward Suppose $\vb{x}_n\to\vb{x}$. From the definition of the norm in $\RR^k$, the inequalities 
+\[|\alpha_{i,n}-\alpha_i|\le\norm{\vb{x}_n-\vb{x}}\]
+follow immediately, which show that
+\[\lim_{n\to\infty}\alpha_{i,n}=\alpha_i\quad(1\le i\le k).\]
+
+\backward Suppose $\displaystyle\lim_{n\to\infty}\alpha_{i,n}=\alpha_i$ for $i=1,\dots,k$. Then to each $\epsilon>0$, there exists $N\in\NN$ such that $n\ge N$ implies
+\[|\alpha_{i,n}-\alpha_i|<\frac{\epsilon}{\sqrt{k}}\quad(i=1,\dots,k).\]
+Hence $n\ge N$ implies
+\[\norm{\vb{x}_n-\vb{x}}=\brac{\sum_{i=1}^{k}|\alpha_{i,n}-\alpha_i|^2}^{1/2}<\epsilon,\]
+so that $\vb{x}_n\to\vb{x}$.
+
+\item This follows from (i) and \ref{lemma:arithmetic-properties-limit-sequences}.
+\end{enumerate}
+\end{proof}
+
+The next result provides a useful method to evaluate limits of sequences.
+
+\begin{lemma}[Squeeze theorem]
 Let $a_n\le c_n\le b_n$ where $(a_n)$ and $(b_n)$ are convergent sequences such that $\displaystyle\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n=L$. Then $(c_n)$ is also a convergent sequence, and
 \[\lim_{n\to\infty}c_n=L.\]
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Let $\epsilon>0$ be given. There exist $N_1,N_2\in\NN$ such that
@@ -250,34 +284,40 @@ or
 Hence $(c_n)$ is convergent, and $c_n\to L$.
 \end{proof}
 
-Given a complex sequence $(z_n)$, there are two associated real sequences $\brac{\Re(z_n)}$ and $\brac{\Im(z_n)}$. The next result relates convergence of $(z_n)$ to convergence of $\brac{\Re(z_n)}$ and $\brac{\Im(z_n)}$.
+The following example is a classic application of the squeeze theorem.
 
-\begin{proposition}[Complex sequences]
-Let $(z_n)$ be a complex sequence. Write $z_n=x_n+iy_n$ with $x_n,y_n\in\RR$, so that $(x_n)$ and $(y_n)$ are real sequences. Then $(z_n)$ converges if and only if both $(x_n)$ and $(y_n)$ converge. Moreover, in the case where $(z_n)$ converges, we have
-\[\lim_{n\to\infty}z_n=\lim_{x\to\infty}x_n+i\lim_{n\to\infty}y_n.\]
-\end{proposition}
+\begin{example}
+Show that $\displaystyle\lim_{n\to\infty}\frac{\sin n}{n}=0$.
+\begin{proof}
+We have $-1\le \sin n\le 1$, so
+\[-\frac{1}{n}\le\frac{\sin n}{n}\le\frac{1}{n}.\]
+Now
+\[\lim_{n\to\infty}\frac{1}{n}=\lim_{n\to\infty}\brac{-\frac{1}{n}}=0,\]
+so the squeeze theorem yields the desired result.
+\end{proof}
+\end{example}
 \pagebreak
 
 \subsection{Subsequences}
 \begin{definition}[Subsequence]
-Given a sequence $(x_n)$, consider a sequence $(n_k)$ of positive integers such that $n_1<n_2<\cdots$. Then $(x_{n_k})$ is called a \vocab{subsequence}\index{subsequence} of $(x_n)$.
+Given a sequence $(a_n)$, consider a sequence $(n_k)$ of positive integers such that $n_1<n_2<\cdots$. Then $(a_{n_k})$ is called a \vocab{subsequence}\index{subsequence} of $(a_n)$.
 
-If $(x_{n_k})$ converges, its limit is called a \emph{subsequential limit} of $(x_n)$.
+If $(a_{n_k})$ converges, its limit is called a \emph{subsequential limit} of $(a_n)$.
 \end{definition}
 
 \begin{proposition}
-$(x_n)$ converges to $x$ if and only if every subsequence of $(x_n)$ converges to $x$.
+$(a_n)$ converges to $a$ if and only if every subsequence of $(a_n)$ converges to $a$.
 \end{proposition}
 
 \begin{proof} \
 
-\fbox{$\implies$} Suppose $x_n\to x$. Let $\epsilon>0$ be give. Then there exists $N\in\NN$ such that
-\[n\ge N\implies d(x_n,x)<\epsilon.\]
-Every subsequence of $(x_n)$ can be written in the form $(x_{n_k})$ where $n_1<n_2<\cdots$ is a strictly increasing sequence of positive integers. Pick $M$ such that $n_M\ge N$. Then
-\[k>M\implies n_k>n_M\ge N\implies d(x_{n_k},x)<\epsilon.\]
-Hence every subsequence of $(x_n)$ converges to $x$.
+\fbox{$\implies$} Suppose $a_n\to a$. Let $\epsilon>0$ be give. Then there exists $N\in\NN$ such that
+\[n\ge N\implies d(a_n,a)<\epsilon.\]
+Every subsequence of $(a_n)$ can be written in the form $(a_{n_k})$ where $n_1<n_2<\cdots$ is a strictly increasing sequence of positive integers. Pick $M$ such that $n_M\ge N$. Then
+\[k>M\implies n_k>n_M\ge N\implies d(a_{n_k},a)<\epsilon.\]
+Hence every subsequence of $(a_n)$ converges to $a$.
 
-\fbox{$\impliedby$} Suppose every subsequence of $(x_n)$ converges to $x$. Since $(x_n)$ is a subsequence of itself, we must have $x_n\to x$.
+\fbox{$\impliedby$} Suppose every subsequence of $(a_n)$ converges to $a$. Since $(a_n)$ is a subsequence of itself, we must have $a_n\to a$.
 \end{proof}
 
 \begin{proposition}
@@ -285,20 +325,26 @@ In a compact metric space, any sequence has a convergent subsequence.
 \end{proposition}
 
 \begin{proof}
-Suppose $(x_n)$ is a sequence in a compact metric space $X$.
+Suppose $(a_n)$ is a sequence in a compact metric space $X$.
 
-Let $E$ be the range of $(x_n)$. We have to consider two cases: (i) $E$ is finite, (ii) $E$ is infinite. For both cases, we will construct the desired convergent subsequence.
-\begin{enumerate}[label=(\roman*)]
-\item Notice that there are infinitely many terms in the sequence $(x_n)$, but only finitely many distinct terms in $E$. Hence by the pigeonhole principle, at least one term of $E$ appears infinitely many times in the sequence.
+Let $E$ be the range of $(a_n)$. We consider two cases:
+\begin{description}
+\item[Case 1: $E$ is finite.] Notice that there are infinitely many terms in the sequence $(a_n)$, but only finitely many distinct terms in $E$. 
+By the pigeonhole principle, at least one term of $E$ appears infinitely many times in the sequence.
 
-That is, there exists $x\in E$ and a sequence $(n_k)$ with $n_1<n_2<\cdots$ such that
-\[x_{n_1}=x_{n_2}=\cdots=x.\]
-This subsequence $(x_{n_k})$ that we have constructed evidently converges to $x$.
+That is, there exists $a\in E$ and a sequence $(n_k)$ with $n_1<n_2<\cdots$ such that
+\[a_{n_1}=a_{n_2}=\cdots=a.\]
+This subsequence $(a_{n_k})$ evidently converges to $a$.
 
-\item If $E$ is infinite, then $E$ is an infinite subset of a compact set. By \cref{prop:infinite-compact-lp}, $E$ has a limit point $x\in X$.
+\item[Case 2: $E$ is infinite.] If $E$ is infinite, then $E$ is an infinite subset of a compact set. By \ref{prop:infinite-compact-lp}, $E$ has a limit point $a\in X$.
 
-We now construct a subsequence $(x_{n_k})$ of $(x_n)$ such that $x_{n_k}\to x$. Choose $n_1$ so that $d(x,x_{n_1})<1$. Having chosen $n_1,\dots,n_{k-1}$, choose $n_k$ where $n_k>n_{k-1}$ such that $d(x,x_{n_k})<\frac{1}{k}$ (such $n_k$ exists due to \cref{prop:limit-point-inf-points}). Then $x_{n_k}\to x$.
-\end{enumerate}
+We now construct a subsequence $(a_{n_k})$ of $(a_n)$ such that $a_{n_k}\to a$.
+\begin{itemize}
+\item Choose $n_1$ so that $d(a,a_{n_1})<1$. 
+\item Having chosen $n_1,\dots,n_{k-1}$, choose $n_k$ where $n_k>n_{k-1}$ such that $d(a,a_{n_k})<\frac{1}{k}$ (such $n_k$ exists due to \ref{prop:limit-point-inf-points}).
+\end{itemize}
+Then $a_{n_k}\to a$.
+\end{description}
 \end{proof}
 
 \begin{corollary}[Bolzano--Weierstrass]
@@ -306,32 +352,33 @@ Every bounded sequence in $\RR^k$ has a convergent subsequence.
 \end{corollary}
 
 \begin{proof}
-By \cref{prop:closed-bounded-compact-inf-lp}, every bounded sequence in $\RR^k$ lives in a compact subset of $\RR^k$, and therefore it lives in a compact metric space. Hence by the previous result, it contains a convergent subsequence converging to a point in $\RR^k$.
+By \ref{prop:closed-bounded-compact-inf-lp}, every bounded sequence in $\RR^k$ lives in a compact subset of $\RR^k$, and therefore it lives in a compact metric space. Hence by the previous result, it contains a convergent subsequence converging to a point in $\RR^k$.
 \end{proof}
 
 \begin{lemma}
-Suppose $(x_n)$ is a sequence in $X$. Then the subsequential limits of $(x_n)$ form a closed subset of $X$.
+Suppose $(a_n)$ is a sequence in $X$. Then the subsequential limits of $(a_n)$ form a closed subset of $X$.
 \end{lemma}
 
 \begin{proof}
-Let $E$ be the set of all subsequential limits of $(x_n)$, let $q$ be a limit point of $E$. We want to show that $q\in E$.
+Let $E$ be the set of all subsequential limits of $(a_n)$, let $q$ be a limit point of $E$. We want to show that $q\in E$.
 
-Choose $n_1$ so that $x_{n_1}\neq q$. (If no such $n_1$ exists, then $E$ has only one point, and there is nothing to prove.) Put $\delta=d(q,x_{n_1})$. Suppose $n_1,\dots,n_{i-1}$ are chosen. Since $q$ is a limit point of $E$, there is an $x\in E$ with $d(x,q)<2^{-1}\delta$. Since $x\in E$, there is an $n_i>n_{i-1}$ such that $d(x,x_{n_k})<2^{-i}\delta$. Thus
-\[d(q,x_{n_k})<2^{1-i}\delta\]
-for $i=1,2,3,\dots$. This says that $(x_{n_k})$ converges to $q$. Hence $q\in E$.
+Choose $n_1$ so that $a_{n_1}\neq q$. (If no such $n_1$ exists, then $E$ has only one point, and there is nothing to prove.) Put $\delta=d(q,a_{n_1})$. Suppose $n_1,\dots,n_{i-1}$ are chosen. Since $q$ is a limit point of $E$, there is an $a\in E$ with $d(a,q)<2^{-1}\delta$. Since $a\in E$, there is an $n_i>n_{i-1}$ such that $d(a,a_{n_k})<2^{-i}\delta$. Thus
+\[d(q,a_{n_k})<2^{1-i}\delta\]
+for $i=1,2,3,\dots$. This says that $(a_{n_k})$ converges to $q$. Hence $q\in E$.
 \end{proof}
 \pagebreak
 
 \subsection{Cauchy Sequences}
-This is a very helpful way to determine whether a sequence is convergent or divergent, as it does not require the limit to be known. In the future you will see many instances where the convergence of all sorts of limits are compared with similar counterparts; generally we describe such properties as \emph{Cauchy criteria}.
+This is a very helpful way to determine whether a sequence is convergent or divergent, as it does not require the limit to be known. 
+Subsequently we will see many instances where the convergence of all sorts of limits are compared with similar counterparts; generally we describe such properties as \emph{Cauchy criteria}.
 
 \begin{definition}[Cauchy sequence]
-A sequence $(x_n)$ in $X$ is a \vocab{Cauchy sequence}\index{Cauchy sequence} if 
-\[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall n,m\ge N,\quad d(x_n,x_m)<\epsilon.\]
+A sequence $(a_n)$ in $X$ is a \vocab{Cauchy sequence}\index{Cauchy sequence} if 
+\[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall n,m\ge N,\quad d(a_n,a_m)<\epsilon.\]
 \end{definition}
 
 \begin{remark}
-Intuitively, we see that the distances between any two terms is sufficiently small after a certain point.
+Intuitively, the distances between any two terms becomes sufficiently small after a certain point.
 \end{remark}
 
 A natural question is regarding the relationship between convergent sequences and Cauchy sequences. We now address this.
@@ -339,7 +386,7 @@ A natural question is regarding the relationship between convergent sequences an
 \begin{proposition} \
 \begin{enumerate}[label=(\roman*)]
 \item In any metric space, every convergent sequence is a Cauchy sequence.
-\item If $X$ is a compact metric space and if $(x_n)$ is a Cauchy sequence in $X$, then $(x_n)$ converges to some point of $X$.
+\item If $X$ is a compact metric space and if $(a_n)$ is a Cauchy sequence in $X$, then $(a_n)$ converges to some point of $X$.
 \item In $\RR^k$, every Cauchy sequence converges. 
 \end{enumerate}
 \end{proposition}
@@ -350,77 +397,77 @@ The converse of (i) is not true. For instance, the sequence $\{3,3.1,3.14,3.141,
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item Suppose $x_n\to x$. Let $\epsilon>0$. There exists $N\in\NN$ such that for all $n\ge N$,
-\[d(x_n,x)<\frac{\epsilon}{2}.\]
+\item Suppose $a_n\to a$. Let $\epsilon>0$. There exists $N\in\NN$ such that for all $n\ge N$,
+\[d(a_n,a)<\frac{\epsilon}{2}.\]
 Then for all $n,m\ge N$,
-\[d(x_n,x_m)\le d(x_n,x)+d(x_m,x)<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon,\]
-as desired. Hence $(x_n)$ is a Cauchy sequence.
-\item Let $(x_n)$ be a Cauchy sequence in $X$. Since $X$ is compact, it is sequentially compact. Then there exists a subsequence $(x_{n_k})$ such that $x_{n_k}\to x$.
+\[d(a_n,a_m)\le d(a_n,a)+d(a_m,a)<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon,\]
+as desired. Hence $(a_n)$ is a Cauchy sequence.
+\item Let $(a_n)$ be a Cauchy sequence in $X$. Since $X$ is compact, it is sequentially compact. Then there exists a subsequence $(a_{n_k})$ such that $a_{n_k}\to a$.
 \begin{claim}
-$x_n\to x$.
+$a_n\to a$.
 \end{claim}
-Let $\epsilon>0$. Since $(x_n)$ is a Cauchy sequence, there exists $N_1\in\NN$ such that
-\[n,m\ge N_1\implies d(x_n-x_m)<\frac{\epsilon}{2}.\]
-$x_{n_k}\to x$ implies there exists $N_2\in\NN$ such that
-\[n_k\ge N_2\implies d(x_{n_k},x)<\frac{\epsilon}{2}.\]
+Let $\epsilon>0$. Since $(a_n)$ is a Cauchy sequence, there exists $N_1\in\NN$ such that
+\[n,m\ge N_1\implies d(a_n-a_m)<\frac{\epsilon}{2}.\]
+$a_{n_k}\to a$ implies there exists $N_2\in\NN$ such that
+\[n_k\ge N_2\implies d(a_{n_k},a)<\frac{\epsilon}{2}.\]
 Let $N=\max\{N_1,N_2\}$, fix some $n_k\ge N$. Then $n\ge N$ implies
-\[d(x_n,x)\le d(x_n,x_{n_k})+d(x_{n_k},x)<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.\]
+\[d(a_n,a)\le d(a_n,a_{n_k})+d(a_{n_k},a)<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.\]
 
-\item Suppose $(x_n)$ is a Cauchy sequence.
+\item Suppose $(a_n)$ is a Cauchy sequence.
 
 We perform three steps:
 \begin{itemize}
-\item We first show that $(x_n)$ is bounded:
+\item We first show that $(a_n)$ is bounded:
 
-Pick $N\in\NN$ such that $|x_n-x_N|\le 1$ for all $n\ge N$. Then
-\[|x_n|\le\max\{1+|x_N|,|x_1|,\dots,|x_{N-1}|\}.\]
+Pick $N\in\NN$ such that $|a_n-a_N|\le 1$ for all $n\ge N$. Then
+\[|a_n|\le\max\{1+|a_N|,|a_1|,\dots,|a_{N-1}|\}.\]
 
-\item Since $(x_n)$ is bounded, by Bolzano--Weierstrass, $(x_n)$ contains a subsequence $(x_{n_k})$ which converges to $x$.
+\item Since $(a_n)$ is bounded, by Bolzano--Weierstrass, $(a_n)$ contains a subsequence $(a_{n_k})$ which converges to $a$.
 
-\item We now show that $x_n\to x$.
+\item We now show that $a_n\to a$.
 
-Let $\epsilon>0$ be given. Since $(x_n)$ is a Cauchy sequence, there exists $N_1\in\NN$ such that
-\[n,m\ge N_1\implies|x_n-x_m|<\frac{\epsilon}{2}.\]
+Let $\epsilon>0$ be given. Since $(a_n)$ is a Cauchy sequence, there exists $N_1\in\NN$ such that
+\[n,m\ge N_1\implies|a_n-a_m|<\frac{\epsilon}{2}.\]
 
-Since $x_{n_k}\to x$, there exists $M\in\NN$ such that for all $k>M$,
-\[n_k>n_M\implies |x_{n_k}-x|<\frac{\epsilon}{2}.\]
+Since $a_{n_k}\to a$, there exists $M\in\NN$ such that for all $k>M$,
+\[n_k>n_M\implies |a_{n_k}-a|<\frac{\epsilon}{2}.\]
 Now since $n_1<n_2<\cdots$ is a sequence of strictly increasing positive integers, we can pick $i>M$ such that $n_k>N_1$. Then for all $n\ge N_1$, by setting $m=n_k$ we obtain
-\[ |x_n-x_{n_k}|<\frac{\epsilon}{2},\quad |x_{n_k}-x| < \frac{\epsilon}{2}.\]
+\[ |a_n-a_{n_k}|<\frac{\epsilon}{2},\quad |a_{n_k}-a| < \frac{\epsilon}{2}.\]
 Hence
-\[|x_n-x|\le|x_n-x_{n_k}|+|x_{n_k}-x|<\epsilon.\]
-Therefore $(x_n)$ is convergent, and $x_n\to x$.
+\[|a_n-a|\le|a_n-a_{n_k}|+|a_{n_k}-a|<\epsilon.\]
+Therefore $(a_n)$ is convergent, and $a_n\to a$.
 \end{itemize}
 \end{enumerate}
 \end{proof}
 
-\begin{definition}
+\begin{definition}[Complete metric space]
 A metric space $X$ is \vocab{complete} if every Cauchy sequence in $X$ converges.
 \end{definition}
 
 \begin{remark}
-The above result shows that that all compact metric spaces and all Euclidean spaces are complete. It also implies that every closed subset $E$ of a complete metric space $X$ is complete. (Every Cauchy sequence in $E$ is a Cauchy sequence in $X$, hence it converges to some $x\in X$, and actually $x\in E$ since $E$ is closed.)
+The above result shows that that all compact metric spaces and all Euclidean spaces are complete. It also implies that every closed subset $E$ of a complete metric space $X$ is complete. (Every Cauchy sequence in $E$ is a Cauchy sequence in $X$, hence it converges to some $a\in X$, and actually $a\in E$ since $E$ is closed.)
 \end{remark}
 
 \begin{example}
-The sequence $(x_n)$ is defined as follows:
-\[x_n=1+\frac{1}{2}+\cdots+\frac{1}{n}.\]
-$(x_n)$ does not converge in $\RR$.
+The sequence $(a_n)$ is defined as follows:
+\[a_n=1+\frac{1}{2}+\cdots+\frac{1}{n}.\]
+$(a_n)$ does not converge in $\RR$.
 \begin{proof}
-We claim that $(x_n)$ is not a Cauchy sequence. WLOG assume $n>m$. Consider
-\[|x_n-x_m|=\frac{1}{m+1}+\frac{1}{m+2}+\cdots+\frac{1}{n}\ge\frac{n-m}{n}=1-\frac{m}{n}.\]
+We claim that $(a_n)$ is not a Cauchy sequence. WLOG assume $n>m$. Consider
+\[|a_n-a_m|=\frac{1}{m+1}+\frac{1}{m+2}+\cdots+\frac{1}{n}\ge\frac{n-m}{n}=1-\frac{m}{n}.\]
 Let $n=2m$, then
-\[|x_n-x_m|=|x_{2m}-x_m|>\frac{1}{2}.\]
-Hence $(x_n)$ is not a Cauchy sequence, so it does not converge.
+\[|a_n-a_m|=|a_{2m}-a_m|>\frac{1}{2}.\]
+Hence $(a_n)$ is not a Cauchy sequence, so it does not converge.
 \end{proof}
 \end{example}
 \pagebreak
 
 \subsection{Monotonic Sequences}
 \begin{definition}[Monotonic sequence]
-A sequence $(x_n)$ in $\RR$ is
+A sequence $(a_n)$ in $\RR$ is
 \begin{enumerate}[label=(\roman*)]
-\item \emph{monotonically increasing} if $x_n\le x_{n+1}$ for $n\in\NN$;
-\item \emph{monotonically decreasing} if $x_n\ge x_{n+1}$ for $n\in\NN$;
+\item \emph{monotonically increasing} if $a_n\le a_{n+1}$ for $n\in\NN$;
+\item \emph{monotonically decreasing} if $a_n\ge a_{n+1}$ for $n\in\NN$;
 \item \vocab{monotonic} if it is either monotonically increasing or monotonically decreasing.
 \end{enumerate}
 \end{definition}
@@ -434,102 +481,116 @@ We show the case for monotically increasing sequences; the case for monotonicall
 
 \fbox{$\implies$} We already proved that a convergent sequence is bounded.
 
-\fbox{$\impliedby$} Suppose $(x_n)$ is a monotonically increasing sequence bounded above. Let $E$ be the range of $x_n$. Since $E$ is bounded above, let $x=\sup E$.
+\fbox{$\impliedby$} Suppose $(a_n)$ is a monotonically increasing sequence bounded above. 
+
+Let $E$ be the range of $a_n$. Since $E$ is bounded above, let $a=\sup E$.
 \begin{claim}
-$x_n\to x$.
+$a_n\to a$.
 \end{claim}
-By definition of supremum, $x_n\le x$ for all $n\in\NN$. For every $\epsilon>0$, there exists $N\in\NN$ such that
-\[x-\epsilon<x_N\le x,\]
-otherwise $x-\epsilon$ would be an upper bound of $E$. Since $(x_n)$ is monotically increasing, $n\ge N$ implies $x_N\le x_n\le x$, so 
-\[x-\epsilon<x_n\le x,\]
-which implies $|x_n-x|<\epsilon$. Hence $x_n\to x$.
+By definition of supremum, $a_n\le a$ for all $n\in\NN$. For every $\epsilon>0$, there exists $N\in\NN$ such that
+\[a-\epsilon<a_N\le a,\]
+otherwise $a-\epsilon$ would be an upper bound of $E$. Since $(a_n)$ is monotically increasing, $n\ge N$ implies $a_N\le a_n\le a$, so 
+\[a-\epsilon<a_n\le a,\]
+which implies $|a_n-a|<\epsilon$. Hence $a_n\to a$.
 \end{proof}
 \pagebreak
 
 \subsection{Limit Superior and Inferior}
-For divergent sequences, we have the following definition.
+For properly divergent sequences, we make the following definition.
 \begin{definition}
-Suppose $(x_n)$ is a sequence in $\RR$. We write $x_n\to\infty$ if
-\[\forall M\in\RR,\quad\exists N\in\NN,\quad\forall n\ge N,\quad x_n\ge M.\]
+Suppose $(a_n)$ is a sequence in $\RR$. We write $a_n\to\infty$ if
+\[\forall M\in\RR,\quad\exists N\in\NN,\quad\forall n\ge N,\quad a_n\ge M.\]
 
-Similarly, we write $x_n\to-\infty$ if 
-\[\forall M\in\RR,\quad\exists N\in\NN,\quad\forall n\ge N,\quad x_n\le M.\]
+Similarly, we write $a_n\to-\infty$ if 
+\[\forall M\in\RR,\quad\exists N\in\NN,\quad\forall n\ge N,\quad a_n\le M.\]
 \end{definition}
 
 \begin{definition}
-Suppose $(x_n)$ is a sequence in $\RR$. Let $E\subset\overline{\RR}$ be the set of all subsequential limits of $(x_n)$ (possibly including $+\infty$ and $-\infty$). Define 
+Suppose $(a_n)$ is a sequence in $[-\infty,\infty]$. Define respectively the \vocab{limit superior} and \vocab{limit infimum} of $(a_n)$ as
 \begin{align*}
-\limsup_{n\to\infty}x_n&\coloneqq\sup E,\\
-\liminf_{n\to\infty}x_n&\coloneqq\inf E,
+\limsup_{n\to\infty}a_n&\colonequals\lim_{n\to\infty}\sup_{m\ge n}\brac{a_m},\\
+\liminf_{n\to\infty}a_n&\colonequals\lim_{n\to\infty}\inf_{m\ge n}\brac{a_m}.
 \end{align*}
-known as the \vocab{limit superior} and \vocab{limit infimum} of $(x_n)$ respectively.
 \end{definition}
-
-\begin{remark}
-That is, limit superior is the ``largest'' subsequential limit; limit infimum is the ``smallest'' subsequential limit. 
-\end{remark}
 
 \begin{remark}
 The limit superior and limit infimum exist due to the existence of supremum and infimum in $\overline{\RR}$.
 \end{remark}
 
-Equivalently, we can define limit superior (limit inferior) as the limit of supremum (infimum) of tails:
-\begin{align*}
-\limsup_{n\to\infty}x_n&=\lim_{n\to\infty}\brac{\sup_{k\ge n}x_k}\\
-&=\lim_{n\to\infty}\brac{\sup\{a_n,a_{n+1},\dots\}}\\
-\liminf_{n\to\infty}x_n&=\lim_{n\to\infty}\brac{\inf_{k\ge n}x_k}\\
-&=\lim_{n\to\infty}\brac{\inf\{a_n,a_{n+1},\dots\}}\\
-\end{align*}
+\begin{remark}
+\cite{rudin} defines the limit superior and infimum in another manner, using subsequential limits; both definitons are equivalent.
+\end{remark}
+
+\begin{example}
+Let $a_n=\dfrac{(-1)^n}{1+\frac{1}{n}}$. Then
+\[\limsup_{n\to\infty}a_n=1,\quad\liminf_{n\to\infty}a_n=-1.\]
+\end{example}
+
+\begin{lemma}
+\[\liminf_{n\to\infty}a_n=-\limsup_{n\to\infty}(-a_n).\]
+\end{lemma}
+
+\begin{proof}
+Exercise; use the definitions and \ref{lemma:sup-inf-negative}.
+\end{proof}
+
+\begin{lemma}
+A sequence $(a_n)$ in $[-\infty,\infty]$ converges if and only if
+\[\limsup_{n\to\infty}a_n=\liminf_{n\to\infty}a_n=\lim_{n\to\infty}a_n.\]
+\end{lemma}
+
+\begin{proof} \
+
+\fbox{$\implies$} Suppose $a_n\to a$. Let $\epsilon>0$ be given, there exists $n\in\NN$ such that for all $m\ge n$,
+\[|a_m-a|<\epsilon,\]
+or,
+\[a-\epsilon<a_m<a+\epsilon.\]
+It follows that
+\[a-\epsilon<\inf_{m\ge n}a_m\le\sup_{m\ge n}a_m<a+\epsilon.\]
+Since $\epsilon$ was arbitrary, we must have
+\[\liminf_{n\to\infty}a_n=\limsup_{n\to\infty}a_n=a.\]
+
+\fbox{$\impliedby$} Suppose $\displaystyle\liminf_{n\to\infty}a_n=\limsup_{n\to\infty}a_n=a$. Let $\epsilon>0$ be give, there exists $n\in\NN$ such that
+\[\inf_{m\ge n}a_m>a-\epsilon,\quad\sup_{m\ge n}a_m<a+\epsilon.\]
+It follows that for all $m\ge n$, we have $|a_m-a|<\epsilon$.
+\end{proof}
 
 \begin{proposition}
-Suppose $(x_n)$ is a sequence in $\RR$. Then
+Suppose $(a_n)$ is a sequence in $\RR$. Then
 \begin{enumerate}[label=(\roman*)]
-\item $\displaystyle\limsup_{n\to\infty}x_n\in E$;
-\item if $\displaystyle x>\limsup_{n\to\infty}x_n$, there exists $N\in\NN$ such that $x_n<x$ for all $n\ge N$.
+\item $\displaystyle\limsup_{n\to\infty}a_n\in E$;
+\item if $\displaystyle a>\limsup_{n\to\infty}a_n$, there exists $N\in\NN$ such that $a_n<a$ for all $n\ge N$.
 \end{enumerate}
-Moreover, $\displaystyle\limsup_{n\to\infty}x_n$ is the only number that satisfies (i) and (ii).
+Moreover, $\displaystyle\limsup_{n\to\infty}a_n$ is the only number that satisfies (i) and (ii).
 \end{proposition}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
-\item We consider three cases for the value of $\displaystyle\limsup_{n\to\infty}x_n$:
+\item We consider three cases for the value of $\displaystyle\limsup_{n\to\infty}a_n$:
 \begin{itemize}
-    \item If $\displaystyle\limsup_{n\to\infty}x_n=+\infty$, then $\sup E=+\infty$, so $E$ is not bounded above. Hence $(x_n)$ is not bounded above, so $(x_n)$ has a subsequence $(x_{n_k})$ such that $x_{n_k}\to\infty$
-    \item If $\displaystyle\limsup_{n\to\infty}x_n\in\RR$, then $\sup E\in\RR$, so $E$ is bounded above. Hence at least one subsequential limit exists, so that (i) follows from Theorems 3.7 and 2.28.
-    \item If $\displaystyle\limsup_{n\to\infty}x_n=-\infty$, then $\sup E=-\infty$, so $E$ contains only one element, namely $-\infty$. Hence $(x_n)$ has no subsequential limit. Thus for any $M\in\RR$, $x_n>M$ for at most a finite number of values of $n$, so that $x_n\to-\infty$.
+    \item If $\displaystyle\limsup_{n\to\infty}a_n=+\infty$, then $\sup E=+\infty$, so $E$ is not bounded above. Hence $(a_n)$ is not bounded above, so $(a_n)$ has a subsequence $(a_{n_k})$ such that $a_{n_k}\to\infty$
+    \item If $\displaystyle\limsup_{n\to\infty}a_n\in\RR$, then $\sup E\in\RR$, so $E$ is bounded above. Hence at least one subsequential limit exists, so that (i) follows from Theorems 3.7 and 2.28.
+    \item If $\displaystyle\limsup_{n\to\infty}a_n=-\infty$, then $\sup E=-\infty$, so $E$ contains only one element, namely $-\infty$. Hence $(a_n)$ has no subsequential limit. Thus for any $M\in\RR$, $a_n>M$ for at most a finite number of values of $n$, so that $a_n\to-\infty$.
 \end{itemize}
 \item We prove by contradiction.
 
-Suppose there is a number $\displaystyle x>\limsup_{n\to\infty}x_n$ such that $x_n\ge x$ for infinitely many values of $n$. In that case, there is a number $y\in E$ such that $\displaystyle y\ge x>\limsup_{n\to\infty}x_n$, contradicting the definition of $\displaystyle\limsup_{n\to\infty}x_n$.
+Suppose there is a number $\displaystyle a>\limsup_{n\to\infty}a_n$ such that $a_n\ge a$ for infinitely many values of $n$. In that case, there is a number $y\in E$ such that $\displaystyle y\ge a>\limsup_{n\to\infty}a_n$, contradicting the definition of $\displaystyle\limsup_{n\to\infty}a_n$.
 \end{enumerate}
 
-We now show uniqueness. Suppose, for a contradiction, that two numbers $p$ and $q$ satisfy (i) and (ii). WLOG assume $p<q$. Then choose $x$ such that $p<x<q$. Since $p$ satisfies (i), we have $x_n<x$ for all $n\ge N$. But then $q$ cannot satisfy (i).
+We now show uniqueness. Suppose, for a contradiction, that two numbers $p$ and $q$ satisfy (i) and (ii). WLOG assume $p<q$. Then choose $a$ such that $p<a<q$. Since $p$ satisfies (i), we have $a_n<a$ for all $n\ge N$. But then $q$ cannot satisfy (i).
 \end{proof}
 
-Of course, an analogous result is true for $\displaystyle\liminf_{n\to\infty}x_n$. 
+Of course, an analogous result is true for $\displaystyle\liminf_{n\to\infty}a_n$. 
 
-\begin{example}
-\begin{itemize}
-\item Let $(x_n)$ be a sequence containing all rationals. Then every real number is a subsequential limit, and 
-\[\limsup_{n\to\infty}x_n=+\infty,\quad\liminf_{n\to\infty}=-\infty.\]
-
-\item Let $x_n=\dfrac{(-1)^n}{1+\frac{1}{n}}$. Then
-\[\limsup_{n\to\infty}x_n=1,\quad\liminf_{n\to\infty}x_n=-1.\]
-
-\item For a seqeunce $(x_n)$ in $\RR$, $x_n\to x$ if and only if
-\[\limsup_{n\to\infty}x_n=\liminf_{n\to\infty}x_n=x.\]
-\end{itemize}
-\end{example}
-
-\begin{proposition}\label{prop:limsup-liminf-comp}
-If $a_n\le b_n$ for $n\ge N$ where $N$ is fixed, then
+\begin{lemma}[Comparison]\label{lemma:limsup-liminf-comp}
+If $a_n\le b_n$ for $n\ge N$ (where $N$ is fixed), then
 \begin{align*}
 \liminf_{n\to\infty}a_n&\le\liminf_{n\to\infty}b_n,\\
 \limsup_{n\to\infty}a_n&\le\limsup_{n\to\infty}b_n.
 \end{align*}
-\end{proposition}
+\end{lemma}
 
-\begin{proposition}[Arithmetic properties] \
+\begin{lemma}[Arithmetic properties] \
 \begin{enumerate}[label=(\roman*)]
 \item If $k>0$, $\displaystyle\limsup_{n\to\infty}ka_n=k\limsup_{n\to\infty}a_n$.
 
@@ -542,9 +603,24 @@ Moreover, $\displaystyle\limsup_{n\to\infty}(a_n+b_n)$ may be bounded from below
 
 write down the analogous properties for liminf, and to prove (i) and (ii)
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 Now you should try to prove (i) for liminf as well; as for (ii), try to explain why properties (i),(ii) for limsup and property (i) for liminf would imply property (ii) for liminf
+\pagebreak
+
+\subsection{o-notation and Big o-notation}
+The $o$-notation and $O$-notation are used to compare the size of some given sequence relative to some well known sequence.
+
+The $o$-notation is, roughly speaking, used to compare two sequences when one is much smaller than the other. $x_n$ is said to be much smaller than $y_n$, denoted $x_n\ll y_n$, if $\lim_{n\to\infty}\frac{x_n}{y_n}=0$, denoted by $x_n=o(y_n)$.
+We usually use this notation when both sequences approach 0, for example $\frac{1}{n^2}=o\brac{\frac{1}{n}}$.
+
+The $O$-notation tries to measure how fast a sequence grows or shrinks
+We denote $x_n=O(y_n)$ if there exists a constant $M>0$ and a natural number $N\in\NN$ such that $|x_n|\le My_n$ for all $n>N$. 
+For example $2n^2\sin n=O(n^2)$.
+
+\begin{example}
+Let $(r_k)$ be a sequence of all rational numbers strictly between $0$ and $1$ where each rational number appears exactly once. Show that $\limsup r_k=1$ and $\liminf r_k=0$.
+\end{example}
 \pagebreak
 
 \section{Series}
@@ -568,21 +644,21 @@ When there is no possible ambiguity, we write $\displaystyle\sum_{n=1}^{\infty}a
 
 The Cauchy criterion can be restated in the following form:
 
-\begin{proposition}[Cauchy criterion]
+\begin{lemma}[Cauchy criterion]
 $\sum a_n$ converges if and only if
 \[\forall\epsilon>0,\quad\exists N\in\NN,\quad\forall n\ge m\ge N,\quad\absolute{\sum_{k=m}^n a_k}\le\epsilon.\]
-\end{proposition}
+\end{lemma}
 \pagebreak
 
 \subsection{Convergence Tests}
 To determine the convergence of a series, apart from using the definition and the Cauchy criterion, we also have the following methods:
 \begin{itemize}
-\item Divergence test (\cref{lemma:divergence-test})
-\item Boundedness of partial sums (\cref{lemma:bounded-partial-sums}, for series of non-negative terms)
-\item Comparison test (\cref{lemma:comparison-test})
-\item Root test (\cref{lemma:root-test})
-\item Ratio test (\cref{lemma:ratio-test})
-\item Absolute convergence (\cref{lemma:absolute-convergence})
+\item Divergence test (\ref{lemma:divergence-test})
+\item Boundedness of partial sums (\ref{lemma:bounded-partial-sums}, for series of non-negative terms)
+\item Comparison test (\ref{lemma:comparison-test})
+\item Root test (\ref{lemma:root-test})
+\item Ratio test (\ref{lemma:ratio-test})
+\item Absolute convergence (\ref{lemma:absolute-convergence})
 \end{itemize}
 
 \begin{lemma}[Divergence test]\label{lemma:divergence-test}
@@ -725,9 +801,7 @@ If $p=1$, the resulting series is known as the \emph{harmonic series} (which div
 \begin{example}[The number $e$]
 Consider the series
 \[\sum_{n=0}^{\infty}\frac{1}{n!}.\]
-\begin{claim}
-The above series converges.
-\end{claim}
+We first show that the above series converges. 
 Consider the $n$-th partial sum:
 \begin{align*}
 \sum_{k=0}^{n}\frac{1}{k!}
@@ -736,7 +810,7 @@ Consider the $n$-th partial sum:
 &<1+1+\frac{1}{2}+\frac{1}{2^2}+\cdots=3.
 \end{align*}
 Since the partial sums are bounded (by $3$), and the terms are non-negative, the series converges. Then we can make the following definition for the sum of the series:
-\[e\coloneqq\sum_{n=0}^\infty\frac{1}{n!}\]
+\[e\colonequals\sum_{n=0}^\infty\frac{1}{n!}\]
 
 \begin{proposition*}
 $e$ is irrational.
@@ -771,7 +845,7 @@ Let
 \[s_n=\sum_{k=0}^n\frac{1}{k!},\quad t_n=\brac{1+\frac{1}{n}}^n.\]
 By the binomial theorem,
 \[t_n=1+1+\frac{1}{2!}\brac{1-\frac{1}{n}}+\frac{1}{3!}\brac{1-\frac{1}{n}}\brac{1-\frac{2}{n}}+\cdots+\frac{1}{n!}\brac{1-\frac{1}{n}}\brac{1-\frac{2}{n}}\cdots\brac{1-\frac{n-1}{n}}.\]
-Comparing term by term, we see that $t_n\le s_n$. By \cref{prop:limsup-liminf-comp}, we have that
+Comparing term by term, we see that $t_n\le s_n$. By \ref{lemma:limsup-liminf-comp}, we have that
 \[\limsup_{n\to\infty}t_n\le\limsup_{n\to\infty}s_n=e.\]
 
 Next, if $n\ge m$,
@@ -780,9 +854,11 @@ Let $n\to\infty$, keeping $m$ fixed. We get
 \[\liminf_{n\to\infty}t_n\ge1+1+\frac{1}{2!}+\cdots+\frac{1}{m!},\]
 so that
 \[s_m\le\liminf_{n\to\infty}t_n.\]
-Letting $m\to\infty$, we finally get
+Letting $m\to\infty$, we get
 \[e\le\liminf_{n\to\infty}t_n.\]
-
+Thus it follows that
+\[\limsup_{n\to\infty}t_n=\liminf_{n\to\infty}t_n=e,\]
+so the desired result follows.
 \end{proof}
 \end{example}
 
@@ -848,7 +924,7 @@ Since $\beta<1$, $\sum\beta^n$ converges. By the comparison test, $\sum a_n$ con
 \end{proof}
 
 \begin{remark}
-The ratio test is easier to apply than the root test (since it is usually easier to compute ratios than $n$-th roots), but the root test is more powerful, as shown by Theorem 3.37 of \cite{rudin}.
+The ratio test is easier to apply than the root test (since it is usually easier to compute ratios than $n$-th roots), but the root test is more powerful, as shown by Theorem 3.37 in \cite{rudin}.
 \end{remark}
 
 The series $\sum a_n$ is said to \emph{converge absolutely} if the series $\sum|a_n|$ converges.
@@ -896,7 +972,9 @@ The RHS can be written as
 which is equal to the LHS.
 \end{proof}
 
-\begin{proposition}\label{prop:part-sum-limit}
+Suppose that we have a series $\sum a_n b_n$ and we wish to show that it converges, then there are these two strategies:
+
+\begin{lemma}[Dirichlet's test]\label{lemma:dirichlet-test-product-series-converge}
 Suppose $(a_n)$ and $(b_n)$ are sequences such that
 \begin{itemize}
 \item the partial sums $A_n$ of $\sum a_n$ form a bounded sequence,
@@ -904,7 +982,7 @@ Suppose $(a_n)$ and $(b_n)$ are sequences such that
 \item $b_n\to0$.
 \end{itemize}
 Then $\sum a_nb_n=0$.
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
 Since the partial sums $A_n$ form a bounded sequence, there exists $M$ such that
@@ -920,6 +998,8 @@ For $q\ge p\ge N$, by the partial summation formula, we have
 \end{align*}
 By the Cauchy criterion, $\sum a_nb_n$ converges to $0$.
 \end{proof}
+
+The following is a convenient application of Dirichlet's test.
 
 \begin{corollary}[Alternating series test]
 Suppose $(c_n)$ is a sequence such that
@@ -940,18 +1020,42 @@ Note that
 \item $b_0\ge b_1\ge b_2\ge\cdots$ holds by assumption;
 \item $c_n\to0$ implies $|c_n|\to0$, so $b_n\to0$.
 \end{itemize}
-Then by \cref{prop:part-sum-limit}, we have that $\sum a_nb_n=0$, so $\sum c_n=0$.
+Then by \ref{lemma:dirichlet-test-product-series-converge}, we have that $\sum a_nb_n=0$, so $\sum c_n=0$.
+\end{proof}
+
+\begin{lemma}[Abel's test]
+If $\sum a_n$ converges, and $(b_n)$ is monotonic and bounded, then $\sum a_n b_n$ converges.
+\end{lemma}
+
+\begin{proof}
+Suppose that $\sum a_n$ is convergent, and $(b_n)$ is monotonic and bounded.
+Now what we do is that we try to transform $b_n$ into the one that we see in Dirichlet's test.
+
+Since $(b_n)$ is monotonic, it's either monotonically increasing or decreasing. 
+If $(b_n)$ were to be monotonically increasing, we multiply the sequences $(a_n)$ and $(b_n)$ by $-1$; $\sum a_n$ is still convergent here.
+Thus assume $(b_n)$ is monotonically decreasing.
+
+Since $(b_n)$ is monotonically decreasing, the sequence $(b_n)$ has an infimum which is also its limit, so we may let $b=\lim b_n=\inf b_n$.
+Then $(b_n-b)$ is a monotonically decreasing sequence which converges to $0$
+
+Since $\sum a_n$ is convergent, its partial sums $A_n$ is bounded
+
+By Dirichlet's test, this shows that $\sum a_n(b_n-b)$ is convergent
+
+However, we have the additional requirement that $\sum a_n$ is convergent, so we can easily deal with the extra '$-b$' term just by noting that $\sum a_n b$ is convergent and hence
+\[\sum a_n b_n=\sum a_n(b_n-b)+\sum a_n b\]
+is convergent.
 \end{proof}
 \pagebreak
 
 \subsection{Addition and Multiplication of Series}
-\begin{proposition}
+\begin{lemma}
 If $\sum a_n=A$ and $\sum b_n=B$, then
 \begin{enumerate}[label=(\roman*)]
 \item $\sum(a_n+b_n)=A+B$,\hfill(addition)
 \item $\sum ca_n=cA$ for some constant $c$.\hfill(scalar multiplication)
 \end{enumerate}
-\end{proposition}
+\end{lemma}
 
 \begin{proof} \
 \begin{enumerate}[label=(\roman*)]
@@ -1022,7 +1126,7 @@ Let $\sum a_n=A$, $\sum b_n=B$, $\sum c_n=C$, where $\sum c_n$ is the Cauchy pro
 \pagebreak
 
 \subsection{Rearrangements}
-\begin{definition}[Rearrangement]
+\begin{definition}[Rearrangement]\label{defn:rearrangement-series}
 Let $(k_n)$ be a sequence in which every positive integer appears once and only once. Let
 \[a_n^\prime=a_{k_n}\quad(\forall n\in\NN)\]
 We say that $\sum a_n^\prime$ is a \emph{rearrangement} of $\sum a_n$.
@@ -1030,22 +1134,75 @@ We say that $\sum a_n^\prime$ is a \emph{rearrangement} of $\sum a_n$.
 
 If $(s_n)$ and $(s_n^\prime)$ are the sequences of partial sums of $(a_n)$ and $(a_n^\prime)$ respectively, it is easily seen that, in general, these two sequences consist of entirely different numbers. We are thus led to the problem of determining under what conditions all rearrangements of a convergent series will converge and whether the sums are necessarily the same.
 
-\begin{proposition}[Riemann]
+\begin{theorem}[Riemann series theorem]
 Let $\sum a_n$ be a series of real numbers which converges, but not absolutely. Suppose $-\infty\le\alpha\le\beta\le\infty$. Then there exists a rearrangement $\sum a_n^\prime$ with partial sums $s_n^\prime$ such that
 \[\liminf_{n\to\infty}s_n^\prime=\alpha,\quad\limsup_{n\to\infty}s_n^\prime=\beta.\]
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
-\todo{to do}
+Let
+\[p_n=\frac{|a_n|+a_n}{2},\quad q_n=\frac{|a_n|-a_n}{2}\quad(n=1,2,\dots).\]
+Then $p_n-q_n=a_n$, $p_n+q_n=|a_n|$, $p_n\ge0$, $q_n\ge0$. 
+
+\begin{claim}
+The series $\sum p_n$ and $\sum q_n$ must both diverge.
+\end{claim}
+If both were convergent, then
+\[\sum(p_n+q_n)=\sum|a_n|\]
+would converge, contrary to hypothesis. Since
+\[\sum_{n=1}^{N}a_n=\sum_{n=1}^{N}(p_n-q_n)=\sum_{n=1}^{N}p_n-\sum_{n=1}^{N}q_n,\]
+divergence of $\sum p_n$ and convergence of $\sum q_n$ (or vice versa) implies divergence of $\sum a_n$, again contrary to hypothesis.
+
+Now let $P_1,P_2,\dots$ denote the non-negative terms of $\sum a_n$, in the order which they occur, and let $Q_1,Q_2,\dots$ be the absolute values of the negative terms of $\sum a_n$, also in their original order.
+
+The series $\sum P_n$ and $\sum Q_n$ differ from $\sum p_n$ and $\sum q_n$ only by zero terms, and are therefore divergent.
+
+We shall construct sequences $(m_n)$ and $(k_n)$, such that the series
+\begin{equation*}\tag{1}
+\begin{split}
+&\brac{P_1+\cdots+P_{m_1}}-\brac{Q_1+\cdots+Q_{k_1}}+\\
+&\brac{P_{m_1+1}+\cdots+P_{m_2}}-\brac{Q_{k_1+1}+\cdots+Q_{k_2}}+\cdots
+\end{split}
+\end{equation*}
+which clearly is a rearrangement of $\sum a_n$, satisfies $\displaystyle\liminf_{n\to\infty}s_n^\prime=\alpha$, $\displaystyle\limsup_{n\to\infty}s_n^\prime=\beta$.
+
+Choose real-valued sequences $(\alpha_n)$ and $(\beta_n)$ such that $\alpha_n\to\alpha$, $\beta_n\to\beta$, $\alpha_n<\beta_n$, $\beta_1>0$.
+
+Let $m_1,k_1$ be the smallest integers such that
+\begin{align*}
+P_1+\cdots+P_{m_1}&>\beta_1,\\
+P_1+\cdots+P_{m_1}-\brac{Q_1+\cdots+Q_{k_1}}&<\alpha_1;
+\end{align*}
+let $m_2,k_2$ be the smallest integers such that
+\begin{align*}
+\brac{P_1+\cdots+P_{m_1}}-\brac{Q_1+\cdots+Q_{k_1}}+\brac{P_{m_1+1}+\cdots+P_{m_2}}&>\beta_2\\
+\brac{P_1+\cdots+P_{m_1}}-\brac{Q_1+\cdots+Q_{k_1}}+\brac{P_{m_1+1}+\cdots+P_{m_2}}-\brac{Q_{k_1+1}+\cdots+Q_{k_2}}&<\alpha_2;
+\end{align*}
+and continue in this way. This is possible since $\sum P_n$ and $\sum Q_n$ diverge.
+
+If $x_n$, $y_n$ denote the partial sums of (1) whose last terms are $P_{m_n}$, $-Q_{k_n}$, then
+\[|x_n-\beta_n|\le P_{m_n},\quad|y_n-\alpha_n|\le Q_{k_n}.\]
+Since $P_n\to0$ and $Q_n\to0$ as $n\to\infty$, wee see that $x_n\to\beta$, $y_n\to\alpha$.
+
+Finally, it is clear that no number less than $\alpha$ or greater than $\beta$ can be a subsequential limit of the partial sums of (1).
+
+\todo{to review}
 \end{proof}
 
-\begin{proposition}
+\begin{theorem}
 If $\sum a_n$ is a series of complex numbers which converges absolutely, then every rearrangement of $\sum a_n$ converges, and they all converge to the same sum.
-\end{proposition}
+\end{theorem}
+
+\begin{proof}
+Let $\sum a_n^\prime$ be a rearrangement, with partial sums $s_n^\prime$. Since $\sum a_n$ converges absolutely, given $\epsilon>0$, there exists $N\in\NN$ such that $m\ge n\ge N$ implies
+\begin{equation*}\tag{1}
+\sum_{i=n}^{m}|a_i|<\epsilon.
+\end{equation*}
+Now choose $p$ such that the integers $1,2,\dots,N$ are all contained in the set $k_1,\dots,k_p$ (we use the notation of \cref{defn:rearrangement-series}). Then if $n>p$, the numbers $a_1,\dots,a_N$ will cancel in the difference $s_n-s_n^\prime$, so that $|s_n-s_n^\prime|<\epsilon$, by (1) Hence $(s_n^\prime)$ converges to the same sum as $(s_n)$. \todo{to review}
+\end{proof}
 \pagebreak
 
 \section*{Exercises}
-\addcontentsline{toc}{section}{Exercises}
 \begin{exercise}
 Show the following:
 \begin{enumerate}[label=(\roman*)]
@@ -1061,62 +1218,87 @@ Show the following:
 \begin{enumerate}[label=(\roman*)]
 \item Let $\epsilon>0$ be given. Take $N=\floor{\brac{\frac{1}{\epsilon}}^\frac{1}{p}}+1$. Then $n\ge N$ implies
 \[\absolute{\frac{1}{n^p}-0}=\frac{1}{n^p}\le\frac{1}{N^p}<\frac{1}{\brac{\brac{\frac{1}{\epsilon}}^\frac{1}{p}}^p}=\epsilon.\]
-\item We need to consider the cases when $p>1$, $p=1$, and $0<p<1$.
+\item We need to consider cases corresponding to different values of $p$.
+\begin{description}
+\item[Case 1: $p>1$.] Put $x_n=\sqrt[n]{p}-1$. Then $x_n>0$, and, by the binomial theorem,
+\[1+nx_n\le(1+x_n)^n=p,\]
+so that
+\[0<x_n\le\frac{p-1}{n}.\]
+Hence $x_n\to0$.
 
-If $p>1$, 
+\item[Case 2: $p=1$.] Trivial.
+\item[Case 3: $0<p<1$.] The result is obtained by taking reciprocals.
+\end{description}
 
-\item 
-\item 
-\item 
+\item Put $x_n=\sqrt[n]{n}-1$. Then $x_n\ge0$, and, by the binomial theorem,
+\[n=(1+x_n)^n\ge\frac{n(n-1)}{2}x_n^2.\]
+Hence
+\[0\le x_n\le\sqrt{\frac{2}{n-1}}\quad(n\ge2.)\]
+
+\item Let $k$ be an integer such that $k>\alpha$, $k>0$. For $n>2k$,
+\[(1+p)^n>\binom{n}{k}p^k=\frac{n(n-1)\cdots(n-k+1)}{k!}p^k>\frac{n^k p^k}{2^k k!}.\]
+Hence
+\[0<\frac{n^\alpha}{(1+p)^n}<\frac{2^k k!}{p^k}n^{\alpha-k}\quad(n>2k).\]
+Since $\alpha-k<0$, by (i), $n^{\alpha-k}\to0$.
+
+\item Take $\alpha=0$ in (iv).
 \end{enumerate}
 \end{solution}
 
 \begin{exercise}
-Let $(x_n)$ be a sequence in $\RR$, let $\alpha\ge2$ be a constant. Define the sequence $(y_n)$ as follows:
+Let $(x_n)$ be a real sequence, let $\alpha\ge2$ be a constant. Define the sequence $(y_n)$ as follows:
 \[y_n=x_n+\alpha x_{n+1}\quad(n=1,2,\dots)\]
 Show that if $(y_n)$ is convergent, then $(x_n)$ is also convergent.
 \end{exercise}
 
 \begin{exercise}[\cite{rudin} 3.1]
-Prove that the convergence of $(x_n)$ implies the convergence of $(|x_n|)$. Is the converse true?
+Prove that the convergence of $(a_n)$ implies the convergence of $(|a_n|)$. Is the converse true?
 \end{exercise}
 
 \begin{solution}
-Let $\epsilon>0$ be given. Since $(x_n)$ is a Cauchy sequence, there exists $N\in\NN$ such that for all $n,m\ge N$,
-\[|x_n-x_m|<\epsilon.\]
+Let $\epsilon>0$ be given. Since $(a_n)$ is a Cauchy sequence, there exists $N\in\NN$ such that for all $n,m\ge N$,
+\[|a_n-a_m|<\epsilon.\]
 See that
-\[\absolute{|x_n|-|x_m|}\le|x_n-x_m|<\epsilon,\]
-so $(|x_n|)$ is a Cauchy sequence, and therefore must converge.
+\[\absolute{|a_n|-|a_m|}\le|a_n-a_m|<\epsilon,\]
+so $(|a_n|)$ is a Cauchy sequence, and therefore must converge.
 
-The converse is not true, as shown by the sequence $(x_n)$ with $x_n=(-1)^n$.
+The converse is not true, as shown by the sequence $(a_n)$ with $a_n=(-1)^n$.
+\end{solution}
+
+\begin{exercise}[\cite{rudin} 3.2]
+Calculate $\displaystyle\lim_{n\to\infty}\brac{\sqrt{n^2+n}-n}$.
+\end{exercise}
+
+\begin{solution}
+
 \end{solution}
 
 \begin{exercise}[\cite{rudin} 3.3]
-The sequence $(x_n)$ is recursively defined by
+The sequence $(a_n)$ is recursively defined by
 \[\begin{cases}
-x_0=\sqrt{2},\\
-x_{n+1}=\sqrt{2+x_n}\quad n\ge0.
+a_0=\sqrt{2},\\
+a_{n+1}=\sqrt{2+a_n}\quad n\ge0.
 \end{cases}\]
-Show that $(x_n)$ converges.
+Show that $(a_n)$ converges.
 \end{exercise}
 
 \begin{solution}
-We first prove by induction that $x_n\le x_{n+1}\le 2$ for all $n\in\NN$. For $n=0$,
-\[x_0=\sqrt{2}\le\sqrt{2+\sqrt{2}}=x_1\le\sqrt{2+\sqrt{4}}=2.\]
-If $x_{n-1}\le x_n\le 2$, then
-\[x_n=\sqrt{2+x_{n-1}}\le\sqrt{2+x_n}=x_{n+1}\le\sqrt{2+2}=2.\]
-Hence $(x_n)$ is monotonically increasing and bounded above by $2$. By the monotone convergence theorem, $(x_n)$ converges; let $x_n\to x$. Applying the limit on both sides of $x_{n+1}=\sqrt{2+x_n}$,
+We first prove by induction that $a_n\le a_{n+1}\le 2$ for all $n\in\NN$. For $n=0$,
+\[a_0=\sqrt{2}\le\sqrt{2+\sqrt{2}}=a_1\le\sqrt{2+\sqrt{4}}=2.\]
+If $a_{n-1}\le a_n\le 2$, then
+\[a_n=\sqrt{2+a_{n-1}}\le\sqrt{2+a_n}=a_{n+1}\le\sqrt{2+2}=2.\]
+Hence $(a_n)$ is monotonically increasing and bounded above by $2$. By the monotone convergence theorem, $(a_n)$ converges; let $a_n\to a$. Applying the limit on both sides of $a_{n+1}=\sqrt{2+a_n}$,
 \begin{align*}
-\lim_{n\to\infty}x_{n+1}&=\lim_{n\to\infty}\sqrt{2+x_n}\\
-x&=\sqrt{2+x}\\
-x&=2\text{ or }1
+\lim_{n\to\infty}a_{n+1}&=\lim_{n\to\infty}\sqrt{2+a_n}\\
+a&=\sqrt{2+a}\\
+a&=2\text{ or }1
 \end{align*}
-Since all $x_n\ge0$, we must have $x=2$.
+Since all $a_n\ge0$, we must have $a=2$.
 \end{solution}
 
 \begin{exercise}[Contractive sequence]
-A sequence $(x_n)$ in $\RR$ is \emph{contractive} if there exists $k\in[0,1)$ such that
-\[|x_{n+2}-x_{n+1}|\le k|x_{n+1}-x_n|\quad(\forall n\in\NN)\]
+A complex sequence $(x_n)$ is \emph{contractive} if there exists $k\in[0,1)$ such that
+\[|a_{n+2}-a_{n+1}|\le k|a_{n+1}-a_n|\quad(\forall n\in\NN)\]
 Show that every contractive sequence is convergent.
 \end{exercise}
 
@@ -1130,20 +1312,20 @@ Thus
 &\le k^{n-1}\brac{1+k+k^{2}+\cdots+k^{p-1}}|a_{2}-a_{1}|\\ 
 &\le\frac{k^{n-1}}{1-k}|a_{2}-a_{1}|
 \end{align*}
-for all $n,p\in\NN$. Since $k^{n-1}\to0$ as $n\to\infty$ (independently of $p$), this implies $(a_n)$ is a Cauchy sequence (in $\RR$) and, hence, it is convergent.
+for all $n,p\in\NN$. Since $k^{n-1}\to0$ as $n\to\infty$ (independently of $p$), this implies $(a_n)$ is a Cauchy sequence, so it is convergent.
 \end{solution}
 
 \begin{exercise}[\cite{rudin} 3.4]
-Find the limit superior and limit inferior of the sequence $(x_n)$ defined by
-\[x_1=0,\quad x_{2m}=\frac{x_{2m-1}}{2},\quad x_{2m+1}=x_{2m}+\frac{1}{2}.\]
+Find the limit superior and limit inferior of the sequence $(a_n)$ defined by
+\[a_1=0,\quad a_{2m}=\frac{a_{2m-1}}{2},\quad a_{2m+1}=a_{2m}+\frac{1}{2}.\]
 \end{exercise}
 
 \begin{solution}
 We shall prove by induction that
-\[x_{2m}=\frac{1}{2}-\frac{1}{2^m},\quad x_{2m+1}=1-\frac{1}{2^m}\]
-for $m=1,2,\dots$. The second of these equalities is a direct consequence of the first, and so we need only prove the first. Immediate computation shows that $x_2=0$ and $x_3=\frac{1}{2}$. Hence assume that both formulae holds for $m\le r$. Then
-\[x_{2r+2}=\frac{1}{2}x_{2r+1}=\frac{1}{2}\brac{1-\frac{1}{2^r}}=\frac{1}{2}-\frac{1}{2^{r+1}}.\]
-This completes the induction. We thus have $\displaystyle\limsup_{n\to\infty}x_n=1$ and $\displaystyle\liminf_{n\to\infty}x_n=\frac{1}{2}$.
+\[a_{2m}=\frac{1}{2}-\frac{1}{2^m},\quad a_{2m+1}=1-\frac{1}{2^m}\]
+for $m=1,2,\dots$. The second of these equalities is a direct consequence of the first, and so we need only prove the first. Immediate computation shows that $a_2=0$ and $a_3=\frac{1}{2}$. Hence assume that both formulae holds for $m\le r$. Then
+\[a_{2r+2}=\frac{1}{2}a_{2r+1}=\frac{1}{2}\brac{1-\frac{1}{2^r}}=\frac{1}{2}-\frac{1}{2^{r+1}}.\]
+This completes the induction. We thus have $\displaystyle\limsup_{n\to\infty}a_n=1$ and $\displaystyle\liminf_{n\to\infty}a_n=\frac{1}{2}$.
 \end{solution}
 
 \begin{exercise}[\cite{rudin} 3.7]
@@ -1152,14 +1334,43 @@ Prove that the convergence of $\sum a_n$ implies the convergence of
 if $a_n\ge0$.
 \end{exercise}
 
-\begin{exercise}[\cite{rudin} 3.8]
-If $\sum a_n$ converges, and if $(b_n)$ is monotonic and bounded, prove that $\sum a_nb_n$ converges.
-\end{exercise}
-
 \begin{exercise}[\cite{rudin} 3.13]
 Prove that the Cauchy product of two absolutely convergent series converges absolutely.
 \end{exercise}
 
 \begin{exercise}[\cite{rudin} 3.23]
-Suppose $(p_n)$ and $(q_n)$ are Cauchy sequences in a metric space $X$. Show that the sequence $\brac{d(p_n,q_n)}$ converges.
+Suppose $(a_n)$ and $(b_n)$ are Cauchy sequences in a metric space $X$. Show that the sequence $\brac{d(a_n,b_n)}$ converges.
+\end{exercise}
+
+\begin{exercise}
+Prove that $\sum_{n=1}^\infty\frac{\sin n\alpha}{n}$ is convergent for all real $\alpha$, and that $\sum_{n=1}^\infty\frac{\cos n\alpha}{n}$ is convergent if and only if $\alpha\neq2k\pi$ for integer $k$.
+
+\emph{Hint:}
+\begin{align*}
+&\sin x+\sin 2x+\sin 3x\\
+&=\frac{\brac{\sin\frac{x}{2}}\brac{\sin x+\sin2x+\sin3x}}{\sin\frac{x}{2}}\\
+&=\frac{-\frac{1}{2}\brac{\cos\frac{3x}{2}-\cos\frac{x}{2}-\cdots}}{\sin\frac{x}{2}}
+\end{align*}
+\end{exercise}
+
+\begin{exercise}
+Determine whether the series
+\[\sum_{n=1}^{\infty}\ln\brac{1+\frac{(-1)^n}{n^p}}\]
+is absolutely convergent, conditionally convergent or divergent for each $p>0$.
+
+\emph{Hint:} $\ln(1+x)\to x$ as $x\to0$.
+\end{exercise}
+
+\begin{exercise}
+Suppose that $\sum_{n=1}^\infty a_n$ is absolutely convergent; for $n=1$ to $\infty$, define the subsequences
+\[b_n=a_{2n-1},\quad c_n=a_{2n}.\]
+\begin{enumerate}[label=(\roman*)]
+\item Show that $\sum b_n$ and $\sum c_n$ are absolutely convergent.
+\item Show that $\sum a_n=\sum b_n+\sum c_n$.
+\item Using the fact that $\sum\frac{1}{n^2}=\frac{\pi^2}{6}$, find $\sum\frac{(-1)^{n-1}}{n^2}$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Given a function $f\colon\RR\to\RR$ such that for any $x\in\RR$, there exists $\epsilon>0$ such that $f$ is monotically increasing on $(x-\epsilon,x+\epsilon)$. Prove that $f$ is monotonically increasing on $\RR$.
 \end{exercise}
